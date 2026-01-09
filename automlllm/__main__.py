@@ -1,0 +1,3 @@
+import automlllm
+
+automlllm.main()

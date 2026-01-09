@@ -1,6 +1,6 @@
 import pytest
 
-from automl-llm import MyClass
+from automlllm import MyClass
 
 
 # can test using classes, name must begin with `Test`
