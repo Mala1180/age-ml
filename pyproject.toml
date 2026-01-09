@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "automl-llm"
 packages = [
-    { include = "automl-llm" },
+    { include = "automlllm" },
 ]
 version = "2.4.1"
 description = "A template for Python projects, using Poetry"
@@ -30,8 +30,8 @@ ruff-check = "ruff check"
 ruff-fix = "ruff check --fix"
 format = "ruff format"
 format-check = "ruff format --check"
-mypy = "mypy automl-llm tests"
-compile = "python -m compileall automl-llm tests"
+mypy = "mypy automlllm tests"
+compile = "python -m compileall automlllm tests"
 static-checks = [
     "ruff-check",
     "mypy",
