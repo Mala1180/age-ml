@@ -3,10 +3,12 @@ import os
 import mlflow
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain_core.messages import SystemMessage
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+
 # from langchain_core.tools import Tool
 # from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.state import CompiledStateGraph
 
 from automlllm.tools import tools
@@ -27,7 +29,8 @@ mlflow.langchain.autolog()
 #     model="ministral-3:8b",
 # )
 
-api_key = lambda: os.environ["OPENROUTER_API_KEY"]
+def api_key() -> str:
+    return os.environ["OPENROUTER_API_KEY"]
 
 # openrouter
 llm = ChatOpenAI(
@@ -37,13 +40,26 @@ llm = ChatOpenAI(
 )
 
 
-system_prompt: SystemMessage = SystemMessage("""
+system_prompt: str = """
     You are a helpful assistant able to craft tools in order to train models for supervised learning. 
     Your objective is to craft a tool depending on the problem and dataset provided by the user, and provide to the latter the trained model. 
-""")
+"""
+
+
+checkpointer = MemorySaver()
+
+middleware = HumanInTheLoopMiddleware(
+    interrupt_on={
+        "install_dependency": False,
+        "load_csv": False,
+        "craft_model": True,
+    }
+)
 
 agent: CompiledStateGraph = create_agent(
     model=llm,
     tools=tools,
     system_prompt=system_prompt,
+    checkpointer=checkpointer,
+    middleware=[middleware],
 )

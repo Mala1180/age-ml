@@ -50,6 +50,7 @@ def craft_model(code: str) -> str:
 
     try:
         import mlflow
+
         mlflow.autolog()
         # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
         namespace: dict = {}
