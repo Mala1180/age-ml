@@ -75,7 +75,7 @@ Overview:
     - cf. <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic>
     - the token must allow pushing to the repository
 
-13. Put your main (resp. test) code in `automl-llm/` (resp. `test/`)
+13. Put your main (resp. test) code in `automlllm/` (resp. `test/`)
 
 ## How to do stuff
 
