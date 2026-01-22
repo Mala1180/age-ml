@@ -5,7 +5,7 @@
 State of the art AutoML frameworks allow for automatic hyperparameter tuning for machine learning (ML) models.
 Despite these methods have shown increased performance thanks to their systematic search for the optimal model, they commonly automate a small portion of the entire ML workflow, disregarding crucial steps such as data preprocessing, feature engineering/selection, validation, deployment, etc.
 Recent advancements in large language models (LLMs) have paved the way for more comprehensive AutoML solutions that aim to automate the entire ML pipeline by means of code generation---the whole idea can be described as an AI agent _autonomously_ crafting a tool for data science tasks.
-While other works have explored the exploitation of LLM-based AI agents for automating ML tasks often leading to black-box solutions with limited user controllability, in this paper we present a novel agentic framework for AutoML that keep human users in control.
+While other works have explored the exploitation of LLM-based AI agents for automating ML tasks often leading to black-box solutions with limited user controllability, in this paper we present a novel agentic framework for AutoML that keeps human users in control.
 Our focus here is on how to let ML practitioners express their expertise, needs, and constraints about the desired ML pipeline, and how to let the agent iteratively refine the generated solution ML based such information.
 
 This approach not only democratizes the access to ML for non-experts but also leverages the planning capabilities of Large Language Models (LLMs) to construct robust, performant pipelines while mitigating issues like technical hallucinations.

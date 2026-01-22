@@ -2,7 +2,7 @@ from typing import Optional, Dict, List, Tuple
 
 import networkx as nx
 import yaml
-from networkx import DiGraph
+from networkx import MultiDiGraph
 
 
 class Validator:
@@ -13,18 +13,18 @@ class Validator:
         self.rules: Dict = self.spec["rules"]
         self.constraints: List[Dict] = self.spec["constraints"]
 
-    def _check_admissible_step(self, graph: DiGraph) -> bool:
+    def _check_admissible_step(self, graph: MultiDiGraph) -> bool:
         for node in graph:
             if node not in self.steps:
                 return False
         return True
 
-    def _check_ordering(self, graph: DiGraph, before: str, after: str) -> bool:
+    def _check_ordering(self, graph: MultiDiGraph, before: str, after: str) -> bool:
         return any(nx.all_simple_paths(graph, source=before, target=after))
 
     def _check_constraint(
         self,
-        graph: DiGraph,
+        graph: MultiDiGraph,
         condition: Dict,
         require: Dict,
         forbid: Dict,
@@ -45,7 +45,9 @@ class Validator:
                     return False
         return True
 
-    def _validate_allowed_steps(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_allowed_steps(
+        self, graph: MultiDiGraph
+    ) -> Tuple[bool, Optional[str]]:
         for node_id in graph:
             if node_id not in self.steps:
                 return False, f"Unknown step {node_id}"
@@ -63,7 +65,9 @@ class Validator:
                 )
         return True, None
 
-    def _validate_initial_steps(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_initial_steps(
+        self, graph: MultiDiGraph
+    ) -> Tuple[bool, Optional[str]]:
         for step_id, step in self.steps.items():
             if step_id in graph and step.get("initial", False):
                 if graph.in_degree(step_id) != 0:
@@ -73,7 +77,9 @@ class Validator:
                     )
         return True, None
 
-    def _validate_terminal_steps(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_terminal_steps(
+        self, graph: MultiDiGraph
+    ) -> Tuple[bool, Optional[str]]:
         for step_id, step in self.steps.items():
             if step_id in graph and step.get("terminal", False):
                 if graph.out_degree(step_id) != 0:
@@ -83,12 +89,12 @@ class Validator:
                     )
         return True, None
 
-    def _validate_connectivity(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_connectivity(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         if not nx.is_weakly_connected(graph):
             return False, "Graph is not connected"
         return True, None
 
-    def _validate_ordering(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_ordering(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         for ordering in self.rules.get("ordering", []):
             before = ordering["before"]
             after = ordering["after"]
@@ -101,7 +107,7 @@ class Validator:
                 return False, f"Ordering {ordering} violated"
         return True, None
 
-    def _validate_constraints(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def _validate_constraints(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         for constraint in self.constraints:
             condition = constraint["condition"]
             require = constraint.get("require", {})
@@ -110,7 +116,7 @@ class Validator:
                 return False, f"Constraint {constraint} violated"
         return True, None
 
-    def validate(self, graph: DiGraph) -> Tuple[bool, Optional[str]]:
+    def validate(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         checks = [
             self._validate_allowed_steps,
             self._validate_initial_steps,
