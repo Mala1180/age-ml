@@ -9,7 +9,7 @@ from langchain_core.runnables import RunnableConfig
 from automlllm import logger
 
 # from automlllm.executingagent import executing_agent
-from automlllm.planningagent import planning_agent
+from automlllm.planning import planning_agent
 
 mlflow.set_experiment("mattia-experiment")
 mlflow.openai.autolog()

@@ -9,8 +9,8 @@ from langchain_core.tools import BaseTool
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.state import CompiledStateGraph
 
-from automlllm.model import model
-from automlllm.tools import install_dependency, craft_model, load_csv
+from automlllm.common.model import model
+from automlllm.common.tools import install_dependency, craft_model, load_csv
 
 # google gemini
 # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
