@@ -1,0 +1,200 @@
+pipeline:
+  steps:
+    imputation:
+      values: [simple_imputer, iterative_imputer]
+
+    discretization:
+      values: [kbins, binarizer]
+
+    normalization:
+      values: [power_transformer, robust_scaler, standard, minmax]
+
+    features:
+      values: [select_k_best, pca]
+
+    rebalancing:
+      values: [near_miss, smote]
+
+    classification:
+      values: [dt, knn, naive_bayes, nn, rf, ada_boost]
+      terminal: true
+
+    regression:
+      values: [linear, ridge, lasso, elastic_net, svr, knn_regressor, rf_regressor, nn_regressor]
+      terminal: true
+
+
+rules:
+  ordering:
+    - before: imputation
+      after: discretization
+
+    - before: imputation
+      after: normalization
+
+    - before: imputation
+      after: features
+
+    - before: imputation
+      after: rebalancing
+
+    - before: discretization
+      after: normalization
+
+    - before: normalization
+      after: features
+
+    - before: features
+      after: classification
+
+    - before: features
+      after: regression
+
+    - before: rebalancing
+      after: classification
+
+    - before: rebalancing
+      after: regression
+
+
+constraints:
+  # =========================
+  # TASK SELECTION (XOR)
+  # =========================
+
+  - condition:
+      classification: {}
+    forbid:
+      steps: [regression]
+
+  - condition:
+      regression: {}
+    forbid:
+      steps: [classification]
+
+  # At least one terminal task must exist
+  - condition:
+      task: supervised
+    require:
+      steps: [classification, regression]
+
+
+  # =========================
+  # CLASSIFICATION
+  # =========================
+
+  - condition:
+      classification: dt
+    require:
+      steps: [discretization]
+    forbid:
+      steps: [normalization, features]
+
+  - condition:
+      classification: rf
+    forbid:
+      steps: [normalization]
+
+  - condition:
+      classification: knn
+    require:
+      steps: [normalization, features]
+
+  - condition:
+      classification: nn
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      classification: naive_bayes
+    forbid:
+      steps: [normalization]
+
+  - condition:
+      classification: ada_boost
+    forbid:
+      steps: [normalization]
+
+
+  # =========================
+  # REGRESSION
+  # =========================
+
+  - condition:
+      regression: linear
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: ridge
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: lasso
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: elastic_net
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: svr
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: knn_regressor
+    require:
+      steps: [normalization, features]
+
+  - condition:
+      regression: nn_regressor
+    require:
+      steps: [normalization]
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      regression: rf_regressor
+    forbid:
+      steps: [normalization]
+
+
+  # =========================
+  # SHARED BEST PRACTICES
+  # =========================
+
+  - condition:
+      features: pca
+    require:
+      steps: [normalization]
+
+  - condition:
+      features: select_k_best
+    forbid:
+      steps: [discretization]
+
+  - condition:
+      rebalancing: smote
+    require:
+      steps: [imputation]
+
+  - condition:
+      imputation: iterative_imputer
+    require:
+      steps: [normalization]

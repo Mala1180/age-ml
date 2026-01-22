@@ -1,23 +1,16 @@
-import os
+from typing import List
 
-import mlflow
-from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langchain_core.tools import BaseTool
 
 # from langchain_core.tools import Tool
 # from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.state import CompiledStateGraph
 
-from automlllm.tools import tools
-
-load_dotenv()
-
-mlflow.set_experiment("mattia-experiment")
-mlflow.openai.autolog()
-mlflow.langchain.autolog()
+from automlllm.model import model
+from automlllm.tools import install_dependency, craft_model, load_csv
 
 # google gemini
 # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
@@ -28,16 +21,6 @@ mlflow.langchain.autolog()
 #     api_key="dummy",
 #     model="ministral-3:8b",
 # )
-
-def api_key() -> str:
-    return os.environ["OPENROUTER_API_KEY"]
-
-# openrouter
-llm = ChatOpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=api_key,
-    model="mistralai/devstral-2512:free",
-)
 
 
 system_prompt: str = """
@@ -56,8 +39,11 @@ middleware = HumanInTheLoopMiddleware(
     }
 )
 
+tools: List[BaseTool] = [install_dependency, load_csv, craft_model]
+
+
 agent: CompiledStateGraph = create_agent(
-    model=llm,
+    model=model,
     tools=tools,
     system_prompt=system_prompt,
     checkpointer=checkpointer,

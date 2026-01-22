@@ -1,12 +1,17 @@
 import uuid
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 
 import fire
+import mlflow
 from langchain_core.messages import HumanMessage
 from langgraph.types import Command
 from langchain_core.runnables import RunnableConfig
 from automlllm import logger
-from automlllm.agent import agent
+from automlllm.executingagent import agent
+
+mlflow.set_experiment("mattia-experiment")
+mlflow.openai.autolog()
+mlflow.langchain.autolog()
 
 
 def main(prompt: str = "", dataset_path: Optional[str] = None):
@@ -39,7 +44,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
 
 
 def agent_streaming(messages: List, config: RunnableConfig):
-    inputs = {"messages": messages}
+    inputs: Optional[Dict | Command] = {"messages": messages}
     while inputs:
         for mode, chunk in agent.stream(
             inputs,
@@ -56,11 +61,11 @@ def agent_streaming(messages: List, config: RunnableConfig):
             continue
 
         print("\nAgent interrupted. Actions requiring review:")
-        resume_payload = get_user_decision()
+        resume_payload: Dict[str, Any] = get_user_decision()
         inputs = Command(resume=resume_payload)
 
 
-def get_user_decision() -> dict:
+def get_user_decision() -> Dict[str, Any]:
     import json
 
     while True:
