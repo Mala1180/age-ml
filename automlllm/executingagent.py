@@ -24,7 +24,7 @@ from automlllm.tools import install_dependency, craft_model, load_csv
 
 
 system_prompt: str = """
-    You are a helpful assistant able to craft tools in order to train models for supervised learning. 
+    You are a helpful assistant able to craft models for supervised learning. 
     Your objective is to craft a tool depending on the problem and dataset provided by the user, and provide to the latter the trained model. 
 """
 
@@ -42,7 +42,7 @@ middleware = HumanInTheLoopMiddleware(
 tools: List[BaseTool] = [install_dependency, load_csv, craft_model]
 
 
-agent: CompiledStateGraph = create_agent(
+executing_agent: CompiledStateGraph = create_agent(
     model=model,
     tools=tools,
     system_prompt=system_prompt,

@@ -1,4 +1,4 @@
-import uuid
+# import uuid
 from typing import Optional, List, Dict, Any
 
 import fire
@@ -7,7 +7,9 @@ from langchain_core.messages import HumanMessage
 from langgraph.types import Command
 from langchain_core.runnables import RunnableConfig
 from automlllm import logger
-from automlllm.executingagent import agent
+
+# from automlllm.executingagent import executing_agent
+from automlllm.planningagent import planning_agent
 
 mlflow.set_experiment("mattia-experiment")
 mlflow.openai.autolog()
@@ -15,38 +17,47 @@ mlflow.langchain.autolog()
 
 
 def main(prompt: str = "", dataset_path: Optional[str] = None):
-    prompt = (
-        "Please help me to build a machine learning model for Adult Income Prediction."
-    )
-    dataset_path = "resources/datasets/adult.csv"
+    prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
 
+    dataset_path = "resources/datasets/adult.csv"
+    specification_path = "resources/automl-specification.yml"
     messages = [
         HumanMessage(
             content=[
                 {"type": "text", "text": prompt},
-                {"type": "text", "text": dataset_path + " is the URI of the dataset"}
+                {"type": "text", "text": dataset_path + " is the URI of the dataset. "}
                 if dataset_path
+                else {},
+                {
+                    "type": "text",
+                    "text": specification_path + " is the URI of the specification. ",
+                }
+                if specification_path
                 else {},
             ]
         ),
-        # AIMessage(
-        #     "What kind of problem am I facing? "
-        #     "Does dataset need preprocessing? "
-        #     "Which are the best model and hyperparameters to solve it?"
-        # ),
     ]
-    print(agent.get_graph().draw_mermaid())
+    print(planning_agent.get_graph().draw_mermaid())
 
-    config: RunnableConfig = {"configurable": {"thread_id": str(uuid.uuid4())}}
+    # config: RunnableConfig = {"configurable": {"thread_id": str(uuid.uuid4())}}
+    config: RunnableConfig = {}
 
     # Stream agent progress and LLM tokens until interrupt
-    agent_streaming(messages, config)
+    # agent_streaming(messages, config)
+    for mode, chunk in planning_agent.stream(
+        {"messages": messages},
+        config=config,
+        stream_mode=["values"],
+    ):
+        for step, data in chunk.items():
+            logger.info(f"step: {step}")
+            logger.info(f"content: {data}")
 
 
 def agent_streaming(messages: List, config: RunnableConfig):
     inputs: Optional[Dict | Command] = {"messages": messages}
     while inputs:
-        for mode, chunk in agent.stream(
+        for mode, chunk in planning_agent.stream(
             inputs,
             config=config,
             stream_mode=["values"],
@@ -55,7 +66,7 @@ def agent_streaming(messages: List, config: RunnableConfig):
                 logger.info(f"step: {step}")
                 logger.info(f"content: {data}")
 
-        state = agent.get_state(config)
+        state = planning_agent.get_state(config)
         if not state.next:
             inputs = None
             continue
