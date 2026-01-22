@@ -1,7 +1,7 @@
 import networkx as nx
 import pytest
 
-from automlllm.validation import Validator
+from automlllm.planning.validation import Validator
 from tests.resources import get_test_resource_path
 
 spec_sample: str = get_test_resource_path("specification-sample.yml").read_text()
