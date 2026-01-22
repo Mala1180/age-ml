@@ -1,5 +1,9 @@
+from typing import Tuple, Any, List
+
 import pandas as pd
 from langchain_core.tools import tool
+import networkx as nx
+from networkx import Graph
 
 
 @tool
@@ -60,4 +64,17 @@ def craft_model(code: str) -> str:
         return str(e)
 
 
-tools = [install_dependency, load_csv, craft_model]
+@tool
+def generate_computational_graph(
+    nodes: List[Tuple[str, Any]], edges: List[Tuple[str, str]]
+) -> dict:
+    """Generate a graph given nodes and edges.
+    Nodes are tuples of (node_id, node_value).
+    Edges are tuples of (from_node_id, to_node_id).
+    """
+    graph: Graph = nx.DiGraph()
+    for node_id, node_value in nodes:
+        graph.add_node(node_id, value=node_value)
+    for from_node, to_node in edges:
+        graph.add_edge(from_node, to_node)
+    return nx.node_link_data(graph)

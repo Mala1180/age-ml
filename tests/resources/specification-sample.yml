@@ -1,0 +1,61 @@
+pipeline:
+  steps:
+    step1:
+      values: [a, b]
+      initial: true
+
+    step2:
+      values: [c, d]
+
+    step3:
+      values: [e, f, g, h]
+
+    step4:
+      values: [i, j]
+
+    step5:
+      values: [k, l]
+      terminal: true
+
+rules:
+  ordering:
+    - before: step1
+      after: step2
+
+    - before: step2
+      after: step3
+
+    - before: step1
+      after: step4
+
+    - before: step4
+      after: step5
+
+constraints:
+  - condition:
+      step2: {}
+    require:
+      steps: [step1]
+    forbid:
+      steps: [step3]
+
+  - condition:
+      step1: a
+    require:
+      steps: [step2, step4]
+
+  - condition:
+      step1: b
+    require:
+      steps:
+        step3: f
+        step4: i
+    forbid:
+      steps:
+        step3: e
+        step4: j
+
+  - condition:
+      step4: j
+    forbid:
+      steps: [step3]

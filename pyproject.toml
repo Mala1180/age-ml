@@ -11,7 +11,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 # update the Python versions in .github/workflows/check.yml if you change this
-python = ">= 3.11.0 < 4.0.0"
+python = "> 3.14.1 < 4.0.0"
 langchain = {extras = ["openai"], version = "^1.2.3"}
 mlflow = "^3.8.1"
 scikit-learn = "^1.8.0"
@@ -21,14 +21,19 @@ tabulate = "^0.9.0"
 numpy = "^2.4.0"
 boto3 = "^1.42.24"
 pandas-stubs = "~=2.3.3"
+networkx = "^3.6.1"
+types-networkx = "^3.6.1.20251220"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.4.0"
 mypy = "^1.10.1"
 poethepoet = "^0.37.0"
 poetry = "^1.8.3"
-pytest = "^8.3.5"
+pytest = "^9.0.2"
 ruff = "^0.14.8"
+types-pyyaml = "^6.0.12.20250915"
+types-pygments = "^2.19.0.20251121"
+types-pexpect = "^4.9.0.20250916"
 
 [tool.poe.tasks]
 test = "pytest"
