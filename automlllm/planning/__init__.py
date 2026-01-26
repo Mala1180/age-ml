@@ -5,8 +5,8 @@ from langchain.agents import create_agent
 from langgraph.graph.state import CompiledStateGraph
 
 from automlllm.common.model import model
-from automlllm.common.tools import load_csv
-from automlllm.planning.tools import load_yaml, generate_pipeline_graph, validate_pipeline_graph
+from automlllm.common.tools import load_dataset
+from automlllm.planning.tools import generate_pipeline_graph
 
 system_prompt: str = """
     You are a helpful assistant able to design machine learning pipelines.
@@ -31,8 +31,21 @@ system_prompt: str = """
 
 planning_agent: CompiledStateGraph = create_agent(
     model=model,
-    tools=[load_csv, load_yaml, generate_pipeline_graph, validate_pipeline_graph],
+    tools=[load_dataset, generate_pipeline_graph],
     system_prompt=system_prompt,
     # checkpointer=checkpointer,
     # middleware=[middleware],
 )
+
+# config: RunnableConfig = {"configurable": {"thread_id": str(uuid.uuid4())}}
+#
+# # Stream agent progress and LLM tokens until interrupt
+# agent_streaming(messages, config)
+# for mode, chunk in planning_agent.stream(
+#         {"messages": messages},
+#         config=config,
+#         stream_mode=["values"],
+# ):
+#     for step, data in chunk.items():
+#         logger.info(f"step: {step}")
+#         logger.info(f"content: {data}")

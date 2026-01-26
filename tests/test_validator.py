@@ -30,7 +30,10 @@ class TestValidator:
         sample_graph.add_node("unknown_step", value="x")
         is_valid, message = validator.validate(sample_graph)
         assert is_valid is False
-        assert message == "Unknown step unknown_step"
+        assert (
+            message
+            == f"Unknown node 'unknown_step', admissible nodes are {list(validator.steps.keys())}"
+        )
 
     def test_step_with_wrong_value(self, validator, sample_graph):
         sample_graph.nodes["step1"]["value"] = "y"
@@ -38,7 +41,7 @@ class TestValidator:
         assert is_valid is False
         assert (
             message
-            == "Step step1 has invalid value y, admissible values are ['a', 'b']"
+            == "Node 'step1' has invalid value 'y', admissible values are ['a', 'b']"
         )
 
     def test_ordering_violation(self, validator, sample_graph):
@@ -53,13 +56,13 @@ class TestValidator:
         sample_graph.add_edge("step2", "step1")
         is_valid, message = validator.validate(sample_graph)
         assert is_valid is False
-        assert message == "Step step1 must be initial but has ingoing edges"
+        assert message == "Node step1 must be initial but has ingoing edges"
 
     def test_wrong_terminal_step(self, validator, sample_graph):
         sample_graph.add_edge("step5", "step2")
         is_valid, message = validator.validate(sample_graph)
         assert is_valid is False
-        assert message == "Step step5 must be terminal but has outgoing edges"
+        assert message == "Node step5 must be terminal but has outgoing edges"
 
     def test_graph_is_not_connected(self, validator, sample_graph):
         sample_graph.remove_edge("step2", "step4")

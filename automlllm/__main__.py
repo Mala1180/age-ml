@@ -3,13 +3,14 @@ from typing import Optional, List, Dict, Any
 
 import fire
 import mlflow
-from langchain_core.messages import HumanMessage
-from langgraph.types import Command
+from langchain_core.messages import BaseMessage
 from langchain_core.runnables import RunnableConfig
+from langgraph.types import Command
+
 from automlllm import logger
+from automlllm.planning.agent import planning_agent, create_user_prompt
 
 # from automlllm.executingagent import executing_agent
-from automlllm.planning import planning_agent
 
 mlflow.set_experiment("mattia-experiment")
 mlflow.openai.autolog()
@@ -18,34 +19,20 @@ mlflow.langchain.autolog()
 
 def main(prompt: str = "", dataset_path: Optional[str] = None):
     prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
-
+    messages: List[BaseMessage] = create_user_prompt(prompt)
     dataset_path = "resources/datasets/adult.csv"
     specification_path = "resources/automl-specification.yml"
-    messages = [
-        HumanMessage(
-            content=[
-                {"type": "text", "text": prompt},
-                {"type": "text", "text": dataset_path + " is the URI of the dataset. "}
-                if dataset_path
-                else {},
-                {
-                    "type": "text",
-                    "text": specification_path + " is the URI of the specification. ",
-                }
-                if specification_path
-                else {},
-            ]
-        ),
-    ]
-    print(planning_agent.get_graph().draw_mermaid())
 
     # config: RunnableConfig = {"configurable": {"thread_id": str(uuid.uuid4())}}
     config: RunnableConfig = {}
 
-    # Stream agent progress and LLM tokens until interrupt
-    # agent_streaming(messages, config)
     for mode, chunk in planning_agent.stream(
-        {"messages": messages},
+        {
+            "messages": messages,
+            "user_prompt": prompt,
+            "specification_path": specification_path,
+            "dataset_path": dataset_path,
+        },
         config=config,
         stream_mode=["values"],
     ):
