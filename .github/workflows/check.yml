@@ -23,6 +23,11 @@ jobs:
         with:
           fetch-depth: 0 # all history
 
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
       - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
@@ -67,9 +72,8 @@ jobs:
           - windows-latest
           - macos-latest
         python-version:
-          - '3.11'
-          - '3.12'
-          - '3.13'
+          - '3.14'
+          - '3.15'
     runs-on: ${{ matrix.os }}
     name: Test on Python ${{ matrix.python-version }}, on ${{ matrix.os }}
     timeout-minutes: 45
