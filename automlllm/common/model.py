@@ -2,14 +2,14 @@ import os
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from pydantic import SecretStr
+
 # from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
 
-def api_key() -> str:
-    return os.environ["OPENROUTER_API_KEY"]
-
+api_key = SecretStr(os.environ["OPENROUTER_API_KEY"])
 
 # openrouter
 # model = ChatOpenAI(
@@ -18,13 +18,12 @@ def api_key() -> str:
 #     model="mistralai/devstral-2512:free",
 # )
 
-
 # # google gemini
 # model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
 #
 # local with ollama
 model = ChatOpenAI(
     base_url="http://localhost:11434/v1",
-    api_key="dummy",
+    api_key=SecretStr("dummy"),
     model="ministral-3:8b",
 )

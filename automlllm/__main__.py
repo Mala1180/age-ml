@@ -36,6 +36,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
         config=config,
         stream_mode=["values"],
     ):
+        assert isinstance(chunk, dict)
         for step, data in chunk.items():
             logger.info(f"step: {step}")
             logger.info(f"content: {data}")
@@ -49,6 +50,7 @@ def agent_streaming(messages: List, config: RunnableConfig):
             config=config,
             stream_mode=["values"],
         ):
+            assert isinstance(chunk, dict)
             for step, data in chunk.items():
                 logger.info(f"step: {step}")
                 logger.info(f"content: {data}")

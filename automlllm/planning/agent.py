@@ -7,7 +7,7 @@ import networkx as nx
 import pandas as pd
 import yaml
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
-from langgraph.graph import StateGraph, START, END, MessagesState
+from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from networkx.classes import MultiDiGraph
 from networkx.readwrite import json_graph
@@ -39,6 +39,7 @@ class PipelineGraph(BaseModel):
 structured_model = model.with_structured_output(PipelineGraph)
 attempts: int = 0
 max_attempts: int = 5
+
 
 def load_dataset(state: AgentState) -> AgentState:
     df = pd.read_csv(Path(state["dataset_path"]))
@@ -86,7 +87,8 @@ def generate_pipeline_graph(state: AgentState) -> AgentState:
         "and edges are tuples of (from_node_id, to_node_id)"
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
-    response: PipelineGraph = structured_model.invoke(state["messages"])
+    response = structured_model.invoke(state["messages"])
+    assert isinstance(response, PipelineGraph)
     graph: MultiDiGraph = nx.MultiDiGraph()
     for node_id, node_value in response.nodes:
         graph.add_node(node_id, value=node_value)
@@ -108,11 +110,12 @@ def validate_pipeline_graph(state: AgentState) -> AgentState:
     state["feedback"] = (is_valid, message)
     return state
 
-def should_terminate(state: AgentState) -> Literal["reasoning_node", END]:
+
+def should_terminate(state: AgentState) -> Literal["reasoning_node", "END"]:
     is_valid, _ = state["feedback"]
     global attempts
     attempts += 1
-    return END if is_valid or attempts == max_attempts else "reasoning_node"
+    return "END" if is_valid or attempts == max_attempts else "reasoning_node"
 
 
 state_graph = StateGraph(AgentState)
