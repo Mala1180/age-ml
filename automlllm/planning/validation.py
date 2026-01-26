@@ -50,17 +50,17 @@ class Validator:
     ) -> Tuple[bool, Optional[str]]:
         for node_id in graph:
             if node_id not in self.steps:
-                return False, f"Unknown step {node_id}"
+                return (
+                    False,
+                    f"Unknown node '{node_id}', admissible nodes are {list(self.steps.keys())}",
+                )
 
             if self.steps[node_id].get("values") == {}:
                 continue
-            print(graph.nodes)
-            print(node_id)
-            print(graph.nodes[node_id])
             if graph.nodes[node_id]["value"] not in self.steps[node_id].get("values"):
                 return (
                     False,
-                    f"Step {node_id} has invalid value {graph.nodes[node_id]['value']}, "
+                    f"Node '{node_id}' has invalid value '{graph.nodes[node_id]['value']}', "
                     f"admissible values are {self.steps[node_id].get('values')}",
                 )
         return True, None
@@ -73,7 +73,7 @@ class Validator:
                 if graph.in_degree(step_id) != 0:
                     return (
                         False,
-                        f"Step {step_id} must be initial but has ingoing edges",
+                        f"Node {step_id} must be initial but has ingoing edges",
                     )
         return True, None
 
@@ -85,7 +85,7 @@ class Validator:
                 if graph.out_degree(step_id) != 0:
                     return (
                         False,
-                        f"Step {step_id} must be terminal but has outgoing edges",
+                        f"Node {step_id} must be terminal but has outgoing edges",
                     )
         return True, None
 

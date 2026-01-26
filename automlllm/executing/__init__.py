@@ -10,7 +10,8 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.state import CompiledStateGraph
 
 from automlllm.common.model import model
-from automlllm.common.tools import install_dependency, craft_model, load_csv
+from automlllm.common.tools import load_dataset
+from automlllm.executing.tools import install_dependency, craft_model
 
 # google gemini
 # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
@@ -39,7 +40,7 @@ middleware = HumanInTheLoopMiddleware(
     }
 )
 
-tools: List[BaseTool] = [install_dependency, load_csv, craft_model]
+tools: List[BaseTool] = [install_dependency, load_dataset, craft_model]
 
 
 executing_agent: CompiledStateGraph = create_agent(
