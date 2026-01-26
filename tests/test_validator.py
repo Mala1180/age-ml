@@ -1,4 +1,4 @@
-import networkx as nx
+from networkx import MultiDiGraph
 import pytest
 
 from automlllm.planning.validation import Validator
@@ -8,8 +8,8 @@ spec_sample: str = get_test_resource_path("specification-sample.yml").read_text(
 
 
 @pytest.fixture
-def sample_graph():
-    graph = nx.MultiDiGraph()
+def sample_graph() -> MultiDiGraph:
+    graph: MultiDiGraph = MultiDiGraph()
     graph.add_node("step1", value="a")
     graph.add_node("step2", value="c")
     graph.add_edge("step1", "step2")
@@ -21,7 +21,7 @@ def sample_graph():
 
 
 @pytest.fixture
-def validator():
+def validator() -> Validator:
     return Validator(spec_sample)
 
 
