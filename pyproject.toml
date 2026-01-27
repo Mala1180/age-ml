@@ -16,7 +16,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.dependencies]
 # update the Python versions in .github/workflows/check.yml if you change this
 python = "> 3.14.1 < 4.0.0"
-langchain = {extras = ["openai"], version = "^1.2.3"}
+langchain = {extras = ["ollama", "openai"], version = "^1.2.7"}
 mlflow = "^3.8.1"
 scikit-learn = "^1.8.0"
 fire = "^0.7.1"
