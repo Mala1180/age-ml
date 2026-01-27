@@ -13,6 +13,7 @@ from networkx.classes import MultiDiGraph
 from networkx.readwrite import json_graph
 from pydantic import BaseModel
 
+from automlllm import system_prompt
 from automlllm.common.model import model
 from automlllm.planning.validation import Validator
 
@@ -69,11 +70,17 @@ def load_specification(state: AgentState) -> AgentState:
 
 
 def reasoning_node(state: AgentState) -> AgentState:
-    state["messages"] = state["messages"] + [HumanMessage(content=state["user_prompt"])]
     if "feedback" in state:
         state["messages"] = state["messages"] + [
             HumanMessage(content=state["feedback"][1]),
         ]
+    reasoning_prompt: str = (
+        "Reason on how to generate the pipeline graph."
+        "Remember that the graph must comply with the specification provided "
+        "and consider the previous feedbacks if any."
+    )
+
+    state["messages"] = state["messages"] + [HumanMessage(content=reasoning_prompt)]
 
     response = model.invoke(state["messages"])
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
@@ -89,6 +96,8 @@ def generate_pipeline_graph(state: AgentState) -> AgentState:
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
     response = structured_model.invoke(state["messages"])
     assert isinstance(response, PipelineGraph)
+    response.nodes = [(k.lower(), v.lower()) for k, v in response.nodes]
+    response.edges = [(f.lower(), t.lower()) for f, t in response.edges]
     graph: MultiDiGraph = nx.MultiDiGraph()
     for node_id, node_value in response.nodes:
         graph.add_node(node_id, value=node_value)
@@ -111,11 +120,11 @@ def validate_pipeline_graph(state: AgentState) -> AgentState:
     return state
 
 
-def should_terminate(state: AgentState) -> Literal["reasoning_node", "END"]:
+def should_terminate(state: AgentState) -> Literal["reasoning_node", "__end__"]:
     is_valid, _ = state["feedback"]
     global attempts
     attempts += 1
-    return "END" if is_valid or attempts == max_attempts else "reasoning_node"
+    return "__end__" if is_valid or attempts == max_attempts else "reasoning_node"
 
 
 state_graph = StateGraph(AgentState)
@@ -141,17 +150,6 @@ prompt: str = (
 
 
 def create_user_prompt(prompt: str) -> List[BaseMessage]:
-    system_prompt: str = """
-        You are a helpful assistant able to design machine learning pipelines.
-        Your task is to create a graph representing a machine learning pipeline based on the provided dataset and specification.
-        The pipeline must respect the specification provided in yaml format.
-        Pipeline step names are provided as the keys in the 'steps' section of the specification, under the 'pipeline' key.
-        These step names should be the node keys in the graph.
-        Values for each step should be chosen among the admissible values defined inside the spep object.
-        The output should be a graph representing the machine learning pipeline steps.
-        It is not necessary to use all the steps defined in the specification, but you always need to validate the generated pipeline against the specification.
-        You need to create the best pipeline depending on the dataset characteristics.
-    """
     return [SystemMessage(content=system_prompt), HumanMessage(content=prompt)]
 
 

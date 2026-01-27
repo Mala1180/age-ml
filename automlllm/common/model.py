@@ -1,7 +1,9 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
+
+# from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
 
 # from langchain_google_genai import ChatGoogleGenerativeAI
@@ -9,21 +11,25 @@ from pydantic import SecretStr
 load_dotenv()
 
 
-api_key = SecretStr(os.environ["OPENROUTER_API_KEY"])
+api_key = SecretStr(os.getenv("OPENROUTER_API_KEY", ""))
+
+# model_name: str = "deepseek/deepseek-r1-0528:free"
+model_name: str = "mistralai/devstral-2512:free"
 
 # openrouter
 # model = ChatOpenAI(
 #     base_url="https://openrouter.ai/api/v1",
 #     api_key=api_key,
-#     model="mistralai/devstral-2512:free",
+#     model=model_name,
 # )
 
 # # google gemini
 # model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
 #
 # local with ollama
-model = ChatOpenAI(
-    base_url="http://localhost:11434/v1",
-    api_key=SecretStr("dummy"),
-    model="ministral-3:8b",
+model = ChatOllama(
+    model="llama3.1:8b",
+    temperature=0.0,
+    # num_ctx=3072,
+    num_predict=-2,  # fill context
 )

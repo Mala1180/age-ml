@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Tuple, Any, List
+from typing import Tuple, Any, List, Dict
 
 import networkx as nx
 import yaml
@@ -23,7 +23,7 @@ def load_yaml(uri: str) -> str:
 @tool
 def generate_pipeline_graph(
     nodes: List[Tuple[str, Any]], edges: List[Tuple[str, str]]
-) -> dict:
+) -> Dict:
     """Generate a MultiDiGraph given nodes and edges.
     Nodes are tuples of (node_id, node_value).
     Edges are tuples of (from_node_id, to_node_id).
