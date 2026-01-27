@@ -1,3 +1,31 @@
+## 1.0.0 (2026-01-27)
+
+### Features
+
+* add basic agent and tools, add adult dataset for use case ([d1d465a](https://github.com/Mala1180/automl-llm/commit/d1d465a8fac14e283e3b43c0cd72eb336a6d6a9b))
+* add fail fast option to Validator, replace "condition" with "if" in specification constraints ([54383e9](https://github.com/Mala1180/automl-llm/commit/54383e9a312d44ae01fbd7065dd2db330f064b5f))
+* add new planning agent using langgraph api ([a8e3475](https://github.com/Mala1180/automl-llm/commit/a8e34753cb403336e3e2a704a5d464751576d224))
+* add streaming and human in the loop ([30f8993](https://github.com/Mala1180/automl-llm/commit/30f899397ca0fd30ca388cd33016b619d8908368))
+* refactor agents, add automl use case, add Validator and tests ([6b0a903](https://github.com/Mala1180/automl-llm/commit/6b0a90330da58121b4901a3e61a60d2de90fb97c))
+* use planning agent to generate a right ML pipeline ([d8a46ce](https://github.com/Mala1180/automl-llm/commit/d8a46ceed71ef86edfd7ce55ae07abb2666f3cad))
+
+### Build and continuous integration
+
+* downgrade networkx dependency and add more python versions ([32aae40](https://github.com/Mala1180/automl-llm/commit/32aae40519637906b5e961b4888412771bc8773e))
+* fix python versions ([fcec2ad](https://github.com/Mala1180/automl-llm/commit/fcec2adab35bc1c2b9e75ec59f54e831deefb3dc))
+* remove publish on pypi ([ace9ad5](https://github.com/Mala1180/automl-llm/commit/ace9ad5d1f69b774d0e560d9e3dbc8120809d7dc))
+
+### General maintenance
+
+* fix mypy errors ([9a43e6f](https://github.com/Mala1180/automl-llm/commit/9a43e6fdd007a03f413f34e8e437407c101a665d))
+* fix project name ([54217f3](https://github.com/Mala1180/automl-llm/commit/54217f30d37a1099712a528681011ade0a7a0f78))
+* initialise repository renaming files and removing init workflow [skip ci] ([b39060c](https://github.com/Mala1180/automl-llm/commit/b39060cf4cd3fe8e0d2ee7aa6028aef2da08c9ee))
+
+### Refactoring
+
+* refactor project structure ([b9ea111](https://github.com/Mala1180/automl-llm/commit/b9ea111c426f3760e01c3eb93bd02d2358bcf8ff))
+* separate agent implementation (langchain/langgraph), improve prompt in langgraph agent ([b02310c](https://github.com/Mala1180/automl-llm/commit/b02310cc24af4d0fd6fd05d7ce235b6480eefe3d))
+
 ## [2.4.1](https://github.com/aequitas-aod/template-python-project-poetry/compare/2.4.0...2.4.1) (2025-12-19)
 
 ### Dependency updates
