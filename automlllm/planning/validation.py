@@ -6,7 +6,8 @@ from networkx import MultiDiGraph
 
 
 class Validator:
-    def __init__(self, spec_yaml: str):
+    def __init__(self, spec_yaml: str, fail_fast: bool = False):
+        self.fail_fast: bool = fail_fast
         self.spec: Dict = yaml.safe_load(spec_yaml)
         self.pipeline: Dict = self.spec["pipeline"]
         self.steps: Dict = self.pipeline["steps"]
@@ -28,22 +29,37 @@ class Validator:
         condition: Dict,
         require: Dict,
         forbid: Dict,
-    ) -> bool:
+    ) -> Tuple[bool, Optional[str]]:
         condition_node, condition_value = list(condition.items())[0]
-
+        is_valid: bool = True
+        feedbacks: List[str] = []
         if condition_node in graph:
             if (
                 condition_value == {}
                 or graph.nodes[condition_node]["value"] == condition_value
             ):
-                required_nodes = set(require.get("steps", []))
+                message: str
+                required_nodes = set(require.get("steps", {}))
                 if not required_nodes.issubset(graph.nodes):
-                    return False
+                    is_valid = False
+                    message = (
+                        f"Constraint violated since {str(condition)} "
+                        f"condition is met but some of required nodes "
+                        f"{str(require['steps'])} are missing."
+                    )
+                    feedbacks.append(message)
 
                 forbidden_nodes = set(forbid.get("steps", []))
                 if forbidden_nodes.intersection(graph.nodes):
-                    return False
-        return True
+                    is_valid = False
+                    message = (
+                        f"Constraint violated since {str(condition)} "
+                        f"condition is met but some of forbidden nodes "
+                        f"{str(forbid['steps'])} are present."
+                    )
+                    feedbacks.append(message)
+
+        return is_valid, None if is_valid else "\n".join(feedbacks)
 
     def _validate_allowed_steps(
         self, graph: MultiDiGraph
@@ -52,7 +68,7 @@ class Validator:
             if node_id not in self.steps:
                 return (
                     False,
-                    f"Unknown node '{node_id}', admissible nodes are {list(self.steps.keys())}",
+                    f"Unknown node '{node_id}', admissible nodes are {list(self.steps.keys())}.",
                 )
 
             if self.steps[node_id].get("values") == {}:
@@ -61,7 +77,7 @@ class Validator:
                 return (
                     False,
                     f"Node '{node_id}' has invalid value '{graph.nodes[node_id]['value']}', "
-                    f"admissible values are {self.steps[node_id].get('values')}",
+                    f"admissible values are {self.steps[node_id].get('values')}.",
                 )
         return True, None
 
@@ -73,7 +89,7 @@ class Validator:
                 if graph.in_degree(step_id) != 0:
                     return (
                         False,
-                        f"Node {step_id} must be initial but has ingoing edges",
+                        f"Node {step_id} must be initial but has ingoing edges.",
                     )
         return True, None
 
@@ -85,13 +101,13 @@ class Validator:
                 if graph.out_degree(step_id) != 0:
                     return (
                         False,
-                        f"Node {step_id} must be terminal but has outgoing edges",
+                        f"Node {step_id} must be terminal but has outgoing edges.",
                     )
         return True, None
 
     def _validate_connectivity(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         if not nx.is_weakly_connected(graph):
-            return False, "Graph is not connected"
+            return False, "Graph is not connected."
         return True, None
 
     def _validate_ordering(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
@@ -104,16 +120,19 @@ class Validator:
                 and before in graph
                 and not self._check_ordering(graph, before, after)
             ):
-                return False, f"Ordering {ordering} violated"
+                return False, f"Ordering {ordering} violated."
         return True, None
 
     def _validate_constraints(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
         for constraint in self.constraints:
-            condition = constraint["condition"]
+            condition = constraint["if"]
             require = constraint.get("require", {})
             forbid = constraint.get("forbid", {})
-            if not self._check_constraint(graph, condition, require, forbid):
-                return False, f"Constraint {constraint} violated"
+            is_valid, message = self._check_constraint(
+                graph, condition, require, forbid
+            )
+            if not is_valid:
+                return False, message
         return True, None
 
     def validate(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
@@ -125,10 +144,13 @@ class Validator:
             self._validate_ordering,
             self._validate_constraints,
         ]
-
+        overall_feedback: List[str] = []
         for check in checks:
             is_valid, message = check(graph)
-            if not is_valid:
-                return is_valid, message
-
+            if not is_valid and message:
+                overall_feedback.append(message)
+                if self.fail_fast:
+                    return is_valid, "\n".join(overall_feedback)
+        if len(overall_feedback) > 0:
+            return False, "\n".join(overall_feedback)
         return True, None
