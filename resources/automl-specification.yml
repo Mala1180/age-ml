@@ -58,61 +58,51 @@ rules:
 
 
 constraints:
-  # =========================
-  # TASK SELECTION (XOR)
-  # =========================
 
-  - condition:
+  - if:
       classification: {}
     forbid:
       steps: [regression]
 
-  - condition:
+  - if:
       regression: {}
     forbid:
       steps: [classification]
-
-  # At least one terminal task must exist
-  - condition:
-      task: supervised
-    require:
-      steps: [classification, regression]
-
 
   # =========================
   # CLASSIFICATION
   # =========================
 
-  - condition:
+  - if:
       classification: dt
     require:
       steps: [discretization]
     forbid:
       steps: [normalization, features]
 
-  - condition:
+  - if:
       classification: rf
     forbid:
       steps: [normalization]
 
-  - condition:
+  - if:
       classification: knn
     require:
       steps: [normalization, features]
 
-  - condition:
+  - if:
       classification: nn
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       classification: naive_bayes
     forbid:
       steps: [normalization]
 
-  - condition:
+  - if:
       classification: ada_boost
     forbid:
       steps: [normalization]
@@ -122,54 +112,54 @@ constraints:
   # REGRESSION
   # =========================
 
-  - condition:
+  - if:
       regression: linear
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: ridge
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: lasso
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: elastic_net
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: svr
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: knn_regressor
     require:
       steps: [normalization, features]
 
-  - condition:
+  - if:
       regression: nn_regressor
     require:
       steps: [normalization]
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       regression: rf_regressor
     forbid:
       steps: [normalization]
@@ -179,22 +169,22 @@ constraints:
   # SHARED BEST PRACTICES
   # =========================
 
-  - condition:
+  - if:
       features: pca
     require:
       steps: [normalization]
 
-  - condition:
+  - if:
       features: select_k_best
     forbid:
       steps: [discretization]
 
-  - condition:
+  - if:
       rebalancing: smote
     require:
       steps: [imputation]
 
-  - condition:
+  - if:
       imputation: iterative_imputer
     require:
       steps: [normalization]

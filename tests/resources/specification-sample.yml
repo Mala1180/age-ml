@@ -32,19 +32,19 @@ rules:
       after: step5
 
 constraints:
-  - condition:
+  - if:
       step2: {}
     require:
       steps: [step1]
     forbid:
       steps: [step3]
 
-  - condition:
+  - if:
       step1: a
     require:
       steps: [step2, step4]
 
-  - condition:
+  - if:
       step1: b
     require:
       steps:
@@ -55,7 +55,7 @@ constraints:
         step3: e
         step4: j
 
-  - condition:
+  - if:
       step4: j
     forbid:
       steps: [step3]
