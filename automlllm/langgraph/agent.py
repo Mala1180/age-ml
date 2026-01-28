@@ -1,8 +1,7 @@
 from pathlib import Path
 from pprint import pformat
-from typing import List, Tuple, Optional, Literal, Dict
+from typing import List, Tuple, Literal, Dict
 
-import mlflow
 import networkx as nx
 import pandas as pd
 import yaml
@@ -17,19 +16,15 @@ from automlllm import system_prompt
 from automlllm.common.model import model
 from automlllm.planning.validation import Validator
 
-mlflow.set_experiment("mattia-experiment")
-mlflow.openai.autolog()
-mlflow.langchain.autolog()
 
-
-class AgentState(MessagesState):
+class PlanningAgentState(MessagesState):
     user_prompt: str
     specification_path: str
     specification: str
     dataset_path: str
     dataset_info: str
     pipeline_graph: Dict[str, str]
-    feedback: Tuple[bool, Optional[str]]
+    is_pipeline_valid: bool
 
 
 class PipelineGraph(BaseModel):
@@ -42,7 +37,7 @@ attempts: int = 0
 max_attempts: int = 5
 
 
-def load_dataset(state: AgentState) -> AgentState:
+def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
     df = pd.read_csv(Path(state["dataset_path"]))
 
     dataset_info: str = f"""
@@ -59,7 +54,7 @@ def load_dataset(state: AgentState) -> AgentState:
     return state
 
 
-def load_specification(state: AgentState) -> AgentState:
+def load_specification(state: PlanningAgentState) -> PlanningAgentState:
     content: str = Path(state["specification_path"]).read_text()
     data: Dict = yaml.safe_load(content)
     state["messages"] = state["messages"] + [
@@ -69,15 +64,12 @@ def load_specification(state: AgentState) -> AgentState:
     return state
 
 
-def reasoning_node(state: AgentState) -> AgentState:
-    if "feedback" in state:
-        state["messages"] = state["messages"] + [
-            HumanMessage(content=state["feedback"][1]),
-        ]
+def reasoning_node(state: PlanningAgentState) -> PlanningAgentState:
     reasoning_prompt: str = (
-        "Reason on how to generate the pipeline graph."
+        "Reason on how to generate the pipeline graph. "
         "Remember that the graph must comply with the specification provided "
-        "and consider the previous feedbacks if any."
+        "and consider the previous feedbacks if any. "
+        "You don't need to generate any sort of code, just reason about the steps to take."
     )
 
     state["messages"] = state["messages"] + [HumanMessage(content=reasoning_prompt)]
@@ -87,11 +79,15 @@ def reasoning_node(state: AgentState) -> AgentState:
     return state
 
 
-def generate_pipeline_graph(state: AgentState) -> AgentState:
+def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     local_prompt: str = (
-        "Generate a directed graph where "
-        "nodes are tuples of (node_id, node_value) "
-        "and edges are tuples of (from_node_id, to_node_id)"
+        "Generate a directed graph representing the pipeline.\n"
+        "Return ONLY valid JSON that matches this schema:\n"
+        "{"
+        '  "nodes": [[string, string], ...],'
+        '  "edges": [[string, string], ...]'
+        "}\n"
+        "Do not include markdown, code fences, comments, or explanations."
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
     response = structured_model.invoke(state["messages"])
@@ -109,25 +105,25 @@ def generate_pipeline_graph(state: AgentState) -> AgentState:
     return state
 
 
-def validate_pipeline_graph(state: AgentState) -> AgentState:
+def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
     validator = Validator(state["specification"])
     is_valid, message = validator.validate(graph)
     if message is None:
         message = "Graph is valid according to the specification."
     state["messages"] = state["messages"] + [HumanMessage(content=message)]
-    state["feedback"] = (is_valid, message)
+    state["is_pipeline_valid"] = is_valid
     return state
 
 
-def should_terminate(state: AgentState) -> Literal["reasoning_node", "__end__"]:
-    is_valid, _ = state["feedback"]
+def should_terminate(state: PlanningAgentState) -> Literal["reasoning_node", "__end__"]:
+    terminate: bool = state["is_pipeline_valid"]
     global attempts
     attempts += 1
-    return "__end__" if is_valid or attempts == max_attempts else "reasoning_node"
+    return "__end__" if terminate or attempts == max_attempts else "reasoning_node"
 
 
-state_graph = StateGraph(AgentState)
+state_graph = StateGraph(PlanningAgentState)
 
 state_graph.add_sequence(
     [
