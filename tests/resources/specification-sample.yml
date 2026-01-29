@@ -1,8 +1,16 @@
 pipeline:
+
+  defaults:
+    values: []
+    mandatory: false
+    terminal: false
+    initial: false
+
   steps:
     step1:
       values: [a, b]
       initial: true
+      mandatory: true
 
     step2:
       values: [c, d]
@@ -16,20 +24,22 @@ pipeline:
     step5:
       values: [k, l]
       terminal: true
+      mandatory: true
 
-rules:
-  ordering:
-    - before: step1
-      after: step2
 
-    - before: step2
-      after: step3
+partial_ordering:
+  - before: step1
+    after: step2
 
-    - before: step1
-      after: step4
+  - before: step2
+    after: step3
 
-    - before: step4
-      after: step5
+  - before: step1
+    after: step4
+
+  - before: step4
+    after: step5
+
 
 constraints:
   - if:
