@@ -3,16 +3,82 @@ from typing import Optional, Dict, List, Tuple
 import networkx as nx
 import yaml
 from networkx import MultiDiGraph
+from pydantic import BaseModel, Field, ConfigDict
 
 
-class Validator:
-    def __init__(self, spec_yaml: str, fail_fast: bool = False):
-        self.fail_fast: bool = fail_fast
-        self.spec: Dict = yaml.safe_load(spec_yaml)
-        self.pipeline: Dict = self.spec["pipeline"]
-        self.steps: Dict = self.pipeline["steps"]
-        self.rules: Dict = self.spec["rules"]
-        self.constraints: List[Dict] = self.spec["constraints"]
+class StepFields(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    values: List[str] = Field(default_factory=list)
+    mandatory: bool = False
+    initial: bool = False
+    terminal: bool = False
+
+
+class Defaults(StepFields):
+    pass
+
+
+class Step(StepFields):
+    id: str
+
+
+class OrderingRule(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    before: str
+    after: str
+
+
+class Constraint(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    condition: Dict
+    require: Optional[List[str] | Dict] = Field(default_factory=list)
+    forbid: Optional[List[str] | Dict] = Field(default_factory=list)
+
+
+class Specification:
+    def __init__(
+        self,
+        steps: List[Step],
+        ordering: List[OrderingRule],
+        constraints: List[Constraint],
+    ) -> None:
+        self.steps: List[Step] = steps
+        self.ordering: List[OrderingRule] = ordering
+        self.constraints: List[Constraint] = constraints
+
+    @classmethod
+    def parse(cls, spec_yaml: str) -> "Specification":
+        spec: Dict = yaml.safe_load(spec_yaml)
+
+        defaults = Defaults.model_validate(spec["pipeline"]["defaults"]).model_dump()
+
+        steps: List[Step] = [
+            Step.model_validate(
+                {
+                    "id": step_id,
+                    **defaults,
+                    **step_data,
+                }
+            )
+            for step_id, step_data in spec["pipeline"]["steps"].items()
+        ]
+
+        ordering: List[OrderingRule] = [
+            OrderingRule.model_validate(order) for order in spec["partial_ordering"]
+        ]
+
+        constraints: List[Constraint] = [
+            Constraint.model_validate(
+                {
+                    "condition": constraint["if"],
+                    "require": constraint.get("require", None),
+                    "forbid": constraint.get("forbid", None),
+                }
+            )
+            for constraint in spec.get("constraints", [])
+        ]
+
+        return cls(steps, ordering, constraints)
 
     def _check_admissible_step(self, graph: MultiDiGraph) -> bool:
         for node in graph:
@@ -135,7 +201,9 @@ class Validator:
                 return False, message
         return True, None
 
-    def validate(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
+    def validate(
+        self, graph: MultiDiGraph, fail_fast: bool = False
+    ) -> Tuple[bool, Optional[str]]:
         checks = [
             self._validate_allowed_steps,
             self._validate_initial_steps,
@@ -149,8 +217,17 @@ class Validator:
             is_valid, message = check(graph)
             if not is_valid and message:
                 overall_feedback.append(message)
-                if self.fail_fast:
+                if fail_fast:
                     return is_valid, "\n".join(overall_feedback)
         if len(overall_feedback) > 0:
             return False, "\n".join(overall_feedback)
         return True, None
+
+
+# spec_string: str = get_test_resource_path("specification-sample.yml").read_text()
+# # spec_string = get_resource_path("automl-specification.yml").read_text()
+#
+# spec_sample: Specification = Specification.parse(spec_string)
+# print(spec_sample.steps)
+# print(spec_sample.ordering)
+# print(spec_sample.constraints)

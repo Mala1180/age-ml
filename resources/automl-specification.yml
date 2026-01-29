@@ -1,4 +1,11 @@
 pipeline:
+
+  defaults:
+    values: []
+    mandatory: false
+    terminal: false
+    initial: false
+
   steps:
     imputation:
       values: [simple_imputer, iterative_imputer]
@@ -24,37 +31,37 @@ pipeline:
       terminal: true
 
 
-rules:
-  ordering:
-    - before: imputation
-      after: discretization
 
-    - before: imputation
-      after: normalization
+partial_ordering:
+  - before: imputation
+    after: discretization
 
-    - before: imputation
-      after: features
+  - before: imputation
+    after: normalization
 
-    - before: imputation
-      after: rebalancing
+  - before: imputation
+    after: features
 
-    - before: discretization
-      after: normalization
+  - before: imputation
+    after: rebalancing
 
-    - before: normalization
-      after: features
+  - before: discretization
+    after: normalization
 
-    - before: features
-      after: classification
+  - before: normalization
+    after: features
 
-    - before: features
-      after: regression
+  - before: features
+    after: classification
 
-    - before: rebalancing
-      after: classification
+  - before: features
+    after: regression
 
-    - before: rebalancing
-      after: regression
+  - before: rebalancing
+    after: classification
+
+  - before: rebalancing
+    after: regression
 
 
 constraints:
