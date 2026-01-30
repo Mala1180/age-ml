@@ -19,10 +19,10 @@ pipeline:
       values: [e, f, g, h]
 
     step4:
-      values: [i, j]
+      values: [i, j, k]
 
     step5:
-      values: [k, l]
+      values: [l, m]
       terminal: true
       mandatory: true
 
@@ -42,30 +42,19 @@ partial_ordering:
 
 
 constraints:
-  - if:
-      step2: {}
-    require:
-      steps: [step1]
-    forbid:
-      steps: [step3]
 
   - if:
-      step1: a
-    require:
-      steps: [step2, step4]
+      step1: {}
+    require: [step2, step4]
+    forbid: [step3]
 
   - if:
       step1: b
     require:
-      steps:
-        step3: f
-        step4: i
+      - step4: j
     forbid:
-      steps:
-        step3: e
-        step4: j
+      - step5: l
 
   - if:
       step4: j
-    forbid:
-      steps: [step3]
+    forbid: [step3]

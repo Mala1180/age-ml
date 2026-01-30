@@ -68,13 +68,11 @@ constraints:
 
   - if:
       classification: {}
-    forbid:
-      steps: [regression]
+    forbid: [regression]
 
   - if:
       regression: {}
-    forbid:
-      steps: [classification]
+    forbid: [classification]
 
   # =========================
   # CLASSIFICATION
@@ -82,37 +80,29 @@ constraints:
 
   - if:
       classification: dt
-    require:
-      steps: [discretization]
-    forbid:
-      steps: [normalization, features]
+    require: [discretization]
+    forbid: [normalization, features]
 
   - if:
       classification: rf
-    forbid:
-      steps: [normalization]
+    forbid: [normalization]
 
   - if:
       classification: knn
-    require:
-      steps: [normalization, features]
+    require: [normalization, features]
 
   - if:
       classification: nn
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       classification: naive_bayes
-    forbid:
-      steps: [normalization]
+    forbid: [normalization]
 
   - if:
       classification: ada_boost
-    forbid:
-      steps: [normalization]
+    forbid: [normalization]
 
 
   # =========================
@@ -121,55 +111,41 @@ constraints:
 
   - if:
       regression: linear
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: ridge
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: lasso
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: elastic_net
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: svr
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: knn_regressor
-    require:
-      steps: [normalization, features]
+    require: [normalization, features]
 
   - if:
       regression: nn_regressor
-    require:
-      steps: [normalization]
-    forbid:
-      steps: [discretization]
+    require: [normalization]
+    forbid: [discretization]
 
   - if:
       regression: rf_regressor
-    forbid:
-      steps: [normalization]
+    forbid: [normalization]
 
 
   # =========================
@@ -178,20 +154,16 @@ constraints:
 
   - if:
       features: pca
-    require:
-      steps: [normalization]
+    require: [normalization]
 
   - if:
       features: select_k_best
-    forbid:
-      steps: [discretization]
+    forbid: [discretization]
 
   - if:
       rebalancing: smote
-    require:
-      steps: [imputation]
+    require: [imputation]
 
   - if:
       imputation: iterative_imputer
-    require:
-      steps: [normalization]
+    require: [normalization]

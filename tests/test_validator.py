@@ -13,16 +13,16 @@ def sample_graph() -> MultiDiGraph:
     graph.add_node("step1", value="a")
     graph.add_node("step2", value="c")
     graph.add_edge("step1", "step2")
-    graph.add_node("step4", value="i")
+    graph.add_node("step4", value="k")
     graph.add_edge("step2", "step4")
-    graph.add_node("step5", value="k")
+    graph.add_node("step5", value="l")
     graph.add_edge("step4", "step5")
     return graph
 
 
 @pytest.fixture
 def specification() -> Specification:
-    return Specification(spec_sample)
+    return Specification.parse(spec_sample)
 
 
 class TestValidator:
@@ -32,8 +32,14 @@ class TestValidator:
         assert is_valid is False
         assert (
             message
-            == f"Unknown node 'unknown_step', admissible nodes are {list(specification.steps.keys())}."
+            == f"Unknown nodes ['unknown_step'], admissible nodes are {[n.id for n in specification.steps]}."
         )
+
+    def test_missing_mandatory_step(self, specification, sample_graph):
+        sample_graph.remove_nodes_from({"step1", "step5"})
+        is_valid, message = specification.validate(sample_graph, True)
+        assert is_valid is False
+        assert message == "Missing mandatory steps ['step1', 'step5']."
 
     def test_step_with_wrong_value(self, specification, sample_graph):
         sample_graph.nodes["step1"]["value"] = "y"
@@ -49,7 +55,10 @@ class TestValidator:
         sample_graph.add_edge("step3", "step2")
         is_valid, message = specification.validate(sample_graph, True)
         assert is_valid is False
-        assert message == "Ordering {'before': 'step2', 'after': 'step3'} violated."
+        assert (
+            message
+            == "Partial ordering violated:\n- 'step2' node must come before 'step3' node."
+        )
 
     def test_wrong_initial_step(self, specification, sample_graph):
         sample_graph.remove_edge("step1", "step2")
@@ -75,51 +84,28 @@ class TestValidator:
         assert message is None
         assert is_valid is True
 
-    def test_required_constraint_violation_without_value(
-        self, specification, sample_graph
-    ):
-        sample_graph.remove_node("step1")
+    def test_constraint_violation_without_values(self, specification, sample_graph):
+        sample_graph.remove_node("step2")
+        sample_graph.add_edge("step1", "step3")
+        sample_graph.add_edge("step3", "step4")
         is_valid, message = specification.validate(sample_graph, True)
         assert is_valid is False
 
         assert message == (
-            "Constraint violated since {'step2': {}} condition is met but some of "
-            "required nodes ['step1'] are missing."
+            "Constraints violated:\n"
+            "- since 'step1' is present, required nodes ['step2'] are missing.\n"
+            "- since 'step1' is present, forbidden nodes ['step3'] are present."
         )
 
-    def test_forbidden_constraint_violation_without_value(
-        self, specification, sample_graph
-    ):
-        sample_graph.remove_node("step1")
-        is_valid, message = specification.validate(sample_graph, True)
-        assert is_valid is False
-        assert message == (
-            "Constraint violated since {'step2': {}} condition is met but some of "
-            "required nodes ['step1'] are missing."
-        )
-
-    def test_required_constraint_violation_with_value(
+    def test_required_constraint_violation_with_values(
         self, specification, sample_graph
     ):
         sample_graph.nodes["step1"]["value"] = "b"
+        sample_graph.add_edge("step2", "step4")
         is_valid, message = specification.validate(sample_graph, True)
         assert is_valid is False
         assert message == (
-            "Constraint violated since {'step1': 'b'} condition is met but some of "
-            "required nodes {'step3': 'f', 'step4': 'i'} are missing.\n"
-            "Constraint violated since {'step1': 'b'} condition is met but some of "
-            "forbidden nodes {'step3': 'e', 'step4': 'j'} are present."
-        )
-
-    def test_forbidden_constraint_violation_with_value(
-        self, specification, sample_graph
-    ):
-        sample_graph.nodes["step1"]["value"] = "b"
-        is_valid, message = specification.validate(sample_graph, True)
-        assert is_valid is False
-        assert message == (
-            "Constraint violated since {'step1': 'b'} condition is met but some of "
-            "required nodes {'step3': 'f', 'step4': 'i'} are missing.\n"
-            "Constraint violated since {'step1': 'b'} condition is met but some of "
-            "forbidden nodes {'step3': 'e', 'step4': 'j'} are present."
+            "Constraints violated:\n"
+            "- since 'step1' has value 'b', required value 'j' to node 'step4' is missing.\n"
+            "- since 'step1' has value 'b', forbidden value 'l' to node 'step5' is present."
         )
