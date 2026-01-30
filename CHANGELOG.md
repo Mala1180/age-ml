@@ -1,3 +1,14 @@
+## [1.1.0](https://github.com/Mala1180/automl-llm/compare/1.0.0...1.1.0) (2026-01-30)
+
+### Features
+
+* **specification:** add specification class ([b6680f1](https://github.com/Mala1180/automl-llm/commit/b6680f1cff9ca462494d1456dae1948f0cfbcc96))
+
+### Refactoring
+
+* rename planning agent class and improve prompts ([8946626](https://github.com/Mala1180/automl-llm/commit/89466264e9cb6fbdbd39054e898b29a0574b54aa))
+* **specification:** add defaults field, improve specification with parsing ([60430e6](https://github.com/Mala1180/automl-llm/commit/60430e6289222d2b547b0a5502b6ada7ebcf5089))
+
 ## 1.0.0 (2026-01-27)
 
 ### Features
