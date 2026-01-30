@@ -43,7 +43,7 @@ def validate_pipeline_graph(graph_data: dict, spec: str) -> str:
     The specification is a YAML string defining the validation rules.
     """
     graph: MultiDiGraph = json_graph.node_link_graph(graph_data)
-    validator = Specification(spec)
+    validator = Specification.parse(spec)
     is_valid, message = validator.validate(graph)
     if is_valid:
         return "Graph is valid according to the specification."

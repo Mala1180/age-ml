@@ -107,7 +107,7 @@ def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
 
 def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
-    validator = Specification(state["specification"])
+    validator = Specification.parse(state["specification"])
     is_valid, message = validator.validate(graph)
     if message is None:
         message = "Graph is valid according to the specification."
