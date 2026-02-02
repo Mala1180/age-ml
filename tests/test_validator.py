@@ -93,8 +93,8 @@ class TestValidator:
 
         assert message == (
             "Constraints violated:\n"
-            "- since 'step1' is present, required nodes ['step2'] are missing.\n"
-            "- since 'step1' is present, forbidden nodes ['step3'] are present."
+            "- since 'step1' is present, required node 'step2' is missing.\n"
+            "- since 'step1' is present, forbidden node 'step3' is present."
         )
 
     def test_required_constraint_violation_with_values(
@@ -106,6 +106,6 @@ class TestValidator:
         assert is_valid is False
         assert message == (
             "Constraints violated:\n"
-            "- since 'step1' has value 'b', required value 'j' to node 'step4' is missing.\n"
-            "- since 'step1' has value 'b', forbidden value 'l' to node 'step5' is present."
+            "- since 'step1' has value 'b', required value 'j' for node 'step4' is missing.\n"
+            "- since 'step1' has value 'b', forbidden value 'l' for node 'step5' is present."
         )

@@ -106,78 +106,58 @@ class Specification:
         self,
         graph: MultiDiGraph,
         condition: Dict,
-        require: List[Node],
-        forbid: List[Node],
+        required_nodes: List[Node],
+        forbidden_nodes: List[Node],
     ) -> Tuple[bool, Optional[str]]:
-        condition_node, condition_value = list(condition.items())[0]
-        is_valid: bool = True
+        condition_node, condition_value = next(iter(condition.items()))
         feedbacks: List[str] = []
-        if condition_node in graph:
-            if (
-                condition_value == {}
-                or graph.nodes[condition_node]["value"] == condition_value
-            ):
-                condition_str: str = (
-                    f"'{condition_node}' is present"
-                    if condition_value == {}
-                    else f"'{condition_node}' has value '{condition_value}'"
+
+        # Condition node is not present, constraint irrelevant
+        if condition_node not in graph:
+            return True, None
+
+        node_value = graph.nodes[condition_node].get("value")
+
+        # Condition value mismatch, constraint irrelevant
+        if condition_value and node_value != condition_value:
+            return True, None
+
+        condition_str = (
+            f"'{condition_node}' is present"
+            if not condition_value
+            else f"'{condition_node}' has value '{condition_value}'"
+        )
+
+        for req_node in required_nodes:
+            if req_node.id not in graph:
+                feedbacks.append(
+                    f"- since {condition_str}, required node '{req_node.id}' is missing."
+                )
+                continue
+
+            if req_node.value is not None:
+                actual_value = graph.nodes[req_node.id].get("value")
+                if actual_value != req_node.value:
+                    feedbacks.append(
+                        f"- since {condition_str}, required value '{req_node.value}' for node '{req_node.id}' is missing."
+                    )
+
+        for forb_node in forbidden_nodes:
+            if forb_node.id not in graph:
+                continue
+
+            actual_value = graph.nodes[forb_node.id].get("value")
+
+            if forb_node.value is None:
+                feedbacks.append(
+                    f"- since {condition_str}, forbidden node '{forb_node.id}' is present."
+                )
+            elif actual_value == forb_node.value:
+                feedbacks.append(
+                    f"- since {condition_str}, forbidden value '{forb_node.value}' for node '{forb_node.id}' is present."
                 )
 
-                # or graph.nodes[n.id].get("value", None) != n.value
-
-                missing_nodes: List[str] = [
-                    required_node.id
-                    for required_node in require
-                    if required_node.id not in graph.nodes
-                ]
-                if missing_nodes:
-                    is_valid = False
-                    feedbacks.append(
-                        f"- since {condition_str}, required nodes {missing_nodes} are missing."
-                    )
-
-                for required_node in require:
-                    for node_id in graph.nodes:
-                        if (
-                            node_id == required_node.id
-                            and required_node.value is not None
-                        ):
-                            if (
-                                graph.nodes[node_id].get("value", None)
-                                != required_node.value
-                            ):
-                                is_valid = False
-                                feedbacks.append(
-                                    f"- since {condition_str}, required value '{required_node.value}' to node '{required_node.id}' is missing."
-                                )
-
-                forbidden_nodes: List[str] = [
-                    forbidden_node.id
-                    for forbidden_node in forbid
-                    if forbidden_node.id in graph.nodes and forbidden_node.value is None
-                ]
-
-                if forbidden_nodes:
-                    is_valid = False
-                    feedbacks.append(
-                        f"- since {condition_str}, forbidden nodes {forbidden_nodes} are present."
-                    )
-
-                for forbidden_node in forbid:
-                    for node_id in graph.nodes:
-                        if (
-                            node_id == forbidden_node.id
-                            and forbidden_node.value is not None
-                        ):
-                            if (
-                                graph.nodes[node_id].get("value", None)
-                                == forbidden_node.value
-                            ):
-                                is_valid = False
-                                feedbacks.append(
-                                    f"- since {condition_str}, forbidden value '{forbidden_node.value}' to node '{forbidden_node.id}' is present."
-                                )
-
+        is_valid = not feedbacks
         return is_valid, None if is_valid else "\n".join(feedbacks)
 
     def _validate_allowed_steps(
