@@ -160,6 +160,12 @@ class Specification:
         is_valid = not feedbacks
         return is_valid, None if is_valid else "\n".join(feedbacks)
 
+    def _validate_edges(self, graph: MultiDiGraph) -> Tuple[bool, Optional[str]]:
+        is_valid: bool = len(graph.edges) > 0
+        if not is_valid:
+            return False, "Graph has no edges."
+        return True, None
+
     def _validate_allowed_steps(
         self, graph: MultiDiGraph
     ) -> Tuple[bool, Optional[str]]:

@@ -26,6 +26,15 @@ def specification() -> Specification:
 
 
 class TestValidator:
+    def test_graph_is_connected(self, specification, sample_graph):
+        is_valid, message = specification.validate(sample_graph, True)
+        assert is_valid is True
+        assert message is None
+        sample_graph.remove_edges_from(list(sample_graph.edges))
+        is_valid, message = specification.validate(sample_graph, True)
+        assert is_valid is False
+        assert message == "Graph is not connected."
+
     def test_unknown_step(self, specification, sample_graph):
         sample_graph.add_node("unknown_step", value="x")
         is_valid, message = specification.validate(sample_graph, True)
