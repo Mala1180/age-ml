@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/Mala1180/automl-llm/compare/1.1.0...1.2.0) (2026-02-03)
+
+### Features
+
+* **specification:** add edges validation ([1b32970](https://github.com/Mala1180/automl-llm/commit/1b3297020cc8e65c0b5ee08dea870a8e4dd856d9))
+
+### Refactoring
+
+* **specification:** improve constraints check ([8fde8b5](https://github.com/Mala1180/automl-llm/commit/8fde8b5e0949108a214fd8663d8802412c1ef240))
+
 ## [1.1.0](https://github.com/Mala1180/automl-llm/compare/1.0.0...1.1.0) (2026-01-30)
 
 ### Features
