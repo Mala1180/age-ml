@@ -160,7 +160,6 @@ class Specification:
         is_valid = not feedbacks
         return is_valid, None if is_valid else "\n".join(feedbacks)
 
-
     def _validate_allowed_steps(
         self, graph: MultiDiGraph
     ) -> Tuple[bool, Optional[str]]:

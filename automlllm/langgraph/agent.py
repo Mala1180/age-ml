@@ -1,6 +1,6 @@
 from pathlib import Path
 from pprint import pformat
-from typing import List, Tuple, Literal, Dict
+from typing import List, Literal, Dict, Tuple, Optional, TypedDict
 
 import networkx as nx
 import pandas as pd
@@ -24,12 +24,17 @@ class PlanningAgentState(MessagesState):
     dataset_path: str
     dataset_info: str
     pipeline_graph: Dict[str, str]
-    is_pipeline_valid: bool
+    pipeline_feedback: Tuple[bool, Optional[str]]
+
+
+class Edge(TypedDict):
+    from_node: str
+    to_node: str
 
 
 class PipelineGraph(BaseModel):
-    nodes: List[Tuple[str, str]]
-    edges: List[Tuple[str, str]]
+    nodes: List[List[str]]
+    edges: List[Edge]
 
 
 structured_model = model.with_structured_output(PipelineGraph)
@@ -81,24 +86,29 @@ def reasoning_node(state: PlanningAgentState) -> PlanningAgentState:
 
 def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     local_prompt: str = (
-        "Generate a directed graph representing the pipeline.\n"
+        "Generate a DIRECTED graph representing the pipeline.\n"
+        "Each edge must explicitly specify direction using keys:\n"
+        "  from = source node\n"
+        "  to = destination node\n\n"
         "Return ONLY valid JSON that matches this schema:\n"
         "{"
-        '  "nodes": [[string, string], ...],'
-        '  "edges": [[string, string], ...]'
-        "}\n"
-        "Do not include markdown, code fences, comments, or explanations."
+        '  "nodes": [[node_id, value], ...],'
+        '  "edges": [{"from": "...", "to": "..."}, ...]'
+        "}"
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
     response = structured_model.invoke(state["messages"])
     assert isinstance(response, PipelineGraph)
-    response.nodes = [(k.lower(), v.lower()) for k, v in response.nodes]
-    response.edges = [(f.lower(), t.lower()) for f, t in response.edges]
+    response.nodes = [[k.lower(), v.lower()] for k, v in response.nodes]
+    response.edges = [
+        {"from_node": edge["from_node"].lower(), "to_node": edge["to_node"].lower()}
+        for edge in response.edges
+    ]
     graph: MultiDiGraph = nx.MultiDiGraph()
     for node_id, node_value in response.nodes:
         graph.add_node(node_id, value=node_value)
-    for from_node, to_node in response.edges:
-        graph.add_edge(from_node, to_node)
+    for edge in response.edges:
+        graph.add_edge(edge["from_node"], edge["to_node"])
 
     state["messages"] = state["messages"] + [AIMessage(content=str(response))]
     state["pipeline_graph"] = nx.node_link_data(graph)
@@ -112,12 +122,12 @@ def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     if message is None:
         message = "Graph is valid according to the specification."
     state["messages"] = state["messages"] + [HumanMessage(content=message)]
-    state["is_pipeline_valid"] = is_valid
+    state["pipeline_feedback"] = is_valid, message if not is_valid else None
     return state
 
 
 def should_terminate(state: PlanningAgentState) -> Literal["reasoning_node", "__end__"]:
-    terminate: bool = state["is_pipeline_valid"]
+    terminate, _ = state["pipeline_feedback"]
     global attempts
     attempts += 1
     return "__end__" if terminate or attempts == max_attempts else "reasoning_node"
