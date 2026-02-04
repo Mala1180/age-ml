@@ -1,5 +1,5 @@
-from networkx import MultiDiGraph
 import pytest
+from networkx import MultiDiGraph
 
 from automlllm.specification import Specification
 from tests.resources import get_test_resource_path
@@ -26,7 +26,6 @@ def specification() -> Specification:
 
 
 class TestValidator:
-
     def test_unknown_step(self, specification, sample_graph):
         sample_graph.add_node("unknown_step", value="x")
         is_valid, message = specification.validate(sample_graph, True)
