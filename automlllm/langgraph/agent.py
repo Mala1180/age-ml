@@ -1,10 +1,8 @@
 from pathlib import Path
-from pprint import pformat
 from typing import List, Literal, Dict, Tuple, Optional, TypedDict
 
 import networkx as nx
 import pandas as pd
-import yaml
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
@@ -39,7 +37,7 @@ class PipelineGraph(BaseModel):
 
 structured_model = model.with_structured_output(PipelineGraph)
 attempts: int = 0
-max_attempts: int = 5
+max_attempts: int = 10
 
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
@@ -61,11 +59,16 @@ def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
 
 def load_specification(state: PlanningAgentState) -> PlanningAgentState:
     content: str = Path(state["specification_path"]).read_text()
-    data: Dict = yaml.safe_load(content)
+    # data: Dict = yaml.safe_load(content)
+    # state["messages"] = state["messages"] + [
+    #     AIMessage(content=f"Specification loaded. \n{pformat(data)}")
+    # ]
+    # state["specification"] = yaml.dump(data)
+    nl_spec: str = Specification.parse(content).to_natural_language()
     state["messages"] = state["messages"] + [
-        AIMessage(content=f"Specification loaded. \n{pformat(data)}")
+        AIMessage(content=f"Specification loaded. \n{nl_spec}")
     ]
-    state["specification"] = yaml.dump(data)
+    state["specification"] = content
     return state
 
 

@@ -311,36 +311,72 @@ class Specification:
 
     def to_natural_language(self) -> str:
         """Convert the specification to a natural language description."""
-        description = "Pipeline Specification:\n\nSteps:\n"
+        nl_spec: str = ""
+
+        step_ids = [f"'{step.id}'" for step in self.steps]
+        nl_spec += f"The pool of admissible steps for the pipeline consists of: {', '.join(step_ids)}.\n\n"
+
+        nl_spec += "Details:\n"
         for step in self.steps:
-            description += f"- {step.id}: values={step.values}, mandatory={step.mandatory}, initial={step.initial}, terminal={step.terminal}\n"
+            details: List[str] = []
+            if step.values:
+                values_str = ", ".join([f"'{v}'" for v in step.values])
+                details.append(f"Allowed values are {values_str}")
 
-        description += (
-            "\nOrdering Rules.\n"
-            "They are valid only if both steps are present in the pipeline.\n"
-            "The order is intended to be relative and partial.\n"
-        )
-        for order in self.ordering:
-            description += f"- {order.before} must come before {order.after}\n"
+            attrs = []
+            if step.mandatory:
+                attrs.append("mandatory")
+            if step.initial:
+                attrs.append("initial")
+            if step.terminal:
+                attrs.append("terminal")
 
-        description += "\nConstraints:\n"
-        for constraint in self.constraints:
-            condition_list: List[str] = []
-            for node_id, node_value in constraint.condition.items():
-                if node_value == {}:
-                    condition_list.append(f"step '{node_id}' is present")
-                else:
-                    condition_list.append(
-                        f"step '{node_id}' is present and has value '{node_value}'"
-                    )
-            condition_str = ", and ".join(condition_list)
+            if attrs:
+                details.append(f"It is {' and '.join(attrs)}")
 
-            require_list: List[str] = []
-            for required_node in constraint.require:
-                require_list.append(
-                    f"step '{required_node.id}' is present and has value '{required_node.value}'"
+            nl_spec += f"- Step '{step.id}': {'. '.join(details)}.\n"
+
+        if self.ordering:
+            nl_spec += (
+                "\nPartial Ordering Rules (applied only if both steps are present):\n"
+            )
+            for order in self.ordering:
+                nl_spec += f"- '{order.before}' must precede '{order.after}'.\n"
+
+        if self.constraints:
+            nl_spec += "\nConstraints:\n"
+            for constraint in self.constraints:
+                condition_node, condition_value = next(
+                    iter(constraint.condition.items())
                 )
+                if condition_value:
+                    cond_str = f"'{condition_node}' has value '{condition_value}'"
+                else:
+                    cond_str = f"'{condition_node}' is present"
 
-            description += f"- If {condition_str}, then require {constraint.require} and forbid {constraint.forbid}\n"
+                consequences: List[str] = []
+                if constraint.require:
+                    reqs: List[str] = []
+                    for req in constraint.require:
+                        if req.value:
+                            reqs.append(f"value '{req.value}' for node '{req.id}'")
+                        else:
+                            reqs.append(f"'{req.id}'")
+                    consequences.append(
+                        f"{', '.join(reqs)} {'are' if len(reqs) > 1 else 'is'} required"
+                    )
 
-        return description
+                if constraint.forbid:
+                    forbids: List[str] = []
+                    for forb in constraint.forbid:
+                        if forb.value:
+                            forbids.append(f"value '{forb.value}' for node '{forb.id}'")
+                        else:
+                            forbids.append(f"'{forb.id}'")
+                    consequences.append(
+                        f"{', '.join(forbids)} {'are' if len(forbids) > 1 else 'is'} forbidden"
+                    )
+
+                nl_spec += f"- If {cond_str}, then {' and '.join(consequences)}.\n"
+
+        return nl_spec.strip()
