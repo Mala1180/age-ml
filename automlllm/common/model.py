@@ -1,10 +1,9 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
-
-# from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
@@ -22,12 +21,12 @@ model_name: str = "openai/gpt-oss-120b:free"
 # )
 
 # # google gemini
-model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
+# model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
 #
 # local with ollama
-# model = ChatOllama(
-#     model="llama3.1:8b",
-#     temperature=0.0,
-#     # num_ctx=3072,
-#     num_predict=-2,  # fill context
-# )
+model = ChatOllama(
+    model="llama3.1:8b",
+    temperature=0.0,
+    # num_ctx=3072,
+    num_predict=-2,  # fill context
+)
