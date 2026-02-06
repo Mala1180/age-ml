@@ -30,7 +30,9 @@ pipeline:
       values: [linear, ridge, lasso, elastic_net, svr, knn_regressor, rf_regressor, nn_regressor]
       terminal: true
 
-
+#    validation:
+#     values: [cv, holdout]
+#     mandatory: true
 
 partial_ordering:
   - before: imputation

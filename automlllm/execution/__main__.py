@@ -6,7 +6,7 @@ import networkx as nx
 import pandas as pd
 from networkx import MultiDiGraph
 
-from automlllm.execution.agent import executing_agent
+from automlllm.execution.agent import execution_agent
 from automlllm.langgraph import logger
 from resources import get_resource_path
 
@@ -40,7 +40,7 @@ def main():
         "current_node": None,
         "generate_code": "",
     }
-    for mode, chunk in executing_agent.stream(
+    for mode, chunk in execution_agent.stream(
         initial_state,
         stream_mode=["values"],
     ):
