@@ -9,5 +9,7 @@ class Step(BaseModel):
 
 
 class Pipeline(BaseModel):
+    id: int
     steps: List[Step]
-    code: str
+    code: str = ""
+    explanation: str = ""

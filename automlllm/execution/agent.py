@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Literal, Dict, List
 
 import networkx as nx
@@ -7,11 +8,13 @@ from langgraph.graph.state import CompiledStateGraph
 from networkx import MultiDiGraph
 from networkx.readwrite import json_graph
 
-from automlllm.execution.code_generation_agent import code_generation_agent
+from automlllm.execution.code_generation_agent import (
+    code_generation_agent,
+)
 from automlllm.execution.pipeline import Step, Pipeline
 
 
-class ExecutingAgentState(MessagesState):
+class ExecutionAgentState(MessagesState):
     dataset_path: str
     dataset_info: str
     pipeline_graph: Dict[str, str]
@@ -20,11 +23,12 @@ class ExecutingAgentState(MessagesState):
     generated_code: str
 
 
-def load_pipelines(state: ExecutingAgentState) -> ExecutingAgentState:
+def load_pipelines(state: ExecutionAgentState) -> ExecutionAgentState:
     graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
     roots = [n for n, d in graph.in_degree() if d == 0]
     leaves = [n for n, d in graph.out_degree() if d == 0]
     all_paths: List[Pipeline] = []
+    index: int = 1
     for root in roots:
         for leaf in leaves:
             for path in nx.all_simple_paths(graph, root, leaf):
@@ -36,31 +40,35 @@ def load_pipelines(state: ExecutingAgentState) -> ExecutingAgentState:
                         path,
                     )
                 )
-                all_paths.append(Pipeline(steps=path_with_values, code=""))
+                all_paths.append(Pipeline(id=index, steps=path_with_values))
+                index += 1
 
     state["planned_pipelines"] = all_paths
     return state
 
 
-def generate_code_for_pipeline(state: ExecutingAgentState) -> ExecutingAgentState:
+def generate_code_for_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     if "current_pipeline" not in state:
         state["current_pipeline"] = 0
 
     pipeline: Pipeline = state["planned_pipelines"][state["current_pipeline"]]
-    pipeline_code = code_generation_agent.invoke(
+    code_gen_state: Dict = code_generation_agent.invoke(
         {
             "dataset_path": state["dataset_path"],
             "dataset_info": state["dataset_info"],
             "pipeline": pipeline,
         }
     )
-    assert isinstance(pipeline_code, str)
-    print(pipeline_code)
+    pipeline = code_gen_state["pipeline"]
+    out_dir = Path(f"out/pipeline_{pipeline.id}")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
+    (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
     return state
 
 
 def iterate_over_pipelines(
-    state: ExecutingAgentState,
+    state: ExecutionAgentState,
 ) -> Literal["generate_code_for_pipeline", "__end__"]:
     if state["current_pipeline"] + 1 < len(state["planned_pipelines"]):
         state["current_pipeline"] += 1
@@ -70,7 +78,7 @@ def iterate_over_pipelines(
         return "__end__"
 
 
-def execute_code(state: ExecutingAgentState) -> ExecutingAgentState:
+def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     try:
         import mlflow
 
@@ -87,12 +95,12 @@ def execute_code(state: ExecutingAgentState) -> ExecutingAgentState:
 
 
 # def should_terminate(
-#     state: ExecutingAgentState,
+#     state: ExecutionAgentState,
 # ) -> Literal["generate_code_for_step", "__end__"]:
 #     return "__end__"
 
 
-state_graph = StateGraph(ExecutingAgentState)
+state_graph = StateGraph(ExecutionAgentState)
 
 state_graph.add_sequence(
     [
@@ -107,7 +115,7 @@ state_graph.add_conditional_edges("generate_code_for_pipeline", iterate_over_pip
 
 # state_graph.add_edge("execute_code", END)
 
-executing_agent: CompiledStateGraph = state_graph.compile()
+execution_agent: CompiledStateGraph = state_graph.compile()
 
 
 system_prompt: str = """
@@ -119,4 +127,4 @@ system_prompt: str = """
 """
 
 
-print(executing_agent.get_graph().draw_mermaid())
+print(execution_agent.get_graph().draw_mermaid())

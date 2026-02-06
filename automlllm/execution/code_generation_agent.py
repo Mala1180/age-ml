@@ -1,11 +1,12 @@
 from typing import Literal, Tuple, Optional
 
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 
 from automlllm.common.model import model
-from automlllm.execution.pipeline import Step, Pipeline
+from automlllm.execution.pipeline import Pipeline
 from automlllm.execution.utils import extract_python_code
 
 
@@ -15,12 +16,12 @@ class CodeGenerationAgentState(MessagesState):
     pipeline: Pipeline
     current_step: int
     code_generation_feedback: Tuple[bool, Optional[str]]
-    generated_code: str
 
 
 def load_info(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
     state["messages"] = [
         SystemMessage(content=system_prompt),
+        AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
         AIMessage(content=f"Pipeline: \n{str(state['pipeline'].steps)}"),
     ]
@@ -28,23 +29,11 @@ def load_info(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
     return state
 
 
-def generate_code_for_step(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
-    step: Step = state["pipeline"].steps[state["current_step"]]
-    pipeline_code: str = state["pipeline"].code
-    value: str
-    if isinstance(step.content, str):
-        value = step.content
-    else:
-        assert isinstance(step.content, dict)
-        value = list(step.content.keys())[0]  # TODO: place here hyperparameters
+def generate_pipeline_code(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
     local_prompt: str = f"""
-        You are generating code for a machine learning pipeline step by step.
-        The current step to implement is '{step}' using '{value}'.
-        Ensure also that the generated code integrates well with the previously generated code.
-        Previously generated code: 
-        {pipeline_code if pipeline_code else "No code generated yet."}\n
-        Generate the python code for this step only, ensuring compliance with the provided pipeline graph 
-        and in such a way that can be appended to the previously generated code.
+        You are generating python code for a machine learning pipeline.
+        The pipeline to implement is the following: 
+        {state["pipeline"]}
         Provide only the code without any explanations.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
@@ -52,7 +41,7 @@ def generate_code_for_step(state: CodeGenerationAgentState) -> CodeGenerationAge
     response = model.invoke(state["messages"])
     assert isinstance(response.content, str)
     generated_code: str = extract_python_code(response.content)
-    state["generated_code"] = generated_code
+    state["pipeline"].code = generated_code
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     return state
 
@@ -69,10 +58,9 @@ def validate_code_compliance(
     if "yes" in response.content[:10].lower().strip():
         state["code_generation_feedback"] = (True, None)
         state["current_step"] += 1
-        state["pipeline"].code += "\n" + state["generated_code"]
-        state["generated_code"] = ""
     else:
         state["code_generation_feedback"] = (False, response.content)
+        state["pipeline"].code = ""
     # append feedback message
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     return state
@@ -80,15 +68,28 @@ def validate_code_compliance(
 
 def code_validation_branch(
     state: CodeGenerationAgentState,
-) -> Literal["generate_code_for_step", "__end__"]:
+) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid, message = state["code_generation_feedback"]
     if is_valid:
         if state["current_step"] >= len(state["pipeline"].steps):
-            return "__end__"
+            return "explain_pipeline"
         else:
-            return "generate_code_for_step"
+            return "generate_pipeline_code"
     else:
-        return "generate_code_for_step"
+        return "generate_pipeline_code"
+
+
+def explain_pipeline(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
+    explain_prompt = f"""
+        Explain the final machine learning pipeline generated, step by step.
+        For each pipeline step, create a concise phrase that explain such step concisely.
+    """
+    state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
+    response = model.invoke(state["messages"])
+    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    assert isinstance(response.content, str)
+    state["pipeline"].explanation = response.content
+    return state
 
 
 state_graph = StateGraph(CodeGenerationAgentState)
@@ -96,13 +97,14 @@ state_graph = StateGraph(CodeGenerationAgentState)
 state_graph.add_sequence(
     [
         load_info,
-        generate_code_for_step,
+        generate_pipeline_code,
         validate_code_compliance,
     ]
 )
 state_graph.add_edge(START, "load_info")
 state_graph.add_conditional_edges("validate_code_compliance", code_validation_branch)
-
+state_graph.add_node("explain_pipeline", explain_pipeline)
+state_graph.add_edge("explain_pipeline", END)
 
 code_generation_agent: CompiledStateGraph = state_graph.compile()
 
