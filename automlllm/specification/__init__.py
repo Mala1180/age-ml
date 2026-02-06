@@ -1,4 +1,4 @@
-from typing import Optional, Dict, List, Tuple, Set
+from typing import Optional, Dict, List, Tuple, Set, Any
 
 import networkx as nx
 import yaml
@@ -11,19 +11,23 @@ class Node(BaseModel):
     value: Optional[str] = None
 
 
-class StepFields(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    values: List[str] = Field(default_factory=list)
+class Defaults(BaseModel):
     mandatory: bool = False
     initial: bool = False
     terminal: bool = False
 
 
-class Defaults(StepFields):
-    pass
+class Candidate(BaseModel):
+    name: str
+    params: Dict[str, List[Any]] = Field(default_factory=dict)
+
+
+class StepFields(Defaults):
+    candidates: List[Candidate] = Field(default_factory=list)
 
 
 class Step(StepFields):
+    model_config = ConfigDict(extra="forbid")
     id: str
 
 
@@ -55,18 +59,31 @@ class Specification:
     def parse(cls, spec_yaml: str) -> "Specification":
         spec: Dict = yaml.safe_load(spec_yaml)
 
-        defaults = Defaults.model_validate(spec["pipeline"]["defaults"]).model_dump()
+        defaults_data = spec["pipeline"]["defaults"]
+        defaults = Defaults.model_validate(defaults_data).model_dump()
 
-        steps: List[Step] = [
-            Step.model_validate(
-                {
-                    "id": step_id,
-                    **defaults,
-                    **step_data,
-                }
+        steps: List[Step] = []
+        for step_id, step_data in spec["pipeline"]["steps"].items():
+            candidates_data = step_data.get("candidates", [])
+            parsed_candidates = []
+            for c in candidates_data:
+                if isinstance(c, str):
+                    parsed_candidates.append(Candidate(name=c))
+                elif isinstance(c, dict):
+                    name = list(c.keys())[0]
+                    params = c[name].get("params", {})
+                    parsed_candidates.append(Candidate(name=name, params=params))
+
+            step_data["candidates"] = parsed_candidates
+            steps.append(
+                Step.model_validate(
+                    {
+                        "id": step_id,
+                        **defaults,
+                        **step_data,
+                    }
+                )
             )
-            for step_id, step_data in spec["pipeline"]["steps"].items()
-        ]
 
         ordering: List[OrderingRule] = [
             OrderingRule.model_validate(order) for order in spec["partial_ordering"]
@@ -177,16 +194,15 @@ class Specification:
         graph.remove_nodes_from(unknown_nodes)
         for node_id in graph:
             step: Step = next(filter(lambda n: n.id == node_id, self.steps))
-            if step.values is None:
-                continue
-
-            node_value: Optional[str] = graph.nodes[node_id].get("value", None)
-            if node_value and node_value not in step.values:
-                is_valid = False
-                messages.append(
-                    f"Node '{node_id}' has invalid value '{node_value}', "
-                    f"admissible values are {step.values}.",
-                )
+            if step.candidates:
+                candidate_names = {c.name for c in step.candidates}
+                node_value: Optional[str] = graph.nodes[node_id].get("value", None)
+                if node_value and node_value not in candidate_names:
+                    is_valid = False
+                    messages.append(
+                        f"Node '{node_id}' has invalid value '{node_value}', "
+                        f"admissible values are {sorted(list(candidate_names))}.",
+                    )
 
         feedback = " ".join(messages) if len(messages) > 0 else None
         return is_valid, feedback
@@ -319,8 +335,8 @@ class Specification:
         nl_spec += "Details:\n"
         for step in self.steps:
             details: List[str] = []
-            if step.values:
-                values_str = ", ".join([f"'{v}'" for v in step.values])
+            if step.candidates:
+                values_str = ", ".join([f"'{c.name}'" for c in step.candidates])
                 details.append(f"Allowed values are {values_str}")
 
             attrs = []

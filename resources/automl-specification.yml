@@ -1,37 +1,135 @@
 pipeline:
 
   defaults:
-    values: []
+    candidates: []
     mandatory: false
     terminal: false
     initial: false
 
   steps:
     imputation:
-      values: [simple_imputer, iterative_imputer]
+      candidates:
+        - simple_imputer:
+            params:
+              strategy: [mean, median]
+        - iterative_imputer:
+            params:
+              max_iter: [10]
 
     discretization:
-      values: [kbins, binarizer]
+      candidates:
+        - kbins:
+            params:
+              n_bins: [10]
+              encode: [ordinal]
+              strategy: [quantile]
+        - binarizer:
+            params:
+              threshold: [0.0]
 
     normalization:
-      values: [power_transformer, robust_scaler, standard, minmax]
+      candidates:
+        - power_transformer:
+            params:
+              method: [yeo-johnson]
+        - robust_scaler:
+            params:
+              quantile_range:
+                - [25.0, 75.0]
+        - standard:
+            params: {}
+        - minmax:
+            params:
+              feature_range:
+                - [0, 1]
 
     features:
-      values: [select_k_best, pca]
+      candidates:
+        - select_k_best:
+            params:
+              k: [5, 10]
+        - pca:
+            params:
+              n_components: [0.95]
 
     rebalancing:
-      values: [near_miss, smote]
+      candidates:
+        - near_miss:
+            params:
+              version: [1]
+        - smote:
+            params:
+              k_neighbors: [5]
 
     classification:
-      values: [dt, knn, naive_bayes, nn, rf, ada_boost]
       terminal: true
+      candidates:
+        - dt:
+            params:
+              max_depth: [null, 10]
+              min_samples_split: [2, 5]
+        - knn:
+            params:
+              n_neighbors: [5, 11]
+              weights: [uniform, distance]
+        - naive_bayes:
+            params:
+              var_smoothing: [1e-9]
+        - nn:
+            params:
+              hidden_layer_sizes:
+                - [50]
+                - [100]
+              alpha: [0.001]
+              max_iter: [300]
+        - rf:
+            params:
+              n_estimators: [200]
+              max_depth: [null, 20]
+        - ada_boost:
+            params:
+              n_estimators: [100]
+              learning_rate: [0.1]
+
 
     regression:
-      values: [linear, ridge, lasso, elastic_net, svr, knn_regressor, rf_regressor, nn_regressor]
       terminal: true
+      candidates:
+        - linear:
+            params: {}
+        - ridge:
+            params:
+              alpha: [1.0, 10.0]
+        - lasso:
+            params:
+              alpha: [0.01, 0.1]
+        - elastic_net:
+            params:
+              alpha: [0.01]
+              l1_ratio: [0.5]
+        - svr:
+            params:
+              kernel: [rbf]
+              C: [1.0, 10.0]
+              epsilon: [0.1]
+        - knn_regressor:
+            params:
+              n_neighbors: [5, 11]
+              weights: [distance]
+        - rf_regressor:
+            params:
+              n_estimators: [200]
+              max_depth: [null, 20]
+        - nn_regressor:
+            params:
+              hidden_layer_sizes:
+                - [50]
+                - [100]
+              alpha: [0.001]
+              max_iter: [300]
 
 #    validation:
-#     values: [cv, holdout]
+#     candidates: [cv, holdout]
 #     mandatory: true
 
 partial_ordering:
