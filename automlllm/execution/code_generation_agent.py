@@ -80,7 +80,7 @@ def code_validation_branch(
 
 
 def explain_pipeline(state: CodeGenerationAgentState) -> CodeGenerationAgentState:
-    explain_prompt = f"""
+    explain_prompt = """
         Explain the final machine learning pipeline generated, step by step.
         For each pipeline step, create a concise phrase that explain such step concisely.
     """

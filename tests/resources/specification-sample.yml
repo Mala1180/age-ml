@@ -1,31 +1,29 @@
 pipeline:
-
   defaults:
-    values: []
+    candidates: []
     mandatory: false
     terminal: false
     initial: false
 
   steps:
     step1:
-      values: [a, b]
+      candidates: [a, b]
       initial: true
       mandatory: true
 
     step2:
-      values: [c, d]
+      candidates: [c, d]
 
     step3:
-      values: [e, f, g, h]
+      candidates: [e, f, g, h]
 
     step4:
-      values: [i, j, k]
+      candidates: [i, j, k]
 
     step5:
-      values: [l, m]
+      candidates: [l, m]
       terminal: true
       mandatory: true
-
 
 partial_ordering:
   - before: step1
@@ -40,9 +38,7 @@ partial_ordering:
   - before: step4
     after: step5
 
-
 constraints:
-
   - if:
       step1: {}
     require: [step2, step4]
