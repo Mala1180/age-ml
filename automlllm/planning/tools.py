@@ -44,7 +44,7 @@ def validate_pipeline_graph(graph_data: dict, spec: str) -> str:
     """
     graph: MultiDiGraph = json_graph.node_link_graph(graph_data)
     validator = Specification.parse(spec)
-    is_valid, message = validator.validate(graph)
+    is_valid, message = validator.validate_graph(graph)
     if is_valid:
         return "Graph is valid according to the specification."
     else:

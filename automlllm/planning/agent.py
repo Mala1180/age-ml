@@ -88,14 +88,16 @@ def reasoning_node(state: PlanningAgentState) -> PlanningAgentState:
 
 def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     local_prompt: str = (
-        "Generate a DIRECTED graph representing the pipeline.\n"
+        "Generate a DIRECTED ACYCLIC GRAPH representing few pipeline paths, those you consider better for this specific problem.\n"
+        "Graph can have multiple roots and multiple leaves, but it is not a constraint.\n"
+        "The graph must not have cycles.\n"
         "Each edge must explicitly specify direction using keys:\n"
         "  from = source node\n"
         "  to = destination node\n\n"
         "Return ONLY valid JSON that matches this schema:\n"
         "{"
         '  "nodes": [[node_id, value], ...],'
-        '  "edges": [{"from": "...", "to": "..."}, ...]'
+        '  "edges": [{"from_node": "...", "to_node": "..."}, ...]'
         "}"
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
@@ -120,7 +122,7 @@ def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
 def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
     validator = Specification.parse(state["specification"])
-    is_valid, message = validator.validate(graph)
+    is_valid, message = validator.validate_graph(graph)
     if message is None:
         message = "Graph is valid according to the specification."
     state["messages"] = state["messages"] + [HumanMessage(content=message)]
@@ -157,15 +159,21 @@ prompt: str = (
 )
 
 system_prompt: str = """
-    You are a helpful assistant able to design pipelines of tasks.
-    Your task is to create a graph representing a pipeline of tasks based on the provided specification.
-    The pipeline must respect the specification provided in yaml format.
-    Pipeline task names are provided as the keys in the 'steps' section of the specification, under the 'pipeline' key.
-    These step names should be the node keys in the graph.
-    Values for each step should be chosen among the admissible values defined inside the step object.
-    The output should be a graph representing the pipeline steps.
+    You are a helpful assistant able to design pipeline of steps.
+    Your task is to create a directed acyclic graph (DAG) representing pipelines of tasks based on the provided specification.
+    These pipelines are represented by all the possible paths from roots to leaves in the graph.
+    The graph should not represent all the possible pipelines (combinatorial explosion) but only the best ones depending on the specific problem.
+    The graph of pipelines must respect the specification provided in natural language.
+    It is not necessary to include all types of steps in the graph (except for the mandatory ones)
+    Terminal nodes should be the leaf nodes in valid paths
+    Initial nodes should be the root nodes in valid paths
     The generated graph is always validated and a feedback is provided.
 """
+
+# Pipeline task names are provided as the keys in the 'steps' section of the specification, under the 'pipeline' key.
+# These step names should be the node keys in the graph.
+# Values for each step should be chosen among the admissible values defined inside the step object.
+# The output should be a comprehensive graph representing all possible pipeline paths.
 
 
 def create_user_prompt(prompt: str) -> List[BaseMessage]:
