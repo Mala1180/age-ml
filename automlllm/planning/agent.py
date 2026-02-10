@@ -10,7 +10,6 @@ from networkx.classes import MultiDiGraph
 from networkx.readwrite import json_graph
 from pydantic import BaseModel
 
-from automlllm import system_prompt
 from automlllm.common.model import model
 from automlllm.specification import Specification
 
@@ -156,6 +155,17 @@ planning_agent: CompiledStateGraph = state_graph.compile()
 prompt: str = (
     "Help me to build a machine learning pipeline for Adult Income Prediction."
 )
+
+system_prompt: str = """
+    You are a helpful assistant able to design pipelines of tasks.
+    Your task is to create a graph representing a pipeline of tasks based on the provided specification.
+    The pipeline must respect the specification provided in yaml format.
+    Pipeline task names are provided as the keys in the 'steps' section of the specification, under the 'pipeline' key.
+    These step names should be the node keys in the graph.
+    Values for each step should be chosen among the admissible values defined inside the step object.
+    The output should be a graph representing the pipeline steps.
+    The generated graph is always validated and a feedback is provided.
+"""
 
 
 def create_user_prompt(prompt: str) -> List[BaseMessage]:

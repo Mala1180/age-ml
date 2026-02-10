@@ -7,7 +7,7 @@ import pandas as pd
 from networkx import MultiDiGraph
 
 from automlllm.execution.agent import execution_agent
-from automlllm.langgraph import logger
+from automlllm.planning import logger
 from resources import get_resource_path
 
 mlflow.set_experiment("mattia-experiment")
