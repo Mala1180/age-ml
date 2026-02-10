@@ -1,3 +1,24 @@
+## [1.2.0](https://github.com/Mala1180/automl-llm/compare/1.1.0...1.2.0) (2026-02-10)
+
+### Features
+
+* **execution:** change code generation in order to iterate over pipelines, add explanation node, save code and explanation in out dir ([30631b4](https://github.com/Mala1180/automl-llm/commit/30631b4de384ab112b0cd98a77f897dfe2c99368))
+* **execution:** setup agents that generate code for machine learning pipelines ([bd5e167](https://github.com/Mala1180/automl-llm/commit/bd5e1677c071d0146f1615571433bd4b82aecdee))
+* **specification:** add hyperparameters (not yet in execution) ([dd79a69](https://github.com/Mala1180/automl-llm/commit/dd79a69ebe5f3485905bd4dedbbebeb686e1616d))
+* **specification:** add natural language version of specification ([6a4b0a3](https://github.com/Mala1180/automl-llm/commit/6a4b0a3e1d510c4a8c7ee745d4beaf1994a172bd))
+
+### General maintenance
+
+* **planning:** remove usused langchain version ([11b88bf](https://github.com/Mala1180/automl-llm/commit/11b88bfddec8abb72b11556f5770c47a472b689a))
+* **release:** 1.2.0 [skip ci] ([1da2fc0](https://github.com/Mala1180/automl-llm/commit/1da2fc0ef993202b48190528df42eb2830deb95e))
+* **release:** 1.2.0 [skip ci] ([ec14d3f](https://github.com/Mala1180/automl-llm/commit/ec14d3f4c7265bcaf40272b94695180bcbb325ae))
+* **specification:** improve PipelineGraph typing ([8116c49](https://github.com/Mala1180/automl-llm/commit/8116c497c9fdc6529e71e53ae68b88bf2cde047e))
+* **test:** improve a test ([9219b32](https://github.com/Mala1180/automl-llm/commit/9219b32548650e2f50b420be1de8f394465deb4b))
+
+### Refactoring
+
+* **specification:** improve constraints check ([8fde8b5](https://github.com/Mala1180/automl-llm/commit/8fde8b5e0949108a214fd8663d8802412c1ef240))
+
 ## [1.2.0](https://github.com/Mala1180/automl-llm/compare/1.1.0...1.2.0) (2026-02-06)
 
 ### Features
