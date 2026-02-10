@@ -4,8 +4,8 @@ import fire
 import mlflow
 from langchain_core.messages import BaseMessage
 
-from automlllm.langgraph import logger
-from automlllm.langgraph.agent import planning_agent, create_user_prompt
+from automlllm.planning import logger
+from automlllm.planning.agent import planning_agent, create_user_prompt
 
 
 mlflow.set_experiment("mattia-experiment")
