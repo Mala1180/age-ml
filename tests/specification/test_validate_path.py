@@ -1,4 +1,4 @@
-class TestValidator:
+class TestSpecificationValidator:
     def test_unknown_step(self, validator, sample_path):
         sample_path.add_node("unknown_step", value="x")
         is_valid, message = validator.validate_path(sample_path, True)
