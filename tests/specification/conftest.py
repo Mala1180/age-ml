@@ -2,6 +2,7 @@ import pytest
 from networkx import DiGraph
 
 from automlllm.specification import Specification
+from automlllm.specification.validation import SpecificationValidator
 from tests.resources import get_test_resource_path
 
 spec_sample: str = get_test_resource_path("specification-sample.yml").read_text()
@@ -31,3 +32,8 @@ def sample_graph(sample_path: DiGraph) -> DiGraph:
 @pytest.fixture
 def specification() -> Specification:
     return Specification.parse(spec_sample)
+
+
+@pytest.fixture
+def validator(specification) -> SpecificationValidator:
+    return SpecificationValidator(specification)

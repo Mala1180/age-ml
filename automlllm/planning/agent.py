@@ -12,6 +12,7 @@ from pydantic import BaseModel
 
 from automlllm.common.model import model
 from automlllm.specification import Specification
+from automlllm.specification.validation import SpecificationValidator
 
 
 class PlanningAgentState(MessagesState):
@@ -121,7 +122,8 @@ def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
 
 def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
-    validator = Specification.parse(state["specification"])
+    spec = Specification.parse(state["specification"])
+    validator = SpecificationValidator(spec)
     is_valid, message = validator.validate_graph(graph)
     if message is None:
         message = "Graph is valid according to the specification."

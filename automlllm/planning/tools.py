@@ -8,6 +8,7 @@ from networkx import MultiDiGraph
 from networkx.readwrite import json_graph
 
 from automlllm.specification import Specification
+from automlllm.specification.validation import SpecificationValidator
 
 
 @tool
@@ -43,7 +44,7 @@ def validate_pipeline_graph(graph_data: dict, spec: str) -> str:
     The specification is a YAML string defining the validation rules.
     """
     graph: MultiDiGraph = json_graph.node_link_graph(graph_data)
-    validator = Specification.parse(spec)
+    validator = SpecificationValidator(Specification.parse(spec))
     is_valid, message = validator.validate_graph(graph)
     if is_valid:
         return "Graph is valid according to the specification."
