@@ -32,9 +32,12 @@ class SpecificationValidator:
         all_paths: List[DiGraph] = self.enumerate_paths(graph)
         is_valid: bool
         message: str | None
+
         for path in all_paths:
             is_valid, message = self.validate_path(path, fail_fast=fail_fast)
             if not is_valid and message:
+                ordered_nodes = list(nx.topological_sort(path))
+                overall_feedback.append(f"In path {ordered_nodes}:")
                 overall_feedback.append(message)
                 if fail_fast:
                     return False, "\n".join(overall_feedback)
