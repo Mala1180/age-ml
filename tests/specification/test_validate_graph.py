@@ -23,3 +23,24 @@ class TestValidateGraph:
         expected_path.add_node("step3", value="e")
         expected_path.add_edge("step1", "step3")
         assert nx.is_isomorphic(path2, expected_path)
+
+    def test_graph_with_invalid_paths(self, sample_graph, validator):
+        sample_graph.nodes["step1"]["value"] = "unknown"
+        is_valid, message = validator.validate_graph(sample_graph, fail_fast=False)
+        assert is_valid is False
+        assert message == (
+            "In path ['step1', 'step2', 'step4', 'step5']:\n"
+            "\n"
+            "Node 'step1' has invalid value 'unknown', admissible values are ['a', 'b'].\n"
+            "\n"
+            "In path ['step1', 'step3']:\n"
+            "\n"
+            "Node 'step1' has invalid value 'unknown', admissible values are ['a', 'b'].\n"
+            "\n"
+            "Missing mandatory steps ['step5'].\n"
+            "\n"
+            "Constraints violated:\n"
+            "- since 'step1' is present, required node 'step2' is missing.\n"
+            "- since 'step1' is present, required node 'step4' is missing.\n"
+            "- since 'step1' is present, forbidden node 'step3' is present."
+        )

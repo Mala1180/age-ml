@@ -6,6 +6,7 @@ import pandas as pd
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
+from matplotlib import pyplot as plt
 from networkx.classes import MultiDiGraph
 from networkx.readwrite import json_graph
 from pydantic import BaseModel
@@ -115,6 +116,17 @@ def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
     for edge in response.edges:
         graph.add_edge(edge["from_node"], edge["to_node"])
 
+    plt.figure(figsize=(6, 6))
+    pos = nx.spring_layout(graph)
+    nx.draw(
+        graph,
+        pos,
+        with_labels=True,
+        node_size=2000,
+        node_color="lightblue",
+        arrows=True,
+    )
+    plt.show()
     state["messages"] = state["messages"] + [AIMessage(content=str(response))]
     state["pipeline_graph"] = nx.node_link_data(graph)
     return state
