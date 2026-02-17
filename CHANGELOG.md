@@ -1,3 +1,19 @@
+## [2.0.1](https://github.com/Mala1180/automl-llm/compare/2.0.0...2.0.1) (2026-02-17)
+
+### Bug Fixes
+
+* correct arg name in draw function call ([9214684](https://github.com/Mala1180/automl-llm/commit/9214684a0f0cf9f95776083e1786ffe7ff1f4f64))
+
+### Tests
+
+* add test for invalid paths ([3e6fca2](https://github.com/Mala1180/automl-llm/commit/3e6fca2f4c16f827398aea9e5371604d8b998ada))
+* improve test organization ([b574682](https://github.com/Mala1180/automl-llm/commit/b574682958408bc9a1347eb431cda5d892efdb35))
+* **specification:** add tests for specification parsing ([8cb73fd](https://github.com/Mala1180/automl-llm/commit/8cb73fdcfd5f7f501d6b362d98bfa3915002d12e))
+
+### Refactoring
+
+* improve specification package structure ([77158e0](https://github.com/Mala1180/automl-llm/commit/77158e0a8dd537be003d078f116b801d7fc5f42c))
+
 ## [2.0.0](https://github.com/Mala1180/automl-llm/compare/1.1.0...2.0.0) (2026-02-10)
 
 ### ⚠ BREAKING CHANGES
