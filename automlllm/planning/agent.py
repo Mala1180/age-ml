@@ -124,7 +124,7 @@ def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
         with_labels=True,
         node_size=2000,
         node_color="lightblue",
-        arrows=True,
+        arrowstyle="->",
     )
     plt.show()
     state["messages"] = state["messages"] + [AIMessage(content=str(response))]
