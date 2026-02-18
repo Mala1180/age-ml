@@ -1,81 +1,143 @@
 from pathlib import Path
-from typing import Literal, Dict, List
+from typing import Any, Tuple, Optional, Literal
 
-import networkx as nx
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
+from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
-from networkx import MultiDiGraph
-from networkx.readwrite import json_graph
+from typing_extensions import override
 
-from automlllm.execution.code_generation_agent import (
-    code_generation_agent,
-)
-from automlllm.execution.pipeline import Step, Pipeline
+from automlllm.common.model import model
+from automlllm.common.types import Pipeline
+from automlllm.execution.utils import extract_python_code
+from automlllm.planning.agent import PlanningPipeline
+
+
+class ExecutionPipeline(Pipeline):
+    id: int
+    code: str = ""
+    explanation: str = ""
+
+    @override
+    def __str__(self) -> str:
+        string_value: str = f"Pipeline {self.id}:\n" + "\n".join(
+            [f"{step.name}: {step.content}" for step in self.steps]
+        )
+        if self.code:
+            string_value += f"\nCode:\n{self.code}"
+        if self.explanation:
+            string_value += f"\nExplanation:\n{self.explanation}"
+        return string_value
 
 
 class ExecutionAgentState(MessagesState):
     dataset_path: str
     dataset_info: str
-    pipeline_graph: Dict[str, str]
-    planned_pipelines: List[Pipeline]
-    current_pipeline: int
-    generated_code: str
+    planning_pipeline: PlanningPipeline
+    pipeline: ExecutionPipeline
+    # current_step: int
+    code_generation_feedback: Tuple[bool, Optional[str]]
 
 
-def load_pipelines(state: ExecutionAgentState) -> ExecutionAgentState:
-    graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
-    roots = [n for n, d in graph.in_degree() if d == 0]
-    leaves = [n for n, d in graph.out_degree() if d == 0]
-    all_paths: List[Pipeline] = []
-    index: int = 1
-    for root in roots:
-        for leaf in leaves:
-            for path in nx.all_simple_paths(graph, root, leaf):
-                path_with_values: List[Step] = list(
-                    map(
-                        lambda node: Step(
-                            name=node, content=graph.nodes[node]["value"]
-                        ),
-                        path,
-                    )
-                )
-                all_paths.append(Pipeline(id=index, steps=path_with_values))
-                index += 1
+# def load_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+#     steps: List[Step] = [Step(**step_data) for step_data in state["pipeline"]]
+#     state["planned_pipeline"] = ExecutionPipeline(id=1, steps=steps)
+#     return state
 
-    state["planned_pipelines"] = all_paths
+
+def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    state["messages"] = [
+        SystemMessage(content=system_prompt),
+        AIMessage(content=f"Dataset path: {state['dataset_path']}"),
+        AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
+        AIMessage(content=f"Pipeline: \n{str(state['pipeline'])}"),
+    ]
     return state
 
 
-def generate_code_for_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
-    if "current_pipeline" not in state:
-        state["current_pipeline"] = 0
+# def generate_code_for_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+#     pipeline: ExecutionPipeline = state["pipeline"]
+#     code_gen_state: Dict[str, Any] = code_generation_agent.invoke(
+#         {
+#             "dataset_path": state["dataset_path"],
+#             "dataset_info": state["dataset_info"],
+#             "pipeline": pipeline,
+#         }
+#     )
+#     pipeline = code_gen_state["pipeline"]
+#     out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
+#     out_dir.mkdir(parents=True, exist_ok=True)
+#     (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
+#     (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
+#     return state
 
-    pipeline: Pipeline = state["planned_pipelines"][state["current_pipeline"]]
-    code_gen_state: Dict = code_generation_agent.invoke(
-        {
-            "dataset_path": state["dataset_path"],
-            "dataset_info": state["dataset_info"],
-            "pipeline": pipeline,
-        }
-    )
-    pipeline = code_gen_state["pipeline"]
-    out_dir = Path(f"out/pipeline_{pipeline.id}")
+
+def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
+    local_prompt: str = f"""
+        You are generating python code for a machine learning pipeline.
+        The pipeline to implement is the following:
+        {str(state["pipeline"])}
+        Provide only the code without any explanations.
+        Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
+        The code eventually will be executed, so ensure that it is correct and executable.
+    """
+    state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
+
+    response: Any = model.invoke(state["messages"])
+    assert isinstance(response.content, str)
+    state["pipeline"].code = extract_python_code(response.content)
+    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    return state
+
+
+def validate_code_compliance(
+    state: ExecutionAgentState,
+) -> ExecutionAgentState:
+    validating_prompt: str = "Is the generated code compliant with the provided pipeline? Answer with a simple 'yes' if compliant, otherwise answer 'no' and explain why."
+
+    state["messages"] = state["messages"] + [HumanMessage(content=validating_prompt)]
+
+    response: Any = model.invoke(state["messages"])
+    assert isinstance(response.content, str)
+    if "yes" in response.content[:10].lower().strip():
+        state["code_generation_feedback"] = (True, None)
+    else:
+        state["code_generation_feedback"] = (False, response.content)
+        state["pipeline"].code = ""
+    # append feedback message
+    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    return state
+
+
+def code_validation_branch(
+    state: ExecutionAgentState,
+) -> Literal["generate_pipeline_code", "explain_pipeline"]:
+    is_valid: bool
+    message: Optional[str]
+    is_valid, message = state["code_generation_feedback"]
+    return "explain_pipeline" if is_valid else "generate_pipeline_code"
+
+
+def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+    explain_prompt: str = """
+        Explain the final machine learning pipeline generated, step by step.
+        For each pipeline step, create a concise phrase that explain such step concisely.
+    """
+    state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
+    response: Any = model.invoke(state["messages"])
+    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    assert isinstance(response.content, str)
+    state["pipeline"].explanation = response.content
+    return state
+
+
+def save_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+    pipeline: ExecutionPipeline = state["pipeline"]
+    out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
     (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
     return state
-
-
-def iterate_over_pipelines(
-    state: ExecutionAgentState,
-) -> Literal["generate_code_for_pipeline", "__end__"]:
-    if state["current_pipeline"] + 1 < len(state["planned_pipelines"]):
-        state["current_pipeline"] += 1
-        return "generate_code_for_pipeline"
-    else:
-        # return "execute_code"
-        return "__end__"
 
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
@@ -85,7 +147,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         mlflow.autolog()
         # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
         namespace: dict = {}
-        exec(state["generated_code"], namespace, namespace)
+        exec(state["pipeline"].code, namespace, namespace)
     except Exception as e:
         state["messages"] = state["messages"] + [
             AIMessage(content=f"Error during code execution: {str(e)}")
@@ -94,26 +156,25 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-# def should_terminate(
-#     state: ExecutionAgentState,
-# ) -> Literal["generate_code_for_step", "__end__"]:
-#     return "__end__"
-
-
 state_graph = StateGraph(ExecutionAgentState)
 
 state_graph.add_sequence(
     [
-        load_pipelines,
-        generate_code_for_pipeline,
+        load_info,
+        generate_pipeline_code,
+        validate_code_compliance,
     ]
 )
-state_graph.add_edge(START, "load_pipelines")
-state_graph.add_conditional_edges("generate_code_for_pipeline", iterate_over_pipelines)
-# state_graph.add_node("execute_code", execute_code)
-# state_graph.add_conditional_edges("execute_code", should_terminate)
-
-# state_graph.add_edge("execute_code", END)
+state_graph.add_edge(START, "load_info")
+state_graph.add_conditional_edges("validate_code_compliance", code_validation_branch)
+state_graph.add_sequence(
+    [
+        explain_pipeline,
+        save_pipeline,
+        execute_code,
+    ]
+)
+state_graph.add_edge("execute_code", END)
 
 execution_agent: CompiledStateGraph = state_graph.compile()
 
@@ -121,9 +182,9 @@ execution_agent: CompiledStateGraph = state_graph.compile()
 system_prompt: str = """
     You are an expert of machine learning and data science.
     Your task is to help the user to generate a machine learning pipeline in python.
-    You will be provided with a dataset and a graph representing the pipeline to implement.
-    You must ensure that the generated machine learning code is compliant with the provided graph.
-    You will generate the code step by step, i.e. node by node of the graph.
+    You will be provided with a dataset and a pipeline representing the steps to implement.
+    You must ensure that the generated machine learning code is compliant with the provided pipeline.
+    You will generate the code step by step, i.e. step by step of the pipeline.
 """
 
 

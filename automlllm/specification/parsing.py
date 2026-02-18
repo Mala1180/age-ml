@@ -3,25 +3,25 @@ from typing import Dict, List
 import yaml
 from pydantic import BaseModel
 
+from automlllm.common.types import Step
 from automlllm.specification.types import (
     Candidate,
     Constraint,
     Defaults,
-    Node,
     OrderingRule,
-    Step,
+    SpecStep,
 )
 
 
 class ParsedSpecification(BaseModel):
-    steps: List[Step]
+    steps: List[SpecStep]
     ordering: List[OrderingRule]
     constraints: List[Constraint]
 
 
 class SpecificationParser:
-    def __init__(self, spec_yaml: str):
-        self.spec_yaml = spec_yaml
+    def __init__(self, spec_yaml: str) -> None:
+        self.spec_yaml: str = spec_yaml
 
     def parse(self) -> ParsedSpecification:
         spec: Dict = yaml.safe_load(self.spec_yaml)
@@ -29,21 +29,21 @@ class SpecificationParser:
         defaults_data = spec["pipeline"]["defaults"]
         defaults = Defaults.model_validate(defaults_data).model_dump()
 
-        steps: List[Step] = []
+        steps: List[SpecStep] = []
         for step_id, step_data in spec["pipeline"]["steps"].items():
             candidates_data = step_data.get("candidates", [])
-            parsed_candidates = []
+            parsed_candidates: List[Candidate] = []
             for c in candidates_data:
                 if isinstance(c, str):
                     parsed_candidates.append(Candidate(name=c))
                 elif isinstance(c, dict):
-                    name = list(c.keys())[0]
-                    params = c[name].get("params", {})
+                    name: str = list(c.keys())[0]
+                    params: Dict = c[name].get("params", {})
                     parsed_candidates.append(Candidate(name=name, params=params))
 
             step_data["candidates"] = parsed_candidates
             steps.append(
-                Step.model_validate(
+                SpecStep.model_validate(
                     {
                         "id": step_id,
                         **defaults,
@@ -58,19 +58,19 @@ class SpecificationParser:
 
         constraints: List[Constraint] = []
         for constraint in spec.get("constraints", []):
-            required_nodes: List[Node] = []
-            forbidden_nodes: List[Node] = []
+            required_steps: List[Step] = []
+            forbidden_steps: List[Step] = []
             for required in constraint.get("require", []):
-                required_nodes.append(self._get_node_with_value(required))
+                required_steps.append(self._get_step_with_value(required))
             for forbidden in constraint.get("forbid", []):
-                forbidden_nodes.append(self._get_node_with_value(forbidden))
+                forbidden_steps.append(self._get_step_with_value(forbidden))
 
             constraints.append(
                 Constraint.model_validate(
                     {
                         "condition": constraint["if"],
-                        "require": required_nodes,
-                        "forbid": forbidden_nodes,
+                        "require": required_steps,
+                        "forbid": forbidden_steps,
                     }
                 )
             )
@@ -79,10 +79,10 @@ class SpecificationParser:
             steps=steps, ordering=ordering, constraints=constraints
         )
 
-    def _get_node_with_value(self, node: str | Dict[str, str]) -> Node:
+    def _get_step_with_value(self, node: str | Dict[str, str]) -> Step:
         if isinstance(node, str):
-            return Node(id=node)
+            return Step(name=node)
         else:
             node_id: str = list(node.keys())[0]
             node_value: str = node[node_id]
-            return Node(id=node_id, value=node_value)
+            return Step(name=node_id, content=node_value)
