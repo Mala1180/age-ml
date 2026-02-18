@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Tuple, Optional, Literal
 
@@ -53,23 +54,6 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         AIMessage(content=f"Pipeline: \n{str(state['pipeline'])}"),
     ]
     return state
-
-
-# def generate_code_for_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
-#     pipeline: ExecutionPipeline = state["pipeline"]
-#     code_gen_state: Dict[str, Any] = code_generation_agent.invoke(
-#         {
-#             "dataset_path": state["dataset_path"],
-#             "dataset_info": state["dataset_info"],
-#             "pipeline": pipeline,
-#         }
-#     )
-#     pipeline = code_gen_state["pipeline"]
-#     out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
-#     out_dir.mkdir(parents=True, exist_ok=True)
-#     (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
-#     (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
-#     return state
 
 
 def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
@@ -135,6 +119,12 @@ def save_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     pipeline: ExecutionPipeline = state["pipeline"]
     out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
     out_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now()
+    created_at = (
+        "**Created at:** " + timestamp.strftime("%Y-%m-%d %H:%M:%S") + " UTC\n\n"
+    )
+    pipeline.code = "# " + created_at + pipeline.code
+    pipeline.explanation = "> " + created_at + pipeline.explanation
     (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
     (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
     return state
