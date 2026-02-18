@@ -1,11 +1,8 @@
-from typing import Optional, Dict, List, Any
+from typing import Dict, List, Any
 
 from pydantic import BaseModel, Field, ConfigDict
 
-
-class Node(BaseModel):
-    id: str
-    value: Optional[str] = None
+from automlllm.common.types import Step
 
 
 class Defaults(BaseModel):
@@ -23,7 +20,7 @@ class StepFields(Defaults):
     candidates: List[Candidate] = Field(default_factory=list)
 
 
-class Step(StepFields):
+class SpecStep(StepFields):
     model_config = ConfigDict(extra="forbid")
     id: str
 
@@ -37,5 +34,5 @@ class OrderingRule(BaseModel):
 class Constraint(BaseModel):
     model_config = ConfigDict(extra="forbid")
     condition: Dict
-    require: List[Node] = Field(default_factory=list)
-    forbid: List[Node] = Field(default_factory=list)
+    require: List[Step] = Field(default_factory=list)
+    forbid: List[Step] = Field(default_factory=list)

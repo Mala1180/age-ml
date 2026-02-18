@@ -1,19 +1,28 @@
 from pathlib import Path
-from typing import List, Literal, Dict, Tuple, Optional, TypedDict
+from typing import Any, List, Literal, Optional, Tuple
 
-import networkx as nx
 import pandas as pd
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
-from matplotlib import pyplot as plt
-from networkx.classes import MultiDiGraph
-from networkx.readwrite import json_graph
-from pydantic import BaseModel
+from typing_extensions import override
 
 from automlllm.common.model import model
+from automlllm.common.types import Pipeline, Step
 from automlllm.specification import Specification
 from automlllm.specification.validation import SpecificationValidator
+
+
+class PlanningPipeline(Pipeline):
+    @override
+    def __str__(self) -> str:
+        str_value: str = "Planning Pipeline:\n"
+        for i, step in enumerate(self.steps):
+            str_value += f"Step {i + 1}: {step.name}"
+            if step.content:
+                str_value += f" with value {step.content}"
+            str_value += "\n"
+        return str_value
 
 
 class PlanningAgentState(MessagesState):
@@ -22,33 +31,23 @@ class PlanningAgentState(MessagesState):
     specification: str
     dataset_path: str
     dataset_info: str
-    pipeline_graph: Dict[str, str]
+    pipeline: PlanningPipeline
     pipeline_feedback: Tuple[bool, Optional[str]]
 
 
-class Edge(TypedDict):
-    from_node: str
-    to_node: str
-
-
-class PipelineGraph(BaseModel):
-    nodes: List[List[str]]
-    edges: List[Edge]
-
-
-structured_model = model.with_structured_output(PipelineGraph)
+structured_model = model.with_structured_output(PlanningPipeline)
 attempts: int = 0
 max_attempts: int = 10
 
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
-    df = pd.read_csv(Path(state["dataset_path"]))
+    df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
 
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
-        Columns:\n{list(df.columns)} 
-        Data Types:\n{df.dtypes.to_markdown()} 
-        Description:\n{df.describe().to_markdown()} 
+        Columns:\n{list(df.columns)}
+        Data Types:\n{df.dtypes.to_markdown()}
+        Description:\n{df.describe().to_markdown()}
         Preview:\n{df.head().to_markdown()}
     """
     state["messages"] = state["messages"] + [
@@ -75,95 +74,75 @@ def load_specification(state: PlanningAgentState) -> PlanningAgentState:
 
 def reasoning_node(state: PlanningAgentState) -> PlanningAgentState:
     reasoning_prompt: str = (
-        "Reason on how to generate the pipeline graph. "
-        "Remember that the graph must comply with the specification provided "
+        "Reason on how to generate the pipeline. "
+        "Remember that the pipeline must comply with the specification provided "
         "and consider the previous feedbacks if any. "
         "You don't need to generate any sort of code, just reason about the steps to take."
     )
 
     state["messages"] = state["messages"] + [HumanMessage(content=reasoning_prompt)]
 
-    response = model.invoke(state["messages"])
+    response: Any = model.invoke(state["messages"])
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     return state
 
 
-def generate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
+def generate_pipeline(state: PlanningAgentState) -> PlanningAgentState:
     local_prompt: str = (
-        "Generate a DIRECTED ACYCLIC GRAPH representing few pipeline paths, those you consider better for this specific problem.\n"
-        "Graph can have multiple roots and multiple leaves, but it is not a constraint.\n"
-        "The graph must not have cycles.\n"
-        "Each edge must explicitly specify direction using keys:\n"
-        "  from = source node\n"
-        "  to = destination node\n\n"
-        "Return ONLY valid JSON that matches this schema:\n"
-        "{"
-        '  "nodes": [[node_id, value], ...],'
-        '  "edges": [{"from_node": "...", "to_node": "..."}, ...]'
-        "}"
+        "Generate the pipeline you consider best for this specific problem.\n"
+        "For each step, set 'name' to the step name defined in the specification "
+        "and 'content' to the candidate value you choose for that step."
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
     response = structured_model.invoke(state["messages"])
-    assert isinstance(response, PipelineGraph)
-    response.nodes = [[k.lower(), v.lower()] for k, v in response.nodes]
-    response.edges = [
-        {"from_node": edge["from_node"].lower(), "to_node": edge["to_node"].lower()}
-        for edge in response.edges
+    assert isinstance(response, PlanningPipeline)
+    response.steps = [
+        Step(
+            name=step.name.lower(),
+            content=step.content.lower() if step.content else None,
+        )
+        for step in response.steps
     ]
-    graph: MultiDiGraph = nx.MultiDiGraph()
-    for node_id, node_value in response.nodes:
-        graph.add_node(node_id, value=node_value)
-    for edge in response.edges:
-        graph.add_edge(edge["from_node"], edge["to_node"])
 
-    plt.figure(figsize=(6, 6))
-    pos = nx.spring_layout(graph)
-    nx.draw(
-        graph,
-        pos,
-        with_labels=True,
-        node_size=2000,
-        node_color="lightblue",
-        arrowstyle="->",
-    )
-    plt.show()
     state["messages"] = state["messages"] + [AIMessage(content=str(response))]
-    state["pipeline_graph"] = nx.node_link_data(graph)
+    state["pipeline"] = response
     return state
 
 
-def validate_pipeline_graph(state: PlanningAgentState) -> PlanningAgentState:
-    graph: MultiDiGraph = json_graph.node_link_graph(state["pipeline_graph"])
-    spec = Specification.parse(state["specification"])
-    validator = SpecificationValidator(spec)
-    is_valid, message = validator.validate_graph(graph)
+def validate_pipeline(state: PlanningAgentState) -> PlanningAgentState:
+    spec: Specification = Specification.parse(state["specification"])
+    validator: SpecificationValidator = SpecificationValidator(spec)
+    is_valid: bool
+    message: Optional[str]
+    is_valid, message = validator.validate_pipeline(state["pipeline"].steps)
     if message is None:
-        message = "Graph is valid according to the specification."
+        message = "Pipeline is valid according to the specification."
     state["messages"] = state["messages"] + [HumanMessage(content=message)]
     state["pipeline_feedback"] = is_valid, message if not is_valid else None
     return state
 
 
 def should_terminate(state: PlanningAgentState) -> Literal["reasoning_node", "__end__"]:
+    terminate: bool
     terminate, _ = state["pipeline_feedback"]
     global attempts
     attempts += 1
     return "__end__" if terminate or attempts == max_attempts else "reasoning_node"
 
 
-state_graph = StateGraph(PlanningAgentState)
+state_graph: StateGraph = StateGraph(PlanningAgentState)
 
 state_graph.add_sequence(
     [
         load_dataset,
         load_specification,
         reasoning_node,
-        generate_pipeline_graph,
-        validate_pipeline_graph,
+        generate_pipeline,
+        validate_pipeline,
     ]
 )
 state_graph.add_edge(START, "load_dataset")
-state_graph.add_conditional_edges("validate_pipeline_graph", should_terminate)
+state_graph.add_conditional_edges("validate_pipeline", should_terminate)
 
 
 planning_agent: CompiledStateGraph = state_graph.compile()
@@ -173,21 +152,15 @@ prompt: str = (
 )
 
 system_prompt: str = """
-    You are a helpful assistant able to design pipeline of steps.
-    Your task is to create a directed acyclic graph (DAG) representing pipelines of tasks based on the provided specification.
-    These pipelines are represented by all the possible paths from roots to leaves in the graph.
-    The graph should not represent all the possible pipelines (combinatorial explosion) but only the best ones depending on the specific problem.
-    The graph of pipelines must respect the specification provided in natural language.
-    It is not necessary to include all types of steps in the graph (except for the mandatory ones)
-    Terminal nodes should be the leaf nodes in valid paths
-    Initial nodes should be the root nodes in valid paths
-    The generated graph is always validated and a feedback is provided.
+    You are a helpful assistant able to design pipelines of steps.
+    Your task is to create an ordered pipeline of tasks based on the provided specification.
+    A pipeline is a sequence of steps, each with an id and a chosen value.
+    The pipeline must respect the specification provided in natural language.
+    It is not necessary to include all types of steps in the pipeline (except for the mandatory ones).
+    Terminal steps should be the last step in the pipeline.
+    Initial steps should be the first step in the pipeline.
+    The generated pipeline is always validated and a feedback is provided.
 """
-
-# Pipeline task names are provided as the keys in the 'steps' section of the specification, under the 'pipeline' key.
-# These step names should be the node keys in the graph.
-# Values for each step should be chosen among the admissible values defined inside the step object.
-# The output should be a comprehensive graph representing all possible pipeline paths.
 
 
 def create_user_prompt(prompt: str) -> List[BaseMessage]:

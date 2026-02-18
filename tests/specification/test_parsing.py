@@ -122,10 +122,10 @@ partial_ordering: []
         constraint = spec.constraints[0]
         assert constraint.condition == {"step1": {}}
         assert len(constraint.require) == 2
-        assert constraint.require[0].value is None
-        assert constraint.require[1].value is None
+        assert constraint.require[0].content is None
+        assert constraint.require[1].content is None
         assert len(constraint.forbid) == 1
-        assert constraint.forbid[0].value is None
+        assert constraint.forbid[0].content is None
 
     def test_parse_constraints_with_values(self):
         spec = Specification.parse(spec_sample)
@@ -133,11 +133,11 @@ partial_ordering: []
         constraint = spec.constraints[1]
         assert constraint.condition == {"step1": "b"}
         assert len(constraint.require) == 1
-        assert constraint.require[0].id == "step4"
-        assert constraint.require[0].value == "j"
+        assert constraint.require[0].name == "step4"
+        assert constraint.require[0].content == "j"
         assert len(constraint.forbid) == 1
-        assert constraint.forbid[0].id == "step5"
-        assert constraint.forbid[0].value == "l"
+        assert constraint.forbid[0].name == "step5"
+        assert constraint.forbid[0].content == "l"
 
     def test_parse_multiple_constraints(self):
         spec = Specification.parse(spec_sample)
@@ -206,9 +206,9 @@ pipeline:
 
         constraint = spec.constraints[0]
         assert len(constraint.require) == 2
-        required_ids = [node.id for node in constraint.require]
-        assert "step2" in required_ids
-        assert "step4" in required_ids
+        required_names = [step.name for step in constraint.require]
+        assert "step2" in required_names
+        assert "step4" in required_names
 
     def test_parse_all_step_ids(self):
         spec = Specification.parse(spec_sample)

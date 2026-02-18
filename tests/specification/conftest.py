@@ -2,8 +2,8 @@ from typing import List
 
 import pytest
 
+from automlllm.common.types import Step
 from automlllm.specification import Specification
-from automlllm.specification.types import Node
 from automlllm.specification.validation import SpecificationValidator
 from tests.resources import get_test_resource_path
 
@@ -11,12 +11,12 @@ spec_sample: str = get_test_resource_path("specification-sample.yml").read_text(
 
 
 @pytest.fixture
-def sample_pipeline() -> List[Node]:
+def sample_pipeline() -> List[Step]:
     return [
-        Node(id="step1", value="a"),
-        Node(id="step2", value="c"),
-        Node(id="step4", value="k"),
-        Node(id="step5", value="l"),
+        Step(name="step1", content="a"),
+        Step(name="step2", content="c"),
+        Step(name="step4", content="k"),
+        Step(name="step5", content="l"),
     ]
 
 
