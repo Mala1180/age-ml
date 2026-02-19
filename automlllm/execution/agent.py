@@ -1,9 +1,8 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Tuple, Optional, Literal
+from typing import Any, Optional, Literal
 
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
-from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
@@ -39,7 +38,7 @@ class ExecutionAgentState(MessagesState):
     pipeline: ExecutionPipeline
     code_validation_feedback: bool
     code_execution_feedback: bool
-    # human_feedback: Optional[str]
+    human_feedback: Optional[str]
 
 
 validation_attempts: int = 0
@@ -60,7 +59,7 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
-        AIMessage(content=str(state['pipeline'])),
+        AIMessage(content=str(state["pipeline"])),
     ]
     return state
 
@@ -117,12 +116,12 @@ def code_validation_branch(
 
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
+    global validation_attempts
+    validation_attempts = 0
     try:
         import mlflow
 
         mlflow.autolog()
-        mlflow.config.enable_system_metrics_logging()
-        mlflow.config.set_system_metrics_sampling_interval(2)
         with mlflow.start_run():
             # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
             namespace: dict = {}
@@ -149,6 +148,8 @@ def code_execution_branch(
 
 
 def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+    global execution_attempts
+    execution_attempts = 0
     explain_prompt: str = """
         Explain the final machine learning pipeline generated, step by step.
         For each pipeline step, create a concise phrase that explain such step concisely.
@@ -158,11 +159,38 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     assert isinstance(response.content, str)
     state["pipeline"].explanation = response.content
+    __save_pipeline(state["pipeline"])
+    print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
+    print(
+        f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
+    )
     return state
 
 
-def save_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
-    pipeline: ExecutionPipeline = state["pipeline"]
+def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
+    res: Optional[str] = None
+    while res not in ["yes", "y", "no", "n"]:
+        res = input(
+            "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)"
+        )
+        if res == "yes" or res == "y":
+            feedback = input("Please provide your feedback:")
+            state["human_feedback"] = feedback
+            state["messages"] = state["messages"] + [HumanMessage(content=feedback)]
+        elif res == "no" or res == "n":
+            state["human_feedback"] = None
+        else:
+            print("Invalid input. Please answer with 'y/yes' or 'n/no'.")
+    return state
+
+
+def human_feedback_branch(
+    state: ExecutionAgentState,
+) -> Literal["generate_pipeline_code", "__end__"]:
+    return "__end__" if state["human_feedback"] is None else "generate_pipeline_code"
+
+
+def __save_pipeline(pipeline: ExecutionPipeline) -> None:
     out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now()
@@ -173,7 +201,6 @@ def save_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     pipeline.explanation = "> " + created_at + pipeline.explanation
     (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
     (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
-    return state
 
 
 state_graph = StateGraph(ExecutionAgentState)
@@ -195,10 +222,11 @@ state_graph.add_conditional_edges("execute_code", code_execution_branch)
 state_graph.add_sequence(
     [
         explain_pipeline,
-        save_pipeline,
+        human_feedback,
     ]
 )
-state_graph.add_edge("save_pipeline", END)
+state_graph.add_conditional_edges("human_feedback", human_feedback_branch)
+
 
 execution_agent: CompiledStateGraph = state_graph.compile()
 
