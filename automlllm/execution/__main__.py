@@ -6,7 +6,7 @@ import pandas as pd
 
 from automlllm.common.types import Step
 from automlllm.execution.agent import execution_agent, ExecutionPipeline
-from automlllm.planning import logger
+from automlllm import logger
 from automlllm.planning.agent import PlanningPipeline
 from resources import get_resource_path
 
