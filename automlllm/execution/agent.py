@@ -39,10 +39,10 @@ class ExecutionAgentState(MessagesState):
     code_validation_feedback: bool
     code_execution_feedback: bool
     human_feedback: Optional[str]
+    validation_attempts: int
+    execution_attempts: int
 
 
-validation_attempts: int = 0
-execution_attempts: int = 0
 max_attempts: int = 5
 
 
@@ -61,6 +61,8 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
         AIMessage(content=str(state["pipeline"])),
     ]
+    state["validation_attempts"] = 0
+    state["execution_attempts"] = 0
     return state
 
 
@@ -108,16 +110,14 @@ def code_validation_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "execute_code"]:
     is_valid = state["code_validation_feedback"]
-    global validation_attempts
-    validation_attempts += 1
-    if not is_valid and validation_attempts == max_attempts:
+    state["validation_attempts"] += 1
+    if not is_valid and state["validation_attempts"] == max_attempts:
         raise Exception("Maximum attempts reached for code generation.")
     return "execute_code" if is_valid else "generate_pipeline_code"
 
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
-    global validation_attempts
-    validation_attempts = 0
+    state["validation_attempts"] = 0
     try:
         import mlflow
 
@@ -140,16 +140,14 @@ def code_execution_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid = state["code_execution_feedback"]
-    global execution_attempts
-    execution_attempts += 1
-    if not is_valid and execution_attempts == max_attempts:
+    state["execution_attempts"] += 1
+    if not is_valid and state["execution_attempts"] == max_attempts:
         raise Exception("Maximum attempts reached for code execution.")
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
 
 def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
-    global execution_attempts
-    execution_attempts = 0
+    state["execution_attempts"] = 0
     explain_prompt: str = """
         Explain the final machine learning pipeline generated, step by step.
         For each pipeline step, create a concise phrase that explain such step concisely.
@@ -172,7 +170,7 @@ def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
     while res not in ["yes", "y", "no", "n"]:
         res = input(
             "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)"
-        )
+        ).lower()
         if res == "yes" or res == "y":
             feedback = input("Please provide your feedback:")
             state["human_feedback"] = feedback
