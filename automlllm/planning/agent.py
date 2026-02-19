@@ -37,7 +37,7 @@ class PlanningAgentState(MessagesState):
 
 structured_model = model.with_structured_output(PlanningPipeline)
 attempts: int = 0
-max_attempts: int = 10
+max_attempts: int = 5
 
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
