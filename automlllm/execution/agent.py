@@ -6,6 +6,7 @@ from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
+from pydantic import BaseModel
 from typing_extensions import override
 
 from automlllm.common.model import model
@@ -36,14 +37,22 @@ class ExecutionAgentState(MessagesState):
     dataset_info: str
     planning_pipeline: PlanningPipeline
     pipeline: ExecutionPipeline
-    # current_step: int
-    code_generation_feedback: Tuple[bool, Optional[str]]
+    code_validation_feedback: bool
+    code_execution_feedback: bool
+    # human_feedback: Optional[str]
 
 
-# def load_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
-#     steps: List[Step] = [Step(**step_data) for step_data in state["pipeline"]]
-#     state["planned_pipeline"] = ExecutionPipeline(id=1, steps=steps)
-#     return state
+validation_attempts: int = 0
+execution_attempts: int = 0
+max_attempts: int = 5
+
+
+class JudgeResponse(BaseModel):
+    is_compliant: bool
+    feedback: str
+
+
+judge_model = model.with_structured_output(JudgeResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
@@ -51,7 +60,7 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
-        AIMessage(content=f"Pipeline: \n{str(state['pipeline'])}"),
+        AIMessage(content=str(state['pipeline'])),
     ]
     return state
 
@@ -77,28 +86,65 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
 def validate_code_compliance(
     state: ExecutionAgentState,
 ) -> ExecutionAgentState:
-    validating_prompt: str = "Is the generated code compliant with the provided pipeline? Answer with a simple 'yes' if compliant, otherwise answer 'no' and explain why."
-
+    validating_prompt: str = (
+        "Is the generated code compliant with the provided pipeline? "
+        "Is the generated code containing malicious code or code that can cause security issues? "
+        "Answer with a simple 'yes' if both answers are 'yes', otherwise answer 'no' and explain why."
+    )
     state["messages"] = state["messages"] + [HumanMessage(content=validating_prompt)]
 
-    response: Any = model.invoke(state["messages"])
-    assert isinstance(response.content, str)
-    if "yes" in response.content[:10].lower().strip():
-        state["code_generation_feedback"] = (True, None)
+    response = judge_model.invoke(state["messages"])
+    assert isinstance(response, JudgeResponse)
+    if response.is_compliant:
+        state["code_validation_feedback"] = True
     else:
-        state["code_generation_feedback"] = (False, response.content)
+        state["code_validation_feedback"] = False
         state["pipeline"].code = ""
     # append feedback message
-    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    state["messages"] = state["messages"] + [AIMessage(content=response.feedback)]
     return state
 
 
 def code_validation_branch(
     state: ExecutionAgentState,
+) -> Literal["generate_pipeline_code", "execute_code"]:
+    is_valid = state["code_validation_feedback"]
+    global validation_attempts
+    validation_attempts += 1
+    if not is_valid and validation_attempts == max_attempts:
+        raise Exception("Maximum attempts reached for code generation.")
+    return "execute_code" if is_valid else "generate_pipeline_code"
+
+
+def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
+    try:
+        import mlflow
+
+        mlflow.autolog()
+        mlflow.config.enable_system_metrics_logging()
+        mlflow.config.set_system_metrics_sampling_interval(2)
+        with mlflow.start_run():
+            # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
+            namespace: dict = {}
+            exec(state["pipeline"].code, namespace, namespace)
+            state["code_execution_feedback"] = True
+    except Exception as e:
+        state["messages"] = state["messages"] + [
+            AIMessage(content=f"Error during code execution: {str(e)}")
+        ]
+        state["code_execution_feedback"] = False
+
+    return state
+
+
+def code_execution_branch(
+    state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
-    is_valid: bool
-    message: Optional[str]
-    is_valid, message = state["code_generation_feedback"]
+    is_valid = state["code_execution_feedback"]
+    global execution_attempts
+    execution_attempts += 1
+    if not is_valid and execution_attempts == max_attempts:
+        raise Exception("Maximum attempts reached for code execution.")
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
 
@@ -130,23 +176,9 @@ def save_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
-    try:
-        import mlflow
-
-        mlflow.autolog()
-        # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
-        namespace: dict = {}
-        exec(state["pipeline"].code, namespace, namespace)
-    except Exception as e:
-        state["messages"] = state["messages"] + [
-            AIMessage(content=f"Error during code execution: {str(e)}")
-        ]
-
-    return state
-
-
 state_graph = StateGraph(ExecutionAgentState)
+
+state_graph.add_edge(START, "load_info")
 
 state_graph.add_sequence(
     [
@@ -155,16 +187,18 @@ state_graph.add_sequence(
         validate_code_compliance,
     ]
 )
-state_graph.add_edge(START, "load_info")
 state_graph.add_conditional_edges("validate_code_compliance", code_validation_branch)
+
+state_graph.add_node("execute_code", execute_code)
+state_graph.add_conditional_edges("execute_code", code_execution_branch)
+
 state_graph.add_sequence(
     [
         explain_pipeline,
         save_pipeline,
-        execute_code,
     ]
 )
-state_graph.add_edge("execute_code", END)
+state_graph.add_edge("save_pipeline", END)
 
 execution_agent: CompiledStateGraph = state_graph.compile()
 

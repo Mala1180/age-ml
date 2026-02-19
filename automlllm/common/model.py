@@ -10,7 +10,7 @@ load_dotenv()
 api_key = SecretStr(os.getenv("OPENROUTER_API_KEY", ""))
 
 # model_name: str = "deepseek/deepseek-r1-0528:free"
-model_name: str = "openai/gpt-oss-120b:free"
+# model_name: str = "openai/gpt-oss-120b:free"
 
 # openrouter
 # model = ChatOpenAI(
