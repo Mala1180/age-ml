@@ -12,6 +12,7 @@ from automlllm.common.model import model
 from automlllm.common.types import Pipeline
 from automlllm.execution.utils import extract_python_code
 from automlllm.planning.agent import PlanningPipeline
+from automlllm.specification import Specification
 
 
 class ExecutionPipeline(Pipeline):
@@ -34,6 +35,7 @@ class ExecutionPipeline(Pipeline):
 class ExecutionAgentState(MessagesState):
     dataset_path: str
     dataset_info: str
+    specification_path: str
     planning_pipeline: PlanningPipeline
     pipeline: ExecutionPipeline
     code_validation_feedback: bool
@@ -55,11 +57,14 @@ judge_model = model.with_structured_output(JudgeResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    content: str = Path(state["specification_path"]).read_text()
+    technical_details: str = Specification.parse(content).describe_technical_details()
     state["messages"] = [
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
         AIMessage(content=str(state["pipeline"])),
+        AIMessage(content=technical_details),
     ]
     state["validation_attempts"] = 0
     state["execution_attempts"] = 0
@@ -231,7 +236,7 @@ execution_agent: CompiledStateGraph = state_graph.compile()
 
 system_prompt: str = """
     You are an expert of machine learning and data science.
-    Your task is to help the user to generate a machine learning pipeline in python.
+    Your task is to help the user to generate a machine learning pipeline.
     You will be provided with a dataset and a pipeline representing the steps to implement.
     You must ensure that the generated machine learning code is compliant with the provided pipeline.
     You will generate the code step by step, i.e. step by step of the pipeline.

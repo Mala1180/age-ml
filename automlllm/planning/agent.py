@@ -64,7 +64,7 @@ def load_specification(state: PlanningAgentState) -> PlanningAgentState:
     #     AIMessage(content=f"Specification loaded. \n{pformat(data)}")
     # ]
     # state["specification"] = yaml.dump(data)
-    nl_spec: str = Specification.parse(content).to_natural_language()
+    nl_spec: str = Specification.parse(content).describe_pipeline()
     state["messages"] = state["messages"] + [
         AIMessage(content=f"Specification loaded. \n{nl_spec}")
     ]

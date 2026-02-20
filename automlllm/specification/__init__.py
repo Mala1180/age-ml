@@ -10,19 +10,21 @@ class Specification:
         steps: List[SpecStep],
         ordering: List[OrderingRule],
         constraints: List[Constraint],
+        technical_details: List[str],
     ) -> None:
         self.steps: List[SpecStep] = steps
         self.ordering: List[OrderingRule] = ordering
         self.constraints: List[Constraint] = constraints
+        self.technical_details: List[str] = technical_details
 
     @classmethod
     def parse(cls, spec_yaml: str) -> "Specification":
         parser: SpecificationParser = SpecificationParser(spec_yaml)
         parsed_spec = parser.parse()
-        return cls(parsed_spec.steps, parsed_spec.ordering, parsed_spec.constraints)
+        return cls(parsed_spec.steps, parsed_spec.ordering, parsed_spec.constraints, parsed_spec.technical_details)
 
-    def to_natural_language(self) -> str:
-        """Convert the specification to a natural language description."""
+    def describe_pipeline(self) -> str:
+        """Converts the pipeline specification into a human-readable format."""
         nl_spec: str = ""
 
         step_ids: List[str] = [f"'{step.id}'" for step in self.steps]
@@ -96,3 +98,12 @@ class Specification:
                 nl_spec += f"- If {cond_str}, then {' and '.join(consequences)}.\n"
 
         return nl_spec.strip()
+
+    def describe_technical_details(self) -> str:
+        """Converts technical details into a human-readable format."""
+        if not self.technical_details:
+            return ""
+        nl: str = "Technical Details:\n"
+        for detail in self.technical_details:
+            nl += f"- {detail}\n"
+        return nl.strip()

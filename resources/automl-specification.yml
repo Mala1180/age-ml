@@ -132,138 +132,144 @@ pipeline:
 #     candidates: [cv, holdout]
 #     mandatory: true
 
-partial_ordering:
-  - before: imputation
-    after: discretization
+  partial_ordering:
+    - before: imputation
+      after: discretization
 
-  - before: imputation
-    after: normalization
+    - before: imputation
+      after: normalization
 
-  - before: imputation
-    after: features
+    - before: imputation
+      after: features
 
-  - before: imputation
-    after: rebalancing
+    - before: imputation
+      after: rebalancing
 
-  - before: discretization
-    after: normalization
+    - before: discretization
+      after: normalization
 
-  - before: normalization
-    after: features
+    - before: normalization
+      after: features
 
-  - before: features
-    after: classification
+    - before: features
+      after: classification
 
-  - before: features
-    after: regression
+    - before: features
+      after: regression
 
-  - before: rebalancing
-    after: classification
+    - before: rebalancing
+      after: classification
 
-  - before: rebalancing
-    after: regression
-
-
-constraints:
-
-  - if:
-      classification: {}
-    forbid: [regression]
-
-  - if:
-      regression: {}
-    forbid: [classification]
-
-  # =========================
-  # CLASSIFICATION
-  # =========================
-
-  - if:
-      classification: decision_tree
-    require: [discretization]
-    forbid: [normalization, features]
-
-  - if:
-      classification: random_forest
-    forbid: [normalization]
-
-  - if:
-      classification: knn
-    require: [normalization, features]
-
-  - if:
-      classification: nn
-    require: [normalization]
-    forbid: [discretization]
-
-  - if:
-      classification: naive_bayes
-    forbid: [normalization]
-
-  - if:
-      classification: ada_boost
-    forbid: [normalization]
+    - before: rebalancing
+      after: regression
 
 
-  # =========================
-  # REGRESSION
-  # =========================
+  constraints:
 
-  - if:
-      regression: linear
-    require: [normalization]
-    forbid: [discretization]
+    - if:
+        classification: {}
+      forbid: [regression]
 
-  - if:
-      regression: ridge
-    require: [normalization]
-    forbid: [discretization]
+    - if:
+        regression: {}
+      forbid: [classification]
 
-  - if:
-      regression: lasso
-    require: [normalization]
-    forbid: [discretization]
+    # =========================
+    # CLASSIFICATION
+    # =========================
 
-  - if:
-      regression: elastic_net
-    require: [normalization]
-    forbid: [discretization]
+    - if:
+        classification: decision_tree
+      require: [discretization]
+      forbid: [normalization, features]
 
-  - if:
-      regression: svr
-    require: [normalization]
-    forbid: [discretization]
+    - if:
+        classification: random_forest
+      forbid: [normalization]
 
-  - if:
-      regression: knn_regressor
-    require: [normalization, features]
+    - if:
+        classification: knn
+      require: [normalization, features]
 
-  - if:
-      regression: nn_regressor
-    require: [normalization]
-    forbid: [discretization]
+    - if:
+        classification: nn
+      require: [normalization]
+      forbid: [discretization]
 
-  - if:
-      regression: random_forest_regressor
-    forbid: [normalization]
+    - if:
+        classification: naive_bayes
+      forbid: [normalization]
+
+    - if:
+        classification: ada_boost
+      forbid: [normalization]
 
 
-  # =========================
-  # SHARED BEST PRACTICES
-  # =========================
+    # =========================
+    # REGRESSION
+    # =========================
 
-  - if:
-      features: pca
-    require: [normalization]
+    - if:
+        regression: linear
+      require: [normalization]
+      forbid: [discretization]
 
-  - if:
-      features: select_k_best
-    forbid: [discretization]
+    - if:
+        regression: ridge
+      require: [normalization]
+      forbid: [discretization]
 
-  - if:
-      rebalancing: smote
-    require: [imputation]
+    - if:
+        regression: lasso
+      require: [normalization]
+      forbid: [discretization]
 
-  - if:
-      imputation: iterative_imputer
-    require: [normalization]
+    - if:
+        regression: elastic_net
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: svr
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: knn_regressor
+      require: [normalization, features]
+
+    - if:
+        regression: nn_regressor
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: random_forest_regressor
+      forbid: [normalization]
+
+
+    # =========================
+    # SHARED BEST PRACTICES
+    # =========================
+
+    - if:
+        features: pca
+      require: [normalization]
+
+    - if:
+        features: select_k_best
+      forbid: [discretization]
+
+    - if:
+        rebalancing: smote
+      require: [imputation]
+
+    - if:
+        imputation: iterative_imputer
+      require: [normalization]
+
+
+technical_details:
+  - use Python for the implementation
+  - use scikit-learn for the ML algorithms (using Pipeline class if possible)
+  - use FLAML framework for the hyperparameter optimization for the model

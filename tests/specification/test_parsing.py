@@ -22,6 +22,7 @@ class TestSpecificationParsing:
         assert step5.mandatory is True
         assert len(spec.ordering) == 4
         assert len(spec.constraints) == 3
+        assert len(spec.technical_details) == 2
 
     def test_parse_steps_with_string_candidates(self):
         spec = Specification.parse(spec_sample)
@@ -51,7 +52,7 @@ pipeline:
               C: [0.1, 1.0, 10.0]
               kernel: [linear, rbf]
 
-partial_ordering: []
+  partial_ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -88,8 +89,8 @@ pipeline:
         - pca:
             params:
               n_components: [2, 5, 10]
-
-partial_ordering: []
+  
+  partial_ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -182,7 +183,7 @@ pipeline:
       candidates: [b]
       mandatory: false
 
-partial_ordering: []
+  partial_ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -229,3 +230,28 @@ pipeline:
         assert len(step_map["step3"].candidates) == 4  # [e, f, g, h]
         assert len(step_map["step4"].candidates) == 3  # [i, j, k]
         assert len(step_map["step5"].candidates) == 2  # [l, m]
+
+    def test_parse_technical_details(self):
+        spec = Specification.parse(spec_sample)
+        assert spec.technical_details == [
+            "use python for the implementation",
+            "use scikit-learn for the ML algorithms",
+        ]
+
+    def test_parse_technical_details_missing(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    step1:
+      candidates: [a]
+
+  partial_ordering: []
+"""
+        spec = Specification.parse(spec_yaml)
+        assert spec.technical_details == []
