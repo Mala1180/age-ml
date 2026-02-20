@@ -25,32 +25,36 @@ pipeline:
       terminal: true
       mandatory: true
 
-partial_ordering:
-  - before: step1
-    after: step2
+  partial_ordering:
+    - before: step1
+      after: step2
 
-  - before: step2
-    after: step3
+    - before: step2
+      after: step3
 
-  - before: step1
-    after: step4
+    - before: step1
+      after: step4
 
-  - before: step4
-    after: step5
+    - before: step4
+      after: step5
 
-constraints:
-  - if:
-      step1: {}
-    require: [step2, step4]
-    forbid: [step3]
+  constraints:
+    - if:
+        step1: {}
+      require: [step2, step4]
+      forbid: [step3]
 
-  - if:
-      step1: b
-    require:
-      - step4: j
-    forbid:
-      - step5: l
+    - if:
+        step1: b
+      require:
+        - step4: j
+      forbid:
+        - step5: l
 
-  - if:
-      step4: j
-    forbid: [step3]
+    - if:
+        step4: j
+      forbid: [step3]
+
+technical_details:
+  - use python for the implementation
+  - use scikit-learn for the ML algorithms

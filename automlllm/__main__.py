@@ -46,6 +46,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
         {
             "dataset_path": dataset_path,
             "dataset_info": dataset_info,
+            "specification_path": specification_path,
             "pipeline": execution_pipeline,
         }
     )

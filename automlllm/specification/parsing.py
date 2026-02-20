@@ -17,6 +17,7 @@ class ParsedSpecification(BaseModel):
     steps: List[SpecStep]
     ordering: List[OrderingRule]
     constraints: List[Constraint]
+    technical_details: List[str]
 
 
 class SpecificationParser:
@@ -53,11 +54,11 @@ class SpecificationParser:
             )
 
         ordering: List[OrderingRule] = [
-            OrderingRule.model_validate(order) for order in spec["partial_ordering"]
+            OrderingRule.model_validate(order) for order in spec["pipeline"]["partial_ordering"]
         ]
 
         constraints: List[Constraint] = []
-        for constraint in spec.get("constraints", []):
+        for constraint in spec["pipeline"].get("constraints", []):
             required_steps: List[Step] = []
             forbidden_steps: List[Step] = []
             for required in constraint.get("require", []):
@@ -75,8 +76,10 @@ class SpecificationParser:
                 )
             )
 
+        technical_details: List[str] = spec.get("technical_details", [])
+
         return ParsedSpecification(
-            steps=steps, ordering=ordering, constraints=constraints
+            steps=steps, ordering=ordering, constraints=constraints, technical_details=technical_details
         )
 
     def _get_step_with_value(self, node: str | Dict[str, str]) -> Step:
