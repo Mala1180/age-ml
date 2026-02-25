@@ -24,7 +24,7 @@ mlflow.langchain.autolog()
 
 def main(prompt: str = "", dataset_path: Optional[str] = None):
     dataset_path = "resources/datasets/adult.csv"
-    specification_path = "resources/automl-specification.yml"
+    specification_path = "resources/adult-specification.yml"
     prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
     messages: List[BaseMessage] = create_user_prompt(prompt)
 
