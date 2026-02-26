@@ -127,6 +127,18 @@ def constraints():
         yield Constraint(condition=item["if"], forbid=item.get("forbid", []), require=item.get("require", []))
 
 
+@dataclass(frozen=True)
+class StepImplementation:
+    step: str
+    candidate: str
+
+    def __repr__(self):
+        return "{" + f"{self.step}: {self.candidate}" + "}"
+    
+    def __str__(self):
+        return repr(self)
+
+
 class ModelInterpreter:
     def __init__(self, model, variables, steps):
         self.__model = model
@@ -147,7 +159,10 @@ class ModelInterpreter:
         else:
             var = name
         val = self.__model[var]
-        return val
+        if hasattr(val, "as_long"):
+            return val.as_long()
+        else:
+            return bool(val) if val is not None else None
         
     def variable_values_with_name(self, prefix):
         return {str(var): self.variable_value(var) for var in self.__variables.with_name(prefix)}
@@ -159,14 +174,15 @@ class ModelInterpreter:
                 return name.split(f"_as_")[1]
         raise ValueError(f"BUG: no candidates for step {step}.")
         
-    def interpret(self) -> tuple[str]:
+    def interpret(self) -> tuple[StepImplementation]:
         steps_to_index = dict()
         for step in self.__steps:
             index = self.variable_value(f"index_of_step_{step}")
             steps_to_index[step] = index
-        ordered_steps = sorted(self.__steps, key=lambda step: steps_to_index[step])
+        ordered_steps = list(self.__steps)
+        ordered_steps.sort(key=lambda step: steps_to_index[step])
         filtered_steps = [step for step in ordered_steps if self.variable_value(f"do_step_{step}")]
-        candidates_seq = [self.select_candidate_for(step) for step in filtered_steps]
+        candidates_seq = [StepImplementation(step, self.select_candidate_for(step)) for step in filtered_steps]
         return tuple(candidates_seq)
 
 
@@ -190,10 +206,16 @@ if __name__ == "__main__":
         constraint.add_to(solver, using=variables)
     
     print(solver)
-    input("---")
+    pipelines = set()
+    # input("---")
     while solver.check() == sat:
         model = solver.model()
         interpreter = ModelInterpreter(model, variables, steps)
-        print(interpreter.interpret())
+        pipeline = interpreter.interpret()
+        if pipeline not in pipelines:
+            print(pipeline)
+            pipelines.add(pipeline)
+        else:
+            continue
         input("---")
     print("No more solutions.")
