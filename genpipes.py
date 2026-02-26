@@ -62,9 +62,11 @@ class PartialOrderConstraint:
     after: str
 
     def add_to(self, constraints: Solver, using: Variables):
-        before = using[f"index_of_step_{self.before}"]
-        after = using[f"index_of_step_{self.after}"]
-        constraints.add(before < after)
+        index_of_before = using[f"index_of_step_{self.before}"]
+        do_before = using[f"do_step_{self.before}"]
+        index_of_after = using[f"index_of_step_{self.after}"]
+        do_after = using[f"do_step_{self.after}"]
+        constraints.add(Implies(And(do_before, do_after), index_of_before < index_of_after))
 
 
 def partial_ordering():
@@ -86,11 +88,16 @@ class Constraint:
             conditions = []
             for step, candidate in item.items():
                 condition = using[f"do_step_{step}"] == True
-                if len(candidate) == 1 and isinstance(candidate, str):
+                if isinstance(candidate, str):
                     if positive:
                         condition = And(condition, using[f"implement_{step}_as_{candidate}"] == True)
                     else:
                         condition = Implies(condition, using[f"implement_{step}_as_{candidate}"] == False)
+                elif isinstance(candidate, dict):
+                    if len(candidate) != 0:
+                        raise ValueError(f"Candidate {candidate} for step {step} has more than one component, which is not supported yet.")
+                else:
+                    raise ValueError(f"Invalid candidate for step {step} in constraint: {candidate}")
                 conditions.append(condition)
             if len(conditions) == 1:
                 return conditions[0]
@@ -171,7 +178,7 @@ class ModelInterpreter:
         candidates = self.variable_values_with_name(f"implement_{step}_as_")
         for name, candidate in candidates.items():
             if candidate:
-                return name.split(f"_as_")[1]
+                return name.split(f"implement_{step}_as_", maxsplit=1)[1]
         raise ValueError(f"BUG: no candidates for step {step}.")
         
     def interpret(self) -> tuple[StepImplementation]:
@@ -197,12 +204,16 @@ class ModelInterpreter:
             return Not(conditions[0])
         else:
             return Not(And(*conditions))
+        
+
+MINIMAL_STEPS = {"regression", "classification", "clustering"}
 
 
 if __name__ == "__main__":
     steps = tuple(SPEC["pipeline"]["steps"].keys())
     solver = Solver()
     variables = Variables()
+    minimal_steps = set()
     for step in steps:
         step_index = variables.int(f"index_of_step_{step}")
         solver.add(step_index < len(steps))
@@ -211,13 +222,17 @@ if __name__ == "__main__":
         for candidate in candidates_of_step(step):
             implement_step_as = variables.bool(f"implement_{step}_as_{candidate}")
             # constraints.add(implement_step_as >= 0, implement_step_as <= 1)
-        # constraints.add(sum(variables.with_name(f"implement_{step}_as_")) == 1)
         all_candidates = tuple(variables.with_name(f"implement_{step}_as_"))
+        solver.add(AtMost(*all_candidates, 1))
         # exactly_one_candidate = And(AtMost(*all_candidates, 1), AtLeast(*all_candidates, 1))
-        exactly_one_candidate = PbEq([(candidate,1) for candidate in all_candidates], k=1)
+        # exactly_one_candidate = PbEq([(candidate,1) for candidate in all_candidates], k=1)
         # no_candidate = And(*[var == False for var in all_candidates])
-        no_candidate = Not(Or(*all_candidates))
-        solver.add(If(do_step, exactly_one_candidate, no_candidate))
+        # no_candidate = Not(Or(*all_candidates))
+        # solver.add(If(do_step, exactly_one_candidate, no_candidate))
+        solver.add(do_step == Or(*all_candidates))
+        if step in MINIMAL_STEPS:
+            minimal_steps.add(step)
+    solver.add(Or(*[variables[f"do_step_{step}"] for step in minimal_steps]))
     for constraint in partial_ordering():
         constraint.add_to(solver, using=variables)
     for constraint in constraints():
@@ -225,16 +240,17 @@ if __name__ == "__main__":
     
     print(solver)
     pipelines = set()
-    # input("---")
+    i = 1
     while solver.check() == sat:
         model = solver.model()
         interpreter = ModelInterpreter(model, variables, steps)
         pipeline = interpreter.interpret()
         solver.add(interpreter.different_than_this_model_constraint())
         if pipeline not in pipelines:
-            print(pipeline)
+            status = "OK" if pipeline[-1].step in minimal_steps else "ERROR"
+            print(f"{i})", status, pipeline)
             pipelines.add(pipeline)
         else:
             continue
-        input("---")
+        i += 1
     print("No more solutions.")
