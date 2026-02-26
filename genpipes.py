@@ -1,6 +1,6 @@
 import resources
 import yaml
-from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost
+from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost, AtLeast, If, PbEq
 from functools import cache
 from dataclasses import dataclass
 
@@ -34,7 +34,7 @@ class Variables:
     def __iter__(self):
         return iter(self.__variables.values())
     
-    def __items__(self):
+    def items(self):
         return self.__variables.items()
     
     def __len__(self):
@@ -184,6 +184,19 @@ class ModelInterpreter:
         filtered_steps = [step for step in ordered_steps if self.variable_value(f"do_step_{step}")]
         candidates_seq = [StepImplementation(step, self.select_candidate_for(step)) for step in filtered_steps]
         return tuple(candidates_seq)
+    
+    def different_than_this_model_constraint(self):
+        conditions = []
+        for variable in self.__variables:
+            value = self.variable_value(variable)
+            if value is not None:
+                conditions.append(variable == value)
+        if len(conditions) == 0:
+            raise ValueError("BUG: no variables in the model.")
+        elif len(conditions) == 1:
+            return Not(conditions[0])
+        else:
+            return Not(And(*conditions))
 
 
 if __name__ == "__main__":
@@ -192,14 +205,19 @@ if __name__ == "__main__":
     variables = Variables()
     for step in steps:
         step_index = variables.int(f"index_of_step_{step}")
-        solver.add(step_index >= 0, step_index < len(steps))
+        solver.add(step_index < len(steps))
         do_step = variables.bool(f"do_step_{step}")
-        # constraints.add(do_step >= 0, do_step <= 1)
+        solver.add(If(do_step, step_index >= 0, step_index == -1))
         for candidate in candidates_of_step(step):
             implement_step_as = variables.bool(f"implement_{step}_as_{candidate}")
             # constraints.add(implement_step_as >= 0, implement_step_as <= 1)
         # constraints.add(sum(variables.with_name(f"implement_{step}_as_")) == 1)
-        solver.add(AtMost(*variables.with_name(f"implement_{step}_as_"), 1))
+        all_candidates = tuple(variables.with_name(f"implement_{step}_as_"))
+        # exactly_one_candidate = And(AtMost(*all_candidates, 1), AtLeast(*all_candidates, 1))
+        exactly_one_candidate = PbEq([(candidate,1) for candidate in all_candidates], k=1)
+        # no_candidate = And(*[var == False for var in all_candidates])
+        no_candidate = Not(Or(*all_candidates))
+        solver.add(If(do_step, exactly_one_candidate, no_candidate))
     for constraint in partial_ordering():
         constraint.add_to(solver, using=variables)
     for constraint in constraints():
@@ -212,6 +230,7 @@ if __name__ == "__main__":
         model = solver.model()
         interpreter = ModelInterpreter(model, variables, steps)
         pipeline = interpreter.interpret()
+        solver.add(interpreter.different_than_this_model_constraint())
         if pipeline not in pipelines:
             print(pipeline)
             pipelines.add(pipeline)
