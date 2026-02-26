@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional, Tuple, Set, Dict
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 from automlllm.common.types import Step
 from automlllm.specification import Specification
@@ -66,10 +66,10 @@ class SpecificationValidator:
             )
             if spec_step.candidates:
                 candidate_names: Set[str] = {c.name for c in spec_step.candidates}
-                if step.content and step.content not in candidate_names:
+                if step.candidate and step.candidate not in candidate_names:
                     is_valid = False
                     messages.append(
-                        f"Step '{step.name}' has invalid value '{step.content}', "
+                        f"Step '{step.name}' has invalid value '{step.candidate}', "
                         f"admissible values are {sorted(list(candidate_names))}.",
                     )
 
@@ -173,22 +173,20 @@ class SpecificationValidator:
         forbidden_steps: List[Step],
     ) -> Tuple[bool, Optional[str]]:
         condition_name: str
-        condition_value: Optional[str]
+        condition_value: Any
         condition_name, condition_value = next(iter(condition.items()))
         feedbacks: List[str] = []
 
-        pipeline_map: Dict[str, Optional[str | Dict]] = {
-            step.name: step.content for step in pipeline
-        }
+        pipeline_map: Dict[str, Step] = {step.name: step for step in pipeline}
 
         # Condition step is not present, constraint irrelevant
         if condition_name not in pipeline_map:
             return True, None
 
-        step_content: Optional[str | Dict] = pipeline_map[condition_name]
+        step_candidate: str = pipeline_map[condition_name].candidate
 
         # Condition value mismatch, constraint irrelevant
-        if condition_value and step_content != condition_value:
+        if condition_value and step_candidate != condition_value:
             return True, None
 
         condition_str: str = (
@@ -204,26 +202,26 @@ class SpecificationValidator:
                 )
                 continue
 
-            if req_step.content is not None:
-                actual_content: Optional[str | Dict] = pipeline_map[req_step.name]
-                if actual_content != req_step.content:
+            if req_step.candidate:
+                actual_candidate: str = pipeline_map[req_step.name].candidate
+                if actual_candidate != req_step.candidate:
                     feedbacks.append(
-                        f"- since {condition_str}, required value '{req_step.content}' for step '{req_step.name}' is missing."
+                        f"- since {condition_str}, required value '{req_step.candidate}' for step '{req_step.name}' is missing."
                     )
 
         for forb_step in forbidden_steps:
             if forb_step.name not in pipeline_map:
                 continue
 
-            actual_content = pipeline_map[forb_step.name]
+            actual_candidate: str = pipeline_map[forb_step.name].candidate
 
-            if forb_step.content is None:
+            if not forb_step.candidate:
                 feedbacks.append(
                     f"- since {condition_str}, forbidden step '{forb_step.name}' is present."
                 )
-            elif actual_content == forb_step.content:
+            elif actual_candidate == forb_step.candidate:
                 feedbacks.append(
-                    f"- since {condition_str}, forbidden value '{forb_step.content}' for step '{forb_step.name}' is present."
+                    f"- since {condition_str}, forbidden value '{forb_step.candidate}' for step '{forb_step.name}' is present."
                 )
 
         is_valid: bool = not feedbacks

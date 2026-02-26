@@ -13,10 +13,10 @@ spec_sample: str = get_test_resource_path("specification-sample.yml").read_text(
 @pytest.fixture
 def sample_pipeline() -> List[Step]:
     return [
-        Step(name="step1", content="a"),
-        Step(name="step2", content="c"),
-        Step(name="step4", content="k"),
-        Step(name="step5", content="l"),
+        Step(name="step1", candidate="a", hyperparameters={}),
+        Step(name="step2", candidate="c", hyperparameters={}),
+        Step(name="step4", candidate="k", hyperparameters={}),
+        Step(name="step5", candidate="l", hyperparameters={}),
     ]
 
 

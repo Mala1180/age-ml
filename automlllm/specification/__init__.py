@@ -21,21 +21,35 @@ class Specification:
     def parse(cls, spec_yaml: str) -> "Specification":
         parser: SpecificationParser = SpecificationParser(spec_yaml)
         parsed_spec = parser.parse()
-        return cls(parsed_spec.steps, parsed_spec.ordering, parsed_spec.constraints, parsed_spec.technical_details)
+        return cls(
+            parsed_spec.steps,
+            parsed_spec.ordering,
+            parsed_spec.constraints,
+            parsed_spec.technical_details,
+        )
 
     def describe_pipeline(self) -> str:
         """Converts the pipeline specification into a human-readable format."""
-        nl_spec: str = ""
-
+        lines: List[str] = []
         step_ids: List[str] = [f"'{step.id}'" for step in self.steps]
-        nl_spec += f"The pool of admissible steps for the pipeline consists of: {', '.join(step_ids)}.\n\n"
+        lines.append(
+            f"The pool of admissible steps for the pipeline consists of: {', '.join(step_ids)}."
+        )
+        lines.append("")
 
-        nl_spec += "Details:\n"
+        lines.append("Details:")
         for step in self.steps:
-            details: List[str] = []
+            lines.append(f"- Step '{step.id}':")
             if step.candidates:
-                values_str: str = ", ".join([f"'{c.name}'" for c in step.candidates])
-                details.append(f"Allowed values are {values_str}")
+                lines.append("  - Candidates:")
+                for candidate in step.candidates:
+                    if candidate.params:
+                        lines.append(f"    - '{candidate.name}'")
+                        lines.append("      - Hyperparameters:")
+                        for param_name, param_values in candidate.params.items():
+                            lines.append(f"        - '{param_name}': {param_values}")
+                    else:
+                        lines.append(f"    - '{candidate.name}'")
 
             attrs: List[str] = []
             if step.mandatory:
@@ -46,19 +60,20 @@ class Specification:
                 attrs.append("terminal")
 
             if attrs:
-                details.append(f"It is {' and '.join(attrs)}")
-
-            nl_spec += f"- Step '{step.id}': {'. '.join(details)}.\n"
+                lines.append(f"  - Attributes: {', '.join(attrs)}")
 
         if self.ordering:
-            nl_spec += (
-                "\nPartial Ordering Rules (applied only if both steps are present):\n"
+            lines.extend(
+                [
+                    "",
+                    "Partial Ordering Rules (applied only if both steps are present):",
+                ]
             )
             for order in self.ordering:
-                nl_spec += f"- '{order.before}' must precede '{order.after}'.\n"
+                lines.append(f"- '{order.before}' must precede '{order.after}'.")
 
         if self.constraints:
-            nl_spec += "\nConstraints:\n"
+            lines.extend(["", "Constraints:"])
             for constraint in self.constraints:
                 condition_node: str
                 condition_value: str
@@ -74,8 +89,10 @@ class Specification:
                 if constraint.require:
                     reqs: List[str] = []
                     for req in constraint.require:
-                        if req.content:
-                            reqs.append(f"value '{req.content}' for step '{req.name}'")
+                        if req.candidate:
+                            reqs.append(
+                                f"value '{req.candidate}' for step '{req.name}'"
+                            )
                         else:
                             reqs.append(f"'{req.name}'")
                     consequences.append(
@@ -85,9 +102,9 @@ class Specification:
                 if constraint.forbid:
                     forbids: List[str] = []
                     for forb in constraint.forbid:
-                        if forb.content:
+                        if forb.candidate:
                             forbids.append(
-                                f"value '{forb.content}' for step '{forb.name}'"
+                                f"value '{forb.candidate}' for step '{forb.name}'"
                             )
                         else:
                             forbids.append(f"'{forb.name}'")
@@ -95,9 +112,9 @@ class Specification:
                         f"{', '.join(forbids)} {'are' if len(forbids) > 1 else 'is'} forbidden"
                     )
 
-                nl_spec += f"- If {cond_str}, then {' and '.join(consequences)}.\n"
+                lines.append(f"- If {cond_str}, then {' and '.join(consequences)}.")
 
-        return nl_spec.strip()
+        return "\n".join(lines).strip()
 
     def describe_technical_details(self) -> str:
         """Converts technical details into a human-readable format."""
