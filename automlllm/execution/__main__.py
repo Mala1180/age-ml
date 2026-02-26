@@ -29,8 +29,16 @@ def main() -> None:
 
     planning_pipeline_mock: PlanningPipeline = PlanningPipeline(
         steps=[
-            Step(name="imputation", content="simple_imputer"),
-            Step(name="classification", content="random_forest"),
+            Step(
+                name="imputation",
+                candidate="simple_imputer",
+                hyperparameters={},
+            ),
+            Step(
+                name="classification",
+                candidate="random_forest",
+                hyperparameters={},
+            ),
         ]
     )
     execution_pipeline: ExecutionPipeline = ExecutionPipeline(

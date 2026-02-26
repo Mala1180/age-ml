@@ -3,7 +3,9 @@ from automlllm.common.types import Step
 
 class TestSpecificationValidator:
     def test_unknown_step(self, validator, sample_pipeline):
-        sample_pipeline.append(Step(name="unknown_step", content="x"))
+        sample_pipeline.append(
+            Step(name="unknown_step", candidate="x", hyperparameters={})
+        )
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert is_valid is False
         assert (
@@ -19,7 +21,7 @@ class TestSpecificationValidator:
         assert message == "Missing mandatory steps ['step1', 'step5']."
 
     def test_step_with_wrong_value(self, validator, sample_pipeline):
-        sample_pipeline[0] = Step(name="step1", content="y")
+        sample_pipeline[0] = Step(name="step1", candidate="y", hyperparameters={})
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert is_valid is False
         assert (
@@ -28,7 +30,7 @@ class TestSpecificationValidator:
         )
 
     def test_ordering_violation(self, validator, sample_pipeline):
-        sample_pipeline.insert(1, Step(name="step3", content="e"))
+        sample_pipeline.insert(1, Step(name="step3", candidate="e", hyperparameters={}))
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert is_valid is False
         assert (
@@ -56,7 +58,7 @@ class TestSpecificationValidator:
         assert is_valid is True
 
     def test_constraint_violation_without_values(self, validator, sample_pipeline):
-        sample_pipeline[1] = Step(name="step3", content="e")
+        sample_pipeline[1] = Step(name="step3", candidate="e", hyperparameters={})
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert is_valid is False
 
@@ -69,7 +71,7 @@ class TestSpecificationValidator:
     def test_required_constraint_violation_with_values(
         self, validator, sample_pipeline
     ):
-        sample_pipeline[0] = Step(name="step1", content="b")
+        sample_pipeline[0] = Step(name="step1", candidate="b", hyperparameters={})
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert is_valid is False
         assert message == (

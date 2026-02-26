@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import yaml
 from pydantic import BaseModel
@@ -54,7 +54,8 @@ class SpecificationParser:
             )
 
         ordering: List[OrderingRule] = [
-            OrderingRule.model_validate(order) for order in spec["pipeline"]["partial_ordering"]
+            OrderingRule.model_validate(order)
+            for order in spec["pipeline"]["partial_ordering"]
         ]
 
         constraints: List[Constraint] = []
@@ -79,13 +80,17 @@ class SpecificationParser:
         technical_details: List[str] = spec.get("technical_details", [])
 
         return ParsedSpecification(
-            steps=steps, ordering=ordering, constraints=constraints, technical_details=technical_details
+            steps=steps,
+            ordering=ordering,
+            constraints=constraints,
+            technical_details=technical_details,
         )
 
-    def _get_step_with_value(self, node: str | Dict[str, str]) -> Step:
+    def _get_step_with_value(self, node: str | Dict[str, Any]) -> Step:
         if isinstance(node, str):
-            return Step(name=node)
+            return Step(name=node, candidate="", hyperparameters={})
         else:
             node_id: str = list(node.keys())[0]
-            node_value: str = node[node_id]
-            return Step(name=node_id, content=node_value)
+            node_value: Any = node[node_id]
+            candidate: str = node_value if isinstance(node_value, str) else ""
+            return Step(name=node_id, candidate=candidate, hyperparameters={})

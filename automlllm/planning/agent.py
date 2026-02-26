@@ -19,8 +19,10 @@ class PlanningPipeline(Pipeline):
         str_value: str = "Planning Pipeline:\n"
         for i, step in enumerate(self.steps):
             str_value += f"Step {i + 1}: {step.name}"
-            if step.content:
-                str_value += f" with value {step.content}"
+            if step.candidate:
+                str_value += f" with candidate {step.candidate}"
+            if step.hyperparameters:
+                str_value += f" and hyperparameters {step.hyperparameters}"
             str_value += "\n"
         return str_value
 
@@ -91,19 +93,14 @@ def generate_pipeline(state: PlanningAgentState) -> PlanningAgentState:
     local_prompt: str = (
         "Generate the pipeline you consider best for this specific problem.\n"
         "For each step, set 'name' to the step name defined in the specification "
-        "and 'content' to the candidate value you choose for that step."
+        "and 'candidate' to the candidate value you choose for that step. "
+        "Set 'hyperparameters' to a dictionary where each key is a hyperparameter name "
+        "and each value is a list of admissible values for that candidate. "
+        "Use an empty dictionary when no hyperparameters are needed."
     )
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
     response = structured_model.invoke(state["messages"])
     assert isinstance(response, PlanningPipeline)
-    response.steps = [
-        Step(
-            name=step.name.lower(),
-            content=step.content.lower() if step.content else None,
-        )
-        for step in response.steps
-    ]
-
     state["messages"] = state["messages"] + [AIMessage(content=str(response))]
     state["pipeline"] = response
     return state

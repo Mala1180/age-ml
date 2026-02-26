@@ -123,10 +123,10 @@ pipeline:
         constraint = spec.constraints[0]
         assert constraint.condition == {"step1": {}}
         assert len(constraint.require) == 2
-        assert constraint.require[0].content is None
-        assert constraint.require[1].content is None
+        assert constraint.require[0].candidate == ""
+        assert constraint.require[1].candidate == ""
         assert len(constraint.forbid) == 1
-        assert constraint.forbid[0].content is None
+        assert constraint.forbid[0].candidate == ""
 
     def test_parse_constraints_with_values(self):
         spec = Specification.parse(spec_sample)
@@ -135,10 +135,10 @@ pipeline:
         assert constraint.condition == {"step1": "b"}
         assert len(constraint.require) == 1
         assert constraint.require[0].name == "step4"
-        assert constraint.require[0].content == "j"
+        assert constraint.require[0].candidate == "j"
         assert len(constraint.forbid) == 1
         assert constraint.forbid[0].name == "step5"
-        assert constraint.forbid[0].content == "l"
+        assert constraint.forbid[0].candidate == "l"
 
     def test_parse_multiple_constraints(self):
         spec = Specification.parse(spec_sample)

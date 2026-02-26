@@ -1,11 +1,12 @@
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from pydantic import BaseModel
 
 
 class Step(BaseModel):
     name: str
-    content: str | Dict[str, Dict] | None = None
+    candidate: str
+    hyperparameters: Dict[str, List[Any]]
 
 
 class Pipeline(BaseModel):

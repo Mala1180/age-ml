@@ -2,6 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional, Literal
 
+import pandas as pd
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
@@ -23,7 +24,15 @@ class ExecutionPipeline(Pipeline):
     @override
     def __str__(self) -> str:
         string_value: str = f"Pipeline {self.id}:\n" + "\n".join(
-            [f"{step.name}: {step.content}" for step in self.steps]
+            [
+                f"{step.name}: {step.candidate}"
+                + (
+                    f" with hyperparameters {step.hyperparameters}"
+                    if step.hyperparameters
+                    else ""
+                )
+                for step in self.steps
+            ]
         )
         if self.code:
             string_value += f"\nCode:\n{self.code}"
@@ -34,7 +43,6 @@ class ExecutionPipeline(Pipeline):
 
 class ExecutionAgentState(MessagesState):
     dataset_path: str
-    dataset_info: str
     specification_path: str
     planning_pipeline: PlanningPipeline
     pipeline: ExecutionPipeline
@@ -57,12 +65,20 @@ judge_model = model.with_structured_output(JudgeResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
+    dataset_info: str = f"""
+        Loaded dataset with {len(df)} rows and {len(df.columns)} columns
+        Columns:\n{list(df.columns)}
+        Data Types:\n{df.dtypes.to_markdown()}
+        Description:\n{df.describe().to_markdown()}
+        Preview:\n{df.head().to_markdown()}
+    """
     content: str = Path(state["specification_path"]).read_text()
     technical_details: str = Specification.parse(content).describe_technical_details()
     state["messages"] = [
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
-        AIMessage(content=f"Dataset info: \n{state['dataset_info']}"),
+        AIMessage(content=f"Dataset info: \n{dataset_info}"),
         AIMessage(content=str(state["pipeline"])),
         AIMessage(content=technical_details),
     ]
@@ -79,6 +95,8 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         Provide only the code without any explanations.
         Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
         The code eventually will be executed, so ensure that it is correct and executable.
+        Hyperparameters used in the entire pipeline must not be magic numbers/string, but they must 
+        be passed using argparse, in such a way the python script is callable with different hyperparameters values.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
 
@@ -174,7 +192,7 @@ def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
     res: Optional[str] = None
     while res not in ["yes", "y", "no", "n"]:
         res = input(
-            "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)"
+            "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)\n >"
         ).lower()
         if res == "yes" or res == "y":
             feedback = input("Please provide your feedback:")
