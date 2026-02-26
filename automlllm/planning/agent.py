@@ -8,7 +8,7 @@ from langgraph.graph.state import CompiledStateGraph
 from typing_extensions import override
 
 from automlllm.common.model import model
-from automlllm.common.types import Pipeline, Step
+from automlllm.common.types import Pipeline
 from automlllm.specification import Specification
 from automlllm.specification.validation import SpecificationValidator
 
@@ -16,15 +16,7 @@ from automlllm.specification.validation import SpecificationValidator
 class PlanningPipeline(Pipeline):
     @override
     def __str__(self) -> str:
-        str_value: str = "Planning Pipeline:\n"
-        for i, step in enumerate(self.steps):
-            str_value += f"Step {i + 1}: {step.name}"
-            if step.candidate:
-                str_value += f" with candidate {step.candidate}"
-            if step.hyperparameters:
-                str_value += f" and hyperparameters {step.hyperparameters}"
-            str_value += "\n"
-        return str_value
+        return f"Planning Pipeline:\n{self.format_steps()}"
 
 
 class PlanningAgentState(MessagesState):

@@ -55,6 +55,8 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
     execution_pipeline: ExecutionPipeline = ExecutionPipeline(
         id=1, steps=planned_pipeline.steps
     )
+    print("Execution pipeline:")
+    print(str(execution_pipeline))
     execution: ExecutionAgentState = execution_agent.invoke(  # type: ignore[assignment]
         {
             "dataset_path": dataset_path,
