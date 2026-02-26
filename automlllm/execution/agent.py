@@ -23,17 +23,7 @@ class ExecutionPipeline(Pipeline):
 
     @override
     def __str__(self) -> str:
-        string_value: str = f"Pipeline {self.id}:\n" + "\n".join(
-            [
-                f"{step.name}: {step.candidate}"
-                + (
-                    f" with hyperparameters {step.hyperparameters}"
-                    if step.hyperparameters
-                    else ""
-                )
-                for step in self.steps
-            ]
-        )
+        string_value: str = f"Pipeline {self.id}:\n{self.format_steps()}"
         if self.code:
             string_value += f"\nCode:\n{self.code}"
         if self.explanation:
