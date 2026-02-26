@@ -127,13 +127,56 @@ def constraints():
         yield Constraint(condition=item["if"], forbid=item.get("forbid", []), require=item.get("require", []))
 
 
+class ModelInterpreter:
+    def __init__(self, model, variables, steps):
+        self.__model = model
+        self.__variables = variables
+        self.__steps = steps
+
+    @property
+    def steps(self):
+        return self.__steps
+    
+    @property
+    def candidates_for(self, step):
+        return candidates_of_step(step)
+
+    def variable_value(self, name):
+        if isinstance(name, str):
+            var = self.__variables[name]
+        else:
+            var = name
+        val = self.__model[var]
+        return val
+        
+    def variable_values_with_name(self, prefix):
+        return {str(var): self.variable_value(var) for var in self.__variables.with_name(prefix)}
+        
+    def select_candidate_for(self, step):
+        candidates = self.variable_values_with_name(f"implement_{step}_as_")
+        for name, candidate in candidates.items():
+            if candidate:
+                return name.split(f"_as_")[1]
+        raise ValueError(f"BUG: no candidates for step {step}.")
+        
+    def interpret(self) -> tuple[str]:
+        steps_to_index = dict()
+        for step in self.__steps:
+            index = self.variable_value(f"index_of_step_{step}")
+            steps_to_index[step] = index
+        ordered_steps = sorted(self.__steps, key=lambda step: steps_to_index[step])
+        filtered_steps = [step for step in ordered_steps if self.variable_value(f"do_step_{step}")]
+        candidates_seq = [self.select_candidate_for(step) for step in filtered_steps]
+        return tuple(candidates_seq)
+
+
 if __name__ == "__main__":
     steps = tuple(SPEC["pipeline"]["steps"].keys())
     solver = Solver()
     variables = Variables()
     for step in steps:
         step_index = variables.int(f"index_of_step_{step}")
-        solver.add(step_index in range(len(steps)))
+        solver.add(step_index >= 0, step_index < len(steps))
         do_step = variables.bool(f"do_step_{step}")
         # constraints.add(do_step >= 0, do_step <= 1)
         for candidate in candidates_of_step(step):
@@ -150,6 +193,7 @@ if __name__ == "__main__":
     input("---")
     while solver.check() == sat:
         model = solver.model()
-        print(model)
+        interpreter = ModelInterpreter(model, variables, steps)
+        print(interpreter.interpret())
         input("---")
     print("No more solutions.")
