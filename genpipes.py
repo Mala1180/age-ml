@@ -63,10 +63,8 @@ class PartialOrderConstraint:
 
     def add_to(self, constraints: Solver, using: Variables):
         index_of_before = using[f"index_of_step_{self.before}"]
-        do_before = using[f"do_step_{self.before}"]
         index_of_after = using[f"index_of_step_{self.after}"]
-        do_after = using[f"do_step_{self.after}"]
-        constraints.add(Implies(And(do_before, do_after), index_of_before < index_of_after))
+        constraints.add(index_of_before < index_of_after)
 
 
 def partial_ordering():
@@ -209,26 +207,36 @@ class ModelInterpreter:
 MINIMAL_STEPS = {"regression", "classification", "clustering"}
 
 
+def quick_and_dirty_check(pipeline: list[StepImplementation]) -> bool:
+    for constraint in partial_ordering():
+        index_of_before = next((i for i, step in enumerate(pipeline) if step.step == constraint.before), None)
+        index_of_after = next((i for i, step in enumerate(pipeline) if step.step == constraint.after), None)
+        if index_of_before is not None and index_of_after is not None:
+            if index_of_before >= index_of_after:
+                return False
+    if pipeline[-1].step not in MINIMAL_STEPS:
+        return False
+    return True
+
+
 if __name__ == "__main__":
+    import sys
+
+    disabled = set(sys.argv[1:]) if len(sys.argv) > 1 else set()
     steps = tuple(SPEC["pipeline"]["steps"].keys())
     solver = Solver()
     variables = Variables()
     minimal_steps = set()
     for step in steps:
         step_index = variables.int(f"index_of_step_{step}")
-        solver.add(step_index < len(steps))
+        solver.add(And(step_index >= 0, step_index < len(steps)))
         do_step = variables.bool(f"do_step_{step}")
-        solver.add(If(do_step, step_index >= 0, step_index == -1))
+        if step in disabled:
+            solver.add(do_step == False)
         for candidate in candidates_of_step(step):
             implement_step_as = variables.bool(f"implement_{step}_as_{candidate}")
-            # constraints.add(implement_step_as >= 0, implement_step_as <= 1)
         all_candidates = tuple(variables.with_name(f"implement_{step}_as_"))
         solver.add(AtMost(*all_candidates, 1))
-        # exactly_one_candidate = And(AtMost(*all_candidates, 1), AtLeast(*all_candidates, 1))
-        # exactly_one_candidate = PbEq([(candidate,1) for candidate in all_candidates], k=1)
-        # no_candidate = And(*[var == False for var in all_candidates])
-        # no_candidate = Not(Or(*all_candidates))
-        # solver.add(If(do_step, exactly_one_candidate, no_candidate))
         solver.add(do_step == Or(*all_candidates))
         if step in MINIMAL_STEPS:
             minimal_steps.add(step)
@@ -247,10 +255,10 @@ if __name__ == "__main__":
         pipeline = interpreter.interpret()
         solver.add(interpreter.different_than_this_model_constraint())
         if pipeline not in pipelines:
-            status = "OK" if pipeline[-1].step in minimal_steps else "ERROR"
+            status = "OK" if quick_and_dirty_check(pipeline) else "ERROR"
             print(f"{i})", status, pipeline)
             pipelines.add(pipeline)
         else:
             continue
         i += 1
-    print("No more solutions.")
+    print("No more pipelines.")
