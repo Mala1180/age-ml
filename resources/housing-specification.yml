@@ -1,0 +1,196 @@
+pipeline:
+
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    imputation:
+      candidates:
+        - simple_imputer:
+            params:
+              strategy: [mean, median]
+        - iterative_imputer:
+            params:
+              max_iter: [10]
+
+    discretization:
+      candidates:
+        - kbins:
+            params:
+              n_bins: [10]
+              encode: [ordinal]
+              strategy: [quantile]
+        - binarizer:
+            params:
+              threshold: [0.0]
+
+    normalization:
+      candidates:
+        - power_transformer:
+            params:
+              method: [yeo-johnson]
+        - robust_scaler:
+            params:
+              quantile_range:
+                - [25.0, 75.0]
+        - standard:
+            params: {}
+        - minmax:
+            params:
+              feature_range:
+                - [0, 1]
+
+    features:
+      candidates:
+        - select_k_best:
+            params:
+              k: [4, 6, 8]
+        - pca:
+            params:
+              n_components: [0.95]
+
+    regression:
+      terminal: true
+      candidates:
+        - linear_regression:
+            params: {}
+
+        - ridge:
+            params:
+              alpha: [0.1, 1.0, 10.0]
+
+        - lasso:
+            params:
+              alpha: [0.0005, 0.001, 0.01]
+
+        - elastic_net:
+            params:
+              alpha: [0.001, 0.01, 0.1]
+              l1_ratio: [0.2, 0.5, 0.8]
+              max_iter: [5000]
+
+        - svr:
+            params:
+              kernel: [rbf]
+              C: [1.0, 10.0]
+              epsilon: [0.1]
+              gamma: [scale]
+
+        - knn_regressor:
+            params:
+              n_neighbors: [5, 11]
+              weights: [uniform, distance]
+
+        - decision_tree_regressor:
+            params:
+              max_depth: [null, 10]
+              min_samples_split: [2, 5]
+
+        - random_forest_regressor:
+            params:
+              n_estimators: [200]
+              max_depth: [null, 20]
+
+        - gradient_boosting_regressor:
+            params:
+              n_estimators: [200]
+              learning_rate: [0.05, 0.1]
+              max_depth: [3]
+
+        - hist_gradient_boosting_regressor:
+            params:
+              max_iter: [300]
+              learning_rate: [0.05, 0.1]
+              max_depth: [null, 10]
+
+#    validation:
+#     candidates: [cv, holdout]
+#     mandatory: true
+
+  partial_ordering:
+    - before: imputation
+      after: discretization
+
+    - before: imputation
+      after: normalization
+
+    - before: imputation
+      after: features
+
+    - before: discretization
+      after: normalization
+
+    - before: normalization
+      after: features
+
+    - before: features
+      after: regression
+
+  constraints:
+
+    - if:
+        regression: decision_tree_regressor
+      forbid: [normalization, features]
+      require: [discretization]
+
+    - if:
+        regression: random_forest_regressor
+      forbid: [normalization]
+
+    - if:
+        regression: gradient_boosting_regressor
+      forbid: [normalization]
+
+    - if:
+        regression: hist_gradient_boosting_regressor
+      forbid: [normalization]
+
+    - if:
+        regression: knn_regressor
+      require: [normalization, features]
+      forbid: [discretization]
+
+    - if:
+        regression: svr
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: lasso
+      require: [normalization]
+
+    - if:
+        regression: ridge
+      require: [normalization]
+
+    - if:
+        regression: elastic_net
+      require: [normalization]
+
+    - if:
+        regression: linear_regression
+      require: [normalization]
+
+    # =========================
+    # BEST PRACTICES
+    # =========================
+
+    - if:
+        features: pca
+      require: [normalization]
+
+    - if:
+        features: select_k_best
+      forbid: [discretization]
+
+    - if:
+        imputation: iterative_imputer
+      require: [normalization]
+
+
+technical_details:
+  - use Python for the implementation
+  - use scikit-learn for the ML algorithms (using Pipeline class if possible)
