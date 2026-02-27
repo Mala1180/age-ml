@@ -1,9 +1,10 @@
-from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+from typing import Callable, Dict, List, Optional, Set, Tuple
 
 from automlllm.common.types import Step
 from automlllm.specification import Specification
 from automlllm.specification.types import (
     Constraint,
+    IfCondition,
     OrderingRule,
     SpecStep,
 )
@@ -168,13 +169,12 @@ class SpecificationValidator:
     def _check_constraint(
         self,
         pipeline: List[Step],
-        condition: Dict,
+        condition: IfCondition,
         required_steps: List[Step],
         forbidden_steps: List[Step],
     ) -> Tuple[bool, Optional[str]]:
-        condition_name: str
-        condition_value: Any
-        condition_name, condition_value = next(iter(condition.items()))
+        condition_name: str = condition.step
+        condition_value: str = condition.candidate.name if condition.candidate else ""
         feedbacks: List[str] = []
 
         pipeline_map: Dict[str, Step] = {step.name: step for step in pipeline}

@@ -1,7 +1,7 @@
 from typing import List
 
 from automlllm.specification.parsing import SpecificationParser
-from automlllm.specification.types import OrderingRule, Constraint, SpecStep
+from automlllm.specification.types import Constraint, OrderingRule, SpecStep
 
 
 class Specification:
@@ -75,10 +75,11 @@ class Specification:
         if self.constraints:
             lines.extend(["", "Constraints:"])
             for constraint in self.constraints:
-                condition_node: str
-                condition_value: str
-                condition_node, condition_value = next(
-                    iter(constraint.condition.items())
+                condition_node: str = constraint.condition.step
+                condition_value: str = (
+                    constraint.condition.candidate.name
+                    if constraint.condition.candidate
+                    else ""
                 )
                 if condition_value:
                     cond_str: str = f"'{condition_node}' has value '{condition_value}'"

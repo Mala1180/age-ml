@@ -1,4 +1,4 @@
-from typing import Dict, List, Any
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -31,8 +31,14 @@ class OrderingRule(BaseModel):
     after: str
 
 
+class IfCondition(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    step: str
+    candidate: Optional[Candidate] = None
+
+
 class Constraint(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    condition: Dict
+    condition: IfCondition
     require: List[Step] = Field(default_factory=list)
     forbid: List[Step] = Field(default_factory=list)

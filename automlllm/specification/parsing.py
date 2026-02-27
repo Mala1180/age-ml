@@ -8,6 +8,7 @@ from automlllm.specification.types import (
     Candidate,
     Constraint,
     Defaults,
+    IfCondition,
     OrderingRule,
     SpecStep,
 )
@@ -67,7 +68,7 @@ class SpecificationParser:
             constraints.append(
                 Constraint.model_validate(
                     {
-                        "condition": constraint["if"],
+                        "condition": self._parse_if_condition(constraint["if"]),
                         "require": required_steps,
                         "forbid": forbidden_steps,
                     }
@@ -120,3 +121,16 @@ class SpecificationParser:
             node_value: Any = node[node_id]
             candidate: str = node_value if isinstance(node_value, str) else ""
             return Step(name=node_id, candidate=candidate, hyperparameters={})
+
+    def _parse_if_condition(self, node: str | Dict[str, Any]) -> IfCondition:
+        if isinstance(node, str):
+            return IfCondition(step=node, candidate=None)
+
+        if not node:
+            raise ValueError("Constraint 'if' condition cannot be empty.")
+
+        step: str = next(iter(node.keys()))
+        candidate_node: Any = node[step]
+        if isinstance(candidate_node, str):
+            return IfCondition(step=step, candidate=Candidate(name=candidate_node))
+        return IfCondition(step=step, candidate=None)
