@@ -47,49 +47,64 @@ pipeline:
       candidates:
         - select_k_best:
             params:
-              k: [5, 10]
+              k: [4, 6, 8]
         - pca:
             params:
               n_components: [0.95]
 
-    rebalancing:
-      candidates:
-        - near_miss:
-            params:
-              version: [1]
-        - smote:
-            params:
-              k_neighbors: [5]
-
-    classification:
+    regression:
       terminal: true
       candidates:
-        - decision_tree:
+        - linear_regression:
+            params: {}
+
+        - ridge:
             params:
-              max_depth: [null, 10]
-              min_samples_split: [2, 5]
-        - knn:
+              alpha: [0.1, 1.0, 10.0]
+
+        - lasso:
+            params:
+              alpha: [0.0005, 0.001, 0.01]
+
+        - elastic_net:
+            params:
+              alpha: [0.001, 0.01, 0.1]
+              l1_ratio: [0.2, 0.5, 0.8]
+              max_iter: [5000]
+
+        - svr:
+            params:
+              kernel: [rbf]
+              C: [1.0, 10.0]
+              epsilon: [0.1]
+              gamma: [scale]
+
+        - knn_regressor:
             params:
               n_neighbors: [5, 11]
               weights: [uniform, distance]
-        - naive_bayes:
+
+        - decision_tree_regressor:
             params:
-              var_smoothing: [1e-9]
-        - nn:
-            params:
-              hidden_layer_sizes:
-                - [50]
-                - [100]
-              alpha: [0.001]
-              max_iter: [300]
-        - random_forest:
+              max_depth: [null, 10]
+              min_samples_split: [2, 5]
+
+        - random_forest_regressor:
             params:
               n_estimators: [200]
               max_depth: [null, 20]
-        - ada_boost:
+
+        - gradient_boosting_regressor:
             params:
-              n_estimators: [100]
-              learning_rate: [0.1]
+              n_estimators: [200]
+              learning_rate: [0.05, 0.1]
+              max_depth: [3]
+
+        - hist_gradient_boosting_regressor:
+            params:
+              max_iter: [300]
+              learning_rate: [0.05, 0.1]
+              max_depth: [null, 10]
 
 #    validation:
 #     candidates: [cv, holdout]
@@ -105,9 +120,6 @@ pipeline:
     - before: imputation
       after: features
 
-    - before: imputation
-      after: rebalancing
-
     - before: discretization
       after: normalization
 
@@ -115,41 +127,55 @@ pipeline:
       after: features
 
     - before: features
-      after: classification
-
-    - before: rebalancing
-      after: classification
+      after: regression
 
   constraints:
 
     - if:
-        classification: decision_tree
-      require: [discretization]
+        regression: decision_tree_regressor
       forbid: [normalization, features]
+      require: [discretization]
 
     - if:
-        classification: random_forest
+        regression: random_forest_regressor
       forbid: [normalization]
 
     - if:
-        classification: knn
-      require: [normalization, features]
+        regression: gradient_boosting_regressor
+      forbid: [normalization]
 
     - if:
-        classification: nn
+        regression: hist_gradient_boosting_regressor
+      forbid: [normalization]
+
+    - if:
+        regression: knn_regressor
+      require: [normalization, features]
+      forbid: [discretization]
+
+    - if:
+        regression: svr
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        classification: naive_bayes
-      forbid: [normalization]
+        regression: lasso
+      require: [normalization]
 
     - if:
-        classification: ada_boost
-      forbid: [normalization]
+        regression: ridge
+      require: [normalization]
+
+    - if:
+        regression: elastic_net
+      require: [normalization]
+
+    - if:
+        regression: linear_regression
+      require: [normalization]
 
     # =========================
-    # SHARED BEST PRACTICES
+    # BEST PRACTICES
     # =========================
 
     - if:
@@ -159,10 +185,6 @@ pipeline:
     - if:
         features: select_k_best
       forbid: [discretization]
-
-    - if:
-        rebalancing: smote
-      require: [imputation]
 
     - if:
         imputation: iterative_imputer

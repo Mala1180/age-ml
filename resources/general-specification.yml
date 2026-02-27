@@ -91,6 +91,43 @@ pipeline:
               n_estimators: [100]
               learning_rate: [0.1]
 
+
+    regression:
+      terminal: true
+      candidates:
+        - linear:
+            params: {}
+        - ridge:
+            params:
+              alpha: [1.0, 10.0]
+        - lasso:
+            params:
+              alpha: [0.01, 0.1]
+        - elastic_net:
+            params:
+              alpha: [0.01]
+              l1_ratio: [0.5]
+        - svr:
+            params:
+              kernel: [rbf]
+              C: [1.0, 10.0]
+              epsilon: [0.1]
+        - knn_regressor:
+            params:
+              n_neighbors: [5, 11]
+              weights: [distance]
+        - random_forest_regressor:
+            params:
+              n_estimators: [200]
+              max_depth: [null, 20]
+        - nn_regressor:
+            params:
+              hidden_layer_sizes:
+                - [50]
+                - [100]
+              alpha: [0.001]
+              max_iter: [300]
+
 #    validation:
 #     candidates: [cv, holdout]
 #     mandatory: true
@@ -117,10 +154,29 @@ pipeline:
     - before: features
       after: classification
 
+    - before: features
+      after: regression
+
     - before: rebalancing
       after: classification
 
+    - before: rebalancing
+      after: regression
+
+
   constraints:
+
+    - if:
+        classification: {}
+      forbid: [regression]
+
+    - if:
+        regression: {}
+      forbid: [classification]
+
+    # =========================
+    # CLASSIFICATION
+    # =========================
 
     - if:
         classification: decision_tree
@@ -147,6 +203,50 @@ pipeline:
     - if:
         classification: ada_boost
       forbid: [normalization]
+
+
+    # =========================
+    # REGRESSION
+    # =========================
+
+    - if:
+        regression: linear
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: ridge
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: lasso
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: elastic_net
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: svr
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: knn_regressor
+      require: [normalization, features]
+
+    - if:
+        regression: nn_regressor
+      require: [normalization]
+      forbid: [discretization]
+
+    - if:
+        regression: random_forest_regressor
+      forbid: [normalization]
+
 
     # =========================
     # SHARED BEST PRACTICES
