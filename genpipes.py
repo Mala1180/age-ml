@@ -1,12 +1,15 @@
 from dataclasses import dataclass
 from functools import cache
+from typing import Iterator
 
 import yaml
-from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost
+from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost, ExprRef, ArithRef, BoolRef
 
 import resources
+from automlllm.specification import Specification
 
 FILE_SPEC = resources.get_resource_path("adult-specification.yml")
+specification: Specification = Specification.parse(FILE_SPEC.read_text())
 with open(FILE_SPEC, "r") as f:
     SPEC = yaml.safe_load(f)
 
@@ -28,13 +31,13 @@ class Variables:
     def __init__(self):
         self.__variables = dict()
 
-    def add(self, variable):
+    def add(self, variable: ExprRef) -> None:
         self.__variables[str(variable)] = variable
 
-    def __getitem__(self, key):
+    def __getitem__(self, key) -> ExprRef:
         return self.__variables[key]
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[ExprRef]:
         return iter(self.__variables.values())
 
     def items(self):
@@ -43,12 +46,12 @@ class Variables:
     def __len__(self):
         return len(self.__variables)
 
-    def int(self, name):
+    def int(self, name) -> ArithRef:
         variable = Int(name)
         self.add(variable)
         return variable
 
-    def bool(self, name):
+    def bool(self, name) -> BoolRef:
         variable = Bool(name)
         self.add(variable)
         return variable
@@ -84,7 +87,7 @@ class Constraint:
     @classmethod
     def __parse_constraint(
         cls, item: str | dict[str, str], using: Variables, positive: bool = True
-    ):
+    ) -> ExprRef:
         if isinstance(item, str):
             return using[f"do_step_{item}"] == positive
         elif isinstance(item, dict):
