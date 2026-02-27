@@ -26,6 +26,12 @@ pipeline:
       mandatory: true
 
   partial_ordering:
+
+    - sequence:
+        - step1
+        - step2
+        - step3
+
     - before: step1
       after: step2
 

@@ -117,6 +117,35 @@ pipeline:
         assert ("step1", "step4") in ordering_pairs
         assert ("step4", "step5") in ordering_pairs
 
+    def test_parse_ordering_sequence_syntax(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    a:
+      candidates: []
+    b:
+      candidates: []
+    c:
+      candidates: []
+
+  partial_ordering:
+    - sequence:
+        - a
+        - b
+        - c
+"""
+        spec = Specification.parse(spec_yaml)
+        ordering_pairs = [(o.before, o.after) for o in spec.ordering]
+        assert len(ordering_pairs) == 2
+        assert ("a", "b") in ordering_pairs
+        assert ("b", "c") in ordering_pairs
+
     def test_parse_constraints_without_values(self):
         spec = Specification.parse(spec_sample)
 
