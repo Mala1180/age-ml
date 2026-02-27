@@ -45,9 +45,9 @@ class Specification:
                 for candidate in step.candidates:
                     if candidate.params:
                         lines.append(f"    - '{candidate.name}'")
-                        lines.append("      - Hyperparameters:")
-                        for param_name, param_values in candidate.params.items():
-                            lines.append(f"        - '{param_name}': {param_values}")
+                        lines.append(
+                            f"      - with hyperparameters: {candidate.params}"
+                        )
                     else:
                         lines.append(f"    - '{candidate.name}'")
 

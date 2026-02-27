@@ -53,10 +53,7 @@ class SpecificationParser:
                 )
             )
 
-        ordering: List[OrderingRule] = [
-            OrderingRule.model_validate(order)
-            for order in spec["pipeline"]["partial_ordering"]
-        ]
+        ordering = self._parse_ordering(spec["pipeline"].get("partial_ordering", []))
 
         constraints: List[Constraint] = []
         for constraint in spec["pipeline"].get("constraints", []):
@@ -85,6 +82,35 @@ class SpecificationParser:
             constraints=constraints,
             technical_details=technical_details,
         )
+
+    def _parse_ordering(
+        self, ordering_nodes: List[Dict[str, Any]]
+    ) -> List[OrderingRule]:
+        parsed_ordering: List[OrderingRule] = []
+        seen_pairs: set[tuple[str, str]] = set()
+
+        for node in ordering_nodes:
+            rules: List[OrderingRule] = []
+
+            if "sequence" in node:
+                sequence: List[str] = node["sequence"]
+                for i in range(len(sequence) - 1):
+                    rules.append(
+                        OrderingRule.model_validate(
+                            {"before": sequence[i], "after": sequence[i + 1]}
+                        )
+                    )
+            else:
+                rules.append(OrderingRule.model_validate(node))
+
+            for rule in rules:
+                pair = (rule.before, rule.after)
+                if pair in seen_pairs:
+                    continue
+                seen_pairs.add(pair)
+                parsed_ordering.append(rule)
+
+        return parsed_ordering
 
     def _get_step_with_value(self, node: str | Dict[str, Any]) -> Step:
         if isinstance(node, str):

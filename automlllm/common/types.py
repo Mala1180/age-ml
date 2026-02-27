@@ -13,7 +13,11 @@ class Pipeline(BaseModel):
     steps: List[Step]
 
     def _format_step(self, step: Step, index: int) -> str:
-        hyperparameters: str = f" and hyperparameters: {step.hyperparameters}" if step.hyperparameters else ""
+        hyperparameters: str = (
+            f" and hyperparameters: {step.hyperparameters}"
+            if step.hyperparameters
+            else ""
+        )
         return f"Step {index}: {step.name} with {step.candidate}{hyperparameters}"
 
     def format_steps(self) -> str:

@@ -29,9 +29,10 @@ pipeline:
         assert "- Step 'model':" in description
         assert "  - Candidates:" in description
         assert "    - 'random_forest'" in description
-        assert "      - Hyperparameters:" in description
-        assert "        - 'n_estimators': [10, 50]" in description
-        assert "        - 'max_depth': [None, 8]" in description
+        assert (
+            "      - with hyperparameters: {'n_estimators': [10, 50], 'max_depth': [None, 8]}"
+            in description
+        )
         assert "    - 'linear'" in description
 
     def test_describe_pipeline_omits_hyperparameter_text_for_empty_params(self):

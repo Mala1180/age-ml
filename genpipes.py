@@ -1,11 +1,12 @@
-import resources
-import yaml
-from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost, AtLeast, If, PbEq
-from functools import cache
 from dataclasses import dataclass
+from functools import cache
 
+import yaml
+from z3 import Int, Not, Solver, sat, Or, And, Bool, Implies, AtMost
 
-FILE_SPEC = resources.get_resource_path("automl-specification.yml")
+import resources
+
+FILE_SPEC = resources.get_resource_path("adult-specification.yml")
 with open(FILE_SPEC, "r") as f:
     SPEC = yaml.safe_load(f)
 
@@ -15,7 +16,9 @@ def candidates_of_step(step):
     candidates = []
     for candidate in SPEC["pipeline"]["steps"][step]["candidates"]:
         if len(candidate) != 1:
-            raise ValueError(f"Candidate {candidate} for step {step} has more than one component, which is not supported yet.")
+            raise ValueError(
+                f"Candidate {candidate} for step {step} has more than one component, which is not supported yet."
+            )
         for k in candidate:
             candidates.append(k)
     return tuple(candidates)
@@ -30,26 +33,26 @@ class Variables:
 
     def __getitem__(self, key):
         return self.__variables[key]
-    
+
     def __iter__(self):
         return iter(self.__variables.values())
-    
+
     def items(self):
         return self.__variables.items()
-    
+
     def __len__(self):
         return len(self.__variables)
-    
+
     def int(self, name):
         variable = Int(name)
         self.add(variable)
         return variable
-    
+
     def bool(self, name):
         variable = Bool(name)
         self.add(variable)
         return variable
-    
+
     def with_name(self, name):
         for variable_name, variable in self.__variables.items():
             if variable_name.startswith(name):
@@ -79,30 +82,43 @@ class Constraint:
     require: list[str | dict[str, str]]
 
     @classmethod
-    def __parse_constraint(cls, item: str | dict[str, str], using: Variables, positive: bool = True):
+    def __parse_constraint(
+        cls, item: str | dict[str, str], using: Variables, positive: bool = True
+    ):
         if isinstance(item, str):
             return using[f"do_step_{item}"] == positive
         elif isinstance(item, dict):
             conditions = []
             for step, candidate in item.items():
-                condition = using[f"do_step_{step}"] == True
+                condition = using[f"do_step_{step}"]
                 if isinstance(candidate, str):
                     if positive:
-                        condition = And(condition, using[f"implement_{step}_as_{candidate}"] == True)
+                        condition = And(
+                            condition, using[f"implement_{step}_as_{candidate}"]
+                        )
                     else:
-                        condition = Implies(condition, using[f"implement_{step}_as_{candidate}"] == False)
+                        condition = Implies(
+                            condition,
+                            using[f"implement_{step}_as_{candidate}"],
+                        )
                 elif isinstance(candidate, dict):
                     if len(candidate) != 0:
-                        raise ValueError(f"Candidate {candidate} for step {step} has more than one component, which is not supported yet.")
+                        raise ValueError(
+                            f"Candidate {candidate} for step {step} has more than one component, which is not supported yet."
+                        )
                 else:
-                    raise ValueError(f"Invalid candidate for step {step} in constraint: {candidate}")
+                    raise ValueError(
+                        f"Invalid candidate for step {step} in constraint: {candidate}"
+                    )
                 conditions.append(condition)
             if len(conditions) == 1:
                 return conditions[0]
             else:
                 return Or(*conditions)
         elif isinstance(item, list):
-            conditions = [cls.__parse_constraint(i, using, positive=positive) for i in item]
+            conditions = [
+                cls.__parse_constraint(i, using, positive=positive) for i in item
+            ]
             if len(conditions) == 1:
                 return conditions[0]
             else:
@@ -129,7 +145,11 @@ class Constraint:
 
 def constraints():
     for item in SPEC["pipeline"]["constraints"]:
-        yield Constraint(condition=item["if"], forbid=item.get("forbid", []), require=item.get("require", []))
+        yield Constraint(
+            condition=item["if"],
+            forbid=item.get("forbid", []),
+            require=item.get("require", []),
+        )
 
 
 @dataclass(frozen=True)
@@ -139,7 +159,7 @@ class StepImplementation:
 
     def __repr__(self):
         return "{" + f"{self.step}: {self.candidate}" + "}"
-    
+
     def __str__(self):
         return repr(self)
 
@@ -153,7 +173,7 @@ class ModelInterpreter:
     @property
     def steps(self):
         return self.__steps
-    
+
     @property
     def candidates_for(self, step):
         return candidates_of_step(step)
@@ -168,17 +188,20 @@ class ModelInterpreter:
             return val.as_long()
         else:
             return bool(val) if val is not None else None
-        
+
     def variable_values_with_name(self, prefix):
-        return {str(var): self.variable_value(var) for var in self.__variables.with_name(prefix)}
-        
+        return {
+            str(var): self.variable_value(var)
+            for var in self.__variables.with_name(prefix)
+        }
+
     def select_candidate_for(self, step):
         candidates = self.variable_values_with_name(f"implement_{step}_as_")
         for name, candidate in candidates.items():
             if candidate:
                 return name.split(f"implement_{step}_as_", maxsplit=1)[1]
         raise ValueError(f"BUG: no candidates for step {step}.")
-        
+
     def interpret(self) -> tuple[StepImplementation]:
         steps_to_index = dict()
         for step in self.__steps:
@@ -186,10 +209,15 @@ class ModelInterpreter:
             steps_to_index[step] = index
         ordered_steps = list(self.__steps)
         ordered_steps.sort(key=lambda step: steps_to_index[step])
-        filtered_steps = [step for step in ordered_steps if self.variable_value(f"do_step_{step}")]
-        candidates_seq = [StepImplementation(step, self.select_candidate_for(step)) for step in filtered_steps]
+        filtered_steps = [
+            step for step in ordered_steps if self.variable_value(f"do_step_{step}")
+        ]
+        candidates_seq = [
+            StepImplementation(step, self.select_candidate_for(step))
+            for step in filtered_steps
+        ]
         return tuple(candidates_seq)
-    
+
     def different_than_this_model_constraint(self):
         conditions = []
         for variable in self.__variables:
@@ -202,15 +230,21 @@ class ModelInterpreter:
             return Not(conditions[0])
         else:
             return Not(And(*conditions))
-        
+
 
 MINIMAL_STEPS = {"regression", "classification", "clustering"}
 
 
 def quick_and_dirty_check(pipeline: list[StepImplementation]) -> bool:
     for constraint in partial_ordering():
-        index_of_before = next((i for i, step in enumerate(pipeline) if step.step == constraint.before), None)
-        index_of_after = next((i for i, step in enumerate(pipeline) if step.step == constraint.after), None)
+        index_of_before = next(
+            (i for i, step in enumerate(pipeline) if step.step == constraint.before),
+            None,
+        )
+        index_of_after = next(
+            (i for i, step in enumerate(pipeline) if step.step == constraint.after),
+            None,
+        )
         if index_of_before is not None and index_of_after is not None:
             if index_of_before >= index_of_after:
                 return False
@@ -232,7 +266,7 @@ if __name__ == "__main__":
         solver.add(And(step_index >= 0, step_index < len(steps)))
         do_step = variables.bool(f"do_step_{step}")
         if step in disabled:
-            solver.add(do_step == False)
+            solver.add(do_step)
         for candidate in candidates_of_step(step):
             implement_step_as = variables.bool(f"implement_{step}_as_{candidate}")
         all_candidates = tuple(variables.with_name(f"implement_{step}_as_"))
@@ -245,7 +279,7 @@ if __name__ == "__main__":
         constraint.add_to(solver, using=variables)
     for constraint in constraints():
         constraint.add_to(solver, using=variables)
-    
+
     print(solver)
     pipelines = set()
     i = 1
