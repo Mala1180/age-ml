@@ -32,12 +32,12 @@ def main() -> None:
             Step(
                 name="imputation",
                 candidate="simple_imputer",
-                hyperparameters={},
+                hyperparameters={"strategy": ["mean", "median"]},
             ),
             Step(
                 name="classification",
                 candidate="random_forest",
-                hyperparameters={},
+                hyperparameters={"n_estimators": [200], "max_depth": [None, 20]},
             ),
         ]
     )

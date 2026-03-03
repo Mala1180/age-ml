@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional, Literal
+from typing import Any, Optional, Literal, Dict
 
 import pandas as pd
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
@@ -11,7 +11,7 @@ from typing_extensions import override
 
 from automlllm.common.model import model
 from automlllm.common.types import Pipeline
-from automlllm.execution.utils import extract_python_code
+from automlllm.execution.utils import extract_python_code, grid_search_exploration
 from automlllm.planning.agent import PlanningPipeline
 from automlllm.specification import Specification
 
@@ -20,6 +20,7 @@ class ExecutionPipeline(Pipeline):
     id: int
     code: str = ""
     explanation: str = ""
+    created_at: Optional[datetime] = None
 
     @override
     def __str__(self) -> str:
@@ -29,6 +30,13 @@ class ExecutionPipeline(Pipeline):
         if self.explanation:
             string_value += f"\nExplanation:\n{self.explanation}"
         return string_value
+
+    def extract_hyperparameters(self) -> Dict[str, Any]:
+        hyperparameters: Dict[str, Any] = {}
+        for step in self.steps:
+            for hp_name, hp_values in step.hyperparameters.items():
+                hyperparameters[hp_name] = hp_values
+        return hyperparameters
 
 
 class ExecutionAgentState(MessagesState):
@@ -85,14 +93,35 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         Provide only the code without any explanations.
         Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
         The code eventually will be executed, so ensure that it is correct and executable.
+        The code must be contained in a function called 'train_model'.
         Hyperparameters used in the entire pipeline must not be magic numbers/string, but they must 
-        be passed using argparse, in such a way the python script is callable with different hyperparameters values.
+        be passed as arguments to the 'train_model' using these parameters names: {", ".join(state["pipeline"].extract_hyperparameters().keys())}.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
 
     response: Any = model.invoke(state["messages"])
     assert isinstance(response.content, str)
-    state["pipeline"].code = extract_python_code(response.content)
+    state["pipeline"].created_at = datetime.now()
+    created_at = (
+        "**Created at:** "
+        + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
+        + " UTC"
+    )
+    # mlflow_start: str = (
+    #     "import mlflow, os\n\n"
+    #     "run_id = os.environ['MLFLOW_RUN_ID']\n"
+    #     "mlflow.start_run(run_id=run_id)\n"
+    #     "mlflow.autolog()"
+    # )
+    # mlflow_end: str = "mlflow.end_run()"
+    state["pipeline"].code = (
+        f"# {created_at}\n\n"
+        # f"{mlflow_start}\n\n"
+        f"{extract_python_code(response.content)}\n\n"
+        # f"{mlflow_end}"
+    )
+
+    __save_file(state["pipeline"].id, "code.py", state["pipeline"].code)
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     return state
 
@@ -102,7 +131,6 @@ def validate_code_compliance(
 ) -> ExecutionAgentState:
     validating_prompt: str = (
         "Is the generated code compliant with the provided pipeline? "
-        "Is the generated code containing malicious code or code that can cause security issues? "
         "Answer with a simple 'yes' if both answers are 'yes', otherwise answer 'no' and explain why."
     )
     state["messages"] = state["messages"] + [HumanMessage(content=validating_prompt)]
@@ -134,11 +162,30 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     try:
         import mlflow
 
-        mlflow.autolog()
-        with mlflow.start_run():
-            # WARNING: Using eval/exec can be dangerous. This is just for demonstration purposes.
-            namespace: dict = {}
-            exec(state["pipeline"].code, namespace, namespace)
+        with mlflow.start_run(
+            run_name=f"pipeline_{state['pipeline'].id}"
+        ) as parent_run:
+            hyperparameters: Dict[str, Any] = state[
+                "pipeline"
+            ].extract_hyperparameters()
+            for index, hp_combination in enumerate(
+                grid_search_exploration(hyperparameters)
+            ):
+                mlflow.autolog()
+                # run_id: str = f"{parent_run.info.run_id}_{index}"
+                with mlflow.start_run(
+                    nested=True, run_name=f"run_{index}"
+                ) as child_run:
+                    import importlib.util
+
+                    spec = importlib.util.spec_from_file_location(
+                        "out_module", f"out/pipeline_{state['pipeline'].id}/code.py"
+                    )
+                    module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(module)
+
+                    module.train_model(**hp_combination)
+
             state["code_execution_feedback"] = True
     except Exception as e:
         state["messages"] = state["messages"] + [
@@ -169,8 +216,13 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     response: Any = model.invoke(state["messages"])
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     assert isinstance(response.content, str)
-    state["pipeline"].explanation = response.content
-    __save_pipeline(state["pipeline"])
+    created_at = (
+        "**Created at:** "
+        + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
+        + " UTC\n\n"
+    )
+    state["pipeline"].explanation = "> " + created_at + response.content
+    __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
         f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
@@ -201,17 +253,10 @@ def human_feedback_branch(
     return "__end__" if state["human_feedback"] is None else "generate_pipeline_code"
 
 
-def __save_pipeline(pipeline: ExecutionPipeline) -> None:
-    out_dir: Path = Path(f"out/pipeline_{pipeline.id}")
+def __save_file(pipeline_id: int, filename: str, content: str) -> None:
+    out_dir: Path = Path(f"out/pipeline_{pipeline_id}")
     out_dir.mkdir(parents=True, exist_ok=True)
-    timestamp = datetime.now()
-    created_at = (
-        "**Created at:** " + timestamp.strftime("%Y-%m-%d %H:%M:%S") + " UTC\n\n"
-    )
-    pipeline.code = "# " + created_at + pipeline.code
-    pipeline.explanation = "> " + created_at + pipeline.explanation
-    (out_dir / "code.py").write_text(pipeline.code, encoding="utf-8")
-    (out_dir / "explanation.md").write_text(pipeline.explanation, encoding="utf-8")
+    (out_dir / filename).write_text(content, encoding="utf-8")
 
 
 state_graph = StateGraph(ExecutionAgentState)
