@@ -1,0 +1,54 @@
+pipeline:
+
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    step1:
+      candidates:
+        - simple_imputer:
+            params:
+              strategy: [mean, median]
+        - iterative_imputer:
+            params:
+              max_iter: [10]
+
+    step2:
+      candidates:
+        - kbins:
+            params:
+              n_bins: [10]
+              encode: [ordinal]
+              strategy: [quantile]
+        - binarizer:
+            params:
+              threshold: [0.0]
+
+    step3:
+      candidates:
+        - ab:
+            params:
+              n_bins: [ 10 ]
+              encode: [ ordinal ]
+              strategy: [ quantile ]
+        - cd:
+            params:
+              threshold: [ 0.0 ]
+
+
+#    validation:
+#     candidates: [cv, holdout]
+#     mandatory: true
+
+  partial_ordering:
+    - sequence:
+        - step1
+        - step2
+        - step3
+
+technical_details:
+  - use Python for the implementation
+  - use scikit-learn for the ML algorithms (using Pipeline class if possible)

@@ -63,6 +63,7 @@ pipeline:
 
     classification:
       terminal: true
+      mandatory: true
       candidates:
         - decision_tree:
             params:

@@ -111,23 +111,12 @@ pipeline:
 #     mandatory: true
 
   partial_ordering:
-    - before: imputation
-      after: discretization
-
-    - before: imputation
-      after: normalization
-
-    - before: imputation
-      after: features
-
-    - before: discretization
-      after: normalization
-
-    - before: normalization
-      after: features
-
-    - before: features
-      after: regression
+    - sequence:
+      - imputation
+      - discretization
+      - normalization
+      - features
+      - regression
 
   constraints:
 
