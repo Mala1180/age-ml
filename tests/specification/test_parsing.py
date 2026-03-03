@@ -20,7 +20,7 @@ class TestSpecificationParsing:
         step5 = next(s for s in spec.steps if s.id == "step5")
         assert step5.terminal is True
         assert step5.mandatory is True
-        assert len(spec.ordering) == 4
+        assert len(spec.ordering) == 5
         assert len(spec.constraints) == 3
         assert len(spec.technical_details) == 2
 
@@ -108,12 +108,13 @@ pipeline:
     def test_parse_ordering_rules(self):
         spec = Specification.parse(spec_sample)
 
-        assert len(spec.ordering) == 4
+        assert len(spec.ordering) == 5
 
         # Check specific ordering rules
         ordering_pairs = [(o.before, o.after) for o in spec.ordering]
         assert ("step1", "step2") in ordering_pairs
         assert ("step2", "step3") in ordering_pairs
+        assert ("step1", "step3") in ordering_pairs
         assert ("step1", "step4") in ordering_pairs
         assert ("step4", "step5") in ordering_pairs
 
@@ -142,8 +143,9 @@ pipeline:
 """
         spec = Specification.parse(spec_yaml)
         ordering_pairs = [(o.before, o.after) for o in spec.ordering]
-        assert len(ordering_pairs) == 2
+        assert len(ordering_pairs) == 3
         assert ("a", "b") in ordering_pairs
+        assert ("a", "c") in ordering_pairs
         assert ("b", "c") in ordering_pairs
 
     def test_parse_constraints_without_values(self):
