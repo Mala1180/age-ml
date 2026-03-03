@@ -32,7 +32,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
             Step(
                 name="imputation",
                 candidate="simple_imputer",
-                hyperparameters={"strategy": ["mean", "median"]},
+                hyperparameters={"strategy": ["mean"]},
             ),
             Step(
                 name="features",
@@ -57,7 +57,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
     )
     print("Execution pipeline:")
     print(str(execution_pipeline))
-    execution: ExecutionAgentState = execution_agent.invoke(  # type: ignore[assignment]
+    execution: ExecutionAgentState = execution_agent.invoke(
         {
             "dataset_path": dataset_path,
             "specification_path": specification_path,

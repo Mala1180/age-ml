@@ -20,7 +20,6 @@ from z3 import (
 
 from automlllm.planning.solver.utils import (
     convert_solution_to_pipeline,
-    compare_solutions,
 )
 from automlllm.specification import Specification
 from resources import get_resource_path
