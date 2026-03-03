@@ -177,9 +177,7 @@ pipeline:
         spec = Specification.parse(spec_sample)
 
         assert len(spec.constraints) == 3
-        assert spec.constraints[0].condition == IfCondition(
-            step="step1"
-        )
+        assert spec.constraints[0].condition == IfCondition(step="step1")
         assert spec.constraints[1].condition == IfCondition(
             step="step1", candidate=Candidate(name="b")
         )
