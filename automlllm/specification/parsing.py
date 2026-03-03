@@ -96,11 +96,12 @@ class SpecificationParser:
             if "sequence" in node:
                 sequence: List[str] = node["sequence"]
                 for i in range(len(sequence) - 1):
-                    rules.append(
-                        OrderingRule.model_validate(
-                            {"before": sequence[i], "after": sequence[i + 1]}
+                    for j in range(i + 1, len(sequence)):
+                        rules.append(
+                            OrderingRule.model_validate(
+                                {"before": sequence[i], "after": sequence[j]}
+                            )
                         )
-                    )
             else:
                 rules.append(OrderingRule.model_validate(node))
 
