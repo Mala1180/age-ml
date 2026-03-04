@@ -57,6 +57,7 @@ static-checks = [
     "mypy",
 ]
 
+# tells mypy to follow imports of untyped packages
 [[tool.mypy.overrides]]
-module = ["fire.*"]
+module = ["fire.*", "z3.*"]
 follow_untyped_imports = true

@@ -63,7 +63,7 @@ class SpecificationValidator:
 
         for step in pipeline:
             spec_step: SpecStep = next(
-                filter(lambda s, name=step.name: s.id == name, self.steps)
+                filter(lambda s, name=step.name: s.id == name, self.steps)  # type: ignore
             )
             if spec_step.candidates:
                 candidate_names: Set[str] = {c.name for c in spec_step.candidates}
@@ -195,6 +195,7 @@ class SpecificationValidator:
             else f"'{condition_name}' has value '{condition_value}'"
         )
 
+        actual_candidate: str
         for req_step in required_steps:
             if req_step.name not in pipeline_map:
                 feedbacks.append(
@@ -203,7 +204,7 @@ class SpecificationValidator:
                 continue
 
             if req_step.candidate:
-                actual_candidate: str = pipeline_map[req_step.name].candidate
+                actual_candidate = pipeline_map[req_step.name].candidate
                 if actual_candidate != req_step.candidate:
                     feedbacks.append(
                         f"- since {condition_str}, required value '{req_step.candidate}' for step '{req_step.name}' is missing."
@@ -213,7 +214,7 @@ class SpecificationValidator:
             if forb_step.name not in pipeline_map:
                 continue
 
-            actual_candidate: str = pipeline_map[forb_step.name].candidate
+            actual_candidate = pipeline_map[forb_step.name].candidate
 
             if not forb_step.candidate:
                 feedbacks.append(
