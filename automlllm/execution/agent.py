@@ -1,9 +1,11 @@
 from datetime import datetime
 from pathlib import Path
+from types import ModuleType
 from typing import Any, Optional, Literal, Dict
 
 import pandas as pd
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
+from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
@@ -162,9 +164,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     try:
         import mlflow
 
-        with mlflow.start_run(
-            run_name=f"pipeline_{state['pipeline'].id}"
-        ) as parent_run:
+        with mlflow.start_run(nested=True, run_name=f"pipeline_{state['pipeline'].id}"):
             hyperparameters: Dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
@@ -173,16 +173,14 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             ):
                 mlflow.autolog()
                 # run_id: str = f"{parent_run.info.run_id}_{index}"
-                with mlflow.start_run(
-                    nested=True, run_name=f"run_{index}"
-                ) as child_run:
+                with mlflow.start_run(nested=True, run_name=f"run_{index}"):
                     import importlib.util
 
                     spec = importlib.util.spec_from_file_location(
                         "out_module", f"out/pipeline_{state['pipeline'].id}/code.py"
                     )
-                    module = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(module)
+                    module: ModuleType = importlib.util.module_from_spec(spec) # type: ignore
+                    spec.loader.exec_module(module)  # type: ignore
 
                     module.train_model(**hp_combination)
 
@@ -230,27 +228,27 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
-    res: Optional[str] = None
-    while res not in ["yes", "y", "no", "n"]:
-        res = input(
-            "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)\n >"
-        ).lower()
-        if res == "yes" or res == "y":
-            feedback = input("Please provide your feedback:")
-            state["human_feedback"] = feedback
-            state["messages"] = state["messages"] + [HumanMessage(content=feedback)]
-        elif res == "no" or res == "n":
-            state["human_feedback"] = None
-        else:
-            print("Invalid input. Please answer with 'y/yes' or 'n/no'.")
-    return state
-
-
-def human_feedback_branch(
-    state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "__end__"]:
-    return "__end__" if state["human_feedback"] is None else "generate_pipeline_code"
+# def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
+#     res: Optional[str] = None
+#     while res not in ["yes", "y", "no", "n"]:
+#         res = input(
+#             "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)\n >"
+#         ).lower()
+#         if res == "yes" or res == "y":
+#             feedback = input("Please provide your feedback:")
+#             state["human_feedback"] = feedback
+#             state["messages"] = state["messages"] + [HumanMessage(content=feedback)]
+#         elif res == "no" or res == "n":
+#             state["human_feedback"] = None
+#         else:
+#             print("Invalid input. Please answer with 'y/yes' or 'n/no'.")
+#     return state
+#
+#
+# def human_feedback_branch(
+#     state: ExecutionAgentState,
+# ) -> Literal["generate_pipeline_code", "__end__"]:
+#     return "__end__" if state["human_feedback"] is None else "generate_pipeline_code"
 
 
 def __save_file(pipeline_id: int, filename: str, content: str) -> None:
@@ -275,14 +273,16 @@ state_graph.add_conditional_edges("validate_code_compliance", code_validation_br
 state_graph.add_node("execute_code", execute_code)
 state_graph.add_conditional_edges("execute_code", code_execution_branch)
 
-state_graph.add_sequence(
-    [
-        explain_pipeline,
-        human_feedback,
-    ]
-)
-state_graph.add_conditional_edges("human_feedback", human_feedback_branch)
+# state_graph.add_sequence(
+#     [
+#         explain_pipeline,
+#         human_feedback,
+#     ]
+# )
+# state_graph.add_conditional_edges("human_feedback", human_feedback_branch)
 
+state_graph.add_node("explain_pipeline", explain_pipeline)
+state_graph.add_edge("explain_pipeline", END)
 
 execution_agent: CompiledStateGraph = state_graph.compile()
 

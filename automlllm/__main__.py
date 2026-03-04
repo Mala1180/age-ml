@@ -1,22 +1,17 @@
-from typing import Optional, List
+from concurrent.futures import ProcessPoolExecutor
+from typing import Optional
 
 import fire
 import mlflow
-from langchain_core.messages import BaseMessage
 
 from automlllm import logger
-from automlllm.common.types import Step
 from automlllm.execution.agent import (
     execution_agent,
     ExecutionAgentState,
     ExecutionPipeline,
 )
-from automlllm.planning.agent import (
-    create_user_prompt,
-    PlanningPipeline,
-)
+from automlllm.mocks import planned_pipeline_1, planned_pipeline_2
 
-mlflow.set_experiment("mattia-experiment")
 mlflow.openai.autolog()
 mlflow.langchain.autolog()
 
@@ -24,47 +19,56 @@ mlflow.langchain.autolog()
 def main(prompt: str = "", dataset_path: Optional[str] = None):
     dataset_path = "resources/datasets/adult.csv"
     specification_path = "resources/adult-specification.yml"
-    prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
-    messages: List[BaseMessage] = create_user_prompt(prompt)
+    # prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
+    # messages: List[BaseMessage] = create_user_prompt(prompt)
 
-    planned_pipeline = PlanningPipeline(
-        steps=[
-            Step(
-                name="imputation",
-                candidate="simple_imputer",
-                hyperparameters={"strategy": ["mean"]},
-            ),
-            Step(
-                name="features",
-                candidate="select_k_best",
-                hyperparameters={"k": [5, 10]},
-            ),
-            Step(
-                name="classification",
-                candidate="random_forest",
-                hyperparameters={
-                    "n_estimators": [200],
-                    "max_depth": [None, 20],
-                },
-            ),
-        ]
-    )
+    # planning: PlanningAgentState = planning_agent.invoke(
+    #     {
+    #         "messages": messages,
+    #         "user_prompt": prompt,
+    #         "specification_path": specification_path,
+    #         "dataset_path": dataset_path,
+    #     }
+    # )
     # planned_pipeline: PlanningPipeline = planning["pipeline"]
 
     # dataset_info: str = planning["dataset_info"]
-    execution_pipeline: ExecutionPipeline = ExecutionPipeline(
-        id=1, steps=planned_pipeline.steps
+    execution_pipeline_1: ExecutionPipeline = ExecutionPipeline(
+        id=1, steps=planned_pipeline_1.steps
+    )
+    execution_pipeline_2: ExecutionPipeline = ExecutionPipeline(
+        id=2, steps=planned_pipeline_2.steps
     )
     print("Execution pipeline:")
-    print(str(execution_pipeline))
-    execution: ExecutionAgentState = execution_agent.invoke(
-        {
-            "dataset_path": dataset_path,
-            "specification_path": specification_path,
-            "pipeline": execution_pipeline,
-        }
-    )
-    logger.info(execution)
+    # print(str(execution_pipeline))
+    mlflow.set_experiment("adult-experiment")
+
+    with ProcessPoolExecutor(max_workers=2) as executor:
+        future_1 = executor.submit(
+            invoke_agent,
+            {
+                "dataset_path": dataset_path,
+                "specification_path": specification_path,
+                "pipeline": execution_pipeline_1,
+            },
+        )
+        future_2 = executor.submit(
+            invoke_agent,
+            {
+                "dataset_path": dataset_path,
+                "specification_path": specification_path,
+                "pipeline": execution_pipeline_2,
+            },
+        )
+        future_1.result()
+        future_2.result()
+
+
+def invoke_agent(input: dict) -> ExecutionAgentState:
+    logger.info(f"Invoking execution agent with input: {input}")
+    result = execution_agent.invoke(input)
+    logger.info(f"Agent returned result: {result}")
+    return result
 
 
 if __name__ == "__main__":
