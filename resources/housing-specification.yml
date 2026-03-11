@@ -121,46 +121,56 @@ pipeline:
   constraints:
 
     - if:
-        regression: decision_tree_regressor
+        step:
+          regression: decision_tree_regressor
       forbid: [normalization, features]
       require: [discretization]
 
     - if:
-        regression: random_forest_regressor
+        step:
+          regression: random_forest_regressor
       forbid: [normalization]
 
     - if:
-        regression: gradient_boosting_regressor
+        step:
+          regression: gradient_boosting_regressor
       forbid: [normalization]
 
     - if:
-        regression: hist_gradient_boosting_regressor
+        step:
+          regression: hist_gradient_boosting_regressor
       forbid: [normalization]
 
     - if:
-        regression: knn_regressor
+        step:
+          regression: knn_regressor
       require: [normalization, features]
       forbid: [discretization]
 
     - if:
-        regression: svr
+        step:
+          regression: svr
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: lasso
+        step:
+          regression: lasso
       require: [normalization]
 
     - if:
-        regression: ridge
+        step:
+          regression: ridge
       require: [normalization]
 
     - if:
-        regression: elastic_net
+        step:
+          regression: elastic_net
       require: [normalization]
 
     - if:
-        regression: linear_regression
+        step:
+          regression: linear_regression
       require: [normalization]
 
     # =========================
@@ -168,15 +178,18 @@ pipeline:
     # =========================
 
     - if:
-        features: pca
+        step:
+          features: pca
       require: [normalization]
 
     - if:
-        features: select_k_best
+        step:
+          features: select_k_best
       forbid: [discretization]
 
     - if:
-        imputation: iterative_imputer
+        step:
+          imputation: iterative_imputer
       require: [normalization]
 
 

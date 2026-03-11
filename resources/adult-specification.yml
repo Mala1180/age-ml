@@ -5,6 +5,7 @@ pipeline:
     mandatory: false
     terminal: false
     initial: false
+    source: training
 
   steps:
     imputation:
@@ -62,7 +63,6 @@ pipeline:
               k_neighbors: [5]
 
     classification:
-      terminal: true
       mandatory: true
       candidates:
         - decision_tree:
@@ -92,9 +92,19 @@ pipeline:
               n_estimators: [100]
               learning_rate: [0.1]
 
-#    validation:
-#     candidates: [cv, holdout]
-#     mandatory: true
+    # validation:
+    #   source: test
+    #   mandatory: true
+    #   candidates:
+    #    - accuracy:
+    #        params:
+    #          threshold: [0.8]
+    #    - f1_score:
+    #        params:
+    #          threshold: [0.8]
+    #    - roc_auc:
+    #        params:
+    #          threshold: [0.8]
 
   partial_ordering:
     - sequence:
@@ -104,33 +114,51 @@ pipeline:
         - features
         - rebalancing
         - classification
+        - validation
 
   constraints:
 
+#     - if:
+#         raw: target is categorical
+
+#         dataset:
+#           feature:
+# #            is_like: class
+#             role: output
+#             data_kind: categorical
+
+#       require: [classification]
+
     - if:
-        classification: decision_tree
+        step:
+          classification: decision_tree
       require: [discretization]
       forbid: [normalization, features]
 
     - if:
-        classification: random_forest
+        step:
+          classification: random_forest
       forbid: [normalization]
 
     - if:
-        classification: knn
+        step:
+          classification: knn
       require: [normalization, features]
 
     - if:
-        classification: nn
+        step:
+          classification: nn
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        classification: naive_bayes
+        step:
+          classification: naive_bayes
       forbid: [normalization]
 
     - if:
-        classification: ada_boost
+        step:
+          classification: ada_boost
       forbid: [normalization]
 
     # =========================
@@ -138,19 +166,23 @@ pipeline:
     # =========================
 
     - if:
-        features: pca
+        step:
+          features: pca
       require: [normalization]
 
     - if:
-        features: select_k_best
+        step:
+          features: select_k_best
       forbid: [discretization]
 
     - if:
-        rebalancing: smote
+        step:
+          rebalancing: smote
       require: [imputation]
 
     - if:
-        imputation: iterative_imputer
+        step:
+          imputation: iterative_imputer
       require: [normalization]
 
 

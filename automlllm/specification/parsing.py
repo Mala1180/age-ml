@@ -8,9 +8,9 @@ from automlllm.specification.types import (
     Candidate,
     Constraint,
     Defaults,
-    IfCondition,
     OrderingRule,
     SpecStep,
+    StepCondition,
 )
 
 
@@ -68,7 +68,7 @@ class SpecificationParser:
             constraints.append(
                 Constraint.model_validate(
                     {
-                        "condition": self._parse_if_condition(constraint["if"]),
+                        "condition": self._parse_step_condition(constraint["if"]),
                         "require": required_steps,
                         "forbid": forbidden_steps,
                     }
@@ -123,15 +123,19 @@ class SpecificationParser:
             candidate: str = node_value if isinstance(node_value, str) else ""
             return Step(name=node_id, candidate=candidate, hyperparameters={})
 
-    def _parse_if_condition(self, node: str | Dict[str, Any]) -> IfCondition:
-        if isinstance(node, str):
-            return IfCondition(step=node, candidate=None)
+    def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
+        if not isinstance(node, dict) or not node:
+            raise ValueError("Constraint 'if' condition must define a 'step' key.")
 
-        if not node:
-            raise ValueError("Constraint 'if' condition cannot be empty.")
+        step_node: Any = node.get("step")
+        if isinstance(step_node, str):
+            return StepCondition(step=step_node, candidate=None)
 
-        step: str = next(iter(node.keys()))
-        candidate_node: Any = node[step]
+        if not isinstance(step_node, dict) or not step_node:
+            raise ValueError("Constraint 'if.step' condition cannot be empty.")
+
+        step: str = next(iter(step_node.keys()))
+        candidate_node: Any = step_node[step]
         if isinstance(candidate_node, str):
-            return IfCondition(step=step, candidate=Candidate(name=candidate_node))
-        return IfCondition(step=step, candidate=None)
+            return StepCondition(step=step, candidate=Candidate(name=candidate_node))
+        return StepCondition(step=step, candidate=None)

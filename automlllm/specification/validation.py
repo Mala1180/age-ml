@@ -4,9 +4,9 @@ from automlllm.common.types import Step
 from automlllm.specification import Specification
 from automlllm.specification.types import (
     Constraint,
-    IfCondition,
     OrderingRule,
     SpecStep,
+    StepCondition,
 )
 
 
@@ -169,7 +169,7 @@ class SpecificationValidator:
     def _check_constraint(
         self,
         pipeline: List[Step],
-        condition: IfCondition,
+        condition: StepCondition,
         required_steps: List[Step],
         forbidden_steps: List[Step],
     ) -> Tuple[bool, Optional[str]]:

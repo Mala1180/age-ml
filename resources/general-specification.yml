@@ -149,11 +149,13 @@ pipeline:
   constraints:
 
     - if:
-        classification: {}
+        step:
+          classification: {}
       forbid: [regression]
 
     - if:
-        regression: {}
+        step:
+          regression: {}
       forbid: [classification]
 
     # =========================
@@ -161,29 +163,35 @@ pipeline:
     # =========================
 
     - if:
-        classification: decision_tree
+        step:
+          classification: decision_tree
       require: [discretization]
       forbid: [normalization, features]
 
     - if:
-        classification: random_forest
+        step:
+          classification: random_forest
       forbid: [normalization]
 
     - if:
-        classification: knn
+        step:
+          classification: knn
       require: [normalization, features]
 
     - if:
-        classification: nn
+        step:
+          classification: nn
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        classification: naive_bayes
+        step:
+          classification: naive_bayes
       forbid: [normalization]
 
     - if:
-        classification: ada_boost
+        step:
+          classification: ada_boost
       forbid: [normalization]
 
 
@@ -192,41 +200,49 @@ pipeline:
     # =========================
 
     - if:
-        regression: linear
+        step:
+          regression: linear
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: ridge
+        step:
+          regression: ridge
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: lasso
+        step:
+          regression: lasso
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: elastic_net
+        step:
+          regression: elastic_net
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: svr
+        step:
+          regression: svr
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: knn_regressor
+        step:
+          regression: knn_regressor
       require: [normalization, features]
 
     - if:
-        regression: nn_regressor
+        step:
+          regression: nn_regressor
       require: [normalization]
       forbid: [discretization]
 
     - if:
-        regression: random_forest_regressor
+        step:
+          regression: random_forest_regressor
       forbid: [normalization]
 
 
@@ -235,19 +251,23 @@ pipeline:
     # =========================
 
     - if:
-        features: pca
+        step:
+          features: pca
       require: [normalization]
 
     - if:
-        features: select_k_best
+        step:
+          features: select_k_best
       forbid: [discretization]
 
     - if:
-        rebalancing: smote
+        step:
+          rebalancing: smote
       require: [imputation]
 
     - if:
-        imputation: iterative_imputer
+        step:
+          imputation: iterative_imputer
       require: [normalization]
 
 

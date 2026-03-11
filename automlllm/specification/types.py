@@ -31,7 +31,7 @@ class OrderingRule(BaseModel):
     after: str
 
 
-class IfCondition(BaseModel):
+class StepCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
     step: str
     candidate: Optional[Candidate] = None
@@ -39,6 +39,6 @@ class IfCondition(BaseModel):
 
 class Constraint(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    condition: IfCondition
+    condition: StepCondition
     require: List[Step] = Field(default_factory=list)
     forbid: List[Step] = Field(default_factory=list)

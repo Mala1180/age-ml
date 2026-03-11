@@ -46,19 +46,22 @@ pipeline:
 
   constraints:
     - if:
-        step1: {}
+        step:
+          step1: {}
       require: [step2, step4]
       forbid: [step3]
 
     - if:
-        step1: b
+        step:
+          step1: b
       require:
         - step4: j
       forbid:
         - step5: l
 
     - if:
-        step4: j
+        step:
+          step4: j
       forbid: [step3]
 
 technical_details:
