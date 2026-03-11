@@ -18,9 +18,7 @@ from z3 import (
     ExprRef,
 )
 
-from automlllm.planning.solver.utils import (
-    convert_solution_to_pipeline,
-)
+from automlllm.planning.solver.utils import convert_solution_to_pipeline
 from automlllm.specification import Specification
 from resources import get_resource_path
 
@@ -72,7 +70,18 @@ def create_solver(specification: Specification) -> Solver:
 def add_steps_to_solver(
     solver: Solver, variables: Variables, specification: Specification
 ) -> None:
-    for step in specification.steps:
+    for i, step in enumerate(specification.steps):
+        step_index = variables.int(f"index_of_step_{step.id}")
+        # if step_index != 0, then all subsequent steps must have different indices to ensure a valid ordering of steps in the pipeline.
+        for step_j in specification.steps[i + 1 :]:
+            step_index_j = variables.int(f"index_of_step_{step_j.id}")
+            solver.add(
+                Implies(
+                    And(step_index != 0, step_index_j != 0),
+                    step_index != step_index_j,
+                )
+            )
+
         step_index = variables.int(f"index_of_step_{step.id}")
         do_step = variables.bool(f"do_step_{step.id}")
         # index_lt_than_num_steps = step_index < len(specification.steps)
@@ -157,21 +166,33 @@ def enumerate_solutions(solver: Solver) -> Iterator[ModelRef]:
 if __name__ == "__main__":
     spec: Specification = Specification.parse(
         # get_resource_path("general-specification.yml").read_text()
-        get_resource_path("adult-specification.yml").read_text()
+        get_resource_path("general-specification.yml").read_text()
     )
     solver = create_solver(spec)
-    solutions_list: List[str] = []
-    solutions_set: set[str] = set()
+    model_list: List[str] = []
+    pipelines_list: List[str] = []
+    pipelines_set: set[str] = set()
     i: int = 0
     for solution in enumerate_solutions(solver):
         pipeline = convert_solution_to_pipeline(solution, spec)
-        solutions_list.append(str(pipeline))
-        solutions_set.add(str(pipeline))
+        model_list.append(str(solution))
+
+        # if str(pipeline) in pipelines_set:
+        #     print("Duplicate solution found:")
+        #     print(str(pipeline))
+        #     print(solution)
+        #     for pipeline_2 in pipelines_list:
+        #         if str(pipeline) == str(pipeline):
+        #             print("Matching pipeline found:")
+        #             index = pipelines_list.index(pipeline_2)
+        #             print("-----------------------------------")
+        #             print(model_list[index])
+        #             break
+
+        pipelines_list.append(str(pipeline))
+        pipelines_set.add(str(pipeline))
         i += 1
         print(i, pipeline)
-        # if i > 1:
-        #     is_equal = compare_solutions(solutions_list[i - 1], solutions_list[i - 2])
-        #     equal_solutions += 1 if is_equal else 0
 
-    print("Len List:", len(solutions_list))
-    print("Len Set:", len(solutions_set))
+    print("Len List:", len(pipelines_list))
+    print("Len Set:", len(pipelines_set))
