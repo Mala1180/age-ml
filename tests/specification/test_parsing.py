@@ -1,7 +1,7 @@
 import pytest
 
 from automlllm.specification import Specification
-from automlllm.specification.types import Candidate, IfCondition
+from automlllm.specification.types import Candidate, StepCondition
 from tests.specification.conftest import spec_sample
 
 
@@ -152,7 +152,7 @@ pipeline:
         spec = Specification.parse(spec_sample)
 
         constraint = spec.constraints[0]
-        assert constraint.condition == IfCondition(step="step1")
+        assert constraint.condition == StepCondition(step="step1")
         assert len(constraint.require) == 2
         assert constraint.require[0].candidate == ""
         assert constraint.require[1].candidate == ""
@@ -163,7 +163,7 @@ pipeline:
         spec = Specification.parse(spec_sample)
 
         constraint = spec.constraints[1]
-        assert constraint.condition == IfCondition(
+        assert constraint.condition == StepCondition(
             step="step1", candidate=Candidate(name="b")
         )
         assert len(constraint.require) == 1
@@ -177,11 +177,11 @@ pipeline:
         spec = Specification.parse(spec_sample)
 
         assert len(spec.constraints) == 3
-        assert spec.constraints[0].condition == IfCondition(step="step1")
-        assert spec.constraints[1].condition == IfCondition(
+        assert spec.constraints[0].condition == StepCondition(step="step1")
+        assert spec.constraints[1].condition == StepCondition(
             step="step1", candidate=Candidate(name="b")
         )
-        assert spec.constraints[2].condition == IfCondition(
+        assert spec.constraints[2].condition == StepCondition(
             step="step4", candidate=Candidate(name="j")
         )
 
