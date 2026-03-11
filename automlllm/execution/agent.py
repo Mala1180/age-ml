@@ -179,7 +179,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     spec = importlib.util.spec_from_file_location(
                         "out_module", f"out/pipeline_{state['pipeline'].id}/code.py"
                     )
-                    module: ModuleType = importlib.util.module_from_spec(spec) # type: ignore
+                    module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
 
                     module.train_model(**hp_combination)
