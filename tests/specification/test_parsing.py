@@ -1,7 +1,12 @@
 import pytest
 
 from automlllm.specification import Specification
-from automlllm.specification.types import Candidate, StepCondition
+from automlllm.specification.types import (
+    Candidate,
+    DatasetCondition,
+    DatasetFeatureCondition,
+    StepCondition,
+)
 from tests.specification.conftest import spec_sample
 
 
@@ -184,6 +189,42 @@ pipeline:
         assert spec.constraints[2].condition == StepCondition(
             step="step4", candidate=Candidate(name="j")
         )
+
+    def test_parse_dataset_condition_and_nested_effects(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    classification:
+      candidates: [random_forest]
+
+  partial_ordering: []
+
+  constraints:
+    - if:
+        dataset:
+          feature:
+            is_like: class
+            role: output
+            data_kind: categorical
+      require: [classification]
+"""
+        spec = Specification.parse(spec_yaml)
+        assert len(spec.constraints) == 1
+        assert spec.constraints[0].condition == DatasetCondition(
+            feature=DatasetFeatureCondition(
+                is_like="class",
+                role="output",
+                data_kind="categorical",
+            )
+        )
+        assert len(spec.constraints[0].require) == 1
+        assert spec.constraints[0].require[0].name == "classification"
 
     def test_parse_step_attributes(self):
         spec = Specification.parse(spec_sample)

@@ -4,6 +4,7 @@ from automlllm.common.types import Step
 from automlllm.specification import Specification
 from automlllm.specification.types import (
     Constraint,
+    DatasetCondition,
     OrderingRule,
     SpecStep,
     StepCondition,
@@ -169,10 +170,15 @@ class SpecificationValidator:
     def _check_constraint(
         self,
         pipeline: List[Step],
-        condition: StepCondition,
+        condition: StepCondition | DatasetCondition,
         required_steps: List[Step],
         forbidden_steps: List[Step],
     ) -> Tuple[bool, Optional[str]]:
+        if isinstance(condition, DatasetCondition):
+            # Dataset constraints depend on dataset metadata, which is not available
+            # in pipeline-only validation.
+            return True, None
+
         condition_name: str = condition.step
         condition_value: str = condition.candidate.name if condition.candidate else ""
         feedbacks: List[str] = []
