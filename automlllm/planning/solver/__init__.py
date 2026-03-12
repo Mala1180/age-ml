@@ -19,8 +19,8 @@ from z3 import (
 )
 
 from automlllm.planning.solver.utils import convert_solution_to_pipeline
-from automlllm.specification import Specification
-from automlllm.specification.types import DatasetCondition
+from automlllm.specification import Specification, StepCondition
+from automlllm.specification.types import DatasetCondition, NaturalLanguageCondition
 from resources import get_resource_path
 
 
@@ -118,7 +118,7 @@ def add_orderings_to_solver(
                     variables[f"do_step_{ordering.before}"],
                     variables[f"do_step_{ordering.after}"],
                 ),
-                variables[f"index_of_step_{ordering.before}"]
+                variables[f"index_of_step_{ordering.before}"]  # type: ignore
                 < variables[f"index_of_step_{ordering.after}"],
             )
         )
@@ -128,10 +128,12 @@ def add_constraints_to_solver(
     solver: Solver, variables: Variables, specification: Specification
 ) -> None:
     for constraint in specification.constraints:
-        if isinstance(constraint.condition, DatasetCondition):
-            # Dataset-driven constraints cannot be encoded without dataset metadata.
+        if isinstance(
+            constraint.condition, (DatasetCondition, NaturalLanguageCondition)
+        ):
+            # Non-step constraints cannot be encoded without external metadata/context.
             continue
-
+        assert isinstance(constraint.condition, StepCondition)
         conditions = [variables[f"do_step_{constraint.condition.step}"]]
         if constraint.condition.candidate:
             candidate_name: str = constraint.condition.candidate.name

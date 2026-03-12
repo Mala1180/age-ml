@@ -1,5 +1,5 @@
 from concurrent.futures import ProcessPoolExecutor
-from typing import Optional
+from typing import Optional, Dict
 
 import fire
 import mlflow
@@ -7,7 +7,6 @@ import mlflow
 from automlllm import logger
 from automlllm.execution.agent import (
     execution_agent,
-    ExecutionAgentState,
     ExecutionPipeline,
 )
 from automlllm.mocks import planned_pipeline_1, planned_pipeline_2
@@ -64,7 +63,7 @@ def main(prompt: str = "", dataset_path: Optional[str] = None):
         future_2.result()
 
 
-def invoke_agent(input: dict) -> ExecutionAgentState:
+def invoke_agent(input: dict) -> Dict:
     logger.info(f"Invoking execution agent with input: {input}")
     result = execution_agent.invoke(input)
     logger.info(f"Agent returned result: {result}")

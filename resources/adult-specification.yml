@@ -118,20 +118,6 @@ pipeline:
 
   constraints:
 
-
-#    - if:
-#        raw: target is categorical
-#      require: [ classification ]
-
-
-    - if:
-        dataset:
-          feature:
-            is_like: class
-            role: output
-            data_kind: categorical
-      require: [classification]
-
     - if:
         step:
           classification: decision_tree

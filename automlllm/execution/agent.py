@@ -214,6 +214,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     response: Any = model.invoke(state["messages"])
     state["messages"] = state["messages"] + [AIMessage(content=response.content)]
     assert isinstance(response.content, str)
+    assert state["pipeline"].created_at
     created_at = (
         "**Created at:** "
         + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
