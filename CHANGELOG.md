@@ -1,3 +1,55 @@
+## [3.0.0](https://github.com/Mala1180/automl-llm/compare/2.0.1...3.0.0) (2026-03-12)
+
+### ⚠ BREAKING CHANGES
+
+* remove pipeline graph and create one pipeline at a time
+* **specification:** remove graph validation
+
+### Features
+
+* add hyperparameters to pipeline and specification ([2890f70](https://github.com/Mala1180/automl-llm/commit/2890f70a098584509f60fbd4cb38ed074e3fc781))
+* add main for the entire workflow ([c332715](https://github.com/Mala1180/automl-llm/commit/c332715d68574b4fe5d342d99c85b2b9bf658da7))
+* add technical details in specification ([1ad7bf8](https://github.com/Mala1180/automl-llm/commit/1ad7bf8a719b3264e6d7746c0f0cafeb5812220a))
+* **executing:** add human feedback, remove system metrics logs ([40f7a86](https://github.com/Mala1180/automl-llm/commit/40f7a86480b173e75b5bf113efd683152b4d8058))
+* **execution:** add nested runs and autolog ([75a22b2](https://github.com/Mala1180/automl-llm/commit/75a22b2657433f5fbbbc41e398e6d698693e933d))
+* pipeline generation works ([12e5dec](https://github.com/Mala1180/automl-llm/commit/12e5dec56d952cee7883e1e5ecc4962cbd004658))
+* **planning:** add z3 solver for pipelines exploration ([3541e89](https://github.com/Mala1180/automl-llm/commit/3541e89019b516aadd7a5b37fa3bdbfb19715960))
+* **specification:** add encoding for DatasetCondition ([12ef6cd](https://github.com/Mala1180/automl-llm/commit/12ef6cd79d44b6a5fcd845f7f6008df6c65a0762))
+* **specification:** add encoding for NaturalLanguageCondition ([4c92de7](https://github.com/Mala1180/automl-llm/commit/4c92de72ecfd0659ca591a7eb3e96003c18960df))
+* **specification:** add sequence short hand for ordering rules ([c52c737](https://github.com/Mala1180/automl-llm/commit/c52c73720891cb8c8a889602bc2249232261d50c))
+* **specification:** improve typing of constraint condition ([3b3eeed](https://github.com/Mala1180/automl-llm/commit/3b3eeed41538510588e2f2dacd81aef9f0692b5b))
+
+### Dependency updates
+
+* **deps:** add imblearn ([49c699c](https://github.com/Mala1180/automl-llm/commit/49c699c4eba4d5b9d78e98f06bb45b993f4f6617))
+* **deps:** add z3 solver dependency ([c9a865f](https://github.com/Mala1180/automl-llm/commit/c9a865feeaf09ee3cf5c2b7881add0b9787cba67))
+
+### Bug Fixes
+
+* **solver:** add constraints to step indexes to avoid duplicates solutions ([0849e70](https://github.com/Mala1180/automl-llm/commit/0849e70ddf84919d05fe9f367f1dff645c45b067))
+
+### Performance improvements
+
+* **execution:** add multiprocess computation for code execution ([c17638e](https://github.com/Mala1180/automl-llm/commit/c17638e764965f7740b963de3905a8e3f7a9256f))
+
+### General maintenance
+
+* fix some imports and refactor attempts in execution agent ([fa3e31e](https://github.com/Mala1180/automl-llm/commit/fa3e31efc0ba8192834577284eb44d528b32338d))
+* generation of pipelines via z3 ([2cd7801](https://github.com/Mala1180/automl-llm/commit/2cd7801ce57864dc28a7afc30587aefba2928f2d))
+* improve constraints ([349ff85](https://github.com/Mala1180/automl-llm/commit/349ff85acba09301840d316c7035475cd674998d))
+* improve constraints, generate solutions ([3cb4a81](https://github.com/Mala1180/automl-llm/commit/3cb4a81ac86ff19ca61e4ab1967170d987ddb2fb))
+* improve Pipeline hyperparameter string representation ([160d1c9](https://github.com/Mala1180/automl-llm/commit/160d1c9475ed302a6920bd981aad7daa60a2ebbf))
+* rename yaml specification ([300d7fb](https://github.com/Mala1180/automl-llm/commit/300d7fb7d53441f12beee3c5edffd64502c942d1))
+* **resources:** add specification for regression case ([238e33d](https://github.com/Mala1180/automl-llm/commit/238e33de574aba168d4b1581d455502aba9b2142))
+
+### Refactoring
+
+* **executing:** add validation after code execution, change structure of judge model response ([63fac71](https://github.com/Mala1180/automl-llm/commit/63fac7152e43675e86158f5b0b3249d68aa1b476))
+* remove pipeline graph and create one pipeline at a time ([fd12256](https://github.com/Mala1180/automl-llm/commit/fd122562713de055aaeac7b9c040474fb477d5ea))
+* **specification:** change IfCondition to support various condition types (add StepCondition) ([af38dcd](https://github.com/Mala1180/automl-llm/commit/af38dcd05490b4411cad1f8f9acf72004550bcdd))
+* **specification:** change order created by sequence ([586d008](https://github.com/Mala1180/automl-llm/commit/586d008a018140458625721aefad241dc76168ba))
+* **specification:** remove graph validation ([d167a69](https://github.com/Mala1180/automl-llm/commit/d167a69cc3149c079f6ea5328e67eb4215f4e0a2))
+
 ## [2.0.1](https://github.com/Mala1180/automl-llm/compare/2.0.0...2.0.1) (2026-02-17)
 
 ### Bug Fixes
