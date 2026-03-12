@@ -1,7 +1,12 @@
 from typing import List
 
 from automlllm.specification.parsing import SpecificationParser
-from automlllm.specification.types import Constraint, OrderingRule, SpecStep
+from automlllm.specification.types import (
+    Constraint,
+    DatasetCondition,
+    OrderingRule,
+    SpecStep,
+)
 
 
 class Specification:
@@ -75,16 +80,27 @@ class Specification:
         if self.constraints:
             lines.extend(["", "Constraints:"])
             for constraint in self.constraints:
-                condition_node: str = constraint.condition.step
-                condition_value: str = (
-                    constraint.condition.candidate.name
-                    if constraint.condition.candidate
-                    else ""
-                )
-                if condition_value:
-                    cond_str: str = f"'{condition_node}' has value '{condition_value}'"
+                if isinstance(constraint.condition, DatasetCondition):
+                    feature = constraint.condition.feature
+                    parts: List[str] = []
+                    if feature.role:
+                        parts.append(f"role '{feature.role}'")
+                    if feature.data_kind:
+                        parts.append(f"data kind '{feature.data_kind}'")
+                    if feature.is_like:
+                        parts.append(f"is like '{feature.is_like}'")
+                    cond_str = "dataset feature matches " + ", ".join(parts)
                 else:
-                    cond_str = f"'{condition_node}' is present"
+                    condition_node: str = constraint.condition.step
+                    condition_value: str = (
+                        constraint.condition.candidate.name
+                        if constraint.condition.candidate
+                        else ""
+                    )
+                    if condition_value:
+                        cond_str = f"'{condition_node}' has value '{condition_value}'"
+                    else:
+                        cond_str = f"'{condition_node}' is present"
 
                 consequences: List[str] = []
                 if constraint.require:

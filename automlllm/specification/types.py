@@ -31,14 +31,28 @@ class OrderingRule(BaseModel):
     after: str
 
 
-class StepCondition(BaseModel):
+class Condition(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+class StepCondition(Condition):
     step: str
     candidate: Optional[Candidate] = None
 
 
+class DatasetFeatureCondition(BaseModel):
+    is_like: Optional[str] = None
+    role: Optional[str] = None
+    data_kind: Optional[str] = None
+
+
+class DatasetCondition(Condition):
+    model_config = ConfigDict(extra="forbid")
+    feature: DatasetFeatureCondition
+
+
 class Constraint(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    condition: StepCondition
+    condition: Condition
     require: List[Step] = Field(default_factory=list)
     forbid: List[Step] = Field(default_factory=list)

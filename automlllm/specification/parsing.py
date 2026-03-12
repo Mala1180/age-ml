@@ -7,6 +7,8 @@ from automlllm.common.types import Step
 from automlllm.specification.types import (
     Candidate,
     Constraint,
+    DatasetCondition,
+    DatasetFeatureCondition,
     Defaults,
     OrderingRule,
     SpecStep,
@@ -58,17 +60,21 @@ class SpecificationParser:
 
         constraints: List[Constraint] = []
         for constraint in spec["pipeline"].get("constraints", []):
+            condition_node: Dict[str, Any] = constraint["if"]
+            require_nodes: List[str | Dict[str, Any]] = constraint.get("require", [])
+            forbid_nodes: List[str | Dict[str, Any]] = constraint.get("forbid", [])
+
             required_steps: List[Step] = []
             forbidden_steps: List[Step] = []
-            for required in constraint.get("require", []):
+            for required in require_nodes:
                 required_steps.append(self._get_step_with_value(required))
-            for forbidden in constraint.get("forbid", []):
+            for forbidden in forbid_nodes:
                 forbidden_steps.append(self._get_step_with_value(forbidden))
 
             constraints.append(
                 Constraint.model_validate(
                     {
-                        "condition": self._parse_step_condition(constraint["if"]),
+                        "condition": self._parse_condition(condition_node),
                         "require": required_steps,
                         "forbid": forbidden_steps,
                     }
@@ -123,10 +129,23 @@ class SpecificationParser:
             candidate: str = node_value if isinstance(node_value, str) else ""
             return Step(name=node_id, candidate=candidate, hyperparameters={})
 
-    def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
+    def _parse_condition(
+        self, node: Dict[str, Any]
+    ) -> StepCondition | DatasetCondition:
         if not isinstance(node, dict) or not node:
-            raise ValueError("Constraint 'if' condition must define a 'step' key.")
+            raise ValueError(
+                "Constraint 'if' condition must define a 'step' or 'dataset' key."
+            )
 
+        if "step" in node:
+            return self._parse_step_condition(node)
+        if "dataset" in node:
+            return self._parse_dataset_condition(node)
+        raise ValueError(
+            "Constraint 'if' condition must define a 'step' or 'dataset' key."
+        )
+
+    def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
         step_node: Any = node.get("step")
         if isinstance(step_node, str):
             return StepCondition(step=step_node, candidate=None)
@@ -139,3 +158,16 @@ class SpecificationParser:
         if isinstance(candidate_node, str):
             return StepCondition(step=step, candidate=Candidate(name=candidate_node))
         return StepCondition(step=step, candidate=None)
+
+    def _parse_dataset_condition(self, node: Dict[str, Any]) -> DatasetCondition:
+        dataset_node: Any = node.get("dataset")
+        if not isinstance(dataset_node, dict) or not dataset_node:
+            raise ValueError("Constraint 'if.dataset' condition cannot be empty.")
+
+        feature_node: Any = dataset_node.get("feature")
+        if not isinstance(feature_node, dict) or not feature_node:
+            raise ValueError("Constraint 'if.dataset.feature' cannot be empty.")
+
+        return DatasetCondition(
+            feature=DatasetFeatureCondition.model_validate(feature_node)
+        )

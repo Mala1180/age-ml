@@ -20,6 +20,7 @@ from z3 import (
 
 from automlllm.planning.solver.utils import convert_solution_to_pipeline
 from automlllm.specification import Specification
+from automlllm.specification.types import DatasetCondition
 from resources import get_resource_path
 
 
@@ -127,6 +128,10 @@ def add_constraints_to_solver(
     solver: Solver, variables: Variables, specification: Specification
 ) -> None:
     for constraint in specification.constraints:
+        if isinstance(constraint.condition, DatasetCondition):
+            # Dataset-driven constraints cannot be encoded without dataset metadata.
+            continue
+
         conditions = [variables[f"do_step_{constraint.condition.step}"]]
         if constraint.condition.candidate:
             candidate_name: str = constraint.condition.candidate.name
