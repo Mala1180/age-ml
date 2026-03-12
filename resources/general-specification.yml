@@ -149,6 +149,23 @@ pipeline:
   constraints:
 
     - if:
+        natural_language: target feature is categorical
+      require: [classification]
+
+    - if:
+        natural_language: target feature is numerical
+      require: [regression]
+
+    - if:
+        dataset:
+          feature:
+            is_like: class
+            role: output
+            data_kind: categorical
+      require: [classification]
+
+
+    - if:
         step:
           classification: {}
       forbid: [regression]

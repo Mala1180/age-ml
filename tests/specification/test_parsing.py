@@ -5,6 +5,7 @@ from automlllm.specification.types import (
     Candidate,
     DatasetCondition,
     DatasetFeatureCondition,
+    NaturalLanguageCondition,
     StepCondition,
 )
 from tests.specification.conftest import spec_sample
@@ -222,6 +223,34 @@ pipeline:
                 role="output",
                 data_kind="categorical",
             )
+        )
+        assert len(spec.constraints[0].require) == 1
+        assert spec.constraints[0].require[0].name == "classification"
+
+    def test_parse_natural_language_condition(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+    terminal: false
+    initial: false
+
+  steps:
+    classification:
+      candidates: [random_forest]
+
+  partial_ordering: []
+
+  constraints:
+    - if:
+        natural_language: target feature is categorical
+      require: [classification]
+"""
+        spec = Specification.parse(spec_yaml)
+        assert len(spec.constraints) == 1
+        assert spec.constraints[0].condition == NaturalLanguageCondition(
+            text="target feature is categorical"
         )
         assert len(spec.constraints[0].require) == 1
         assert spec.constraints[0].require[0].name == "classification"

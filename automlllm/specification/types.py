@@ -41,14 +41,18 @@ class StepCondition(Condition):
 
 
 class DatasetFeatureCondition(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     is_like: Optional[str] = None
     role: Optional[str] = None
     data_kind: Optional[str] = None
 
 
 class DatasetCondition(Condition):
-    model_config = ConfigDict(extra="forbid")
     feature: DatasetFeatureCondition
+
+
+class NaturalLanguageCondition(Condition):
+    text: str
 
 
 class Constraint(BaseModel):

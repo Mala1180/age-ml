@@ -3,8 +3,10 @@ from typing import Callable, Dict, List, Optional, Set, Tuple
 from automlllm.common.types import Step
 from automlllm.specification import Specification
 from automlllm.specification.types import (
+    Condition,
     Constraint,
     DatasetCondition,
+    NaturalLanguageCondition,
     OrderingRule,
     SpecStep,
     StepCondition,
@@ -170,15 +172,16 @@ class SpecificationValidator:
     def _check_constraint(
         self,
         pipeline: List[Step],
-        condition: StepCondition | DatasetCondition,
+        condition: Condition,
         required_steps: List[Step],
         forbidden_steps: List[Step],
     ) -> Tuple[bool, Optional[str]]:
-        if isinstance(condition, DatasetCondition):
-            # Dataset constraints depend on dataset metadata, which is not available
+        if isinstance(condition, (DatasetCondition, NaturalLanguageCondition)):
+            # Non-step constraints depend on external context not available
             # in pipeline-only validation.
             return True, None
 
+        assert isinstance(condition, StepCondition)
         condition_name: str = condition.step
         condition_value: str = condition.candidate.name if condition.candidate else ""
         feedbacks: List[str] = []

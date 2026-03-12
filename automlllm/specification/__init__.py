@@ -4,8 +4,10 @@ from automlllm.specification.parsing import SpecificationParser
 from automlllm.specification.types import (
     Constraint,
     DatasetCondition,
+    NaturalLanguageCondition,
     OrderingRule,
     SpecStep,
+    StepCondition,
 )
 
 
@@ -90,7 +92,11 @@ class Specification:
                     if feature.is_like:
                         parts.append(f"is like '{feature.is_like}'")
                     cond_str = "dataset feature matches " + ", ".join(parts)
-                else:
+                elif isinstance(constraint.condition, NaturalLanguageCondition):
+                    cond_str = (
+                        f"natural-language condition: '{constraint.condition.text}'"
+                    )
+                elif isinstance(constraint.condition, StepCondition):
                     condition_node: str = constraint.condition.step
                     condition_value: str = (
                         constraint.condition.candidate.name
@@ -101,7 +107,8 @@ class Specification:
                         cond_str = f"'{condition_node}' has value '{condition_value}'"
                     else:
                         cond_str = f"'{condition_node}' is present"
-
+                else:
+                    raise ValueError("Unknown condition type in constraint.")
                 consequences: List[str] = []
                 if constraint.require:
                     reqs: List[str] = []

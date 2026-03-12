@@ -10,6 +10,7 @@ from automlllm.specification.types import (
     DatasetCondition,
     DatasetFeatureCondition,
     Defaults,
+    NaturalLanguageCondition,
     OrderingRule,
     SpecStep,
     StepCondition,
@@ -131,18 +132,20 @@ class SpecificationParser:
 
     def _parse_condition(
         self, node: Dict[str, Any]
-    ) -> StepCondition | DatasetCondition:
+    ) -> StepCondition | DatasetCondition | NaturalLanguageCondition:
         if not isinstance(node, dict) or not node:
             raise ValueError(
-                "Constraint 'if' condition must define a 'step' or 'dataset' key."
+                "Constraint 'if' condition must define a 'step', 'dataset', or 'natural_language' key."
             )
 
         if "step" in node:
             return self._parse_step_condition(node)
         if "dataset" in node:
             return self._parse_dataset_condition(node)
+        if "natural_language" in node:
+            return self._parse_natural_language_condition(node)
         raise ValueError(
-            "Constraint 'if' condition must define a 'step' or 'dataset' key."
+            "Constraint 'if' condition must define a 'step', 'dataset', or 'natural_language' key."
         )
 
     def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
@@ -171,3 +174,13 @@ class SpecificationParser:
         return DatasetCondition(
             feature=DatasetFeatureCondition.model_validate(feature_node)
         )
+
+    def _parse_natural_language_condition(
+        self, node: Dict[str, Any]
+    ) -> NaturalLanguageCondition:
+        natural_language_node: Any = node.get("natural_language")
+        if not isinstance(natural_language_node, str) or natural_language_node == "":
+            raise ValueError(
+                "Constraint 'if.natural_language' condition must be a non-empty string."
+            )
+        return NaturalLanguageCondition(text=natural_language_node)
