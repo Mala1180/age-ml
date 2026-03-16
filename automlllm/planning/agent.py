@@ -1,4 +1,5 @@
 from pathlib import Path
+import random
 from typing import Any, List
 
 import pandas as pd
@@ -24,6 +25,7 @@ class PlanningAgentState(MessagesState):
     specification: Specification
     dataset_path: str
     dataset_info: str
+    max_pipelines: int
     pipelines: List[PlanningPipeline]
 
 
@@ -98,6 +100,14 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
     return state
 
 
+def select_pipelines(state: PlanningAgentState) -> PlanningAgentState:
+    if len(state["pipelines"]) <= state["max_pipelines"]:
+        return state
+
+    state["pipelines"] = random.sample(state["pipelines"], k=state["max_pipelines"])
+    return state
+
+
 state_graph: StateGraph = StateGraph(PlanningAgentState)
 
 state_graph.add_sequence(
@@ -106,10 +116,11 @@ state_graph.add_sequence(
         load_specification,
         translate_semantic_conditions,
         generate_pipelines,
+        select_pipelines,
     ]
 )
 state_graph.add_edge(START, "load_dataset")
-state_graph.add_edge("generate_pipelines", END)
+state_graph.add_edge("select_pipelines", END)
 
 system_prompt: SystemMessage = SystemMessage(
     content=(

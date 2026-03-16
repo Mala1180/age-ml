@@ -20,7 +20,7 @@ api_key = SecretStr(os.getenv("OPENROUTER_API_KEY", ""))
 # )
 
 # google gemini
-model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
+model = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite-preview")
 #
 # # local with ollama
 # model = ChatOllama(
