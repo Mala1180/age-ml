@@ -14,7 +14,11 @@ from typing_extensions import override
 
 from automlllm.common.model import model
 from automlllm.common.types import Pipeline
-from automlllm.execution.utils import extract_python_code, grid_search_exploration
+from automlllm.execution.utils import (
+    extract_python_code,
+    grid_search_exploration,
+    delete_failed_runs,
+)
 from automlllm.planning.agent import PlanningPipeline
 from automlllm.specification import Specification
 
@@ -43,6 +47,8 @@ class ExecutionPipeline(Pipeline):
 
 
 class ExecutionAgentState(MessagesState):
+    run_id: str
+    experiment_id: str
     dataset_path: str
     specification_path: str
     planning_pipeline: PlanningPipeline
@@ -64,6 +70,7 @@ class JudgeResponse(BaseModel):
 
 class CodeResponse(BaseModel):
     code: str
+
 
 class ExplanationResponse(BaseModel):
     explanation: str
@@ -121,18 +128,8 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
         + " UTC"
     )
-    # mlflow_start: str = (
-    #     "import mlflow, os\n\n"
-    #     "run_id = os.environ['MLFLOW_RUN_ID']\n"
-    #     "mlflow.start_run(run_id=run_id)\n"
-    #     "mlflow.autolog()"
-    # )
-    # mlflow_end: str = "mlflow.end_run()"
     state["pipeline"].code = (
-        f"# {created_at}\n\n"
-        # f"{mlflow_start}\n\n"
-        f"{extract_python_code(response.code)}\n\n"
-        # f"{mlflow_end}"
+        f"# {created_at}\n\n{extract_python_code(response.code)}\n\n"
     )
 
     __save_file(state["pipeline"].id, "code.py", state["pipeline"].code)
@@ -177,10 +174,16 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         import mlflow
 
         mlflow.autolog()
-
+        parent_run_id: str
         description: str = str(state["pipeline"])
         run_name: str = f"pipeline_{state['pipeline'].id}"
-        with mlflow.start_run(run_name=run_name, description=description):
+        with mlflow.start_run(
+            nested=True,
+            parent_run_id=state["run_id"],
+            run_name=run_name,
+            description=description,
+        ) as parent_run:
+            parent_run_id = parent_run.info.run_id
             hyperparameters: Dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
@@ -201,6 +204,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             AIMessage(content=f"Error during code execution: {str(e)}")
         ]
         state["code_execution_feedback"] = False
+        delete_failed_runs(parent_run_id, state["experiment_id"])
 
     return state
 

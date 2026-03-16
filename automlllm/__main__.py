@@ -1,8 +1,10 @@
+from datetime import datetime
 from concurrent.futures import ProcessPoolExecutor
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import fire
 import mlflow
+from mlflow.entities import Experiment
 
 from automlllm import logger
 from automlllm.execution.agent import (
@@ -15,17 +17,20 @@ mlflow.openai.autolog()
 mlflow.langchain.autolog()
 
 
-def main(spec_path: str, dataset_path: str, max_pipelines: int = 5) -> None:
+def main(
+    spec_path: str, dataset_path: str, max_pipelines: int = 20, max_workers: int = 5
+) -> None:
     """Run planning and execution from the command line.
 
     The command can be invoked as:
 
-    ``python -m automlllm --spec_path=<path> --dataset_path=<path>``
+    ``python -m automlllm --spec_path=<path> --dataset_path=<path> --max_pipelines=<number> --max_workers=<number>``
 
     Args:
         spec_path: Filesystem path to the YAML specification file.
         dataset_path: Filesystem path to the input dataset used for the AutoML task.
         max_pipelines: Maximum number of pipelines to explore and execute.
+        max_workers: Maximum number of workers to launch.
 
     Returns:
         None.
@@ -42,30 +47,38 @@ def main(spec_path: str, dataset_path: str, max_pipelines: int = 5) -> None:
     )
     planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
 
-    mlflow.set_experiment("adult-experiment")
+    experiment_name: str = "adult-experiment"
+    mlflow.set_experiment(experiment_name)
+    experiment: Optional[Experiment] = mlflow.get_experiment_by_name(experiment_name)
+    assert experiment is not None, "Experiment should exist after setting it"
+    experiment_id = experiment.experiment_id
 
-    with ProcessPoolExecutor(max_workers=4) as executor:
-        for i, planned_pipeline in enumerate(planned_pipelines):
-            print(f"Executing pipeline {i}")
-            execution_pipeline: ExecutionPipeline = ExecutionPipeline(
-                id=i, steps=planned_pipeline.steps
-            )
-            # invoke_agent(
-            #     {
-            #         "dataset_path": dataset_path,
-            #         "specification_path": spec_path,
-            #         "pipeline": execution_pipeline,
-            #     }
-            # )
-            executor.submit(
-                invoke_agent,
-                {
-                    "dataset_path": dataset_path,
-                    "specification_path": spec_path,
-                    "pipeline": execution_pipeline,
-                },
-            )
-            # future.result()
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    run_name: str = f"pipeline_exploration-{timestamp}"
+    with mlflow.start_run(run_name=run_name) as run:
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            for i, planned_pipeline in enumerate(planned_pipelines):
+                print(f"Executing pipeline {i}")
+                execution_pipeline: ExecutionPipeline = ExecutionPipeline(
+                    id=i, steps=planned_pipeline.steps
+                )
+                executor.submit(
+                    invoke_agent,
+                    {
+                        "dataset_path": dataset_path,
+                        "specification_path": spec_path,
+                        "pipeline": execution_pipeline,
+                        "run_id": run.info.run_id,
+                        "experiment_id": experiment_id,
+                    },
+                )
+                # invoke_agent(
+                #     {
+                #         "dataset_path": dataset_path,
+                #         "specification_path": spec_path,
+                #         "pipeline": execution_pipeline,
+                #     }
+                # )
 
 
 def invoke_agent(input: dict) -> Dict:
