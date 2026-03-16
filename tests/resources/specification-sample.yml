@@ -2,13 +2,10 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     step1:
       candidates: [a, b]
-      initial: true
       mandatory: true
 
     step2:
@@ -22,7 +19,6 @@ pipeline:
 
     step5:
       candidates: [l, m]
-      terminal: true
       mandatory: true
 
   partial_ordering:

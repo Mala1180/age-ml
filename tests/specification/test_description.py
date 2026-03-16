@@ -8,8 +8,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     model:
@@ -41,8 +39,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     preprocessing:

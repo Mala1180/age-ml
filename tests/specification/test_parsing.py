@@ -18,13 +18,11 @@ class TestSpecificationParsing:
         step_ids = {s.id for s in spec.steps}
         assert step_ids == {"step1", "step2", "step3", "step4", "step5"}
         step1 = next(s for s in spec.steps if s.id == "step1")
-        assert step1.initial is True
         assert step1.mandatory is True
         assert len(step1.candidates) == 2
         assert step1.candidates[0].name == "a"
         assert step1.candidates[1].name == "b"
         step5 = next(s for s in spec.steps if s.id == "step5")
-        assert step5.terminal is True
         assert step5.mandatory is True
         assert len(spec.ordering) == 5
         assert len(spec.constraints) == 3
@@ -43,8 +41,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
   
   steps:
     model:
@@ -85,8 +81,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
   
   steps:
     preprocessing:
@@ -130,8 +124,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     a:
@@ -197,8 +189,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     classification:
@@ -216,16 +206,17 @@ pipeline:
       require: [classification]
 """
         spec = Specification.parse(spec_yaml)
-        assert len(spec.constraints) == 1
-        assert spec.constraints[0].condition == DatasetCondition(
+        assert len(spec.constraints) == 0
+        assert len(spec.semantic_constraints) == 1
+        assert spec.semantic_constraints[0].condition == DatasetCondition(
             feature=DatasetFeatureCondition(
                 is_like="class",
                 role="output",
                 data_kind="categorical",
             )
         )
-        assert len(spec.constraints[0].require) == 1
-        assert spec.constraints[0].require[0].name == "classification"
+        assert len(spec.semantic_constraints[0].require) == 1
+        assert spec.semantic_constraints[0].require[0].name == "classification"
 
     def test_parse_natural_language_condition(self):
         spec_yaml = """
@@ -233,8 +224,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     classification:
@@ -248,30 +237,25 @@ pipeline:
       require: [classification]
 """
         spec = Specification.parse(spec_yaml)
-        assert len(spec.constraints) == 1
-        assert spec.constraints[0].condition == NaturalLanguageCondition(
+        assert len(spec.constraints) == 0
+        assert len(spec.semantic_constraints) == 1
+        assert spec.semantic_constraints[0].condition == NaturalLanguageCondition(
             text="target feature is categorical"
         )
-        assert len(spec.constraints[0].require) == 1
-        assert spec.constraints[0].require[0].name == "classification"
+        assert len(spec.semantic_constraints[0].require) == 1
+        assert spec.semantic_constraints[0].require[0].name == "classification"
 
     def test_parse_step_attributes(self):
         spec = Specification.parse(spec_sample)
 
         step1 = next(s for s in spec.steps if s.id == "step1")
-        assert step1.initial is True
         assert step1.mandatory is True
-        assert step1.terminal is False
 
         step2 = next(s for s in spec.steps if s.id == "step2")
-        assert step2.initial is False
         assert step2.mandatory is False
-        assert step2.terminal is False
 
         step5 = next(s for s in spec.steps if s.id == "step5")
-        assert step5.initial is False
         assert step5.mandatory is True
-        assert step5.terminal is True
 
     def test_parse_defaults_applied_to_steps(self):
         spec_sample = """
@@ -279,8 +263,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: true
-    terminal: false
-    initial: false
   
   steps:
     step1:
@@ -351,8 +333,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     step1:

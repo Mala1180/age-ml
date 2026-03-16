@@ -28,8 +28,6 @@ class SpecificationValidator:
         checks: List[Callable[[List[Step]], Tuple[bool, Optional[str]]]] = [
             self._validate_allowed_steps,
             self._validate_mandatory_steps,
-            self._validate_initial_steps,
-            self._validate_terminal_steps,
             self._validate_ordering,
             self._validate_constraints,
         ]
@@ -95,38 +93,6 @@ class SpecificationValidator:
             )
 
         return True, None
-
-    def _validate_initial_steps(
-        self, pipeline: List[Step]
-    ) -> Tuple[bool, Optional[str]]:
-        is_valid: bool = True
-        messages: List[str] = []
-        pipeline_names: Set[str] = {step.name for step in pipeline}
-        for spec_step in self.steps:
-            if spec_step.id in pipeline_names and spec_step.initial:
-                if pipeline[0].name != spec_step.id:
-                    is_valid = False
-                    messages.append(
-                        f"Step {spec_step.id} must be initial but is not the first step.",
-                    )
-        feedback: Optional[str] = " ".join(messages) if len(messages) > 0 else None
-        return is_valid, feedback
-
-    def _validate_terminal_steps(
-        self, pipeline: List[Step]
-    ) -> Tuple[bool, Optional[str]]:
-        is_valid: bool = True
-        messages: List[str] = []
-        pipeline_names: Set[str] = {step.name for step in pipeline}
-        for spec_step in self.steps:
-            if spec_step.id in pipeline_names and spec_step.terminal:
-                if pipeline[-1].name != spec_step.id:
-                    is_valid = False
-                    messages.append(
-                        f"Step {spec_step.id} must be terminal but is not the last step.",
-                    )
-        feedback: Optional[str] = " ".join(messages) if len(messages) > 0 else None
-        return is_valid, feedback
 
     def _validate_ordering(self, pipeline: List[Step]) -> Tuple[bool, Optional[str]]:
         is_valid: bool = True
