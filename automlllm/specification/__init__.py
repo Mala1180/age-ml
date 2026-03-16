@@ -64,10 +64,6 @@ class Specification:
             attrs: List[str] = []
             if step.mandatory:
                 attrs.append("mandatory")
-            if step.initial:
-                attrs.append("initial")
-            if step.terminal:
-                attrs.append("terminal")
 
             if attrs:
                 lines.append(f"  - Attributes: {', '.join(attrs)}")

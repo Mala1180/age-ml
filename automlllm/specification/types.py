@@ -7,8 +7,6 @@ from automlllm.common.types import Step
 
 class Defaults(BaseModel):
     mandatory: bool = False
-    initial: bool = False
-    terminal: bool = False
 
 
 class Candidate(BaseModel):

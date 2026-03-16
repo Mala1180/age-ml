@@ -37,21 +37,6 @@ class TestSpecificationValidator:
             message == "Partial ordering violated:\n- 'step2' must come before 'step3'."
         )
 
-    def test_wrong_initial_step(self, validator, sample_pipeline):
-        sample_pipeline[0], sample_pipeline[1] = sample_pipeline[1], sample_pipeline[0]
-        is_valid, message = validator.validate_pipeline(sample_pipeline, True)
-        assert is_valid is False
-        assert message == "Step step1 must be initial but is not the first step."
-
-    def test_wrong_terminal_step(self, validator, sample_pipeline):
-        sample_pipeline[-2], sample_pipeline[-1] = (
-            sample_pipeline[-1],
-            sample_pipeline[-2],
-        )
-        is_valid, message = validator.validate_pipeline(sample_pipeline, True)
-        assert is_valid is False
-        assert message == "Step step5 must be terminal but is not the last step."
-
     def test_pipeline_is_valid(self, validator, sample_pipeline):
         is_valid, message = validator.validate_pipeline(sample_pipeline, True)
         assert message is None

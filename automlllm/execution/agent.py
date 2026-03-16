@@ -33,7 +33,7 @@ class ExecutionPipeline(Pipeline):
     def __str__(self) -> str:
         string_value: str = f"Pipeline {self.id}:\n{self.format_steps()}"
         if self.code:
-            string_value += f"\nCode:\n{self.code}"
+            string_value += f"\nCode:\n```python\n{self.code}```"
         if self.explanation:
             string_value += f"\nExplanation:\n{self.explanation}"
         return string_value
@@ -128,9 +128,9 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
         + " UTC"
     )
-    state["pipeline"].code = (
-        f"# {created_at}\n\n{extract_python_code(response.code)}\n\n"
-    )
+    state[
+        "pipeline"
+    ].code = f"# {created_at}\n\n{extract_python_code(response.code)}\n\n"
 
     __save_file(state["pipeline"].id, "code.py", state["pipeline"].code)
     state["messages"] = state["messages"] + [AIMessage(content=response.code)]

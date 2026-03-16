@@ -3,8 +3,6 @@ pipeline:
   defaults:
     candidates: []
     mandatory: false
-    terminal: false
-    initial: false
 
   steps:
     imputation:
@@ -62,7 +60,6 @@ pipeline:
               k_neighbors: [5]
 
     classification:
-      terminal: true
       candidates:
         - decision_tree:
             params:
@@ -93,7 +90,6 @@ pipeline:
 
 
     regression:
-      terminal: true
       candidates:
         - linear:
             params: {}
