@@ -1,3 +1,19 @@
+## [3.1.0](https://github.com/Mala1180/automl-llm/compare/3.0.0...3.1.0) (2026-03-16)
+
+### Features
+
+* add pipeline exploration cap with random selection, improve prompts for code generation ([82578a2](https://github.com/Mala1180/automl-llm/commit/82578a2fd0768e0ee66d7f004798c89058a0eb81))
+* improve logging and nesting of runs ([48adff0](https://github.com/Mala1180/automl-llm/commit/48adff023745c29f6bfd715563216606a594fe03))
+* **planning:** add TrueCondition, semantic constraints, refactor planning agent in order to generate a list of pipelines ([9258a66](https://github.com/Mala1180/automl-llm/commit/9258a66762e87f1f8334dde1cfcce5c10d408b17))
+
+### General maintenance
+
+* fill README.md ([82846d3](https://github.com/Mala1180/automl-llm/commit/82846d374c3bdb7b2c7d625bafa142ae2c1471ff))
+
+### Refactoring
+
+* remove initial and terminal fields from specification ([8b90150](https://github.com/Mala1180/automl-llm/commit/8b90150af43adebadf9f8c642eda4408390428cb))
+
 ## [3.0.0](https://github.com/Mala1180/automl-llm/compare/2.0.1...3.0.0) (2026-03-12)
 
 ### ⚠ BREAKING CHANGES
