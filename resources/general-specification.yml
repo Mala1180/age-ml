@@ -139,12 +139,8 @@ pipeline:
         - normalization
         - features
         - rebalancing
-
-    - before: rebalancing
-      after: classification
-
-    - before: rebalancing
-      after: regression
+        - classification
+        - regression
 
   constraints:
 

@@ -1,3 +1,4 @@
+import importlib.util
 from datetime import datetime
 from pathlib import Path
 from types import ModuleType
@@ -61,7 +62,16 @@ class JudgeResponse(BaseModel):
     feedback: str
 
 
+class CodeResponse(BaseModel):
+    code: str
+
+class ExplanationResponse(BaseModel):
+    explanation: str
+
+
 judge_model = model.with_structured_output(JudgeResponse)
+code_model = model.with_structured_output(CodeResponse)
+explanation_model = model.with_structured_output(CodeResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
@@ -98,11 +108,13 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         The code must be contained in a function called 'train_model'.
         Hyperparameters used in the entire pipeline must not be magic numbers/string, but they must 
         be passed as arguments to the 'train_model' using these parameters names: {", ".join(state["pipeline"].extract_hyperparameters().keys())}.
+        'train_model' function must have ONLY these parameters, and no other parameters.
+        Do NOT use grid search.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
 
-    response: Any = model.invoke(state["messages"])
-    assert isinstance(response.content, str)
+    response: Any = code_model.invoke(state["messages"])
+    assert isinstance(response, CodeResponse)
     state["pipeline"].created_at = datetime.now()
     created_at = (
         "**Created at:** "
@@ -119,12 +131,12 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["pipeline"].code = (
         f"# {created_at}\n\n"
         # f"{mlflow_start}\n\n"
-        f"{extract_python_code(response.content)}\n\n"
+        f"{extract_python_code(response.code)}\n\n"
         # f"{mlflow_end}"
     )
 
     __save_file(state["pipeline"].id, "code.py", state["pipeline"].code)
-    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+    state["messages"] = state["messages"] + [AIMessage(content=response.code)]
     return state
 
 
@@ -164,18 +176,17 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     try:
         import mlflow
 
-        with mlflow.start_run(nested=True, run_name=f"pipeline_{state['pipeline'].id}"):
+        mlflow.autolog()
+
+        description: str = str(state["pipeline"])
+        run_name: str = f"pipeline_{state['pipeline'].id}"
+        with mlflow.start_run(run_name=run_name, description=description):
             hyperparameters: Dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
-            for index, hp_combination in enumerate(
-                grid_search_exploration(hyperparameters)
-            ):
-                mlflow.autolog()
-                # run_id: str = f"{parent_run.info.run_id}_{index}"
-                with mlflow.start_run(nested=True, run_name=f"run_{index}"):
-                    import importlib.util
-
+            index_run: int = 0
+            for hp_combination in grid_search_exploration(hyperparameters):
+                with mlflow.start_run(nested=True, run_name=f"run_{index_run}"):
                     spec = importlib.util.spec_from_file_location(
                         "out_module", f"out/pipeline_{state['pipeline'].id}/code.py"
                     )
@@ -183,7 +194,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     spec.loader.exec_module(module)  # type: ignore
 
                     module.train_model(**hp_combination)
-
+                index_run += 1
             state["code_execution_feedback"] = True
     except Exception as e:
         state["messages"] = state["messages"] + [
@@ -199,6 +210,7 @@ def code_execution_branch(
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid = state["code_execution_feedback"]
     state["execution_attempts"] += 1
+    print(f"Execution attempt {state['execution_attempts']}")
     if not is_valid and state["execution_attempts"] == max_attempts:
         raise Exception("Maximum attempts reached for code execution.")
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
@@ -211,16 +223,16 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         For each pipeline step, create a concise phrase that explain such step concisely.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
-    response: Any = model.invoke(state["messages"])
-    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
-    assert isinstance(response.content, str)
+    response: Any = explanation_model.invoke(state["messages"])
+    assert isinstance(response, ExplanationResponse)
+    state["messages"] = state["messages"] + [AIMessage(content=response.explanation)]
     assert state["pipeline"].created_at
     created_at = (
         "**Created at:** "
         + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
         + " UTC\n\n"
     )
-    state["pipeline"].explanation = "> " + created_at + response.content
+    state["pipeline"].explanation = "> " + created_at + response.explanation
     __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
