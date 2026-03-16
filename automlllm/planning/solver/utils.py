@@ -3,7 +3,7 @@ from typing import List
 from z3 import ModelRef, is_true
 
 from automlllm.common.types import Step
-from automlllm.planning.agent import PlanningPipeline
+from automlllm.planning.types import PlanningPipeline
 from automlllm.specification import Specification
 
 

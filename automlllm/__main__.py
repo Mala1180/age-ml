@@ -1,5 +1,5 @@
 from concurrent.futures import ProcessPoolExecutor
-from typing import Optional, Dict
+from typing import Dict, List
 
 import fire
 import mlflow
@@ -9,58 +9,53 @@ from automlllm.execution.agent import (
     execution_agent,
     ExecutionPipeline,
 )
-from automlllm.mocks import planned_pipeline_1, planned_pipeline_2
+from automlllm.planning.agent import PlanningPipeline, planning_agent
 
 mlflow.openai.autolog()
 mlflow.langchain.autolog()
 
 
-def main(prompt: str = "", dataset_path: Optional[str] = None):
-    dataset_path = "resources/datasets/adult.csv"
-    specification_path = "resources/adult-specification.yml"
-    # prompt = "Help me to build a machine learning pipeline for Adult Income Prediction."
-    # messages: List[BaseMessage] = create_user_prompt(prompt)
+def main(spec_path: str, dataset_path: str) -> None:
+    """Run planning and execution from the command line.
 
-    # planning: PlanningAgentState = planning_agent.invoke(
-    #     {
-    #         "messages": messages,
-    #         "user_prompt": prompt,
-    #         "specification_path": specification_path,
-    #         "dataset_path": dataset_path,
-    #     }
-    # )
-    # planned_pipeline: PlanningPipeline = planning["pipeline"]
+    The command can be invoked as:
 
-    # dataset_info: str = planning["dataset_info"]
-    execution_pipeline_1: ExecutionPipeline = ExecutionPipeline(
-        id=1, steps=planned_pipeline_1.steps
+    ``python -m automlllm --spec_path=<path> --dataset_path=<path>``
+
+    Args:
+        spec_path: Filesystem path to the YAML specification file.
+        dataset_path: Filesystem path to the input dataset used for the AutoML task.
+
+    Returns:
+        None.
+    """
+    # dataset_path = "resources/datasets/adult.csv"
+    # spec_path = "resources/general-specification.yml"
+
+    planning = planning_agent.invoke(
+        {
+            "specification_path": spec_path,
+            "dataset_path": dataset_path,
+        }
     )
-    execution_pipeline_2: ExecutionPipeline = ExecutionPipeline(
-        id=2, steps=planned_pipeline_2.steps
-    )
-    print("Execution pipeline:")
-    # print(str(execution_pipeline))
+    planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
+
     mlflow.set_experiment("adult-experiment")
 
-    with ProcessPoolExecutor(max_workers=2) as executor:
-        future_1 = executor.submit(
-            invoke_agent,
-            {
-                "dataset_path": dataset_path,
-                "specification_path": specification_path,
-                "pipeline": execution_pipeline_1,
-            },
-        )
-        future_2 = executor.submit(
-            invoke_agent,
-            {
-                "dataset_path": dataset_path,
-                "specification_path": specification_path,
-                "pipeline": execution_pipeline_2,
-            },
-        )
-        future_1.result()
-        future_2.result()
+    with ProcessPoolExecutor(max_workers=10) as executor:
+        for i, planned_pipeline in enumerate(planned_pipelines):
+            execution_pipeline: ExecutionPipeline = ExecutionPipeline(
+                id=i, steps=planned_pipeline.steps
+            )
+            future = executor.submit(
+                invoke_agent,
+                {
+                    "dataset_path": dataset_path,
+                    "specification_path": spec_path,
+                    "pipeline": execution_pipeline,
+                },
+            )
+            future.result()
 
 
 def invoke_agent(input: dict) -> Dict:

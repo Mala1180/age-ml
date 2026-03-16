@@ -35,6 +35,14 @@ class Condition(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class TrueCondition(Condition):
+    pass
+
+
+class SemanticCondition(Condition):
+    pass
+
+
 class StepCondition(Condition):
     step: str
     candidate: Optional[Candidate] = None
@@ -47,12 +55,25 @@ class DatasetFeatureCondition(BaseModel):
     data_kind: Optional[str] = None
 
 
-class DatasetCondition(Condition):
+class DatasetCondition(SemanticCondition):
     feature: DatasetFeatureCondition
 
+    def __str__(self):
+        conditions = []
+        if self.feature.is_like:
+            conditions.append(f"feature name is like '{self.feature.is_like}'")
+        if self.feature.role:
+            conditions.append(f"feature role is '{self.feature.role}'")
+        if self.feature.data_kind:
+            conditions.append(f"feature data kind is '{self.feature.data_kind}'")
+        return " and ".join(conditions)
 
-class NaturalLanguageCondition(Condition):
+
+class NaturalLanguageCondition(SemanticCondition):
     text: str
+
+    def __str__(self):
+        return self.text
 
 
 class Constraint(BaseModel):
