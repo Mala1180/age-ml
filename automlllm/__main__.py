@@ -1,5 +1,6 @@
 from datetime import datetime
 from concurrent.futures import ProcessPoolExecutor
+from pathlib import Path
 from typing import Dict, List, Optional
 
 import fire
@@ -12,24 +13,25 @@ from automlllm.execution.agent import (
     ExecutionPipeline,
 )
 from automlllm.planning.agent import PlanningPipeline, planning_agent
+from automlllm.specification import Specification
 
 mlflow.openai.autolog()
 mlflow.langchain.autolog()
 
 
-def main(
-    spec_path: str, dataset_path: str, max_pipelines: int = 20, max_workers: int = 5
-) -> None:
+def main(spec_path: str, dataset_path: str, max_workers: int = 5) -> None:
     """Run planning and execution from the command line.
 
     The command can be invoked as:
 
-    ``python -m automlllm --spec_path=<path> --dataset_path=<path> --max_pipelines=<number> --max_workers=<number>``
+    ``python -m automlllm --spec_path=<path> --dataset_path=<path> --max_workers=<number>``
+
+    The max pipeline exploration cap is read from ``max_exploration`` in the
+    specification YAML.
 
     Args:
         spec_path: Filesystem path to the YAML specification file.
         dataset_path: Filesystem path to the input dataset used for the AutoML task.
-        max_pipelines: Maximum number of pipelines to explore and execute.
         max_workers: Maximum number of workers to launch.
 
     Returns:
@@ -37,6 +39,9 @@ def main(
     """
     # dataset_path = "resources/datasets/adult.csv"
     # spec_path = "resources/general-specification.yml"
+
+    specification: Specification = Specification.parse(Path(spec_path).read_text())
+    max_pipelines: int = specification.max_exploration
 
     planning = planning_agent.invoke(
         {

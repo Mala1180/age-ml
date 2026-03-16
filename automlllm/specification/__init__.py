@@ -14,12 +14,14 @@ from automlllm.specification.types import (
 class Specification:
     def __init__(
         self,
+        max_exploration: int,
         steps: List[SpecStep],
         ordering: List[OrderingRule],
         constraints: List[Constraint],
         semantic_constraints: List[Constraint],
         technical_details: List[str],
     ) -> None:
+        self.max_exploration: int = max_exploration
         self.steps: List[SpecStep] = steps
         self.ordering: List[OrderingRule] = ordering
         self.constraints: List[Constraint] = constraints
@@ -31,6 +33,7 @@ class Specification:
         parser: SpecificationParser = SpecificationParser(spec_yaml)
         parsed_spec = parser.parse()
         return cls(
+            parsed_spec.max_exploration,
             parsed_spec.steps,
             parsed_spec.ordering,
             parsed_spec.constraints,

@@ -101,10 +101,13 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
 
 
 def select_pipelines(state: PlanningAgentState) -> PlanningAgentState:
-    if len(state["pipelines"]) <= state["max_pipelines"]:
+    max_pipelines: int = state.get(
+        "max_pipelines", state["specification"].max_exploration
+    )
+    if len(state["pipelines"]) <= max_pipelines:
         return state
 
-    state["pipelines"] = random.sample(state["pipelines"], k=state["max_pipelines"])
+    state["pipelines"] = random.sample(state["pipelines"], k=max_pipelines)
     return state
 
 

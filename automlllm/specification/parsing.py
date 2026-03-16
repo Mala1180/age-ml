@@ -19,6 +19,7 @@ from automlllm.specification.types import (
 
 
 class ParsedSpecification(BaseModel):
+    max_exploration: int
     steps: List[SpecStep]
     ordering: List[OrderingRule]
     constraints: List[Constraint]
@@ -32,6 +33,7 @@ class SpecificationParser:
 
     def parse(self) -> ParsedSpecification:
         spec: Dict = yaml.safe_load(self.spec_yaml)
+        max_exploration: int = spec.get("max_exploration", 20)
 
         defaults_data = spec["pipeline"]["defaults"]
         defaults = Defaults.model_validate(defaults_data).model_dump()
@@ -93,6 +95,7 @@ class SpecificationParser:
         technical_details: List[str] = spec.get("technical_details", [])
 
         return ParsedSpecification(
+            max_exploration=max_exploration,
             steps=steps,
             ordering=ordering,
             constraints=constraints,

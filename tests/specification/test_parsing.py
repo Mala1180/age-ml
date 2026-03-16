@@ -14,6 +14,7 @@ from tests.specification.conftest import spec_sample
 class TestSpecificationParsing:
     def test_parse_sample_specification(self):
         spec = Specification.parse(spec_sample)
+        assert spec.max_exploration == 20
         assert len(spec.steps) == 5
         step_ids = {s.id for s in spec.steps}
         assert step_ids == {"step1", "step2", "step3", "step4", "step5"}
@@ -27,6 +28,24 @@ class TestSpecificationParsing:
         assert len(spec.ordering) == 5
         assert len(spec.constraints) == 3
         assert len(spec.technical_details) == 2
+
+    def test_parse_max_exploration(self):
+        spec_yaml = """
+max_exploration: 7
+
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+
+  steps:
+    model:
+      candidates: [random_forest]
+
+  partial_ordering: []
+"""
+        spec = Specification.parse(spec_yaml)
+        assert spec.max_exploration == 7
 
     def test_parse_steps_with_string_candidates(self):
         spec = Specification.parse(spec_sample)
