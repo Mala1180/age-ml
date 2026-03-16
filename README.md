@@ -8,7 +8,7 @@ The workflow has two stages:
 
 ## Repository Structure
 
-- `automlllm/planning/`: planning agent and Z3-based pipeline enumeration.
+- `automlllm/planning/`: planning agent and constraint solver logic.
 - `automlllm/execution/`: code generation, validation, execution, and MLflow integration.
 - `automlllm/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
@@ -21,7 +21,8 @@ The workflow has two stages:
 - Poetry for dependency management
 - API key for the configured LLM provider
 
-The project currently instantiates `ChatGoogleGenerativeAI` in `automlllm/common/model.py`, so you should provide a valid Google API key via environment (for example in `.env`).
+The project currently instantiates `ChatGoogleGenerativeAI` in [`automlllm/common/model.py`](automlllm/common/model.py), 
+so you should provide a valid Google API key via environment (for example in `.env`, initialized from `.env.example`).
 
 ## Installation
 
@@ -43,7 +44,6 @@ Run the full workflow:
 python -m automlllm \
   --spec_path resources/general-specification.yml \
   --dataset_path resources/datasets/adult.csv \
-  --max_pipelines 5 \
   --max_workers 2
 ```
 
@@ -57,6 +57,7 @@ What this does:
 ## Specification Format
 
 A specification file defines:
+- `max_exploration`: maximum number of planned pipelines to sample/execute (default: 20).
 - `pipeline.defaults`: default attributes for steps (`mandatory`, `candidates`).
 - `pipeline.steps`: admissible steps and candidates with parameter grids.
 - `pipeline.partial_ordering`: ordering constraints (supports `sequence` shorthand).
