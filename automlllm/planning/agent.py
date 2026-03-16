@@ -1,35 +1,38 @@
 from pathlib import Path
-from typing import Any, List, Literal, Optional, Tuple
+from typing import Any, List
 
 import pandas as pd
-from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, BaseMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
-from typing_extensions import override
+from pydantic import BaseModel
 
 from automlllm.common.model import model
-from automlllm.common.types import Pipeline
-from automlllm.specification import Specification
-from automlllm.specification.validation import SpecificationValidator
-
-
-class PlanningPipeline(Pipeline):
-    @override
-    def __str__(self) -> str:
-        return f"Planning Pipeline:\n{self.format_steps()}"
+from automlllm.planning.solver import (
+    create_solver,
+    enumerate_solutions,
+    convert_solution_to_pipeline,
+)
+from automlllm.planning.types import PlanningPipeline
+from automlllm.specification import Specification, Constraint
+from automlllm.specification.types import TrueCondition
 
 
 class PlanningAgentState(MessagesState):
-    user_prompt: str
     specification_path: str
-    specification: str
+    specification: Specification
     dataset_path: str
     dataset_info: str
-    pipeline: PlanningPipeline
-    pipeline_feedback: Tuple[bool, Optional[str]]
+    pipelines: List[PlanningPipeline]
 
 
-structured_model = model.with_structured_output(PlanningPipeline)
+class ConditionVerification(BaseModel):
+    is_condition_met: bool
+    explanation: str
+
+
+structured_model = model.with_structured_output(ConditionVerification)
 attempts: int = 0
 max_attempts: int = 5
 
@@ -45,7 +48,8 @@ def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
         Preview:\n{df.head().to_markdown()}
     """
     state["messages"] = state["messages"] + [
-        AIMessage(content=f"Dataset loaded. \n{dataset_info}")
+        system_prompt,
+        AIMessage(content=f"Dataset loaded. \n{dataset_info}"),
     ]
     state["dataset_info"] = dataset_info
     return state
@@ -53,70 +57,45 @@ def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
 
 def load_specification(state: PlanningAgentState) -> PlanningAgentState:
     content: str = Path(state["specification_path"]).read_text()
-    # data: Dict = yaml.safe_load(content)
-    # state["messages"] = state["messages"] + [
-    #     AIMessage(content=f"Specification loaded. \n{pformat(data)}")
-    # ]
-    # state["specification"] = yaml.dump(data)
-    nl_spec: str = Specification.parse(content).describe_pipeline()
-    state["messages"] = state["messages"] + [
-        AIMessage(content=f"Specification loaded. \n{nl_spec}")
-    ]
-    state["specification"] = content
+    state["specification"] = Specification.parse(content)
     return state
 
 
-def reasoning_node(state: PlanningAgentState) -> PlanningAgentState:
-    reasoning_prompt: str = (
-        "Reason on how to generate the pipeline. "
-        "Remember that the pipeline must comply with the specification provided "
-        "and consider the previous feedbacks if any. "
-        "You don't need to generate any sort of code, just reason about the steps to take."
-    )
+def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentState:
+    for semantic_constraint in state["specification"].semantic_constraints:
+        prompt: str = (
+            "Given the following condition, determine if the condition is met.\n"
+            "If the condition is met, return 'is_condition_met' as True, otherwise False. "
+            "Constraint Condition:\n"
+            f"{semantic_constraint.condition}\n"
+        )
 
-    state["messages"] = state["messages"] + [HumanMessage(content=reasoning_prompt)]
-
-    response: Any = model.invoke(state["messages"])
-    state["messages"] = state["messages"] + [AIMessage(content=response.content)]
+        state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
+        response: Any = structured_model.invoke(state["messages"])
+        assert isinstance(response, ConditionVerification)
+        state["messages"] = state["messages"] + [
+            AIMessage(content=response.explanation)
+        ]
+        if response.is_condition_met:
+            state["specification"].constraints.append(
+                Constraint(
+                    condition=TrueCondition(),
+                    require=semantic_constraint.require,
+                    forbid=semantic_constraint.forbid,
+                )
+            )
     return state
 
 
-def generate_pipeline(state: PlanningAgentState) -> PlanningAgentState:
-    local_prompt: str = (
-        "Generate the pipeline you consider best for this specific problem.\n"
-        "For each step, set 'name' to the step name defined in the specification "
-        "and 'candidate' to the candidate value you choose for that step. "
-        "Set 'hyperparameters' to a dictionary where each key is a hyperparameter name "
-        "and each value is a list of admissible values for that candidate. "
-        "Use an empty dictionary when no hyperparameters are needed."
-    )
-    state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
-    response = structured_model.invoke(state["messages"])
-    assert isinstance(response, PlanningPipeline)
-    state["messages"] = state["messages"] + [AIMessage(content=str(response))]
-    state["pipeline"] = response
+def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
+    solver = create_solver(state["specification"])
+    state["pipelines"] = []
+    for solution in enumerate_solutions(solver):
+        pipeline: PlanningPipeline = convert_solution_to_pipeline(
+            solution, state["specification"]
+        )
+        state["pipelines"].append(pipeline)
     return state
-
-
-def validate_pipeline(state: PlanningAgentState) -> PlanningAgentState:
-    spec: Specification = Specification.parse(state["specification"])
-    validator: SpecificationValidator = SpecificationValidator(spec)
-    is_valid: bool
-    message: Optional[str]
-    is_valid, message = validator.validate_pipeline(state["pipeline"].steps)
-    if message is None:
-        message = "Pipeline is valid according to the specification."
-    state["messages"] = state["messages"] + [HumanMessage(content=message)]
-    state["pipeline_feedback"] = is_valid, message if not is_valid else None
-    return state
-
-
-def should_terminate(state: PlanningAgentState) -> Literal["reasoning_node", "__end__"]:
-    terminate: bool
-    terminate, _ = state["pipeline_feedback"]
-    global attempts
-    attempts += 1
-    return "__end__" if terminate or attempts == max_attempts else "reasoning_node"
 
 
 state_graph: StateGraph = StateGraph(PlanningAgentState)
@@ -125,35 +104,30 @@ state_graph.add_sequence(
     [
         load_dataset,
         load_specification,
-        reasoning_node,
-        generate_pipeline,
-        validate_pipeline,
+        translate_semantic_conditions,
+        generate_pipelines,
     ]
 )
 state_graph.add_edge(START, "load_dataset")
-state_graph.add_conditional_edges("validate_pipeline", should_terminate)
+state_graph.add_edge("generate_pipelines", END)
 
-
-planning_agent: CompiledStateGraph = state_graph.compile()
-
-prompt: str = (
-    "Help me to build a machine learning pipeline for Adult Income Prediction."
+system_prompt: SystemMessage = SystemMessage(
+    content=(
+        """You are an agent that evaluates whether dataset conditions are satisfied.
+        Before evaluating any condition you MUST:
+        
+        1. Determine the most likely target feature of the dataset.
+        2. Explain why it is the target feature.
+        3. Use ONLY that target feature when evaluating the condition.
+        
+        Important rules:
+        - The target feature is usually the column representing the prediction label.
+        - Column names like "target", "label", "class", "y", "outcome" are strong indicators.
+        - Once the target feature is chosen, do NOT change it across different conditions.
+        """
+    )
 )
 
-system_prompt: str = """
-    You are a helpful assistant able to design pipelines of steps.
-    Your task is to create an ordered pipeline of tasks based on the provided specification.
-    A pipeline is a sequence of steps, each with an id and a chosen value.
-    The pipeline must respect the specification provided in natural language.
-    It is not necessary to include all types of steps in the pipeline (except for the mandatory ones).
-    Terminal steps should be the last step in the pipeline.
-    Initial steps should be the first step in the pipeline.
-    The generated pipeline is always validated and a feedback is provided.
-"""
-
-
-def create_user_prompt(prompt: str) -> List[BaseMessage]:
-    return [SystemMessage(content=system_prompt), HumanMessage(content=prompt)]
-
+planning_agent: CompiledStateGraph = state_graph.compile()
 
 print(planning_agent.get_graph().draw_mermaid())

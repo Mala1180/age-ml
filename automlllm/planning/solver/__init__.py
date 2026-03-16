@@ -16,11 +16,16 @@ from z3 import (
     BoolRef,
     Bool,
     ExprRef,
+    BoolVal,
 )
 
 from automlllm.planning.solver.utils import convert_solution_to_pipeline
 from automlllm.specification import Specification, StepCondition
-from automlllm.specification.types import DatasetCondition, NaturalLanguageCondition
+from automlllm.specification.types import (
+    DatasetCondition,
+    NaturalLanguageCondition,
+    TrueCondition,
+)
 from resources import get_resource_path
 
 
@@ -133,17 +138,24 @@ def add_constraints_to_solver(
         ):
             # Non-step constraints cannot be encoded without external metadata/context.
             continue
-        assert isinstance(constraint.condition, StepCondition)
-        conditions = [variables[f"do_step_{constraint.condition.step}"]]
-        if constraint.condition.candidate:
-            candidate_name: str = constraint.condition.candidate.name
-            conditions.append(
-                And(
-                    variables[f"do_step_{constraint.condition.step}"],
-                    variables[
-                        f"implement_{constraint.condition.step}_as_{candidate_name}"
-                    ],
+
+        if isinstance(constraint.condition, StepCondition):
+            conditions = [variables[f"do_step_{constraint.condition.step}"]]
+            if constraint.condition.candidate:
+                candidate_name: str = constraint.condition.candidate.name
+                conditions.append(
+                    And(
+                        variables[f"do_step_{constraint.condition.step}"],
+                        variables[
+                            f"implement_{constraint.condition.step}_as_{candidate_name}"
+                        ],
+                    )
                 )
+        elif isinstance(constraint.condition, TrueCondition):
+            conditions = [BoolVal(True)]
+        else:
+            raise ValueError(
+                f"Unsupported condition type: {type(constraint.condition)}"
             )
 
         effects = []

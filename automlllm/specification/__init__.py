@@ -17,11 +17,13 @@ class Specification:
         steps: List[SpecStep],
         ordering: List[OrderingRule],
         constraints: List[Constraint],
+        semantic_constraints: List[Constraint],
         technical_details: List[str],
     ) -> None:
         self.steps: List[SpecStep] = steps
         self.ordering: List[OrderingRule] = ordering
         self.constraints: List[Constraint] = constraints
+        self.semantic_constraints: List[Constraint] = semantic_constraints
         self.technical_details: List[str] = technical_details
 
     @classmethod
@@ -32,6 +34,7 @@ class Specification:
             parsed_spec.steps,
             parsed_spec.ordering,
             parsed_spec.constraints,
+            parsed_spec.semantic_constraints,
             parsed_spec.technical_details,
         )
 

@@ -14,6 +14,7 @@ from automlllm.specification.types import (
     OrderingRule,
     SpecStep,
     StepCondition,
+    SemanticCondition,
 )
 
 
@@ -21,6 +22,7 @@ class ParsedSpecification(BaseModel):
     steps: List[SpecStep]
     ordering: List[OrderingRule]
     constraints: List[Constraint]
+    semantic_constraints: List[Constraint]
     technical_details: List[str]
 
 
@@ -60,10 +62,13 @@ class SpecificationParser:
         ordering = self._parse_ordering(spec["pipeline"].get("partial_ordering", []))
 
         constraints: List[Constraint] = []
-        for constraint in spec["pipeline"].get("constraints", []):
-            condition_node: Dict[str, Any] = constraint["if"]
-            require_nodes: List[str | Dict[str, Any]] = constraint.get("require", [])
-            forbid_nodes: List[str | Dict[str, Any]] = constraint.get("forbid", [])
+        semantic_constraints: List[Constraint] = []
+        for constraint_dict in spec["pipeline"].get("constraints", []):
+            condition_node: Dict[str, Any] = constraint_dict["if"]
+            require_nodes: List[str | Dict[str, Any]] = constraint_dict.get(
+                "require", []
+            )
+            forbid_nodes: List[str | Dict[str, Any]] = constraint_dict.get("forbid", [])
 
             required_steps: List[Step] = []
             forbidden_steps: List[Step] = []
@@ -72,15 +77,18 @@ class SpecificationParser:
             for forbidden in forbid_nodes:
                 forbidden_steps.append(self._get_step_with_value(forbidden))
 
-            constraints.append(
-                Constraint.model_validate(
-                    {
-                        "condition": self._parse_condition(condition_node),
-                        "require": required_steps,
-                        "forbid": forbidden_steps,
-                    }
-                )
+            condition = self._parse_condition(condition_node)
+            constraint: Constraint = Constraint.model_validate(
+                {
+                    "condition": condition,
+                    "require": required_steps,
+                    "forbid": forbidden_steps,
+                }
             )
+            if isinstance(constraint.condition, SemanticCondition):
+                semantic_constraints.append(constraint)
+            else:
+                constraints.append(constraint)
 
         technical_details: List[str] = spec.get("technical_details", [])
 
@@ -88,6 +96,7 @@ class SpecificationParser:
             steps=steps,
             ordering=ordering,
             constraints=constraints,
+            semantic_constraints=semantic_constraints,
             technical_details=technical_details,
         )
 
