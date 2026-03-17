@@ -18,6 +18,7 @@ from automlllm.execution.utils import (
     extract_python_code,
     grid_search_exploration,
     delete_failed_runs,
+    set_run_description,
 )
 from automlllm.planning.agent import PlanningPipeline
 from automlllm.specification import Specification
@@ -48,6 +49,7 @@ class ExecutionPipeline(Pipeline):
 
 class ExecutionAgentState(MessagesState):
     run_id: str
+    pipeline_run_id: Optional[str]
     experiment_id: str
     dataset_path: str
     specification_path: str
@@ -170,20 +172,19 @@ def code_validation_branch(
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
+    parent_run_id: Optional[str] = None
     try:
         import mlflow
 
         mlflow.autolog()
-        parent_run_id: str
-        description: str = str(state["pipeline"])
         run_name: str = f"pipeline_{state['pipeline'].id}"
         with mlflow.start_run(
             nested=True,
             parent_run_id=state["run_id"],
             run_name=run_name,
-            description=description,
         ) as parent_run:
             parent_run_id = parent_run.info.run_id
+            state["pipeline_run_id"] = parent_run_id
             hyperparameters: Dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
@@ -204,7 +205,8 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             AIMessage(content=f"Error during code execution: {str(e)}")
         ]
         state["code_execution_feedback"] = False
-        delete_failed_runs(parent_run_id, state["experiment_id"])
+        if parent_run_id is not None:
+            delete_failed_runs(parent_run_id, state["experiment_id"])
 
     return state
 
@@ -222,8 +224,10 @@ def code_execution_branch(
 def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     state["execution_attempts"] = 0
 
-    explain_prompt: str = """
+    explain_prompt: str = f"""
         Explain the final machine learning pipeline generated, step by step.
+        Make sure to systematically report each step of the actual pipeline:
+        {state["pipeline"].steps}
         For each pipeline step, create a concise phrase that explain such step concisely.
         Use markdown format to structure the explanation.
     """
@@ -255,6 +259,11 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     state["pipeline"].explanation = (
         "> " + created_at + explanation.text + "\n\n" + summary.text
     )
+
+    pipeline_run_id = state.get("pipeline_run_id")
+    if pipeline_run_id:
+        set_run_description(pipeline_run_id, state["pipeline"].explanation)
+
     __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(

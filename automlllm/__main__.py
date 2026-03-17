@@ -59,7 +59,7 @@ def main(spec_path: str, dataset_path: str, max_workers: int = 5) -> None:
     experiment_id = experiment.experiment_id
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    run_name: str = f"pipeline_exploration-{timestamp}"
+    run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             for i, planned_pipeline in enumerate(planned_pipelines):
