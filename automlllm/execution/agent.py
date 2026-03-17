@@ -73,12 +73,12 @@ class CodeResponse(BaseModel):
 
 
 class ExplanationResponse(BaseModel):
-    explanation: str
+    text: str
 
 
 judge_model = model.with_structured_output(JudgeResponse)
 code_model = model.with_structured_output(CodeResponse)
-explanation_model = model.with_structured_output(CodeResponse)
+explanation_model = model.with_structured_output(ExplanationResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
@@ -214,7 +214,6 @@ def code_execution_branch(
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid = state["code_execution_feedback"]
     state["execution_attempts"] += 1
-    print(f"Execution attempt {state['execution_attempts']}")
     if not is_valid and state["execution_attempts"] == max_attempts:
         raise Exception("Maximum attempts reached for code execution.")
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
@@ -222,50 +221,46 @@ def code_execution_branch(
 
 def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     state["execution_attempts"] = 0
+
     explain_prompt: str = """
         Explain the final machine learning pipeline generated, step by step.
         For each pipeline step, create a concise phrase that explain such step concisely.
+        Use markdown format to structure the explanation.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
-    response: Any = explanation_model.invoke(state["messages"])
-    assert isinstance(response, ExplanationResponse)
-    state["messages"] = state["messages"] + [AIMessage(content=response.explanation)]
+    explanation: Any = explanation_model.invoke(state["messages"])
+    assert isinstance(explanation, ExplanationResponse), (
+        "Expected ExplanationResponse from the model"
+    )
+    state["messages"] = state["messages"] + [AIMessage(content=explanation.text)]
+
+    summarize_prompt: str = """
+        Now briefly summarize the entire conversation focussing on the design choices and
+        eventual problems occurred that have lead to this final version of the pipeline.
+        Use markdown format to structure the summary.
+    """
+    state["messages"] = state["messages"] + [HumanMessage(content=summarize_prompt)]
+    summary = explanation_model.invoke(state["messages"])
+    assert isinstance(summary, ExplanationResponse), (
+        "Expected ExplanationResponse from the model"
+    )
+    state["messages"] = state["messages"] + [AIMessage(content=summary.text)]
+
     assert state["pipeline"].created_at
     created_at = (
         "**Created at:** "
         + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
         + " UTC\n\n"
     )
-    state["pipeline"].explanation = "> " + created_at + response.explanation
+    state["pipeline"].explanation = (
+        "> " + created_at + explanation.text + "\n\n" + summary.text
+    )
     __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
         f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
     )
     return state
-
-
-# def human_feedback(state: ExecutionAgentState) -> ExecutionAgentState:
-#     res: Optional[str] = None
-#     while res not in ["yes", "y", "no", "n"]:
-#         res = input(
-#             "Do you have any feedback on the generated pipeline, code and explanation? (y/yes or n/no)\n >"
-#         ).lower()
-#         if res == "yes" or res == "y":
-#             feedback = input("Please provide your feedback:")
-#             state["human_feedback"] = feedback
-#             state["messages"] = state["messages"] + [HumanMessage(content=feedback)]
-#         elif res == "no" or res == "n":
-#             state["human_feedback"] = None
-#         else:
-#             print("Invalid input. Please answer with 'y/yes' or 'n/no'.")
-#     return state
-#
-#
-# def human_feedback_branch(
-#     state: ExecutionAgentState,
-# ) -> Literal["generate_pipeline_code", "__end__"]:
-#     return "__end__" if state["human_feedback"] is None else "generate_pipeline_code"
 
 
 def __save_file(pipeline_id: int, filename: str, content: str) -> None:
@@ -289,14 +284,6 @@ state_graph.add_conditional_edges("validate_code_compliance", code_validation_br
 
 state_graph.add_node("execute_code", execute_code)
 state_graph.add_conditional_edges("execute_code", code_execution_branch)
-
-# state_graph.add_sequence(
-#     [
-#         explain_pipeline,
-#         human_feedback,
-#     ]
-# )
-# state_graph.add_conditional_edges("human_feedback", human_feedback_branch)
 
 state_graph.add_node("explain_pipeline", explain_pipeline)
 state_graph.add_edge("explain_pipeline", END)

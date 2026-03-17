@@ -50,7 +50,7 @@ def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
         Preview:\n{df.head().to_markdown()}
     """
     state["messages"] = state["messages"] + [
-        system_prompt,
+        SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset loaded. \n{dataset_info}"),
     ]
     state["dataset_info"] = dataset_info
@@ -125,22 +125,20 @@ state_graph.add_sequence(
 state_graph.add_edge(START, "load_dataset")
 state_graph.add_edge("select_pipelines", END)
 
-system_prompt: SystemMessage = SystemMessage(
-    content=(
-        """You are an agent that evaluates whether dataset conditions are satisfied.
-        Before evaluating any condition you MUST:
-        
-        1. Determine the most likely target feature of the dataset.
-        2. Explain why it is the target feature.
-        3. Use ONLY that target feature when evaluating the condition.
-        
-        Important rules:
-        - The target feature is usually the column representing the prediction label.
-        - Column names like "target", "label", "class", "y", "outcome" are strong indicators.
-        - Once the target feature is chosen, do NOT change it across different conditions.
-        """
-    )
-)
+system_prompt: str = """
+    You are an agent that evaluates whether dataset conditions are satisfied.
+    Before evaluating any condition you MUST:
+    
+    1. Determine the most likely target feature of the dataset.
+    2. Explain why it is the target feature.
+    3. Use ONLY that target feature when evaluating the condition.
+    
+    Important rules:
+    - The target feature is usually the column representing the prediction label.
+    - Column names like "target", "label", "class", "y", "outcome" are strong indicators.
+    - Once the target feature is chosen, do NOT change it across different conditions.
+"""
+
 
 planning_agent: CompiledStateGraph = state_graph.compile()
 
