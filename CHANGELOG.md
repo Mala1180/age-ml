@@ -1,3 +1,9 @@
+## [3.2.0](https://github.com/Mala1180/automl-llm/compare/3.1.1...3.2.0) (2026-03-17)
+
+### Features
+
+* **execution:** add explanation to run description ([fc53847](https://github.com/Mala1180/automl-llm/commit/fc53847202bdc8b4794ddfbbce52fe92bd799429))
+
 ## [3.1.1](https://github.com/Mala1180/automl-llm/compare/3.1.0...3.1.1) (2026-03-17)
 
 ### Bug Fixes
