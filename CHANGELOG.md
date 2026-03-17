@@ -1,3 +1,13 @@
+## [3.1.1](https://github.com/Mala1180/automl-llm/compare/3.1.0...3.1.1) (2026-03-17)
+
+### Bug Fixes
+
+* **execution:** fix class of structured output model ([541066f](https://github.com/Mala1180/automl-llm/commit/541066f7525c5ec50900cb4f891d34f477186200))
+
+### Refactoring
+
+* max_exploration is now specified in the specification ([0478f83](https://github.com/Mala1180/automl-llm/commit/0478f834046bf1c0865898063ee8691ddd0ea104))
+
 ## [3.1.0](https://github.com/Mala1180/automl-llm/compare/3.0.0...3.1.0) (2026-03-16)
 
 ### Features
