@@ -2,6 +2,7 @@ from typing import List
 
 from automlllm.specification.parsing import SpecificationParser
 from automlllm.specification.types import (
+    Budgets,
     Constraint,
     DatasetCondition,
     NaturalLanguageCondition,
@@ -14,14 +15,14 @@ from automlllm.specification.types import (
 class Specification:
     def __init__(
         self,
-        max_exploration: int,
+        budgets: Budgets,
         steps: List[SpecStep],
         ordering: List[OrderingRule],
         constraints: List[Constraint],
         semantic_constraints: List[Constraint],
         technical_details: List[str],
     ) -> None:
-        self.max_exploration: int = max_exploration
+        self.budgets: Budgets = budgets
         self.steps: List[SpecStep] = steps
         self.ordering: List[OrderingRule] = ordering
         self.constraints: List[Constraint] = constraints
@@ -33,13 +34,29 @@ class Specification:
         parser: SpecificationParser = SpecificationParser(spec_yaml)
         parsed_spec = parser.parse()
         return cls(
-            parsed_spec.max_exploration,
+            parsed_spec.budgets,
             parsed_spec.steps,
             parsed_spec.ordering,
             parsed_spec.constraints,
             parsed_spec.semantic_constraints,
             parsed_spec.technical_details,
         )
+
+    @property
+    def pipelines(self) -> int:
+        return self.budgets.pipelines
+
+    @property
+    def workers(self) -> int:
+        return self.budgets.workers
+
+    @property
+    def time_budget_minutes(self) -> int:
+        return self.budgets.time.total_seconds // 60
+
+    @property
+    def time_budget_seconds(self) -> int:
+        return self.budgets.time.total_seconds
 
     def describe_pipeline(self) -> str:
         """Converts the pipeline specification into a human-readable format."""

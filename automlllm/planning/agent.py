@@ -101,9 +101,7 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
 
 
 def select_pipelines(state: PlanningAgentState) -> PlanningAgentState:
-    max_pipelines: int = state.get(
-        "max_pipelines", state["specification"].max_exploration
-    )
+    max_pipelines: int = state["specification"].budgets.pipelines
     if len(state["pipelines"]) <= max_pipelines:
         return state
 

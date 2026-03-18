@@ -43,8 +43,7 @@ Run the full workflow:
 ```bash
 python -m automlllm \
   --spec_path resources/general-specification.yml \
-  --dataset_path resources/datasets/adult.csv \
-  --max_workers 2
+  --dataset_path resources/datasets/adult.csv
 ```
 
 What this does:
@@ -57,7 +56,9 @@ What this does:
 ## Specification Format
 
 A specification file defines:
-- `max_exploration`: maximum number of planned pipelines to sample/execute (default: 20).
+- `budgets.pipelines`: maximum number of planned pipelines to sample/execute (default: 20).
+- `budgets.time`: runtime budget for exploration/execution scheduling. You can set `hours`, `minutes`, and/or `seconds` (default: `minutes: 60`).
+- `budgets.workers`: number of execution workers used for concurrent pipeline runs (default: 5).
 - `pipeline.defaults`: default attributes for steps (`mandatory`, `candidates`).
 - `pipeline.steps`: admissible steps and candidates with parameter grids.
 - `pipeline.partial_ordering`: ordering constraints (supports `sequence` shorthand).
