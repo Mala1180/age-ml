@@ -265,7 +265,7 @@ pipeline:
     classification:
       candidates: [random_forest]
 
-  partial_ordering: []
+orderings: []
 
 constraints:
   - if:
@@ -300,7 +300,7 @@ pipeline:
     classification:
       candidates: [random_forest]
 
-  partial_ordering: []
+orderings: []
 
 constraints:
   - if:
