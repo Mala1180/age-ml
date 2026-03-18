@@ -1,3 +1,9 @@
+budgets:
+  pipelines: 3
+  workers: 5
+  time:
+    minutes: 60
+
 pipeline:
 
   defaults:
@@ -90,21 +96,7 @@ pipeline:
               n_estimators: [100]
               learning_rate: [0.1]
 
-    # validation:
-    #   source: test
-    #   mandatory: true
-    #   candidates:
-    #    - accuracy:
-    #        params:
-    #          threshold: [0.8]
-    #    - f1_score:
-    #        params:
-    #          threshold: [0.8]
-    #    - roc_auc:
-    #        params:
-    #          threshold: [0.8]
-
-orderings:
+ordering:
   - sequence:
       - imputation
       - discretization
@@ -112,7 +104,6 @@ orderings:
       - features
       - rebalancing
       - classification
-#        - validation
 
 constraints:
 

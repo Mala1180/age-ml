@@ -63,7 +63,7 @@ class SpecificationParser:
                 )
             )
 
-        ordering = self._parse_ordering(spec.get("orderings", []))
+        ordering = self._parse_ordering(spec.get("ordering", []))
 
         constraints: List[Constraint] = []
         semantic_constraints: List[Constraint] = []

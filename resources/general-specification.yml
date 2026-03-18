@@ -1,9 +1,8 @@
 budgets:
   pipelines: 3
-  workers: 3
+  workers: 5
   time:
-    seconds: 40
-#    minutes: 60
+    minutes: 60
 
 pipeline:
 
@@ -135,7 +134,7 @@ pipeline:
 #     candidates: [cv, holdout]
 #     mandatory: true
 
-orderings:
+ordering:
   - sequence:
     - imputation
     - discretization
