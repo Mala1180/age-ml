@@ -115,79 +115,79 @@ pipeline:
       - features
       - regression
 
-  constraints:
+constraints:
 
-    - if:
-        step:
-          regression: decision_tree_regressor
-      forbid: [normalization, features]
-      require: [discretization]
+  - if:
+      step:
+        regression: decision_tree_regressor
+    forbid: [normalization, features]
+    require: [discretization]
 
-    - if:
-        step:
-          regression: random_forest_regressor
-      forbid: [normalization]
+  - if:
+      step:
+        regression: random_forest_regressor
+    forbid: [normalization]
 
-    - if:
-        step:
-          regression: gradient_boosting_regressor
-      forbid: [normalization]
+  - if:
+      step:
+        regression: gradient_boosting_regressor
+    forbid: [normalization]
 
-    - if:
-        step:
-          regression: hist_gradient_boosting_regressor
-      forbid: [normalization]
+  - if:
+      step:
+        regression: hist_gradient_boosting_regressor
+    forbid: [normalization]
 
-    - if:
-        step:
-          regression: knn_regressor
-      require: [normalization, features]
-      forbid: [discretization]
+  - if:
+      step:
+        regression: knn_regressor
+    require: [normalization, features]
+    forbid: [discretization]
 
-    - if:
-        step:
-          regression: svr
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        regression: svr
+    require: [normalization]
+    forbid: [discretization]
 
-    - if:
-        step:
-          regression: lasso
-      require: [normalization]
+  - if:
+      step:
+        regression: lasso
+    require: [normalization]
 
-    - if:
-        step:
-          regression: ridge
-      require: [normalization]
+  - if:
+      step:
+        regression: ridge
+    require: [normalization]
 
-    - if:
-        step:
-          regression: elastic_net
-      require: [normalization]
+  - if:
+      step:
+        regression: elastic_net
+    require: [normalization]
 
-    - if:
-        step:
-          regression: linear_regression
-      require: [normalization]
+  - if:
+      step:
+        regression: linear_regression
+    require: [normalization]
 
-    # =========================
-    # BEST PRACTICES
-    # =========================
+  # =========================
+  # BEST PRACTICES
+  # =========================
 
-    - if:
-        step:
-          features: pca
-      require: [normalization]
+  - if:
+      step:
+        features: pca
+    require: [normalization]
 
-    - if:
-        step:
-          features: select_k_best
-      forbid: [discretization]
+  - if:
+      step:
+        features: select_k_best
+    forbid: [discretization]
 
-    - if:
-        step:
-          imputation: iterative_imputer
-      require: [normalization]
+  - if:
+      step:
+        imputation: iterative_imputer
+    require: [normalization]
 
 
 technical_details:

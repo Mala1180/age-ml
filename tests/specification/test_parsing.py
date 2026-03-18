@@ -267,14 +267,14 @@ pipeline:
 
   partial_ordering: []
 
-  constraints:
-    - if:
-        dataset:
-          feature:
-            is_like: class
-            role: output
-            data_kind: categorical
-      require: [classification]
+constraints:
+  - if:
+      dataset:
+        feature:
+          is_like: class
+          role: output
+          data_kind: categorical
+    require: [classification]
 """
         spec = Specification.parse(spec_yaml)
         assert len(spec.constraints) == 0
@@ -302,10 +302,10 @@ pipeline:
 
   partial_ordering: []
 
-  constraints:
-    - if:
-        natural_language: target feature is categorical
-      require: [classification]
+constraints:
+  - if:
+      natural_language: target feature is categorical
+    require: [classification]
 """
         spec = Specification.parse(spec_yaml)
         assert len(spec.constraints) == 0
