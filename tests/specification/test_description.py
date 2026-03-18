@@ -18,7 +18,7 @@ pipeline:
               max_depth: [null, 8]
         - linear
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
 
@@ -46,7 +46,7 @@ pipeline:
         - standard_scaler:
             params: {}
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
 
