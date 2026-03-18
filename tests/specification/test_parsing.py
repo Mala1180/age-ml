@@ -2,6 +2,7 @@ import pytest
 
 from automlllm.specification import Specification
 from automlllm.specification.types import (
+    Budgets,
     Candidate,
     DatasetCondition,
     DatasetFeatureCondition,
@@ -14,7 +15,11 @@ from tests.specification.conftest import spec_sample
 class TestSpecificationParsing:
     def test_parse_sample_specification(self):
         spec = Specification.parse(spec_sample)
-        assert spec.max_exploration == 20
+        assert isinstance(spec.budgets, Budgets)
+        assert spec.pipelines == 20
+        assert spec.time_budget_minutes == 60
+        assert spec.time_budget_seconds == 3600
+        assert spec.workers == 5
         assert len(spec.steps) == 5
         step_ids = {s.id for s in spec.steps}
         assert step_ids == {"step1", "step2", "step3", "step4", "step5"}
@@ -29,9 +34,13 @@ class TestSpecificationParsing:
         assert len(spec.constraints) == 3
         assert len(spec.technical_details) == 2
 
-    def test_parse_max_exploration(self):
+    def test_parse_budgets(self):
         spec_yaml = """
-max_exploration: 7
+budgets:
+  pipelines: 4
+  workers: 3
+  time:
+    minutes: 12
 
 pipeline:
   defaults:
@@ -45,7 +54,50 @@ pipeline:
   partial_ordering: []
 """
         spec = Specification.parse(spec_yaml)
-        assert spec.max_exploration == 7
+        assert spec.pipelines == 4
+        assert spec.time_budget_minutes == 12
+        assert spec.time_budget_seconds == 720
+        assert spec.workers == 3
+
+    def test_parse_time_budget_in_seconds(self):
+        spec_yaml = """
+budgets:
+  time:
+    seconds: 75
+
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+
+  steps:
+    model:
+      candidates: [random_forest]
+
+  partial_ordering: []
+"""
+        spec = Specification.parse(spec_yaml)
+        assert spec.time_budget_seconds == 75
+
+    def test_parse_time_budget_in_hours(self):
+        spec_yaml = """
+budgets:
+  time:
+    hours: 2
+
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+
+  steps:
+    model:
+      candidates: [random_forest]
+
+  partial_ordering: []
+"""
+        spec = Specification.parse(spec_yaml)
+        assert spec.time_budget_seconds == 7200
 
     def test_parse_steps_with_string_candidates(self):
         spec = Specification.parse(spec_sample)
