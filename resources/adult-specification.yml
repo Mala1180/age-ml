@@ -104,14 +104,14 @@ pipeline:
     #        params:
     #          threshold: [0.8]
 
-  partial_ordering:
-    - sequence:
-        - imputation
-        - discretization
-        - normalization
-        - features
-        - rebalancing
-        - classification
+orderings:
+  - sequence:
+      - imputation
+      - discretization
+      - normalization
+      - features
+      - rebalancing
+      - classification
 #        - validation
 
 constraints:

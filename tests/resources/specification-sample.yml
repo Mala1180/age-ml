@@ -21,24 +21,24 @@ pipeline:
       candidates: [l, m]
       mandatory: true
 
-  partial_ordering:
+orderings:
 
-    - sequence:
-        - step1
-        - step2
-        - step3
+  - sequence:
+      - step1
+      - step2
+      - step3
 
-    - before: step1
-      after: step2
+  - before: step1
+    after: step2
 
-    - before: step2
-      after: step3
+  - before: step2
+    after: step3
 
-    - before: step1
-      after: step4
+  - before: step1
+    after: step4
 
-    - before: step4
-      after: step5
+  - before: step4
+    after: step5
 
 constraints:
   - if:
