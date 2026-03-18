@@ -51,7 +51,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.pipelines == 4
@@ -74,7 +74,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.time_budget_seconds == 75
@@ -94,7 +94,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.time_budget_seconds == 7200
@@ -125,7 +125,7 @@ pipeline:
               C: [0.1, 1.0, 10.0]
               kernel: [linear, rbf]
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -161,7 +161,7 @@ pipeline:
             params:
               n_components: [2, 5, 10]
   
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -204,7 +204,7 @@ pipeline:
     c:
       candidates: []
 
-orderings:
+ordering:
   - sequence:
       - a
       - b
@@ -265,7 +265,7 @@ pipeline:
     classification:
       candidates: [random_forest]
 
-orderings: []
+ordering: []
 
 constraints:
   - if:
@@ -300,7 +300,7 @@ pipeline:
     classification:
       candidates: [random_forest]
 
-orderings: []
+ordering: []
 
 constraints:
   - if:
@@ -343,7 +343,7 @@ pipeline:
       candidates: [b]
       mandatory: false
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -409,7 +409,7 @@ pipeline:
     step1:
       candidates: [a]
 
-orderings: []
+ordering: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.technical_details == []

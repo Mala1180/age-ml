@@ -61,7 +61,7 @@ A specification file defines:
 - `budgets.workers`: number of execution workers used for concurrent pipeline runs (default: 5).
 - `pipeline.defaults`: default attributes for steps (`mandatory`, `candidates`).
 - `pipeline.steps`: admissible steps and candidates with parameter grids.
-- `orderings`: ordering constraints (supports `sequence` shorthand).
+- `ordering`: ordering constraints (supports `sequence` shorthand).
 - `constraints`: conditional `require` / `forbid` rules.
 - `technical_details`: extra implementation requirements passed to the execution agent.
 

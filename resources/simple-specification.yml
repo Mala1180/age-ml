@@ -1,3 +1,9 @@
+budgets:
+  pipelines: 3
+  workers: 5
+  time:
+    minutes: 60
+
 pipeline:
 
   defaults:
@@ -41,7 +47,7 @@ pipeline:
 #     candidates: [cv, holdout]
 #     mandatory: true
 
-orderings:
+ordering:
   - sequence:
       - step1
       - step2
