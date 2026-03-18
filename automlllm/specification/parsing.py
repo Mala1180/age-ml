@@ -63,7 +63,7 @@ class SpecificationParser:
                 )
             )
 
-        ordering = self._parse_ordering(spec["pipeline"].get("partial_ordering", []))
+        ordering = self._parse_ordering(spec.get("orderings", []))
 
         constraints: List[Constraint] = []
         semantic_constraints: List[Constraint] = []

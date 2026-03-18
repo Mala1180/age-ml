@@ -41,11 +41,11 @@ pipeline:
 #     candidates: [cv, holdout]
 #     mandatory: true
 
-  partial_ordering:
-    - sequence:
-        - step1
-        - step2
-        - step3
+orderings:
+  - sequence:
+      - step1
+      - step2
+      - step3
 
 technical_details:
   - use Python for the implementation

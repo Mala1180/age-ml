@@ -107,13 +107,13 @@ pipeline:
 #     candidates: [cv, holdout]
 #     mandatory: true
 
-  partial_ordering:
-    - sequence:
-      - imputation
-      - discretization
-      - normalization
-      - features
-      - regression
+orderings:
+  - sequence:
+    - imputation
+    - discretization
+    - normalization
+    - features
+    - regression
 
 constraints:
 

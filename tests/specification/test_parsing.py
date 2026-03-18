@@ -51,7 +51,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.pipelines == 4
@@ -74,7 +74,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.time_budget_seconds == 75
@@ -94,7 +94,7 @@ pipeline:
     model:
       candidates: [random_forest]
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.time_budget_seconds == 7200
@@ -125,7 +125,7 @@ pipeline:
               C: [0.1, 1.0, 10.0]
               kernel: [linear, rbf]
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -161,7 +161,7 @@ pipeline:
             params:
               n_components: [2, 5, 10]
   
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -204,11 +204,11 @@ pipeline:
     c:
       candidates: []
 
-  partial_ordering:
-    - sequence:
-        - a
-        - b
-        - c
+orderings:
+  - sequence:
+      - a
+      - b
+      - c
 """
         spec = Specification.parse(spec_yaml)
         ordering_pairs = [(o.before, o.after) for o in spec.ordering]
@@ -343,7 +343,7 @@ pipeline:
       candidates: [b]
       mandatory: false
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_sample)
 
@@ -409,7 +409,7 @@ pipeline:
     step1:
       candidates: [a]
 
-  partial_ordering: []
+orderings: []
 """
         spec = Specification.parse(spec_yaml)
         assert spec.technical_details == []
