@@ -40,25 +40,25 @@ pipeline:
     - before: step4
       after: step5
 
-  constraints:
-    - if:
-        step:
-          step1: {}
-      require: [step2, step4]
-      forbid: [step3]
+constraints:
+  - if:
+      step:
+        step1: {}
+    require: [step2, step4]
+    forbid: [step3]
 
-    - if:
-        step:
-          step1: b
-      require:
-        - step4: j
-      forbid:
-        - step5: l
+  - if:
+      step:
+        step1: b
+    require:
+      - step4: j
+    forbid:
+      - step5: l
 
-    - if:
-        step:
-          step4: j
-      forbid: [step3]
+  - if:
+      step:
+        step4: j
+    forbid: [step3]
 
 technical_details:
   - use python for the implementation

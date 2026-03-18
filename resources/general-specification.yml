@@ -145,146 +145,146 @@ pipeline:
         - classification
         - regression
 
-  constraints:
+constraints:
 
-    - if:
-        natural_language: target feature is categorical
-      require: [classification]
+  - if:
+      natural_language: target feature is categorical
+    require: [classification]
 
-    - if:
-        natural_language: target feature is numerical
-      require: [regression]
+  - if:
+      natural_language: target feature is numerical
+    require: [regression]
 
-    - if:
-        dataset:
-          feature:
-            is_like: class
-            role: output
-            data_kind: categorical
-      require: [classification]
-
-
-    - if:
-        step:
-          classification: {}
-      forbid: [regression]
-
-    - if:
-        step:
-          regression: {}
-      forbid: [classification]
-
-    # =========================
-    # CLASSIFICATION
-    # =========================
-
-    - if:
-        step:
-          classification: decision_tree
-      require: [discretization]
-      forbid: [normalization, features]
-
-    - if:
-        step:
-          classification: random_forest
-      forbid: [normalization]
-
-    - if:
-        step:
-          classification: knn
-      require: [normalization, features]
-
-    - if:
-        step:
-          classification: nn
-      require: [normalization]
-      forbid: [discretization]
-
-    - if:
-        step:
-          classification: naive_bayes
-      forbid: [normalization]
-
-    - if:
-        step:
-          classification: ada_boost
-      forbid: [normalization]
+  - if:
+      dataset:
+        feature:
+          is_like: class
+          role: output
+          data_kind: categorical
+    require: [classification]
 
 
-    # =========================
-    # REGRESSION
-    # =========================
+  - if:
+      step:
+        classification: {}
+    forbid: [regression]
 
-    - if:
-        step:
-          regression: linear
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        regression: {}
+    forbid: [classification]
 
-    - if:
-        step:
-          regression: ridge
-      require: [normalization]
-      forbid: [discretization]
+  # =========================
+  # CLASSIFICATION
+  # =========================
 
-    - if:
-        step:
-          regression: lasso
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        classification: decision_tree
+    require: [discretization]
+    forbid: [normalization, features]
 
-    - if:
-        step:
-          regression: elastic_net
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        classification: random_forest
+    forbid: [normalization]
 
-    - if:
-        step:
-          regression: svr
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        classification: knn
+    require: [normalization, features]
 
-    - if:
-        step:
-          regression: knn_regressor
-      require: [normalization, features]
+  - if:
+      step:
+        classification: nn
+    require: [normalization]
+    forbid: [discretization]
 
-    - if:
-        step:
-          regression: nn_regressor
-      require: [normalization]
-      forbid: [discretization]
+  - if:
+      step:
+        classification: naive_bayes
+    forbid: [normalization]
 
-    - if:
-        step:
-          regression: random_forest_regressor
-      forbid: [normalization]
+  - if:
+      step:
+        classification: ada_boost
+    forbid: [normalization]
 
 
-    # =========================
-    # SHARED BEST PRACTICES
-    # =========================
+  # =========================
+  # REGRESSION
+  # =========================
 
-    - if:
-        step:
-          features: pca
-      require: [normalization]
+  - if:
+      step:
+        regression: linear
+    require: [normalization]
+    forbid: [discretization]
 
-    - if:
-        step:
-          features: select_k_best
-      forbid: [discretization]
+  - if:
+      step:
+        regression: ridge
+    require: [normalization]
+    forbid: [discretization]
 
-    - if:
-        step:
-          rebalancing: smote
-      require: [imputation]
+  - if:
+      step:
+        regression: lasso
+    require: [normalization]
+    forbid: [discretization]
 
-    - if:
-        step:
-          imputation: iterative_imputer
-      require: [normalization]
+  - if:
+      step:
+        regression: elastic_net
+    require: [normalization]
+    forbid: [discretization]
+
+  - if:
+      step:
+        regression: svr
+    require: [normalization]
+    forbid: [discretization]
+
+  - if:
+      step:
+        regression: knn_regressor
+    require: [normalization, features]
+
+  - if:
+      step:
+        regression: nn_regressor
+    require: [normalization]
+    forbid: [discretization]
+
+  - if:
+      step:
+        regression: random_forest_regressor
+    forbid: [normalization]
+
+
+  # =========================
+  # SHARED BEST PRACTICES
+  # =========================
+
+  - if:
+      step:
+        features: pca
+    require: [normalization]
+
+  - if:
+      step:
+        features: select_k_best
+    forbid: [discretization]
+
+  - if:
+      step:
+        rebalancing: smote
+    require: [imputation]
+
+  - if:
+      step:
+        imputation: iterative_imputer
+    require: [normalization]
 
 
 technical_details:

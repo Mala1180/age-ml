@@ -67,7 +67,7 @@ class SpecificationParser:
 
         constraints: List[Constraint] = []
         semantic_constraints: List[Constraint] = []
-        for constraint_dict in spec["pipeline"].get("constraints", []):
+        for constraint_dict in spec.get("constraints", []):
             condition_node: Dict[str, Any] = constraint_dict["if"]
             require_nodes: List[str | Dict[str, Any]] = constraint_dict.get(
                 "require", []
