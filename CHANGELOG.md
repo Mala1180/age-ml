@@ -1,3 +1,14 @@
+## [3.3.0](https://github.com/Mala1180/automl-llm/compare/3.2.0...3.3.0) (2026-03-18)
+
+### Features
+
+* add TimeBudget and tasks deadline ([7a116d9](https://github.com/Mala1180/automl-llm/commit/7a116d96990bcedcf993ce28876fc41397ad4ada))
+
+### Refactoring
+
+* change constraints indentation in specification files ([687112d](https://github.com/Mala1180/automl-llm/commit/687112d217fdc6a111c53257edaea948f337a6e2))
+* change orderings indentation in specification files ([9aeef71](https://github.com/Mala1180/automl-llm/commit/9aeef714af8dc03140ab0255cfdf8218662e3409))
+
 ## [3.2.0](https://github.com/Mala1180/automl-llm/compare/3.1.1...3.2.0) (2026-03-17)
 
 ### Features
