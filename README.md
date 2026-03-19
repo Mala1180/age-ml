@@ -43,8 +43,19 @@ Run the full workflow:
 ```bash
 python -m automlllm \
   --spec_path resources/general-specification.yml \
-  --dataset_path resources/datasets/adult.csv
+  --dataset_path resources/datasets/adult.csv \
+  --validation_metric accuracy \
+  --maximize True
 ```
+
+### Parameters
+
+| Parameter           | Required | Default    | Description                                                                                                           |
+|---------------------|----------|------------|-----------------------------------------------------------------------------------------------------------------------|
+| `spec_path`         | Yes      | -          | Filesystem path to the YAML specification file                                                                        |
+| `dataset_path`      | Yes      | -          | Filesystem path to the input dataset (CSV)                                                                            |
+| `validation_metric` | No       | `accuracy` | Metric for model selection. Supported: `accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2` |
+| `maximize`          | No       | `True`     | Whether to maximize (`True`) or minimize (`False`) the metric                                                         |
 
 What this does:
 1. Generates all feasible pipelines according to the provided specification.

@@ -20,7 +20,12 @@ mlflow.openai.autolog()
 mlflow.langchain.autolog()
 
 
-def main(spec_path: str, dataset_path: str) -> None:
+def main(
+    spec_path: str,
+    dataset_path: str,
+    validation_metric: str = "accuracy",
+    maximize: bool = True,
+) -> None:
     """Run planning and execution from the command line.
 
     The command can be invoked as:
@@ -33,6 +38,8 @@ def main(spec_path: str, dataset_path: str) -> None:
     Args:
         spec_path: Filesystem path to the YAML specification file.
         dataset_path: Filesystem path to the input dataset used for the AutoML task.
+        validation_metric: Name of the metric to use for model selection (default: "accuracy").
+        maximize: Whether to maximize the metric (True) or minimize it (False). Default: True.
     Returns:
         None.
     """
@@ -78,6 +85,8 @@ def main(spec_path: str, dataset_path: str) -> None:
                         "pipeline": execution_pipeline,
                         "run_id": run.info.run_id,
                         "experiment_id": experiment_id,
+                        "validation_metric": validation_metric,
+                        "maximize": maximize,
                     },
                     semaphore,
                 ),

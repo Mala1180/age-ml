@@ -10,6 +10,7 @@ from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
+from sklearn.model_selection import train_test_split
 from typing_extensions import override
 
 from automlllm.common.model import model
@@ -19,6 +20,8 @@ from automlllm.execution.utils import (
     grid_search_exploration,
     delete_failed_runs,
     set_run_description,
+    get_best_run,
+    compute_metric,
 )
 from automlllm.planning.agent import PlanningPipeline
 from automlllm.specification import Specification
@@ -60,6 +63,14 @@ class ExecutionAgentState(MessagesState):
     human_feedback: Optional[str]
     validation_attempts: int
     execution_attempts: int
+    validation_metric: str
+    maximize: bool
+    # Dataset splits
+    train_df: pd.DataFrame
+    test_df: pd.DataFrame
+    best_run_id: Optional[str]
+    # Target feature identification
+    target_column: Optional[str]
 
 
 max_attempts: int = 5
@@ -78,13 +89,25 @@ class ExplanationResponse(BaseModel):
     text: str
 
 
+class TargetFeatureResponse(BaseModel):
+    target_column: str
+    reasoning: str
+
+
 judge_model = model.with_structured_output(JudgeResponse)
 code_model = model.with_structured_output(CodeResponse)
 explanation_model = model.with_structured_output(ExplanationResponse)
+target_model = model.with_structured_output(TargetFeatureResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
+
+    # Split dataset into train and test (test set saved for later evaluation)
+    train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+    state["train_df"] = train_df
+    state["test_df"] = test_df
+
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
         Columns:\n{list(df.columns)}
@@ -106,8 +129,45 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
+def identify_target_feature(state: ExecutionAgentState) -> ExecutionAgentState:
+    df: pd.DataFrame = state["train_df"]
+
+    identify_prompt: str = f"""
+        Analyze the following dataset and identify the target column (the variable to predict).
+
+        Dataset columns: {list(df.columns)}
+        Data types:
+        {df.dtypes.to_markdown()}
+
+        Sample data:
+        {df.head().to_markdown()}
+
+        Based on the column names, data types, and sample values, determine which column
+        is most likely the target variable for a machine learning task.
+
+        Consider:
+        - Common target column names (e.g., 'target', 'label', 'class', 'y', 'outcome')
+        - The position of the column (often last)
+        - The data type (classification targets are often categorical/integer, regression targets are often numeric)
+
+        Provide your answer with the exact column name and your reasoning.
+    """
+
+    response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
+    assert isinstance(response, TargetFeatureResponse)
+
+    state["target_column"] = response.target_column
+    state["messages"] = state["messages"] + [
+        AIMessage(content=f"Identified target column: '{response.target_column}'\nReasoning: {response.reasoning}")
+    ]
+
+    return state
+
+
 def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
-    local_prompt: str = f"""
+    hyperparameter_names = list(state["pipeline"].extract_hyperparameters().keys())
+    target_column = state["target_column"]
+    prompt: str = f"""
         You are generating python code for a machine learning pipeline.
         The pipeline to implement is the following:
         {str(state["pipeline"])}
@@ -115,12 +175,24 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
         The code eventually will be executed, so ensure that it is correct and executable.
         The code must be contained in a function called 'train_model'.
-        Hyperparameters used in the entire pipeline must not be magic numbers/string, but they must 
-        be passed as arguments to the 'train_model' using these parameters names: {", ".join(state["pipeline"].extract_hyperparameters().keys())}.
-        'train_model' function must have ONLY these parameters, and no other parameters.
+
+        The 'train_model' function MUST have the following signature:
+        def train_model(X_train, y_train{', ' + ', '.join(hyperparameter_names) if hyperparameter_names else ''}):
+
+        Where:
+        - X_train: Training features (pandas DataFrame or numpy array)
+        - y_train: Training target (pandas Series or numpy array)
+        {f'- {", ".join(hyperparameter_names)}: Hyperparameters for the pipeline' if hyperparameter_names else ''}
+
+        The function must:
+        1. Build and train the pipeline on the training data
+        2. Return the trained model
+
+        Do NOT calculate any validation metrics - just train and return the model.
         Do NOT use grid search.
+        Do NOT load data from files - data will be passed as arguments.
     """
-    state["messages"] = state["messages"] + [HumanMessage(content=local_prompt)]
+    state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
 
     response: Any = code_model.invoke(state["messages"])
     assert isinstance(response, CodeResponse)
@@ -177,6 +249,20 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         import mlflow
 
         mlflow.autolog()
+
+        # Split train data into train/validation for model selection
+        train_df_full = state["train_df"]
+        train_df, val_df = train_test_split(
+            train_df_full, test_size=0.2, random_state=42
+        )
+
+        # Extract features and target using identified target column
+        target_column = state["target_column"]
+        X_train = train_df.drop(columns=[target_column])
+        y_train = train_df[target_column]
+        X_val = val_df.drop(columns=[target_column])
+        y_val = val_df[target_column]
+
         run_name: str = f"pipeline_{state['pipeline'].id}"
         with mlflow.start_run(
             nested=True,
@@ -197,8 +283,29 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
 
-                    module.train_model(**hp_combination)
+                    trained_model = module.train_model(
+                        X_train, y_train, **hp_combination
+                    )
+
+                    # Calculate validation metric
+                    y_pred = trained_model.predict(X_val)
+                    validation_score = compute_metric(
+                        y_val, y_pred, state["validation_metric"]
+                    )
+                    mlflow.log_metric(state["validation_metric"], validation_score)
                 index_run += 1
+
+            # Select the best run based on validation score
+            best_run_id = get_best_run(
+                parent_run_id,
+                state["experiment_id"],
+                metric=state["validation_metric"],
+                maximize=state["maximize"],
+            )
+            state["best_run_id"] = best_run_id
+            if best_run_id:
+                mlflow.set_tag("best_nested_run_id", best_run_id)
+
             state["code_execution_feedback"] = True
     except Exception as e:
         state["messages"] = state["messages"] + [
@@ -285,6 +392,7 @@ state_graph.add_edge(START, "load_info")
 state_graph.add_sequence(
     [
         load_info,
+        identify_target_feature,
         generate_pipeline_code,
         validate_code_compliance,
     ]
