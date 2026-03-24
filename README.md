@@ -41,7 +41,7 @@ poetry install
 Run the full workflow:
 
 ```bash
-python -m automlllm \
+poetry run python -m automlllm \
   --spec_path resources/general-specification.yml \
   --dataset_path resources/datasets/adult.csv \
   --validation_metric accuracy \

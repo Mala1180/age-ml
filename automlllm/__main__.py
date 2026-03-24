@@ -1,14 +1,20 @@
 from datetime import datetime
-from multiprocessing import Process, Semaphore
+from multiprocessing import Process, Semaphore, Queue
 from time import monotonic, sleep
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 
 import fire
 import mlflow
+import pandas as pd
+from langchain_core.messages import HumanMessage
 from mlflow.entities import Experiment
+from pydantic import BaseModel
+from sklearn.model_selection import train_test_split
 
 from automlllm import logger
+from automlllm.common.model import model
+from automlllm.evaluation.agent import evaluation_agent
 from automlllm.execution.agent import (
     execution_agent,
     ExecutionPipeline,
@@ -43,9 +49,6 @@ def main(
     Returns:
         None.
     """
-    # dataset_path = "resources/datasets/adult.csv"
-    # spec_path = "resources/general-specification.yml"
-
     specification: Specification = Specification.parse(Path(spec_path).read_text())
     time_budget_seconds: int = specification.budgets.time.total_seconds
     max_workers: int = specification.budgets.workers
@@ -68,6 +71,13 @@ def main(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
+        df: pd.DataFrame = pd.read_csv(Path(dataset_path))
+
+        target_feature = identify_target_feature(df)
+
+        train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+
+        result_queue = Queue()
         semaphore = Semaphore(max_workers)
         processes: List[Process] = []
 
@@ -80,45 +90,127 @@ def main(
                 target=invoke_agent,
                 args=(
                     {
-                        "dataset_path": dataset_path,
                         "specification_path": spec_path,
+                        "dataset_path": dataset_path,
+                        "train_df": train_df,
+                        "target_feature": target_feature,
                         "pipeline": execution_pipeline,
-                        "run_id": run.info.run_id,
+                        "root_run_id": run.info.run_id,
                         "experiment_id": experiment_id,
                         "validation_metric": validation_metric,
                         "maximize": maximize,
                     },
                     semaphore,
+                    result_queue,
                 ),
             )
             process.start()
             processes.append(process)
 
-        while monotonic() < execution_deadline:
-            if all(not p.is_alive() for p in processes):
-                break
-            sleep(1)
+        results = wait_and_collect_agents_results(
+            processes, result_queue, execution_deadline
+        )
 
-        completed = 0
-        terminated = 0
-        for process in processes:
-            if process.is_alive():
-                process.terminate()
-                process.join(timeout=5)
-                terminated += 1
-                logger.warning("Terminated pipeline due to deadline")
-            else:
-                completed += 1
+        pipeline_run_ids: Dict[str, Optional[str]] = {
+            result["pipeline"].id: result.get("pipeline_run_id") for result in results
+        }
 
-        logger.info(f"Completed {completed} pipelines, terminated {terminated}")
+        res = evaluation_agent.invoke(
+            {
+                "experiment_id": experiment_id,
+                "pipeline_run_ids": pipeline_run_ids,
+                "validation_metric": validation_metric,
+                "maximize": maximize,
+                "test_df": test_df,
+                "target_feature": target_feature,
+            }
+        )
 
 
-def invoke_agent(input: dict, semaphore) -> Dict:
+
+def invoke_agent(input: dict, semaphore, result_queue) -> None:
     with semaphore:
         logger.info(f"Invoking execution agent with input: {input}")
         result = execution_agent.invoke(input)
         logger.info(f"Agent returned result: {result}")
-        return result
+        result_queue.put(result)
+
+
+def wait_and_collect_agents_results(
+    processes: List[Process],
+    result_queue: Queue,
+    execution_deadline: float,
+) -> List[Dict]:
+    results: List[Dict] = []
+    expected_results = len(processes)
+
+    while monotonic() < execution_deadline:
+        # Collect any available results (non-blocking)
+        while not result_queue.empty():
+            results.append(result_queue.get_nowait())
+
+        # Exit early if we have all results
+        if len(results) >= expected_results:
+            break
+        sleep(1)
+
+    # Collect any remaining results
+    while not result_queue.empty():
+        results.append(result_queue.get_nowait())
+
+    completed = 0
+    terminated = 0
+    for process in processes:
+        if process.is_alive():
+            process.terminate()
+            process.join(timeout=5)
+            terminated += 1
+            logger.warning("Terminated pipeline due to deadline")
+        else:
+            process.join()
+            completed += 1
+
+    logger.info(
+        f"Completed {completed} pipelines, terminated by deadline budget: {terminated}"
+    )
+
+    logger.info(f"Got {results} results from execution agents")
+    return results
+
+
+class TargetFeatureResponse(BaseModel):
+    target_feature: str
+    reasoning: str
+
+
+target_model = model.with_structured_output(TargetFeatureResponse)
+
+
+def identify_target_feature(df: pd.DataFrame) -> str:
+    identify_prompt: str = f"""
+        Analyze the following dataset and identify the target column (the variable to predict).
+
+        Dataset columns: {list(df.columns)}
+        Data types:
+        {df.dtypes.to_markdown()}
+
+        Sample data:
+        {df.head().to_markdown()}
+
+        Based on the column names, data types, and sample values, determine which column
+        is most likely the target variable for a machine learning task.
+
+        Consider:
+        - Common target column names (e.g., 'target', 'label', 'class', 'y', 'outcome')
+        - The position of the column (often last)
+        - The data type (classification targets are often categorical/integer, regression targets are often numeric)
+
+        Provide your answer with the exact column name and your reasoning.
+    """
+
+    response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
+    assert isinstance(response, TargetFeatureResponse)
+    return response.target_feature
 
 
 if __name__ == "__main__":

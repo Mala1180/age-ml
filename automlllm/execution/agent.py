@@ -4,6 +4,7 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any, Optional, Literal, Dict
 
+import mlflow
 import pandas as pd
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langgraph.constants import END
@@ -13,17 +14,15 @@ from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 from typing_extensions import override
 
+from automlllm import logger
+from automlllm.common.client import set_run_description, delete_failed_runs
 from automlllm.common.model import model
 from automlllm.common.types import Pipeline
 from automlllm.execution.utils import (
     extract_python_code,
     grid_search_exploration,
-    delete_failed_runs,
-    set_run_description,
-    get_best_run,
-    compute_metric,
+    get_metric,
 )
-from automlllm.planning.agent import PlanningPipeline
 from automlllm.specification import Specification
 
 
@@ -51,26 +50,21 @@ class ExecutionPipeline(Pipeline):
 
 
 class ExecutionAgentState(MessagesState):
-    run_id: str
+    root_run_id: str
     pipeline_run_id: Optional[str]
     experiment_id: str
     dataset_path: str
     specification_path: str
-    planning_pipeline: PlanningPipeline
     pipeline: ExecutionPipeline
     code_validation_feedback: bool
     code_execution_feedback: bool
-    human_feedback: Optional[str]
     validation_attempts: int
     execution_attempts: int
     validation_metric: str
     maximize: bool
-    # Dataset splits
     train_df: pd.DataFrame
-    test_df: pd.DataFrame
     best_run_id: Optional[str]
-    # Target feature identification
-    target_column: Optional[str]
+    target_feature: str
 
 
 max_attempts: int = 5
@@ -89,24 +83,13 @@ class ExplanationResponse(BaseModel):
     text: str
 
 
-class TargetFeatureResponse(BaseModel):
-    target_column: str
-    reasoning: str
-
-
 judge_model = model.with_structured_output(JudgeResponse)
 code_model = model.with_structured_output(CodeResponse)
 explanation_model = model.with_structured_output(ExplanationResponse)
-target_model = model.with_structured_output(TargetFeatureResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
-    df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
-
-    # Split dataset into train and test (test set saved for later evaluation)
-    train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
-    state["train_df"] = train_df
-    state["test_df"] = test_df
+    df: pd.DataFrame = pd.read_csv(state["dataset_path"])
 
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
@@ -121,6 +104,7 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{dataset_info}"),
+        AIMessage(content=f"Identified target column: '{state['target_feature']}'"),
         AIMessage(content=str(state["pipeline"])),
         AIMessage(content=technical_details),
     ]
@@ -129,44 +113,8 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def identify_target_feature(state: ExecutionAgentState) -> ExecutionAgentState:
-    df: pd.DataFrame = state["train_df"]
-
-    identify_prompt: str = f"""
-        Analyze the following dataset and identify the target column (the variable to predict).
-
-        Dataset columns: {list(df.columns)}
-        Data types:
-        {df.dtypes.to_markdown()}
-
-        Sample data:
-        {df.head().to_markdown()}
-
-        Based on the column names, data types, and sample values, determine which column
-        is most likely the target variable for a machine learning task.
-
-        Consider:
-        - Common target column names (e.g., 'target', 'label', 'class', 'y', 'outcome')
-        - The position of the column (often last)
-        - The data type (classification targets are often categorical/integer, regression targets are often numeric)
-
-        Provide your answer with the exact column name and your reasoning.
-    """
-
-    response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
-    assert isinstance(response, TargetFeatureResponse)
-
-    state["target_column"] = response.target_column
-    state["messages"] = state["messages"] + [
-        AIMessage(content=f"Identified target column: '{response.target_column}'\nReasoning: {response.reasoning}")
-    ]
-
-    return state
-
-
 def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     hyperparameter_names = list(state["pipeline"].extract_hyperparameters().keys())
-    target_column = state["target_column"]
     prompt: str = f"""
         You are generating python code for a machine learning pipeline.
         The pipeline to implement is the following:
@@ -177,12 +125,12 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         The code must be contained in a function called 'train_model'.
 
         The 'train_model' function MUST have the following signature:
-        def train_model(X_train, y_train{', ' + ', '.join(hyperparameter_names) if hyperparameter_names else ''}):
+        def train_model(X_train, y_train{", " + ", ".join(hyperparameter_names) if hyperparameter_names else ""}):
 
         Where:
         - X_train: Training features (pandas DataFrame or numpy array)
         - y_train: Training target (pandas Series or numpy array)
-        {f'- {", ".join(hyperparameter_names)}: Hyperparameters for the pipeline' if hyperparameter_names else ''}
+        {f"- {", ".join(hyperparameter_names)}: Hyperparameters for the pipeline" if hyperparameter_names else ""}
 
         The function must:
         1. Build and train the pipeline on the training data
@@ -227,18 +175,20 @@ def validate_code_compliance(
     else:
         state["code_validation_feedback"] = False
         state["pipeline"].code = ""
+        state["pipeline_run_id"] = None
     # append feedback message
     state["messages"] = state["messages"] + [AIMessage(content=response.feedback)]
+    state["validation_attempts"] = state["validation_attempts"] + 1
     return state
 
 
 def code_validation_branch(
     state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "execute_code"]:
+) -> Literal["generate_pipeline_code", "execute_code", "__end__"]:
     is_valid = state["code_validation_feedback"]
-    state["validation_attempts"] += 1
-    if not is_valid and state["validation_attempts"] == max_attempts:
-        raise Exception("Maximum attempts reached for code generation.")
+    if not is_valid and state["validation_attempts"] >= max_attempts:
+        logger.warning("Maximum attempts reached for code generation.")
+        return "__end__"
     return "execute_code" if is_valid else "generate_pipeline_code"
 
 
@@ -246,31 +196,29 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
     parent_run_id: Optional[str] = None
     try:
-        import mlflow
-
         mlflow.autolog()
-
-        # Split train data into train/validation for model selection
-        train_df_full = state["train_df"]
-        train_df, val_df = train_test_split(
-            train_df_full, test_size=0.2, random_state=42
-        )
-
-        # Extract features and target using identified target column
-        target_column = state["target_column"]
-        X_train = train_df.drop(columns=[target_column])
-        y_train = train_df[target_column]
-        X_val = val_df.drop(columns=[target_column])
-        y_val = val_df[target_column]
-
         run_name: str = f"pipeline_{state['pipeline'].id}"
         with mlflow.start_run(
             nested=True,
-            parent_run_id=state["run_id"],
+            parent_run_id=state["root_run_id"],
             run_name=run_name,
         ) as parent_run:
             parent_run_id = parent_run.info.run_id
             state["pipeline_run_id"] = parent_run_id
+
+            # Split train data into train/validation for model selection
+            train_df_full = state["train_df"]
+            train_df, val_df = train_test_split(
+                train_df_full, test_size=0.2, random_state=42
+            )
+
+            # Extract features and target using identified target column
+            target_feature = state["target_feature"]
+            X_train = train_df.drop(columns=[target_feature])
+            y_train = train_df[target_feature]
+            X_val = val_df.drop(columns=[target_feature])
+            y_val = val_df[target_feature]
+
             hyperparameters: Dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
@@ -289,23 +237,14 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
                     # Calculate validation metric
                     y_pred = trained_model.predict(X_val)
-                    validation_score = compute_metric(
-                        y_val, y_pred, state["validation_metric"]
-                    )
+                    metric_fn = get_metric(state["validation_metric"])
+                    validation_score = metric_fn(y_val, y_pred)
                     mlflow.log_metric(state["validation_metric"], validation_score)
                 index_run += 1
 
-            # Select the best run based on validation score
-            best_run_id = get_best_run(
-                parent_run_id,
-                state["experiment_id"],
-                metric=state["validation_metric"],
-                maximize=state["maximize"],
+            mlflow.log_artifact(
+                f"out/pipeline_{state['pipeline'].id}/code.py", artifact_path="code.py"
             )
-            state["best_run_id"] = best_run_id
-            if best_run_id:
-                mlflow.set_tag("best_nested_run_id", best_run_id)
-
             state["code_execution_feedback"] = True
     except Exception as e:
         state["messages"] = state["messages"] + [
@@ -371,7 +310,12 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     if pipeline_run_id:
         set_run_description(pipeline_run_id, state["pipeline"].explanation)
 
-    __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
+    path = __save_file(
+        state["pipeline"].id, "explanation.md", state["pipeline"].explanation
+    )
+    with mlflow.start_run(run_id=state["root_run_id"]):
+        mlflow.log_artifact(str(path), artifact_path=str(path))
+
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
         f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
@@ -379,10 +323,11 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def __save_file(pipeline_id: int, filename: str, content: str) -> None:
+def __save_file(pipeline_id: int, filename: str, content: str) -> Path:
     out_dir: Path = Path(f"out/pipeline_{pipeline_id}")
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / filename).write_text(content, encoding="utf-8")
+    return out_dir / filename
 
 
 state_graph = StateGraph(ExecutionAgentState)
@@ -392,7 +337,6 @@ state_graph.add_edge(START, "load_info")
 state_graph.add_sequence(
     [
         load_info,
-        identify_target_feature,
         generate_pipeline_code,
         validate_code_compliance,
     ]
