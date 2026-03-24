@@ -10,6 +10,7 @@ from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langgraph.constants import END
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
+from mlflow.models import infer_signature
 from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 from typing_extensions import override
@@ -119,7 +120,7 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         You are generating python code for a machine learning pipeline.
         The pipeline to implement is the following:
         {str(state["pipeline"])}
-        Provide only the code without any explanations.
+        Provide only the code without any explanations, and pay attention to the indentation.
         Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
         The code eventually will be executed, so ensure that it is correct and executable.
         The code must be contained in a function called 'train_model'.
@@ -196,8 +197,10 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
     parent_run_id: Optional[str] = None
     try:
-        mlflow.autolog()
-        run_name: str = f"pipeline_{state['pipeline'].id}"
+        mlflow.autolog(log_models=False)
+        run_name: str = (
+            f"pipeline_{state['pipeline'].steps[-1].candidate}_{state['pipeline'].id}"
+        )
         with mlflow.start_run(
             nested=True,
             parent_run_id=state["root_run_id"],
@@ -240,16 +243,26 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     metric_fn = get_metric(state["validation_metric"])
                     validation_score = metric_fn(y_val, y_pred)
                     mlflow.log_metric(state["validation_metric"], validation_score)
+
+                    signature = infer_signature(X_train, trained_model.predict(X_train))
+                    mlflow.sklearn.log_model(
+                        sk_model=trained_model,
+                        name="model",
+                        signature=signature,
+                        input_example=X_train.head(3),
+                    )
+
                 index_run += 1
 
             mlflow.log_artifact(
-                f"out/pipeline_{state['pipeline'].id}/code.py", artifact_path="code.py"
+                f"out/pipeline_{state['pipeline'].id}",
+                artifact_path=f"pipeline_{state['pipeline'].id}",
             )
             state["code_execution_feedback"] = True
     except Exception as e:
-        state["messages"] = state["messages"] + [
-            AIMessage(content=f"Error during code execution: {str(e)}")
-        ]
+        message = f"Error during code execution: {str(e)}"
+        logger.info(message)
+        state["messages"] = state["messages"] + [AIMessage(content=message)]
         state["code_execution_feedback"] = False
         if parent_run_id is not None:
             delete_failed_runs(parent_run_id, state["experiment_id"])
@@ -275,7 +288,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Make sure to systematically report each step of the actual pipeline:
         {state["pipeline"].steps}
         For each pipeline step, create a concise phrase that explain such step concisely.
-        Use markdown format to structure the explanation.
+        Use markdown format to structure the explanation and pay attention to the format (spaces, newlines, etc.).
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
     explanation: Any = explanation_model.invoke(state["messages"])
@@ -310,11 +323,12 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     if pipeline_run_id:
         set_run_description(pipeline_run_id, state["pipeline"].explanation)
 
-    path = __save_file(
-        state["pipeline"].id, "explanation.md", state["pipeline"].explanation
-    )
+    __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     with mlflow.start_run(run_id=state["root_run_id"]):
-        mlflow.log_artifact(str(path), artifact_path=str(path))
+        mlflow.log_artifact(
+            f"out/pipeline_{state['pipeline'].id}",
+            artifact_path=f"pipeline_{state['pipeline'].id}",
+        )
 
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
@@ -323,11 +337,10 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def __save_file(pipeline_id: int, filename: str, content: str) -> Path:
+def __save_file(pipeline_id: int, filename: str, content: str) -> None:
     out_dir: Path = Path(f"out/pipeline_{pipeline_id}")
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / filename).write_text(content, encoding="utf-8")
-    return out_dir / filename
 
 
 state_graph = StateGraph(ExecutionAgentState)

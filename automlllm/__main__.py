@@ -77,7 +77,7 @@ def main(
 
         train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
 
-        result_queue = Queue()
+        result_queue: Queue = Queue()
         semaphore = Semaphore(max_workers)
         processes: List[Process] = []
 
@@ -125,7 +125,9 @@ def main(
                 "target_feature": target_feature,
             }
         )
-
+        logger.info(
+            f"Best model: pipeline {res['best_pipeline_id']}, run {res['best_run_id']}, {res['validation_metric']} = {res['best_test_score']}\n"
+        )
 
 
 def invoke_agent(input: dict, semaphore, result_queue) -> None:
