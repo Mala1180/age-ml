@@ -19,6 +19,7 @@ class EvaluationAgentState(MessagesState):
     maximize: bool
     test_df: pd.DataFrame
     target_feature: str
+    best_pipeline_id: Optional[int]
     best_run_id: Optional[str]
     best_test_score: Optional[float]
     test_scores: Dict[int, float]
@@ -78,10 +79,7 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
 
     state["best_run_id"] = best_run_id
     state["best_test_score"] = best_score
-    logger.info(
-        f"Best model: pipeline {best_pipeline_id}, run {best_run_id}, {state['validation_metric']} = {best_score}"
-    )
-
+    state["best_pipeline_id"] = best_pipeline_id
     return state
 
 

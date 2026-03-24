@@ -38,6 +38,5 @@ def get_best_pipeline_run(
     return None
 
 
-def get_model_from_run_id(run_id: str) -> mlflow.pyfunc.PyFuncModel:
-    model = mlflow.pyfunc.load_model(f"runs:/{run_id}/model")
-    return model
+def get_model_from_run_id(run_id: str):
+    return mlflow.pyfunc.load_model(f"runs:/{run_id}/model")
