@@ -74,9 +74,10 @@ class StepCondition(Condition):
 
 class DatasetFeatureCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    is_like: Optional[str] = None
-    role: Optional[str] = None
+    named_like: Optional[str] = None
+    is_target: Optional[bool] = None
     data_type: Optional[str] = None
+    data_distribution: Optional[str] = None
 
 
 class DatasetCondition(SemanticCondition):
@@ -84,12 +85,18 @@ class DatasetCondition(SemanticCondition):
 
     def __str__(self):
         conditions = []
-        if self.feature.is_like:
-            conditions.append(f"feature name is like '{self.feature.is_like}'")
-        if self.feature.role:
-            conditions.append(f"feature role is '{self.feature.role}'")
+        if self.feature.named_like:
+            conditions.append(f"feature name is like '{self.feature.named_like}'")
+        if self.feature.is_target is not None:
+            conditions.append(
+                f"feature is {'' if self.feature.is_target else 'not'} the target variable"
+            )
         if self.feature.data_type:
             conditions.append(f"feature data type is '{self.feature.data_type}'")
+        if self.feature.data_distribution:
+            conditions.append(
+                f"feature data distribution is '{self.feature.data_distribution}'"
+            )
         return " and ".join(conditions)
 
 

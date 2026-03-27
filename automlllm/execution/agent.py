@@ -292,7 +292,9 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     assert isinstance(explanation, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
     )
-    state["messages"] = state["messages"] + [AIMessage(content=explanation.markdown_text)]
+    state["messages"] = state["messages"] + [
+        AIMessage(content=explanation.markdown_text)
+    ]
 
     summarize_prompt: str = """
         Now briefly summarize the entire conversation focussing on the design choices and

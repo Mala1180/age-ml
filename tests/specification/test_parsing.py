@@ -271,9 +271,10 @@ constraints:
   - if:
       dataset:
         feature:
-          is_like: class
-          role: output
+          named_like: class
+          is_target: true
           data_type: categorical
+          data_distribution: evenly distributed
     require: [classification]
 """
         spec = Specification.parse(spec_yaml)
@@ -281,9 +282,10 @@ constraints:
         assert len(spec.semantic_constraints) == 1
         assert spec.semantic_constraints[0].condition == DatasetCondition(
             feature=DatasetFeatureCondition(
-                is_like="class",
-                role="output",
+                named_like="class",
+                is_target=True,
                 data_type="categorical",
+                data_distribution="evenly distributed",
             )
         )
         assert len(spec.semantic_constraints[0].require) == 1
