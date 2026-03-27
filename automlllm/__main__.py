@@ -51,19 +51,21 @@ def main(
         None.
     """
     specification: Specification = Specification.parse(Path(spec_path).read_text())
-    time_budget_seconds: int = specification.budgets.time.total_seconds
-    max_workers: int = specification.budgets.workers
-    execution_deadline = monotonic() + time_budget_seconds
+    execution_deadline = monotonic() + specification.budgets.time.total_seconds
+
+    df: pd.DataFrame = pd.read_csv(Path(dataset_path))
+    target_feature = identify_target_feature(df)
 
     planning = planning_agent.invoke(
         {
             "specification_path": spec_path,
             "dataset_path": dataset_path,
+            "target_feature": target_feature,
         }
     )
     planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
 
-    experiment_name: str = "adult-experiment"
+    experiment_name: str = Path(dataset_path).stem
     mlflow.set_experiment(experiment_name)
     experiment: Optional[Experiment] = mlflow.get_experiment_by_name(experiment_name)
     assert experiment is not None, "Experiment should exist after setting it"
@@ -72,14 +74,10 @@ def main(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
-        df: pd.DataFrame = pd.read_csv(Path(dataset_path))
-
-        target_feature = identify_target_feature(df)
-
         train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
 
         result_queue: Queue = Queue()
-        semaphore = Semaphore(max_workers)
+        semaphore = Semaphore(specification.budgets.workers)
         processes: List[Process] = []
 
         for i, planned_pipeline in enumerate(planned_pipelines):

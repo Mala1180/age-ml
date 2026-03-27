@@ -20,11 +20,12 @@ from z3 import (
 )
 
 from automlllm.planning.solver.utils import convert_solution_to_pipeline
-from automlllm.specification import Specification, StepCondition
+from automlllm.specification import Specification
 from automlllm.specification.types import (
     DatasetCondition,
     NaturalLanguageCondition,
     TrueCondition,
+    StepCondition,
 )
 from resources import get_resource_path
 

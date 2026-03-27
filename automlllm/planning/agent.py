@@ -25,6 +25,7 @@ class PlanningAgentState(MessagesState):
     specification: Specification
     dataset_path: str
     dataset_info: str
+    target_feature: str
     max_pipelines: int
     pipelines: List[PlanningPipeline]
 
@@ -34,7 +35,7 @@ class ConditionVerification(BaseModel):
     explanation: str
 
 
-structured_model = model.with_structured_output(ConditionVerification)
+condition_verification_model = model.with_structured_output(ConditionVerification)
 attempts: int = 0
 max_attempts: int = 5
 
@@ -45,6 +46,7 @@ def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
         Columns:\n{list(df.columns)}
+        Target feature: {state["target_feature"]}
         Data Types:\n{df.dtypes.to_markdown()}
         Description:\n{df.describe().to_markdown()}
         Preview:\n{df.head().to_markdown()}
@@ -73,7 +75,7 @@ def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentSta
         )
 
         state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
-        response: Any = structured_model.invoke(state["messages"])
+        response: Any = condition_verification_model.invoke(state["messages"])
         assert isinstance(response, ConditionVerification)
         state["messages"] = state["messages"] + [
             AIMessage(content=response.explanation)

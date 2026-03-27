@@ -89,7 +89,7 @@ class DatasetCondition(SemanticCondition):
             conditions.append(f"feature name is like '{self.feature.named_like}'")
         if self.feature.is_target is not None:
             conditions.append(
-                f"feature is {'' if self.feature.is_target else 'not'} the target variable"
+                f"feature is{' ' if self.feature.is_target else ' not '}the target variable"
             )
         if self.feature.data_type:
             conditions.append(f"feature data type is '{self.feature.data_type}'")
