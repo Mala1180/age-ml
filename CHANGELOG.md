@@ -1,3 +1,28 @@
+## [3.4.0](https://github.com/Mala1180/automl-llm/compare/3.3.0...3.4.0) (2026-03-27)
+
+### Features
+
+* add target feature inference, validation metric in input, and best run evaluation per pipeline ([5555a4a](https://github.com/Mala1180/automl-llm/commit/5555a4a3dd955e4a555dd7e3ed51dfb5c204690e))
+* modify models training using train/val datasets, add evaluation agent to pick best pipeline after evaluation on test set ([1925d88](https://github.com/Mala1180/automl-llm/commit/1925d88d42df77fa95bc11aa47a1f166e1e39bdf))
+
+### Bug Fixes
+
+* move target feature identification before planning ([8c343b2](https://github.com/Mala1180/automl-llm/commit/8c343b2a6f19e8f52da4ef63aa4c4fd2b2e7dafd))
+
+### General maintenance
+
+* add mlflow stuffs to gitignore ([e342ff8](https://github.com/Mala1180/automl-llm/commit/e342ff8c09487dad8eb2aa3dfa09810616e50558))
+* fix some typos in readme ([ee7197b](https://github.com/Mala1180/automl-llm/commit/ee7197b18d4bfef3a4f94407728d821ecd7d04c9))
+* fix typing and improve mlflow run names ([b0a75d0](https://github.com/Mala1180/automl-llm/commit/b0a75d070dd73aa1d9be3289bf4c3954f7c694ee))
+* minor refinements on prompts, logs and specifications ([40fc358](https://github.com/Mala1180/automl-llm/commit/40fc3588e7cf8aa3b7e751dbc42159a257c48bf8))
+* modify logs ([9a8326f](https://github.com/Mala1180/automl-llm/commit/9a8326f9b74108aae843ae9a7320229013db5128))
+* rename ordering field in specification ([1aae3a5](https://github.com/Mala1180/automl-llm/commit/1aae3a5ac06aaf136e62da3d7ddcec89d7d1cfc5))
+
+### Refactoring
+
+* improve log models/artifacts, improve some prompts, exclude sklearn from mypy checks ([7b1d732](https://github.com/Mala1180/automl-llm/commit/7b1d732bd824b077eb5c39f9a51c16b897617df2))
+* update DatasetFeatureCondition fields ([c84b359](https://github.com/Mala1180/automl-llm/commit/c84b359903708e0fe9f8ace4399881e2b252d778))
+
 ## [3.3.0](https://github.com/Mala1180/automl-llm/compare/3.2.0...3.3.0) (2026-03-18)
 
 ### Features
