@@ -37,7 +37,7 @@ class ConditionVerification(BaseModel):
 
 condition_verification_model = model.with_structured_output(ConditionVerification)
 attempts: int = 0
-max_attempts: int = 5
+generation_attempts: int = 5
 
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:

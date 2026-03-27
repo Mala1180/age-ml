@@ -68,7 +68,7 @@ class SpecificationParser:
         constraints: List[Constraint] = []
         semantic_constraints: List[Constraint] = []
         for constraint_dict in spec.get("constraints", []):
-            condition_node: Dict[str, Any] = constraint_dict["if"]
+            condition_node: str | Dict[str, Any] = constraint_dict["if"]
             require_nodes: List[str | Dict[str, Any]] = constraint_dict.get(
                 "require", []
             )
@@ -145,21 +145,21 @@ class SpecificationParser:
             return Step(name=node_id, candidate=candidate, hyperparameters={})
 
     def _parse_condition(
-        self, node: Dict[str, Any]
+        self, node: str | Dict[str, Any]
     ) -> StepCondition | DatasetCondition | NaturalLanguageCondition:
+        if isinstance(node, str):
+            return self._parse_natural_language_condition(node)
         if not isinstance(node, dict) or not node:
             raise ValueError(
-                "Constraint 'if' condition must define a 'step', 'dataset', or 'natural_language' key."
+                "Constraint 'if' condition must be a non-empty string or define a 'step' or 'dataset' key."
             )
 
         if "step" in node:
             return self._parse_step_condition(node)
         if "dataset" in node:
             return self._parse_dataset_condition(node)
-        if "natural_language" in node:
-            return self._parse_natural_language_condition(node)
         raise ValueError(
-            "Constraint 'if' condition must define a 'step', 'dataset', or 'natural_language' key."
+            "Constraint 'if' condition must be a non-empty string or define a 'step' or 'dataset' key."
         )
 
     def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
@@ -189,12 +189,9 @@ class SpecificationParser:
             feature=DatasetFeatureCondition.model_validate(feature_node)
         )
 
-    def _parse_natural_language_condition(
-        self, node: Dict[str, Any]
-    ) -> NaturalLanguageCondition:
-        natural_language_node: Any = node.get("natural_language")
-        if not isinstance(natural_language_node, str) or natural_language_node == "":
+    def _parse_natural_language_condition(self, node: str) -> NaturalLanguageCondition:
+        if not isinstance(node, str) or node == "":
             raise ValueError(
-                "Constraint 'if.natural_language' condition must be a non-empty string."
+                "Constraint 'if' natural language condition must be a non-empty string."
             )
-        return NaturalLanguageCondition(text=natural_language_node)
+        return NaturalLanguageCondition(text=node)

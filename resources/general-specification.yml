@@ -1,6 +1,7 @@
 budgets:
   pipelines: 5
   workers: 5
+  generation_attempts: 5
   time:
     minutes: 5
 
@@ -146,26 +147,26 @@ ordering:
 
 constraints:
 
-#  - if: target feature is categorical
-#    require: [classification]
-#
-#  - if: target feature is numerical
-#    require: [regression]
-
-  - if:
-      dataset:
-        feature:
-          named_like: class
-          is_target: true
-          data_type: categorical
+  - if: target feature is categorical
     require: [classification]
 
-  - if:
-      dataset:
-        feature:
-          is_target: true
-          data_type: numeric
+  - if: target feature is numeric
     require: [regression]
+
+#  - if:
+#      dataset:
+#        feature:
+#          named_like: class
+#          is_target: true
+#          data_type: categorical
+#    require: [classification]
+#
+#  - if:
+#      dataset:
+#        feature:
+#          is_target: true
+#          data_type: numeric
+#    require: [regression]
 
   - if:
       step:

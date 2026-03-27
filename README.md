@@ -70,6 +70,7 @@ A specification file defines:
 - `budgets.pipelines`: maximum number of planned pipelines to sample/execute (default: 20).
 - `budgets.time`: runtime budget for exploration/execution scheduling. You can set `hours`, `minutes`, and/or `seconds` (default: `minutes: 60`).
 - `budgets.workers`: number of execution workers used for concurrent pipeline runs (default: 5).
+- `budgets.generation_attempts`: max retries per pipeline for code validation/execution loops (default: 5).
 - `pipeline.defaults`: default attributes for steps (`mandatory`, `candidates`).
 - `pipeline.steps`: admissible steps and candidates with parameter grids.
 - `ordering`: ordering constraints (supports `sequence` shorthand).
@@ -101,12 +102,6 @@ poetry run poe static-checks
 poetry run poe format
 poetry run poe coverage
 ```
-
-## Notes and Current Limitations
-
-- Semantic constraints (`natural_language`, `dataset`) are evaluated by the planning agent and translated into concrete constraints when satisfied.
-- Pipeline code generation/execution retries up to 5 times for validation/execution failures.
-- Experiment names are currently hard-coded in entrypoints (`adult-experiment` / `mattia-experiment`).
 
 ## License
 
