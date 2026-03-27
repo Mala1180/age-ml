@@ -76,7 +76,7 @@ class DatasetFeatureCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
     is_like: Optional[str] = None
     role: Optional[str] = None
-    data_kind: Optional[str] = None
+    data_type: Optional[str] = None
 
 
 class DatasetCondition(SemanticCondition):
@@ -88,8 +88,8 @@ class DatasetCondition(SemanticCondition):
             conditions.append(f"feature name is like '{self.feature.is_like}'")
         if self.feature.role:
             conditions.append(f"feature role is '{self.feature.role}'")
-        if self.feature.data_kind:
-            conditions.append(f"feature data kind is '{self.feature.data_kind}'")
+        if self.feature.data_type:
+            conditions.append(f"feature data type is '{self.feature.data_type}'")
         return " and ".join(conditions)
 
 

@@ -15,7 +15,7 @@ pipeline:
       candidates:
         - simple_imputer:
             params:
-              strategy: [mean, median]
+              imputation_strategy: [mean, median]
         - iterative_imputer:
             params:
               max_iter: [10]
@@ -26,7 +26,7 @@ pipeline:
             params:
               n_bins: [10]
               encode: [ordinal]
-              strategy: [quantile]
+              discretization_strategy: [quantile]
         - binarizer:
             params:
               threshold: [0.0]
@@ -159,7 +159,7 @@ constraints:
         feature:
           is_like: class
           role: output
-          data_kind: categorical
+          data_type: categorical
     require: [classification]
 
 

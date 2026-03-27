@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from multiprocessing import Process, Semaphore, Queue
 from time import monotonic, sleep
@@ -114,6 +115,10 @@ def main(
         pipeline_run_ids: Dict[str, Optional[str]] = {
             result["pipeline"].id: result.get("pipeline_run_id") for result in results
         }
+
+        # for result in results:
+        #     if result.get("pipeline_run_id") is None:
+        #         os.system(f"echo '{str(result["pipeline"])}' >> failed_pipelines.md")
 
         res = evaluation_agent.invoke(
             {
