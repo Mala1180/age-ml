@@ -157,9 +157,10 @@ constraints:
   - if:
       dataset:
         feature:
-          is_like: class
-          role: output
+          named_like: class
+          is_target: true
           data_type: categorical
+          data_distribution: evenly distributed
     require: [classification]
 
 
