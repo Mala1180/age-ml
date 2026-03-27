@@ -129,7 +129,7 @@ def main(
             }
         )
         logger.info(
-            f"Best model: pipeline {res['best_pipeline_id']}, run {res['best_run_id']}, {res['validation_metric']} = {res['best_test_score']}\n"
+            f"Best model: pipeline {res['best_pipeline_id']}, run {res['best_run_id']}, {res['validation_metric']} = {res['best_test_score']} on test set"
         )
 
 

@@ -61,7 +61,7 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
         score = metric_fn(y_test, y_pred)
         state["test_scores"][pipeline_id] = score
         logger.info(
-            f"Pipeline {pipeline_id} (run {run_id}): {state['validation_metric']} = {score}"
+            f"Pipeline {pipeline_id} (run {run_id}): {state['validation_metric']} = {score} on validation set"
         )
 
         if best_score is None:
