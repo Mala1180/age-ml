@@ -323,7 +323,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         set_run_description(pipeline_run_id, state["pipeline"].explanation)
 
     __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
-    with mlflow.start_run(run_id=state["root_run_id"]):
+    with mlflow.start_run(run_id=pipeline_run_id):
         mlflow.log_artifact(f"out/pipeline_{state['pipeline'].id}/explanation.md")
 
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")

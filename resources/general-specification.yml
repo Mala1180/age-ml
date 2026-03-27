@@ -146,13 +146,13 @@ ordering:
 
 constraints:
 
-  - if:
-      natural_language: target feature is categorical
-    require: [classification]
-
-  - if:
-      natural_language: target feature is numerical
-    require: [regression]
+#  - if:
+#      natural_language: target feature is categorical
+#    require: [classification]
+#
+#  - if:
+#      natural_language: target feature is numerical
+#    require: [regression]
 
   - if:
       dataset:
@@ -160,9 +160,14 @@ constraints:
           named_like: class
           is_target: true
           data_type: categorical
-          data_distribution: evenly distributed
     require: [classification]
 
+  - if:
+      dataset:
+        feature:
+          is_target: true
+          data_type: numeric
+    require: [regression]
 
   - if:
       step:
