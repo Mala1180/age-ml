@@ -48,6 +48,10 @@ class Specification:
         return self.budgets.workers
 
     @property
+    def generation_attempts(self) -> int:
+        return self.budgets.generation_attempts
+
+    @property
     def time_budget_minutes(self) -> int:
         return self.budgets.time.total_seconds // 60
 

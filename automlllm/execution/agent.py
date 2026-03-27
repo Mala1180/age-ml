@@ -61,14 +61,12 @@ class ExecutionAgentState(MessagesState):
     code_execution_feedback: bool
     validation_attempts: int
     execution_attempts: int
+    generation_attempts: int
     validation_metric: str
     maximize: bool
     train_df: pd.DataFrame
     best_run_id: Optional[str]
     target_feature: str
-
-
-max_attempts: int = 5
 
 
 class JudgeResponse(BaseModel):
@@ -100,7 +98,9 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
         Preview:\n{df.head().to_markdown()}
     """
     content: str = Path(state["specification_path"]).read_text()
-    technical_details: str = Specification.parse(content).describe_technical_details()
+    specification: Specification = Specification.parse(content)
+    technical_details: str = specification.describe_technical_details()
+    state["generation_attempts"] = specification.generation_attempts
     state["messages"] = [
         SystemMessage(content=system_prompt),
         AIMessage(content=f"Dataset path: {state['dataset_path']}"),
@@ -187,8 +187,11 @@ def code_validation_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "execute_code", "__end__"]:
     is_valid = state["code_validation_feedback"]
-    if not is_valid and state["validation_attempts"] >= max_attempts:
-        logger.warning("Maximum attempts reached for code generation.")
+    generation_attempts: int = state["generation_attempts"]
+    if not is_valid and state["validation_attempts"] >= generation_attempts:
+        logger.warning(
+            f"Maximum attempts ({generation_attempts}) reached for code generation."
+        )
         return "__end__"
     return "execute_code" if is_valid else "generate_pipeline_code"
 
@@ -273,8 +276,11 @@ def code_execution_branch(
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid = state["code_execution_feedback"]
     state["execution_attempts"] += 1
-    if not is_valid and state["execution_attempts"] == max_attempts:
-        raise Exception("Maximum attempts reached for code execution.")
+    generation_attempts: int = state["generation_attempts"]
+    if not is_valid and state["execution_attempts"] >= generation_attempts:
+        raise Exception(
+            f"Maximum attempts ({generation_attempts}) reached for code execution."
+        )
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
 

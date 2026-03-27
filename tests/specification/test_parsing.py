@@ -20,6 +20,7 @@ class TestSpecificationParsing:
         assert spec.time_budget_minutes == 60
         assert spec.time_budget_seconds == 3600
         assert spec.workers == 5
+        assert spec.generation_attempts == 5
         assert len(spec.steps) == 5
         step_ids = {s.id for s in spec.steps}
         assert step_ids == {"step1", "step2", "step3", "step4", "step5"}
@@ -39,6 +40,7 @@ class TestSpecificationParsing:
 budgets:
   pipelines: 4
   workers: 3
+  generation_attempts: 7
   time:
     minutes: 12
 
@@ -58,6 +60,7 @@ ordering: []
         assert spec.time_budget_minutes == 12
         assert spec.time_budget_seconds == 720
         assert spec.workers == 3
+        assert spec.generation_attempts == 7
 
     def test_parse_time_budget_in_seconds(self):
         spec_yaml = """
@@ -305,8 +308,7 @@ pipeline:
 ordering: []
 
 constraints:
-  - if:
-      natural_language: target feature is categorical
+  - if: target feature is categorical
     require: [classification]
 """
         spec = Specification.parse(spec_yaml)

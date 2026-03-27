@@ -32,6 +32,7 @@ class Budgets(BaseModel):
     model_config = ConfigDict(extra="forbid")
     pipelines: int = 20
     workers: int = 5
+    generation_attempts: int = Field(default=5, ge=1)
     time: TimeBudget = Field(default_factory=lambda: TimeBudget(minutes=60))
 
 

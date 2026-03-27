@@ -39,7 +39,8 @@ def main(
     ``python -m automlllm --spec_path=<path> --dataset_path=<path>``
 
     Runtime budgets are read from ``budgets`` in the specification YAML:
-    ``budgets.pipelines``, ``budgets.time`` (hours/minutes/seconds), and ``budgets.workers``.
+    ``budgets.pipelines``, ``budgets.time`` (hours/minutes/seconds), ``budgets.workers``,
+    and ``budgets.generation_attempts``.
 
     Args:
         spec_path: Filesystem path to the YAML specification file.
