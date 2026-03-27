@@ -196,11 +196,11 @@ def code_validation_branch(
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
     parent_run_id: Optional[str] = None
+    algorithm: str = state["pipeline"].steps[-1].candidate
+    pipeline_id: int = state["pipeline"].id
     try:
         mlflow.autolog(log_models=False)
-        run_name: str = (
-            f"pipeline_{state['pipeline'].steps[-1].candidate}_{state['pipeline'].id}"
-        )
+        run_name: str = f"pipeline_{algorithm}_{pipeline_id}"
         with mlflow.start_run(
             nested=True,
             parent_run_id=state["root_run_id"],
@@ -227,9 +227,10 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             ].extract_hyperparameters()
             index_run: int = 0
             for hp_combination in grid_search_exploration(hyperparameters):
-                with mlflow.start_run(nested=True, run_name=f"run_{index_run}"):
+                nested_run_name: str = f"{algorithm}_{pipeline_id}_run_{index_run}"
+                with mlflow.start_run(nested=True, run_name=nested_run_name):
                     spec = importlib.util.spec_from_file_location(
-                        "out_module", f"out/pipeline_{state['pipeline'].id}/code.py"
+                        "out_module", f"out/pipeline_{pipeline_id}/code.py"
                     )
                     module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
@@ -254,7 +255,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
                 index_run += 1
 
-            mlflow.log_artifact(f"out/pipeline_{state['pipeline'].id}/code.py")
+            mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
         message = f"Error during code execution: {str(e)}"

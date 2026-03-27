@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from multiprocessing import Process, Semaphore, Queue
 from time import monotonic, sleep

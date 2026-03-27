@@ -146,12 +146,10 @@ ordering:
 
 constraints:
 
-#  - if:
-#      natural_language: target feature is categorical
+#  - if: target feature is categorical
 #    require: [classification]
 #
-#  - if:
-#      natural_language: target feature is numerical
+#  - if: target feature is numerical
 #    require: [regression]
 
   - if:
