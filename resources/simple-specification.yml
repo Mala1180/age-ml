@@ -15,7 +15,7 @@ pipeline:
       candidates:
         - simple_imputer:
             params:
-              strategy: [mean, median]
+              imputation_strategy: [mean, median]
         - iterative_imputer:
             params:
               max_iter: [10]

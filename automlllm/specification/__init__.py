@@ -106,8 +106,8 @@ class Specification:
                     parts: List[str] = []
                     if feature.role:
                         parts.append(f"role '{feature.role}'")
-                    if feature.data_kind:
-                        parts.append(f"data kind '{feature.data_kind}'")
+                    if feature.data_type:
+                        parts.append(f"data type '{feature.data_type}'")
                     if feature.is_like:
                         parts.append(f"is like '{feature.is_like}'")
                     cond_str = "dataset feature matches " + ", ".join(parts)

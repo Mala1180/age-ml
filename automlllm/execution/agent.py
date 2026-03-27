@@ -81,7 +81,7 @@ class CodeResponse(BaseModel):
 
 
 class ExplanationResponse(BaseModel):
-    text: str
+    markdown_text: str
 
 
 judge_model = model.with_structured_output(JudgeResponse)
@@ -254,10 +254,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
                 index_run += 1
 
-            mlflow.log_artifact(
-                f"out/pipeline_{state['pipeline'].id}",
-                artifact_path=f"pipeline_{state['pipeline'].id}",
-            )
+            mlflow.log_artifact(f"out/pipeline_{state['pipeline'].id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
         message = f"Error during code execution: {str(e)}"
@@ -288,14 +285,14 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Make sure to systematically report each step of the actual pipeline:
         {state["pipeline"].steps}
         For each pipeline step, create a concise phrase that explain such step concisely.
-        Use markdown format to structure the explanation and pay attention to the format (spaces, newlines, etc.).
+        Use markdown format to structure the explanation paying attention to newlines and spaces.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
     explanation: Any = explanation_model.invoke(state["messages"])
     assert isinstance(explanation, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
     )
-    state["messages"] = state["messages"] + [AIMessage(content=explanation.text)]
+    state["messages"] = state["messages"] + [AIMessage(content=explanation.markdown_text)]
 
     summarize_prompt: str = """
         Now briefly summarize the entire conversation focussing on the design choices and
@@ -307,7 +304,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     assert isinstance(summary, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
     )
-    state["messages"] = state["messages"] + [AIMessage(content=summary.text)]
+    state["messages"] = state["messages"] + [AIMessage(content=summary.markdown_text)]
 
     assert state["pipeline"].created_at
     created_at = (
@@ -316,7 +313,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         + " UTC\n\n"
     )
     state["pipeline"].explanation = (
-        "> " + created_at + explanation.text + "\n\n" + summary.text
+        "> " + created_at + explanation.markdown_text + "\n\n" + summary.markdown_text
     )
 
     pipeline_run_id = state.get("pipeline_run_id")
@@ -325,10 +322,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
 
     __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
     with mlflow.start_run(run_id=state["root_run_id"]):
-        mlflow.log_artifact(
-            f"out/pipeline_{state['pipeline'].id}",
-            artifact_path=f"pipeline_{state['pipeline'].id}",
-        )
+        mlflow.log_artifact(f"out/pipeline_{state['pipeline'].id}/explanation.md")
 
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(

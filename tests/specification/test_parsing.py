@@ -273,7 +273,7 @@ constraints:
         feature:
           is_like: class
           role: output
-          data_kind: categorical
+          data_type: categorical
     require: [classification]
 """
         spec = Specification.parse(spec_yaml)
@@ -283,7 +283,7 @@ constraints:
             feature=DatasetFeatureCondition(
                 is_like="class",
                 role="output",
-                data_kind="categorical",
+                data_type="categorical",
             )
         )
         assert len(spec.semantic_constraints[0].require) == 1
