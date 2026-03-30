@@ -190,7 +190,7 @@ def code_validation_branch(
     generation_attempts: int = state["generation_attempts"]
     if not is_valid and state["validation_attempts"] >= generation_attempts:
         logger.warning(
-            f"Maximum attempts ({generation_attempts}) reached for code generation."
+            f"Maximum attempts ({generation_attempts}) reached for code generation of pipeline {state['pipeline'].id}."
         )
         return "__end__"
     return "execute_code" if is_valid else "generate_pipeline_code"
@@ -261,7 +261,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
-        message = f"Error during code execution: {str(e)}"
+        message = f"Error during code execution of pipeline {state['pipeline'].id}: {str(e)}"
         logger.info(message)
         state["messages"] = state["messages"] + [AIMessage(content=message)]
         state["code_execution_feedback"] = False
@@ -279,7 +279,7 @@ def code_execution_branch(
     generation_attempts: int = state["generation_attempts"]
     if not is_valid and state["execution_attempts"] >= generation_attempts:
         raise Exception(
-            f"Maximum attempts ({generation_attempts}) reached for code execution."
+            f"Maximum attempts ({generation_attempts}) reached for code execution of pipeline {state['pipeline'].id}."
         )
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
