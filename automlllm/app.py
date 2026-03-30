@@ -183,7 +183,6 @@ def wait_and_collect_agents_results(
         f"Completed {completed} pipelines, terminated by deadline budget: {terminated}"
     )
 
-    logger.info(f"Got {results} results from execution agents")
     return results
 
 

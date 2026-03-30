@@ -63,34 +63,40 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
 
     for pipeline_id, run_id in state["best_run_per_pipeline"].items():
         if run_id is not None:
-            model = get_model_from_run_id(run_id)
-            y_pred = model.predict(X_test)
-            score = metric_fn(y_test, y_pred)
-            state["test_scores"][pipeline_id] = score
+            try:
+                model = get_model_from_run_id(run_id)
+                y_pred = model.predict(X_test)
+                score = metric_fn(y_test, y_pred)
+                state["test_scores"][pipeline_id] = score
 
-            run_name = get_run_name_from_run_id(run_id)
-            logger.info(
-                f"Pipeline {pipeline_id}\n"
-                f"  - run id: {run_id}\n"
-                f"  - run name: {run_name}\n"
-                f"  - {state['validation_metric']} = {score} on test set\n"
-            )
+                run_name = get_run_name_from_run_id(run_id)
+                logger.info(
+                    f"Pipeline {pipeline_id}\n"
+                    f"  - run id: {run_id}\n"
+                    f"  - run name: {run_name}\n"
+                    f"  - {state['validation_metric']} = {score} on test set\n"
+                )
 
-            if best_score is None:
-                best_score = score
-                best_run_id = run_id
-                best_run_name = run_name
-                best_pipeline_id = pipeline_id
-            elif state["maximize"] and score > best_score:
-                best_score = score
-                best_run_id = run_id
-                best_run_name = run_name
-                best_pipeline_id = pipeline_id
-            elif not state["maximize"] and score < best_score:
-                best_score = score
-                best_run_id = run_id
-                best_run_name = run_name
-                best_pipeline_id = pipeline_id
+                if best_score is None:
+                    best_score = score
+                    best_run_id = run_id
+                    best_run_name = run_name
+                    best_pipeline_id = pipeline_id
+                elif state["maximize"] and score > best_score:
+                    best_score = score
+                    best_run_id = run_id
+                    best_run_name = run_name
+                    best_pipeline_id = pipeline_id
+                elif not state["maximize"] and score < best_score:
+                    best_score = score
+                    best_run_id = run_id
+                    best_run_name = run_name
+                    best_pipeline_id = pipeline_id
+
+            except Exception as e:
+                logger.error(
+                    f"Error evaluating pipeline {pipeline_id} with run id {run_id}:\n{e}"
+                )
 
     state["best_run_id"] = best_run_id
     state["best_run_name"] = best_run_name
