@@ -6,7 +6,11 @@ from langgraph.graph import MessagesState
 from langgraph.graph.state import CompiledStateGraph, StateGraph
 
 from automlllm import logger
-from automlllm.common.client import get_best_pipeline_run, get_model_from_run_id
+from automlllm.common.client import (
+    get_best_pipeline_run,
+    get_model_from_run_id,
+    get_run_name_from_run_id,
+)
 from automlllm.execution.utils import get_metric
 
 
@@ -21,6 +25,7 @@ class EvaluationAgentState(MessagesState):
     target_feature: str
     best_pipeline_id: Optional[int]
     best_run_id: Optional[str]
+    best_run_name: Optional[str]
     best_test_score: Optional[float]
     test_scores: Dict[int, float]
 
@@ -53,6 +58,7 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
 
     best_score = None
     best_run_id = None
+    best_run_name = None
     best_pipeline_id = None
 
     for pipeline_id, run_id in state["best_run_per_pipeline"].items():
@@ -61,24 +67,33 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
             y_pred = model.predict(X_test)
             score = metric_fn(y_test, y_pred)
             state["test_scores"][pipeline_id] = score
+
+            run_name = get_run_name_from_run_id(run_id)
             logger.info(
-                f"Pipeline {pipeline_id} (run {run_id}): {state['validation_metric']} = {score} on validation set"
+                f"Pipeline {pipeline_id}\n"
+                f"  - run id: {run_id}\n"
+                f"  - run name: {run_name}\n"
+                f"  - {state['validation_metric']} = {score} on test set\n"
             )
 
             if best_score is None:
                 best_score = score
                 best_run_id = run_id
+                best_run_name = run_name
                 best_pipeline_id = pipeline_id
             elif state["maximize"] and score > best_score:
                 best_score = score
                 best_run_id = run_id
+                best_run_name = run_name
                 best_pipeline_id = pipeline_id
             elif not state["maximize"] and score < best_score:
                 best_score = score
                 best_run_id = run_id
+                best_run_name = run_name
                 best_pipeline_id = pipeline_id
 
     state["best_run_id"] = best_run_id
+    state["best_run_name"] = best_run_name
     state["best_test_score"] = best_score
     state["best_pipeline_id"] = best_pipeline_id
     return state

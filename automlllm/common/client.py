@@ -40,3 +40,8 @@ def get_best_pipeline_run(
 
 def get_model_from_run_id(run_id: str):
     return mlflow.pyfunc.load_model(f"runs:/{run_id}/model")
+
+
+def get_run_name_from_run_id(run_id: str) -> str:
+    run = client.get_run(run_id)
+    return run.info.run_name
