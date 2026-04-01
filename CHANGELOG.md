@@ -1,3 +1,20 @@
+## [3.5.0](https://github.com/Mala1180/automl-llm/compare/3.4.0...3.5.0) (2026-04-01)
+
+### Features
+
+* **specification:** add possibility to provide list of names in feature name condition ([fad7edb](https://github.com/Mala1180/automl-llm/commit/fad7edbb35e1296b625cc85f4129a6a3e8272f58))
+
+### General maintenance
+
+* add openml dependency ([472b3c4](https://github.com/Mala1180/automl-llm/commit/472b3c42d6ec7cb41f3d6772a728483a9f466ebd))
+* improve logs ([08dcec0](https://github.com/Mala1180/automl-llm/commit/08dcec08a2b3310ddad209d7686b3f0fb865d164))
+* remove dataset dir ([fa1bdbc](https://github.com/Mala1180/automl-llm/commit/fa1bdbc121f01e992ba125eee907eb51caf987a9))
+
+### Refactoring
+
+* change natural language condition in specification, pass generation_attempts through specification ([993ed5f](https://github.com/Mala1180/automl-llm/commit/993ed5f50d11918120f6904d4123add84e1097fc))
+* update main entry point, add run name to logs, setup main of experiments ([9d4c1e9](https://github.com/Mala1180/automl-llm/commit/9d4c1e92dde07c0e410f8056b3faa6fb3a840c96))
+
 ## [3.4.0](https://github.com/Mala1180/automl-llm/compare/3.3.0...3.4.0) (2026-03-27)
 
 ### Features
