@@ -37,7 +37,6 @@ if __name__ == "__main__":
         "regression": {
             "california_housing": 43939,
             "ames_housing": 42165,
-            "diabetes": 37,
             "auto_mpg": 196,
         },
     }

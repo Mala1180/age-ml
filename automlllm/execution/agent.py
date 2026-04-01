@@ -261,7 +261,9 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
-        message = f"Error during code execution of pipeline {state['pipeline'].id}: {str(e)}"
+        message = (
+            f"Error during code execution of pipeline {state['pipeline'].id}: {str(e)}"
+        )
         logger.info(message)
         state["messages"] = state["messages"] + [AIMessage(content=message)]
         state["code_execution_feedback"] = False
