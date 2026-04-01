@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from automlllm.common.types import Step
 
@@ -75,10 +75,21 @@ class StepCondition(Condition):
 
 class DatasetFeatureCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    named_like: Optional[str] = None
+    named_like: Optional[List[str]] = None
     is_target: Optional[bool] = None
     data_type: Optional[str] = None
     data_distribution: Optional[str] = None
+
+    @field_validator("named_like", mode="before")
+    @classmethod
+    def normalize_named_like(cls, value: Any) -> Any:
+        if value is None:
+            return None
+        if isinstance(value, str):
+            return [value]
+        if isinstance(value, list):
+            return value
+        raise ValueError("'named_like' must be a string or a list of strings.")
 
 
 class DatasetCondition(SemanticCondition):
@@ -87,7 +98,13 @@ class DatasetCondition(SemanticCondition):
     def __str__(self):
         conditions = []
         if self.feature.named_like:
-            conditions.append(f"feature name is like '{self.feature.named_like}'")
+            if len(self.feature.named_like) == 1:
+                conditions.append(
+                    f"feature name is like '{self.feature.named_like[0]}'"
+                )
+            else:
+                patterns = ", ".join(f"'{name}'" for name in self.feature.named_like)
+                conditions.append(f"feature name is like one of [{patterns}]")
         if self.feature.is_target is not None:
             conditions.append(
                 f"feature is{' ' if self.feature.is_target else ' not '}the target variable"
