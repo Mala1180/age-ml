@@ -1,4 +1,5 @@
-from datetime import datetime
+import sys
+from datetime import datetime, timedelta
 from multiprocessing import Process, Semaphore, Queue
 from pathlib import Path
 from time import monotonic, sleep
@@ -47,6 +48,7 @@ def main(
     Returns:
         None.
     """
+    # start_time = monotonic()
     mlflow.openai.autolog()
     mlflow.langchain.autolog()
 
@@ -128,11 +130,17 @@ def main(
                 "target_feature": target_feature,
             }
         )
+        # elapsed_seconds = monotonic() - start_time
+        # human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
+        # res["runtime_seconds"] = elapsed_seconds
+        # res["runtime_human_readable"] = human_readable_runtime
         logger.info(
             f"Best model: Pipeline {res['best_pipeline_id']}\n"
             f"  - run id: {res['best_run_id']}\n"
             f"  - run name: {res['best_run_name']}\n"
-            f"  - {res['validation_metric']} = {res['best_test_score']} on test set"
+            f"  - {res['validation_metric']} = {res['best_test_score']} on test set\n"
+            # f"  - runtime_seconds = {elapsed_seconds:.2f}\n"
+            # f"  - runtime = {human_readable_runtime}"
         )
         return res
 
@@ -216,6 +224,7 @@ def identify_target_feature(df: pd.DataFrame) -> str:
     response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
     assert isinstance(response, TargetFeatureResponse)
     return response.target_feature
+
 
 
 if __name__ == "__main__":

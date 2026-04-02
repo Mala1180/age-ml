@@ -5,15 +5,16 @@ client = MlflowClient()
 
 
 def delete_failed_runs(parent_run_id: str, experiment_id: str):
+    """Delete nested runs except the one(s) named 'failed_runs'."""
     runs = client.search_runs(
         experiment_ids=[experiment_id],
         filter_string=f"tags.mlflow.parentRunId = '{parent_run_id}'",
     )
 
     for r in runs:
+        if r.info.run_name == "failed_runs":
+            continue
         client.delete_run(r.info.run_id)
-
-    client.delete_run(parent_run_id)
 
 
 def set_run_description(run_id: str, description: str) -> None:

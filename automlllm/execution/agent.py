@@ -52,6 +52,7 @@ class ExecutionPipeline(Pipeline):
 
 class ExecutionAgentState(MessagesState):
     root_run_id: str
+    failed_runs_id: Optional[str]
     pipeline_run_id: Optional[str]
     experiment_id: str
     dataset_path: str
@@ -198,20 +199,23 @@ def code_validation_branch(
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
-    parent_run_id: Optional[str] = None
+    parent_run_id: Optional[str] = state["pipeline_run_id"] if "pipeline_run_id" in state else None
     algorithm: str = state["pipeline"].steps[-1].candidate
     pipeline_id: int = state["pipeline"].id
+    print(f"Enabling autolog")
+    mlflow.autolog(log_models=False)
+    print("Enabled autolog")
     try:
-        mlflow.autolog(log_models=False)
         run_name: str = f"pipeline_{algorithm}_{pipeline_id}"
         with mlflow.start_run(
             nested=True,
+            run_id=parent_run_id,
             parent_run_id=state["root_run_id"],
             run_name=run_name,
         ) as parent_run:
             parent_run_id = parent_run.info.run_id
             state["pipeline_run_id"] = parent_run_id
-
+            print(f"Created Run with id: {parent_run_id} for pipeline {pipeline_id}")
             # Split train data into train/validation for model selection
             train_df_full = state["train_df"]
             train_df, val_df = train_test_split(
@@ -267,9 +271,26 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         logger.info(message)
         state["messages"] = state["messages"] + [AIMessage(content=message)]
         state["code_execution_feedback"] = False
+        __save_file(state["pipeline"].id, "error.txt", str(e))
+        # log failed runs
         if parent_run_id is not None:
+            with mlflow.start_run(
+                nested=True,
+                parent_run_id=parent_run_id,
+                run_name="failed_runs",
+                run_id=state["failed_runs_id"] if "failed_runs_id" in state else None
+            ) as failed_runs:
+                state["failed_runs_id"] = failed_runs.info.run_id
+                with mlflow.start_run(
+                    nested=True,
+                    run_name=f"attempt_{state['execution_attempts']}",
+                ):
+                    mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
+                    mlflow.log_artifact(f"out/pipeline_{pipeline_id}/error.txt")
+
             delete_failed_runs(parent_run_id, state["experiment_id"])
 
+    state["execution_attempts"] += 1
     return state
 
 
@@ -277,7 +298,6 @@ def code_execution_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     is_valid = state["code_execution_feedback"]
-    state["execution_attempts"] += 1
     generation_attempts: int = state["generation_attempts"]
     if not is_valid and state["execution_attempts"] >= generation_attempts:
         raise Exception(
