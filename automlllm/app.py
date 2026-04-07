@@ -1,6 +1,8 @@
-import sys
+import multiprocessing
+import time
+from copy import deepcopy
 from datetime import datetime, timedelta
-from multiprocessing import Process, Semaphore, Queue
+from multiprocessing import Process, Queue, Pool
 from pathlib import Path
 from time import monotonic, sleep
 from typing import Dict, List, Optional, Any
@@ -19,6 +21,7 @@ from automlllm.evaluation.agent import evaluation_agent
 from automlllm.execution.agent import (
     execution_agent,
     ExecutionPipeline,
+    PipelineStatus,
 )
 from automlllm.planning.agent import PlanningPipeline, planning_agent
 from automlllm.specification import Specification
@@ -48,12 +51,11 @@ def main(
     Returns:
         None.
     """
-    # start_time = monotonic()
+    start_time = monotonic()
     mlflow.openai.autolog()
     mlflow.langchain.autolog()
 
     specification: Specification = Specification.parse(Path(spec_path).read_text())
-    execution_deadline = monotonic() + specification.budgets.time.total_seconds
 
     df: pd.DataFrame = pd.read_csv(Path(dataset_path))
     target_feature = identify_target_feature(df)
@@ -77,48 +79,69 @@ def main(
     run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
         train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
-
-        result_queue: Queue = Queue()
-        semaphore = Semaphore(specification.budgets.workers)
-        processes: List[Process] = []
-
+        inputs: List[Dict[str, Any]] = []
         for i, planned_pipeline in enumerate(planned_pipelines):
             print(f"Executing pipeline {i}")
             execution_pipeline: ExecutionPipeline = ExecutionPipeline(
                 id=i, steps=planned_pipeline.steps
             )
-            process = Process(
-                target=invoke_agent,
-                args=(
-                    {
-                        "specification_path": spec_path,
-                        "dataset_path": dataset_path,
-                        "train_df": train_df,
-                        "target_feature": target_feature,
-                        "pipeline": execution_pipeline,
-                        "root_run_id": run.info.run_id,
-                        "experiment_id": experiment_id,
-                        "validation_metric": validation_metric,
-                        "maximize": maximize,
-                    },
-                    semaphore,
-                    result_queue,
-                ),
+            inputs.append(
+                {
+                    "specification_path": spec_path,
+                    "dataset_path": dataset_path,
+                    "train_df": train_df,
+                    "target_feature": target_feature,
+                    "pipeline": execution_pipeline,
+                    "root_run_id": run.info.run_id,
+                    "experiment_id": experiment_id,
+                    "validation_metric": validation_metric,
+                    "maximize": maximize,
+                }
             )
-            process.start()
-            processes.append(process)
 
-        results = wait_and_collect_agents_results(
-            processes, result_queue, execution_deadline
-        )
+        results: List = deepcopy(inputs)
+        timeout = specification.budgets.time.total_seconds
+        failed: int = 0
+        timed_out: int = 0
+        with Pool(processes=specification.budgets.workers) as pool:
+            jobs = [pool.apply_async(invoke_agent, (i,)) for i in inputs]
+            deadline = time.time() + timeout
+
+            for i, job in enumerate(jobs):
+                remaining = deadline - time.time()
+                if remaining <= 0:
+                    remaining = 0
+
+                try:
+                    results[i] = job.get(timeout=remaining)
+                except multiprocessing.TimeoutError:
+                    logger.info(f"Pipeline {i} execution timed out")
+                    results[i]["status"] = PipelineStatus.TIMED_OUT
+                except Exception as e:
+                    logger.error(
+                        f"Pipeline {i} execution failed with general error:\n{e}"
+                    )
+                    results[i]["status"] = PipelineStatus.FAILED
+                    failed += 1
+
+        for r in results:
+            if r["status"] == PipelineStatus.FAILED:
+                failed += 1
+            if r["status"] == PipelineStatus.TIMED_OUT:
+                timed_out += 1
+            if r["status"] != PipelineStatus.TIMED_OUT:
+                logger.info(
+                    f"Pipeline id: {r['pipeline'].id}, validation_attempts: {r['validation_attempts']}, execution_attempts: {r['execution_attempts']}"
+                )
+        logger.info(f"Failed pipelines: {failed}")
+        logger.info(f"Timed out pipelines: {timed_out}")
 
         pipeline_run_ids: Dict[str, Optional[str]] = {
-            result["pipeline"].id: result.get("pipeline_run_id") for result in results
+            result["pipeline"].id: result.get("pipeline_run_id")
+            if result["status"] == PipelineStatus.COMPLETED
+            else None
+            for result in results
         }
-
-        # for result in results:
-        #     if result.get("pipeline_run_id") is None:
-        #         os.system(f"echo '{str(result["pipeline"])}' >> failed_pipelines.md")
 
         res = evaluation_agent.invoke(
             {
@@ -130,68 +153,26 @@ def main(
                 "target_feature": target_feature,
             }
         )
-        # elapsed_seconds = monotonic() - start_time
-        # human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
-        # res["runtime_seconds"] = elapsed_seconds
-        # res["runtime_human_readable"] = human_readable_runtime
+        elapsed_seconds = monotonic() - start_time
+        human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
+        res["runtime_seconds"] = elapsed_seconds
+        res["runtime_human_readable"] = human_readable_runtime
         logger.info(
             f"Best model: Pipeline {res['best_pipeline_id']}\n"
             f"  - run id: {res['best_run_id']}\n"
             f"  - run name: {res['best_run_name']}\n"
             f"  - {res['validation_metric']} = {res['best_test_score']} on test set\n"
-            # f"  - runtime_seconds = {elapsed_seconds:.2f}\n"
-            # f"  - runtime = {human_readable_runtime}"
+            f"  - elapsed seconds = {elapsed_seconds:.2f}\n"
+            f"  - elapsed time = {human_readable_runtime}"
         )
         return res
 
 
-def invoke_agent(input: dict, semaphore, result_queue) -> None:
-    with semaphore:
-        logger.info(f"Invoking execution agent with input: {input}")
-        result = execution_agent.invoke(input)
-        logger.info(f"Agent returned result with keys {result.keys()}")
-        result_queue.put(result)
-
-
-def wait_and_collect_agents_results(
-    processes: List[Process],
-    result_queue: Queue,
-    execution_deadline: float,
-) -> List[Dict]:
-    results: List[Dict] = []
-    expected_results = len(processes)
-
-    while monotonic() < execution_deadline:
-        # Collect any available results (non-blocking)
-        while not result_queue.empty():
-            results.append(result_queue.get_nowait())
-
-        # Exit early if we have all results
-        if len(results) >= expected_results:
-            break
-        sleep(1)
-
-    # Collect any remaining results
-    while not result_queue.empty():
-        results.append(result_queue.get_nowait())
-
-    completed = 0
-    terminated = 0
-    for process in processes:
-        if process.is_alive():
-            process.terminate()
-            process.join(timeout=5)
-            terminated += 1
-            logger.warning("Terminated pipeline due to deadline")
-        else:
-            process.join()
-            completed += 1
-
-    logger.info(
-        f"Completed {completed} pipelines, terminated by deadline budget: {terminated}"
-    )
-
-    return results
+def invoke_agent(input: dict) -> Dict[str, Any]:
+    logger.info(f"Invoking execution agent with input: {input}")
+    result = execution_agent.invoke(input)
+    logger.info(f"Agent returned result with keys {result.keys()}")
+    return result
 
 
 class TargetFeatureResponse(BaseModel):
@@ -224,7 +205,6 @@ def identify_target_feature(df: pd.DataFrame) -> str:
     response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
     assert isinstance(response, TargetFeatureResponse)
     return response.target_feature
-
 
 
 if __name__ == "__main__":
