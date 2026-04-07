@@ -1,5 +1,6 @@
 import importlib.util
 from datetime import datetime
+from enum import Enum
 from pathlib import Path
 from types import ModuleType
 from typing import Any, Optional, Literal, Dict
@@ -50,7 +51,15 @@ class ExecutionPipeline(Pipeline):
         return hyperparameters
 
 
+class PipelineStatus(Enum):
+    RUNNING = "RUNNING"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
+
+
 class ExecutionAgentState(MessagesState):
+    status: PipelineStatus
     root_run_id: str
     failed_runs_id: Optional[str]
     pipeline_run_id: Optional[str]
@@ -61,8 +70,8 @@ class ExecutionAgentState(MessagesState):
     code_validation_feedback: bool
     code_execution_feedback: bool
     validation_attempts: int
-    execution_attempts: int
     generation_attempts: int
+    execution_attempts: int
     validation_metric: str
     maximize: bool
     train_df: pd.DataFrame
@@ -89,6 +98,7 @@ explanation_model = model.with_structured_output(ExplanationResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    state["status"] = PipelineStatus.RUNNING
     df: pd.DataFrame = pd.read_csv(state["dataset_path"])
 
     dataset_info: str = f"""
@@ -177,34 +187,37 @@ def validate_code_compliance(
     else:
         state["code_validation_feedback"] = False
         state["pipeline"].code = ""
-        state["pipeline_run_id"] = None
     # append feedback message
     state["messages"] = state["messages"] + [AIMessage(content=response.feedback)]
     state["validation_attempts"] = state["validation_attempts"] + 1
+
+    is_valid = state["code_validation_feedback"]
+    generation_attempts: int = state["generation_attempts"]
+    if not is_valid and state["validation_attempts"] >= generation_attempts:
+        state["status"] = PipelineStatus.FAILED
     return state
 
 
 def code_validation_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "execute_code", "__end__"]:
-    is_valid = state["code_validation_feedback"]
-    generation_attempts: int = state["generation_attempts"]
-    if not is_valid and state["validation_attempts"] >= generation_attempts:
-        logger.warning(
-            f"Maximum attempts ({generation_attempts}) reached for code generation of pipeline {state['pipeline'].id}."
+    if state["status"] == PipelineStatus.FAILED:
+        logger.info(
+            f"Maximum attempts ({state['validation_attempts']}) reached for code validation of pipeline {state['pipeline'].id}."
         )
         return "__end__"
+    is_valid = state["code_validation_feedback"]
     return "execute_code" if is_valid else "generate_pipeline_code"
 
 
 def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
-    parent_run_id: Optional[str] = state["pipeline_run_id"] if "pipeline_run_id" in state else None
     algorithm: str = state["pipeline"].steps[-1].candidate
     pipeline_id: int = state["pipeline"].id
-    print(f"Enabling autolog")
-    mlflow.autolog(log_models=False)
-    print("Enabled autolog")
+    parent_run_id: Optional[str] = (
+        state["pipeline_run_id"] if "pipeline_run_id" in state else None
+    )
+    mlflow.sklearn.autolog(log_models=False)
     try:
         run_name: str = f"pipeline_{algorithm}_{pipeline_id}"
         with mlflow.start_run(
@@ -265,6 +278,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
+        mlflow.end_run()
         message = (
             f"Error during code execution of pipeline {state['pipeline'].id}: {str(e)}"
         )
@@ -278,7 +292,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                 nested=True,
                 parent_run_id=parent_run_id,
                 run_name="failed_runs",
-                run_id=state["failed_runs_id"] if "failed_runs_id" in state else None
+                run_id=state["failed_runs_id"] if "failed_runs_id" in state else None,
             ) as failed_runs:
                 state["failed_runs_id"] = failed_runs.info.run_id
                 with mlflow.start_run(
@@ -291,18 +305,23 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             delete_failed_runs(parent_run_id, state["experiment_id"])
 
     state["execution_attempts"] += 1
+
+    is_valid = state["code_execution_feedback"]
+    generation_attempts: int = state["generation_attempts"]
+    if not is_valid and state["execution_attempts"] >= generation_attempts:
+        state["status"] = PipelineStatus.FAILED
     return state
 
 
 def code_execution_branch(
     state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "explain_pipeline"]:
-    is_valid = state["code_execution_feedback"]
-    generation_attempts: int = state["generation_attempts"]
-    if not is_valid and state["execution_attempts"] >= generation_attempts:
-        raise Exception(
-            f"Maximum attempts ({generation_attempts}) reached for code execution of pipeline {state['pipeline'].id}."
+) -> Literal["generate_pipeline_code", "explain_pipeline", "__end__"]:
+    if state["status"] == PipelineStatus.FAILED:
+        logger.info(
+            f"Maximum attempts ({state['execution_attempts']}) reached for code execution of pipeline {state['pipeline'].id}."
         )
+        return "__end__"
+    is_valid = state["code_execution_feedback"]
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
 
@@ -359,6 +378,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     print(
         f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
     )
+    state["status"] = PipelineStatus.COMPLETED
     return state
 
 
