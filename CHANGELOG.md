@@ -1,3 +1,18 @@
+## [4.0.0](https://github.com/Mala1180/automl-llm/compare/3.5.0...4.0.0) (2026-04-10)
+
+### ⚠ BREAKING CHANGES
+
+* **execution:** add elapsed time, refactor parallelism with Pool, add status to ExecutionPipeline
+
+### Bug Fixes
+
+* refactor runs structure on mlflow, fix increment of execution_attempts ([9110379](https://github.com/Mala1180/automl-llm/commit/91103790b3bd8e551df96a07c0fe87f7eb75f7de))
+* stratify dataset for split, modify prompt to classify better the kind of problem (regression/classification) ([eb40c1d](https://github.com/Mala1180/automl-llm/commit/eb40c1d6f0ad8c0f13057f7506b368f98df726b4))
+
+### Refactoring
+
+* **execution:** add elapsed time, refactor parallelism with Pool, add status to ExecutionPipeline ([b27962d](https://github.com/Mala1180/automl-llm/commit/b27962d86c076e8b1d37943c2854ecfee210c162))
+
 ## [3.5.0](https://github.com/Mala1180/automl-llm/compare/3.4.0...3.5.0) (2026-04-01)
 
 ### Features
