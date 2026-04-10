@@ -83,7 +83,6 @@ def main(
         )
         inputs: List[Dict[str, Any]] = []
         for i, planned_pipeline in enumerate(planned_pipelines):
-            print(f"Executing pipeline {i}")
             execution_pipeline: ExecutionPipeline = ExecutionPipeline(
                 id=i, steps=planned_pipeline.steps
             )

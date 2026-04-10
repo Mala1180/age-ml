@@ -219,7 +219,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     )
     mlflow.sklearn.autolog(log_models=False)
     try:
-        run_name: str = f"pipeline_{algorithm}_{pipeline_id}"
+        run_name: str = f"pipeline_{pipeline_id}_{algorithm}"
         with mlflow.start_run(
             nested=True,
             run_id=parent_run_id,
@@ -250,7 +250,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             ].extract_hyperparameters()
             index_run: int = 0
             for hp_combination in grid_search_exploration(hyperparameters):
-                nested_run_name: str = f"{algorithm}_{pipeline_id}_run_{index_run}"
+                nested_run_name: str = f"{pipeline_id}_{algorithm}_run_{index_run}"
                 with mlflow.start_run(nested=True, run_name=nested_run_name):
                     spec = importlib.util.spec_from_file_location(
                         "out_module", f"out/pipeline_{pipeline_id}/code.py"
