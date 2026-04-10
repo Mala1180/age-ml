@@ -2,9 +2,9 @@ import multiprocessing
 import time
 from copy import deepcopy
 from datetime import datetime, timedelta
-from multiprocessing import Process, Queue, Pool
+from multiprocessing import Pool
 from pathlib import Path
-from time import monotonic, sleep
+from time import monotonic
 from typing import Dict, List, Optional, Any
 
 import fire
@@ -78,7 +78,9 @@ def main(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
-        train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+        train_df, test_df = train_test_split(
+            df, test_size=0.2, stratify=df[target_feature], random_state=42
+        )
         inputs: List[Dict[str, Any]] = []
         for i, planned_pipeline in enumerate(planned_pipelines):
             print(f"Executing pipeline {i}")
@@ -197,7 +199,7 @@ def identify_target_feature(df: pd.DataFrame) -> str:
         Consider:
         - Common target column names (e.g., 'target', 'label', 'class', 'y', 'outcome')
         - The position of the column (often last)
-        - The data type (classification targets are often categorical/integer, regression targets are often numeric)
+        - The data type (classification targets are often categorical/integer, regression targets are often float)
 
         Provide your answer with the exact column name and your reasoning.
     """
