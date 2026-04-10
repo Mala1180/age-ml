@@ -288,7 +288,11 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         logger.info(message)
         state["messages"] = state["messages"] + [AIMessage(content=message)]
         state["code_execution_feedback"] = False
-        __save_file(state["pipeline"].id, "error.txt", str(e))
+        error_file_path = __save_error_file(
+            state["pipeline"].id,
+            state["execution_attempts"] + 1,
+            str(e),
+        )
         # log failed runs
         if parent_run_id is not None:
             with mlflow.start_run(
@@ -303,7 +307,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     run_name=f"attempt_{state['execution_attempts']}",
                 ):
                     mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
-                    mlflow.log_artifact(f"out/pipeline_{pipeline_id}/error.txt")
+                    mlflow.log_artifact(str(error_file_path))
 
             delete_failed_runs(parent_run_id, state["experiment_id"])
 
@@ -385,10 +389,25 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
-def __save_file(pipeline_id: int, filename: str, content: str) -> None:
-    out_dir: Path = Path(f"out/pipeline_{pipeline_id}")
+def __save_file(
+    pipeline_id: int,
+    filename: str,
+    content: str,
+    out_dir: Optional[Path] = None,
+) -> Path:
+    if out_dir is None:
+        out_dir = Path(f"out/pipeline_{pipeline_id}")
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / filename).write_text(content, encoding="utf-8")
+    file_path = out_dir / filename
+    file_path.write_text(content, encoding="utf-8")
+    return file_path
+
+
+def __save_error_file(pipeline_id: int, attempt: int, content: str) -> Path:
+    error_dir: Path = (
+        Path("out") / f"pipeline_{pipeline_id}" / "errors" / f"attempt_{attempt}"
+    )
+    return __save_file(pipeline_id, "error.txt", content, out_dir=error_dir)
 
 
 state_graph = StateGraph(ExecutionAgentState)
