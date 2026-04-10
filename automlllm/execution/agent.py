@@ -231,12 +231,19 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             print(f"Created Run with id: {parent_run_id} for pipeline {pipeline_id}")
             # Split train data into train/validation for model selection
             train_df_full = state["train_df"]
-            train_df, val_df = train_test_split(
-                train_df_full,
-                test_size=0.2,
-                stratify=train_df_full[state["target_feature"]],
-                random_state=42,
-            )
+            try:
+                train_df, val_df = train_test_split(
+                    train_df_full,
+                    test_size=0.2,
+                    stratify=train_df_full[state["target_feature"]],
+                    random_state=42,
+                )
+            except ValueError:
+                train_df, val_df = train_test_split(
+                    train_df_full,
+                    test_size=0.2,
+                    random_state=42,
+                )
 
             # Extract features and target using identified target column
             target_feature = state["target_feature"]

@@ -78,9 +78,13 @@ def main(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
-        train_df, test_df = train_test_split(
-            df, test_size=0.2, stratify=df[target_feature], random_state=42
-        )
+        try:
+            train_df, test_df = train_test_split(
+                df, test_size=0.2, stratify=df[target_feature], random_state=42
+            )
+        except ValueError:
+            train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+
         inputs: List[Dict[str, Any]] = []
         for i, planned_pipeline in enumerate(planned_pipelines):
             execution_pipeline: ExecutionPipeline = ExecutionPipeline(
