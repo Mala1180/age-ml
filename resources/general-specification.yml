@@ -1,10 +1,12 @@
 budgets:
-  pipelines: 5
-  workers: 5
+  pipelines: 30
+  workers: 8
   generation_attempts: 10
   time:
+#    hours: 2
     minutes: 5
 #    seconds: 30
+
 pipeline:
 
   defaults:
@@ -158,14 +160,14 @@ constraints:
         feature:
           named_like: class
           is_target: true
-          data_type: categorical
+          data_type: categorical or integer
     require: [classification]
 
   - if:
       dataset:
         feature:
           is_target: true
-          data_type: numeric
+          data_type: float
     require: [regression]
 
   - if:
