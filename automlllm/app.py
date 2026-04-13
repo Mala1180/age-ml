@@ -16,6 +16,10 @@ from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 
 from automlllm import logger
+from automlllm.common.client import (
+    enable_mlflow_llm_autologging,
+    get_session_total_token_usage,
+)
 from automlllm.common.model import model
 from automlllm.evaluation.agent import evaluation_agent
 from automlllm.execution.agent import (
@@ -51,20 +55,26 @@ def main(
     Returns:
         None.
     """
-    start_time = monotonic()
-    mlflow.openai.autolog()
-    mlflow.langchain.autolog()
+    enable_mlflow_llm_autologging()
 
     specification: Specification = Specification.parse(Path(spec_path).read_text())
 
+    start_time = monotonic()
+    timeout = specification.budgets.time.total_seconds
+    deadline = time.time() + timeout
+
     df: pd.DataFrame = pd.read_csv(Path(dataset_path))
     target_feature = identify_target_feature(df)
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    run_name: str = f"pipelines_exploration-{timestamp}"
 
     planning = planning_agent.invoke(
         {
             "specification_path": spec_path,
             "dataset_path": dataset_path,
             "target_feature": target_feature,
+            "session": run_name,
         }
     )
     planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
@@ -75,8 +85,6 @@ def main(
     assert experiment is not None, "Experiment should exist after setting it"
     experiment_id = experiment.experiment_id
 
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    run_name: str = f"pipelines_exploration-{timestamp}"
     with mlflow.start_run(run_name=run_name) as run:
         try:
             train_df, test_df = train_test_split(
@@ -98,6 +106,7 @@ def main(
                     "target_feature": target_feature,
                     "pipeline": execution_pipeline,
                     "root_run_id": run.info.run_id,
+                    "session": run.info.run_name,
                     "experiment_id": experiment_id,
                     "validation_metric": validation_metric,
                     "maximize": maximize,
@@ -105,12 +114,10 @@ def main(
             )
 
         results: List = deepcopy(inputs)
-        timeout = specification.budgets.time.total_seconds
         failed: int = 0
         timed_out: int = 0
         with Pool(processes=specification.budgets.workers) as pool:
             jobs = [pool.apply_async(invoke_agent, (i,)) for i in inputs]
-            deadline = time.time() + timeout
 
             for i, job in enumerate(jobs):
                 remaining = deadline - time.time()
@@ -162,6 +169,7 @@ def main(
         human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
         res["runtime_seconds"] = elapsed_seconds
         res["runtime_human_readable"] = human_readable_runtime
+        res["token_usage"] = get_session_total_token_usage(run.info.run_name)
         logger.info(
             f"Best model: Pipeline {res['best_pipeline_id']}\n"
             f"  - run id: {res['best_run_id']}\n"
@@ -170,6 +178,19 @@ def main(
             f"  - elapsed seconds = {elapsed_seconds:.2f}\n"
             f"  - elapsed time = {human_readable_runtime}"
         )
+        logger.info(
+            f"Session '{run.info.run_name}' token usage: "
+            f"input_tokens={res['token_usage']['input_tokens']}, "
+            f"output_tokens={res['token_usage']['output_tokens']}, "
+            f"total_tokens={res['token_usage']['total_tokens']}"
+        )
+        logger.info(
+            f"Session '{run.info.run_name}' costs: "
+            f"input_cost={res['token_usage']['input_cost']}, "
+            f"output_cost={res['token_usage']['output_cost']}, "
+            f"total_cost={res['token_usage']['total_cost']}"
+        )
+
         return res
 
 
