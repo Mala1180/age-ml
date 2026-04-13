@@ -4,7 +4,6 @@ from copy import deepcopy
 from datetime import datetime, timedelta
 from multiprocessing import Pool
 from pathlib import Path
-from time import monotonic
 from typing import Dict, List, Optional, Any
 
 import fire
@@ -59,12 +58,14 @@ def main(
 
     specification: Specification = Specification.parse(Path(spec_path).read_text())
 
-    start_time = monotonic()
+    start_time = time.perf_counter()
     timeout = specification.budgets.time.total_seconds
     deadline = time.time() + timeout
 
     df: pd.DataFrame = pd.read_csv(Path(dataset_path))
+    target_inference_start = time.perf_counter()
     target_feature = identify_target_feature(df)
+    target_inference_time = time.perf_counter() - target_inference_start
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
@@ -78,6 +79,7 @@ def main(
         }
     )
     planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
+    planning_inference_time = float(planning.get("inference_time", 0.0))
 
     experiment_name: str = Path(dataset_path).stem
     mlflow.set_experiment(experiment_name)
@@ -165,10 +167,22 @@ def main(
                 "target_feature": target_feature,
             }
         )
-        elapsed_seconds = monotonic() - start_time
+        total_training_time = sum(
+            float(result.get("training_time", 0.0)) for result in results
+        )
+        execution_inference_time = sum(
+            float(result.get("inference_time", 0.0)) for result in results
+        )
+        total_inference_time = (
+            target_inference_time + planning_inference_time + execution_inference_time
+        )
+
+        elapsed_seconds = time.perf_counter() - start_time
         human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
         res["runtime_seconds"] = elapsed_seconds
         res["runtime_human_readable"] = human_readable_runtime
+        res["training_time"] = total_training_time
+        res["inference_time"] = total_inference_time
         res["token_usage"] = get_session_total_token_usage(run.info.run_name)
         logger.info(
             f"Best model: Pipeline {res['best_pipeline_id']}\n"
@@ -176,7 +190,9 @@ def main(
             f"  - run name: {res['best_run_name']}\n"
             f"  - {res['validation_metric']} = {res['best_test_score']} on test set\n"
             f"  - elapsed seconds = {elapsed_seconds:.2f}\n"
-            f"  - elapsed time = {human_readable_runtime}"
+            f"  - elapsed time = {human_readable_runtime}\n"
+            f"  - total training time = {total_training_time:.4f} seconds\n"
+            f"  - total inference time = {total_inference_time:.4f} seconds"
         )
         logger.info(
             f"Session '{run.info.run_name}' token usage: "
@@ -228,7 +244,11 @@ def identify_target_feature(df: pd.DataFrame) -> str:
         Provide your answer with the exact column name and your reasoning.
     """
     target_model = model.with_structured_output(TargetFeatureResponse)
+    start = time.perf_counter()
     response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
+    end = time.perf_counter()
+    duration = end - start
+    logger.info(f"Target feature identification inference time: {duration:.4f} seconds")
     assert isinstance(response, TargetFeatureResponse)
     return response.target_feature
 
