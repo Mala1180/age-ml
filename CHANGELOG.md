@@ -1,3 +1,23 @@
+## [4.1.0](https://github.com/Mala1180/automl-llm/compare/4.0.0...4.1.0) (2026-04-13)
+
+### Features
+
+* add csv creation for experiments results, log inference and training time ([2e4200c](https://github.com/Mala1180/automl-llm/commit/2e4200c099fff0df9212540c8ab25ce578a71114))
+* add token usage and costs logs ([e4a3255](https://github.com/Mala1180/automl-llm/commit/e4a3255a9df4a5dbbea6c048cbd0aef1d31707a4))
+
+### Dependency updates
+
+* **deps:** update mlflow dependency ([7512e5c](https://github.com/Mala1180/automl-llm/commit/7512e5c632df56101ad5d4a04bd504a96fe850ee))
+
+### Bug Fixes
+
+* fix train test split for regression problems ([9fb5933](https://github.com/Mala1180/automl-llm/commit/9fb5933540d137863bb1f805aacc5cf04e55f298))
+
+### General maintenance
+
+* change run name format ([0ff4649](https://github.com/Mala1180/automl-llm/commit/0ff4649f9f1432958a58fa2a5b8021751767adc8))
+* save all error files ([730e37e](https://github.com/Mala1180/automl-llm/commit/730e37e015035b5ad2c648048cc78c1b3b03fa90))
+
 ## [4.0.0](https://github.com/Mala1180/automl-llm/compare/3.5.0...4.0.0) (2026-04-10)
 
 ### ⚠ BREAKING CHANGES
