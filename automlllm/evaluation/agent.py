@@ -10,6 +10,7 @@ from automlllm.common.client import (
     get_best_pipeline_run,
     get_model_from_run_id,
     get_run_name_from_run_id,
+    enable_mlflow_llm_autologging,
 )
 from automlllm.execution.utils import get_metric
 
@@ -31,6 +32,7 @@ class EvaluationAgentState(MessagesState):
 
 
 def get_best_run_per_pipeline(state: EvaluationAgentState) -> EvaluationAgentState:
+    enable_mlflow_llm_autologging()
     state["best_run_per_pipeline"] = {}
 
     for pipeline_id, pipeline_run_id in state["pipeline_run_ids"].items():

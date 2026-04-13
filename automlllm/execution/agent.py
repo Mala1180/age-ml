@@ -17,7 +17,12 @@ from sklearn.model_selection import train_test_split
 from typing_extensions import override
 
 from automlllm import logger
-from automlllm.common.client import set_run_description, delete_failed_runs
+from automlllm.common.client import (
+    delete_failed_runs,
+    enable_mlflow_llm_autologging,
+    set_run_description,
+    set_trace_metadata,
+)
 from automlllm.common.model import model
 from automlllm.common.types import Pipeline
 from automlllm.execution.utils import (
@@ -61,6 +66,7 @@ class PipelineStatus(Enum):
 class ExecutionAgentState(MessagesState):
     status: PipelineStatus
     root_run_id: str
+    session: str
     failed_runs_id: Optional[str]
     pipeline_run_id: Optional[str]
     experiment_id: str
@@ -98,6 +104,7 @@ explanation_model = model.with_structured_output(ExplanationResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    enable_mlflow_llm_autologging()
     state["status"] = PipelineStatus.RUNNING
     df: pd.DataFrame = pd.read_csv(state["dataset_path"])
 
@@ -125,7 +132,10 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
+@mlflow.trace(name="generate_pipeline_code")
 def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
+    set_trace_metadata(session=state["session"])
+
     hyperparameter_names = list(state["pipeline"].extract_hyperparameters().keys())
     prompt: str = f"""
         You are generating python code for a machine learning pipeline.
@@ -171,9 +181,12 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     return state
 
 
+@mlflow.trace(name="validate_code_compliance")
 def validate_code_compliance(
     state: ExecutionAgentState,
 ) -> ExecutionAgentState:
+    set_trace_metadata(session=state["session"])
+
     validating_prompt: str = (
         "Is the generated code compliant with the provided pipeline? "
         "Answer with a simple 'yes' if both answers are 'yes', otherwise answer 'no' and explain why."
@@ -339,7 +352,10 @@ def code_execution_branch(
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
 
+@mlflow.trace(name="explain_pipeline")
 def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
+    set_trace_metadata(session=state["session"])
+
     state["execution_attempts"] = 0
 
     explain_prompt: str = f"""
