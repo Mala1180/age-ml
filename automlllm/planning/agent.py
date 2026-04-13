@@ -1,4 +1,5 @@
 import random
+import time
 from pathlib import Path
 from typing import Any, List
 
@@ -34,6 +35,7 @@ class PlanningAgentState(MessagesState):
     target_feature: str
     max_pipelines: int
     pipelines: List[PlanningPipeline]
+    inference_time: float
 
 
 class ConditionVerification(BaseModel):
@@ -47,6 +49,7 @@ generation_attempts: int = 5
 
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
+    state["inference_time"] = 0.0
     enable_mlflow_llm_autologging()
     df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
 
@@ -85,7 +88,11 @@ def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentSta
         )
 
         state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
+        start = time.perf_counter()
         response: Any = condition_verification_model.invoke(state["messages"])
+        end = time.perf_counter()
+        duration = end - start
+        state["inference_time"] += duration
         assert isinstance(response, ConditionVerification)
         state["messages"] = state["messages"] + [
             AIMessage(content=response.explanation)

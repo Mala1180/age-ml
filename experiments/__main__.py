@@ -8,6 +8,11 @@ from pandas import DataFrame
 
 from automlllm import logger
 from automlllm.app import main
+from automlllm.specification import Specification
+from experiments.results_csv import (
+    build_experiment_summary_row,
+    save_experiment_summary_to_csv,
+)
 from resources import DIR as RESOURCES_DIR
 
 
@@ -25,6 +30,10 @@ def download_openml_datasets(datasets: Dict[str, int], path: Path) -> None:
 
 
 if __name__ == "__main__":
+    output_dir = Path(__file__).parent / "results"
+    spec_path = str(RESOURCES_DIR / "general-specification.yml")
+    specification = Specification.parse(Path(spec_path).read_text())
+
     datasets: Dict[str, Dict[str, int]] = {
         "classification": {
             "wilt": 40983,
@@ -47,19 +56,27 @@ if __name__ == "__main__":
         datasets["regression"], RESOURCES_DIR / "datasets" / "regression"
     )
 
-    for kind, datasets in datasets.items():
-        for dataset_name, openml_id in datasets.items():
-            spec_path = str(RESOURCES_DIR / "general-specification.yml")
+    for kind, datasets_by_kind in datasets.items():
+        for dataset_name, openml_id in datasets_by_kind.items():
             dataset_path = str(
                 RESOURCES_DIR / "datasets" / kind / f"{dataset_name}.csv"
             )
-            metric = "rmse" if kind == "classification" else "accuracy"
-            maximize = False if kind == "regression" else True
-            results: Dict = main(
+            metric = "accuracy" if kind == "classification" else "rmse"
+            maximize = kind == "classification"
+            result: Dict = main(
                 spec_path=spec_path,
                 dataset_path=dataset_path,
                 validation_metric=metric,
                 maximize=maximize,
             )
-
-            # process results...
+            dataset_df = pd.read_csv(dataset_path)
+            row = build_experiment_summary_row(
+                dataset_name=dataset_name,
+                problem=kind,
+                dataset_df=dataset_df,
+                result=result,
+                pipeline_budget=specification.pipelines,
+                workers=specification.workers,
+            )
+            output_path = output_dir / "results.csv"
+            save_experiment_summary_to_csv(row=row, csv_path=output_path)
