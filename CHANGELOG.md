@@ -1,3 +1,9 @@
+## [4.3.0](https://github.com/Mala1180/automl-llm/compare/4.2.0...4.3.0) (2026-04-14)
+
+### Features
+
+* add input/output tokens to results ([17dd554](https://github.com/Mala1180/automl-llm/commit/17dd55465f9a9444da08301cbe6375ec8619c4ed))
+
 ## [4.2.0](https://github.com/Mala1180/automl-llm/compare/4.1.0...4.2.0) (2026-04-14)
 
 ### Features
