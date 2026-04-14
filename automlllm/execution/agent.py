@@ -25,6 +25,7 @@ from automlllm.common.client import (
     set_trace_metadata,
 )
 from automlllm.common.model import model
+from automlllm.common.timing import timed_call
 from automlllm.common.types import Pipeline
 from automlllm.execution.utils import (
     extract_python_code,
@@ -169,10 +170,7 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     """
     state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
 
-    start = time.perf_counter()
-    response: Any = code_model.invoke(state["messages"])
-    end = time.perf_counter()
-    duration = end - start
+    response, duration = timed_call(code_model.invoke, state["messages"])
     state["inference_time"] += duration
     assert isinstance(response, CodeResponse)
     state["pipeline"].created_at = datetime.now()
@@ -202,10 +200,7 @@ def validate_code_compliance(
     )
     state["messages"] = state["messages"] + [HumanMessage(content=validating_prompt)]
 
-    start = time.perf_counter()
-    response = judge_model.invoke(state["messages"])
-    end = time.perf_counter()
-    duration = end - start
+    response, duration = timed_call(judge_model.invoke, state["messages"])
     state["inference_time"] += duration
     assert isinstance(response, JudgeResponse)
     if response.is_compliant:
@@ -383,10 +378,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Use markdown format to structure the explanation paying attention to newlines and spaces.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
-    start = time.perf_counter()
-    explanation: Any = explanation_model.invoke(state["messages"])
-    end = time.perf_counter()
-    duration = end - start
+    explanation, duration = timed_call(explanation_model.invoke, state["messages"])
     state["inference_time"] += duration
     assert isinstance(explanation, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
@@ -401,10 +393,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Use markdown format to structure the summary.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=summarize_prompt)]
-    start = time.perf_counter()
-    summary = explanation_model.invoke(state["messages"])
-    end = time.perf_counter()
-    duration = end - start
+    summary, duration = timed_call(explanation_model.invoke, state["messages"])
     state["inference_time"] += duration
     assert isinstance(summary, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
