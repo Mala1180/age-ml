@@ -1,7 +1,6 @@
 import random
-import time
 from pathlib import Path
-from typing import Any, List
+from typing import List
 
 import mlflow
 import pandas as pd
@@ -16,6 +15,7 @@ from automlllm.common.client import (
     set_trace_metadata,
 )
 from automlllm.common.model import model
+from automlllm.common.timing import timed_call
 from automlllm.planning.solver import (
     create_solver,
     enumerate_solutions,
@@ -88,10 +88,9 @@ def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentSta
         )
 
         state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
-        start = time.perf_counter()
-        response: Any = condition_verification_model.invoke(state["messages"])
-        end = time.perf_counter()
-        duration = end - start
+        response, duration = timed_call(
+            condition_verification_model.invoke, state["messages"]
+        )
         state["inference_time"] += duration
         assert isinstance(response, ConditionVerification)
         state["messages"] = state["messages"] + [

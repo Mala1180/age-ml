@@ -20,6 +20,7 @@ from automlllm.common.client import (
     get_session_total_token_usage,
 )
 from automlllm.common.model import model
+from automlllm.common.timing import timed_call
 from automlllm.evaluation.agent import evaluation_agent
 from automlllm.execution.agent import (
     execution_agent,
@@ -244,10 +245,9 @@ def identify_target_feature(df: pd.DataFrame) -> str:
         Provide your answer with the exact column name and your reasoning.
     """
     target_model = model.with_structured_output(TargetFeatureResponse)
-    start = time.perf_counter()
-    response: Any = target_model.invoke([HumanMessage(content=identify_prompt)])
-    end = time.perf_counter()
-    duration = end - start
+    response, duration = timed_call(
+        target_model.invoke, [HumanMessage(content=identify_prompt)]
+    )
     logger.info(f"Target feature identification inference time: {duration:.4f} seconds")
     assert isinstance(response, TargetFeatureResponse)
     return response.target_feature
