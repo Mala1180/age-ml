@@ -24,6 +24,8 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "ml_training_time": "ML Training Time",
     "pipeline_budget": "Pipeline Budget",
     "actual_pipelines": "Actual Pipelines",
+    "input_tokens": "Input Tokens",
+    "output_tokens": "Output Tokens",
     "consumed_tokens": "Consumed Tokens",
     "putative_cost": "Putative Cost ($)",
 }
@@ -166,6 +168,8 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["ml_training_time"]: ml_training_time,
         SUMMARY_COLUMNS["pipeline_budget"]: pipeline_budget,
         SUMMARY_COLUMNS["actual_pipelines"]: actual_pipelines,
+        SUMMARY_COLUMNS["input_tokens"]: token_usage.get("input_tokens", ""),
+        SUMMARY_COLUMNS["output_tokens"]: token_usage.get("output_tokens", ""),
         SUMMARY_COLUMNS["consumed_tokens"]: token_usage.get("total_tokens", ""),
         SUMMARY_COLUMNS["putative_cost"]: token_usage.get("total_cost", ""),
     }
