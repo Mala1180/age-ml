@@ -1,4 +1,4 @@
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Set
 
 import mlflow
 from mlflow import MlflowClient
@@ -115,3 +115,84 @@ def get_session_total_token_usage(session: str) -> Dict[str, int | float]:
         "output_cost": output_cost,
         "total_cost": total_cost,
     }
+
+
+def _get_run_duration_seconds(run: Run) -> float:
+    start_time = run.info.start_time
+    end_time = run.info.end_time
+
+    if start_time is None or end_time is None:
+        return 0.0
+    if end_time < start_time:
+        return 0.0
+
+    return (end_time - start_time) / 1000.0
+
+
+def get_nested_runs_total_duration(parent_run_id: str, experiment_id: str) -> float:
+    """Return total duration (seconds) across all nested descendants of a run."""
+    total_duration_seconds = 0.0
+
+    parents_to_visit = [parent_run_id]
+    visited_parent_ids: Set[str] = set()
+
+    while parents_to_visit:
+        current_parent_id = parents_to_visit.pop()
+        if current_parent_id in visited_parent_ids:
+            continue
+        visited_parent_ids.add(current_parent_id)
+        escaped_current_parent_id = current_parent_id.replace("'", "\\'")
+
+        runs = client.search_runs(
+            experiment_ids=[experiment_id],
+            filter_string=(
+                f"tags.mlflow.parentRunId = '{escaped_current_parent_id}' "
+                "AND attributes.run_name != 'failed_runs'"
+            ),
+            max_results=50000,
+        )
+
+        for run in runs:
+            if run.info.run_name == "failed_runs":
+                continue
+            total_duration_seconds += _get_run_duration_seconds(run)
+            run_id = run.info.run_id
+            if run_id and run_id not in visited_parent_ids:
+                parents_to_visit.append(run_id)
+
+    return total_duration_seconds
+
+
+def _get_trace_duration_seconds(trace: Trace) -> float:
+    execution_duration = trace.info.execution_duration
+    if execution_duration is None:
+        return 0.0
+    if execution_duration < 0:
+        return 0.0
+    return execution_duration / 1000.0
+
+
+def get_nested_runs_total_llm_latency(session: str, experiment_id: str) -> float:
+    """Return total LLM trace latency (seconds) across all traces in a session."""
+    total_latency_seconds = 0.0
+    escaped_session = session.replace("'", "\\'")
+    filter_string = f"tags.session = '{escaped_session}'"
+
+    try:
+        traces: List[Trace] = mlflow.search_traces(
+            experiment_ids=[experiment_id],
+            filter_string=filter_string,
+            max_results=None,
+            return_type="list",
+            include_spans=False,
+        )
+    except Exception as exc:
+        logger.warning(
+            f"Unable to search traces for session '{session}' in experiment '{experiment_id}': {exc}"
+        )
+        return 0.0
+
+    for trace in traces:
+        total_latency_seconds += _get_trace_duration_seconds(trace)
+
+    return total_latency_seconds

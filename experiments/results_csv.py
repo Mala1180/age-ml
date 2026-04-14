@@ -13,12 +13,15 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "problem": "Problem",
     "best_pipeline": "Best Pipeline",
     "best_test_score": "Best Test-set score",
+    "baseline": "Baseline",
     "features": "Features",
     "instances": "Instances",
     "numeric_features": "Numeric Features",
     "discrete_features": "Discrete Features",
-    "actual_time": "Actual time",
-    "equivalent_time": "Equivalent time",
+    "actual_time": "Actual Time",
+    "equivalent_time": "Equivalent Time",
+    "llm_inference_time": "LLM Inference Time",
+    "ml_training_time": "ML Training Time",
     "pipeline_budget": "Pipeline Budget",
     "actual_pipelines": "Actual Pipelines",
     "consumed_tokens": "Consumed Tokens",
@@ -139,23 +142,28 @@ def build_experiment_summary_row(
     inference_time_seconds = float(result.get("inference_time") or 0.0)
 
     equivalent_time = _format_duration(training_time_seconds + inference_time_seconds)
+    llm_inference_time = _format_duration(inference_time_seconds)
+    ml_training_time = _format_duration(training_time_seconds)
 
     best_pipeline_id = result.get("best_pipeline_id")
     best_pipeline = (
         f"Pipeline {best_pipeline_id}" if best_pipeline_id is not None else ""
     )
-
+    baseline = "hamlet" if problem == "classification" else "to fill"
     return {
         SUMMARY_COLUMNS["dataset"]: dataset_name,
         SUMMARY_COLUMNS["problem"]: problem,
         SUMMARY_COLUMNS["best_pipeline"]: best_pipeline,
         SUMMARY_COLUMNS["best_test_score"]: result.get("best_test_score", ""),
+        SUMMARY_COLUMNS["baseline"]: baseline,
         SUMMARY_COLUMNS["features"]: int(features_df.shape[1]),
         SUMMARY_COLUMNS["instances"]: int(dataset_df.shape[0]),
         SUMMARY_COLUMNS["numeric_features"]: numeric_features,
         SUMMARY_COLUMNS["discrete_features"]: discrete_features,
         SUMMARY_COLUMNS["actual_time"]: actual_time,
         SUMMARY_COLUMNS["equivalent_time"]: equivalent_time,
+        SUMMARY_COLUMNS["llm_inference_time"]: llm_inference_time,
+        SUMMARY_COLUMNS["ml_training_time"]: ml_training_time,
         SUMMARY_COLUMNS["pipeline_budget"]: pipeline_budget,
         SUMMARY_COLUMNS["actual_pipelines"]: actual_pipelines,
         SUMMARY_COLUMNS["consumed_tokens"]: token_usage.get("total_tokens", ""),

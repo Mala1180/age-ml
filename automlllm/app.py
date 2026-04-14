@@ -17,10 +17,12 @@ from sklearn.model_selection import train_test_split
 from automlllm import logger
 from automlllm.common.client import (
     enable_mlflow_llm_autologging,
+    get_nested_runs_total_llm_latency,
+    get_nested_runs_total_duration,
     get_session_total_token_usage,
+    set_trace_metadata,
 )
 from automlllm.common.model import model
-from automlllm.common.timing import timed_call
 from automlllm.evaluation.agent import evaluation_agent
 from automlllm.execution.agent import (
     execution_agent,
@@ -64,23 +66,21 @@ def main(
     deadline = time.time() + timeout
 
     df: pd.DataFrame = pd.read_csv(Path(dataset_path))
-    target_inference_start = time.perf_counter()
-    target_feature = identify_target_feature(df)
-    target_inference_time = time.perf_counter() - target_inference_start
-
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
+    session: str = run_name
+
+    target_feature = identify_target_feature(df, session)
 
     planning = planning_agent.invoke(
         {
             "specification_path": spec_path,
             "dataset_path": dataset_path,
             "target_feature": target_feature,
-            "session": run_name,
+            "session": session,
         }
     )
     planned_pipelines: List[PlanningPipeline] = planning["pipelines"]
-    planning_inference_time = float(planning.get("inference_time", 0.0))
 
     experiment_name: str = Path(dataset_path).stem
     mlflow.set_experiment(experiment_name)
@@ -109,7 +109,7 @@ def main(
                     "target_feature": target_feature,
                     "pipeline": execution_pipeline,
                     "root_run_id": run.info.run_id,
-                    "session": run.info.run_name,
+                    "session": session,
                     "experiment_id": experiment_id,
                     "validation_metric": validation_metric,
                     "maximize": maximize,
@@ -139,6 +139,7 @@ def main(
                     results[i]["status"] = PipelineStatus.FAILED
                     failed += 1
 
+        total_training_time: float = 0.0
         for r in results:
             if r["status"] == PipelineStatus.FAILED:
                 failed += 1
@@ -148,6 +149,17 @@ def main(
                 logger.info(
                     f"Pipeline id: {r['pipeline'].id}, validation_attempts: {r['validation_attempts']}, execution_attempts: {r['execution_attempts']}"
                 )
+
+            pipeline_run_id: Optional[str] = r.get("pipeline_run_id")
+            if pipeline_run_id:
+                nested_runs_duration = get_nested_runs_total_duration(
+                    pipeline_run_id, experiment_id
+                )
+                total_training_time += nested_runs_duration
+        total_inference_time: float = get_nested_runs_total_llm_latency(
+            session, experiment_id
+        )
+
         logger.info(f"Failed pipelines: {failed}")
         logger.info(f"Timed out pipelines: {timed_out}")
 
@@ -168,15 +180,6 @@ def main(
                 "target_feature": target_feature,
             }
         )
-        total_training_time = sum(
-            float(result.get("training_time", 0.0)) for result in results
-        )
-        execution_inference_time = sum(
-            float(result.get("inference_time", 0.0)) for result in results
-        )
-        total_inference_time = (
-            target_inference_time + planning_inference_time + execution_inference_time
-        )
 
         elapsed_seconds = time.perf_counter() - start_time
         human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
@@ -187,25 +190,28 @@ def main(
         res["token_usage"] = get_session_total_token_usage(run.info.run_name)
         logger.info(
             f"Best model: Pipeline {res['best_pipeline_id']}\n"
-            f"  - run id: {res['best_run_id']}\n"
-            f"  - run name: {res['best_run_name']}\n"
-            f"  - {res['validation_metric']} = {res['best_test_score']} on test set\n"
-            f"  - elapsed seconds = {elapsed_seconds:.2f}\n"
-            f"  - elapsed time = {human_readable_runtime}\n"
-            f"  - total training time = {total_training_time:.4f} seconds\n"
-            f"  - total inference time = {total_inference_time:.4f} seconds"
+            f"  - run id = {res['best_run_id']}\n"
+            f"  - run name = {res['best_run_name']}\n"
+            f"  - {res['validation_metric']} = {res['best_test_score']} on test set"
         )
         logger.info(
-            f"Session '{run.info.run_name}' token usage: "
-            f"input_tokens={res['token_usage']['input_tokens']}, "
-            f"output_tokens={res['token_usage']['output_tokens']}, "
-            f"total_tokens={res['token_usage']['total_tokens']}"
+            f"Session '{run.info.run_name}' time:\n"
+            f"  - runtime_seconds = {res['runtime_seconds']:.2f}\n"
+            f"  - runtime_human_readable = {res['runtime_human_readable']}\n"
+            f"  - training_time = {res['training_time']:.2f}\n"
+            f"  - inference_time = {res['inference_time']:.2f}"
         )
         logger.info(
-            f"Session '{run.info.run_name}' costs: "
-            f"input_cost={res['token_usage']['input_cost']}, "
-            f"output_cost={res['token_usage']['output_cost']}, "
-            f"total_cost={res['token_usage']['total_cost']}"
+            f"Session '{run.info.run_name}' token usage:\n"
+            f"  - input_tokens = {res['token_usage']['input_tokens']}\n"
+            f"  - output_tokens = {res['token_usage']['output_tokens']}\n"
+            f"  - total_tokens = {res['token_usage']['total_tokens']}"
+        )
+        logger.info(
+            f"Session '{run.info.run_name}' costs:\n"
+            f"  - input_cost = {res['token_usage']['input_cost']}\n"
+            f"  - output_cost = {res['token_usage']['output_cost']}\n"
+            f"  - total_cost = {res['token_usage']['total_cost']}"
         )
 
         return res
@@ -223,7 +229,9 @@ class TargetFeatureResponse(BaseModel):
     reasoning: str
 
 
-def identify_target_feature(df: pd.DataFrame) -> str:
+@mlflow.trace(name="identify_target_feature")
+def identify_target_feature(df: pd.DataFrame, session: str) -> str:
+    set_trace_metadata(session=session)
     identify_prompt: str = f"""
         Analyze the following dataset and identify the target column (the variable to predict).
 
@@ -245,10 +253,7 @@ def identify_target_feature(df: pd.DataFrame) -> str:
         Provide your answer with the exact column name and your reasoning.
     """
     target_model = model.with_structured_output(TargetFeatureResponse)
-    response, duration = timed_call(
-        target_model.invoke, [HumanMessage(content=identify_prompt)]
-    )
-    logger.info(f"Target feature identification inference time: {duration:.4f} seconds")
+    response = target_model.invoke([HumanMessage(content=identify_prompt)])
     assert isinstance(response, TargetFeatureResponse)
     return response.target_feature
 
