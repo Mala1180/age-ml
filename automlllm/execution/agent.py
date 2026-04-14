@@ -1,5 +1,4 @@
 import importlib.util
-import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
@@ -25,7 +24,6 @@ from automlllm.common.client import (
     set_trace_metadata,
 )
 from automlllm.common.model import model
-from automlllm.common.timing import timed_call
 from automlllm.common.types import Pipeline
 from automlllm.execution.utils import (
     extract_python_code,
@@ -85,8 +83,6 @@ class ExecutionAgentState(MessagesState):
     train_df: pd.DataFrame
     best_run_id: Optional[str]
     target_feature: str
-    inference_time: float
-    training_time: float
 
 
 class JudgeResponse(BaseModel):
@@ -109,8 +105,6 @@ explanation_model = model.with_structured_output(ExplanationResponse)
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     enable_mlflow_llm_autologging()
-    state["inference_time"] = 0.0
-    state["training_time"] = 0.0
     state["status"] = PipelineStatus.RUNNING
     df: pd.DataFrame = pd.read_csv(state["dataset_path"])
 
@@ -170,8 +164,7 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     """
     state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
 
-    response, duration = timed_call(code_model.invoke, state["messages"])
-    state["inference_time"] += duration
+    response = code_model.invoke(state["messages"])
     assert isinstance(response, CodeResponse)
     state["pipeline"].created_at = datetime.now()
     created_at = (
@@ -200,8 +193,7 @@ def validate_code_compliance(
     )
     state["messages"] = state["messages"] + [HumanMessage(content=validating_prompt)]
 
-    response, duration = timed_call(judge_model.invoke, state["messages"])
-    state["inference_time"] += duration
+    response = judge_model.invoke(state["messages"])
     assert isinstance(response, JudgeResponse)
     if response.is_compliant:
         state["code_validation_feedback"] = True
@@ -285,15 +277,9 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     )
                     module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
-
-                    start = time.perf_counter()
                     trained_model = module.train_model(
                         X_train, y_train, **hp_combination
                     )
-                    end = time.perf_counter()
-                    duration = end - start
-                    state["training_time"] += duration
-
                     # Calculate validation metric
                     y_pred = trained_model.predict(X_val)
                     metric_fn = get_metric(state["validation_metric"])
@@ -378,8 +364,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Use markdown format to structure the explanation paying attention to newlines and spaces.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=explain_prompt)]
-    explanation, duration = timed_call(explanation_model.invoke, state["messages"])
-    state["inference_time"] += duration
+    explanation = explanation_model.invoke(state["messages"])
     assert isinstance(explanation, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
     )
@@ -393,8 +378,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         Use markdown format to structure the summary.
     """
     state["messages"] = state["messages"] + [HumanMessage(content=summarize_prompt)]
-    summary, duration = timed_call(explanation_model.invoke, state["messages"])
-    state["inference_time"] += duration
+    summary = explanation_model.invoke(state["messages"])
     assert isinstance(summary, ExplanationResponse), (
         "Expected ExplanationResponse from the model"
     )
