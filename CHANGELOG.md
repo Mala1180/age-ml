@@ -1,3 +1,13 @@
+## [4.2.0](https://github.com/Mala1180/automl-llm/compare/4.1.0...4.2.0) (2026-04-14)
+
+### Features
+
+* improve execution time logging ([a2343cf](https://github.com/Mala1180/automl-llm/commit/a2343cf80ac0a427a0b7c7b647e1ade55efe4086))
+
+### Refactoring
+
+* add timed_call for llm invocations ([f2d5a18](https://github.com/Mala1180/automl-llm/commit/f2d5a18e4c3ccfbdc9dc1c238c93510aac415313))
+
 ## [4.1.0](https://github.com/Mala1180/automl-llm/compare/4.0.0...4.1.0) (2026-04-13)
 
 ### Features
