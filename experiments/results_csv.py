@@ -13,6 +13,7 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "dataset": "Dataset",
     "problem": "Problem",
     "best_pipeline": "Best Pipeline",
+    "validation_metric": "Validation Metric",
     "best_test_score": "Best Test-set Score",
     "baseline": "Baseline",
     "features": "Features",
@@ -160,8 +161,8 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["dataset"]: dataset_name,
         SUMMARY_COLUMNS["problem"]: problem,
         SUMMARY_COLUMNS["best_pipeline"]: best_pipeline,
-        SUMMARY_COLUMNS["best_test_score"]: result.get("best_test_score", "")
-        + f" ({result.get('validation_metric', '')})",
+        SUMMARY_COLUMNS["validation_metric"]: result.get("validation_metric", ""),
+        SUMMARY_COLUMNS["best_test_score"]: result.get("best_test_score", ""),
         SUMMARY_COLUMNS["baseline"]: baseline,
         SUMMARY_COLUMNS["features"]: int(features_df.shape[1]),
         SUMMARY_COLUMNS["instances"]: int(dataset_df.shape[0]),
