@@ -133,10 +133,6 @@ pipeline:
               alpha: [0.001]
               max_iter: [300]
 
-#    validation:
-#     candidates: [cv, holdout]
-#     mandatory: true
-
 ordering:
   - sequence:
     - imputation
