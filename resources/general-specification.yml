@@ -171,13 +171,11 @@ constraints:
     require: [regression]
 
   - if:
-      step:
-        classification: {}
+      step: classification
     forbid: [regression]
 
   - if:
-      step:
-        regression: {}
+      step: regression
     forbid: [classification]
 
   # =========================

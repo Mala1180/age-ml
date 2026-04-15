@@ -165,16 +165,28 @@ class SpecificationParser:
     def _parse_step_condition(self, node: Dict[str, Any]) -> StepCondition:
         step_node: Any = node.get("step")
         if isinstance(step_node, str):
+            if step_node == "":
+                raise ValueError("Constraint 'if.step' condition cannot be empty.")
             return StepCondition(step=step_node, candidate=None)
 
-        if not isinstance(step_node, dict) or not step_node:
+        if not isinstance(step_node, dict):
+            raise ValueError(
+                "Constraint 'if.step' condition must be a string or a dict[str, str]."
+            )
+        if not step_node:
             raise ValueError("Constraint 'if.step' condition cannot be empty.")
+        if len(step_node) > 1:
+            raise ValueError(
+                "Constraint 'if.step' dictionary condition must contain a single step."
+            )
 
         step: str = next(iter(step_node.keys()))
         candidate_node: Any = step_node[step]
-        if isinstance(candidate_node, str):
-            return StepCondition(step=step, candidate=Candidate(name=candidate_node))
-        return StepCondition(step=step, candidate=None)
+        if not isinstance(candidate_node, str) or candidate_node == "":
+            raise ValueError(
+                "Constraint 'if.step' dictionary condition must be of type dict[str, str]."
+            )
+        return StepCondition(step=step, candidate=Candidate(name=candidate_node))
 
     def _parse_dataset_condition(self, node: Dict[str, Any]) -> DatasetCondition:
         dataset_node: Any = node.get("dataset")
