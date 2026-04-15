@@ -9,6 +9,7 @@ from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
 
+from automlllm import logger
 from automlllm.common.client import (
     enable_mlflow_llm_autologging,
 )
@@ -103,15 +104,18 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
             solution, state["specification"]
         )
         state["pipelines"].append(pipeline)
+    logger.info(f"Generated pipelines: {len(state['pipelines'])}")
     return state
 
 
 def select_pipelines(state: PlanningAgentState) -> PlanningAgentState:
     max_pipelines: int = state["specification"].budgets.pipelines
-    if len(state["pipelines"]) <= max_pipelines:
-        return state
-
-    state["pipelines"] = random.sample(state["pipelines"], k=max_pipelines)
+    all_pipelines: List[PlanningPipeline] = state["pipelines"]
+    if len(state["pipelines"]) > max_pipelines:
+        state["pipelines"] = random.sample(all_pipelines, k=max_pipelines)
+    logger.info(
+        f"Picked {len(state['pipelines'])} pipelines out of {len(all_pipelines)} candidates (budget was {max_pipelines})"
+    )
     return state
 
 

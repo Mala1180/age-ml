@@ -231,6 +231,56 @@ ordering:
         assert len(constraint.forbid) == 1
         assert constraint.forbid[0].candidate == ""
 
+    def test_parse_constraint_step_as_string(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+
+  steps:
+    regression:
+      candidates: [linear]
+    classification:
+      candidates: [random_forest]
+
+ordering: []
+
+constraints:
+  - if:
+      step: regression
+    forbid: [classification]
+"""
+        spec = Specification.parse(spec_yaml)
+        assert len(spec.constraints) == 1
+        assert spec.constraints[0].condition == StepCondition(step="regression")
+
+    def test_parse_constraint_step_dict_requires_string_value(self):
+        spec_yaml = """
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+
+  steps:
+    regression:
+      candidates: [linear]
+    classification:
+      candidates: [random_forest]
+
+ordering: []
+
+constraints:
+  - if:
+      step:
+        regression: {}
+    forbid: [classification]
+"""
+        with pytest.raises(
+            ValueError, match="Constraint 'if.step' dictionary condition"
+        ):
+            Specification.parse(spec_yaml)
+
     def test_parse_constraints_with_values(self):
         spec = Specification.parse(spec_sample)
 

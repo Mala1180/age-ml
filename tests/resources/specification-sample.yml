@@ -42,8 +42,7 @@ ordering:
 
 constraints:
   - if:
-      step:
-        step1: {}
+      step: step1
     require: [step2, step4]
     forbid: [step3]
 
