@@ -35,7 +35,7 @@ from automlllm.specification import Specification
 def main(
     spec_path: str,
     dataset_path: str,
-    validation_metric: str = "accuracy",
+    validation_metric: str = "balanced_accuracy",
     maximize: bool = True,
 ) -> Dict:
     """Run planning and execution from the command line.
@@ -51,7 +51,7 @@ def main(
     Args:
         spec_path: Filesystem path to the YAML specification file.
         dataset_path: Filesystem path to the input dataset used for the AutoML task.
-        validation_metric: Name of the metric to use for model selection (default: "accuracy").
+        validation_metric: Name of the metric to use for model selection (default: "balanced_accuracy").
         maximize: Whether to maximize the metric (True) or minimize it (False). Default: True.
     Returns:
         None.
