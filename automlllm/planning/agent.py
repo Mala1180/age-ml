@@ -2,7 +2,6 @@ import random
 from pathlib import Path
 from typing import List
 
-import mlflow
 import pandas as pd
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langgraph.constants import END
@@ -12,7 +11,6 @@ from pydantic import BaseModel
 
 from automlllm.common.client import (
     enable_mlflow_llm_autologging,
-    set_trace_metadata,
 )
 from automlllm.common.model import model
 from automlllm.planning.solver import (
@@ -30,7 +28,6 @@ class PlanningAgentState(MessagesState):
     specification: Specification
     dataset_path: str
     dataset_info: str
-    session: str
     target_feature: str
     max_pipelines: int
     pipelines: List[PlanningPipeline]
@@ -72,10 +69,7 @@ def load_specification(state: PlanningAgentState) -> PlanningAgentState:
     return state
 
 
-@mlflow.trace(name="translate_semantic_conditions")
 def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentState:
-    set_trace_metadata(session=state["session"])
-
     for semantic_constraint in state["specification"].semantic_constraints:
         prompt: str = (
             "Given the following condition, determine if the condition is met.\n"
