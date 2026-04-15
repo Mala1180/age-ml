@@ -7,6 +7,7 @@ from sklearn import metrics
 
 METRIC_FUNCTIONS: Dict[str, Callable] = {
     "accuracy": metrics.accuracy_score,
+    "balanced_accuracy": metrics.balanced_accuracy_score,
     "f1": metrics.f1_score,
     "precision": metrics.precision_score,
     "recall": metrics.recall_score,

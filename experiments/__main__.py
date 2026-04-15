@@ -68,7 +68,7 @@ if __name__ == "__main__":
             dataset_path = str(
                 RESOURCES_DIR / "datasets" / kind / f"{dataset_name}.csv"
             )
-            metric = "accuracy" if kind == "classification" else "rmse"
+            metric = "balanced_accuracy" if kind == "classification" else "rmse"
             maximize = kind == "classification"
             result: Dict = main(
                 spec_path=spec_path,
