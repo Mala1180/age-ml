@@ -59,16 +59,6 @@ def enable_mlflow_llm_autologging() -> None:
     mlflow.gemini.autolog()
 
 
-def set_trace_metadata(session: str) -> None:
-    try:
-        mlflow.update_current_trace(
-            tags={"session": session},
-            metadata={"mlflow.trace.session": session},
-        )
-    except Exception as exc:
-        logger.debug(f"Unable to update current active trace metadata: {exc}")
-
-
 def get_session_total_token_usage(session: str) -> Dict[str, int | float]:
     escaped_session: str = session.replace("'", "\\'")
     filter_string = f"tags.session = '{escaped_session}'"
