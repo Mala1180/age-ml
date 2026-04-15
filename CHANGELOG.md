@@ -1,3 +1,13 @@
+## [4.4.0](https://github.com/Mala1180/automl-llm/compare/4.3.0...4.4.0) (2026-04-15)
+
+### Features
+
+* add dataset ids and workers to csv ([2fcc4b2](https://github.com/Mala1180/automl-llm/commit/2fcc4b2f73fd7d1be26e062501991a7c0aa524ec))
+
+### General maintenance
+
+* improve trace logging ([0d49b96](https://github.com/Mala1180/automl-llm/commit/0d49b96cfe215b0e487ca997e63badd497b0db2e))
+
 ## [4.3.0](https://github.com/Mala1180/automl-llm/compare/4.2.0...4.3.0) (2026-04-14)
 
 ### Features
