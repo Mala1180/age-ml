@@ -1,3 +1,14 @@
+## [4.5.0](https://github.com/Mala1180/automl-llm/compare/4.4.0...4.5.0) (2026-04-15)
+
+### Features
+
+* add balanced_accuracy as default metric ([998fefa](https://github.com/Mala1180/automl-llm/commit/998fefa4962181868bc523a9d4a99c699852af8e))
+
+### Refactoring
+
+* change csv file name ([065f03b](https://github.com/Mala1180/automl-llm/commit/065f03b90f7bb1ee16edfd9f230f44d5d81481f2))
+* **specification:** change step condition in yaml, now it can be string or dict ([4ec601c](https://github.com/Mala1180/automl-llm/commit/4ec601ce5327bc52b75a2ad34ad96011584b6381))
+
 ## [4.4.0](https://github.com/Mala1180/automl-llm/compare/4.3.0...4.4.0) (2026-04-15)
 
 ### Features
