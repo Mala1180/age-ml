@@ -1,3 +1,9 @@
+## [4.5.1](https://github.com/Mala1180/automl-llm/compare/4.5.0...4.5.1) (2026-04-15)
+
+### Bug Fixes
+
+* fix csv creation ([824f14e](https://github.com/Mala1180/automl-llm/commit/824f14ec02e60e96aab0ddbe52ef603ac688593a))
+
 ## [4.5.0](https://github.com/Mala1180/automl-llm/compare/4.4.0...4.5.0) (2026-04-15)
 
 ### Features
