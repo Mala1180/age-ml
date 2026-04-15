@@ -9,6 +9,7 @@ from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
 
 SUMMARY_COLUMNS: dict[str, str] = {
+    "openml_id": "OpenML ID",
     "dataset": "Dataset",
     "problem": "Problem",
     "best_pipeline": "Best Pipeline",
@@ -22,6 +23,7 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "equivalent_time": "Equivalent Time",
     "llm_inference_time": "LLM Inference Time",
     "ml_training_time": "ML Training Time",
+    "workers": "Workers",
     "pipeline_budget": "Pipeline Budget",
     "actual_pipelines": "Actual Pipelines",
     "input_tokens": "Input Tokens",
@@ -108,6 +110,7 @@ def _compute_feature_stats(df: pd.DataFrame) -> tuple[int, int]:
 
 def build_experiment_summary_row(
     dataset_name: str,
+    openml_id: int,
     problem: str,
     dataset_df: pd.DataFrame,
     result: Mapping[str, Any],
@@ -153,6 +156,7 @@ def build_experiment_summary_row(
     )
     baseline = "hamlet" if problem == "classification" else "to fill"
     return {
+        SUMMARY_COLUMNS["openml_id"]: openml_id,
         SUMMARY_COLUMNS["dataset"]: dataset_name,
         SUMMARY_COLUMNS["problem"]: problem,
         SUMMARY_COLUMNS["best_pipeline"]: best_pipeline,
@@ -166,6 +170,7 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["equivalent_time"]: equivalent_time,
         SUMMARY_COLUMNS["llm_inference_time"]: llm_inference_time,
         SUMMARY_COLUMNS["ml_training_time"]: ml_training_time,
+        SUMMARY_COLUMNS["workers"]: workers,
         SUMMARY_COLUMNS["pipeline_budget"]: pipeline_budget,
         SUMMARY_COLUMNS["actual_pipelines"]: actual_pipelines,
         SUMMARY_COLUMNS["input_tokens"]: token_usage.get("input_tokens", ""),

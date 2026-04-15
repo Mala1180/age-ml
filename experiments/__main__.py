@@ -72,6 +72,7 @@ if __name__ == "__main__":
             dataset_df = pd.read_csv(dataset_path)
             row = build_experiment_summary_row(
                 dataset_name=dataset_name,
+                openml_id=openml_id,
                 problem=kind,
                 dataset_df=dataset_df,
                 result=result,
