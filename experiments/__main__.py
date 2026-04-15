@@ -8,12 +8,17 @@ from pandas import DataFrame
 
 from automlllm import logger
 from automlllm.app import main
+from automlllm.common.model import model_name
 from automlllm.specification import Specification
 from experiments.results_csv import (
     build_experiment_summary_row,
     save_experiment_summary_to_csv,
 )
 from resources import DIR as RESOURCES_DIR
+
+
+def _safe_filename_part(value: str) -> str:
+    return "".join(ch if ch.isalnum() or ch in {"-", "_", "."} else "_" for ch in value)
 
 
 def download_openml_datasets(datasets: Dict[str, int], path: Path) -> None:
@@ -31,6 +36,8 @@ def download_openml_datasets(datasets: Dict[str, int], path: Path) -> None:
 
 if __name__ == "__main__":
     output_dir = Path(__file__).parent / "results"
+    model_tag = _safe_filename_part(model_name)
+    output_path = output_dir / f"results_{model_tag}.csv"
     spec_path = str(RESOURCES_DIR / "general-specification.yml")
     specification = Specification.parse(Path(spec_path).read_text())
 
@@ -79,5 +86,4 @@ if __name__ == "__main__":
                 pipeline_budget=specification.pipelines,
                 workers=specification.workers,
             )
-            output_path = output_dir / "results.csv"
             save_experiment_summary_to_csv(row=row, csv_path=output_path)
