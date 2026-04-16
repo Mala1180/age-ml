@@ -1,3 +1,9 @@
+## [4.6.0](https://github.com/Mala1180/automl-llm/compare/4.5.1...4.6.0) (2026-04-16)
+
+### Features
+
+* improve artifact logging (explanation and pipelines are logged if pipelines fail), improve general specification fixing regression tasks ([bb33209](https://github.com/Mala1180/automl-llm/commit/bb33209afb9baafb4ed70a5771e4b143b98e6f1d))
+
 ## [4.5.1](https://github.com/Mala1180/automl-llm/compare/4.5.0...4.5.1) (2026-04-15)
 
 ### Bug Fixes
