@@ -76,7 +76,7 @@ def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentSta
             "Given the following condition, determine if the condition is met.\n"
             "If the condition is met, return 'is_condition_met' as True, otherwise False. "
             "Constraint Condition:\n"
-            f"{semantic_constraint.condition}\n"
+            f"{str(semantic_constraint.condition)}"
         )
 
         state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
