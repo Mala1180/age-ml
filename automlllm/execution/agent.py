@@ -23,7 +23,7 @@ from automlllm.common.client import (
     set_run_description,
 )
 from automlllm.common.model import model
-from automlllm.common.types import Pipeline
+from automlllm.common.types import Pipeline, Step
 from automlllm.execution.utils import (
     extract_python_code,
     grid_search_exploration,
@@ -39,12 +39,15 @@ class ExecutionPipeline(Pipeline):
     created_at: Optional[datetime] = None
 
     @override
+    def _format_step(self, step: Step, index: int) -> str:
+        markdown_step: str = f"{index}. **{step.name}** with `{step.candidate}`"
+        return markdown_step
+
+    @override
     def __str__(self) -> str:
-        string_value: str = f"Pipeline {self.id}:\n{self.format_steps()}"
-        if self.code:
-            string_value += f"\nCode:\n```python\n{self.code}```"
+        string_value: str = f"## Pipeline {self.id}\n\n{self.format_steps()}"
         if self.explanation:
-            string_value += f"\nExplanation:\n{self.explanation}"
+            string_value += f"\n\n{self.explanation}"
         return string_value
 
     def extract_hyperparameters(self) -> Dict[str, Any]:
@@ -205,12 +208,12 @@ def validate_code_compliance(
 
 def code_validation_branch(
     state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "execute_code", "__end__"]:
+) -> Literal["generate_pipeline_code", "execute_code", "explain_pipeline"]:
     if state["status"] == PipelineStatus.FAILED:
         logger.info(
             f"Maximum attempts ({state['validation_attempts']}) reached for code validation of pipeline {state['pipeline'].id}."
         )
-        return "__end__"
+        return "explain_pipeline"
     is_valid = state["code_validation_feedback"]
     return "execute_code" if is_valid else "generate_pipeline_code"
 
@@ -332,12 +335,12 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
 def code_execution_branch(
     state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "explain_pipeline", "__end__"]:
+) -> Literal["generate_pipeline_code", "explain_pipeline"]:
     if state["status"] == PipelineStatus.FAILED:
         logger.info(
             f"Maximum attempts ({state['execution_attempts']}) reached for code execution of pipeline {state['pipeline'].id}."
         )
-        return "__end__"
+        return "explain_pipeline"
     is_valid = state["code_execution_feedback"]
     return "explain_pipeline" if is_valid else "generate_pipeline_code"
 
@@ -374,26 +377,25 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     state["messages"] = state["messages"] + [AIMessage(content=summary.markdown_text)]
 
     assert state["pipeline"].created_at
-    created_at = (
-        "**Created at:** "
-        + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
-        + " UTC\n\n"
-    )
+    created_at = f"**Created at:** {state['pipeline'].created_at.strftime('%Y-%m-%d %H:%M:%S')} UTC"
     state["pipeline"].explanation = (
-        "> " + created_at + explanation.markdown_text + "\n\n" + summary.markdown_text
+        explanation.markdown_text + "\n\n" + summary.markdown_text
     )
 
     pipeline_run_id = state.get("pipeline_run_id")
     if pipeline_run_id:
-        set_run_description(pipeline_run_id, state["pipeline"].explanation)
+        set_run_description(pipeline_run_id, str(state["pipeline"].explanation))
 
-    __save_file(state["pipeline"].id, "explanation.md", state["pipeline"].explanation)
-    with mlflow.start_run(run_id=pipeline_run_id):
-        mlflow.log_artifact(f"out/pipeline_{state['pipeline'].id}/explanation.md")
+    pipeline_md: str = f"> {created_at}\n\n {str(state['pipeline'])}"
+    __save_file(state["pipeline"].id, "pipeline.md", pipeline_md)
+    mlflow.log_artifact(
+        run_id=pipeline_run_id,
+        local_path=f"out/pipeline_{state['pipeline'].id}/pipeline.md",
+    )
 
     print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
     print(
-        f"See explanation generated at: out/pipeline_{state['pipeline'].id}/explanation.md"
+        f"See explanation generated at: out/pipeline_{state['pipeline'].id}/pipeline.md"
     )
     state["status"] = PipelineStatus.COMPLETED
     return state

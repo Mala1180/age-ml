@@ -1,6 +1,13 @@
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    ValidationInfo,
+    field_validator,
+    model_validator,
+)
 
 from automlllm.common.types import Step
 
@@ -77,23 +84,39 @@ class DatasetFeatureCondition(BaseModel):
     model_config = ConfigDict(extra="forbid")
     named_like: Optional[List[str]] = None
     is_target: Optional[bool] = None
-    data_type: Optional[str] = None
+    data_type: Optional[List[str]] = None
     data_distribution: Optional[str] = None
+    cardinality: Optional[List[str]] = None
 
-    @field_validator("named_like", mode="before")
+    @field_validator("named_like", "data_type", "cardinality", mode="before")
     @classmethod
-    def normalize_named_like(cls, value: Any) -> Any:
+    def normalize_string_list(cls, value: Any, info: ValidationInfo) -> Any:
         if value is None:
             return None
         if isinstance(value, str):
             return [value]
         if isinstance(value, list):
             return value
-        raise ValueError("'named_like' must be a string or a list of strings.")
+        raise ValueError(f"'{info.field_name}' must be a string or a list of strings.")
 
 
 class DatasetCondition(SemanticCondition):
     feature: DatasetFeatureCondition
+
+    @staticmethod
+    def _format_or_values(values: List[str]) -> str:
+        if len(values) == 1:
+            return f"'{values[0]}'"
+        if len(values) == 2:
+            return f"'{values[0]}' or '{values[1]}'"
+        head = ", ".join(f"'{value}'" for value in values[:-1])
+        return f"{head}, or '{values[-1]}'"
+
+    @classmethod
+    def _format_string_list(cls, values: List[str], attribute_name: str) -> str:
+        if len(values) == 1:
+            return f"feature {attribute_name} is '{values[0]}'"
+        return f"feature {attribute_name} is {cls._format_or_values(values)}"
 
     def __str__(self):
         conditions = []
@@ -103,17 +126,25 @@ class DatasetCondition(SemanticCondition):
                     f"feature name is like '{self.feature.named_like[0]}'"
                 )
             else:
-                patterns = ", ".join(f"'{name}'" for name in self.feature.named_like)
-                conditions.append(f"feature name is like one of [{patterns}]")
+                conditions.append(
+                    "feature name is like "
+                    f"{self._format_or_values(self.feature.named_like)}"
+                )
         if self.feature.is_target is not None:
             conditions.append(
                 f"feature is{' ' if self.feature.is_target else ' not '}the target variable"
             )
         if self.feature.data_type:
-            conditions.append(f"feature data type is '{self.feature.data_type}'")
+            conditions.append(
+                self._format_string_list(self.feature.data_type, "data type")
+            )
         if self.feature.data_distribution:
             conditions.append(
                 f"feature data distribution is '{self.feature.data_distribution}'"
+            )
+        if self.feature.cardinality:
+            conditions.append(
+                self._format_string_list(self.feature.cardinality, "cardinality")
             )
         return " and ".join(conditions)
 

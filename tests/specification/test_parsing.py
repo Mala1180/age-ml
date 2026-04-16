@@ -326,8 +326,9 @@ constraints:
         feature:
           named_like: class
           is_target: true
-          data_type: categorical
+          data_type: [categorical]
           data_distribution: evenly distributed
+          cardinality: [high]
     require: [classification]
 """
         spec = Specification.parse(spec_yaml)
@@ -335,14 +336,42 @@ constraints:
         assert len(spec.semantic_constraints) == 1
         assert spec.semantic_constraints[0].condition == DatasetCondition(
             feature=DatasetFeatureCondition(
-                named_like="class",
+                named_like=["class"],
                 is_target=True,
-                data_type="categorical",
+                data_type=["categorical"],
                 data_distribution="evenly distributed",
+                cardinality=["high"],
             )
         )
         assert len(spec.semantic_constraints[0].require) == 1
         assert spec.semantic_constraints[0].require[0].name == "classification"
+
+    def test_dataset_condition_string_includes_cardinality(self):
+        condition = DatasetCondition(
+            feature=DatasetFeatureCondition(
+                named_like=["class"],
+                is_target=True,
+                data_type=["integer"],
+                cardinality=["high"],
+            )
+        )
+        assert (
+            str(condition)
+            == "feature name is like 'class' and feature is the target variable "
+            "and feature data type is 'integer' and feature cardinality is 'high'"
+        )
+
+    def test_dataset_condition_string_includes_multiple_data_types(self):
+        condition = DatasetCondition(
+            feature=DatasetFeatureCondition(
+                data_type=["categorical", "integer"],
+                cardinality=["high", "very high"],
+            )
+        )
+        assert (
+            str(condition) == "feature data type is 'categorical' or 'integer' and "
+            "feature cardinality is 'high' or 'very high'"
+        )
 
     def test_parse_natural_language_condition(self):
         spec_yaml = """

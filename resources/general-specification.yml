@@ -1,6 +1,6 @@
 budgets:
-  pipelines: 5
-  workers: 5
+  pipelines: 10
+  workers: 10
   generation_attempts: 10
   time:
 #    hours: 2
@@ -156,14 +156,15 @@ constraints:
         feature:
           named_like: class
           is_target: true
-          data_type: categorical or integer
+          data_type: [categorical, integer]
     require: [classification]
 
   - if:
       dataset:
         feature:
           is_target: true
-          data_type: float
+          data_type: [float, integer]
+          cardinality: high
     require: [regression]
 
   - if:
@@ -181,7 +182,6 @@ constraints:
   - if:
       step:
         classification: decision_tree
-    require: [discretization]
     forbid: [normalization, features]
 
   - if:
@@ -214,6 +214,10 @@ constraints:
   # =========================
   # REGRESSION
   # =========================
+
+  - if:
+      step: regression
+    forbid: [rebalancing]
 
   - if:
       step:
