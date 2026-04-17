@@ -1,3 +1,13 @@
+## [4.6.1](https://github.com/Mala1180/automl-llm/compare/4.6.0...4.6.1) (2026-04-17)
+
+### Bug Fixes
+
+* reduce nn size and add some experiments result ([df93a12](https://github.com/Mala1180/automl-llm/commit/df93a120edae9060b4b9efc5631ce5483d6d99b5))
+
+### Refactoring
+
+* update README and add script for downloading datasets ([4b19b8a](https://github.com/Mala1180/automl-llm/commit/4b19b8ae197e9f8160d0a219c225820b2a22df86))
+
 ## [4.6.0](https://github.com/Mala1180/automl-llm/compare/4.5.1...4.6.0) (2026-04-16)
 
 ### Features
