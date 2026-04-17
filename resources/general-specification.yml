@@ -1,10 +1,10 @@
 budgets:
-  pipelines: 10
-  workers: 10
+  pipelines: 30
+  workers: 8
   generation_attempts: 10
   time:
-#    hours: 2
-    minutes: 5
+    hours: 2
+#    minutes: 5
 #    seconds: 30
 
 pipeline:
@@ -84,8 +84,8 @@ pipeline:
         - nn:
             params:
               hidden_layer_sizes:
-                - [50]
-                - [100]
+                - [10]
+                - [20]
               alpha: [0.001]
               max_iter: [300]
         - random_forest:
@@ -128,8 +128,8 @@ pipeline:
         - nn_regressor:
             params:
               hidden_layer_sizes:
-                - [50]
-                - [100]
+                - [10]
+                - [20]
               alpha: [0.001]
               max_iter: [300]
 
