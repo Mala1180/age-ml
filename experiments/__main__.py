@@ -1,15 +1,15 @@
 from pathlib import Path
 from typing import Dict
 
-import openml
 import pandas as pd
-from openml.config import get_cache_directory, set_root_cache_directory
-from pandas import DataFrame
 
-from automlllm import logger
 from automlllm.app import main
 from automlllm.common.model import model_name
 from automlllm.specification import Specification
+from experiments.download_datasets import (
+    DEFAULT_OPENML_DATASETS,
+    download_all_openml_datasets,
+)
 from experiments.results_csv import (
     build_experiment_summary_row,
     save_experiment_summary_to_csv,
@@ -21,19 +21,6 @@ def _safe_filename_part(value: str) -> str:
     return "".join(ch if ch.isalnum() or ch in {"-", "_", "."} else "_" for ch in value)
 
 
-def download_openml_datasets(datasets: Dict[str, int], path: Path) -> None:
-    set_root_cache_directory(RESOURCES_DIR)
-    logger.info("OpenML cache directory: " + get_cache_directory())
-
-    for dataset_name, openml_id in datasets.items():
-        dataset = openml.datasets.get_dataset(openml_id)
-        X, y, _, _ = dataset.get_data(dataset_format="dataframe")
-        df: DataFrame = pd.concat([X, y], axis=1)
-        datasets_dir = path
-        datasets_dir.mkdir(parents=True, exist_ok=True)
-        df.to_csv(datasets_dir / f"{dataset_name}.csv")
-
-
 if __name__ == "__main__":
     output_dir = Path(__file__).parent / "results"
     model_tag = _safe_filename_part(model_name)
@@ -41,27 +28,8 @@ if __name__ == "__main__":
     spec_path = str(RESOURCES_DIR / "general-specification.yml")
     specification = Specification.parse(Path(spec_path).read_text())
 
-    datasets: Dict[str, Dict[str, int]] = {
-        "classification": {
-            "wilt": 40983,
-            "texture": 40499,
-            "madelon": 1485,
-            "har": 1478,
-            "adult": 1590,
-            "mnist_784": 554,
-        },
-        "regression": {
-            "california_housing": 43939,
-            "ames_housing": 42165,
-            "auto_mpg": 196,
-        },
-    }
-    download_openml_datasets(
-        datasets["classification"], RESOURCES_DIR / "datasets" / "classification"
-    )
-    download_openml_datasets(
-        datasets["regression"], RESOURCES_DIR / "datasets" / "regression"
-    )
+    datasets: Dict[str, Dict[str, int]] = DEFAULT_OPENML_DATASETS
+    download_all_openml_datasets(datasets)
 
     for kind, datasets_by_kind in datasets.items():
         for dataset_name, openml_id in datasets_by_kind.items():
