@@ -1,15 +1,17 @@
 # Agentic AutoML
 
-Agentic AutoML is a Python project that uses LLM agents plus a constraint solver to design, implement, and execute machine learning pipelines from a YAML specification.
+Agentic AutoML is a Python project that uses LLM agents plus a constraint solver to design, implement, execute, and evaluate machine learning pipelines from a YAML specification.
 
-The workflow has two stages:
+The workflow has three stages:
 - **Planning**: parse a specification and enumerate valid pipeline structures.
 - **Execution**: generate Python training code for each planned pipeline, validate it, run hyperparameter combinations, and track runs with MLflow.
+- **Evaluation**: compare all generated models across all pipelines and pick the best overall model according to the selected metric.
 
 ## Repository Structure
 
 - `automlllm/planning/`: planning agent and constraint solver logic.
 - `automlllm/execution/`: code generation, validation, execution, and MLflow integration.
+- `automlllm/evaluation/`: cross-pipeline model evaluation and best-model selection.
 - `automlllm/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
 - `tests/`: parser and specification validation tests.
@@ -38,12 +40,22 @@ poetry install
 
 ## Quick Start
 
+Download the OpenML datasets used by experiments:
+
+```bash
+poetry run python -m experiments.download_datasets
+```
+
+Optional arguments:
+- `--base_dir=<path>` to choose the root output folder (default: `resources/datasets`).
+  The command will create/use `classification/` and `regression/` subfolders under that path.
+
 Run the full workflow:
 
 ```bash
 poetry run python -m automlllm \
   --spec_path resources/general-specification.yml \
-  --dataset_path resources/datasets/adult.csv \
+  --dataset_path resources/datasets/classification/adult.csv \
   --validation_metric balanced_accuracy \
   --maximize True
 ```
@@ -62,7 +74,21 @@ What this does:
 2. Sets/uses MLflow experiment `adult-experiment`.
 3. Generates and executes code of generated pipelines in parallel processes.
 4. Uses MLflow to track runs, logging parameters, metrics, and artifacts.
-5. Writes generated files in `out/pipeline_<id>/`.
+5. Evaluates models from all pipelines, compares them, and selects the best overall model.
+6. Writes generated files in `out/pipeline_<id>/`.
+
+## Run Full Experiments
+
+To run the full experiments suite (all datasets in `classification` and `regression`):
+
+```bash
+poetry run python -m experiments
+```
+
+This command:
+1. Downloads all OpenML datasets into `resources/datasets/classification` and `resources/datasets/regression`.
+2. Runs the AutoML workflow on every dataset using `resources/general-specification.yml`.
+3. Saves a summary CSV in `experiments/results/results_<model_name>.csv`.
 
 ## Specification Format
 
@@ -87,6 +113,8 @@ See examples:
 For each generated pipeline, the execution agent writes:
 - `out/pipeline_<id>/code.py`: generated training function.
 - `out/pipeline_<id>/explanation.md`: concise natural-language explanation.
+
+After execution, the evaluation stage compares models across all pipelines and reports the best pipeline/run based on the selected metric.
 
 
 > MLflow tracks parent/child runs for pipeline/hyperparameter exploration.
