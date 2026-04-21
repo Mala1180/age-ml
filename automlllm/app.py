@@ -147,10 +147,11 @@ def main(
                     failed += 1
                 if r["status"] == PipelineStatus.TIMED_OUT:
                     timed_out += 1
-                if r["status"] != PipelineStatus.TIMED_OUT:
-                    logger.info(
-                        f"Pipeline id: {r['pipeline'].id}, validation_attempts: {r['validation_attempts']}, execution_attempts: {r['execution_attempts']}"
-                    )
+                val_attempts: int = r.get("validation_attempts", 0)
+                exec_attempts: int = r.get("execution_attempts", 0)
+                logger.info(
+                    f"Pipeline id: {r['pipeline'].id}, validation_attempts: {val_attempts}, execution_attempts: {exec_attempts}, status: {r['status'].value}"
+                )
 
                 pipeline_run_id: Optional[str] = r.get("pipeline_run_id")
                 if pipeline_run_id:

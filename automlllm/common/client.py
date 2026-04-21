@@ -170,7 +170,7 @@ def get_nested_runs_total_llm_latency(session: str, experiment_id: str) -> float
 
     try:
         traces: List[Trace] = mlflow.search_traces(
-            experiment_ids=[experiment_id],
+            locations=[experiment_id],
             filter_string=filter_string,
             max_results=None,
             return_type="list",
