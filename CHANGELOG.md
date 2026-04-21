@@ -1,3 +1,9 @@
+## [4.6.2](https://github.com/Mala1180/automl-llm/compare/4.6.1...4.6.2) (2026-04-21)
+
+### Bug Fixes
+
+* fix key error in result dictionary ([f7458cf](https://github.com/Mala1180/automl-llm/commit/f7458cf99401d2f5a19ab36e9b52c78470d36ef1))
+
 ## [4.6.1](https://github.com/Mala1180/automl-llm/compare/4.6.0...4.6.1) (2026-04-17)
 
 ### Bug Fixes
