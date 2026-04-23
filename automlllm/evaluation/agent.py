@@ -1,5 +1,7 @@
-from typing import Optional, Dict
+from pathlib import Path
+from typing import Optional, Dict, List
 
+import mlflow
 import pandas as pd
 from langgraph.constants import START, END
 from langgraph.graph import MessagesState
@@ -29,6 +31,7 @@ class EvaluationAgentState(MessagesState):
     best_run_name: Optional[str]
     best_test_score: Optional[float]
     test_scores: Dict[int, float]
+    artifacts: Dict[str, List[str]]
 
 
 def get_best_run_per_pipeline(state: EvaluationAgentState) -> EvaluationAgentState:
@@ -107,11 +110,57 @@ def get_best_run_across_pipelines(state: EvaluationAgentState) -> EvaluationAgen
     return state
 
 
+def _download_artifacts(run_id: str, out_dir: Path) -> List[str]:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    downloaded_dir = Path(
+        mlflow.artifacts.download_artifacts(run_id=run_id, dst_path=str(out_dir))
+    )
+    return [
+        str(file_path) for file_path in downloaded_dir.rglob("*") if file_path.is_file()
+    ]
+
+
+def download_artifacts(state: EvaluationAgentState) -> EvaluationAgentState:
+    state["artifacts"] = {}
+    out_path = Path("out")
+
+    best_run_id = state.get("best_run_id")
+    if best_run_id:
+        logger.info(f"Downloading artifacts for best run: {best_run_id}")
+        state["artifacts"]["best_run"] = _download_artifacts(
+            best_run_id,
+            out_path / "best_run",
+        )
+
+    best_pipeline_id = state.get("best_pipeline_id")
+    if best_pipeline_id is not None:
+        pipeline_run_id = state["pipeline_run_ids"].get(best_pipeline_id)
+        if pipeline_run_id:
+            logger.info(
+                f"Downloading artifacts for best pipeline run: {pipeline_run_id}"
+            )
+            state["artifacts"]["best_pipeline"] = _download_artifacts(
+                pipeline_run_id,
+                out_path / "best_pipeline",
+            )
+
+    if not state["artifacts"]:
+        logger.info("No best run/pipeline artifacts available to download.")
+
+    return state
+
+
 state_graph = StateGraph(EvaluationAgentState)
 
 state_graph.add_edge(START, "get_best_run_per_pipeline")
-state_graph.add_sequence([get_best_run_per_pipeline, get_best_run_across_pipelines])
-state_graph.add_edge("get_best_run_across_pipelines", END)
+state_graph.add_sequence(
+    [
+        get_best_run_per_pipeline,
+        get_best_run_across_pipelines,
+        download_artifacts,
+    ]
+)
+state_graph.add_edge("download_artifacts", END)
 
 
 evaluation_agent: CompiledStateGraph = state_graph.compile()
