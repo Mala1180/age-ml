@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 from typing import Dict
 
@@ -5,6 +6,7 @@ import pandas as pd
 
 from automlllm.app import main
 from automlllm.common.model import model_name
+from automlllm.common.utils import copy_out_artifacts, safe_filename_part
 from automlllm.specification import Specification
 from experiments.download_datasets import (
     DEFAULT_OPENML_DATASETS,
@@ -16,15 +18,11 @@ from experiments.results_csv import (
 )
 from resources import DIR as RESOURCES_DIR
 
-
-def _safe_filename_part(value: str) -> str:
-    return "".join(ch if ch.isalnum() or ch in {"-", "_", "."} else "_" for ch in value)
-
-
 if __name__ == "__main__":
-    output_dir = Path(__file__).parent / "results"
-    model_tag = _safe_filename_part(model_name)
-    output_path = output_dir / f"results_{model_tag}.csv"
+    model_tag = safe_filename_part(model_name)
+    output_dir = Path(__file__).parent / "results" / model_tag
+    output_path = output_dir / "results.csv"
+    artifacts_path = output_dir / "artifacts"
     spec_path = str(RESOURCES_DIR / "general-specification.yml")
     specification = Specification.parse(Path(spec_path).read_text())
 
@@ -33,6 +31,9 @@ if __name__ == "__main__":
 
     for kind, datasets_by_kind in datasets.items():
         for dataset_name, openml_id in datasets_by_kind.items():
+            out_dir = Path("out")
+            shutil.rmtree(out_dir, ignore_errors=True)
+
             dataset_path = str(
                 RESOURCES_DIR / "datasets" / kind / f"{dataset_name}.csv"
             )
@@ -44,6 +45,9 @@ if __name__ == "__main__":
                 validation_metric=metric,
                 maximize=maximize,
             )
+            dataset_artifacts_dir = artifacts_path / safe_filename_part(dataset_name)
+            copy_out_artifacts(out_dir=out_dir, destination=dataset_artifacts_dir)
+
             dataset_df = pd.read_csv(dataset_path)
             row = build_experiment_summary_row(
                 dataset_name=dataset_name,

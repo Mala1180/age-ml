@@ -24,6 +24,7 @@ from automlllm.common.client import (
 )
 from automlllm.common.model import model
 from automlllm.common.types import Pipeline, Step
+from automlllm.common.utils import save_file
 from automlllm.execution.utils import (
     extract_python_code,
     grid_search_exploration,
@@ -174,7 +175,11 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         "pipeline"
     ].code = f"# {created_at}\n\n{extract_python_code(response.code)}\n\n"
 
-    __save_file(state["pipeline"].id, "code.py", state["pipeline"].code)
+    save_file(
+        "code.py",
+        state["pipeline"].code,
+        out_dir=Path("tmp") / f"pipeline_{state['pipeline'].id}",
+    )
     state["messages"] = state["messages"] + [AIMessage(content=response.code)]
     return state
 
@@ -268,7 +273,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                 nested_run_name: str = f"{pipeline_id}_{algorithm}_run_{index_run}"
                 with mlflow.start_run(nested=True, run_name=nested_run_name):
                     spec = importlib.util.spec_from_file_location(
-                        "out_module", f"out/pipeline_{pipeline_id}/code.py"
+                        "out_module", f"tmp/pipeline_{pipeline_id}/code.py"
                     )
                     module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
@@ -291,7 +296,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
                 index_run += 1
 
-            mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
+            mlflow.log_artifact(f"tmp/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
     except Exception as e:
         mlflow.end_run()
@@ -319,7 +324,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     nested=True,
                     run_name=f"attempt_{state['execution_attempts']}",
                 ):
-                    mlflow.log_artifact(f"out/pipeline_{pipeline_id}/code.py")
+                    mlflow.log_artifact(f"tmp/pipeline_{pipeline_id}/code.py")
                     mlflow.log_artifact(str(error_file_path))
 
             delete_failed_runs(parent_run_id, state["experiment_id"])
@@ -387,39 +392,26 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
         set_run_description(pipeline_run_id, str(state["pipeline"].explanation))
 
     pipeline_md: str = f"> {created_at}\n\n {str(state['pipeline'])}"
-    __save_file(state["pipeline"].id, "pipeline.md", pipeline_md)
+    save_file(
+        "pipeline.md",
+        pipeline_md,
+        out_dir=Path("tmp") / f"pipeline_{state['pipeline'].id}",
+    )
     mlflow.log_artifact(
         run_id=pipeline_run_id,
-        local_path=f"out/pipeline_{state['pipeline'].id}/pipeline.md",
+        local_path=f"tmp/pipeline_{state['pipeline'].id}/pipeline.md",
     )
 
-    print(f"See code generated at: out/pipeline_{state['pipeline'].id}/code.py")
-    print(
-        f"See explanation generated at: out/pipeline_{state['pipeline'].id}/pipeline.md"
-    )
+    print(f"Generated code and explanation for pipeline_{state['pipeline'].id}")
     state["status"] = PipelineStatus.COMPLETED
     return state
 
 
-def __save_file(
-    pipeline_id: int,
-    filename: str,
-    content: str,
-    out_dir: Optional[Path] = None,
-) -> Path:
-    if out_dir is None:
-        out_dir = Path(f"out/pipeline_{pipeline_id}")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    file_path = out_dir / filename
-    file_path.write_text(content, encoding="utf-8")
-    return file_path
-
-
 def __save_error_file(pipeline_id: int, attempt: int, content: str) -> Path:
     error_dir: Path = (
-        Path("out") / f"pipeline_{pipeline_id}" / "errors" / f"attempt_{attempt}"
+        Path("tmp") / f"pipeline_{pipeline_id}" / "errors" / f"attempt_{attempt}"
     )
-    return __save_file(pipeline_id, "error.txt", content, out_dir=error_dir)
+    return save_file("error.txt", content, out_dir=error_dir)
 
 
 state_graph = StateGraph(ExecutionAgentState)

@@ -1,4 +1,5 @@
 import multiprocessing
+import shutil
 import time
 from copy import deepcopy
 from datetime import datetime, timedelta
@@ -119,6 +120,9 @@ def main(
                 )
 
             results: List = deepcopy(inputs)
+
+            shutil.rmtree(Path("out"), ignore_errors=True)
+
             failed: int = 0
             timed_out: int = 0
             with Pool(processes=specification.budgets.workers) as pool:
@@ -172,6 +176,9 @@ def main(
                 else None
                 for result in results
             }
+
+            # remove tmp artifacts saved during execution agent phase
+            shutil.rmtree(Path("tmp"), ignore_errors=True)
 
             res = evaluation_agent.invoke(
                 {
