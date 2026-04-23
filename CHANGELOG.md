@@ -1,3 +1,14 @@
+## [4.7.0](https://github.com/Mala1180/automl-llm/compare/4.6.2...4.7.0) (2026-04-23)
+
+### Features
+
+* add download of artifacts ([6e0dba0](https://github.com/Mala1180/automl-llm/commit/6e0dba05f930c0e6315f8be5cfafcaedbe7e1d38))
+
+### General maintenance
+
+* add gemini 2.5 flash experiment results ([f14bb2b](https://github.com/Mala1180/automl-llm/commit/f14bb2b7a23ef37c19fc271e81f0897e210f5bff))
+* add some code examples ([e823015](https://github.com/Mala1180/automl-llm/commit/e823015e8d6b513e3e7614ff26325f7927c0d728))
+
 ## [4.6.2](https://github.com/Mala1180/automl-llm/compare/4.6.1...4.6.2) (2026-04-21)
 
 ### Bug Fixes
