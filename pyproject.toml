@@ -64,3 +64,6 @@ static-checks = [
 [[tool.mypy.overrides]]
 module = ["fire.*", "z3.*", "sklearn.*"]
 follow_untyped_imports = true
+
+[tool.ruff]
+extend-exclude = ["experiments/results/"]
