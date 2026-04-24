@@ -1,0 +1,10 @@
+Dataset,Problem,Baseline Experiment,Candidate Experiment,Baseline Score,Candidate Score,Improvement,Improvement Metric,Better Experiment
+wilt,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.9662411823983876,0.9827426939872356,1.650151158884794,"balanced accuracy delta, percentage points",gemini-3.1-flash-lite-preview
+texture,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.9954545454545456,0.9918181818181818,-0.3636363636363771,"balanced accuracy delta, percentage points",gemini-2.5-flash
+madelon,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.8634615384615385,0.8634615384615385,0.0,"balanced accuracy delta, percentage points",tie
+har,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.9811429806487671,0.987209758824327,0.6066778175559895,"balanced accuracy delta, percentage points",gemini-3.1-flash-lite-preview
+adult,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.8129252481829121,0.822278909508971,0.935366132605886,"balanced accuracy delta, percentage points",gemini-3.1-flash-lite-preview
+mnist_784,classification,gemini-2.5-flash,gemini-3.1-flash-lite-preview,0.9664450768343156,0.9710350096634814,0.4589932829165866,"balanced accuracy delta, percentage points",gemini-3.1-flash-lite-preview
+california_housing,regression,gemini-2.5-flash,gemini-3.1-flash-lite-preview,69331.03182193861,67675.64076464035,2.387662513879444,"RMSE reduction, percent",gemini-3.1-flash-lite-preview
+ames_housing,regression,gemini-2.5-flash,gemini-3.1-flash-lite-preview,31970.629598659227,30189.15218747868,5.572231243313571,"RMSE reduction, percent",gemini-3.1-flash-lite-preview
+auto_mpg,regression,gemini-2.5-flash,gemini-3.1-flash-lite-preview,2.2832434607562577,2.1484063927615105,5.905505493053571,"RMSE reduction, percent",gemini-3.1-flash-lite-preview
