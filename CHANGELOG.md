@@ -1,3 +1,18 @@
+## [4.8.0](https://github.com/Mala1180/automl-llm/compare/4.7.0...4.8.0) (2026-04-24)
+
+### Features
+
+* add some charts and some baseline value ([7110462](https://github.com/Mala1180/automl-llm/commit/71104629f2e62fb2ada0b65e334099958b58e848))
+
+### Dependency updates
+
+* **deps:** add matplotlib dependency ([2c97a7e](https://github.com/Mala1180/automl-llm/commit/2c97a7e762b3318f8c2cfaa887886f605af5d560))
+
+### General maintenance
+
+* add experiment results with gemini 2.5 flash ([f0e13a1](https://github.com/Mala1180/automl-llm/commit/f0e13a17392371cb813ec1515b857705a0147c0a))
+* add experiment results with gemini 3.1 flash-lite-preview ([c5f1ea1](https://github.com/Mala1180/automl-llm/commit/c5f1ea1e3971d90a0ada593180ba982b96c0041e))
+
 ## [4.7.0](https://github.com/Mala1180/automl-llm/compare/4.6.2...4.7.0) (2026-04-23)
 
 ### Features
