@@ -1,16 +1,20 @@
-# Agentic AutoML
+# AGE-ML
 
-Agentic AutoML is a Python project that uses LLM agents plus a constraint solver to design, implement, execute, and evaluate machine learning pipelines from a YAML specification.
+**AGE-ML** is a framework for automatic generation and execution of end-to-end machine learning pipelines from explicit, human-readable specifications.
+
+It shifts AutoML from a model-centric to a data-centric approach, enabling users to define high-level requirements and constraints for their ML workflows, including data preprocessing, feature engineering, model selection, and hyperparameter tuning.
+
+The architecture combines symbolic reasoning with LLM-based code generation to derive admissible pipelines, synthesize implementations, execute them systematically, and preserve a traceable record of the entire process.
 
 The workflow has three stages:
 - **Planning**: parse a specification and enumerate valid pipeline structures.
-- **Execution**: generate Python training code for each planned pipeline, validate it, run hyperparameter combinations, and track runs with MLflow.
+- **Execution**: generate Python training code for each planned pipeline, validate it, run hyperparameter combinations, and track runs with `MLflow`.
 - **Evaluation**: compare all generated models across all pipelines and pick the best overall model according to the selected metric.
 
 ## Repository Structure
 
 - `ageml/planning/`: planning agent and constraint solver logic.
-- `ageml/execution/`: code generation, validation, execution, and MLflow integration.
+- `ageml/execution/`: code generation, validation, execution, and `MLflow` integration.
 - `ageml/evaluation/`: cross-pipeline model evaluation and best-model selection.
 - `ageml/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
