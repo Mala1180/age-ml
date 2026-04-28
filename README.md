@@ -15,7 +15,7 @@ The workflow has three stages:
 - `automlllm/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
 - `tests/`: parser and specification validation tests.
-- `out/`: generated artifacts (`code.py`, `explanation.md`) per pipeline.
+- `out/`: downloaded artifacts for the best run and best pipeline.
 
 ## Requirements
 
@@ -70,25 +70,26 @@ poetry run python -m automlllm \
 | `maximize`          | No       | `True`              | Whether to maximize (`True`) or minimize (`False`) the metric                                                                              |
 
 What this does:
-1. Generates all feasible pipelines according to the provided specification.
-2. Sets/uses MLflow experiment `adult-experiment`.
-3. Generates and executes code of generated pipelines in parallel processes.
-4. Uses MLflow to track runs, logging parameters, metrics, and artifacts.
-5. Evaluates models from all pipelines, compares them, and selects the best overall model.
-6. Writes generated files in `out/pipeline_<id>/`.
+1. Automatically identifies the most likely target column from the dataset.
+2. Generates all feasible pipelines according to the provided specification.
+3. Sets/uses the MLflow experiment named like the dataset (for example, `adult` for `adult.csv`).
+4. Generates and executes code of generated pipelines in parallel processes.
+5. Uses MLflow to track runs, logging parameters, metrics, and artifacts.
+6. Evaluates models from all pipelines, compares them, and selects the best overall model.
+7. Downloads the selected best-run and best-pipeline artifacts into `out/`.
 
 ## Run Full Experiments
 
-To run the full experiments suite (all datasets in `classification` and `regression`):
+To run the full experiments suite (all datasets in [download_datasets.py](experiments/download_datasets.py)):
 
 ```bash
 poetry run python -m experiments
 ```
 
 This command:
-1. Downloads all OpenML datasets into `resources/datasets/classification` and `resources/datasets/regression`.
+1. Downloads datasets from OpenML into `resources/datasets/classification` and `resources/datasets/regression`.
 2. Runs the AutoML workflow on every dataset using `resources/general-specification.yml`.
-3. Saves a summary CSV in `experiments/results/results_<model_name>.csv`.
+3. Saves a summary CSV in `experiments/results/<model_name>/results.csv`.
 
 ## Specification Format
 
@@ -110,11 +111,11 @@ See examples:
 
 ## Outputs
 
-For each generated pipeline, the execution agent writes:
-- `out/pipeline_<id>/code.py`: generated training function.
-- `out/pipeline_<id>/explanation.md`: concise natural-language explanation.
+The evaluation stage compares models across all pipelines and reports the best pipeline/run based on the selected metric.
 
-After execution, the evaluation stage compares models across all pipelines and reports the best pipeline/run based on the selected metric.
+After evaluation, the framework downloads selected artifacts into:
+- `out/best_run/`: artifacts for the best hyperparameter run.
+- `out/best_pipeline/`: artifacts for the best pipeline run, including generated pipeline code and explanation.
 
 
 > MLflow tracks parent/child runs for pipeline/hyperparameter exploration.
