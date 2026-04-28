@@ -17,8 +17,8 @@ from automlllm.common.model import model
 from automlllm.planning.solver import (
     create_solver,
     enumerate_solutions,
-    convert_solution_to_pipeline,
 )
+from automlllm.planning.solver.utils import convert_solution_to_pipeline
 from automlllm.planning.types import PlanningPipeline
 from automlllm.specification import Specification, Constraint
 from automlllm.specification.types import TrueCondition

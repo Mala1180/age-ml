@@ -1,4 +1,4 @@
-from typing import Iterator, List
+from typing import Iterator
 
 from z3 import (
     Solver,
@@ -19,7 +19,6 @@ from z3 import (
     BoolVal,
 )
 
-from automlllm.planning.solver.utils import convert_solution_to_pipeline
 from automlllm.specification import Specification
 from automlllm.specification.types import (
     DatasetCondition,
@@ -27,7 +26,6 @@ from automlllm.specification.types import (
     TrueCondition,
     StepCondition,
 )
-from resources import get_resource_path
 
 
 class Variables:
@@ -181,38 +179,3 @@ def enumerate_solutions(solver: Solver) -> Iterator[ModelRef]:
         # Add a constraint to block the current solution and find the next one
         different_assignments = [decl() != model[decl] for decl in model.decls()]
         solver.add(Or(*different_assignments))
-
-
-if __name__ == "__main__":
-    spec: Specification = Specification.parse(
-        # get_resource_path("general-specification.yml").read_text()
-        get_resource_path("general-specification.yml").read_text()
-    )
-    solver = create_solver(spec)
-    model_list: List[str] = []
-    pipelines_list: List[str] = []
-    pipelines_set: set[str] = set()
-    i: int = 0
-    for solution in enumerate_solutions(solver):
-        pipeline = convert_solution_to_pipeline(solution, spec)
-        model_list.append(str(solution))
-
-        # if str(pipeline) in pipelines_set:
-        #     print("Duplicate solution found:")
-        #     print(str(pipeline))
-        #     print(solution)
-        #     for pipeline_2 in pipelines_list:
-        #         if str(pipeline) == str(pipeline):
-        #             print("Matching pipeline found:")
-        #             index = pipelines_list.index(pipeline_2)
-        #             print("-----------------------------------")
-        #             print(model_list[index])
-        #             break
-
-        pipelines_list.append(str(pipeline))
-        pipelines_set.add(str(pipeline))
-        i += 1
-        print(i, pipeline)
-
-    print("Len List:", len(pipelines_list))
-    print("Len Set:", len(pipelines_set))

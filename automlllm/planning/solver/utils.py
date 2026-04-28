@@ -7,32 +7,6 @@ from automlllm.planning.types import PlanningPipeline
 from automlllm.specification import Specification
 
 
-def compare_solutions(solution_a: ModelRef, solution_b: ModelRef) -> bool:
-    assignments_a = {
-        decl.name(): solution_a[decl].sexpr() for decl in solution_a.decls()
-    }
-    assignments_b = {
-        decl.name(): solution_b[decl].sexpr() for decl in solution_b.decls()
-    }
-    all_keys = sorted(set(assignments_a) | set(assignments_b))
-    differences: List[tuple[str, str, str]] = []
-
-    for key in all_keys:
-        value_a = assignments_a.get(key, "<missing>")
-        value_b = assignments_b.get(key, "<missing>")
-        if value_a != value_b:
-            differences.append((key, value_a, value_b))
-
-    if differences:
-        print("Different assignments found:")
-        for key, value_a, value_b in differences:
-            print(f"- {key}: solution_a={value_a}, solution_b={value_b}")
-    else:
-        print("No differences found.")
-
-    return len(differences) == 0
-
-
 def convert_solution_to_pipeline(
     solution: ModelRef, specification: Specification
 ) -> PlanningPipeline:
