@@ -7,14 +7,14 @@ from langgraph.constants import START, END
 from langgraph.graph import MessagesState
 from langgraph.graph.state import CompiledStateGraph, StateGraph
 
-from automlllm import logger
-from automlllm.common.client import (
+from ageml import logger
+from ageml.common.client import (
     get_best_pipeline_run,
     get_model_from_run_id,
     get_run_name_from_run_id,
     enable_mlflow_llm_autologging,
 )
-from automlllm.execution.utils import get_metric
+from ageml.execution.utils import get_metric
 
 
 class EvaluationAgentState(MessagesState):

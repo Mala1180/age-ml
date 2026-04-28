@@ -9,19 +9,19 @@ from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
 
-from automlllm import logger
-from automlllm.common.client import (
+from ageml import logger
+from ageml.common.client import (
     enable_mlflow_llm_autologging,
 )
-from automlllm.common.model import model
-from automlllm.planning.solver import (
+from ageml.common.model import model
+from ageml.planning.solver import (
     create_solver,
     enumerate_solutions,
 )
-from automlllm.planning.solver.utils import convert_solution_to_pipeline
-from automlllm.planning.types import PlanningPipeline
-from automlllm.specification import Specification, Constraint
-from automlllm.specification.types import TrueCondition
+from ageml.planning.solver.utils import convert_solution_to_pipeline
+from ageml.planning.types import PlanningPipeline
+from ageml.specification import Specification, Constraint
+from ageml.specification.types import TrueCondition
 
 
 class PlanningAgentState(MessagesState):

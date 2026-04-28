@@ -1,7 +1,7 @@
 from typing import List
 
-from automlllm.specification.parsing import SpecificationParser
-from automlllm.specification.types import (
+from ageml.specification.parsing import SpecificationParser
+from ageml.specification.types import (
     Budgets,
     Constraint,
     OrderingRule,

@@ -1,8 +1,8 @@
 from typing import Callable, Dict, List, Optional, Set, Tuple
 
-from automlllm.common.types import Step
-from automlllm.specification import Specification
-from automlllm.specification.types import (
+from ageml.common.types import Step
+from ageml.specification import Specification
+from ageml.specification.types import (
     Condition,
     Constraint,
     DatasetCondition,

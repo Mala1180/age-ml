@@ -16,21 +16,21 @@ from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 from typing_extensions import override
 
-from automlllm import logger
-from automlllm.common.client import (
+from ageml import logger
+from ageml.common.client import (
     delete_failed_runs,
     enable_mlflow_llm_autologging,
     set_run_description,
 )
-from automlllm.common.model import model
-from automlllm.common.types import Pipeline, Step
-from automlllm.common.utils import save_file
-from automlllm.execution.utils import (
+from ageml.common.model import model
+from ageml.common.types import Pipeline, Step
+from ageml.common.utils import save_file
+from ageml.execution.utils import (
     extract_python_code,
     grid_search_exploration,
     get_metric,
 )
-from automlllm.specification import Specification
+from ageml.specification import Specification
 
 
 class ExecutionPipeline(Pipeline):

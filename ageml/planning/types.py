@@ -1,6 +1,6 @@
 from typing import override
 
-from automlllm.common.types import Pipeline
+from ageml.common.types import Pipeline
 
 
 class PlanningPipeline(Pipeline):

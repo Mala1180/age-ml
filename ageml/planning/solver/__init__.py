@@ -19,8 +19,8 @@ from z3 import (
     BoolVal,
 )
 
-from automlllm.specification import Specification
-from automlllm.specification.types import (
+from ageml.specification import Specification
+from ageml.specification.types import (
     DatasetCondition,
     NaturalLanguageCondition,
     TrueCondition,

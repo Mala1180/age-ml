@@ -2,9 +2,9 @@ from typing import List
 
 from z3 import ModelRef, is_true
 
-from automlllm.common.types import Step
-from automlllm.planning.types import PlanningPipeline
-from automlllm.specification import Specification
+from ageml.common.types import Step
+from ageml.planning.types import PlanningPipeline
+from ageml.specification import Specification
 
 
 def convert_solution_to_pipeline(

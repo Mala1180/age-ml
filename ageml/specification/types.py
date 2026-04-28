@@ -9,7 +9,7 @@ from pydantic import (
     model_validator,
 )
 
-from automlllm.common.types import Step
+from ageml.common.types import Step
 
 
 class Defaults(BaseModel):

@@ -15,22 +15,22 @@ from mlflow.entities import Experiment
 from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 
-from automlllm import logger
-from automlllm.common.client import (
+from ageml import logger
+from ageml.common.client import (
     enable_mlflow_llm_autologging,
     get_nested_runs_total_llm_latency,
     get_nested_runs_total_duration,
     get_session_total_token_usage,
 )
-from automlllm.common.model import model
-from automlllm.evaluation.agent import evaluation_agent
-from automlllm.execution.agent import (
+from ageml.common.model import model
+from ageml.evaluation.agent import evaluation_agent
+from ageml.execution.agent import (
     execution_agent,
     ExecutionPipeline,
     PipelineStatus,
 )
-from automlllm.planning.agent import PlanningPipeline, planning_agent
-from automlllm.specification import Specification
+from ageml.planning.agent import PlanningPipeline, planning_agent
+from ageml.specification import Specification
 
 
 def main(
@@ -43,7 +43,7 @@ def main(
 
     The command can be invoked as:
 
-    ``python -m automlllm --spec_path=<path> --dataset_path=<path>``
+    ``python -m ageml --spec_path=<path> --dataset_path=<path>``
 
     Runtime budgets are read from ``budgets`` in the specification YAML:
     ``budgets.pipelines``, ``budgets.time`` (hours/minutes/seconds), ``budgets.workers``,
