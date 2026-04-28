@@ -1,3 +1,20 @@
+## [5.0.0](https://github.com/Mala1180/age-ml/compare/4.8.0...5.0.0) (2026-04-28)
+
+### ⚠ BREAKING CHANGES
+
+* rename proejct
+
+### General maintenance
+
+* remove unused code ([afab0ee](https://github.com/Mala1180/age-ml/commit/afab0eee7979b2a1a226bc313155cd0fe650d3dc))
+* update baseline ([b3d997d](https://github.com/Mala1180/age-ml/commit/b3d997defe5df49c2ecb544b9cc9c6612c3de422))
+* update baselines 2 ([2dffe4e](https://github.com/Mala1180/age-ml/commit/2dffe4e121e1a5e04b94128b3c9175814ceb1716))
+* update README ([25c408d](https://github.com/Mala1180/age-ml/commit/25c408d6ee46050e030b8f7ed9aa5a547ec08981))
+
+### Refactoring
+
+* rename proejct ([02661a0](https://github.com/Mala1180/age-ml/commit/02661a0ac6bd59aa5037f58d6a7aa33bcf5bba64))
+
 ## [4.8.0](https://github.com/Mala1180/automl-llm/compare/4.7.0...4.8.0) (2026-04-24)
 
 ### Features
