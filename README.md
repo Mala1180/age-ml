@@ -9,10 +9,10 @@ The workflow has three stages:
 
 ## Repository Structure
 
-- `automlllm/planning/`: planning agent and constraint solver logic.
-- `automlllm/execution/`: code generation, validation, execution, and MLflow integration.
-- `automlllm/evaluation/`: cross-pipeline model evaluation and best-model selection.
-- `automlllm/specification/`: YAML parser, types, and validation logic.
+- `ageml/planning/`: planning agent and constraint solver logic.
+- `ageml/execution/`: code generation, validation, execution, and MLflow integration.
+- `ageml/evaluation/`: cross-pipeline model evaluation and best-model selection.
+- `ageml/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
 - `tests/`: parser and specification validation tests.
 - `out/`: downloaded artifacts for the best run and best pipeline.
@@ -23,7 +23,7 @@ The workflow has three stages:
 - Poetry for dependency management
 - API key for the configured LLM provider
 
-The project currently instantiates `ChatGoogleGenerativeAI` in [`automlllm/common/model.py`](automlllm/common/model.py), 
+The project currently instantiates `ChatGoogleGenerativeAI` in [`ageml/common/model.py`](ageml/common/model.py), 
 so you should provide a valid Google API key via environment (for example in `.env`, initialized from `.env.example`).
 
 ## Installation
@@ -53,7 +53,7 @@ Optional arguments:
 Run the full workflow:
 
 ```bash
-poetry run python -m automlllm \
+poetry run python -m ageml \
   --spec_path resources/general-specification.yml \
   --dataset_path resources/datasets/classification/adult.csv \
   --validation_metric balanced_accuracy \

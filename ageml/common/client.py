@@ -4,7 +4,7 @@ import mlflow
 from mlflow import MlflowClient
 from mlflow.entities import Run, Trace
 
-from automlllm import logger
+from ageml import logger
 
 client = MlflowClient()
 

@@ -4,10 +4,10 @@ from typing import Dict
 
 import pandas as pd
 
-from automlllm.app import main
-from automlllm.common.model import model_name
-from automlllm.common.utils import copy_out_artifacts, safe_filename_part
-from automlllm.specification import Specification
+from ageml.app import main
+from ageml.common.model import model_name
+from ageml.common.utils import copy_out_artifacts, safe_filename_part
+from ageml.specification import Specification
 from experiments.download_datasets import (
     DEFAULT_OPENML_DATASETS,
     download_all_openml_datasets,

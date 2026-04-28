@@ -2,9 +2,9 @@ from typing import List
 
 import pytest
 
-from automlllm.common.types import Step
-from automlllm.specification import Specification
-from automlllm.specification.validation import SpecificationValidator
+from ageml.common.types import Step
+from ageml.specification import Specification
+from ageml.specification.validation import SpecificationValidator
 from tests.resources import get_test_resource_path
 
 spec_sample: str = get_test_resource_path("specification-sample.yml").read_text()

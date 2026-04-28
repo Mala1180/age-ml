@@ -7,7 +7,7 @@ import pandas as pd
 from openml.config import get_cache_directory, set_root_cache_directory
 from pandas import DataFrame
 
-from automlllm import logger
+from ageml import logger
 from resources import DIR as RESOURCES_DIR
 
 

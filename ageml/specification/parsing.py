@@ -3,8 +3,8 @@ from typing import Any, Dict, List
 import yaml
 from pydantic import BaseModel
 
-from automlllm.common.types import Step
-from automlllm.specification.types import (
+from ageml.common.types import Step
+from ageml.specification.types import (
     Budgets,
     Candidate,
     Constraint,

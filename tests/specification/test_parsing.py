@@ -1,7 +1,7 @@
 import pytest
 
-from automlllm.specification import Specification
-from automlllm.specification.types import (
+from ageml.specification import Specification
+from ageml.specification.types import (
     Budgets,
     Candidate,
     DatasetCondition,

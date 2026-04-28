@@ -2,8 +2,8 @@ import logging
 
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("automl-llm")
+logger = logging.getLogger("ageml")
 
 
 # let this be the last line of this file
-logger.info("automl-llm agents loaded")
+logger.info("ageml agents loaded")
