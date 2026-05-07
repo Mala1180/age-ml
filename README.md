@@ -136,6 +136,10 @@ poetry run poe format
 poetry run poe coverage
 ```
 
+## Paper
+
+The corresponding paper of this framework is currently under review at the Future Generation Computer Systems (FGCS) journal.
+
 ## License
 
 Apache 2.0. See `LICENSE`.
