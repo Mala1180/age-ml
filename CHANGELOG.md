@@ -1,3 +1,19 @@
+## [5.0.2](https://github.com/Mala1180/age-ml/compare/5.0.1...5.0.2) (2026-05-17)
+
+### Dependency updates
+
+* **deps:** update dependency mypy to v2 ([#15](https://github.com/Mala1180/age-ml/issues/15)) ([891f674](https://github.com/Mala1180/age-ml/commit/891f67426cc6cc3bbaeacb98fd4d36000d74ae6f))
+* **deps:** update dependency poetry to v2.4.1 ([#16](https://github.com/Mala1180/age-ml/issues/16)) ([fbb6910](https://github.com/Mala1180/age-ml/commit/fbb6910935dbc41f8649955775b142cf10f411cb))
+* **deps:** update dependency pydantic to v2.13.4 ([#11](https://github.com/Mala1180/age-ml/issues/11)) ([76a50a0](https://github.com/Mala1180/age-ml/commit/76a50a07b63e0a8b053cd9ce593cd189b925878f))
+
+### Bug Fixes
+
+* **deps:** update dependency pandas-stubs to v3 ([#19](https://github.com/Mala1180/age-ml/issues/19)) ([c0970db](https://github.com/Mala1180/age-ml/commit/c0970dbd6447158a12d5558f9109151b4fd0a3ae))
+
+### Build and continuous integration
+
+* **deps:** update actions/upload-artifact action to v7 ([#17](https://github.com/Mala1180/age-ml/issues/17)) ([c68e712](https://github.com/Mala1180/age-ml/commit/c68e71247ef5a2b3a1b71ef67d831d6397390d1c))
+
 ## [5.0.1](https://github.com/Mala1180/age-ml/compare/5.0.0...5.0.1) (2026-05-16)
 
 ### Dependency updates
