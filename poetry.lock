@@ -2099,14 +2099,14 @@ all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2
 
 [[package]]
 name = "imbalanced-learn"
-version = "0.14.1"
+version = "0.14.2"
 description = "Toolbox for imbalanced dataset in machine learning"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "imbalanced_learn-0.14.1-py3-none-any.whl", hash = "sha256:fcdff8d27870d6992ea3496230788b97ff98e24302e7f6c598701da525ae440f"},
-    {file = "imbalanced_learn-0.14.1.tar.gz", hash = "sha256:46eeb5773a96b6fa92426356da66f3e4390a7ed8e715a633c6fb68ee4a3ccdcb"},
+    {file = "imbalanced_learn-0.14.2-py3-none-any.whl", hash = "sha256:f9b81c47231aa1e3a71a1e4b3cc85b42e3b14f85e3a36922f3323c4da23605ef"},
+    {file = "imbalanced_learn-0.14.2.tar.gz", hash = "sha256:f80ce7eafbcece8686e32571bd12978546c729c3f277215bead61a906ce9afe4"},
 ]
 
 [package.dependencies]
@@ -2114,7 +2114,7 @@ joblib = ">=1.2.0,<2"
 numpy = ">=1.25.2,<3"
 scikit-learn = ">=1.4.2,<2"
 scipy = ">=1.11.4,<2"
-sklearn-compat = ">=0.1.5,<0.2"
+sklearn-compat = ">=0.1.6,<0.2"
 threadpoolctl = ">=2.0.0,<4"
 
 [package.extras]
