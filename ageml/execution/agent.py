@@ -292,6 +292,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                         name="model",
                         signature=signature,
                         input_example=X_train.head(3),
+                        serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_PICKLE,
                     )
 
                 index_run += 1
