@@ -1,3 +1,30 @@
+## [5.1.0](https://github.com/Mala1180/age-ml/compare/5.0.3...5.1.0) (2026-09-15)
+
+### Features
+
+* add model and specification file in command line parameters ([a701f45](https://github.com/Mala1180/age-ml/commit/a701f459f43d9aecfc5fb724ffb66a52e12a0c80))
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.89 ([#170](https://github.com/Mala1180/age-ml/issues/170)) ([ed6716b](https://github.com/Mala1180/age-ml/commit/ed6716b2999132988e5871a56a13dfd1db51b486))
+* **deps:** update dependency boto3 to v1.43.90 ([#174](https://github.com/Mala1180/age-ml/issues/174)) ([397ead6](https://github.com/Mala1180/age-ml/commit/397ead6bdc40e7d64e76a62ef0e7176be7ec82f2))
+* **deps:** update dependency boto3 to v1.43.91 ([#176](https://github.com/Mala1180/age-ml/issues/176)) ([a907c10](https://github.com/Mala1180/age-ml/commit/a907c10d2f2645021d54df8b5484162db524d471))
+* **deps:** update dependency boto3 to v1.43.92 ([#177](https://github.com/Mala1180/age-ml/issues/177)) ([c010e6b](https://github.com/Mala1180/age-ml/commit/c010e6b3f6a7adab88c0837aca3f120282f7beb2))
+* **deps:** update dependency boto3 to v1.43.93 ([#179](https://github.com/Mala1180/age-ml/issues/179)) ([116a9bd](https://github.com/Mala1180/age-ml/commit/116a9bdf6c83f3b530e23290aa3643630809483d))
+* **deps:** update dependency boto3 to v1.43.94 ([#183](https://github.com/Mala1180/age-ml/issues/183)) ([6b7ad6e](https://github.com/Mala1180/age-ml/commit/6b7ad6e790be7e62f65f10e1f35a9886efaff271))
+* **deps:** update dependency coverage to v7.16.1 ([#181](https://github.com/Mala1180/age-ml/issues/181)) ([7fcebf8](https://github.com/Mala1180/age-ml/commit/7fcebf8edb4ed62de2d6e052d6581c8309af4ce8))
+* **deps:** update dependency matplotlib to v3.11.2 ([#180](https://github.com/Mala1180/age-ml/issues/180)) ([b9d93c9](https://github.com/Mala1180/age-ml/commit/b9d93c9b3469c2aca060e64bcd68cdf0bc54b9d0))
+* **deps:** update dependency numpy to v2.5.3 ([#173](https://github.com/Mala1180/age-ml/issues/173)) ([532272f](https://github.com/Mala1180/age-ml/commit/532272f832dfeaca8b554f3aea0936fa0b6a1b53))
+* **deps:** update dependency pandas-stubs to v3.0.5.260914 ([#182](https://github.com/Mala1180/age-ml/issues/182)) ([c1f8832](https://github.com/Mala1180/age-ml/commit/c1f88322d97b2efb67e25b4380c3d444c756e561))
+* **deps:** update dependency poetry to v2.4.3 ([#171](https://github.com/Mala1180/age-ml/issues/171)) ([27d3ef4](https://github.com/Mala1180/age-ml/commit/27d3ef4f2007e6a7af892bbe029e00b38af954d6))
+* **deps:** update dependency poetry to v2.4.3 ([#172](https://github.com/Mala1180/age-ml/issues/172)) ([9ae041a](https://github.com/Mala1180/age-ml/commit/9ae041ab8c3f25a9451bcd0eb4c913ad6c52286f))
+* **deps:** update dependency scikit-learn to v1.9.1 ([#178](https://github.com/Mala1180/age-ml/issues/178)) ([ff27e39](https://github.com/Mala1180/age-ml/commit/ff27e39c243f71d4975dc42229af6a368ee4aade))
+* **deps:** update node.js to 24.21 ([#175](https://github.com/Mala1180/age-ml/issues/175)) ([4e466eb](https://github.com/Mala1180/age-ml/commit/4e466eb74e44358fa6107d487b86ff8b19280bc3))
+
+### Bug Fixes
+
+* fix serialization method for models ([6c88c1d](https://github.com/Mala1180/age-ml/commit/6c88c1d2221150570676aaa1ab8e99143de8a06d))
+
 ## [5.0.3](https://github.com/Mala1180/age-ml/compare/5.0.2...5.0.3) (2026-09-04)
 
 ### Dependency updates
