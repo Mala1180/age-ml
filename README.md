@@ -27,8 +27,10 @@ The workflow has three stages:
 - Poetry for dependency management
 - API key for the configured LLM provider
 
-The project currently instantiates `ChatGoogleGenerativeAI` in [`ageml/common/model.py`](ageml/common/model.py), 
+The project instantiates `ChatGoogleGenerativeAI` in [`ageml/common/model.py`](ageml/common/model.py),
 so you should provide a valid Google API key via environment (for example in `.env`, initialized from `.env.example`).
+The Gemini model name defaults to `gemini-3.1-flash-lite-preview` and can be overridden per run with `--model_name`
+(see [Quick Start](#quick-start) and [Run Full Experiments](#run-full-experiments)) — no code change required.
 
 ## Installation
 
@@ -60,6 +62,7 @@ Run the full workflow:
 poetry run python -m ageml \
   --spec_path resources/general-specification.yml \
   --dataset_path resources/datasets/classification/adult.csv \
+  --model_name gemini-2.5-flash \
   --validation_metric balanced_accuracy \
   --maximize True
 ```
@@ -70,6 +73,7 @@ poetry run python -m ageml \
 |---------------------|----------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | `spec_path`         | Yes      | -                   | Filesystem path to the YAML specification file                                                                                             |
 | `dataset_path`      | Yes      | -                   | Filesystem path to the input dataset (CSV)                                                                                                 |
+| `model_name`         | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/app.py`](ageml/app.py))          |
 | `validation_metric` | No       | `balanced_accuracy` | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2` |
 | `maximize`          | No       | `True`              | Whether to maximize (`True`) or minimize (`False`) the metric                                                                              |
 
@@ -87,8 +91,11 @@ What this does:
 To run the full experiments suite (all datasets in [download_datasets.py](experiments/download_datasets.py)):
 
 ```bash
-poetry run python -m experiments
+poetry run python -m experiments --model_name gemini-2.5-flash --spec_path resources/general-specification.yml
 ```
+
+`--model_name` is optional here too (same default as above) and determines the `<model_name>` results folder below.
+`--spec_path` is also optional (default: `resources/general-specification.yml`) and is used for every dataset in the suite.
 
 This command:
 1. Downloads datasets from OpenML into `resources/datasets/classification` and `resources/datasets/regression`.

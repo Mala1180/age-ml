@@ -1,4 +1,5 @@
 import multiprocessing
+import os
 import shutil
 import time
 from copy import deepcopy
@@ -22,20 +23,24 @@ from ageml.common.client import (
     get_nested_runs_total_duration,
     get_session_total_token_usage,
 )
-from ageml.common.model import model
 from ageml.evaluation.agent import evaluation_agent
-from ageml.execution.agent import (
-    execution_agent,
-    ExecutionPipeline,
-    PipelineStatus,
-)
-from ageml.planning.agent import PlanningPipeline, planning_agent
 from ageml.specification import Specification
+
+# ageml.common.model, ageml.execution.agent and ageml.planning.agent are
+# intentionally NOT imported here at module load time: they build the LLM
+# chat model (and structures derived from it, e.g. `model.with_structured_
+# output(...)`) as soon as they're imported. `main`'s `model_name` argument
+# lets the model be picked per CLI invocation (`--model_name`, via `fire`),
+# so those modules are imported lazily below/inside the functions that need
+# them, after `model_name` has been resolved.
+
+DEFAULT_MODEL_NAME: str = "gemini-3.1-flash-lite-preview"
 
 
 def main(
     spec_path: str,
     dataset_path: str,
+    model_name: str = DEFAULT_MODEL_NAME,
     validation_metric: str = "balanced_accuracy",
     maximize: bool = True,
 ) -> Dict:
@@ -52,11 +57,24 @@ def main(
     Args:
         spec_path: Filesystem path to the YAML specification file.
         dataset_path: Filesystem path to the input dataset used for the AutoML task.
+        model_name: Name of the LLM backend used for planning/execution/evaluation
+            (e.g. "gemini-2.5-flash"). Exposed on the command line as ``--model_name``
+            (e.g. ``--model_name=gemini-2.5-flash`` or ``--model_name gemini-2.5-flash``).
+            Defaults to ``DEFAULT_MODEL_NAME`` above when not provided.
         validation_metric: Name of the metric to use for model selection (default: "balanced_accuracy").
         maximize: Whether to maximize the metric (True) or minimize it (False). Default: True.
     Returns:
-        None.
+        A dictionary containing the results of the experiment.
     """
+    os.environ["AGEML_MODEL_NAME"] = model_name
+
+    # Deferred imports: must happen after AGEML_MODEL_NAME is exported above,
+    # since ageml.common.model reads it at import time to build the chat
+    # model, and these two modules build model-bound structures as soon as
+    # they're imported.
+    from ageml.execution.agent import ExecutionPipeline, PipelineStatus
+    from ageml.planning.agent import PlanningPipeline, planning_agent
+
     enable_mlflow_llm_autologging()
 
     specification: Specification = Specification.parse(Path(spec_path).read_text())
@@ -228,6 +246,13 @@ def main(
 
 
 def invoke_agent(agent_input: dict, session: str) -> Dict[str, Any]:
+    # Local import: this function is also the target of multiprocessing's
+    # Pool.apply_async in main() below, so it must stay picklable as a plain
+    # module-level function; importing execution_agent here (rather than at
+    # module load) keeps the LLM backend selection (AGEML_MODEL_NAME, set in
+    # main() from --model_name) effective in worker processes too.
+    from ageml.execution.agent import execution_agent
+
     with mlflow.context(
         tags={"session": session},
         metadata={"mlflow.trace.session": session},
@@ -264,6 +289,8 @@ def identify_target_feature(df: pd.DataFrame) -> str:
 
         Provide your answer with the exact column name and your reasoning.
     """
+    from ageml.common.model import model
+
     target_model = model.with_structured_output(TargetFeatureResponse)
     response = target_model.invoke([HumanMessage(content=identify_prompt)])
     assert isinstance(response, TargetFeatureResponse)
