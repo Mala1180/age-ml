@@ -9,24 +9,7 @@ load_dotenv()
 
 api_key = SecretStr(os.getenv("OPENROUTER_API_KEY", ""))
 
-# model_name: str = "deepseek/deepseek-r1-0528:free"
-# model_name: str = "openai/gpt-oss-120b:free"
-model_name: str = "gemini-3.1-flash-lite-preview"
-
-# openrouter
-# model = ChatOpenAI(
-#     base_url="https://openrouter.ai/api/v1",
-#     api_key=api_key,
-#     model=model_name,
-# )
+model_name: str = os.environ["AGEML_MODEL_NAME"]
 
 # google gemini
 model = ChatGoogleGenerativeAI(model=model_name)
-#
-# # local with ollama
-# model = ChatOllama(
-#     model="llama3.1:8b",
-#     temperature=0.0,
-#     # num_ctx=3072,
-#     num_predict=-2,  # fill context
-# )
