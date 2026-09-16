@@ -18,6 +18,7 @@ The workflow has three stages:
 - `ageml/evaluation/`: cross-pipeline model evaluation and best-model selection.
 - `ageml/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
+- `experiments/ablation/`: ablation studies on the inputs of the framework (currently: the specification).
 - `tests/`: parser and specification validation tests.
 - `out/`: downloaded artifacts for the best run and best pipeline.
 
@@ -69,13 +70,13 @@ poetry run python -m ageml \
 
 ### Parameters
 
-| Parameter           | Required | Default             | Description                                                                                                                                |
-|---------------------|----------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `spec_path`         | Yes      | -                   | Filesystem path to the YAML specification file                                                                                             |
-| `dataset_path`      | Yes      | -                   | Filesystem path to the input dataset (CSV)                                                                                                 |
-| `model_name`         | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/app.py`](ageml/app.py))          |
-| `validation_metric` | No       | `balanced_accuracy` | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2` |
-| `maximize`          | No       | `True`              | Whether to maximize (`True`) or minimize (`False`) the metric                                                                              |
+| Parameter           | Required | Default                         | Description                                                                                                                                |
+|---------------------|----------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `spec_path`         | Yes      | -                               | Filesystem path to the YAML specification file                                                                                             |
+| `dataset_path`      | Yes      | -                               | Filesystem path to the input dataset (CSV)                                                                                                 |
+| `model_name`        | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/app.py`](ageml/app.py))                       |
+| `validation_metric` | No       | `balanced_accuracy`             | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2` |
+| `maximize`          | No       | `True`                          | Whether to maximize (`True`) or minimize (`False`) the metric                                                                              |
 
 What this does:
 1. Automatically identifies the most likely target column from the dataset.
@@ -96,11 +97,52 @@ poetry run python -m experiments --model_name gemini-2.5-flash --spec_path resou
 
 `--model_name` is optional here too (same default as above) and determines the `<model_name>` results folder below.
 `--spec_path` is also optional (default: `resources/general-specification.yml`) and is used for every dataset in the suite.
+A directory can be passed as well, and is read as one `<dataset>.yml` specification per dataset (see the ablation study below).
 
 This command:
 1. Downloads datasets from OpenML into `resources/datasets/classification` and `resources/datasets/regression`.
 2. Runs the AutoML workflow on every dataset using `resources/general-specification.yml`.
 3. Saves a summary CSV in `experiments/results/<model_name>/results.csv`.
+
+## Ablation on the Specification
+
+The main experiments feed AGE-ML a single, general specification for every dataset.
+The ablation varies *only* that input, over three levels of a priori knowledge, keeping
+budgets, candidate operators, hyper-parameter grids and step ordering fixed:
+
+| Variant    | What it carries                                                                                                              |
+|------------|------------------------------------------------------------------------------------------------------------------------------|
+| `poor`     | the general search space without the AutoML domain knowledge: per-algorithm constraints and shared best practices are removed |
+| `general`  | the specification used in the main experiments (baseline)                                                                    |
+| `specific` | one specification per dataset, narrowed down to the steps and operators that suit the dataset's meta-features                |
+
+Generate the specification files (they are derived from `resources/general-specification.yml`,
+so they are **not** tracked by git and must be regenerated after cloning, and whenever that
+file or the generator changes):
+
+```bash
+poetry run poe ablation-specs
+```
+
+This writes, under `experiments/ablation/specifications/generated/`:
+`poor.yml`, `general.yml`, `specific/<dataset>.yml` (one per dataset),
+plus `meta-features.csv` and `manifest.csv` (the ablation matrix: steps, operators,
+constraints and size of the planning search space of each generated file).
+
+Then run the whole suite once per variant:
+
+```bash
+poetry run poe ablation-run --model_name gemini-2.5-flash
+```
+
+`--variants` restricts the run (e.g. `--variants=[poor,general]`).
+Results land in `experiments/ablation/specifications/results/<model_name>/<variant>/results.csv`,
+with the same schema as `experiments/results/<model_name>/results.csv`.
+
+The `specific` variant is *generated*, never hand-written: every pruning decision
+is a pure function of the dataset meta-features (`specialize` in
+`experiments/ablation/specifications/generator.py`), and the rationale of each decision
+taken is written in the header of the generated file.
 
 ## Specification Format
 
@@ -119,6 +161,12 @@ See examples:
 - `resources/general-specification.yml`
 - `resources/adult-specification.yml`
 - `resources/housing-specification.yml`
+- `experiments/ablation/specifications/generated/` (generated, see above)
+
+> Note: all the steps that a specification declares should also appear in its `ordering`
+> section. A partial ordering lets the planner permute the unordered steps, which makes
+> the number of admissible pipelines grow combinatorially; the generator enforces a total
+> ordering, and `search_space.py` reports the resulting number of admissible pipelines.
 
 ## Outputs
 
@@ -142,6 +190,15 @@ poetry run poe static-checks
 poetry run poe format
 poetry run poe coverage
 ```
+
+Ablation study (see [Ablation on the Specification](#ablation-on-the-specification)):
+
+```bash
+poetry run poe ablation-specs                              # generate the specification variants
+poetry run poe ablation-run --model_name gemini-2.5-flash  # run the suite once per variant
+```
+
+`poetry run poe` lists every task with its description.
 
 ## Paper
 

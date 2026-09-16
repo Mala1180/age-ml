@@ -60,6 +60,8 @@ static-checks = [
     "ruff-check",
     "mypy",
 ]
+ablation-specs = { cmd = "python -m experiments.ablation.specifications", help = "Generate the specification variants of the ablation study" }
+ablation-run = { cmd = "python -m experiments.ablation", help = "Run the dataset suite once per specification variant" }
 
 # tells mypy to follow imports of untyped packages
 [[tool.mypy.overrides]]
