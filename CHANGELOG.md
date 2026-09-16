@@ -1,3 +1,13 @@
+## [5.2.0](https://github.com/Mala1180/age-ml/compare/5.1.0...5.2.0) (2026-09-16)
+
+### Features
+
+* add ablation studies for specification files ([3662a1d](https://github.com/Mala1180/age-ml/commit/3662a1dd41a99a6129fcf1200c0765f3b75c9e26))
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.95 ([#184](https://github.com/Mala1180/age-ml/issues/184)) ([3b72a4f](https://github.com/Mala1180/age-ml/commit/3b72a4fed523b5e5a70de99dc01649ce88ef3f56))
+
 ## [5.1.0](https://github.com/Mala1180/age-ml/compare/5.0.3...5.1.0) (2026-09-15)
 
 ### Features
