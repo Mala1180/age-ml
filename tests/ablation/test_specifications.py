@@ -28,10 +28,7 @@ from experiments.ablation.specifications.meta_features import (
     DatasetMetaFeatures,
     resolve_target,
 )
-from experiments.ablation.specifications.search_space import (
-    count_pipelines,
-    is_totally_ordered,
-)
+from experiments.ablation.specifications.search_space import count_pipelines
 from resources import DIR as RESOURCES_DIR
 
 BASE: str = (RESOURCES_DIR / "general-specification.yml").read_text()
@@ -85,7 +82,6 @@ class TestInvariantsAcrossVariants:
         assert specification.document["ordering"] == [
             {"sequence": list(specification.steps)}
         ]
-        assert is_totally_ordered(specification.document)
 
     @pytest.mark.parametrize("specification", EVERY_SPECIFICATION)
     def test_no_constraint_refers_to_a_missing_step_or_candidate(self, specification):
@@ -253,13 +249,6 @@ class TestTargetResolution:
 
 
 class TestSearchSpace:
-    def test_a_partial_ordering_is_detected(self):
-        document = generate(BASE, GENERAL).document
-        assert is_totally_ordered(document)
-        assert not is_totally_ordered(
-            {**document, "ordering": [{"sequence": ["imputation", "features"]}]}
-        )
-
     def test_mandatory_steps_rule_out_the_empty_pipeline(self):
         document = generate(BASE, POOR).document
         assert count_pipelines(document) > count_pipelines(document, CLASSIFICATION)

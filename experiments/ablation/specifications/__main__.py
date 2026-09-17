@@ -31,12 +31,15 @@ from experiments.ablation.specifications.meta_features import (
     DatasetMetaFeatures,
     compute_meta_features,
 )
-from experiments.ablation.specifications.search_space import (
-    count_pipelines,
-    is_totally_ordered,
-)
+from experiments.ablation.specifications.search_space import count_pipelines
 from experiments.download_datasets import DEFAULT_OPENML_DATASETS
 from resources import DIR as RESOURCES_DIR
+
+#: The specification every variant is derived from.
+BASE_SPECIFICATION: Path = RESOURCES_DIR / "general-specification.yml"
+
+#: Where the CSVs of the suite live, used to compute the meta-features.
+DATASETS_DIR: Path = RESOURCES_DIR / "datasets"
 
 
 def _write_csv(path: Path, rows: Sequence[Dict[str, Any]]) -> Path:
@@ -70,36 +73,17 @@ def _manifest_row(
             else ""
             for candidate_task in (CLASSIFICATION, REGRESSION)
         },
-        "totally_ordered": is_totally_ordered(document),
         "file": str(path.relative_to(out_dir)),
     }
 
 
-def generate_specifications(
-    base_spec_path: Optional[str] = None,
-    out_dir: Optional[str] = None,
-    datasets_dir: Optional[str] = None,
-) -> None:
-    """Generate every specification of the ablation study.
-
-    Args:
-        base_spec_path: the specification every variant is derived from.
-            Defaults to ``resources/general-specification.yml``.
-        out_dir: where the generated files are written. Defaults to
-            ``experiments/ablation/specifications/generated``.
-        datasets_dir: where the CSVs of the suite live, used to compute the
-            dataset meta-features. Defaults to ``resources/datasets``.
-    """
-    base_path: Path = Path(
-        base_spec_path or RESOURCES_DIR / "general-specification.yml"
-    )
-    output_dir: Path = Path(out_dir or GENERATED_DIR)
-    data_dir: Path = Path(datasets_dir or RESOURCES_DIR / "datasets")
-    base: str = base_path.read_text()
+def generate_specifications() -> None:
+    """Generate every specification of the ablation study."""
+    base: str = BASE_SPECIFICATION.read_text()
 
     meta_features: List[DatasetMetaFeatures] = [
         compute_meta_features(
-            dataset_path=data_dir / task / f"{dataset_name}.csv",
+            dataset_path=DATASETS_DIR / task / f"{dataset_name}.csv",
             task=task,
             name=dataset_name,
         )
@@ -111,7 +95,7 @@ def generate_specifications(
 
     manifest: List[Dict[str, Any]] = []
     for variant in VARIANTS:
-        destination: Path = specification_path(variant, output_dir)
+        destination: Path = specification_path(variant)
         targets: List[Optional[DatasetMetaFeatures]] = (
             list(meta_features) if variant.dataset_specific else [None]
         )
@@ -124,12 +108,12 @@ def generate_specifications(
             )
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(specification.to_yaml(), encoding="utf-8")
-            manifest.append(_manifest_row(specification, path, output_dir))
+            manifest.append(_manifest_row(specification, path, GENERATED_DIR))
             logger.info(f"Wrote {path}: {manifest[-1]}")
 
-    logger.info(f"Wrote {_write_csv(output_dir / 'manifest.csv', manifest)}")
+    logger.info(f"Wrote {_write_csv(GENERATED_DIR / 'manifest.csv', manifest)}")
     logger.info(
-        f"Wrote {_write_csv(output_dir / 'meta-features.csv', [m.as_row() for m in meta_features])}"
+        f"Wrote {_write_csv(GENERATED_DIR / 'meta-features.csv', [m.as_row() for m in meta_features])}"
     )
 
 
