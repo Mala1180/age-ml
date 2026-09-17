@@ -1,3 +1,18 @@
+## [5.2.1](https://github.com/Mala1180/age-ml/compare/5.2.0...5.2.1) (2026-09-17)
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.96 ([#185](https://github.com/Mala1180/age-ml/issues/185)) ([7f04c12](https://github.com/Mala1180/age-ml/commit/7f04c12de4ddc0b6e7741236eeb0ce757f772eb9))
+* **deps:** update dependency langchain to v1.4.1 ([#186](https://github.com/Mala1180/age-ml/issues/186)) ([3992d7e](https://github.com/Mala1180/age-ml/commit/3992d7e843ce12a173bf56ebb2e384dd8cacf097))
+
+### Performance improvements
+
+* reduce amount of code for ablation study ([33b30a2](https://github.com/Mala1180/age-ml/commit/33b30a2c41b9d10138b8b906bb90e5ddec4b8904))
+
+### General maintenance
+
+* remove useless spec files ([b4e34c2](https://github.com/Mala1180/age-ml/commit/b4e34c2d6995d7ad8e195413226b011d87d3b7e1))
+
 ## [5.2.0](https://github.com/Mala1180/age-ml/compare/5.1.0...5.2.0) (2026-09-16)
 
 ### Features
