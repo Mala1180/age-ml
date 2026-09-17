@@ -5,6 +5,7 @@ import fire
 
 from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
+from experiments import RESULTS_DIR
 from experiments.suite import run_suite
 from resources import DIR as RESOURCES_DIR
 
@@ -40,7 +41,7 @@ def run_experiments(
     run_suite(
         model_name=model_name,
         spec_path=Path(spec_path or RESOURCES_DIR / "general-specification.yml"),
-        output_dir=Path(__file__).parent / "results" / safe_filename_part(model_name),
+        output_dir=RESULTS_DIR / safe_filename_part(model_name),
     )
 
 

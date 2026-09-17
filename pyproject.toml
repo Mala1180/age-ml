@@ -61,7 +61,10 @@ static-checks = [
     "mypy",
 ]
 ablation-specs = { cmd = "python -m experiments.ablation.specifications", help = "Generate the specification variants of the ablation study" }
-ablation-run = { cmd = "python -m experiments.ablation", help = "Run the dataset suite once per specification variant" }
+ablation-run = { cmd = "python -m experiments.ablation", help = "Run the dataset suite 5 times per specification variant" }
+ablation-poor = { cmd = "python -m experiments.ablation --variants=poor", help = "Run the repetitions of the knowledge-poor specification only" }
+ablation-general = { cmd = "python -m experiments.ablation --variants=general", help = "Run the repetitions of the general specification only" }
+ablation-specific = { cmd = "python -m experiments.ablation --variants=specific", help = "Run the repetitions of the dataset-specific specifications only" }
 
 # tells mypy to follow imports of untyped packages
 [[tool.mypy.overrides]]
@@ -69,4 +72,6 @@ module = ["fire.*", "z3.*", "sklearn.*"]
 follow_untyped_imports = true
 
 [tool.ruff]
-extend-exclude = ["experiments/results/"]
+# Generated code and results: the artifacts of the campaign, and those of
+# the runs that preceded it.
+extend-exclude = ["experiments/results/", "old-results/"]

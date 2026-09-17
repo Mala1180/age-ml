@@ -7,10 +7,11 @@ specification per dataset.
 
 import shutil
 from pathlib import Path
-from typing import Dict, Mapping, Optional
+from typing import Dict, Mapping, Optional, Set
 
 import pandas as pd
 
+from ageml import logger
 from ageml.app import main
 from ageml.common.utils import copy_out_artifacts, safe_filename_part
 from ageml.specification import Specification
@@ -19,10 +20,25 @@ from experiments.download_datasets import (
     download_all_openml_datasets,
 )
 from experiments.results_csv import (
+    SUMMARY_COLUMNS,
     build_experiment_summary_row,
     save_experiment_summary_to_csv,
 )
 from resources import DIR as RESOURCES_DIR
+
+
+def already_recorded(csv_path: Path) -> Set[str]:
+    """The datasets an interrupted run of the same suite already wrote.
+
+    Summary rows are *appended*, so re-running a suite over a non-empty
+    ``results.csv`` would both redo hours of work and duplicate its rows,
+    biasing whatever is later computed over the repetitions. Re-running is
+    therefore a resume; delete the directory to start the suite afresh.
+    """
+    if not csv_path.exists() or csv_path.stat().st_size == 0:
+        return set()
+    column: str = SUMMARY_COLUMNS["dataset"]
+    return set(pd.read_csv(csv_path)[column].astype(str))
 
 
 def run_suite(
@@ -40,6 +56,8 @@ def run_suite(
             ``python -m experiments.ablation.specifications``; a file is used
             for every dataset of the suite.
         output_dir: directory of ``results.csv`` and of the ``artifacts`` tree.
+            Datasets already summarized in that ``results.csv`` are skipped, so
+            that an interrupted suite is resumed by re-running it.
         datasets: the suite to run, defaulting to
             :data:`experiments.download_datasets.DEFAULT_OPENML_DATASETS`.
 
@@ -50,8 +68,13 @@ def run_suite(
     download_all_openml_datasets(suite)
 
     output_path: Path = output_dir / "results.csv"
+    recorded: Set[str] = already_recorded(output_path)
     for task, datasets_by_task in suite.items():
         for dataset_name, openml_id in datasets_by_task.items():
+            if dataset_name in recorded:
+                logger.info(f"Skipping '{dataset_name}': already in {output_path}")
+                continue
+
             out_dir = Path("out")
             shutil.rmtree(out_dir, ignore_errors=True)
 
