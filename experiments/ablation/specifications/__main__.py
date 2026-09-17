@@ -32,7 +32,10 @@ from experiments.ablation.specifications.meta_features import (
     compute_meta_features,
 )
 from experiments.ablation.specifications.search_space import count_pipelines
-from experiments.download_datasets import DEFAULT_OPENML_DATASETS
+from experiments.download_datasets import (
+    DEFAULT_OPENML_DATASETS,
+    download_all_openml_datasets,
+)
 from resources import DIR as RESOURCES_DIR
 
 #: The specification every variant is derived from.
@@ -80,6 +83,10 @@ def _manifest_row(
 def generate_specifications() -> None:
     """Generate every specification of the ablation study."""
     base: str = BASE_SPECIFICATION.read_text()
+
+    # The dataset-specific variant is a pure function of the meta-features of
+    # the CSVs, so they must be there -- exactly as `run_suite` requires them.
+    download_all_openml_datasets()
 
     meta_features: List[DatasetMetaFeatures] = [
         compute_meta_features(
