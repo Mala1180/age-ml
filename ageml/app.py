@@ -17,6 +17,7 @@ from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 
 from ageml import logger
+from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.client import (
     enable_mlflow_llm_autologging,
     get_nested_runs_total_llm_latency,
@@ -33,8 +34,6 @@ from ageml.specification import Specification
 # lets the model be picked per CLI invocation (`--model_name`, via `fire`),
 # so those modules are imported lazily below/inside the functions that need
 # them, after `model_name` has been resolved.
-
-DEFAULT_MODEL_NAME: str = "gemini-3.1-flash-lite-preview"
 
 
 def main(

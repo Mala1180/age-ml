@@ -74,7 +74,7 @@ poetry run python -m ageml \
 |---------------------|----------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | `spec_path`         | Yes      | -                               | Filesystem path to the YAML specification file                                                                                             |
 | `dataset_path`      | Yes      | -                               | Filesystem path to the input dataset (CSV)                                                                                                 |
-| `model_name`        | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/app.py`](ageml/app.py))                       |
+| `model_name`        | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/common/__init__.py`](ageml/common/__init__.py))                       |
 | `validation_metric` | No       | `balanced_accuracy`             | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2` |
 | `maximize`          | No       | `True`                          | Whether to maximize (`True`) or minimize (`False`) the metric                                                                              |
 

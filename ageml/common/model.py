@@ -2,14 +2,14 @@ import os
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from pydantic import SecretStr
+
+from ageml.common import DEFAULT_MODEL_NAME
 
 load_dotenv()
 
-
-api_key = SecretStr(os.getenv("OPENROUTER_API_KEY", ""))
-
-model_name: str = os.environ["AGEML_MODEL_NAME"]
+# `ageml.app.main` exports AGEML_MODEL_NAME from its --model_name before
+# importing the agents, so that the backend can be picked per invocation.
+model_name: str = os.environ.get("AGEML_MODEL_NAME", DEFAULT_MODEL_NAME)
 
 # google gemini
 model = ChatGoogleGenerativeAI(model=model_name)

@@ -17,7 +17,7 @@ from typing import List, Optional, Sequence, Union
 import fire
 
 from ageml import logger
-from ageml.app import DEFAULT_MODEL_NAME
+from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments.ablation.specifications import (
     DIR as SPECIFICATIONS_DIR,
