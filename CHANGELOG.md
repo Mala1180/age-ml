@@ -1,3 +1,13 @@
+## [5.3.0](https://github.com/Mala1180/age-ml/compare/5.2.1...5.3.0) (2026-09-17)
+
+### Features
+
+* modify experiments adding more runs, add download of datasets in spec generation ([fc665d3](https://github.com/Mala1180/age-ml/commit/fc665d3c5f38087833e36ac68e0a896ab695cafa))
+
+### General maintenance
+
+* improve default model name ([8ab9d23](https://github.com/Mala1180/age-ml/commit/8ab9d23b5886073e48ad0ab86b0be3cccc42b6b4))
+
 ## [5.2.1](https://github.com/Mala1180/age-ml/compare/5.2.0...5.2.1) (2026-09-17)
 
 ### Dependency updates
