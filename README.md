@@ -135,7 +135,7 @@ Then run the whole suite once per variant:
 poetry run poe ablation-run --model_name gemini-2.5-flash
 ```
 
-`--variants` restricts the run (e.g. `--variants=[poor,general]`).
+`--variants` restricts the run (e.g. `--variants=poor,general`).
 Results land in `experiments/ablation/specifications/results/<model_name>/<variant>/results.csv`,
 with the same schema as `experiments/results/<model_name>/results.csv`.
 
@@ -159,8 +159,6 @@ A specification file defines:
 
 See examples:
 - `resources/general-specification.yml`
-- `resources/adult-specification.yml`
-- `resources/housing-specification.yml`
 - `experiments/ablation/specifications/generated/` (generated, see above)
 
 > Note: all the steps that a specification declares should also appear in its `ordering`
