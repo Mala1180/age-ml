@@ -3,7 +3,7 @@ from typing import Optional
 
 import fire
 
-from ageml.app import DEFAULT_MODEL_NAME
+from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments.suite import run_suite
 from resources import DIR as RESOURCES_DIR
