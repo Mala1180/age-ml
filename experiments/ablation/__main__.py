@@ -21,7 +21,6 @@ from ageml.app import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments.ablation.specifications import (
     DIR as SPECIFICATIONS_DIR,
-    GENERATED_DIR,
     VARIANTS,
     Variant,
     get_variant,
@@ -36,8 +35,6 @@ RESULTS_DIR: Path = SPECIFICATIONS_DIR / "results"
 def run_ablation(
     model_name: str = DEFAULT_MODEL_NAME,
     variants: Optional[Union[str, Sequence[str]]] = None,
-    generated_dir: Optional[str] = None,
-    results_dir: Optional[str] = None,
 ) -> None:
     """Run the dataset suite once per specification variant.
 
@@ -47,22 +44,15 @@ def run_ablation(
         variants: Ids of the variants to run (e.g. ``--variants=general`` or
             ``--variants=poor,general``). Defaults to all of them,
             from the poorest to the richest.
-        generated_dir: Where the generated specifications live. Defaults to
-            ``experiments/ablation/specifications/generated``.
-        results_dir: Where to write the results. Defaults to
-            ``experiments/ablation/specifications/results``.
     """
     requested: Sequence[str] = (
         [variants] if isinstance(variants, str) else list(variants or ())
     )
     selected: List[Variant] = [get_variant(v) for v in requested] or list(VARIANTS)
-    specifications_dir: Path = Path(generated_dir or GENERATED_DIR)
-    output_root: Path = Path(results_dir or RESULTS_DIR) / safe_filename_part(
-        model_name
-    )
+    output_root: Path = RESULTS_DIR / safe_filename_part(model_name)
 
     for variant in selected:
-        spec_path: Path = specification_path(variant, specifications_dir)
+        spec_path: Path = specification_path(variant)
         if not spec_path.exists():
             raise FileNotFoundError(
                 f"No specification for variant '{variant.id}' at {spec_path}. "
