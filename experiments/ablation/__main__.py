@@ -45,7 +45,7 @@ def run_ablation(
         model_name: Name of the LLM backend used for planning/execution/evaluation
             (e.g. "gemini-2.5-flash"). Defaults to ``ageml.app.DEFAULT_MODEL_NAME``.
         variants: Ids of the variants to run (e.g. ``--variants=general`` or
-            ``--variants=[poor,general]``). Defaults to all of them,
+            ``--variants=poor,general``). Defaults to all of them,
             from the poorest to the richest.
         generated_dir: Where the generated specifications live. Defaults to
             ``experiments/ablation/specifications/generated``.
