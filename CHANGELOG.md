@@ -1,3 +1,20 @@
+## [5.4.0](https://github.com/Mala1180/age-ml/compare/5.3.0...5.4.0) (2026-09-18)
+
+### Features
+
+* add specification column to results ([9e2a32b](https://github.com/Mala1180/age-ml/commit/9e2a32bc682afcfeb65c7ed60206bf0d2cf63deb))
+* add total pipelines found column in results ([a658c6d](https://github.com/Mala1180/age-ml/commit/a658c6dd70fa45502223d912c620f69a6a22dec6))
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.97 ([#188](https://github.com/Mala1180/age-ml/issues/188)) ([557a700](https://github.com/Mala1180/age-ml/commit/557a70080ace330821780cf09c99636668fc2336))
+* **deps:** update dependency mlflow to v3.16.1 ([#187](https://github.com/Mala1180/age-ml/issues/187)) ([af23428](https://github.com/Mala1180/age-ml/commit/af23428de524b372631b0c73183bd276cd4f132d))
+* **deps:** update dependency pandas to v3.0.6 ([#189](https://github.com/Mala1180/age-ml/issues/189)) ([9d0a461](https://github.com/Mala1180/age-ml/commit/9d0a461dd58c18a1dc7903104d06e02ba48dfae8))
+
+### General maintenance
+
+* add 1 experiment run per spec type ([a3b0e86](https://github.com/Mala1180/age-ml/commit/a3b0e86ad766edca70e4775a77fae49954a7f974))
+
 ## [5.3.0](https://github.com/Mala1180/age-ml/compare/5.2.1...5.3.0) (2026-09-17)
 
 ### Features
