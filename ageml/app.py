@@ -212,6 +212,7 @@ def main(
             human_readable_runtime = str(timedelta(seconds=round(elapsed_seconds)))
             res["runtime_seconds"] = elapsed_seconds
             res["runtime_human_readable"] = human_readable_runtime
+            res["pipelines_found"] = planning["pipelines_found"]
             res["training_time"] = total_training_time
             res["inference_time"] = total_inference_time
             res["token_usage"] = get_session_total_token_usage(session)
