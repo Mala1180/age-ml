@@ -32,6 +32,7 @@ class PlanningAgentState(MessagesState):
     target_feature: str
     max_pipelines: int
     pipelines: List[PlanningPipeline]
+    pipelines_found: int
 
 
 class ConditionVerification(BaseModel):
@@ -104,7 +105,8 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
             solution, state["specification"]
         )
         state["pipelines"].append(pipeline)
-    logger.info(f"Generated pipelines: {len(state['pipelines'])}")
+    state["pipelines_found"] = len(state["pipelines"])
+    logger.info(f"Generated pipelines: {state['pipelines_found']}")
     return state
 
 
