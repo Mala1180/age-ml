@@ -108,6 +108,7 @@ def run_suite(
                 result=result,
                 pipeline_budget=parsed.pipelines,
                 workers=parsed.workers,
+                specification=specification.name,
             )
             save_experiment_summary_to_csv(row=row, csv_path=output_path)
     return output_path

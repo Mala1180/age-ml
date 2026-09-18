@@ -31,6 +31,7 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "output_tokens": "Output Tokens",
     "total_tokens": "Total Tokens",
     "putative_cost": "Putative Cost ($)",
+    "specification": "Specification",
 }
 
 
@@ -117,6 +118,7 @@ def build_experiment_summary_row(
     result: Mapping[str, Any],
     pipeline_budget: int,
     workers: int,
+    specification: str,
 ) -> Dict[str, Any]:
     features_df = dataset_df.iloc[:, :-1] if dataset_df.shape[1] > 1 else dataset_df
     numeric_features, discrete_features = _compute_feature_stats(features_df)
@@ -179,6 +181,7 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["output_tokens"]: token_usage.get("output_tokens", ""),
         SUMMARY_COLUMNS["total_tokens"]: token_usage.get("total_tokens", ""),
         SUMMARY_COLUMNS["putative_cost"]: token_usage.get("total_cost", ""),
+        SUMMARY_COLUMNS["specification"]: specification,
     }
 
 
