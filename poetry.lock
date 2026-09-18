@@ -672,7 +672,7 @@ files = [
     {file = "cffi-2.0.0-cp39-cp39-win_amd64.whl", hash = "sha256:b882b3df248017dba09d6b16defe9b5c407fe32fc7c65a9c69798e6175601be9"},
     {file = "cffi-2.0.0.tar.gz", hash = "sha256:44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529"},
 ]
-markers = {dev = "sys_platform == \"darwin\" or platform_python_implementation != \"PyPy\" and (sys_platform == \"linux\" or sys_platform == \"darwin\")"}
+markers = {dev = "platform_python_implementation != \"PyPy\" and (sys_platform == \"darwin\" or sys_platform == \"linux\") or sys_platform == \"darwin\""}
 
 [package.dependencies]
 pycparser = {version = "*", markers = "implementation_name != \"PyPy\""}
@@ -1454,14 +1454,14 @@ test = ["hypothesis (<6.136.0)", "levenshtein (<=0.27.1)", "pip", "pylint (<3.3.
 
 [[package]]
 name = "flaml"
-version = "2.6.0"
+version = "2.7.0"
 description = "A fast library for automated machine learning and tuning"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "flaml-2.6.0-py3-none-any.whl", hash = "sha256:dee9fb17ed44802e63b0cb29edd7bd73d61533f2d23173e7f13704bfc017084e"},
-    {file = "flaml-2.6.0.tar.gz", hash = "sha256:fee0a8419d8a4862afe8aa817c312c7479f4d137b806430ecf3b3c7033270730"},
+    {file = "flaml-2.7.0-py3-none-any.whl", hash = "sha256:993aacfc52632fbd32a9f91861ae8245fb920814a5ca3bec57e9b14a6ebe4afc"},
+    {file = "flaml-2.7.0.tar.gz", hash = "sha256:bcb526586800362da63a152bd9a2a2ff35e739a2a15d3ff40777f94062c3abe9"},
 ]
 
 [package.dependencies]
@@ -1482,7 +1482,7 @@ notebook = ["jupyter"]
 ray = ["ray[tune] (>=1.13,<2.5.0)"]
 spark = ["joblib (<=1.3.2)", "joblibspark (>=0.5.0)", "pandas (<3)", "pyspark (>=3.2.0)"]
 synapse = ["joblibspark (>=0.5.0)", "optuna (>=2.8.0,<=3.6.1)", "pyspark (>=3.2.0)"]
-test = ["catboost (>=0.26)", "coverage (>=5.3)", "datasets", "dill", "evaluate", "hcrystalball", "ipykernel", "joblib (<=1.3.2)", "joblibspark (>=0.5.0)", "jupyter", "lightgbm (>=2.3.1)", "mlflow-skinny (<=2.22.1)", "nbconvert", "nbformat", "nltk (!=3.8.2)", "numpy (>=1.17) ; python_version >= \"3.13\"", "numpy (>=1.17,<2.0.0) ; python_version < \"3.13\"", "openml", "optuna (>=2.8.0,<=3.6.1)", "packaging", "pandas (>=1.1.4)", "pre-commit", "psutil", "pytest (>=6.1.1)", "pytest-rerunfailures (>=13.0)", "pytorch-forecasting", "pytorch-lightning", "requests", "rgf-python", "rouge_score", "scikit-learn (>=1.2.0)", "scipy (>=1.4.1)", "seqeval", "statsmodels (>=0.12.2)", "tensorboardX", "thop", "torch", "torchvision", "transformers[torch]", "xgboost (>=0.90,<2.0.0) ; python_version < \"3.11\"", "xgboost (>=2.0.0) ; python_version >= \"3.11\""]
+test = ["catboost (>=0.26) ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "coverage (>=5.3)", "cryptography (==46.0.3) ; sys_platform == \"win32\" and platform_machine == \"ARM64\"", "datasets ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "dill", "evaluate ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "hcrystalball", "ipykernel", "joblib (<=1.3.2)", "joblibspark (>=0.5.0)", "jupyter", "lightgbm (>=2.3.1)", "mlflow-skinny (<=2.22.1)", "nbconvert", "nbformat", "nltk (!=3.8.2)", "numpy (>=1.17) ; python_version >= \"3.13\" or sys_platform == \"win32\" and platform_machine == \"ARM64\"", "numpy (>=1.17,<2.0.0) ; python_version < \"3.13\" and (sys_platform != \"win32\" or platform_machine != \"ARM64\")", "openml ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "optuna (>=2.8.0,<=3.6.1)", "packaging", "pandas (>=1.1.4)", "pre-commit", "psutil", "pytest (>=6.1.1)", "pytest-asyncio ; sys_platform == \"win32\" and platform_machine == \"ARM64\"", "pytest-rerunfailures (>=13.0)", "pytorch-forecasting ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "pytorch-lightning ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "requests", "rgf-python", "rouge_score", "scikit-learn (>=1.2.0)", "scipy (>=1.4.1)", "seqeval", "statsmodels (>=0.12.2)", "tensorboardX", "thop ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "torch ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "torchvision ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "transformers ; sys_platform == \"win32\" and platform_machine == \"ARM64\"", "transformers[torch] ; sys_platform != \"win32\" or platform_machine != \"ARM64\"", "xgboost (>=0.90,<2.0.0) ; python_version < \"3.11\"", "xgboost (>=2.0.0) ; python_version >= \"3.11\""]
 ts-forecast = ["hcrystalball (>=0.1.10)", "holidays", "prophet (>=1.1.5)", "statsmodels (>=0.12.2)"]
 vw = ["scikit-learn", "vowpalwabbit (>=8.10.0,<9.0.0)"]
 
@@ -4803,7 +4803,7 @@ files = [
     {file = "pycparser-3.0-py3-none-any.whl", hash = "sha256:b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"},
     {file = "pycparser-3.0.tar.gz", hash = "sha256:600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29"},
 ]
-markers = {main = "implementation_name != \"PyPy\"", dev = "sys_platform == \"darwin\" and implementation_name != \"PyPy\" or platform_python_implementation != \"PyPy\" and implementation_name != \"PyPy\" and (sys_platform == \"linux\" or sys_platform == \"darwin\")"}
+markers = {main = "implementation_name != \"PyPy\"", dev = "(platform_python_implementation != \"PyPy\" or sys_platform == \"darwin\") and implementation_name != \"PyPy\" and (python_version <= \"3.14\" or sys_platform == \"linux\" or sys_platform == \"darwin\") and (sys_platform == \"darwin\" or sys_platform == \"linux\")"}
 
 [[package]]
 name = "pycryptodome"
