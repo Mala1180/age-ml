@@ -1,3 +1,20 @@
+## [5.5.0](https://github.com/Mala1180/age-ml/compare/5.4.0...5.5.0) (2026-09-23)
+
+### Features
+
+* add experiment results ([3dce58d](https://github.com/Mala1180/age-ml/commit/3dce58d62c23d3d301f721ce639c5bdd2f1b52b2))
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.100 ([#197](https://github.com/Mala1180/age-ml/issues/197)) ([b3202b5](https://github.com/Mala1180/age-ml/commit/b3202b54b038dfb16a9f95e09827c903a7f1739b))
+* **deps:** update dependency boto3 to v1.43.98 ([#191](https://github.com/Mala1180/age-ml/issues/191)) ([fb88e97](https://github.com/Mala1180/age-ml/commit/fb88e972edff7217a8f82598455560bd6ebc5069))
+* **deps:** update dependency boto3 to v1.43.99 ([#196](https://github.com/Mala1180/age-ml/issues/196)) ([9dab2ed](https://github.com/Mala1180/age-ml/commit/9dab2edf390966d87db25ac4b96086ecd759e684))
+* **deps:** update dependency flaml to v2.7.0 ([#190](https://github.com/Mala1180/age-ml/issues/190)) ([fb939fa](https://github.com/Mala1180/age-ml/commit/fb939fa731fea3cf0b0babeb6db8f85c993d64cf))
+* **deps:** update dependency langchain to v1.4.2 ([#192](https://github.com/Mala1180/age-ml/issues/192)) ([a1553e9](https://github.com/Mala1180/age-ml/commit/a1553e9cb5006b50327a8e342c2436f888b6c0c4))
+* **deps:** update dependency poetry to v2.5.0 ([#193](https://github.com/Mala1180/age-ml/issues/193)) ([51b6ce0](https://github.com/Mala1180/age-ml/commit/51b6ce03b3a0075ecf343b8004fa007cb8324d0d))
+* **deps:** update dependency poetry to v2.5.1 ([#194](https://github.com/Mala1180/age-ml/issues/194)) ([ed0a47d](https://github.com/Mala1180/age-ml/commit/ed0a47d7f2837cefad5ac3d09da549894fe32e61))
+* **deps:** update dependency poetry to v2.5.1 ([#195](https://github.com/Mala1180/age-ml/issues/195)) ([8461bfb](https://github.com/Mala1180/age-ml/commit/8461bfbc58d5712cf6d4075c68fdce85ef777a8e))
+
 ## [5.4.0](https://github.com/Mala1180/age-ml/compare/5.3.0...5.4.0) (2026-09-18)
 
 ### Features
