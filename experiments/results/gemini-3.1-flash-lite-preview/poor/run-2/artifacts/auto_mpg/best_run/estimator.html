@@ -1,0 +1,2327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+  </head>
+  <body>
+    <style>.sk-global {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+}
+
+.sk-global.light {
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: black;
+  --sklearn-color-background: white;
+  --sklearn-color-border-box: black;
+  --sklearn-color-icon: #696969;
+}
+
+.sk-global.dark {
+  --sklearn-color-text-on-default-background: white;
+  --sklearn-color-background: #111;
+  --sklearn-color-border-box: white;
+  --sklearn-color-icon: #878787;
+}
+
+.sk-global {
+  color: var(--sklearn-color-text);
+}
+
+.sk-global pre {
+  padding: 0;
+}
+
+.sk-global input.sk-hidden--visually {
+  border: 0;
+  clip-path: inset(100%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sk-global div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+.sk-global div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+.sk-global div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+.sk-global div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+.sk-global div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+.sk-global div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.sk-global div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+.sk-global div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+.sk-global div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+.sk-global div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+.sk-global div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+.sk-global label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.sk-global label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+.sk-global label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+.sk-global label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+.sk-global div.sk-toggleable__content {
+  display: none;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+.sk-global div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.sk-global div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+.sk-global div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+.sk-global div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+.sk-global div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  line-height: 1.2em;
+}
+
+.sk-global div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+.sk-global div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+.sk-global div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+.sk-global div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.sk-global div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-3) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3) 1pt solid;
+  color: var(--sklearn-color-fitted-level-3);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-0);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-fitted-level-0);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+.sk-global a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+.sk-global a.estimator_doc_link.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+.sk-global a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+.sk-global a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
+}
+
+.estimator-table {
+    font-family: monospace;
+}
+
+.estimator-table summary {
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.estimator-table summary::marker {
+    font-size: 0.7rem;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover td {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table :is(td, th) {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+/*
+    `table td`is set in notebook with right text-align.
+    We need to overwrite it.
+*/
+.estimator-table table td.param {
+    text-align: left;
+    position: relative;
+    padding: 0;
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left !important;
+}
+
+.user-set td.value {
+    color:rgb(255, 94, 0);
+    background-color: transparent;
+}
+
+.default td, .estimator-table th {
+    color: black;
+    text-align: left !important;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
+}
+
+/*
+    Styles for parameter documentation links
+    We need styling for visited so jupyter doesn't overwrite it
+*/
+a.param-doc-link,
+a.param-doc-link:link,
+a.param-doc-link:visited {
+    text-decoration: underline dashed;
+    text-underline-offset: .3em;
+    color: inherit;
+    display: block;
+    padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
+}
+
+/* "hack" to make the entire area of the cell containing the link clickable */
+a.param-doc-link::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+}
+
+.param-doc-description {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    padding: .5ex;
+    margin-left: 1.5em;
+    color: var(--sklearn-color-text);
+    box-shadow: .3em .3em .4em #999;
+    width: max-content;
+    text-align: left;
+    max-height: 10em;
+    overflow-y: auto;
+
+    /* unfitted */
+    background: var(--sklearn-color-unfitted-level-0);
+    border: thin solid var(--sklearn-color-unfitted-level-3);
+}
+
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
+/* Fitted state for parameter tooltips */
+.fitted .param-doc-description {
+    /* fitted */
+    background: var(--sklearn-color-fitted-level-0);
+    border: thin solid var(--sklearn-color-fitted-level-3);
+}
+
+.param-doc-link:hover .param-doc-description {
+    display: block;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
+}
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><body><div id="sk-container-id-16" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;imputation&#x27;, SimpleImputer()),
+                (&#x27;normalization&#x27;, PowerTransformer()),
+                (&#x27;features&#x27;, PCA(n_components=0.95)),
+                (&#x27;regression&#x27;, SVR(C=10.0))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy steps to clipboard"
+                 onclick="copyToClipboard('steps',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-steps;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=steps,-list%20of%20tuples">
+            steps
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-steps;">
+            steps: list of tuples<br><br>List of (name of step, estimator) tuples that are to be chained in<br>sequential order. To be compatible with the scikit-learn API, all steps<br>must define `fit`. All non-last steps must also define `transform`. See<br>:ref:`Combining Estimators &lt;combining_estimators&gt;` for more details.</span>
+        </a>
+    </td>
+            <td class="value">[(&#x27;imputation&#x27;, ...), (&#x27;normalization&#x27;, ...), ...]</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy transform_input to clipboard"
+                 onclick="copyToClipboard('transform_input',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-transform_input;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=transform_input,-list%20of%20str%2C%20default%3DNone">
+            transform_input
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-transform_input;">
+            transform_input: list of str, default=None<br><br>The names of the :term:`metadata` parameters that should be transformed by the<br>pipeline before passing it to the step consuming it.<br><br>This enables transforming some input arguments to ``fit`` (other than ``X``)<br>to be transformed by the steps of the pipeline up to the step which requires<br>them. Requirement is defined via :ref:`metadata routing &lt;metadata_routing&gt;`.<br>For instance, this can be used to pass a validation set through the pipeline.<br><br>You can only set this if metadata routing is enabled, which you<br>can enable using ``sklearn.set_config(enable_metadata_routing=True)``.<br><br>.. versionadded:: 1.6</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy memory to clipboard"
+                 onclick="copyToClipboard('memory',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-memory;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=memory,-str%20or%20object%20with%20the%20joblib.Memory%20interface%2C%20default%3DNone">
+            memory
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-memory;">
+            memory: str or object with the joblib.Memory interface, default=None<br><br>Used to cache the fitted transformers of the pipeline. The last step<br>will never be cached, even if it is a transformer. By default, no<br>caching is performed. If a string is given, it is the path to the<br>caching directory. Enabling caching triggers a clone of the transformers<br>before fitting. Therefore, the transformer instance given to the<br>pipeline cannot be inspected directly. Use the attribute ``named_steps``<br>or ``steps`` to inspect estimators within the pipeline. Caching the<br>transformers is advantageous when fitting is time consuming. See<br>:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`<br>for an example on how to enable caching.</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy verbose to clipboard"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-verbose;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=verbose,-bool%2C%20default%3DFalse">
+            verbose
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-verbose;">
+            verbose: bool, default=False<br><br>If True, the time elapsed while fitting each step will be printed as it<br>is completed.</span>
+        </a>
+    </td>
+            <td class="value">False</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                <table class="parameters-table">
+                    <tbody>
+                        <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        </tr>
+                        
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-feature_names_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=feature_names_in_,-ndarray%20of%20shape%20%28n_features_in_%2C%29">
+            feature_names_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-feature_names_in_;">
+            feature_names_in_: ndarray of shape (`n_features_in_`,)<br><br>Names of features seen during :term:`fit`. Only defined if the<br>underlying estimator exposes such an attribute when fit.<br><br>.. versionadded:: 1.0</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[object](7,)</td>
+           <td>[&#x27;cylinders&#x27;,&#x27;displacement&#x27;,&#x27;horsepower&#x27;,...,&#x27;acceleration&#x27;,&#x27;model&#x27;,
+ &#x27;origin&#x27;]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_features_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=n_features_in_,-int">
+            n_features_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_features_in_;">
+            n_features_in_: int<br><br>Number of features seen during :term:`fit`. Only defined if the<br>underlying first estimator in `steps` exposes such an attribute<br>when fit.<br><br>.. versionadded:: 0.24</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>7</td>
+
+
+       </tr>
+    
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="imputation__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy missing_values to clipboard"
+                 onclick="copyToClipboard('missing_values',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-missing_values;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=missing_values,-int%2C%20float%2C%20str%2C%20np.nan%2C%20None%20or%20pandas.NA%2C%20default%3Dnp.nan">
+            missing_values
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-missing_values;">
+            missing_values: int, float, str, np.nan, None or pandas.NA, default=np.nan<br><br>The placeholder for the missing values. All occurrences of<br>`missing_values` will be imputed. For pandas&#x27; dataframes with<br>nullable integer dtypes with missing values, `missing_values`<br>can be set to either `np.nan` or `pd.NA`.</span>
+        </a>
+    </td>
+            <td class="value">nan</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy strategy to clipboard"
+                 onclick="copyToClipboard('strategy',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-strategy;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=strategy,-str%20or%20Callable%2C%20default%3D%27mean%27">
+            strategy
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-strategy;">
+            strategy: str or Callable, default=&#x27;mean&#x27;<br><br>The imputation strategy.<br><br>- If &quot;mean&quot;, then replace missing values using the mean along<br>  each column. Can only be used with numeric data.<br>- If &quot;median&quot;, then replace missing values using the median along<br>  each column. Can only be used with numeric data.<br>- If &quot;most_frequent&quot;, then replace missing using the most frequent<br>  value along each column. Can be used with strings or numeric data.<br>  If there is more than one such value, only the smallest is returned.<br>- If &quot;constant&quot;, then replace missing values with fill_value. Can be<br>  used with strings or numeric data.<br>- If an instance of Callable, then replace missing values using the<br>  scalar statistic returned by running the callable over a dense 1d<br>  array containing non-missing values of each column.<br><br>.. versionadded:: 0.20<br>   strategy=&quot;constant&quot; for fixed value imputation.<br><br>.. versionadded:: 1.5<br>   strategy=callable for custom value imputation.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;mean&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy fill_value to clipboard"
+                 onclick="copyToClipboard('fill_value',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-fill_value;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=fill_value,-str%20or%20numerical%20value%2C%20default%3DNone">
+            fill_value
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-fill_value;">
+            fill_value: str or numerical value, default=None<br><br>When strategy == &quot;constant&quot;, `fill_value` is used to replace all<br>occurrences of missing_values. For string or object data types,<br>`fill_value` must be a string.<br>If `None`, `fill_value` will be 0 when imputing numerical<br>data and &quot;missing_value&quot; for strings or object data types.</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy copy to clipboard"
+                 onclick="copyToClipboard('copy',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-copy;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=copy,-bool%2C%20default%3DTrue">
+            copy
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-copy;">
+            copy: bool, default=True<br><br>If True, a copy of X will be created. If False, imputation will<br>be done in-place whenever possible. Note that, in the following cases,<br>a new copy will always be made, even if `copy=False`:<br><br>- If `X` is not an array of floating values;<br>- If `X` is encoded as a CSR matrix;<br>- If `add_indicator=True`.</span>
+        </a>
+    </td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy add_indicator to clipboard"
+                 onclick="copyToClipboard('add_indicator',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-add_indicator;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=add_indicator,-bool%2C%20default%3DFalse">
+            add_indicator
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-add_indicator;">
+            add_indicator: bool, default=False<br><br>If True, a :class:`MissingIndicator` transform will stack onto output<br>of the imputer&#x27;s transform. This allows a predictive estimator<br>to account for missingness despite imputation. If a feature has no<br>missing values at fit/train time, the feature won&#x27;t appear on<br>the missing indicator even if there are missing values at<br>transform/test time.</span>
+        </a>
+    </td>
+            <td class="value">False</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy keep_empty_features to clipboard"
+                 onclick="copyToClipboard('keep_empty_features',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-keep_empty_features;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=keep_empty_features,-bool%2C%20default%3DFalse">
+            keep_empty_features
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-keep_empty_features;">
+            keep_empty_features: bool, default=False<br><br>If True, features that consist exclusively of missing values when<br>`fit` is called are returned in results when `transform` is called.<br>The imputed value is always `0` except when `strategy=&quot;constant&quot;`<br>in which case `fill_value` will be used instead.<br><br>.. versionadded:: 1.2</span>
+        </a>
+    </td>
+            <td class="value">False</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                <table class="parameters-table">
+                    <tbody>
+                        <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        </tr>
+                        
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-feature_names_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=feature_names_in_,-ndarray%20of%20shape%20%28n_features_in_%2C%29">
+            feature_names_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-feature_names_in_;">
+            feature_names_in_: ndarray of shape (`n_features_in_`,)<br><br>Names of features seen during :term:`fit`. Defined only when `X`<br>has feature names that are all strings.<br><br>.. versionadded:: 1.0</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[object](7,)</td>
+           <td>[&#x27;cylinders&#x27;,&#x27;displacement&#x27;,&#x27;horsepower&#x27;,...,&#x27;acceleration&#x27;,&#x27;model&#x27;,
+ &#x27;origin&#x27;]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-indicator_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=indicator_,-%3Aclass%3A~sklearn.impute.MissingIndicator">
+            indicator_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-indicator_;">
+            indicator_: :class:`~sklearn.impute.MissingIndicator`<br><br>Indicator used to add binary indicators for missing values.<br>`None` if `add_indicator=False`.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">NoneType</td>
+           <td>None</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_features_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=n_features_in_,-int">
+            n_features_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_features_in_;">
+            n_features_in_: int<br><br>Number of features seen during :term:`fit`.<br><br>.. versionadded:: 0.24</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>7</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-statistics_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.impute.SimpleImputer.html#:~:text=statistics_,-array%20of%20shape%20%28n_features%2C%29">
+            statistics_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-statistics_;">
+            statistics_: array of shape (n_features,)<br><br>The imputation fill value for each feature.<br>Computing statistics can result in `np.nan` values.<br>During :meth:`transform`, features corresponding to `np.nan`<br>statistics will be discarded.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](7,)</td>
+           <td>[  5.44,192.57,103.12,..., 15.76, 76.11,  1.56]</td>
+
+
+       </tr>
+    
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div>
+        <div class="features fitted">
+          <details>
+            <summary>
+              <div class="arrow"></div>
+              <div>7 features</div>
+              <div class="image-container">
+                <button type="button" class="copy-paste-icon"
+                  title="Copy output features (max 100)"
+                  aria-label="Copy output features (max 100)"
+                  onclick="
+                  event.stopPropagation();
+                  event.preventDefault();
+                  copyFeatureNamesToClipboard(this);
+                  "
+                >
+                </button>
+              </div>
+            </summary>
+            <div class="features-container">
+                <table class="features-table">
+                  <tbody>
+                    
+        <tr>
+          <td>cylinders</td>
+        </tr>
+
+    
+        <tr>
+          <td>displacement</td>
+        </tr>
+
+    
+        <tr>
+          <td>horsepower</td>
+        </tr>
+
+    
+        <tr>
+          <td>weight</td>
+        </tr>
+
+    
+        <tr>
+          <td>acceleration</td>
+        </tr>
+
+    
+        <tr>
+          <td>model</td>
+        </tr>
+
+    
+        <tr>
+          <td>origin</td>
+        </tr>
+
+    
+                  </tbody>
+                </table>
+            </div>
+          </details>
+        </div>
+    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>PowerTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html">?<span>Documentation for PowerTransformer</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="normalization__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy method to clipboard"
+                 onclick="copyToClipboard('method',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-method;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html#:~:text=method,-%7B%27yeo-johnson%27%2C%20%27box-cox%27%7D%2C%20default%3D%27yeo-johnson%27">
+            method
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-method;">
+            method: {&#x27;yeo-johnson&#x27;, &#x27;box-cox&#x27;}, default=&#x27;yeo-johnson&#x27;<br><br>The power transform method. Available methods are:<br><br>- &#x27;yeo-johnson&#x27; [1]_, works with positive and negative values<br>- &#x27;box-cox&#x27; [2]_, only works with strictly positive values</span>
+        </a>
+    </td>
+            <td class="value">&#x27;yeo-johnson&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy standardize to clipboard"
+                 onclick="copyToClipboard('standardize',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-standardize;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html#:~:text=standardize,-bool%2C%20default%3DTrue">
+            standardize
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-standardize;">
+            standardize: bool, default=True<br><br>Set to True to apply zero-mean, unit-variance normalization to the<br>transformed output.</span>
+        </a>
+    </td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy copy to clipboard"
+                 onclick="copyToClipboard('copy',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-copy;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html#:~:text=copy,-bool%2C%20default%3DTrue">
+            copy
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-copy;">
+            copy: bool, default=True<br><br>Set to False to perform inplace computation during transformation.</span>
+        </a>
+    </td>
+            <td class="value">True</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                <table class="parameters-table">
+                    <tbody>
+                        <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        </tr>
+                        
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-lambdas_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html#:~:text=lambdas_,-ndarray%20of%20float%20of%20shape%20%28n_features%2C%29">
+            lambdas_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-lambdas_;">
+            lambdas_: ndarray of float of shape (n_features,)<br><br>The parameters of the power transformation for the selected features.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](7,)</td>
+           <td>[-1.51,-0.29,-0.41,..., 0.59, 1.59,-3.04]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_features_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.PowerTransformer.html#:~:text=n_features_in_,-int">
+            n_features_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_features_in_;">
+            n_features_in_: int<br><br>Number of features seen during :term:`fit`.<br><br>.. versionadded:: 0.24</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>7</td>
+
+
+       </tr>
+    
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div>
+        <div class="features fitted">
+          <details>
+            <summary>
+              <div class="arrow"></div>
+              <div>7 features</div>
+              <div class="image-container">
+                <button type="button" class="copy-paste-icon"
+                  title="Copy output features (max 100)"
+                  aria-label="Copy output features (max 100)"
+                  onclick="
+                  event.stopPropagation();
+                  event.preventDefault();
+                  copyFeatureNamesToClipboard(this);
+                  "
+                >
+                </button>
+              </div>
+            </summary>
+            <div class="features-container">
+                <table class="features-table">
+                  <tbody>
+                    
+        <tr>
+          <td>x0</td>
+        </tr>
+
+    
+        <tr>
+          <td>x1</td>
+        </tr>
+
+    
+        <tr>
+          <td>x2</td>
+        </tr>
+
+    
+        <tr>
+          <td>x3</td>
+        </tr>
+
+    
+        <tr>
+          <td>x4</td>
+        </tr>
+
+    
+        <tr>
+          <td>x5</td>
+        </tr>
+
+    
+        <tr>
+          <td>x6</td>
+        </tr>
+
+    
+                  </tbody>
+                </table>
+            </div>
+          </details>
+        </div>
+    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>PCA</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html">?<span>Documentation for PCA</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="features__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy n_components to clipboard"
+                 onclick="copyToClipboard('n_components',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_components;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=n_components,-int%2C%20float%20or%20%27mle%27%2C%20default%3DNone">
+            n_components
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_components;">
+            n_components: int, float or &#x27;mle&#x27;, default=None<br><br>Number of components to keep.<br>if n_components is not set all components are kept::<br><br>    n_components == min(n_samples, n_features)<br><br>If ``n_components == &#x27;mle&#x27;`` and ``svd_solver == &#x27;full&#x27;``, Minka&#x27;s<br>MLE is used to guess the dimension. Use of ``n_components == &#x27;mle&#x27;``<br>will interpret ``svd_solver == &#x27;auto&#x27;`` as ``svd_solver == &#x27;full&#x27;``.<br><br>If ``0 &lt; n_components &lt; 1`` and ``svd_solver == &#x27;full&#x27;``, select the<br>number of components such that the amount of variance that needs to be<br>explained is greater than the percentage specified by n_components.<br><br>If ``svd_solver == &#x27;arpack&#x27;``, the number of components must be<br>strictly less than the minimum of n_features and n_samples.<br><br>Hence, the None case results in::<br><br>    n_components == min(n_samples, n_features) - 1</span>
+        </a>
+    </td>
+            <td class="value">0.95</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy copy to clipboard"
+                 onclick="copyToClipboard('copy',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-copy;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=copy,-bool%2C%20default%3DTrue">
+            copy
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-copy;">
+            copy: bool, default=True<br><br>If False, data passed to fit are overwritten and running<br>fit(X).transform(X) will not yield the expected results,<br>use fit_transform(X) instead.</span>
+        </a>
+    </td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy whiten to clipboard"
+                 onclick="copyToClipboard('whiten',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-whiten;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=whiten,-bool%2C%20default%3DFalse">
+            whiten
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-whiten;">
+            whiten: bool, default=False<br><br>When True (False by default) the `components_` vectors are multiplied<br>by the square root of n_samples and then divided by the singular values<br>to ensure uncorrelated outputs with unit component-wise variances.<br><br>Whitening will remove some information from the transformed signal<br>(the relative variance scales of the components) but can sometime<br>improve the predictive accuracy of the downstream estimators by<br>making their data respect some hard-wired assumptions.</span>
+        </a>
+    </td>
+            <td class="value">False</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy svd_solver to clipboard"
+                 onclick="copyToClipboard('svd_solver',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-svd_solver;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=svd_solver,-%7B%27auto%27%2C%20%27full%27%2C%20%27covariance_eigh%27%2C%20%27arpack%27%2C%20%27randomized%27%7D%2C%20%20%20%20%20%20%20%20%20%20%20%20default%3D%27auto%27">
+            svd_solver
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-svd_solver;">
+            svd_solver: {&#x27;auto&#x27;, &#x27;full&#x27;, &#x27;covariance_eigh&#x27;, &#x27;arpack&#x27;, &#x27;randomized&#x27;},            default=&#x27;auto&#x27;<br><br>&quot;auto&quot; :<br>    The solver is selected by a default &#x27;auto&#x27; policy is based on `X.shape` and<br>    `n_components`: if the input data has fewer than 1000 features and<br>    more than 10 times as many samples, then the &quot;covariance_eigh&quot;<br>    solver is used. Otherwise, if the input data is larger than 500x500<br>    and the number of components to extract is lower than 80% of the<br>    smallest dimension of the data, then the more efficient<br>    &quot;randomized&quot; method is selected. Otherwise the exact &quot;full&quot; SVD is<br>    computed and optionally truncated afterwards.<br>&quot;full&quot; :<br>    Run exact full SVD calling the standard LAPACK solver via<br>    `scipy.linalg.svd` and select the components by postprocessing<br>&quot;covariance_eigh&quot; :<br>    Precompute the covariance matrix (on centered data), run a<br>    classical eigenvalue decomposition on the covariance matrix<br>    typically using LAPACK and select the components by postprocessing.<br>    This solver is very efficient for n_samples &gt;&gt; n_features and small<br>    n_features. It is, however, not tractable otherwise for large<br>    n_features (large memory footprint required to materialize the<br>    covariance matrix). Also note that compared to the &quot;full&quot; solver,<br>    this solver effectively doubles the condition number and is<br>    therefore less numerical stable (e.g. on input data with a large<br>    range of singular values).<br>&quot;arpack&quot; :<br>    Run SVD truncated to `n_components` calling ARPACK solver via<br>    `scipy.sparse.linalg.svds`. It requires strictly<br>    `0 &lt; n_components &lt; min(X.shape)`<br>&quot;randomized&quot; :<br>    Run randomized SVD by the method of Halko et al.<br><br>.. versionadded:: 0.18.0<br><br>.. versionchanged:: 1.5<br>    Added the &#x27;covariance_eigh&#x27; solver.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;auto&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy tol to clipboard"
+                 onclick="copyToClipboard('tol',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-tol;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=tol,-float%2C%20default%3D0.0">
+            tol
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-tol;">
+            tol: float, default=0.0<br><br>Tolerance for singular values computed by svd_solver == &#x27;arpack&#x27;.<br>Must be of range [0.0, infinity).<br><br>.. versionadded:: 0.18.0</span>
+        </a>
+    </td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy iterated_power to clipboard"
+                 onclick="copyToClipboard('iterated_power',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-iterated_power;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=iterated_power,-int%20or%20%27auto%27%2C%20default%3D%27auto%27">
+            iterated_power
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-iterated_power;">
+            iterated_power: int or &#x27;auto&#x27;, default=&#x27;auto&#x27;<br><br>Number of iterations for the power method computed by<br>svd_solver == &#x27;randomized&#x27;.<br>Must be of range [0, infinity).<br><br>.. versionadded:: 0.18.0</span>
+        </a>
+    </td>
+            <td class="value">&#x27;auto&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy n_oversamples to clipboard"
+                 onclick="copyToClipboard('n_oversamples',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_oversamples;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=n_oversamples,-int%2C%20default%3D10">
+            n_oversamples
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_oversamples;">
+            n_oversamples: int, default=10<br><br>This parameter is only relevant when `svd_solver=&quot;randomized&quot;`.<br>It corresponds to the additional number of random vectors to sample the<br>range of `X` so as to ensure proper conditioning. See<br>:func:`~sklearn.utils.extmath.randomized_svd` for more details.<br><br>.. versionadded:: 1.1</span>
+        </a>
+    </td>
+            <td class="value">10</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy power_iteration_normalizer to clipboard"
+                 onclick="copyToClipboard('power_iteration_normalizer',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-power_iteration_normalizer;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=power_iteration_normalizer,-%7B%27auto%27%2C%20%27QR%27%2C%20%27LU%27%2C%20%27none%27%7D%2C%20default%3D%27auto%27">
+            power_iteration_normalizer
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-power_iteration_normalizer;">
+            power_iteration_normalizer: {&#x27;auto&#x27;, &#x27;QR&#x27;, &#x27;LU&#x27;, &#x27;none&#x27;}, default=&#x27;auto&#x27;<br><br>Power iteration normalizer for randomized SVD solver.<br>Not used by ARPACK. See :func:`~sklearn.utils.extmath.randomized_svd`<br>for more details.<br><br>.. versionadded:: 1.1</span>
+        </a>
+    </td>
+            <td class="value">&#x27;auto&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy random_state to clipboard"
+                 onclick="copyToClipboard('random_state',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-random_state;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=random_state,-int%2C%20RandomState%20instance%20or%20None%2C%20default%3DNone">
+            random_state
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-random_state;">
+            random_state: int, RandomState instance or None, default=None<br><br>Used when the &#x27;arpack&#x27; or &#x27;randomized&#x27; solvers are used. Pass an int<br>for reproducible results across multiple function calls.<br>See :term:`Glossary &lt;random_state&gt;`.<br><br>.. versionadded:: 0.18.0</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                <table class="parameters-table">
+                    <tbody>
+                        <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        </tr>
+                        
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-components_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=components_,-ndarray%20of%20shape%20%28n_components%2C%20n_features%29">
+            components_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-components_;">
+            components_: ndarray of shape (n_components, n_features)<br><br>Principal axes in feature space, representing the directions of<br>maximum variance in the data. Equivalently, the right singular<br>vectors of the centered input data, parallel to its eigenvectors.<br>The components are sorted by decreasing ``explained_variance_``.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](4, 7)</td>
+           <td>[[ 0.43, 0.46, 0.43,...,-0.28,-0.19,-0.33],
+ [ 0.1 , 0.16,-0.13,..., 0.49, 0.72,-0.37],
+ [ 0.12, 0.05,-0.22,..., 0.69,-0.65,-0.18],
+ [ 0.24, 0.11, 0.17,..., 0.29, 0.11, 0.83]]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-explained_variance_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=explained_variance_,-ndarray%20of%20shape%20%28n_components%2C%29">
+            explained_variance_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-explained_variance_;">
+            explained_variance_: ndarray of shape (n_components,)<br><br>The amount of variance explained by each of the selected components.<br>The variance estimation uses `n_samples - 1` degrees of freedom.<br><br>Equal to n_components largest eigenvalues<br>of the covariance matrix of X.<br><br>.. versionadded:: 0.18</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](4,)</td>
+           <td>[4.55,1.03,0.71,0.48]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-explained_variance_ratio_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=explained_variance_ratio_,-ndarray%20of%20shape%20%28n_components%2C%29">
+            explained_variance_ratio_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-explained_variance_ratio_;">
+            explained_variance_ratio_: ndarray of shape (n_components,)<br><br>Percentage of variance explained by each of the selected components.<br><br>If ``n_components`` is not set then all components are stored and the<br>sum of the ratios is equal to 1.0.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](4,)</td>
+           <td>[0.65,0.15,0.1 ,0.07]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-mean_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=mean_,-ndarray%20of%20shape%20%28n_features%2C%29">
+            mean_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-mean_;">
+            mean_: ndarray of shape (n_features,)<br><br>Per-feature empirical mean, estimated from the training set.<br><br>Equal to `X.mean(axis=0)`.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](7,)</td>
+           <td>[-0.,-0.,-0.,...,-0., 0., 0.]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_components_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=n_components_,-int">
+            n_components_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_components_;">
+            n_components_: int<br><br>The estimated number of components. When n_components is set<br>to &#x27;mle&#x27; or a number between 0 and 1 (with svd_solver == &#x27;full&#x27;) this<br>number is estimated from input data. Otherwise it equals the parameter<br>n_components, or the lesser value of n_features and n_samples<br>if n_components is None.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int64</td>
+           <td>np.int64(4)</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_features_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=n_features_in_,-int">
+            n_features_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_features_in_;">
+            n_features_in_: int<br><br>Number of features seen during :term:`fit`.<br><br>.. versionadded:: 0.24</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>7</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_samples_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=n_samples_,-int">
+            n_samples_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_samples_;">
+            n_samples_: int<br><br>Number of samples in the training data.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>254</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-noise_variance_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=noise_variance_,-float">
+            noise_variance_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-noise_variance_;">
+            noise_variance_: float<br><br>The estimated noise covariance following the Probabilistic PCA model<br>from Tipping and Bishop 1999. See &quot;Pattern Recognition and<br>Machine Learning&quot; by C. Bishop, 12.2.1 p. 574 or<br>http://www.miketipping.com/papers/met-mppca.pdf. It is required to<br>compute the estimated data covariance and score samples.<br><br>Equal to the average of (min(n_features, n_samples) - n_components)<br>smallest eigenvalues of the covariance matrix of X.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">float64</td>
+           <td>0.08808</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-singular_values_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.decomposition.PCA.html#:~:text=singular_values_,-ndarray%20of%20shape%20%28n_components%2C%29">
+            singular_values_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-singular_values_;">
+            singular_values_: ndarray of shape (n_components,)<br><br>The singular values corresponding to each of the selected components.<br>The singular values are equal to the 2-norms of the ``n_components``<br>variables in the lower-dimensional space.<br><br>.. versionadded:: 0.19</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](4,)</td>
+           <td>[33.93,16.11,13.41,10.97]</td>
+
+
+       </tr>
+    
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div>
+        <div class="features fitted">
+          <details>
+            <summary>
+              <div class="arrow"></div>
+              <div>4 features</div>
+              <div class="image-container">
+                <button type="button" class="copy-paste-icon"
+                  title="Copy output features (max 100)"
+                  aria-label="Copy output features (max 100)"
+                  onclick="
+                  event.stopPropagation();
+                  event.preventDefault();
+                  copyFeatureNamesToClipboard(this);
+                  "
+                >
+                </button>
+              </div>
+            </summary>
+            <div class="features-container">
+                <table class="features-table">
+                  <tbody>
+                    
+        <tr>
+          <td>pca0</td>
+        </tr>
+
+    
+        <tr>
+          <td>pca1</td>
+        </tr>
+
+    
+        <tr>
+          <td>pca2</td>
+        </tr>
+
+    
+        <tr>
+          <td>pca3</td>
+        </tr>
+
+    
+                  </tbody>
+                </table>
+            </div>
+          </details>
+        </div>
+    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SVR</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html">?<span>Documentation for SVR</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="regression__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy C to clipboard"
+                 onclick="copyToClipboard('C',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-C;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=C,-float%2C%20default%3D1.0">
+            C
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-C;">
+            C: float, default=1.0<br><br>Regularization parameter. The strength of the regularization is<br>inversely proportional to C. Must be strictly positive.<br>The penalty is a squared l2. For an intuitive visualization of the<br>effects of scaling the regularization parameter C, see<br>:ref:`sphx_glr_auto_examples_svm_plot_svm_scale_c.py`.</span>
+        </a>
+    </td>
+            <td class="value">10.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy kernel to clipboard"
+                 onclick="copyToClipboard('kernel',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-kernel;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=kernel,-%7B%27linear%27%2C%20%27poly%27%2C%20%27rbf%27%2C%20%27sigmoid%27%2C%20%27precomputed%27%7D%20or%20callable%2C%20%20%20%20%20%20%20%20%20%20default%3D%27rbf%27">
+            kernel
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-kernel;">
+            kernel: {&#x27;linear&#x27;, &#x27;poly&#x27;, &#x27;rbf&#x27;, &#x27;sigmoid&#x27;, &#x27;precomputed&#x27;} or callable,          default=&#x27;rbf&#x27;<br><br>Specifies the kernel type to be used in the algorithm.<br>If none is given, &#x27;rbf&#x27; will be used. If a callable is given it is<br>used to precompute the kernel matrix.<br>For an intuitive visualization of different kernel types<br>see :ref:`sphx_glr_auto_examples_svm_plot_svm_regression.py`</span>
+        </a>
+    </td>
+            <td class="value">&#x27;rbf&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy degree to clipboard"
+                 onclick="copyToClipboard('degree',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-degree;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=degree,-int%2C%20default%3D3">
+            degree
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-degree;">
+            degree: int, default=3<br><br>Degree of the polynomial kernel function (&#x27;poly&#x27;).<br>Must be non-negative. Ignored by all other kernels.</span>
+        </a>
+    </td>
+            <td class="value">3</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy gamma to clipboard"
+                 onclick="copyToClipboard('gamma',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-gamma;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=gamma,-%7B%27scale%27%2C%20%27auto%27%7D%20or%20float%2C%20default%3D%27scale%27">
+            gamma
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-gamma;">
+            gamma: {&#x27;scale&#x27;, &#x27;auto&#x27;} or float, default=&#x27;scale&#x27;<br><br>Kernel coefficient for &#x27;rbf&#x27;, &#x27;poly&#x27; and &#x27;sigmoid&#x27;.<br><br>- if ``gamma=&#x27;scale&#x27;`` (default) is passed then it uses<br>  1 / (n_features * X.var()) as value of gamma,<br>- if &#x27;auto&#x27;, uses 1 / n_features<br>- if float, must be non-negative.<br><br>.. versionchanged:: 0.22<br>   The default value of ``gamma`` changed from &#x27;auto&#x27; to &#x27;scale&#x27;.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;scale&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy coef0 to clipboard"
+                 onclick="copyToClipboard('coef0',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-coef0;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=coef0,-float%2C%20default%3D0.0">
+            coef0
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-coef0;">
+            coef0: float, default=0.0<br><br>Independent term in kernel function.<br>It is only significant in &#x27;poly&#x27; and &#x27;sigmoid&#x27;.</span>
+        </a>
+    </td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy tol to clipboard"
+                 onclick="copyToClipboard('tol',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-tol;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=tol,-float%2C%20default%3D1e-3">
+            tol
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-tol;">
+            tol: float, default=1e-3<br><br>Tolerance for stopping criterion.</span>
+        </a>
+    </td>
+            <td class="value">0.001</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy epsilon to clipboard"
+                 onclick="copyToClipboard('epsilon',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-epsilon;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=epsilon,-float%2C%20default%3D0.1">
+            epsilon
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-epsilon;">
+            epsilon: float, default=0.1<br><br>Epsilon in the epsilon-SVR model. It specifies the epsilon-tube<br>within which no penalty is associated in the training loss function<br>with points predicted within a distance epsilon from the actual<br>value. Must be non-negative.</span>
+        </a>
+    </td>
+            <td class="value">0.1</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy shrinking to clipboard"
+                 onclick="copyToClipboard('shrinking',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-shrinking;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=shrinking,-bool%2C%20default%3DTrue">
+            shrinking
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-shrinking;">
+            shrinking: bool, default=True<br><br>Whether to use the shrinking heuristic.<br>See the :ref:`User Guide &lt;shrinking_svm&gt;`.</span>
+        </a>
+    </td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy cache_size to clipboard"
+                 onclick="copyToClipboard('cache_size',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-cache_size;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=cache_size,-float%2C%20default%3D200">
+            cache_size
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-cache_size;">
+            cache_size: float, default=200<br><br>Specify the size of the kernel cache (in MB).</span>
+        </a>
+    </td>
+            <td class="value">200</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy verbose to clipboard"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-verbose;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=verbose,-bool%2C%20default%3DFalse">
+            verbose
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-verbose;">
+            verbose: bool, default=False<br><br>Enable verbose output. Note that this setting takes advantage of a<br>per-process runtime setting in libsvm that, if enabled, may not work<br>properly in a multithreaded context.</span>
+        </a>
+    </td>
+            <td class="value">False</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><button type="button" class="copy-paste-icon"
+                 aria-label="Copy max_iter to clipboard"
+                 onclick="copyToClipboard('max_iter',
+                          this.parentElement.nextElementSibling)"
+            ></button></td>
+            <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-max_iter;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=max_iter,-int%2C%20default%3D-1">
+            max_iter
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-max_iter;">
+            max_iter: int, default=-1<br><br>Hard limit on iterations within solver, or -1 for no limit.</span>
+        </a>
+    </td>
+            <td class="value">-1</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                <table class="parameters-table">
+                    <tbody>
+                        <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        </tr>
+                        
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-dual_coef_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=dual_coef_,-ndarray%20or%20sparse%20array/matrix%20of%20shape%20%281%2C%20n_SV%29">
+            dual_coef_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-dual_coef_;">
+            dual_coef_: ndarray or sparse array/matrix of shape (1, n_SV)<br><br>Coefficients of the support vector in the decision function.<br>If `X` is sparse, these will also be sparse.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](1, 246)</td>
+           <td>[[-10.,-10., 10.,...,-10.,-10.,-10.]]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-fit_status_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=fit_status_,-int">
+            fit_status_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-fit_status_;">
+            fit_status_: int<br><br>0 if correctly fitted, 1 otherwise (will raise warning)</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>0</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-intercept_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=intercept_,-ndarray%20of%20shape%20%281%2C%29">
+            intercept_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-intercept_;">
+            intercept_: ndarray of shape (1,)<br><br>Constants in decision function.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](1,)</td>
+           <td>[24.51]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_features_in_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=n_features_in_,-int">
+            n_features_in_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_features_in_;">
+            n_features_in_: int<br><br>Number of features seen during :term:`fit`.<br><br>.. versionadded:: 0.24</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>4</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_iter_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=n_iter_,-int">
+            n_iter_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_iter_;">
+            n_iter_: int<br><br>Number of iterations run by the optimization routine to fit the model.<br><br>.. versionadded:: 1.1</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">int</td>
+           <td>721</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-n_support_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=n_support_,-ndarray%20of%20shape%20%281%2C%29%2C%20dtype%3Dint32">
+            n_support_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-n_support_;">
+            n_support_: ndarray of shape (1,), dtype=int32<br><br>Number of support vectors.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[int32](1,)</td>
+           <td>[246]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-shape_fit_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=shape_fit_,-tuple%20of%20int%20of%20shape%20%28n_dimensions_of_X%2C%29">
+            shape_fit_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-shape_fit_;">
+            shape_fit_: tuple of int of shape (n_dimensions_of_X,)<br><br>Array dimensions of training vector ``X``.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">tuple</td>
+           <td>(254, 4)</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-support_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=support_,-ndarray%20of%20shape%20%281%2C%29%2C%20dtype%3Dint32">
+            support_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-support_;">
+            support_: ndarray of shape (n_SV,)<br><br>Indices of support vectors.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[int32](246,)</td>
+           <td>[  0,  1,  2,...,251,252,253]</td>
+
+
+       </tr>
+    
+
+       <tr class="default">
+           <td class="param">
+        <a class="param-doc-link"
+            style="anchor-name: --doc-link-support_vectors_;"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.svm.SVR.html#:~:text=support_vectors_,-ndarray%20or%20sparse%20array/matrix%20of%20shape%20%28n_SV%2C%20n_features%29">
+            support_vectors_
+            <span class="param-doc-description"
+            style="position-anchor: --doc-link-support_vectors_;">
+            support_vectors_: ndarray or sparse array/matrix of shape (n_SV, n_features)<br><br>Support vectors. If `X` is sparse, these will also be sparse.</span>
+        </a>
+    </td>
+           <td class="fitted-att-type">ndarray[float64](246, 4)</td>
+           <td>[[-0.78,-0.73, 0.95,-1.32],
+ [ 3.25,-0.03, 0.41, 0.46],
+ [-1.48, 0.42,-0.58,-1.47],
+ ...,
+ [ 0.5 , 1.9 , 0.33, 0.17],
+ [-1.42,-0.63,-0.99, 0.73],
+ [ 3.92,-0.93,-0.4 , 0.16]]</td>
+
+
+       </tr>
+    
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
+    const paramName = element.parentElement.nextElementSibling
+        .textContent.trim().split(' ')[0];
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
+
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
+/**
+ * Adapted from Skrub
+ * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
+ * @returns "light" or "dark"
+ */
+function detectTheme(element) {
+    const body = document.querySelector('body');
+
+    // Check VSCode theme
+    const themeKindAttr = body.getAttribute('data-vscode-theme-kind');
+    const themeNameAttr = body.getAttribute('data-vscode-theme-name');
+
+    if (themeKindAttr && themeNameAttr) {
+        const themeKind = themeKindAttr.toLowerCase();
+        const themeName = themeNameAttr.toLowerCase();
+
+        if (themeKind.includes("dark") || themeName.includes("dark")) {
+            return "dark";
+        }
+        if (themeKind.includes("light") || themeName.includes("light")) {
+            return "light";
+        }
+    }
+
+    // Check Jupyter theme
+    if (body.getAttribute('data-jp-theme-light') === 'false') {
+        return 'dark';
+    } else if (body.getAttribute('data-jp-theme-light') === 'true') {
+        return 'light';
+    }
+
+    // Guess based on a parent element's color
+    const color = window.getComputedStyle(element.parentNode, null).getPropertyValue('color');
+    const match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i);
+    if (match) {
+        const [r, g, b] = [
+            parseFloat(match[1]),
+            parseFloat(match[2]),
+            parseFloat(match[3])
+        ];
+
+        // https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness
+        const luma = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        if (luma > 180) {
+            // If the text is very bright we have a dark theme
+            return 'dark';
+        }
+        if (luma < 75) {
+            // If the text is very dark we have a light theme
+            return 'light';
+        }
+        // Otherwise fall back to the next heuristic.
+    }
+
+    // Fallback to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+
+function forceTheme(elementId) {
+    const estimatorElement = document.querySelector(`#${elementId}`);
+    if (estimatorElement === null) {
+        console.error(`Element with id ${elementId} not found.`);
+    } else {
+        const theme = detectTheme(estimatorElement);
+        estimatorElement.classList.add(theme);
+    }
+}
+
+forceTheme('sk-container-id-16');</script></body>
+  </body>
+</html>
+    
