@@ -28,6 +28,7 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "pipelines_found": "Pipelines Found",
     "pipeline_budget": "Pipeline Budget",
     "actual_pipelines": "Actual Pipelines",
+    "semantic_validation_failures": "Semantic Validation Failures",
     "input_tokens": "Input Tokens",
     "output_tokens": "Output Tokens",
     "total_tokens": "Total Tokens",
@@ -179,6 +180,9 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["pipelines_found"]: result.get("pipelines_found", ""),
         SUMMARY_COLUMNS["pipeline_budget"]: pipeline_budget,
         SUMMARY_COLUMNS["actual_pipelines"]: actual_pipelines,
+        SUMMARY_COLUMNS["semantic_validation_failures"]: result.get(
+            "semantic_validation_failures", ""
+        ),
         SUMMARY_COLUMNS["input_tokens"]: token_usage.get("input_tokens", ""),
         SUMMARY_COLUMNS["output_tokens"]: token_usage.get("output_tokens", ""),
         SUMMARY_COLUMNS["total_tokens"]: token_usage.get("total_tokens", ""),

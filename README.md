@@ -18,7 +18,7 @@ The workflow has three stages:
 - `ageml/evaluation/`: cross-pipeline model evaluation and best-model selection.
 - `ageml/specification/`: YAML parser, types, and validation logic.
 - `resources/`: sample specifications and datasets.
-- `experiments/ablation/`: ablation studies on the inputs of the framework (currently: the specification).
+- `experiments/ablation/`: ablation studies on the inputs of the framework (the specification, and the execution agent's validation checks).
 - `experiments/results/`: results of the campaign, one subtree per LLM backend.
 - `tests/`: parser and specification validation tests.
 - `out/`: downloaded artifacts for the best run and best pipeline.
@@ -78,6 +78,8 @@ poetry run python -m ageml \
 | `model_name`        | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/common/__init__.py`](ageml/common/__init__.py)) |
 | `validation_metric` | No       | `balanced_accuracy`             | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2`   |
 | `maximize`          | No       | `True`                          | Whether to maximize (`True`) or minimize (`False`) the metric                                                                                |
+| `retry_on_semantic_failure` | No | `True`                      | Whether an LLM-judge "code not compliant with the pipeline" verdict triggers regenerating the code. The judge always runs either way; with `False`, its verdict is only recorded (counted in `results.csv`, reasons saved under `semantic_failures/`) and the code is executed regardless |
+| `retry_on_execution_failure` | No | `True`                     | Whether a code execution failure triggers regenerating the code. With `False`, a pipeline whose code fails to execute is marked failed immediately instead of retrying |
 
 What this does:
 1. Automatically identifies the most likely target column from the dataset.
@@ -105,7 +107,14 @@ This command:
 2. Runs the AutoML workflow on every dataset using `resources/general-specification.yml`.
 3. Saves a summary CSV in `experiments/results/<model_name>/results.csv`.
 
-## Ablation on the Specification
+## Ablation Studies
+
+The main experiments feed AGE-ML a single, general specification and run the execution
+agent with both self-correction checks enabled. Two independent axes are ablated against
+that baseline: the specification (below), and the validation checks
+(see [Ablation on the Validation Checks](#ablation-on-the-validation-checks)).
+
+### Ablation on the Specification
 
 The main experiments feed AGE-ML a single, general specification for every dataset.
 The ablation varies *only* that input, over three levels of a priori knowledge, keeping
@@ -122,7 +131,7 @@ so they are **not** tracked by git and must be regenerated after cloning, and wh
 file or the generator changes):
 
 ```bash
-poetry run poe ablation-specs
+poetry run poe generate-ablation-specs
 ```
 
 This writes, under `experiments/ablation/specifications/generated/`:
@@ -138,7 +147,7 @@ Then run the whole suite once per variant, repeated to measure the statistical
 variance of the results (5 repetitions of 3 variants, i.e. 15 suites):
 
 ```bash
-poetry run poe ablation-run
+poetry run poe ablation-spec-run
 ```
 
 `--model_name` defaults to `gemini-3.1-flash-lite-preview`, the LLM of the campaign.
@@ -147,9 +156,9 @@ ones (`--repetitions=4,5`). `--variants` restricts the run (e.g. `--variants=poo
 and there is one shortcut per variant, to spread the campaign over several days or machines:
 
 ```bash
-poetry run poe ablation-poor       # the 5 repetitions of poor.yml
-poetry run poe ablation-general    # the 5 repetitions of general.yml
-poetry run poe ablation-specific   # the 5 repetitions of specific/<dataset>.yml
+poetry run poe ablation-spec-poor       # the 5 repetitions of poor.yml
+poetry run poe ablation-spec-general    # the 5 repetitions of general.yml
+poetry run poe ablation-spec-specific   # the 5 repetitions of specific/<dataset>.yml
 ```
 
 Each repetition of each variant gets its own directory, with the same schema as the
@@ -177,6 +186,54 @@ The `specific` variant is *generated*, never hand-written: every pruning decisio
 is a pure function of the dataset meta-features (`specialize` in
 `experiments/ablation/specifications/generator.py`), and the rationale of each decision
 taken is written in the header of the generated file.
+
+### Ablation on the Validation Checks
+
+The execution agent (`ageml/execution/agent.py`) self-corrects in two places: an LLM
+judge checks that the generated code is compliant with the planned pipeline, and a
+failed code execution is retried. This ablation keeps the specification fixed (the
+general one, by default) and instead varies `ageml.app.main`'s `retry_on_semantic_failure`
+and `retry_on_execution_failure` flags, disabling each retry on its own against the baseline
+(both enabled, i.e. the normal `python -m experiments` run):
+
+| Config               | Semantic check retried?               | Execution failure retried?      |
+|----------------------|---------------------------------------|---------------------------------|
+| `no-semantic-retry`  | no (judge still runs and is recorded) | yes                             |
+| `no-execution-retry` | yes                                   | no (pipeline fails immediately) |
+
+Run the whole suite once per config, repeated to measure variance (5 repetitions of
+2 configs, i.e. 10 suites):
+
+```bash
+poetry run poe ablation-validation-run
+```
+
+`--model_name`, `--repetitions` and `--spec_path` work as in the other campaigns.
+`--configs` restricts the run (e.g. `--configs=no-semantic-retry`), and there is one shortcut
+per config:
+
+```bash
+poetry run poe ablation-validation-no-semantic-retry
+poetry run poe ablation-validation-no-execution-retry
+```
+
+Each repetition of each config gets its own directory, nested under `validation/` so it
+never collides with the specification variants above:
+
+```
+experiments/results/<model_name>/
+└── validation/
+    └── <config>/                  # no-semantic-retry, no-execution-retry
+        ├── run-1/
+        │   ├── results.csv        # includes a "Semantic Validation Failures" column
+        │   ├── artifacts/<dataset>/
+        │   └── semantic_failures/<dataset>/pipeline_<id>.md   # judge's reasons, when non-compliant
+        ├── run-2/
+        └── ...
+```
+
+An interrupted suite is resumed the same way as the specification ablation: re-run the
+same command, the datasets already summarized in `run-<n>/results.csv` are skipped.
 
 ## Specification Format
 
@@ -223,14 +280,18 @@ poetry run poe format
 poetry run poe coverage
 ```
 
-Ablation study (see [Ablation on the Specification](#ablation-on-the-specification)):
+Ablation studies (see [Ablation Studies](#ablation-studies)):
 
 ```bash
-poetry run poe ablation-specs     # generate the specification variants
-poetry run poe ablation-run       # run the suite 5 times per variant (15 suites)
-poetry run poe ablation-poor      # only the repetitions of the knowledge-poor variant
-poetry run poe ablation-general   # only the repetitions of the general variant
-poetry run poe ablation-specific  # only the repetitions of the dataset-specific variant
+poetry run poe generate-ablation-specs                # generate the specification variants
+poetry run poe ablation-spec-run                      # run the suite 5 times per variant (15 suites)
+poetry run poe ablation-spec-poor                     # only the repetitions of the knowledge-poor variant
+poetry run poe ablation-spec-general                  # only the repetitions of the general variant
+poetry run poe ablation-spec-specific                 # only the repetitions of the dataset-specific variant
+
+poetry run poe ablation-validation-run                # run the suite 5 times per validation config (10 suites)
+poetry run poe ablation-validation-no-semantic-retry  # only the repetitions without semantic retry
+poetry run poe ablation-validation-no-execution-retry # only the repetitions without execution retry
 ```
 
 `poetry run poe` lists every task with its description.

@@ -13,6 +13,8 @@ from resources import DIR as RESOURCES_DIR
 def run_experiments(
     model_name: str = DEFAULT_MODEL_NAME,
     spec_path: Optional[str] = None,
+    retry_on_semantic_failure: bool = True,
+    retry_on_execution_failure: bool = True,
 ) -> None:
     """Run the full experiments suite (all datasets) with a given LLM backend.
 
@@ -37,11 +39,17 @@ def run_experiments(
         spec_path: Filesystem path to the YAML specification file (or to a
             directory of per-dataset specification files) used for the suite.
             Defaults to ``resources/general-specification.yml`` when not provided.
+        retry_on_semantic_failure: forwarded to ``ageml.app.main`` for every
+            dataset in the suite (default: True).
+        retry_on_execution_failure: forwarded to ``ageml.app.main`` for every
+            dataset in the suite (default: True).
     """
     run_suite(
         model_name=model_name,
         spec_path=Path(spec_path or RESOURCES_DIR / "general-specification.yml"),
         output_dir=RESULTS_DIR / safe_filename_part(model_name),
+        retry_on_semantic_failure=retry_on_semantic_failure,
+        retry_on_execution_failure=retry_on_execution_failure,
     )
 
 

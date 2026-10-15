@@ -60,11 +60,14 @@ static-checks = [
     "ruff-check",
     "mypy",
 ]
-ablation-specs = { cmd = "python -m experiments.ablation.specifications", help = "Generate the specification variants of the ablation study" }
-ablation-run = { cmd = "python -m experiments.ablation", help = "Run the dataset suite 5 times per specification variant" }
-ablation-poor = { cmd = "python -m experiments.ablation --variants=poor", help = "Run the repetitions of the knowledge-poor specification only" }
-ablation-general = { cmd = "python -m experiments.ablation --variants=general", help = "Run the repetitions of the general specification only" }
-ablation-specific = { cmd = "python -m experiments.ablation --variants=specific", help = "Run the repetitions of the dataset-specific specifications only" }
+generate-ablation-specs = { cmd = "python -m experiments.ablation.specifications", help = "Generate the specification variants of the ablation study" }
+ablation-spec-run = { cmd = "python -m experiments.ablation", help = "Run the dataset suite 5 times per specification variant" }
+ablation-spec-poor = { cmd = "python -m experiments.ablation --variants=poor", help = "Run the repetitions of the knowledge-poor specification only" }
+ablation-spec-general = { cmd = "python -m experiments.ablation --variants=general", help = "Run the repetitions of the general specification only" }
+ablation-spec-specific = { cmd = "python -m experiments.ablation --variants=specific", help = "Run the repetitions of the dataset-specific specifications only" }
+ablation-validation-run = { cmd = "python -m experiments.ablation.validation", help = "Run the dataset suite 5 times per validation-check ablation config" }
+ablation-validation-no-semantic-retry = { cmd = "python -m experiments.ablation.validation --configs=no-semantic-retry", help = "Run the repetitions without retrying on semantic (compliance) failures" }
+ablation-validation-no-execution-retry = { cmd = "python -m experiments.ablation.validation --configs=no-execution-retry", help = "Run the repetitions without retrying on code execution failures" }
 
 # tells mypy to follow imports of untyped packages
 [[tool.mypy.overrides]]

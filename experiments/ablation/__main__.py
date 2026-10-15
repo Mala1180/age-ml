@@ -10,6 +10,9 @@ they are kept apart so that they can be aggregated afterwards.
 
 The specification files must have been generated first, with
 ``python -m experiments.ablation.specifications``.
+
+See :mod:`experiments.ablation.validation` for the other ablation axis (the
+execution agent's semantic/execution self-correction checks).
 """
 
 from pathlib import Path
@@ -17,32 +20,20 @@ from typing import List, Optional, Sequence, Tuple, Union
 
 import fire
 
-from ageml import logger
 from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments import RESULTS_DIR
+from experiments.ablation.campaign import (
+    DEFAULT_REPETITIONS,
+    AblationConfig,
+    run_campaign,
+)
 from experiments.ablation.specifications import (
     VARIANTS,
     Variant,
     get_variant,
     specification_path,
 )
-from experiments.suite import run_suite
-
-#: How many times each variant is run, to measure the variance of the results.
-DEFAULT_REPETITIONS: int = 5
-
-
-def repetition_ids(repetitions: Union[int, Sequence[int]]) -> List[int]:
-    """The ids of the repetitions to run.
-
-    ``--repetitions=5`` runs the repetitions 1 to 5, whereas
-    ``--repetitions=3,4,5`` runs exactly those three -- which is how an
-    interrupted campaign is resumed, or spread over several machines.
-    """
-    if isinstance(repetitions, int):
-        return list(range(1, repetitions + 1))
-    return [int(repetition) for repetition in repetitions]
 
 
 def run_ablation(
@@ -64,7 +55,7 @@ def run_ablation(
             from the poorest to the richest.
         repetitions: How many times to run each variant (``--repetitions=5``),
             or the exact ids of the repetitions to run (``--repetitions=4,5``).
-            Defaults to :data:`DEFAULT_REPETITIONS`.
+            Defaults to :data:`experiments.ablation.campaign.DEFAULT_REPETITIONS`.
     """
     requested: Sequence[str] = (
         [variants] if isinstance(variants, str) else list(variants or ())
@@ -78,25 +69,19 @@ def run_ablation(
     if missing:
         raise FileNotFoundError(
             f"No specification at {', '.join(missing)}. "
-            "Run `poetry run poe ablation-specs` first."
+            "Run `poetry run poe generate-ablation-specs` first."
         )
 
-    output_root: Path = RESULTS_DIR / safe_filename_part(model_name)
-    for repetition in repetition_ids(repetitions):
-        for variant, spec_path in specifications:
-            logger.info(
-                f"Ablation: running the suite with '{variant.id}' ({spec_path}), "
-                f"repetition {repetition}"
-            )
-            results: Path = run_suite(
-                model_name=model_name,
-                spec_path=spec_path,
-                output_dir=output_root / variant.id / f"run-{repetition}",
-            )
-            logger.info(
-                f"Ablation: '{variant.id}' repetition {repetition} "
-                f"results written to {results}"
-            )
+    run_campaign(
+        model_name=model_name,
+        output_root=RESULTS_DIR / safe_filename_part(model_name),
+        configs=[
+            AblationConfig(id=variant.id, run_suite_kwargs={"spec_path": path})
+            for variant, path in specifications
+        ],
+        repetitions=repetitions,
+        axis="specification",
+    )
 
 
 if __name__ == "__main__":

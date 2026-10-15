@@ -5,7 +5,7 @@ from typing import List
 
 import pytest
 
-from experiments.ablation.__main__ import DEFAULT_REPETITIONS, repetition_ids
+from experiments.ablation.campaign import DEFAULT_REPETITIONS, repetition_ids
 from experiments.results_csv import SUMMARY_COLUMNS
 from experiments.suite import already_recorded
 
