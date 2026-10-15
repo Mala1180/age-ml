@@ -1,3 +1,38 @@
+## [5.6.0](https://github.com/Mala1180/age-ml/compare/5.5.0...5.6.0) (2026-10-15)
+
+### Features
+
+* **ablation:** add ablation on semantic checks and error retries ([953aa31](https://github.com/Mala1180/age-ml/commit/953aa31d3863c50efa6383cb4c081ab57f68541f))
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.102 ([#198](https://github.com/Mala1180/age-ml/issues/198)) ([3ab01de](https://github.com/Mala1180/age-ml/commit/3ab01dea59c1624f2880a30037a2ee5950033fb5))
+* **deps:** update dependency boto3 to v1.43.103 ([#199](https://github.com/Mala1180/age-ml/issues/199)) ([b180dec](https://github.com/Mala1180/age-ml/commit/b180decc951b34e19921e10d4a0f4767a59fe100))
+* **deps:** update dependency boto3 to v1.43.104 ([#201](https://github.com/Mala1180/age-ml/issues/201)) ([3b719db](https://github.com/Mala1180/age-ml/commit/3b719db0f45fe6bc44d6e9c65b2b9c9b41ca50ed))
+* **deps:** update dependency boto3 to v1.43.105 ([#203](https://github.com/Mala1180/age-ml/issues/203)) ([1232692](https://github.com/Mala1180/age-ml/commit/12326926588b0fec7faf9ed67f78a1f728c22aef))
+* **deps:** update dependency boto3 to v1.43.106 ([#204](https://github.com/Mala1180/age-ml/issues/204)) ([68cd167](https://github.com/Mala1180/age-ml/commit/68cd167abac9e43842be3190ba136a2df42d5c52))
+* **deps:** update dependency boto3 to v1.43.107 ([#206](https://github.com/Mala1180/age-ml/issues/206)) ([cc4530a](https://github.com/Mala1180/age-ml/commit/cc4530ac4de5ac751dc3bb535c02a4224a211402))
+* **deps:** update dependency boto3 to v1.43.108 ([#208](https://github.com/Mala1180/age-ml/issues/208)) ([166637a](https://github.com/Mala1180/age-ml/commit/166637a0b05d7ed0dd36dd8cd1958cc128c886fc))
+* **deps:** update dependency boto3 to v1.43.109 ([#210](https://github.com/Mala1180/age-ml/issues/210)) ([719c517](https://github.com/Mala1180/age-ml/commit/719c5172af09b311bf4d61c61f2491c733caf2d7))
+* **deps:** update dependency boto3 to v1.43.110 ([#212](https://github.com/Mala1180/age-ml/issues/212)) ([9dc2788](https://github.com/Mala1180/age-ml/commit/9dc2788bc71c22ae854c7b80f067d233897be53d))
+* **deps:** update dependency boto3 to v1.43.111 ([#214](https://github.com/Mala1180/age-ml/issues/214)) ([a89b1d9](https://github.com/Mala1180/age-ml/commit/a89b1d957797d589e94bab3d7e2a1b764c04ba94))
+* **deps:** update dependency boto3 to v1.43.112 ([#218](https://github.com/Mala1180/age-ml/issues/218)) ([c839957](https://github.com/Mala1180/age-ml/commit/c839957c75803fc4a00f27354a55d5cea4196be3))
+* **deps:** update dependency boto3 to v1.43.113 ([#221](https://github.com/Mala1180/age-ml/issues/221)) ([cab1552](https://github.com/Mala1180/age-ml/commit/cab1552e856da30ad9a81f4caae58971f799bf3b))
+* **deps:** update dependency boto3 to v1.43.114 ([#224](https://github.com/Mala1180/age-ml/issues/224)) ([51b6d2c](https://github.com/Mala1180/age-ml/commit/51b6d2cdc60f725f742b4813023c271ea3342dba))
+* **deps:** update dependency coverage to v7.16.2 ([#200](https://github.com/Mala1180/age-ml/issues/200)) ([126e768](https://github.com/Mala1180/age-ml/commit/126e76831dececf3745b2d457ba7b6fb9b1a2116))
+* **deps:** update dependency langchain to v1.4.3 ([#202](https://github.com/Mala1180/age-ml/issues/202)) ([60887d9](https://github.com/Mala1180/age-ml/commit/60887d940b266321e2575bcfc5f8329beb6b2906))
+* **deps:** update dependency langchain to v1.4.4 ([#213](https://github.com/Mala1180/age-ml/issues/213)) ([8cf59cb](https://github.com/Mala1180/age-ml/commit/8cf59cb59d49b531c1b10504615dc98fc8a74a15))
+* **deps:** update dependency langchain to v1.4.5 ([#219](https://github.com/Mala1180/age-ml/issues/219)) ([dfedda3](https://github.com/Mala1180/age-ml/commit/dfedda3a3293e962e6967f210b94e77a9c715765))
+* **deps:** update dependency langchain to v1.4.6 ([#222](https://github.com/Mala1180/age-ml/issues/222)) ([b1191bc](https://github.com/Mala1180/age-ml/commit/b1191bc0214fca25d22d6d0889b47c78297e0a5e))
+* **deps:** update dependency mlflow to v3.17.0 ([#209](https://github.com/Mala1180/age-ml/issues/209)) ([94646ef](https://github.com/Mala1180/age-ml/commit/94646ef8b6ae7e00be0aedd40d35d4ced427f295))
+* **deps:** update dependency mlflow to v3.17.1 ([#220](https://github.com/Mala1180/age-ml/issues/220)) ([3f7fde6](https://github.com/Mala1180/age-ml/commit/3f7fde6b860eba52423e7306a6103d9bc89bc7c6))
+* **deps:** update dependency mypy to v2.4.0 ([#207](https://github.com/Mala1180/age-ml/issues/207)) ([d40938a](https://github.com/Mala1180/age-ml/commit/d40938a4619a3d006962153e959c3dd41de2b6f7))
+* **deps:** update dependency numpy to v2.5.4 ([#215](https://github.com/Mala1180/age-ml/issues/215)) ([f1b2afd](https://github.com/Mala1180/age-ml/commit/f1b2afdc915d1401260554d0d537a251c84c2c41))
+* **deps:** update dependency pydantic to v2.14.0 ([#211](https://github.com/Mala1180/age-ml/issues/211)) ([1d755c0](https://github.com/Mala1180/age-ml/commit/1d755c07a488e1cd15baa708d390532dfa9fe997))
+* **deps:** update dependency pydantic to v2.14.1 ([#217](https://github.com/Mala1180/age-ml/issues/217)) ([543b883](https://github.com/Mala1180/age-ml/commit/543b88310e3656e12c1e28251c47e42b6431d756))
+* **deps:** update dependency python-dotenv to v1.2.4 ([#205](https://github.com/Mala1180/age-ml/issues/205)) ([d7c3186](https://github.com/Mala1180/age-ml/commit/d7c31860d756db912fa01a2b794e1c2e966ad896))
+* **deps:** update node.js to 24.22 ([#223](https://github.com/Mala1180/age-ml/issues/223)) ([34be445](https://github.com/Mala1180/age-ml/commit/34be4453354e1773ab923762ecf52602a2bdd571))
+
 ## [5.5.0](https://github.com/Mala1180/age-ml/compare/5.4.0...5.5.0) (2026-09-23)
 
 ### Features
