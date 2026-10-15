@@ -3,7 +3,7 @@ from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from types import ModuleType
-from typing import Any, Optional, Literal, Dict
+from typing import Any, Optional, Literal, Dict, List
 
 import mlflow
 import pandas as pd
@@ -85,6 +85,9 @@ class ExecutionAgentState(MessagesState):
     train_df: pd.DataFrame
     best_run_id: Optional[str]
     target_feature: str
+    retry_on_semantic_failure: bool
+    retry_on_execution_failure: bool
+    semantic_validation_feedback: List[str]
 
 
 class JudgeResponse(BaseModel):
@@ -131,6 +134,9 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     ]
     state["validation_attempts"] = 0
     state["execution_attempts"] = 0
+    state["semantic_validation_feedback"] = []
+    state.setdefault("retry_on_semantic_failure", True)
+    state.setdefault("retry_on_execution_failure", True)
     return state
 
 
@@ -195,18 +201,27 @@ def validate_code_compliance(
 
     response = judge_model.invoke(state["messages"])
     assert isinstance(response, JudgeResponse)
-    if response.is_compliant:
-        state["code_validation_feedback"] = True
-    else:
-        state["code_validation_feedback"] = False
-        state["pipeline"].code = ""
+    state["code_validation_feedback"] = response.is_compliant
+    retry_on_semantic_failure: bool = state["retry_on_semantic_failure"]
+    if not response.is_compliant:
+        # Always recorded, regardless of the flag below, so compliance
+        # failures stay visible in the results even when we stop retrying.
+        state["semantic_validation_feedback"] = state[
+            "semantic_validation_feedback"
+        ] + [response.feedback]
+        if retry_on_semantic_failure:
+            state["pipeline"].code = ""
     # append feedback message
     state["messages"] = state["messages"] + [AIMessage(content=response.feedback)]
     state["validation_attempts"] = state["validation_attempts"] + 1
 
     is_valid = state["code_validation_feedback"]
     generation_attempts: int = state["generation_attempts"]
-    if not is_valid and state["validation_attempts"] >= generation_attempts:
+    if (
+        not is_valid
+        and retry_on_semantic_failure
+        and state["validation_attempts"] >= generation_attempts
+    ):
         state["status"] = PipelineStatus.FAILED
     return state
 
@@ -214,6 +229,10 @@ def validate_code_compliance(
 def code_validation_branch(
     state: ExecutionAgentState,
 ) -> Literal["generate_pipeline_code", "execute_code", "explain_pipeline"]:
+    if not state["retry_on_semantic_failure"]:
+        # The judge still ran and its verdict was recorded above; we just
+        # don't act on a "no" by regenerating the code.
+        return "execute_code"
     if state["status"] == PipelineStatus.FAILED:
         logger.info(
             f"Maximum attempts ({state['validation_attempts']}) reached for code validation of pipeline {state['pipeline'].id}."
@@ -242,6 +261,18 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
             parent_run_id = parent_run.info.run_id
             state["pipeline_run_id"] = parent_run_id
             print(f"Created Run with id: {parent_run_id} for pipeline {pipeline_id}")
+
+            semantic_failures = state["semantic_validation_feedback"]
+            mlflow.log_metric("semantic_validation_failures", len(semantic_failures))
+            if semantic_failures:
+                mlflow.log_text(
+                    "\n\n---\n\n".join(
+                        f"Attempt {i + 1}:\n{feedback}"
+                        for i, feedback in enumerate(semantic_failures)
+                    ),
+                    "semantic_validation_feedback.txt",
+                )
+
             # Split train data into train/validation for model selection
             train_df_full = state["train_df"]
             try:
@@ -334,15 +365,22 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
 
     is_valid = state["code_execution_feedback"]
     generation_attempts: int = state["generation_attempts"]
-    if not is_valid and state["execution_attempts"] >= generation_attempts:
+    retry_on_execution_failure: bool = state["retry_on_execution_failure"]
+    if not is_valid and (
+        not retry_on_execution_failure
+        or state["execution_attempts"] >= generation_attempts
+    ):
         state["status"] = PipelineStatus.FAILED
     return state
 
 
-def code_execution_branch(
-    state: ExecutionAgentState,
-) -> Literal["generate_pipeline_code", "explain_pipeline"]:
+def code_execution_branch(state: ExecutionAgentState) -> str:
     if state["status"] == PipelineStatus.FAILED:
+        if not state["retry_on_execution_failure"]:
+            logger.info(
+                f"Code execution failed for pipeline {state['pipeline'].id} and retries are disabled; terminating."
+            )
+            return END
         logger.info(
             f"Maximum attempts ({state['execution_attempts']}) reached for code execution of pipeline {state['pipeline'].id}."
         )
@@ -429,7 +467,11 @@ state_graph.add_sequence(
 state_graph.add_conditional_edges("validate_code_compliance", code_validation_branch)
 
 state_graph.add_node("execute_code", execute_code)
-state_graph.add_conditional_edges("execute_code", code_execution_branch)
+state_graph.add_conditional_edges(
+    "execute_code",
+    code_execution_branch,
+    path_map=["generate_pipeline_code", "explain_pipeline", END],
+)
 
 state_graph.add_node("explain_pipeline", explain_pipeline)
 state_graph.add_edge("explain_pipeline", END)

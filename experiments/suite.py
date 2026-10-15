@@ -13,7 +13,7 @@ import pandas as pd
 
 from ageml import logger
 from ageml.app import main
-from ageml.common.utils import copy_out_artifacts, safe_filename_part
+from ageml.common.utils import copy_out_artifacts, safe_filename_part, save_file
 from ageml.specification import Specification
 from experiments.download_datasets import (
     DEFAULT_OPENML_DATASETS,
@@ -46,6 +46,8 @@ def run_suite(
     spec_path: Path,
     output_dir: Path,
     datasets: Optional[Mapping[str, Mapping[str, int]]] = None,
+    retry_on_semantic_failure: bool = True,
+    retry_on_execution_failure: bool = True,
 ) -> Path:
     """Run every dataset of the suite and append one summary row per dataset.
 
@@ -60,6 +62,8 @@ def run_suite(
             that an interrupted suite is resumed by re-running it.
         datasets: the suite to run, defaulting to
             :data:`experiments.download_datasets.DEFAULT_OPENML_DATASETS`.
+        retry_on_semantic_failure: forwarded to :func:`ageml.app.main`.
+        retry_on_execution_failure: forwarded to :func:`ageml.app.main`.
 
     Returns:
         The path of the written ``results.csv``.
@@ -92,12 +96,29 @@ def run_suite(
                 if task == "classification"
                 else "rmse",
                 maximize=task == "classification",
+                retry_on_semantic_failure=retry_on_semantic_failure,
+                retry_on_execution_failure=retry_on_execution_failure,
             )
 
             copy_out_artifacts(
                 out_dir=out_dir,
                 destination=output_dir / "artifacts" / safe_filename_part(dataset_name),
             )
+
+            semantic_failure_reasons: Mapping[int, list] = result.get(
+                "semantic_validation_failure_reasons", {}
+            )
+            for pipeline_id, reasons in semantic_failure_reasons.items():
+                save_file(
+                    f"pipeline_{pipeline_id}.md",
+                    "\n\n---\n\n".join(
+                        f"Attempt {i + 1}:\n{reason}"
+                        for i, reason in enumerate(reasons)
+                    ),
+                    out_dir=output_dir
+                    / "semantic_failures"
+                    / safe_filename_part(dataset_name),
+                )
 
             parsed: Specification = Specification.parse(specification.read_text())
             row = build_experiment_summary_row(

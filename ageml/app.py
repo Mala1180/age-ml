@@ -42,6 +42,8 @@ def main(
     model_name: str = DEFAULT_MODEL_NAME,
     validation_metric: str = "balanced_accuracy",
     maximize: bool = True,
+    retry_on_semantic_failure: bool = True,
+    retry_on_execution_failure: bool = True,
 ) -> Dict:
     """Run planning and execution from the command line.
 
@@ -62,6 +64,14 @@ def main(
             Defaults to ``DEFAULT_MODEL_NAME`` above when not provided.
         validation_metric: Name of the metric to use for model selection (default: "balanced_accuracy").
         maximize: Whether to maximize the metric (True) or minimize it (False). Default: True.
+        retry_on_semantic_failure: Whether a "code not compliant with the pipeline"
+            verdict from the LLM judge triggers regenerating the code (default: True).
+            The judge always runs either way; when False, its verdict is only
+            recorded (see ``semantic_validation_failures``/``semantic_validation_failure_reasons``
+            in the returned dict) and the generated code is executed regardless.
+        retry_on_execution_failure: Whether a code execution failure triggers
+            regenerating the code (default: True). When False, a pipeline whose
+            code fails to execute is marked failed immediately instead of retrying.
     Returns:
         A dictionary containing the results of the experiment.
     """
@@ -133,6 +143,8 @@ def main(
                         "experiment_id": experiment_id,
                         "validation_metric": validation_metric,
                         "maximize": maximize,
+                        "retry_on_semantic_failure": retry_on_semantic_failure,
+                        "retry_on_execution_failure": retry_on_execution_failure,
                     }
                 )
 
@@ -163,6 +175,7 @@ def main(
                         failed += 1
 
             total_training_time: float = 0.0
+            semantic_validation_failure_reasons: Dict[int, List[str]] = {}
             for r in results:
                 if r["status"] == PipelineStatus.FAILED:
                     failed += 1
@@ -170,8 +183,14 @@ def main(
                     timed_out += 1
                 val_attempts: int = r.get("validation_attempts", 0)
                 exec_attempts: int = r.get("execution_attempts", 0)
+                semantic_failures: List[str] = r.get("semantic_validation_feedback", [])
+                if semantic_failures:
+                    semantic_validation_failure_reasons[r["pipeline"].id] = (
+                        semantic_failures
+                    )
                 logger.info(
-                    f"Pipeline id: {r['pipeline'].id}, validation_attempts: {val_attempts}, execution_attempts: {exec_attempts}, status: {r['status'].value}"
+                    f"Pipeline id: {r['pipeline'].id}, validation_attempts: {val_attempts}, execution_attempts: {exec_attempts}, "
+                    f"semantic_validation_failures: {len(semantic_failures)}, status: {r['status'].value}"
                 )
 
                 pipeline_run_id: Optional[str] = r.get("pipeline_run_id")
@@ -186,6 +205,9 @@ def main(
 
             logger.info(f"Failed pipelines: {failed}")
             logger.info(f"Timed out pipelines: {timed_out}")
+            logger.info(
+                f"Semantic validation failures: {sum(len(v) for v in semantic_validation_failure_reasons.values())}"
+            )
 
             pipeline_run_ids: Dict[str, Optional[str]] = {
                 result["pipeline"].id: result.get("pipeline_run_id")
@@ -206,6 +228,12 @@ def main(
                     "test_df": test_df,
                     "target_feature": target_feature,
                 }
+            )
+            res["semantic_validation_failures"] = sum(
+                len(v) for v in semantic_validation_failure_reasons.values()
+            )
+            res["semantic_validation_failure_reasons"] = (
+                semantic_validation_failure_reasons
             )
 
             elapsed_seconds = time.perf_counter() - start_time
