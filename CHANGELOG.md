@@ -1,3 +1,9 @@
+## [5.7.0](https://github.com/Mala1180/age-ml/compare/5.6.0...5.7.0) (2026-10-15)
+
+### Features
+
+* **experiments:** add first ablation experiment records ([00377c3](https://github.com/Mala1180/age-ml/commit/00377c3924724d1adae3bf0d1689218c15d52dc7))
+
 ## [5.6.0](https://github.com/Mala1180/age-ml/compare/5.5.0...5.6.0) (2026-10-15)
 
 ### Features
