@@ -1,11 +1,11 @@
-"""The bookkeeping of the repeated campaign: repetition ids, and resuming."""
+"""The bookkeeping of the repeated sweep: repetition ids, and resuming."""
 
 from pathlib import Path
 from typing import List
 
 import pytest
 
-from experiments.ablation.campaign import DEFAULT_REPETITIONS, repetition_ids
+from experiments.ablation.sweep import DEFAULT_REPETITIONS, repetition_ids
 from experiments.results_csv import SUMMARY_COLUMNS
 from experiments.suite import already_recorded
 
@@ -17,7 +17,7 @@ def test_a_count_of_repetitions_is_expanded_into_ids_starting_at_one() -> None:
 
 @pytest.mark.parametrize("requested", [(4, 5), ["4", "5"]])
 def test_explicit_repetitions_are_run_as_given(requested: List[int]) -> None:
-    """How an interrupted campaign is resumed, or split across machines.
+    """How an interrupted sweep is resumed, or split across machines.
 
     ``fire`` hands over a tuple for ``--repetitions=4,5``, and strings when
     the value went through a shell that quoted it.

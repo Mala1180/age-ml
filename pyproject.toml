@@ -68,7 +68,7 @@ ablation-spec-specific = { cmd = "python -m experiments.ablation --variants=spec
 ablation-validation-run = { cmd = "python -m experiments.ablation.validation", help = "Run the dataset suite 5 times per validation-check ablation config" }
 ablation-validation-no-semantic-retry = { cmd = "python -m experiments.ablation.validation --configs=no-semantic-retry", help = "Run the repetitions without retrying on semantic (compliance) failures" }
 ablation-validation-no-execution-retry = { cmd = "python -m experiments.ablation.validation --configs=no-execution-retry", help = "Run the repetitions without retrying on code execution failures" }
-ablation-no-csp = { cmd = "python -m experiments.ablation.planning", help = "Run the dataset suite 5 times with the LLM planning a single pipeline from the specification, without the CSP" }
+ablation-no-csp = { cmd = "python -m experiments.ablation.no_csp", help = "Run the dataset suite 5 times with the LLM planning a single pipeline from the specification, without the CSP" }
 
 # tells mypy to follow imports of untyped packages
 [[tool.mypy.overrides]]

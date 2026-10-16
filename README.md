@@ -153,7 +153,7 @@ poetry run poe ablation-spec-run
 `--model_name` defaults to `gemini-3.1-flash-lite-preview`, the LLM of the campaign.
 `--repetitions` sets how many repetitions to run (`--repetitions=3`) or exactly which
 ones (`--repetitions=4,5`). `--variants` restricts the run (e.g. `--variants=poor,general`),
-and there is one shortcut per variant, to spread the campaign over several days or machines:
+and there is one shortcut per variant, to spread the sweep over several days or machines:
 
 ```bash
 poetry run poe ablation-spec-poor       # the 5 repetitions of poor.yml
@@ -166,12 +166,13 @@ main experiments (`experiments/results/<model_name>/results.csv`):
 
 ```
 experiments/results/<model_name>/
-└── <variant>/                    # poor, general, specific
-    ├── run-1/
-    │   ├── results.csv           # one summary row per dataset of the suite
-    │   └── artifacts/<dataset>/  # best_run and best_pipeline of that dataset
-    ├── run-2/
-    └── ...
+└── specification/
+    └── <variant>/                # poor, general, specific
+        ├── run-1/
+        │   ├── results.csv       # one summary row per dataset of the suite
+        │   └── artifacts/<dataset>/  # best_run and best_pipeline of that dataset
+        ├── run-2/
+        └── ...
 ```
 
 Repetitions are the *outer* loop, so after the first pass every variant already has a
@@ -208,7 +209,7 @@ Run the whole suite once per config, repeated to measure variance (5 repetitions
 poetry run poe ablation-validation-run
 ```
 
-`--model_name`, `--repetitions` and `--spec_path` work as in the other campaigns.
+`--model_name`, `--repetitions` and `--spec_path` work as in the other sweeps.
 `--configs` restricts the run (e.g. `--configs=no-semantic-retry`), and there is one shortcut
 per config:
 
@@ -217,19 +218,17 @@ poetry run poe ablation-validation-no-semantic-retry
 poetry run poe ablation-validation-no-execution-retry
 ```
 
-Each repetition of each config gets its own directory, nested under `validation/` so it
-never collides with the specification variants above:
+Each repetition of each config gets its own directory, next to the `specification/` one above:
 
 ```
 experiments/results/<model_name>/
-└── validation/
-    └── <config>/                  # no-semantic-retry, no-execution-retry
-        ├── run-1/
-        │   ├── results.csv        # includes a "Semantic Validation Failures" column
-        │   ├── artifacts/<dataset>/
-        │   └── semantic_failures/<dataset>/pipeline_<id>.md   # judge's reasons, when non-compliant
-        ├── run-2/
-        └── ...
+└── <config>/                      # no-semantic-retry, no-execution-retry
+    ├── run-1/
+    │   ├── results.csv            # includes a "Semantic Validation Failures" column
+    │   ├── artifacts/<dataset>/
+    │   └── semantic_failures/<dataset>/pipeline_<id>.md   # judge's reasons, when non-compliant
+    ├── run-2/
+    └── ...
 ```
 
 An interrupted suite is resumed the same way as the specification ablation: re-run the

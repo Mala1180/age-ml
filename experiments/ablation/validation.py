@@ -11,7 +11,7 @@ only varies ``ageml.app.main``'s ``retry_on_semantic_failure`` and
 
 Every (config, repetition) pair gets its own ``results.csv`` and its own
 ``artifacts`` tree, under
-``experiments/results/<model_tag>/validation/<config>/run-<n>``.
+``experiments/results/<model_tag>/<config>/run-<n>``.
 """
 
 from dataclasses import dataclass
@@ -23,10 +23,10 @@ import fire
 from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments import RESULTS_DIR
-from experiments.ablation.campaign import (
+from experiments.ablation.sweep import (
     DEFAULT_REPETITIONS,
     AblationConfig,
-    run_campaign,
+    run_sweep,
 )
 from resources import DIR as RESOURCES_DIR
 
@@ -78,7 +78,7 @@ def run_validation_ablation(
             Defaults to both.
         repetitions: How many times to run each config (``--repetitions=5``),
             or the exact ids of the repetitions to run (``--repetitions=4,5``).
-            Defaults to :data:`experiments.ablation.campaign.DEFAULT_REPETITIONS`.
+            Defaults to :data:`experiments.ablation.sweep.DEFAULT_REPETITIONS`.
     """
     requested: Sequence[str] = (
         [configs] if isinstance(configs, str) else list(configs or ())
@@ -88,9 +88,9 @@ def run_validation_ablation(
     ] or list(VALIDATION_CONFIGS)
     specification: Path = Path(spec_path or RESOURCES_DIR / "general-specification.yml")
 
-    run_campaign(
+    run_sweep(
         model_name=model_name,
-        output_root=RESULTS_DIR / safe_filename_part(model_name) / "validation",
+        output_root=RESULTS_DIR / safe_filename_part(model_name),
         configs=[
             AblationConfig(
                 id=config.id,

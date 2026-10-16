@@ -24,7 +24,7 @@ def repetition_ids(repetitions: Union[int, Sequence[int]]) -> List[int]:
 
     ``--repetitions=5`` runs the repetitions 1 to 5, whereas
     ``--repetitions=3,4,5`` runs exactly those three -- which is how an
-    interrupted campaign is resumed, or spread over several machines.
+    interrupted sweep is resumed, or spread over several machines.
     """
     if isinstance(repetitions, int):
         return list(range(1, repetitions + 1))
@@ -39,7 +39,7 @@ class AblationConfig:
     run_suite_kwargs: Mapping[str, Any]
 
 
-def run_campaign(
+def run_sweep(
     model_name: str,
     output_root: Path,
     configs: Sequence[AblationConfig],
