@@ -1,10 +1,10 @@
 """Run the dataset suite with the CSP planning replaced by the LLM, several times over.
 
-    python -m experiments.ablation.planning --model_name=gemini-3.1-flash-lite-preview
+    python -m experiments.ablation.no_csp --model_name=gemini-3.1-flash-lite-preview
 
 The LLM gets the specification (minus its budgets) and proposes a single
 pipeline itself, see ``ageml/planning/plain_llm.py``. Results go to
-``experiments/results/<model_tag>/planning/no-csp/run-<n>``.
+``experiments/results/<model_tag>/no-csp/run-<n>``.
 """
 
 from pathlib import Path
@@ -15,15 +15,15 @@ import fire
 from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments import RESULTS_DIR
-from experiments.ablation.campaign import (
+from experiments.ablation.sweep import (
     DEFAULT_REPETITIONS,
     AblationConfig,
-    run_campaign,
+    run_sweep,
 )
 from resources import DIR as RESOURCES_DIR
 
 
-def run_planning_ablation(
+def run_no_csp_ablation(
     model_name: str = DEFAULT_MODEL_NAME,
     spec_path: Optional[str] = None,
     repetitions: Union[int, Sequence[int]] = DEFAULT_REPETITIONS,
@@ -37,9 +37,9 @@ def run_planning_ablation(
         repetitions: How many times to run (``--repetitions=5``), or the exact
             ids of the repetitions to run (``--repetitions=4,5``).
     """
-    run_campaign(
+    run_sweep(
         model_name=model_name,
-        output_root=RESULTS_DIR / safe_filename_part(model_name) / "planning",
+        output_root=RESULTS_DIR / safe_filename_part(model_name),
         configs=[
             AblationConfig(
                 id="no-csp",
@@ -52,9 +52,9 @@ def run_planning_ablation(
             )
         ],
         repetitions=repetitions,
-        axis="planning",
+        axis="no-csp",
     )
 
 
 if __name__ == "__main__":
-    fire.Fire(run_planning_ablation)
+    fire.Fire(run_no_csp_ablation)

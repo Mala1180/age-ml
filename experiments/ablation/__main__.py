@@ -3,7 +3,7 @@
     python -m experiments.ablation --model_name=gemini-3.1-flash-lite-preview
 
 Every (variant, repetition) pair gets its own ``results.csv`` and its own
-``artifacts`` tree, under ``experiments/results/<model_tag>/<variant>/run-<n>``,
+``artifacts`` tree, under ``experiments/results/<model_tag>/specification/<variant>/run-<n>``,
 with the same schema as ``experiments/results/<model_tag>/results.csv``: the
 repetitions are what the variance reported in the paper is computed over, and
 they are kept apart so that they can be aggregated afterwards.
@@ -23,10 +23,10 @@ import fire
 from ageml.common import DEFAULT_MODEL_NAME
 from ageml.common.utils import safe_filename_part
 from experiments import RESULTS_DIR
-from experiments.ablation.campaign import (
+from experiments.ablation.sweep import (
     DEFAULT_REPETITIONS,
     AblationConfig,
-    run_campaign,
+    run_sweep,
 )
 from experiments.ablation.specifications import (
     VARIANTS,
@@ -55,7 +55,7 @@ def run_ablation(
             from the poorest to the richest.
         repetitions: How many times to run each variant (``--repetitions=5``),
             or the exact ids of the repetitions to run (``--repetitions=4,5``).
-            Defaults to :data:`experiments.ablation.campaign.DEFAULT_REPETITIONS`.
+            Defaults to :data:`experiments.ablation.sweep.DEFAULT_REPETITIONS`.
     """
     requested: Sequence[str] = (
         [variants] if isinstance(variants, str) else list(variants or ())
@@ -64,7 +64,7 @@ def run_ablation(
     specifications: List[Tuple[Variant, Path]] = [
         (variant, specification_path(variant)) for variant in selected
     ]
-    # Upfront, rather than when the campaign is already hours in.
+    # Upfront, rather than when the sweep is already hours in.
     missing: List[str] = [str(path) for _, path in specifications if not path.exists()]
     if missing:
         raise FileNotFoundError(
@@ -72,9 +72,9 @@ def run_ablation(
             "Run `poetry run poe generate-ablation-specs` first."
         )
 
-    run_campaign(
+    run_sweep(
         model_name=model_name,
-        output_root=RESULTS_DIR / safe_filename_part(model_name),
+        output_root=RESULTS_DIR / safe_filename_part(model_name) / "specification",
         configs=[
             AblationConfig(id=variant.id, run_suite_kwargs={"spec_path": path})
             for variant, path in specifications
