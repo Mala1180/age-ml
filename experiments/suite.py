@@ -48,6 +48,7 @@ def run_suite(
     datasets: Optional[Mapping[str, Mapping[str, int]]] = None,
     retry_on_semantic_failure: bool = True,
     retry_on_execution_failure: bool = True,
+    use_csp: bool = True,
 ) -> Path:
     """Run every dataset of the suite and append one summary row per dataset.
 
@@ -64,6 +65,7 @@ def run_suite(
             :data:`experiments.download_datasets.DEFAULT_OPENML_DATASETS`.
         retry_on_semantic_failure: forwarded to :func:`ageml.app.main`.
         retry_on_execution_failure: forwarded to :func:`ageml.app.main`.
+        use_csp: forwarded to :func:`ageml.app.main`.
 
     Returns:
         The path of the written ``results.csv``.
@@ -98,6 +100,7 @@ def run_suite(
                 maximize=task == "classification",
                 retry_on_semantic_failure=retry_on_semantic_failure,
                 retry_on_execution_failure=retry_on_execution_failure,
+                use_csp=use_csp,
             )
 
             copy_out_artifacts(
@@ -127,7 +130,7 @@ def run_suite(
                 problem=task,
                 dataset_df=pd.read_csv(dataset_path),
                 result=result,
-                pipeline_budget=parsed.pipelines,
+                pipeline_budget=parsed.pipelines if use_csp else 1,
                 workers=parsed.workers,
                 specification=specification.name,
             )
