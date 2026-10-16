@@ -1,3 +1,17 @@
+## [5.8.0](https://github.com/Mala1180/age-ml/compare/5.7.0...5.8.0) (2026-10-16)
+
+### Features
+
+* **ablation:** add no csp ablation study ([7a7245e](https://github.com/Mala1180/age-ml/commit/7a7245e09c32797175249c97847c023a25c34038))
+
+### Dependency updates
+
+* **deps:** update dependency poethepoet to ^0.49.0 ([#225](https://github.com/Mala1180/age-ml/issues/225)) ([811ef98](https://github.com/Mala1180/age-ml/commit/811ef9851c98e71417a1a84de656092efdb537f3))
+
+### Refactoring
+
+* **experiments:** update result output paths ([a038f69](https://github.com/Mala1180/age-ml/commit/a038f6994defa6a1f2c28cf8547f70aa442ab9f5))
+
 ## [5.7.0](https://github.com/Mala1180/age-ml/compare/5.6.0...5.7.0) (2026-10-15)
 
 ### Features
