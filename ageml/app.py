@@ -6,7 +6,7 @@ from copy import deepcopy
 from datetime import datetime, timedelta
 from multiprocessing import Pool
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Any, Callable, Dict, List, Optional
 
 import fire
 import mlflow
@@ -44,6 +44,7 @@ def main(
     maximize: bool = True,
     retry_on_semantic_failure: bool = True,
     retry_on_execution_failure: bool = True,
+    use_csp: bool = True,
 ) -> Dict:
     """Run planning and execution from the command line.
 
@@ -72,6 +73,9 @@ def main(
         retry_on_execution_failure: Whether a code execution failure triggers
             regenerating the code (default: True). When False, a pipeline whose
             code fails to execute is marked failed immediately instead of retrying.
+        use_csp: Whether the pipelines are planned by the constraint solver (default: True).
+            When False, the LLM is given the specification and
+            proposes a single pipeline directly.
     Returns:
         A dictionary containing the results of the experiment.
     """
@@ -82,7 +86,17 @@ def main(
     # model, and these two modules build model-bound structures as soon as
     # they're imported.
     from ageml.execution.agent import ExecutionPipeline, PipelineStatus
-    from ageml.planning.agent import PlanningPipeline, planning_agent
+    from ageml.planning.types import PlanningPipeline
+
+    plan: Callable[[Dict[str, Any]], Dict[str, Any]]
+    if use_csp:
+        from ageml.planning.agent import planning_agent
+
+        plan = planning_agent.invoke
+    else:
+        from ageml.planning.plain_llm import plan as plan_with_llm
+
+        plan = plan_with_llm
 
     enable_mlflow_llm_autologging()
 
@@ -102,7 +116,7 @@ def main(
     ):
         target_feature = identify_target_feature(df)
 
-        planning = planning_agent.invoke(
+        planning = plan(
             {
                 "specification_path": spec_path,
                 "dataset_path": dataset_path,
