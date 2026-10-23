@@ -8,7 +8,7 @@ raw CSVs.
 
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -54,9 +54,9 @@ class DatasetMetaFeatures:
         """``instances * features``, a proxy for the cost of a single fit."""
         return self.instances * self.features
 
-    def as_row(self) -> Dict[str, Any]:
+    def as_row(self) -> dict[str, Any]:
         """The meta-features as one row of ``meta-features.csv``."""
-        row: Dict[str, Any] = asdict(self)
+        row: dict[str, Any] = asdict(self)
         for key in ("missing_value_ratio", "max_absolute_skew", "imbalance_ratio"):
             row[key] = round(row[key], 6)
         return row
@@ -86,8 +86,8 @@ def resolve_target(df: pd.DataFrame, task: str) -> str:
     prompt are applied here instead -- a name hint first, then the right-most
     column whose data type and cardinality fit ``task``, then the last column.
     """
-    columns: List[str] = [str(column) for column in df.columns]
-    hinted: List[str] = [
+    columns: list[str] = [str(column) for column in df.columns]
+    hinted: list[str] = [
         column for column in columns if column.strip().lower() in TARGET_NAME_HINTS
     ]
     for candidates in (hinted, columns):
@@ -100,14 +100,23 @@ def resolve_target(df: pd.DataFrame, task: str) -> str:
 def compute_meta_features(
     dataset_path: Path,
     task: str,
-    name: Optional[str] = None,
-    target: Optional[str] = None,
+    name: str | None = None,
+    target: str | None = None,
 ) -> DatasetMetaFeatures:
     """Compute the meta-features of the dataset stored at ``dataset_path``."""
     df: pd.DataFrame = pd.read_csv(dataset_path)
-    resolved_target: str = target or resolve_target(df, task)
+    return compute_meta_features_from_frame(
+        df, task, name or dataset_path.stem, target or resolve_target(df, task)
+    )
+
+
+def compute_meta_features_from_frame(
+    df: pd.DataFrame, task: str, name: str, target: str
+) -> DatasetMetaFeatures:
+    """Compute descriptors from an explicitly permitted view and trusted target."""
+    resolved_target = target
     features: pd.DataFrame = df.drop(columns=[resolved_target])
-    numeric: List[str] = [
+    numeric: list[str] = [
         column for column in features.columns if _is_numeric(features[column])
     ]
     skew = features[numeric].skew(numeric_only=True).abs().to_numpy() if numeric else []
@@ -117,7 +126,7 @@ def compute_meta_features(
         else pd.Series(dtype=float)
     )
     return DatasetMetaFeatures(
-        name=name or dataset_path.stem,
+        name=name,
         task=task,
         target=resolved_target,
         instances=int(df.shape[0]),

@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Optional
 
 import fire
 
@@ -12,9 +11,17 @@ from resources import DIR as RESOURCES_DIR
 
 def run_experiments(
     model_name: str = DEFAULT_MODEL_NAME,
-    spec_path: Optional[str] = None,
+    spec_path: str | None = None,
     retry_on_semantic_failure: bool = True,
     retry_on_execution_failure: bool = True,
+    model_provider: str = "gemini",
+    model_base_url: str | None = None,
+    model_api_key_env: str | None = None,
+    evaluation_protocol: str = "holdout",
+    run_seed: int = 42,
+    model_seed: int | None = None,
+    model_temperature: float | None = None,
+    time_budget_seconds: int | None = None,
 ) -> None:
     """Run the full experiments suite (all datasets) with a given LLM backend.
 
@@ -46,6 +53,14 @@ def run_experiments(
     """
     run_suite(
         model_name=model_name,
+        evaluation_protocol=evaluation_protocol,
+        run_seed=run_seed,
+        model_seed=model_seed,
+        model_temperature=model_temperature,
+        time_budget_seconds=time_budget_seconds,
+        model_provider=model_provider,
+        model_base_url=model_base_url,
+        model_api_key_env=model_api_key_env,
         spec_path=Path(spec_path or RESOURCES_DIR / "general-specification.yml"),
         output_dir=RESULTS_DIR / safe_filename_part(model_name),
         retry_on_semantic_failure=retry_on_semantic_failure,

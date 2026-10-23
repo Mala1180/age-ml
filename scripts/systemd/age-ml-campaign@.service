@@ -1,0 +1,19 @@
+[Unit]
+Description=AGE-ML campaign %i
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+User=ageml
+Group=ageml
+WorkingDirectory=/home/ageml/age-ml
+EnvironmentFile=/home/ageml/age-ml/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/ageml/age-ml/scripts/run-campaign.sh --config campaigns/%i.yml
+Restart=no
+KillMode=control-group
+TimeoutStopSec=120
+
+[Install]
+WantedBy=multi-user.target

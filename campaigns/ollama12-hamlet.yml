@@ -1,0 +1,25 @@
+name: ollama12-hamlet-cv
+model:
+  provider: ollama
+  seed: 42
+  temperature: 0.0
+  name: CHANGE_ME_MODEL_TAG
+  base_url: http://192.168.15.12:11434
+  api_key_env: OLLAMA_12_API_KEY
+specification: resources/general-specification.yml
+output_dir: experiments/results/ollama12-hamlet-cv
+repetitions: [1, 2, 3, 4, 5]
+evaluation_protocol: hamlet_cv
+run_seed: 42
+split_seed: 42  # recorded for compatibility; no RNG is used to construct CV folds
+time_budget_seconds: 3600
+baseline: true
+ablations:
+  # The baseline is the general specification; do not duplicate it here.
+  specification: [poor, specific]
+  validation: [no-semantic-retry, no-execution-retry]
+  no_csp: true
+# Omit datasets to use all nine datasets. For an initial campaign, uncomment:
+# datasets:
+#   classification:
+#     wilt: 40983
