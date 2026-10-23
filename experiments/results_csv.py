@@ -1,12 +1,12 @@
 import csv
 import json
+from collections.abc import Mapping, Sequence
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, Dict, Mapping, Sequence
+from typing import Any
 
 import pandas as pd
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
-
 
 SUMMARY_COLUMNS: dict[str, str] = {
     "openml_id": "OpenML ID",
@@ -14,7 +14,15 @@ SUMMARY_COLUMNS: dict[str, str] = {
     "problem": "Problem",
     "best_pipeline": "Best Pipeline",
     "validation_metric": "Validation Metric",
-    "best_test_score": "Best Test-set Score",
+    "best_test_score": "Test-set Score (validation-selected)",
+    "selection_validation_score": "Selection Validation Score",
+    "search_cv_score": "Search CV Score (selection; not independent test)",
+    "evaluation_protocol": "Evaluation Protocol",
+    "protocol_version": "Protocol Version",
+    "run_identity": "Run Identity",
+    "resume_identity": "Resume Identity",
+    "split_identity": "Split Identity",
+    "status": "Status",
     "baseline": "Baseline",
     "features": "Features",
     "instances": "Instances",
@@ -75,18 +83,10 @@ def _append_row(
         with path.open("r", newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             existing_columns = reader.fieldnames or []
-            existing_rows = list(reader)
         if existing_columns != expected_columns:
-            with path.open("w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=expected_columns)
-                writer.writeheader()
-                for existing_row in existing_rows:
-                    aligned_existing_row = {
-                        column: existing_row.get(column, "")
-                        for column in expected_columns
-                    }
-                    writer.writerow(aligned_existing_row)
-            file_exists = True
+            raise ValueError(
+                "Refusing to rewrite a historical or incompatible result schema"
+            )
 
     mode = "a" if file_exists else "w"
     with path.open(mode, newline="", encoding="utf-8") as f:
@@ -97,7 +97,7 @@ def _append_row(
     return path
 
 
-def _format_duration(seconds: float | int | None) -> str:
+def _format_duration(seconds: float | None) -> str:
     if seconds is None:
         return ""
     return str(timedelta(seconds=round(float(seconds))))
@@ -121,7 +121,7 @@ def build_experiment_summary_row(
     pipeline_budget: int,
     workers: int,
     specification: str,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     features_df = dataset_df.iloc[:, :-1] if dataset_df.shape[1] > 1 else dataset_df
     numeric_features, discrete_features = _compute_feature_stats(features_df)
 
@@ -167,6 +167,18 @@ def build_experiment_summary_row(
         SUMMARY_COLUMNS["best_pipeline"]: best_pipeline,
         SUMMARY_COLUMNS["validation_metric"]: result.get("validation_metric", ""),
         SUMMARY_COLUMNS["best_test_score"]: result.get("best_test_score", ""),
+        SUMMARY_COLUMNS["search_cv_score"]: result.get("search_cv_score"),
+        SUMMARY_COLUMNS["evaluation_protocol"]: result.get(
+            "evaluation_protocol", "holdout"
+        ),
+        SUMMARY_COLUMNS["selection_validation_score"]: result.get(
+            "selection_validation_score"
+        ),
+        SUMMARY_COLUMNS["protocol_version"]: result.get("protocol_version"),
+        SUMMARY_COLUMNS["run_identity"]: result.get("run_identity"),
+        SUMMARY_COLUMNS["resume_identity"]: result.get("resume_identity"),
+        SUMMARY_COLUMNS["split_identity"]: result.get("split_identity"),
+        SUMMARY_COLUMNS["status"]: result.get("status"),
         SUMMARY_COLUMNS["baseline"]: baseline,
         SUMMARY_COLUMNS["features"]: int(features_df.shape[1]),
         SUMMARY_COLUMNS["instances"]: int(dataset_df.shape[0]),
@@ -204,8 +216,8 @@ def save_experiment_summary_to_csv(
 
 def _flatten_mapping(
     data: Mapping[str, Any], parent_key: str = "", sep: str = "_"
-) -> Dict[str, Any]:
-    flat: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    flat: dict[str, Any] = {}
     for key, value in data.items():
         full_key = f"{parent_key}{sep}{key}" if parent_key else key
         if isinstance(value, Mapping):

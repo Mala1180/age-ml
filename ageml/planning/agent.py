@@ -1,11 +1,11 @@
+import json
 import random
 from pathlib import Path
-from typing import List
 
 import pandas as pd
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langgraph.constants import END
-from langgraph.graph import StateGraph, START, MessagesState
+from langgraph.graph import START, MessagesState, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel
 
@@ -20,18 +20,19 @@ from ageml.planning.solver import (
 )
 from ageml.planning.solver.utils import convert_solution_to_pipeline
 from ageml.planning.types import PlanningPipeline
-from ageml.specification import Specification, Constraint
+from ageml.specification import Constraint, Specification
 from ageml.specification.types import TrueCondition
 
 
 class PlanningAgentState(MessagesState):
     specification_path: str
+    run_seed: int
     specification: Specification
-    dataset_path: str
+    train_df: pd.DataFrame
     dataset_info: str
     target_feature: str
     max_pipelines: int
-    pipelines: List[PlanningPipeline]
+    pipelines: list[PlanningPipeline]
     pipelines_found: int
 
 
@@ -47,7 +48,7 @@ generation_attempts: int = 5
 
 def load_dataset(state: PlanningAgentState) -> PlanningAgentState:
     enable_mlflow_llm_autologging()
-    df: pd.DataFrame = pd.read_csv(Path(state["dataset_path"]))
+    df: pd.DataFrame = state["train_df"]
 
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
@@ -77,7 +78,7 @@ def translate_semantic_conditions(state: PlanningAgentState) -> PlanningAgentSta
             "Given the following condition, determine if the condition is met.\n"
             "If the condition is met, return 'is_condition_met' as True, otherwise False. "
             "Constraint Condition:\n"
-            f"{str(semantic_constraint.condition)}"
+            f"{semantic_constraint.condition!s}"
         )
 
         state["messages"] = state["messages"] + [HumanMessage(content=prompt)]
@@ -112,9 +113,15 @@ def generate_pipelines(state: PlanningAgentState) -> PlanningAgentState:
 
 def select_pipelines(state: PlanningAgentState) -> PlanningAgentState:
     max_pipelines: int = state["specification"].budgets.pipelines
-    all_pipelines: List[PlanningPipeline] = state["pipelines"]
+    all_pipelines: list[PlanningPipeline] = sorted(
+        state["pipelines"],
+        key=lambda p: json.dumps(p.model_dump(mode="json"), sort_keys=True),
+    )
+    state["pipelines"] = all_pipelines
     if len(state["pipelines"]) > max_pipelines:
-        state["pipelines"] = random.sample(all_pipelines, k=max_pipelines)
+        state["pipelines"] = random.Random(state.get("run_seed", 42)).sample(
+            all_pipelines, k=max_pipelines
+        )
     logger.info(
         f"Picked {len(state['pipelines'])} pipelines out of {len(all_pipelines)} candidates (budget was {max_pipelines})"
     )
@@ -136,20 +143,8 @@ state_graph.add_edge(START, "load_dataset")
 state_graph.add_edge("select_pipelines", END)
 
 system_prompt: str = """
-    You are an agent that evaluates whether dataset conditions are satisfied.
-    Before evaluating any condition you MUST:
-    
-    1. Determine the most likely target feature of the dataset.
-    2. Explain why it is the target feature.
-    3. Use ONLY that target feature when evaluating the condition.
-    
-    Important rules:
-    - The target feature is usually the column representing the prediction label.
-    - Column names like "target", "label", "class", "y", "outcome" are strong indicators.
-    - Once the target feature is chosen, do NOT change it across different conditions.
+    Evaluate dataset conditions using only the provided training data.
+    Use the explicitly configured target feature for every condition; never infer another target.
 """
 
-
 planning_agent: CompiledStateGraph = state_graph.compile()
-
-print(planning_agent.get_graph().draw_mermaid())

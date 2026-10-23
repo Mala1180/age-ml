@@ -64,30 +64,44 @@ Run the full workflow:
 poetry run python -m ageml \
   --spec_path resources/general-specification.yml \
   --dataset_path resources/datasets/classification/adult.csv \
+  --target_column class \
+  --task classification \
+  --protocol_output_dir out/adult-v2-run-1 \
   --model_name gemini-2.5-flash \
   --validation_metric balanced_accuracy \
   --maximize True
 ```
 
+See [the holdout v2 protocol and result schema](docs/holdout-v2.md) for artifacts,
+baseline reproduction, historical results, resume behavior and the local runner's
+filesystem-isolation limitation. Use the dataset's actual target column in the
+example above (`class` for the prepared Adult dataset).
+
+See [Ollama configuration](docs/ollama.md) for a CLI endpoint and environment-based API keys.
+
 ### Parameters
+
+`target_column` and `task` are required. Optional `split_seed` defaults to 42 for
+new splits; `split_manifest` imports an existing protocol; `protocol_output_dir`
+must identify a fresh run directory.
 
 | Parameter           | Required | Default                         | Description                                                                                                                                  |
 |---------------------|----------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `spec_path`         | Yes      | -                               | Filesystem path to the YAML specification file                                                                                               |
 | `dataset_path`      | Yes      | -                               | Filesystem path to the input dataset (CSV)                                                                                                   |
 | `model_name`        | No       | `gemini-3.1-flash-lite-preview` | LLM backend used for planning/execution/evaluation (default: `DEFAULT_MODEL_NAME` in [`ageml/common/__init__.py`](ageml/common/__init__.py)) |
-| `validation_metric` | No       | `balanced_accuracy`             | Metric for model selection. Supported: `accuracy`, `balanced_accuracy`, `f1`, `precision`, `recall`, `roc_auc`, `mse`, `rmse`, `mae`, `r2`   |
-| `maximize`          | No       | `True`                          | Whether to maximize (`True`) or minimize (`False`) the metric                                                                                |
+| `validation_metric` | No | task dependent | v2: `balanced_accuracy` for classification, `rmse` for regression |
+| `maximize` | No | task dependent | v2: `True` for classification, `False` for regression |
 | `retry_on_semantic_failure` | No | `True`                      | Whether an LLM-judge "code not compliant with the pipeline" verdict triggers regenerating the code. The judge always runs either way; with `False`, its verdict is only recorded (counted in `results.csv`, reasons saved under `semantic_failures/`) and the code is executed regardless |
 | `retry_on_execution_failure` | No | `True`                     | Whether a code execution failure triggers regenerating the code. With `False`, a pipeline whose code fails to execute is marked failed immediately instead of retrying |
 
 What this does:
-1. Automatically identifies the most likely target column from the dataset.
+1. Validates the explicit target/task and freezes train/validation/test partitions before planning.
 2. Generates all feasible pipelines according to the provided specification.
 3. Sets/uses the MLflow experiment named like the dataset (for example, `adult` for `adult.csv`).
 4. Generates and executes code of generated pipelines in parallel processes.
 5. Uses MLflow to track runs, logging parameters, metrics, and artifacts.
-6. Evaluates models from all pipelines, compares them, and selects the best overall model.
+6. Selects the fitted model using validation only, freezes its identity, then evaluates it once on test.
 7. Downloads the selected best-run and best-pipeline artifacts into `out/`.
 
 ## Run Full Experiments
@@ -302,3 +316,24 @@ The corresponding paper of this framework is currently under review at the Futur
 ## License
 
 Apache 2.0. See `LICENSE`.
+
+### Campagne complete su Proxmox
+
+Vedere [la guida per container e campagne](docs/proxmox-campaigns.md). Il launcher
+esegue baseline e ablation in sequenza con il backend del profilo YAML:
+
+```bash
+./scripts/run-campaign.sh --config campaigns/ollama12.yml --dry_run=True
+./scripts/run-campaign.sh --config campaigns/ollama12.yml
+```
+
+Sostituire il segnaposto `model.name` prima dell'esecuzione e iniziare dal profilo
+`ollama12-pilot.yml`. Le specifiche dataset-specifiche del launcher sono derivate
+dal solo training e consumano gli stessi split congelati usati dalla suite.
+
+
+### Protocollo CV vicino a HAMLET
+
+Per splitter a 10 fold senza shuffle, seed controllati e profili Ollama da un'ora,
+vedere [docs/hamlet-alignment.md](docs/hamlet-alignment.md). Questi profili riportano
+il punteggio CV di selezione separatamente dal test indipendente.

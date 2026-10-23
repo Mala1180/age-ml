@@ -7,7 +7,7 @@ not guaranteed to be satisfied, which is precisely what is being measured.
 """
 
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 import pandas as pd
 import yaml
@@ -27,19 +27,19 @@ class PlannedStep(BaseModel):
 
 
 class PlannedPipeline(BaseModel):
-    steps: List[PlannedStep]
+    steps: list[PlannedStep]
 
 
 planning_model = model.with_structured_output(PlannedPipeline)
 
 
-def plan(inputs: Dict[str, Any]) -> Dict[str, Any]:
+def plan(inputs: dict[str, Any]) -> dict[str, Any]:
     """Same contract as ``planning_agent.invoke``: ``pipelines`` and ``pipelines_found``."""
     text: str = Path(inputs["specification_path"]).read_text()
     specification: Specification = Specification.parse(text)
-    raw: Dict[str, Any] = yaml.safe_load(text)
+    raw: dict[str, Any] = yaml.safe_load(text)
     raw.pop("budgets", None)
-    df: pd.DataFrame = pd.read_csv(inputs["dataset_path"])
+    df: pd.DataFrame = inputs["train_df"]
 
     response = planning_model.invoke(
         [
@@ -64,7 +64,7 @@ def plan(inputs: Dict[str, Any]) -> Dict[str, Any]:
     )
     assert isinstance(response, PlannedPipeline)
 
-    params: Dict[tuple, Dict[str, List[Any]]] = {
+    params: dict[tuple, dict[str, list[Any]]] = {
         (step.id, candidate.name): candidate.params
         for step in specification.steps
         for candidate in step.candidates

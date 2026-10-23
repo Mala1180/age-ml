@@ -1,24 +1,24 @@
+import hashlib
 import importlib.util
+import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from types import ModuleType
-from typing import Any, Optional, Literal, Dict, List
+from typing import Any, Literal
 
 import mlflow
 import pandas as pd
-from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langgraph.constants import END
-from langgraph.graph import StateGraph, START, MessagesState
+from langgraph.graph import START, MessagesState, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 from mlflow.models import infer_signature
 from pydantic import BaseModel
-from sklearn.model_selection import train_test_split
 from typing_extensions import override
 
 from ageml import logger
 from ageml.common.client import (
-    delete_failed_runs,
     enable_mlflow_llm_autologging,
     set_run_description,
 )
@@ -27,9 +27,11 @@ from ageml.common.types import Pipeline, Step
 from ageml.common.utils import save_file
 from ageml.execution.utils import (
     extract_python_code,
-    grid_search_exploration,
     get_metric,
+    grid_search_exploration,
 )
+from ageml.fitting import evaluate_candidate, seed_process
+from ageml.protocol import VERSION, candidate_key, file_hash, write_json
 from ageml.specification import Specification
 
 
@@ -37,7 +39,7 @@ class ExecutionPipeline(Pipeline):
     id: int
     code: str = ""
     explanation: str = ""
-    created_at: Optional[datetime] = None
+    created_at: datetime | None = None
 
     @override
     def _format_step(self, step: Step, index: int) -> str:
@@ -51,8 +53,8 @@ class ExecutionPipeline(Pipeline):
             string_value += f"\n\n{self.explanation}"
         return string_value
 
-    def extract_hyperparameters(self) -> Dict[str, Any]:
-        hyperparameters: Dict[str, Any] = {}
+    def extract_hyperparameters(self) -> dict[str, Any]:
+        hyperparameters: dict[str, Any] = {}
         for step in self.steps:
             for hp_name, hp_values in step.hyperparameters.items():
                 hyperparameters[hp_name] = hp_values
@@ -68,11 +70,20 @@ class PipelineStatus(Enum):
 
 class ExecutionAgentState(MessagesState):
     status: PipelineStatus
+    run_seed: int
+    exploration_deadline: float
+    cv_folds: list[dict] | None
+    candidate_output_dir: str
     root_run_id: str
-    failed_runs_id: Optional[str]
-    pipeline_run_id: Optional[str]
+    failed_runs_id: str | None
+    pipeline_run_id: str | None
     experiment_id: str
-    dataset_path: str
+    validation_df: pd.DataFrame
+    run_identity: str
+    validation_split_hash: str
+    source_sha256: str
+    task: str
+    candidates: list[dict]
     specification_path: str
     pipeline: ExecutionPipeline
     code_validation_feedback: bool
@@ -83,11 +94,11 @@ class ExecutionAgentState(MessagesState):
     validation_metric: str
     maximize: bool
     train_df: pd.DataFrame
-    best_run_id: Optional[str]
+    best_run_id: str | None
     target_feature: str
     retry_on_semantic_failure: bool
     retry_on_execution_failure: bool
-    semantic_validation_feedback: List[str]
+    semantic_validation_feedback: list[str]
 
 
 class JudgeResponse(BaseModel):
@@ -109,9 +120,11 @@ explanation_model = model.with_structured_output(ExplanationResponse)
 
 
 def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
+    seed_process(state.get("run_seed", 42))
     enable_mlflow_llm_autologging()
     state["status"] = PipelineStatus.RUNNING
-    df: pd.DataFrame = pd.read_csv(state["dataset_path"])
+    state["candidates"] = []
+    df: pd.DataFrame = state["train_df"]
 
     dataset_info: str = f"""
         Loaded dataset with {len(df)} rows and {len(df.columns)} columns
@@ -126,7 +139,6 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
     state["generation_attempts"] = specification.generation_attempts
     state["messages"] = [
         SystemMessage(content=system_prompt),
-        AIMessage(content=f"Dataset path: {state['dataset_path']}"),
         AIMessage(content=f"Dataset info: \n{dataset_info}"),
         AIMessage(content=f"Identified target column: '{state['target_feature']}'"),
         AIMessage(content=str(state["pipeline"])),
@@ -145,14 +157,14 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     prompt: str = f"""
         You are generating python code for a machine learning pipeline.
         The pipeline to implement is the following:
-        {str(state["pipeline"])}
+        {state["pipeline"]!s}
         Provide only the code without any explanations, and pay attention to the indentation.
         Ensure that the generated code is compliant with the provided pipeline, i.e. it implements all the steps of the pipeline and only those steps.
         The code eventually will be executed, so ensure that it is correct and executable.
-        The code must be contained in a function called 'train_model'.
+        The code must be contained in a function called 'build_model'.
 
-        The 'train_model' function MUST have the following signature:
-        def train_model(X_train, y_train{", " + ", ".join(hyperparameter_names) if hyperparameter_names else ""}):
+        The 'build_model' function MUST have the following signature:
+        def build_model(X_train, y_train{", " + ", ".join(hyperparameter_names) if hyperparameter_names else ""}):
 
         Where:
         - X_train: Training features (pandas DataFrame or numpy array)
@@ -160,10 +172,13 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         {f"- {", ".join(hyperparameter_names)}: Hyperparameters for the pipeline" if hyperparameter_names else ""}
 
         The function must:
-        1. Build and train the pipeline on the training data
-        2. Return the trained model
+        1. Build a fresh, UNFITTED sklearn-compatible estimator or pipeline.
+        2. Return it WITHOUT calling fit, fit_transform, or resampling data.
+        3. Put all preprocessing, feature selection and resampling INSIDE the pipeline.
+        The host sets every exposed random_state and fits separately on each fold.
+        Implement get_params/set_params through standard sklearn or imblearn components.
 
-        Do NOT calculate any validation metrics - just train and return the model.
+        Do NOT calculate any validation metrics - just construct and return the unfitted model.
         Do NOT use grid search.
         Do NOT load data from files - data will be passed as arguments.
     """
@@ -172,14 +187,7 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     response = code_model.invoke(state["messages"])
     assert isinstance(response, CodeResponse)
     state["pipeline"].created_at = datetime.now()
-    created_at = (
-        "**Created at:** "
-        + state["pipeline"].created_at.strftime("%Y-%m-%d %H:%M:%S")
-        + " UTC"
-    )
-    state[
-        "pipeline"
-    ].code = f"# {created_at}\n\n{extract_python_code(response.code)}\n\n"
+    state["pipeline"].code = f"{extract_python_code(response.code)}\n"
 
     save_file(
         "code.py",
@@ -246,9 +254,8 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     state["validation_attempts"] = 0
     algorithm: str = state["pipeline"].steps[-1].candidate
     pipeline_id: int = state["pipeline"].id
-    parent_run_id: Optional[str] = (
-        state["pipeline_run_id"] if "pipeline_run_id" in state else None
-    )
+    parent_run_id: str | None = state.get("pipeline_run_id")
+    c = None
     mlflow.sklearn.autolog(log_models=False)
     try:
         run_name: str = f"pipeline_{pipeline_id}_{algorithm}"
@@ -273,51 +280,84 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                     "semantic_validation_feedback.txt",
                 )
 
-            # Split train data into train/validation for model selection
-            train_df_full = state["train_df"]
-            try:
-                train_df, val_df = train_test_split(
-                    train_df_full,
-                    test_size=0.2,
-                    stratify=train_df_full[state["target_feature"]],
-                    random_state=42,
-                )
-            except ValueError:
-                train_df, val_df = train_test_split(
-                    train_df_full,
-                    test_size=0.2,
-                    random_state=42,
-                )
+            train_df = state["train_df"]
+            val_df = state["validation_df"]
 
             # Extract features and target using identified target column
             target_feature = state["target_feature"]
             X_train = train_df.drop(columns=[target_feature])
-            y_train = train_df[target_feature]
-            X_val = val_df.drop(columns=[target_feature])
-            y_val = val_df[target_feature]
 
-            hyperparameters: Dict[str, Any] = state[
+            hyperparameters: dict[str, Any] = state[
                 "pipeline"
             ].extract_hyperparameters()
-            index_run: int = 0
-            for hp_combination in grid_search_exploration(hyperparameters):
+            for index_run, hp_combination in enumerate(
+                grid_search_exploration(hyperparameters)
+            ):
+                if time.time() >= state.get("exploration_deadline", float("inf")):
+                    raise TimeoutError("Exploration deadline exceeded")
                 nested_run_name: str = f"{pipeline_id}_{algorithm}_run_{index_run}"
-                with mlflow.start_run(nested=True, run_name=nested_run_name):
+                with mlflow.start_run(
+                    nested=True, run_name=nested_run_name
+                ) as fitted_run:
+                    c = {
+                        "candidate_key": candidate_key(
+                            [
+                                step.model_dump(mode="json")
+                                for step in state["pipeline"].steps
+                            ],
+                            hp_combination,
+                            state["pipeline"].code,
+                            state.get("run_seed", 42),
+                        ),
+                        "pipeline_id": pipeline_id,
+                        "run_id": fitted_run.info.run_id,
+                        "hyperparameters": hp_combination,
+                        "code_sha256": hashlib.sha256(
+                            state["pipeline"].code.encode()
+                        ).hexdigest(),
+                        "fit_succeeded": False,
+                        "validation_score": None,
+                        "model_sha256": None,
+                        "artifact_status": "fit_or_export_failed",
+                        "run_identity": state["run_identity"],
+                        "metric": state["validation_metric"],
+                        "maximize": state["maximize"],
+                        "validation_split_hash": state["validation_split_hash"],
+                        "fit_attempt": state["execution_attempts"],
+                        "grid_position": index_run,
+                    }
+                    state["candidates"].append(c)
+                    mlflow.log_artifact(f"tmp/pipeline_{pipeline_id}/code.py")
+                    mlflow.log_params(hp_combination)
                     spec = importlib.util.spec_from_file_location(
                         "out_module", f"tmp/pipeline_{pipeline_id}/code.py"
                     )
                     module: ModuleType = importlib.util.module_from_spec(spec)  # type: ignore
                     spec.loader.exec_module(module)  # type: ignore
-                    trained_model = module.train_model(
-                        X_train, y_train, **hp_combination
+                    trained_model, evaluation, predictions = evaluate_candidate(
+                        module.build_model,
+                        train_df,
+                        val_df,
+                        target_feature,
+                        state["task"],
+                        hp_combination,
+                        state.get("run_seed", 42),
+                        get_metric(state["validation_metric"]),
+                        state.get("cv_folds"),
                     )
-                    # Calculate validation metric
-                    y_pred = trained_model.predict(X_val)
-                    metric_fn = get_metric(state["validation_metric"])
-                    validation_score = metric_fn(y_val, y_pred)
-                    mlflow.log_metric(state["validation_metric"], validation_score)
+                    validation_score = evaluation["validation_score"]
+                    if state.get("cv_folds") is not None:
+                        mlflow.log_dict(evaluation, "cv_evaluation.json")
+                        mlflow.log_text(
+                            predictions.to_csv(index=False), "cv_predictions.csv"
+                        )
+                    mlflow.log_metric(
+                        "validation/" + state["validation_metric"], validation_score
+                    )
 
-                    signature = infer_signature(X_train, trained_model.predict(X_train))
+                    signature = infer_signature(
+                        X_train.head(3), trained_model.predict(X_train.head(3))
+                    )
                     mlflow.sklearn.log_model(
                         sk_model=trained_model,
                         name="model",
@@ -326,14 +366,72 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                         serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_PICKLE,
                     )
 
-                index_run += 1
+                    artifact_dir = mlflow.artifacts.download_artifacts(
+                        run_id=fitted_run.info.run_id, artifact_path="model"
+                    )
+                    model_files = sorted(Path(artifact_dir).rglob("*.pkl"))
+                    if len(model_files) != 1:
+                        raise ValueError("Expected one serialized model artifact")
+                    c.update(
+                        {
+                            "candidate_key": candidate_key(
+                                [
+                                    step.model_dump(mode="json")
+                                    for step in state["pipeline"].steps
+                                ],
+                                hp_combination,
+                                state["pipeline"].code,
+                                state.get("run_seed", 42),
+                            ),
+                            "pipeline_id": pipeline_id,
+                            "pipeline_run_id": parent_run_id,
+                            "run_id": fitted_run.info.run_id,
+                            "hyperparameters": hp_combination,
+                            "code_sha256": hashlib.sha256(
+                                state["pipeline"].code.encode()
+                            ).hexdigest(),
+                            "model_sha256": file_hash(model_files[0]),
+                            "artifact_status": "logged",
+                            "fit_seed": state.get("run_seed", 42),
+                            "completed_at": time.time(),
+                            "cv_fold_scores": evaluation["cv_fold_scores"],
+                            "effective_random_states": evaluation[
+                                "effective_random_states"
+                            ],
+                            "validation_score": float(validation_score),
+                            "fit_succeeded": True,
+                            "run_identity": state["run_identity"],
+                            "validation_split_hash": state["validation_split_hash"],
+                            "metric": state["validation_metric"],
+                            "maximize": state["maximize"],
+                        }
+                    )
+                    # Persist each completed candidate before explanations or timeouts.
+                    if state.get("candidate_output_dir"):
+                        write_json(
+                            Path(state["candidate_output_dir"]) / f"{c['run_id']}.json",
+                            c,
+                            exclusive=True,
+                        )
+                    mlflow.set_tags(
+                        {
+                            "protocol_version": VERSION,
+                            "run_identity": state["run_identity"],
+                            "source_sha256": state["source_sha256"],
+                            "validation_split_hash": state["validation_split_hash"],
+                            "candidate_key": c["candidate_key"],
+                            "eligible": "pending_artifact_verification",
+                        }
+                    )
 
             mlflow.log_artifact(f"tmp/pipeline_{pipeline_id}/code.py")
             state["code_execution_feedback"] = True
-    except Exception as e:
-        mlflow.end_run()
+    except Exception as e:  # noqa: BLE001 - generated code may raise arbitrary exceptions
+        if c is not None and not c.get("fit_succeeded"):
+            c["failure"] = str(e)
+        # The nested context managers already closed their runs; preserve the coordinator run.
         message = (
-            f"Error during code execution of pipeline {state['pipeline'].id}: {str(e)}"
+            f"Error during code execution of pipeline {state['pipeline'].id}: {e!s}"
         )
         logger.info(message)
         state["messages"] = state["messages"] + [AIMessage(content=message)]
@@ -345,12 +443,15 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
         )
         # log failed runs
         if parent_run_id is not None:
-            with mlflow.start_run(
-                nested=True,
-                parent_run_id=parent_run_id,
-                run_name="failed_runs",
-                run_id=state["failed_runs_id"] if "failed_runs_id" in state else None,
-            ) as failed_runs:
+            with (
+                mlflow.start_run(nested=True, run_id=parent_run_id),
+                mlflow.start_run(
+                    nested=True,
+                    parent_run_id=parent_run_id,
+                    run_name="failed_runs",
+                    run_id=state.get("failed_runs_id"),
+                ) as failed_runs,
+            ):
                 state["failed_runs_id"] = failed_runs.info.run_id
                 with mlflow.start_run(
                     nested=True,
@@ -358,8 +459,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                 ):
                     mlflow.log_artifact(f"tmp/pipeline_{pipeline_id}/code.py")
                     mlflow.log_artifact(str(error_file_path))
-
-            delete_failed_runs(parent_run_id, state["experiment_id"])
+            # Preserve failed attempts and candidate artifacts for audit.
 
     state["execution_attempts"] += 1
 
@@ -430,7 +530,7 @@ def explain_pipeline(state: ExecutionAgentState) -> ExecutionAgentState:
     if pipeline_run_id:
         set_run_description(pipeline_run_id, str(state["pipeline"].explanation))
 
-    pipeline_md: str = f"> {created_at}\n\n {str(state['pipeline'])}"
+    pipeline_md: str = f"> {created_at}\n\n {state['pipeline']!s}"
     save_file(
         "pipeline.md",
         pipeline_md,

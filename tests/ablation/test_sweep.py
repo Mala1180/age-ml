@@ -1,7 +1,6 @@
 """The bookkeeping of the repeated sweep: repetition ids, and resuming."""
 
 from pathlib import Path
-from typing import List
 
 import pytest
 
@@ -16,7 +15,7 @@ def test_a_count_of_repetitions_is_expanded_into_ids_starting_at_one() -> None:
 
 
 @pytest.mark.parametrize("requested", [(4, 5), ["4", "5"]])
-def test_explicit_repetitions_are_run_as_given(requested: List[int]) -> None:
+def test_explicit_repetitions_are_run_as_given(requested: list[int]) -> None:
     """How an interrupted sweep is resumed, or split across machines.
 
     ``fire`` hands over a tuple for ``--repetitions=4,5``, and strings when
@@ -37,7 +36,22 @@ def test_the_datasets_of_an_interrupted_suite_are_recorded(tmp_path: Path) -> No
     """They are the ones ``run_suite`` skips instead of appending them twice."""
     results: Path = tmp_path / "results.csv"
     header: str = ",".join(SUMMARY_COLUMNS.values())
-    row = lambda dataset: f"40983,{dataset}," + "," * (len(SUMMARY_COLUMNS) - 3)  # noqa: E731
+    row = lambda dataset: f"40983,{dataset}," + "," * (len(SUMMARY_COLUMNS) - 3)
     results.write_text("\n".join([header, row("wilt"), row("texture")]))
 
-    assert already_recorded(results) == {"wilt", "texture"}
+    assert already_recorded(results) == set()  # Legacy dataset rows cannot resume v2.
+
+
+def test_v2_resume_requires_protocol_and_complete_identity(tmp_path):
+    import pandas as pd
+
+    from ageml.protocol import VERSION
+
+    results = tmp_path / "results.csv"
+    pd.DataFrame(
+        {
+            "Protocol Version": [VERSION, "legacy", VERSION],
+            "Resume Identity": ["split-config-model-rep-1", "old", "other-config"],
+        }
+    ).to_csv(results, index=False)
+    assert already_recorded(results) == {"split-config-model-rep-1", "other-config"}

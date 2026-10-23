@@ -1,0 +1,18 @@
+name: ollama12-pilot
+model:
+  provider: ollama
+  name: CHANGE_ME_MODEL_TAG
+  base_url: http://192.168.15.12:11434
+  api_key_env: OLLAMA_12_API_KEY
+specification: resources/general-specification.yml
+output_dir: experiments/results/ollama12-pilot
+repetitions: 1
+split_seed: 42
+baseline: true
+ablations:
+  specification: []
+  validation: []
+  no_csp: false
+datasets:
+  classification:
+    wilt: 40983
