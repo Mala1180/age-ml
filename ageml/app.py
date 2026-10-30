@@ -8,7 +8,7 @@ import uuid
 from collections.abc import Callable
 from copy import deepcopy
 from datetime import datetime, timedelta
-from multiprocessing import Pool
+from multiprocessing import get_context
 from pathlib import Path
 from typing import Any
 
@@ -40,6 +40,11 @@ from ageml.specification import Specification
 
 # Agent modules are imported after the run configuration is exported. Their
 # structured client wrappers resolve the current backend lazily at invocation.
+
+
+# MLflow/HTTP clients start threads before exploration. Forking that process
+# can inherit locked state; spawn starts each worker with fresh clients.
+Pool = get_context("spawn").Pool
 
 
 def main(
@@ -317,7 +322,10 @@ def main(
                     try:
                         results[i] = job.get(timeout=remaining)
                     except multiprocessing.TimeoutError:
-                        logger.info(f"Pipeline {i} execution timed out")
+                        logger.info(
+                            f"Pipeline {i} did not return before the shared exploration deadline "
+                            "(including queue wait)"
+                        )
                         results[i]["status"] = PipelineStatus.TIMED_OUT
                     except Exception as e:  # noqa: BLE001 - preserve independent worker failures
                         logger.error(
@@ -326,6 +334,7 @@ def main(
                         results[i]["status"] = PipelineStatus.FAILED
                         failed += 1
 
+            logger.info("Exploration workers stopped; collecting completed candidates")
             total_training_time: float = 0.0
             semantic_validation_failure_reasons: dict[int, list[str]] = {}
             for r in results:

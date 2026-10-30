@@ -195,13 +195,21 @@ def checkout_lock():
             stream.write(b"0")
             stream.flush()
             stream.seek(0)
-            acquire = lambda: msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
-            release = lambda: msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+
+            def acquire():
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+
+            def release():
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
         else:
             import fcntl
 
-            acquire = lambda: fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            release = lambda: fcntl.flock(stream, fcntl.LOCK_UN)
+            def acquire():
+                fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+            def release():
+                fcntl.flock(stream, fcntl.LOCK_UN)
+
         try:
             acquire()
         except OSError as exc:

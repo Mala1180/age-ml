@@ -41,6 +41,10 @@ def download_openml_datasets(datasets: Mapping[str, int], path: Path) -> None:
                 f"Dataset {dataset_name} requires one explicit OpenML target"
             )
         X, y, _, _ = dataset.get_data(dataset_format="dataframe", target=target)
+        if not isinstance(X, DataFrame) or not isinstance(y, pd.Series):
+            raise ValueError(
+                f"Dataset {dataset_name} did not return a feature frame and one target series"
+            )
         df: DataFrame = pd.concat([X, y], axis=1)
         df.to_csv(path / f"{dataset_name}.csv", index=False)
         (path / f"{dataset_name}.metadata.json").write_text(

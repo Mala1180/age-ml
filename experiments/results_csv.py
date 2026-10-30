@@ -129,6 +129,7 @@ def build_experiment_summary_row(
     if not isinstance(token_usage, Mapping):
         token_usage = {}
 
+    actual_pipelines: int | str
     pipeline_run_ids = result.get("pipeline_run_ids", {})
     if isinstance(pipeline_run_ids, Mapping):
         actual_pipelines = sum(1 for run_id in pipeline_run_ids.values() if run_id)
