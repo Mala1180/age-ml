@@ -119,7 +119,11 @@ def compute_meta_features_from_frame(
     numeric: list[str] = [
         column for column in features.columns if _is_numeric(features[column])
     ]
-    skew = features[numeric].skew(numeric_only=True).abs().to_numpy() if numeric else []
+    skew = (
+        features[numeric].skew(numeric_only=True).abs().to_numpy()
+        if numeric
+        else np.array([], dtype=float)
+    )
     counts = (
         df[resolved_target].value_counts(dropna=True)
         if task == CLASSIFICATION

@@ -26,7 +26,7 @@ class EnvironmentBearerAuth(httpx.Auth):
 
 
 @lru_cache(maxsize=8)
-def _build_model(config):
+def _build_model(config, process_id=None):
     if config.provider == "ollama":
         from langchain_ollama import ChatOllama
 
@@ -56,7 +56,7 @@ def _build_model(config):
 
 
 def get_model():
-    return _build_model(current_llm_config())
+    return _build_model(current_llm_config(), os.getpid())
 
 
 class ConfiguredModel:

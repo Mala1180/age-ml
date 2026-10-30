@@ -154,6 +154,14 @@ def load_info(state: ExecutionAgentState) -> ExecutionAgentState:
 
 def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
     hyperparameter_names = list(state["pipeline"].extract_hyperparameters().keys())
+    hyperparameter_arguments = (
+        ", " + ", ".join(hyperparameter_names) if hyperparameter_names else ""
+    )
+    hyperparameter_description = (
+        f"- {', '.join(hyperparameter_names)}: Hyperparameters for the pipeline"
+        if hyperparameter_names
+        else ""
+    )
     prompt: str = f"""
         You are generating python code for a machine learning pipeline.
         The pipeline to implement is the following:
@@ -164,12 +172,12 @@ def generate_pipeline_code(state: ExecutionAgentState) -> ExecutionAgentState:
         The code must be contained in a function called 'build_model'.
 
         The 'build_model' function MUST have the following signature:
-        def build_model(X_train, y_train{", " + ", ".join(hyperparameter_names) if hyperparameter_names else ""}):
+        def build_model(X_train, y_train{hyperparameter_arguments}):
 
         Where:
         - X_train: Training features (pandas DataFrame or numpy array)
         - y_train: Training target (pandas Series or numpy array)
-        {f"- {", ".join(hyperparameter_names)}: Hyperparameters for the pipeline" if hyperparameter_names else ""}
+        {hyperparameter_description}
 
         The function must:
         1. Build a fresh, UNFITTED sklearn-compatible estimator or pipeline.
@@ -256,7 +264,10 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
     pipeline_id: int = state["pipeline"].id
     parent_run_id: str | None = state.get("pipeline_run_id")
     c = None
-    mlflow.sklearn.autolog(log_models=False)
+    # Parameters, CV scores, predictions and artifacts are logged explicitly below.
+    # sklearn autolog also intercepts nested estimators/defaults and conflicts with
+    # grid parameters in the same run, while repeating dataset uploads per fold.
+    mlflow.sklearn.autolog(disable=True)
     try:
         run_name: str = f"pipeline_{pipeline_id}_{algorithm}"
         with mlflow.start_run(

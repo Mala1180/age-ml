@@ -36,7 +36,10 @@ def test_the_datasets_of_an_interrupted_suite_are_recorded(tmp_path: Path) -> No
     """They are the ones ``run_suite`` skips instead of appending them twice."""
     results: Path = tmp_path / "results.csv"
     header: str = ",".join(SUMMARY_COLUMNS.values())
-    row = lambda dataset: f"40983,{dataset}," + "," * (len(SUMMARY_COLUMNS) - 3)
+
+    def row(dataset):
+        return f"40983,{dataset}," + "," * (len(SUMMARY_COLUMNS) - 3)
+
     results.write_text("\n".join([header, row("wilt"), row("texture")]))
 
     assert already_recorded(results) == set()  # Legacy dataset rows cannot resume v2.

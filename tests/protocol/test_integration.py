@@ -182,6 +182,9 @@ def test_app_smoke(
         assert failures.failure.str.contains("deliberate smoke fit failure").all()
         return
     assert result["status"] == "completed"
+    # This grid has no explicit hyperparameters. Estimator defaults must not be
+    # autologged into the candidate run, where they can collide with grid values.
+    assert mlflow.MlflowClient().get_run(result["best_run_id"]).data.params == {}
     out = tmp_path / "protocol"
     selection = json.loads((out / "selection.json").read_text())
     evidence = pd.read_csv(out / "validation_candidates.csv")
