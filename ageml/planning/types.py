@@ -1,4 +1,4 @@
-from typing import override
+from typing_extensions import override
 
 from ageml.common.types import Pipeline
 
