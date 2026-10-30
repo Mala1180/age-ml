@@ -79,3 +79,8 @@ follow_untyped_imports = true
 # Generated code and results: the artifacts of the campaign, and those of
 # the runs that preceded it.
 extend-exclude = ["experiments/results/", "old-results/"]
+
+[tool.coverage.run]
+# The source code to measure coverage on. The experiments folder is excluded because it contains scripts that are not part of the library.
+source = ["ageml", "experiments"]
+omit = ["experiments/results/*"]
