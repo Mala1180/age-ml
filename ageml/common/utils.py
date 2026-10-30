@@ -9,7 +9,9 @@ def save_file(
 ) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     file_path = out_dir / filename
-    file_path.write_text(content, encoding="utf-8")
+    # Keep the bytes equal to content.encode("utf-8") on every platform:
+    # Windows' default LF -> CRLF translation would invalidate code hashes.
+    file_path.write_text(content, encoding="utf-8", newline="\n")
     return file_path
 
 
