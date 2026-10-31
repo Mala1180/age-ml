@@ -1,3 +1,16 @@
+## [5.8.2](https://github.com/Mala1180/age-ml/compare/5.8.1...5.8.2) (2026-10-31)
+
+### Dependency updates
+
+* **deps:** update dependency boto3 to v1.43.123 ([#233](https://github.com/Mala1180/age-ml/issues/233)) ([e37b7be](https://github.com/Mala1180/age-ml/commit/e37b7be1c6b9d14061f7065ac51493e636d41e3a))
+* **deps:** update dependency mypy to v2.4.1 ([#235](https://github.com/Mala1180/age-ml/issues/235)) ([8c0f013](https://github.com/Mala1180/age-ml/commit/8c0f013045bb69bd26c206e0c44fafaa0250a262))
+* **deps:** update dependency pydantic to v2.14.2 ([#237](https://github.com/Mala1180/age-ml/issues/237)) ([4841539](https://github.com/Mala1180/age-ml/commit/484153904a0166fc8e555d9324ee3c361029a950))
+* **deps:** update dependency pytest to v9.2.0 ([#234](https://github.com/Mala1180/age-ml/issues/234)) ([ad621a4](https://github.com/Mala1180/age-ml/commit/ad621a444ba3b0a25510651dcddd2622c82ae216))
+
+### Bug Fixes
+
+* **deps:** update dependency pandas-stubs to ~=3.1.0 ([#238](https://github.com/Mala1180/age-ml/issues/238)) ([3688859](https://github.com/Mala1180/age-ml/commit/3688859ec2f142e0106ed39a41618b63127b92c7))
+
 ## [5.8.1](https://github.com/Mala1180/age-ml/compare/5.8.0...5.8.1) (2026-10-30)
 
 ### Dependency updates
