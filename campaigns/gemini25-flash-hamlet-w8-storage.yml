@@ -1,0 +1,28 @@
+name: gemini25-flash-hamlet-cv-w8-storage
+model:
+  provider: gemini
+  name: gemini-2.5-flash
+  seed: 42
+  temperature: 0.0
+specification: campaigns/gemini-w8-storage-spec.yml
+output_dir: experiments/results/gemini25-flash-hamlet-cv-w8-storage
+repetitions:
+- 1
+- 2
+- 3
+- 4
+- 5
+evaluation_protocol: hamlet_cv
+run_seed: 42
+split_seed: 42
+time_budget_seconds: 3600
+baseline: true
+ablations:
+  specification:
+  - poor
+  - specific
+  validation:
+  - no-semantic-retry
+  - no-execution-retry
+  no_csp: true
+artifact_retention: best

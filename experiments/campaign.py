@@ -69,6 +69,7 @@ class Campaign(StrictModel):
     run_seed: StrictInt = 42
     evaluation_protocol: Literal["holdout", "hamlet_cv"] = "holdout"
     time_budget_seconds: StrictInt | None = None
+    artifact_retention: Literal["all", "best"] = "all"
     baseline: bool = True
     ablations: Ablations = Field(default_factory=Ablations)
     datasets: dict[str, dict[str, StrictInt]] = Field(
@@ -172,6 +173,7 @@ def build_plan(config):
         "protocol_version": VERSION,
         "evaluation_protocol": config.evaluation_protocol,
         "run_seed": config.run_seed,
+        "artifact_retention": config.artifact_retention,
         "cv_folds_per_candidate": 10
         if config.evaluation_protocol == "hamlet_cv"
         else 0,
@@ -387,6 +389,7 @@ def run(config: str, dry_run: bool = False):
                     split_manifests=splits,
                     split_seed=settings.split_seed,
                     download_datasets=False,
+                    artifact_retention=settings.artifact_retention,
                     **options,
                 )
                 _save_or_verify(

@@ -205,6 +205,17 @@ def test_app_smoke(
     else:
         assert len(pd.read_csv(out / "test_predictions.csv")) == 20
     assert result["artifacts"]["best_run"]
+    # After the dataset has completed, loser binaries can be removed without
+    # deleting scores, runs, code, or the selected model.
+    from ageml.storage import prune_nonwinning_models
+    from ageml.common.client import get_model_from_run_id
+
+    cleanup = prune_nonwinning_models(out)
+    assert cleanup["removed_models"] == 1
+    assert cleanup["removed_bytes"] > 0
+    assert get_model_from_run_id(result["best_run_id"]) is not None
+    assert prune_nonwinning_models(out)["removed_models"] == 0
+    assert (out / "storage_cleanup.json").exists()
     assert (
         json.loads((out / "protocol.json").read_text())["access_boundary"][
             "filesystem_isolation"

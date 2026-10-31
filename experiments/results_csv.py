@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 from collections.abc import Mapping, Sequence
 from datetime import timedelta
 from pathlib import Path
@@ -94,6 +95,8 @@ def _append_row(
         if not file_exists:
             writer.writeheader()
         writer.writerow(normalized_row)
+        f.flush()
+        os.fsync(f.fileno())
     return path
 
 

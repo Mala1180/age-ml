@@ -37,6 +37,7 @@ from ageml.protocol import (
     write_json,
 )
 from ageml.specification import Specification
+from ageml.storage import artifact_workspace, downloaded_artifact
 
 # Agent modules are imported after the run configuration is exported. Their
 # structured client wrappers resolve the current backend lazily at invocation.
@@ -254,9 +255,12 @@ def main(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name: str = f"pipelines_exploration-{timestamp}"
     session: str = run_name
-    with mlflow.context(
-        tags={"session": session},
-        metadata={"mlflow.trace.session": session},
+    with (
+        artifact_workspace(),
+        mlflow.context(
+            tags={"session": session},
+            metadata={"mlflow.trace.session": session},
+        ),
     ):
         planning = plan(
             {
@@ -380,23 +384,18 @@ def main(
             # remove tmp artifacts saved during execution agent phase
             shutil.rmtree(Path("tmp"), ignore_errors=True)
 
-            from ageml.common.client import get_model_from_run_id
-
             def load_candidate(c):
-                artifact = Path(
-                    mlflow.artifacts.download_artifacts(
-                        run_id=c["run_id"], artifact_path="model"
-                    )
-                )
-                files = sorted(artifact.rglob("*.pkl"))
-                if len(files) != 1 or file_hash(files[0]) != c["model_sha256"]:
-                    raise ValueError("Model artifact checksum mismatch")
-                code_file = mlflow.artifacts.download_artifacts(
-                    run_id=c["run_id"], artifact_path="code.py"
-                )
-                if file_hash(code_file) != c["code_sha256"]:
-                    raise ValueError("Generated code artifact checksum mismatch")
-                return get_model_from_run_id(c["run_id"])
+                with downloaded_artifact(c["run_id"], "model") as artifact:
+                    files = sorted(artifact.rglob("*.pkl"))
+                    if len(files) != 1 or file_hash(files[0]) != c["model_sha256"]:
+                        raise ValueError("Model artifact checksum mismatch")
+                    with downloaded_artifact(c["run_id"], "code.py") as code_file:
+                        if file_hash(code_file) != c["code_sha256"]:
+                            raise ValueError(
+                                "Generated code artifact checksum mismatch"
+                            )
+                    # Load the verified local copy, not a second runs:/ download.
+                    return mlflow.pyfunc.load_model(str(artifact))
 
             def test_provider():
                 heldout = df.iloc[protocol["partitions"]["test"]]
