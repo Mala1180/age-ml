@@ -18,6 +18,7 @@ from ageml.common.llm_config import resolve_llm_config
 from ageml.common.utils import copy_out_artifacts, safe_filename_part, save_file
 from ageml.protocol import VERSION, digest, file_hash, prepare
 from ageml.specification import Specification
+from ageml.storage import prune_nonwinning_models
 from experiments.download_datasets import (
     DEFAULT_OPENML_DATASETS,
     download_all_openml_datasets,
@@ -66,6 +67,7 @@ def run_suite(
     model_seed: int | None = None,
     model_temperature: float | None = None,
     time_budget_seconds: int | None = None,
+    artifact_retention: str = "all",
 ) -> Path:
     """Run every dataset of the suite and append one summary row per dataset.
 
@@ -87,6 +89,8 @@ def run_suite(
     Returns:
         The path of the written ``results.csv``.
     """
+    if artifact_retention not in ("all", "best"):
+        raise ValueError("artifact_retention must be all or best")
     llm_config = resolve_llm_config(
         model_name,
         model_provider,
@@ -133,6 +137,7 @@ def run_suite(
             identity = digest(
                 {
                     "protocol": VERSION,
+                    "artifact_retention": artifact_retention,
                     "run_seed": run_seed,
                     "time_budget_seconds": time_budget_seconds,
                     "source": file_hash(dataset_path),
@@ -154,6 +159,15 @@ def run_suite(
                 }
             )
             if identity in recorded:
+                if artifact_retention == "best":
+                    saved_root = (
+                        output_dir
+                        / "protocol"
+                        / safe_filename_part(dataset_name)
+                        / identity
+                    )
+                    for saved_result in saved_root.rglob("result.json"):
+                        prune_nonwinning_models(saved_result.parent)
                 logger.info(f"Skipping completed identity for {dataset_name}")
                 continue
             protocol_dir = (
@@ -227,4 +241,7 @@ def run_suite(
             )
             row["Resume Identity"] = identity
             save_experiment_summary_to_csv(row=row, csv_path=output_path)
+            if artifact_retention == "best":
+                cleanup = prune_nonwinning_models(protocol_dir)
+                logger.info(f"Model artifact cleanup for {dataset_name}: {cleanup}")
     return output_path

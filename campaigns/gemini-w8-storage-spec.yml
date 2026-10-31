@@ -1,0 +1,323 @@
+budgets:
+  pipelines: 30
+  workers: 8
+  generation_attempts: 10
+  time:
+    hours: 2
+pipeline:
+  defaults:
+    candidates: []
+    mandatory: false
+  steps:
+    imputation:
+      candidates:
+      - simple_imputer:
+          params:
+            imputation_strategy:
+            - mean
+            - median
+      - iterative_imputer:
+          params:
+            max_iter:
+            - 10
+    discretization:
+      candidates:
+      - kbins:
+          params:
+            n_bins:
+            - 10
+            encode:
+            - ordinal
+            discretization_strategy:
+            - quantile
+      - binarizer:
+          params:
+            threshold:
+            - 0.0
+    normalization:
+      candidates:
+      - power_transformer:
+          params:
+            method:
+            - yeo-johnson
+      - robust_scaler:
+          params:
+            quantile_range:
+            - - 25.0
+              - 75.0
+      - standard:
+          params: {}
+      - minmax:
+          params:
+            feature_range:
+            - - 0
+              - 1
+    features:
+      candidates:
+      - select_k_best:
+          params:
+            k:
+            - 5
+            - 10
+      - pca:
+          params:
+            n_components:
+            - 0.95
+    rebalancing:
+      candidates:
+      - near_miss:
+          params:
+            version:
+            - 1
+      - smote:
+          params:
+            k_neighbors:
+            - 5
+    classification:
+      candidates:
+      - decision_tree:
+          params:
+            max_depth:
+            - null
+            - 10
+            min_samples_split:
+            - 2
+            - 5
+      - knn:
+          params:
+            n_neighbors:
+            - 5
+            - 11
+            weights:
+            - uniform
+            - distance
+      - naive_bayes:
+          params:
+            var_smoothing:
+            - 1e-9
+      - nn:
+          params:
+            hidden_layer_sizes:
+            - - 10
+            - - 20
+            alpha:
+            - 0.001
+            max_iter:
+            - 300
+      - random_forest:
+          params:
+            n_estimators:
+            - 200
+            max_depth:
+            - null
+            - 20
+      - ada_boost:
+          params:
+            n_estimators:
+            - 100
+            learning_rate:
+            - 0.1
+    regression:
+      candidates:
+      - linear:
+          params: {}
+      - ridge:
+          params:
+            alpha:
+            - 1.0
+            - 10.0
+      - lasso:
+          params:
+            alpha:
+            - 0.01
+            - 0.1
+      - elastic_net:
+          params:
+            alpha:
+            - 0.01
+            l1_ratio:
+            - 0.5
+      - svr:
+          params:
+            kernel:
+            - rbf
+            C:
+            - 1.0
+            - 10.0
+            epsilon:
+            - 0.1
+      - knn_regressor:
+          params:
+            n_neighbors:
+            - 5
+            - 11
+            weights:
+            - distance
+      - random_forest_regressor:
+          params:
+            n_estimators:
+            - 200
+            max_depth:
+            - null
+            - 20
+      - nn_regressor:
+          params:
+            hidden_layer_sizes:
+            - - 10
+            - - 20
+            alpha:
+            - 0.001
+            max_iter:
+            - 300
+ordering:
+- sequence:
+  - imputation
+  - discretization
+  - normalization
+  - features
+  - rebalancing
+  - classification
+  - regression
+constraints:
+- if:
+    dataset:
+      feature:
+        named_like: class
+        is_target: true
+        data_type:
+        - categorical
+        - integer
+  require:
+  - classification
+- if:
+    dataset:
+      feature:
+        is_target: true
+        data_type:
+        - float
+        - integer
+        cardinality: high
+  require:
+  - regression
+- if:
+    step: classification
+  forbid:
+  - regression
+- if:
+    step: regression
+  forbid:
+  - classification
+- if:
+    step:
+      classification: decision_tree
+  forbid:
+  - normalization
+  - features
+- if:
+    step:
+      classification: random_forest
+  forbid:
+  - normalization
+- if:
+    step:
+      classification: knn
+  require:
+  - normalization
+  - features
+- if:
+    step:
+      classification: nn
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      classification: naive_bayes
+  forbid:
+  - normalization
+- if:
+    step:
+      classification: ada_boost
+  forbid:
+  - normalization
+- if:
+    step: regression
+  forbid:
+  - rebalancing
+- if:
+    step:
+      regression: linear
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: ridge
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: lasso
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: elastic_net
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: svr
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: knn_regressor
+  require:
+  - normalization
+  - features
+- if:
+    step:
+      regression: nn_regressor
+  require:
+  - normalization
+  forbid:
+  - discretization
+- if:
+    step:
+      regression: random_forest_regressor
+  forbid:
+  - normalization
+- if:
+    step:
+      features: pca
+  require:
+  - normalization
+- if:
+    step:
+      features: select_k_best
+  forbid:
+  - discretization
+- if:
+    step:
+      rebalancing: smote
+  require:
+  - imputation
+- if:
+    step:
+      imputation: iterative_imputer
+  require:
+  - normalization
+technical_details:
+- use Python for the implementation
+- use scikit-learn for the ML algorithms (using Pipeline class if possible)

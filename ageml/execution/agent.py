@@ -33,6 +33,7 @@ from ageml.execution.utils import (
 from ageml.fitting import evaluate_candidate, seed_process
 from ageml.protocol import VERSION, candidate_key, file_hash, write_json
 from ageml.specification import Specification
+from ageml.storage import downloaded_artifact
 
 
 class ExecutionPipeline(Pipeline):
@@ -377,12 +378,13 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                         serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_PICKLE,
                     )
 
-                    artifact_dir = mlflow.artifacts.download_artifacts(
-                        run_id=fitted_run.info.run_id, artifact_path="model"
-                    )
-                    model_files = sorted(Path(artifact_dir).rglob("*.pkl"))
-                    if len(model_files) != 1:
-                        raise ValueError("Expected one serialized model artifact")
+                    with downloaded_artifact(
+                        fitted_run.info.run_id, "model"
+                    ) as artifact_dir:
+                        model_files = sorted(artifact_dir.rglob("*.pkl"))
+                        if len(model_files) != 1:
+                            raise ValueError("Expected one serialized model artifact")
+                        model_sha256 = file_hash(model_files[0])
                     c.update(
                         {
                             "candidate_key": candidate_key(
@@ -401,7 +403,7 @@ def execute_code(state: ExecutionAgentState) -> ExecutionAgentState:
                             "code_sha256": hashlib.sha256(
                                 state["pipeline"].code.encode()
                             ).hexdigest(),
-                            "model_sha256": file_hash(model_files[0]),
+                            "model_sha256": model_sha256,
                             "artifact_status": "logged",
                             "fit_seed": state.get("run_seed", 42),
                             "completed_at": time.time(),

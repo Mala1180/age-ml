@@ -4,6 +4,8 @@ repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 # Python hash randomization is fixed before starting the interpreter.
 export PYTHONHASHSEED="${PYTHONHASHSEED:-42}"
+# Tracking stays local; the experiment does not require MLflow telemetry.
+export MLFLOW_DISABLE_TELEMETRY="${MLFLOW_DISABLE_TELEMETRY:-true}"
 # Limit nested BLAS/OpenMP parallelism inside the eight pipeline workers.
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-1}"

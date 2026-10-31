@@ -25,7 +25,11 @@ def digest(value):
 
 
 def file_hash(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    hasher = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            hasher.update(block)
+    return hasher.hexdigest()
 
 
 def write_json(path, value, exclusive=False):
@@ -289,7 +293,11 @@ def select_and_evaluate(
             checked_predictions(model, development_X, protocol["task"], classes)
             c["eligible"] = True
             # Identical semantic keys with different evidence are rejected below.
-            usable[c["run_id"]] = model
+            # CV needs scores and artifact evidence, not all fitted models alive
+            # simultaneously. A single model can occupy gigabytes of RAM.
+            if protocol.get("evaluation_protocol") != "hamlet_cv":
+                usable[c["run_id"]] = model
+            del model
         except Exception as exc:  # noqa: BLE001 - artifact and model failures are terminal evidence
             c["eligibility_failure"] = str(exc)
             c.setdefault("failure", str(exc))

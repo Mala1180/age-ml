@@ -5,6 +5,7 @@ from mlflow import MlflowClient
 from mlflow.entities import Run, Trace
 
 from ageml import logger
+from ageml.storage import downloaded_artifact
 
 client = MlflowClient()
 
@@ -45,7 +46,8 @@ def get_best_pipeline_run(
 
 
 def get_model_from_run_id(run_id: str):
-    return mlflow.pyfunc.load_model(f"runs:/{run_id}/model")
+    with downloaded_artifact(run_id, "model") as artifact:
+        return mlflow.pyfunc.load_model(str(artifact))
 
 
 def get_run_name_from_run_id(run_id: str) -> str:
