@@ -337,3 +337,9 @@ dal solo training e consumano gli stessi split congelati usati dalla suite.
 Per splitter a 10 fold senza shuffle, seed controllati e profili Ollama da un'ora,
 vedere [docs/hamlet-alignment.md](docs/hamlet-alignment.md). Questi profili riportano
 il punteggio CV di selezione separatamente dal test indipendente.
+
+### Analisi dei risultati delle campagne
+
+Per esportare una singola ripetizione, committare uno snapshot leggero e generare
+tabelle e figure dalla struttura corrente dei risultati, vedere
+[docs/campaign-analysis.md](docs/campaign-analysis.md).
