@@ -55,7 +55,7 @@ ruff-fix = "ruff check --fix"
 format = "ruff format"
 format-check = "ruff format --check"
 mypy = "mypy ageml tests"
-compile = "python -m compileall ageml tests"
+compile = "python -m compileall ageml tests scripts"
 static-checks = [
     "ruff-check",
     "mypy",
@@ -78,9 +78,9 @@ follow_untyped_imports = true
 [tool.ruff]
 # Generated code and results: the artifacts of the campaign, and those of
 # the runs that preceded it.
-extend-exclude = ["experiments/results/", "old-results/"]
+extend-exclude = ["experiments/results/", "old-results/", "snapshots/", "reports/"]
 
 [tool.coverage.run]
 # The source code to measure coverage on. The experiments folder is excluded because it contains scripts that are not part of the library.
-source = ["ageml", "experiments"]
+source = ["ageml", "experiments", "scripts"]
 omit = ["experiments/results/*"]

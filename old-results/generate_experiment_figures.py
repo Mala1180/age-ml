@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -750,8 +752,27 @@ def main() -> None:
         action="store_true",
         help="Only generate per-experiment figures, without aggregate comparison charts.",
     )
+    parser.add_argument("--campaign", type=Path, help="Current campaign or immutable snapshot root (new layout).")
+    parser.add_argument("--repetitions", default="1", help="For campaign mode: comma-separated IDs or all.")
+    parser.add_argument("--allow-incomplete", action="store_true", help="For campaign mode: show missing outcomes explicitly.")
     parser.add_argument("--formats", nargs="+", default=["png", "pdf"], help="Output formats, e.g. png pdf svg")
     args = parser.parse_args()
+    campaign = args.campaign
+    if campaign is None and len(args.inputs) == 1:
+        candidate = resolve_result_path(args.inputs[0])
+        if candidate.is_dir() and (candidate / "campaign.json").is_file():
+            campaign = candidate
+    if campaign is not None:
+        if args.campaign and args.inputs:
+            parser.error("Use --campaign or a positional campaign root, not both")
+        script = Path(__file__).resolve().parents[1] / "scripts/campaign_analysis.py"
+        target = args.outdir or str(Path("reports") / campaign.name / ("run-" + args.repetitions.replace(",", "-")))
+        command = [sys.executable, str(script), "report", "--campaign", str(campaign),
+                   "--outdir", str(target), "--repetitions", args.repetitions,
+                   "--formats", *args.formats]
+        if args.allow_incomplete:
+            command.append("--allow-incomplete")
+        raise SystemExit(subprocess.run(command).returncode)
     inputs = args.inputs or DEFAULT_RESULT_DIRS
     if args.outdir and len(inputs) != 1:
         parser.error("--outdir can only be used with a single input")
