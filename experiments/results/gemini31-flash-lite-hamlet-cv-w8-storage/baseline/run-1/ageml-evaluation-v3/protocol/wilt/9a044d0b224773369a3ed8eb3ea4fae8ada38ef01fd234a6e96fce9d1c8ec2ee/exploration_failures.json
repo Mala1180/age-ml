@@ -1,0 +1,221 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "0210ea98fce94d9896d6f52a29bfd917",
+    "semantic_feedback": [
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' parameter passed to the function is used as the 'imputation_order' for the IterativeImputer, but 'method' is intended to control the PowerTransformer, while the 'imputation_order' should be a fixed valid string like 'ascending'. Additionally, the previous execution failed because 'method' (which can be 'yeo-johnson') is not a valid value for 'imputation_order'.",
+      "The code is not compliant because the 'method' parameter provided in the function signature is ignored in the configuration of the pipeline components, failing to utilize the provided hyperparameter for the PowerTransformer as intended.",
+      "The code is not compliant because the 'method' parameter provided in the function signature is ignored in the configuration of the pipeline components, failing to utilize the provided hyperparameter for the PowerTransformer as intended.",
+      "The code is not compliant because the 'version' parameter passed to the function is being used as the 'method' argument for the PowerTransformer, but the provided 'version' value is an integer (1) which is invalid for the PowerTransformer, which expects 'yeo-johnson' or 'box-cox'. Additionally, the 'method' parameter passed to the function is completely ignored."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "3ba1fe588732484bb7153756b27a502c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "9581a226c1b043d0ad0619400be15264",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "5441e1f233e445da950d023df752f495",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "39c0cd434a2b40ca9ce5fd3558b91c5f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "25f90db8fced42a0a8ef9d08b674b4e6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "b2d29757648b4e25b67282854e44b910",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "23e93078bcee4e27af6086d6041ff7f7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "473cb0cfae194018bf6e4ec3167c93d3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "72b21ed64fd1473784f969a3cce6d49e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "43ecb3c561cf4c1aa0e37282b627a1a8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "e877f41a33664eb4b7dbcbc269b07e37",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "e55a34c3500b4defaf87b7c16e7be3b6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "aef023a2b0fb44ffb6b51700d8f1c31b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "0e69dcdcf3f147538d053f11768769e5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "bea7abd8fdaf46a19a32001335bed0be",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "714dccd2eb55474294aa425378419070",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "9911705bbb304b45bc5877c0dbbdd1d6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "8f2a073809c247099edd53c227634944",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "160eb4ed662d49a9a821ff0ae2dea0ff",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8ba40b84213b4fa7befac0492c7d2ad5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "22a472fc4ee34e9b99e640a808fab91c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "af305af6e5ca4db58f15d2a628bab440",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "c597682005cc48b4989c8c429c806b91",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "535a0550ab13487b975d0f2aceb89233",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "c9a5e7ffdc9345d4968e5f0a08411c3c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "e05cf2d8b4704476b08bec4d9b8dd64d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "e226d6f7d9254586b712668ac08e6039",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "336c1b88607549679a77816cac3b7b7c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "ddbc4d2082584b349162309dc71abde1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

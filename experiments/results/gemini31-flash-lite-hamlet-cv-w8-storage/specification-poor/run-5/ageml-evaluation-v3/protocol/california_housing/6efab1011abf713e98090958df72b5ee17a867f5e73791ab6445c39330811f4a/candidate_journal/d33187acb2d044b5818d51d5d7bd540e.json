@@ -1,0 +1,93 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "2d68f3eee0f2e8630fcaf576d219ed7dc16e2846a8612b884a4a617f985b0240",
+  "code_sha256": "12f129ddf67ed004a2477f9c3ab9081db45323c8019c89e05af934012b8b4b76",
+  "completed_at": 1794268274.183303,
+  "cv_fold_scores": [
+    74863.79391508304,
+    83782.88505662246,
+    89990.69070026746,
+    61962.82255109908,
+    95938.58965838034,
+    81703.63826417312,
+    73230.6587916433,
+    96292.92508828959,
+    113446.8363096782,
+    70650.16531464999
+  ],
+  "effective_random_states": [
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "max_iter": 10,
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "1b2f710320bdb113398de91f18351f713ba05438623d3f020e4670e7d8232295",
+  "pipeline_id": 5,
+  "pipeline_run_id": "7cb0fddf251f410b80f0221efa20e12d",
+  "run_id": "d33187acb2d044b5818d51d5d7bd540e",
+  "run_identity": "74d609a8c258f136883d7cbd76578794a7c8a8ffa983e3c3534beb0ffa13c73a",
+  "validation_score": 84186.30056498866,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

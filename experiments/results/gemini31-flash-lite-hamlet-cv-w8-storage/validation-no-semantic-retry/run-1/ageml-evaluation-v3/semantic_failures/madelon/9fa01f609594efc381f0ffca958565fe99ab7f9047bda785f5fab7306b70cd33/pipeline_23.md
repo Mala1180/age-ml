@@ -1,0 +1,2 @@
+Attempt 1:
+The code is syntactically correct but the previous execution errors suggest that the environment might be sensitive to the formatting of multiple statements on a single line. I will provide the code in a standard multi-line format to ensure compatibility.

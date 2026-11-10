@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it uses a single-line format which causes syntax errors in the execution environment, and it includes extra preprocessing steps (OneHotEncoder, StandardScaler) not specified in the original pipeline requirements.

@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because the Binarizer step is applied after the OneHotEncoder, which creates sparse/binary data. Applying Binarizer to one-hot encoded categorical features is mathematically invalid and will cause errors or unexpected behavior in the pipeline.

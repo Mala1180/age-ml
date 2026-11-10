@@ -1,0 +1,223 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "ee88fe3b949243c6a3cd2f83a9437be1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "faf028f598894ad5b289e032e2ed799e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "6d2f850f1af0407dad858c3cf079ead3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "5c606e45ca6647679f48ecc9ad24e87b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "4743f8360b9144aa9de8194686b38479",
+    "semantic_feedback": [
+      "The pipeline implementation is not fully compliant because it introduces a ColumnTransformer with OneHotEncoder for categorical variables, which was not specified in the pipeline steps. Additionally, the IterativeImputer is applied to categorical columns in a way that is not standard for that imputer, and the pipeline structure deviates from the requested sequence by adding extra preprocessing steps not explicitly requested.",
+      "The code is not compliant because the pipeline steps must be applied to the entire dataset. The use of ColumnTransformer with OneHotEncoder is necessary to handle categorical data for the IterativeImputer and Lasso, but the pipeline structure must strictly follow the sequence: imputation, normalization, feature selection, and regression. The current implementation is technically correct for the data type constraints, but the prompt implies a direct sequence of operations.",
+      "The code is not compliant because the IterativeImputer cannot handle the sparse output of the OneHotEncoder directly, and the pipeline structure forces the imputer to run after the categorical encoding, which is not standard. Furthermore, the pipeline steps must be applied to the entire dataset, and the current implementation uses a ColumnTransformer that splits the data, which is not explicitly requested in the pipeline steps."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "b527b30f68684c72be62237db97e17aa",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "be7e46642ec94660a75617a0f3250a54",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "5e5c2e52c04740a98436fa334ddd18d9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "ca1774df827543a5aa1689a36feb558f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "01ba67c994e642efad7f8626889a87f4",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because the pipeline steps (imputation, discretization, normalization, pca, regression) must be applied to the entire dataset, but the implementation introduced a ColumnTransformer that splits numeric and categorical features. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure should strictly follow the sequence provided without branching."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "0a9c5323707d47b284002a59e61aea4c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "42652f31a2aa4fdf979e6d24b3ca15ff",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "447cfdbc3f014f189e44be427ea316bb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "cc6ffe4a40e34487b46ec12755e6845f",
+    "semantic_feedback": [
+      "The generated code is not fully compliant with the pipeline requirements. Specifically, the pipeline steps were defined as 1. imputation, 2. discretization, 3. normalization, 4. pca. The provided code introduces a ColumnTransformer that splits the data into numeric and categorical branches, applying different transformations to each, which deviates from the requested linear sequence of operations. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure does not strictly follow the requested sequential order for all features."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "8be25cb4bf294daeab986704ca7f0f84",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "6db563544ab94b5b8004fb91dcea9b75",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "62060fb581ad43d48fc8e4adac58c9bb",
+    "semantic_feedback": [
+      "The pipeline implementation is incorrect because it applies the Binarizer and RobustScaler in parallel via ColumnTransformer, whereas the pipeline requirements specify a sequential process (discretization followed by normalization). Additionally, the Binarizer is applied to all numeric features, which may not be appropriate for all columns, and the pipeline lacks a final estimator.",
+      "The code is not compliant because the Binarizer and RobustScaler are applied to the entire dataset after a ColumnTransformer that only selects numeric columns. While the sequence is correct, the Binarizer will transform the entire feature matrix into binary values (0 or 1) before the RobustScaler is applied, which effectively renders the RobustScaler useless as it will only be scaling binary data. Furthermore, the pipeline lacks a final estimator (regressor) to actually perform the task of predicting the target variable."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "92826e240a3043c6b0e8a0ae5770e9a3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "7cb1054b66a943f8bbdebde6c8b097d7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "4bd923905dd84affab5d58a4b873da82",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "e88b806e35f3443d916636aba44fbf77",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "4223124ecc3d49fbb81eece9ca0a6238",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "0edcdac8c01246268c8d0fb460ee1f76",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "d9999e91db3e4b0bb73596b5c2b44cd9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "7e9af080976b4fbd8ccadb88b6bc6c34",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "22780ae0c0864db099c515a564dcbdcb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "cf4f9d2009ca4315b5c7113cb0295d6d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "b684adab894c4e2bad3e2cb369ac8418",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "ff812431657b4b039b88f5e86e4971fb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "36004f05929a49acb8c3c93ded96359b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

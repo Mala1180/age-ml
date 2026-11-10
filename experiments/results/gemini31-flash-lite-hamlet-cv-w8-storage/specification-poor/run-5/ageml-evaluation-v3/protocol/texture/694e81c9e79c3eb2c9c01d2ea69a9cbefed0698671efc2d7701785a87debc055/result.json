@@ -1,0 +1,102 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/texture/694e81c9e79c3eb2c9c01d2ea69a9cbefed0698671efc2d7701785a87debc055/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/texture/694e81c9e79c3eb2c9c01d2ea69a9cbefed0698671efc2d7701785a87debc055/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/texture/694e81c9e79c3eb2c9c01d2ea69a9cbefed0698671efc2d7701785a87debc055/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/texture/694e81c9e79c3eb2c9c01d2ea69a9cbefed0698671efc2d7701785a87debc055/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 19,
+  "best_run_id": "1ea72c829dcd4feba097745a1a4114d0",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9927272727272727,
+    0.9836363636363636,
+    0.989090909090909,
+    0.989090909090909,
+    0.990909090909091,
+    0.9854545454545455,
+    0.98,
+    0.9854545454545455,
+    0.9927272727272729,
+    0.9927272727272727
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 159.02800000000002,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "c57d6e2e6a2746e49c50fa715166302f",
+    "1": "0650241655394a69a518fa53f1e9942a",
+    "2": "98fffea4c7f245c591839f210ccdf2e9",
+    "3": "e74ba67427904024aa57cd5dbe897a5d",
+    "4": "f6d55bd3933c4c7db0a77fee412bf161",
+    "5": "4c0c1f3a836b41aa8ababacbe1f9e7d8",
+    "6": "497fcc5e3b124c0db5c7259a7c90bbef",
+    "7": "942f3b6bf52d4fe0b85e0f0f2bc8e77b",
+    "8": "7994e8a067bc475e9452806c9b8c9164",
+    "9": "2352119b11584c47bbeb422d0bb4d872",
+    "10": "a2177a0c8c30419aa7deab22f5538a06",
+    "11": "3dddc75282214bf19d73f6352011247d",
+    "12": "a61082c95c3f48709e615a72fa50d4cd",
+    "13": "2c9962171ca6493081453bbdc557a0bc",
+    "14": "c0c44c71bbe8415990726a83cbc4f197",
+    "15": "d1adec7efc2c486c9706083435fcc860",
+    "16": "44838d70ce4d46fbbe0dc7603544c9a0",
+    "17": "e6d14ab00ea14c1eb97c5db477ce599a",
+    "18": "e8abbfd02bd04832a4aa865608045231",
+    "19": "24199117870a48a1aae5b81f04a50066",
+    "20": "91a0d29e93b94a8b8ed124b26cdf8bbd",
+    "21": "3f5b0b43e05f411daa71df2cc1d49e24",
+    "22": "d2a09098135144bdb2069c817aeace4d",
+    "23": "088c93d1b8394574bb97d8261df219e2",
+    "24": "411650fe66bd4d72b0c5e6ca0e9bd2ea",
+    "25": "ba4b46c11176490bb160ff8c4557473a",
+    "26": "71118d6137c649a0b4a4167f2a1a4b55",
+    "27": "4f8ee430411440d39db82d0c0b904395",
+    "28": "618b9bf782d04923bb857ed791350507",
+    "29": "8f9e85031e634451941b07d47f8a597d"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "173b1171fbdeee4aa0e5fab0e643dfabb72451f464fd9b9a054bf016464a6611",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "6701957b96ff56b465607522e38f9ee2d76800ced0324e79c9f3c2653351a1c5",
+  "runtime_human_readable": "0:06:45",
+  "runtime_seconds": 405.3209147825837,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.988181818181818,
+  "selected_candidate_key": "a6b37e41e09992bd554ea07613ecef0eda396ac134d2651623bb85bd76b848f6",
+  "selection_sha256": "4458f510c46614e5f9706f001dd543a8350dce16771b86dba081e1d2284df068",
+  "selection_validation_score": 0.988181818181818,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "The code is syntactically correct and follows the pipeline structure, but it fails during execution because the combination of Binarizer and PCA results in zero features being passed to the NearMiss sampler, which requires at least one feature.",
+      "The code is compliant with the pipeline steps, but the logic for n_components='mle' is not robust for all input scenarios, and the previous execution error indicates that the pipeline configuration (specifically the interaction between Binarizer and PCA) is causing a dimensionality issue that prevents the NearMiss sampler from receiving valid input features."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "a80eee61e65b7b4e1d809b5bfe009a74e2bef5667e7220f0055cae9ac7de8321",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.05538945000000001,
+    "input_tokens": 205705,
+    "output_cost": 0.07302749999999998,
+    "output_tokens": 3139,
+    "total_cost": 0.12841695,
+    "total_tokens": 208816
+  },
+  "training_time": 1511.9499999999998,
+  "validation_metric": "balanced_accuracy"
+}

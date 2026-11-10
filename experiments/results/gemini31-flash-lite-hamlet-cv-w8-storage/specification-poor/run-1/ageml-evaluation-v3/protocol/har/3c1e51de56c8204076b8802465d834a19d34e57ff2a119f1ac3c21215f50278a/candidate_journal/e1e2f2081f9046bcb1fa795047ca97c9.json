@@ -1,0 +1,84 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "50cf43b7875fe13930435a4c6448fb3a18dac4708fe44c5d64d8c39f7c97aa68",
+  "code_sha256": "540b80cf0fc30c98ac30b40f377f030cdae37546242c3b9f3826ba9a679c427f",
+  "completed_at": 1793926530.7183867,
+  "cv_fold_scores": [
+    0.5000637292389748,
+    0.5010637880659646,
+    0.5,
+    0.532015065913371,
+    0.514069264069264,
+    0.5042364452739475,
+    0.5159309564233163,
+    0.5042212726451867,
+    0.5017543859649123,
+    0.5002641947053538
+  ],
+  "effective_random_states": [
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "hidden_layer_sizes": [
+      10
+    ],
+    "k": 10,
+    "k_neighbors": 5,
+    "max_iter": 300,
+    "method": "yeo-johnson",
+    "threshold": 0.0
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "39cba3554242ff0215cfb34bca48ec1792b047d7afd4b607907bcb311acc06e7",
+  "pipeline_id": 11,
+  "pipeline_run_id": "0070556d0ae04030bb18ba59ef533e09",
+  "run_id": "e1e2f2081f9046bcb1fa795047ca97c9",
+  "run_identity": "be5ce323e3df9f081095b7688e49d7c98bd1b2f0d676b83ecbeb614657fe901b",
+  "validation_score": 0.5073619102300292,
+  "validation_split_hash": "d38ac3c1eae9808cec541d3ddff66bf85327db7d30a2f2b23ad76a294e863893"
+}

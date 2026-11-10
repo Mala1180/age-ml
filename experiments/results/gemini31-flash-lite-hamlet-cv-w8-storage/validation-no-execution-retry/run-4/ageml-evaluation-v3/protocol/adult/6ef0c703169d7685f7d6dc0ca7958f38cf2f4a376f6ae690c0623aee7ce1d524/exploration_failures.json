@@ -1,0 +1,220 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "bca6f1b4acc941978b7341a571285fac",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "9b0c73c66d7d41f1a51720c2c7a5f252",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "d1a7d4ed8bff4c02a98b11a0d45beefd",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "501667df92304c22a11efb9790aa4e4f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "66057bfb051b43ccafa701f02ad55f6e",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because it includes an unnecessary SimpleImputer for categorical features and a ColumnTransformer that excludes categorical features entirely, whereas the pipeline steps (discretization, normalization, PCA) should ideally be applied to the relevant features of the dataset. Additionally, the pipeline structure should directly reflect the requested steps.",
+      "The pipeline steps (discretization, normalization, PCA) are applied to the entire feature set after concatenation, but the discretization step is only applied to numeric features within the ColumnTransformer, which deviates from the requirement to apply the pipeline steps to the dataset as a whole."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "172f686cbb6d42aca1660612f72c70ea",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "23ee11ae74d44719ad13cfb8b245661b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "099aed9e4697402ea0fcc9190d28aebc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "274e0afa483441ebbf22d93674e28a09",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "e27787317062457f8199ebca770193e1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "85bb90f46a324006bcf4f5fe423dd08e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "b8a397842ed24c07941c9395c89b79da",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "93ce21e89f494ca48c755b7665e59213",
+    "semantic_feedback": [
+      "The provided code uses an IterativeImputer on categorical features, which is not natively supported by scikit-learn's IterativeImputer as it requires numerical input. Additionally, the pipeline structure includes a ColumnTransformer that was not explicitly requested in the pipeline steps, and the PCA step is applied after the categorical encoding, which is technically correct but the implementation of the imputer for categorical data is invalid."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "6e60d679ecf34e499bd8bc01e12b6848",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because it uses KBinsDiscretizer on categorical features, which is not standard practice and may cause errors depending on the input data. Additionally, the pipeline structure for categorical features is inconsistent with the requested steps (discretization, normalization, pca, knn) as it applies a different transformation logic to categorical columns compared to numeric ones.",
+      "The pipeline is not fully compliant because the discretization and normalization steps are only applied to numeric features, while categorical features are processed via OneHotEncoder, bypassing the requested discretization and normalization steps for the entire dataset."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "cde9c4142cf9469ca0733fcf855a3fa1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "e9cbbb9ddd2b4acea458e4425f1c8f4e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "076c377213cd4a8086f5f839a60196ec",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "b529960fe0db470a8f31a2dfbbcfa72d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "b3b73acd6dda494188a2978b5a80f2b6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "e75dad63f8264ef4a48d10d682487608",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "9fbe4ccc55aa4a14a049b43b21dc163b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "9fa46ebee54b4f3fb49bdf43cdfaa2dc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "cb85252d14b44124977cdda7a9d46a32",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "ffc02d8b7b5e47f9881227573fabcfd5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "d07760ff749946dfb0599bf764a9b38b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "f17ef2cdfc0a46b7943b9b5908b2b7e5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "0706c0b8684a40eca16c1773cbaea87d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "f20830c746db4739a891d8eb835cad47",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "accffadd19a74a679dcc59e1854c9f4e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "00f8597eab5243efa1d0fa5878b48ad2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

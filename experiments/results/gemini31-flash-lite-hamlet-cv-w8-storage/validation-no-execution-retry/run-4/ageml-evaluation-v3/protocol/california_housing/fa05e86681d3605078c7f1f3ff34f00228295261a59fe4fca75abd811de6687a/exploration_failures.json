@@ -1,0 +1,219 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "8920f7d1f3b04d83a5478ff3b09e0c3a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "017c95ce23a9465b9f08ab9d696d1e44",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "d9c5e53f249e440d953397057822d43b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "5a220fbdc67e4a38a8aca3058e940756",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "cf9c572def0d4d83927f1baf19b31dc3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "10f80ade797544b799dcf5a044735948",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "1ba76aed89434a5a8d3287c54d08a718",
+    "semantic_feedback": [
+      "The provided code is not fully compliant because the IterativeImputer cannot be applied directly to categorical features (strings) as implemented in the categorical_transformer pipeline. Additionally, the pipeline structure for categorical data should handle encoding before or during imputation if the imputer requires numerical input, or use a different imputation strategy for categorical columns."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "02b288bb05dd45f08d972ac0f2172f5f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "4fd9251c61f344f39cf34f0dd29bbecd",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "2daefc192f28439dbb654ad6dcad7245",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "8f3e52d24afe49feb18417c4f9aca024",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "212402f2b18343d6857bd72805a7ef93",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "90f2972b3d3e45df970640bc8b005336",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "9b113b969eff4af38e916664ca5772e3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "37ad80681ab6447984bc11e05f635bd1",
+    "semantic_feedback": [
+      "The provided code is not compliant because it includes an unnecessary OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) applied to the dataset as a whole."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "1e7fcf1385214455b1bed9d69a10adb0",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "26a802141d0a4420b8b5d348f7492cf9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "ee1a2d62ae414b00b96c16e5dfcc434e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "b9c2c5a515354cac9c4e00303a6c32d7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "3bcbf07cb37f4938a634699857b4afdb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8df949d50b3f4fd29ec51877729be5dd",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "eb4de3d046db46a1bfbc3d24b5ac8a32",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "1f9f5c458a0342f09d7cd81a8c3bdcfe",
+    "semantic_feedback": [
+      "The generated code includes a ColumnTransformer and a categorical transformer that were not requested in the pipeline steps. The pipeline specifically requested imputation, normalization, and regression, which should be applied to the dataset as a whole or handled consistently without adding extra preprocessing steps like one-hot encoding that were not specified.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OneHotEncoder to handle categorical data, which were not specified in the pipeline requirements. Furthermore, the pipeline should be a simple sequence of the three requested steps."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "a364eb20ecb24af9897e0d3ad39ec51f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "d7fd6e46e1a34d0d9770e0533b053ac4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "fd325d4bef62488a82ad9e777bc3bf2d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "388b4d46c0b74dc09fe0db73841f90d7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "1a28bf3b79b648d7bec20cdfbdb05414",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "6ed7304d6d364de09e2e6bf5f5796843",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "fb70a2606d374f97a4a951082a4030bc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

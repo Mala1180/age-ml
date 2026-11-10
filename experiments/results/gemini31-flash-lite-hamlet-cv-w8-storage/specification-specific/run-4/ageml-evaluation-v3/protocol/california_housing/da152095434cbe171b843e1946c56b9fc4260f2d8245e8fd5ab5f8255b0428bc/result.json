@@ -1,0 +1,149 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/california_housing/da152095434cbe171b843e1946c56b9fc4260f2d8245e8fd5ab5f8255b0428bc/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/california_housing/da152095434cbe171b843e1946c56b9fc4260f2d8245e8fd5ab5f8255b0428bc/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/california_housing/da152095434cbe171b843e1946c56b9fc4260f2d8245e8fd5ab5f8255b0428bc/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/california_housing/da152095434cbe171b843e1946c56b9fc4260f2d8245e8fd5ab5f8255b0428bc/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 9,
+  "best_run_id": "04525e33524e44c8b487fc491c186245",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    73784.02110307824,
+    46872.49354302115,
+    76712.33708588331,
+    66272.41690024441,
+    75971.62918265107,
+    66411.0562151733,
+    54063.2672874405,
+    88816.09955166587,
+    80569.85085649826,
+    52884.0728265062
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 777.9239999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "4952703d84f5442f8337a74a18447337",
+    "1": "f59660eff80a49b4b89cb66e55c7f15d",
+    "2": "8cb9aead21174c97869c47f3eca60190",
+    "3": "2d22233ba829436392d80f3a81aa8b5a",
+    "4": "3a4e821d13c44995b18096e125fb213a",
+    "5": "cc79c86c52f6448cbd4ff39fdbb80e4d",
+    "6": "1d5ab9e00dce42fb8b4e0d0c117263b3",
+    "7": "4fd2838d2c8847bc8973111c703b2535",
+    "8": "749690555e964b0383cacf758d9185c0",
+    "9": "acbd723613a2480a82d367d4aae8c818",
+    "10": "bdaca30e8516432495e021cc5c60087d",
+    "11": "27b595df02ec4f0fad34834738194b98",
+    "12": "4b972682dec548c2ac74f36d8ac924a3",
+    "13": "d6f2d62973fb4c4db19ec2685f07270e",
+    "14": "c085df8cda854ef48fc9e31c3fe833ad",
+    "15": "de5054104b3646cf9375306bd16143c9",
+    "16": "9227c9cb0b314316b8bd06ca7505e2e7",
+    "17": "b7bbfb31405f4cc8a95d897923cc4333",
+    "18": "ca4295d51de84512a949aded3c4c295a",
+    "19": "b3abd99f389d4fc89af09c39443b1cbe",
+    "20": "b45e2b3426c1419e8585402697c4207d",
+    "21": "242d02b4789d4068b5726fb9f82b36d6",
+    "22": "a570aee1c1554bfb84818e5a18d7e48d",
+    "23": "715cef4185b945b787152f59dff4f097",
+    "24": "1daae10915cd451485d126988097f2af",
+    "25": "3be68dad51454fca8617f8765e6bd133",
+    "26": null,
+    "27": "b6a0532e98524b028fa1e2aeb73a0585",
+    "28": "edcfd592ef424eb9a676ced0e87d8080",
+    "29": null
+  },
+  "pipelines_found": 87,
+  "protocol_sha256": "14503fdd7ae3868212838395c073c8e25fdef64aa4df99ea60768305d5997bc9",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "604de1719b4155a1326f1b6b57ccb63fa8adc2448b583e2016c1f791239fa862",
+  "runtime_human_readable": "0:15:05",
+  "runtime_seconds": 904.9993886500597,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 68235.72445521623,
+  "selected_candidate_key": "34f06c6753a887235ab92afbe0e06f51f685759bffe1eb41160cfcdabe458fa6",
+  "selection_sha256": "c0d110028e0bea27470d114b9b8dc7432cab98efb807f7527ff041d56e218d67",
+  "selection_validation_score": 68235.72445521623,
+  "semantic_validation_failure_reasons": {
+    "2": [
+      "The generated code is not compliant with the pipeline order. The pipeline requires discretization (binarizer) to be the first step, followed by normalization (standard), and then regression. In the provided code, the binarizer is applied to the raw input features before the imputer and scaler, which will cause errors if the input contains missing values or non-numeric data, and the logic of applying a binarizer to the entire feature set before preprocessing is mathematically inconsistent with the requested pipeline flow.",
+      "The pipeline requires discretization (binarizer) to be the first step, followed by normalization (standard), and then regression. In the provided code, the binarizer is nested inside a ColumnTransformer alongside an imputer, and the pipeline structure does not explicitly follow the sequential order of discretization -> normalization -> regression as requested.",
+      "The code is not compliant because the Binarizer is applied to the output of the ColumnTransformer (which includes the imputed data), but the Binarizer in scikit-learn expects a 2D array and will transform all features. Applying Binarizer after imputation is correct for the sequence, but the pipeline structure is technically valid. However, the prompt asks for the pipeline to be exactly: 1. discretization, 2. normalization, 3. regression. The current implementation includes an implicit imputation step before discretization which was not explicitly requested as a pipeline step, though necessary for the data provided."
+    ],
+    "4": [
+      "The pipeline is not strictly compliant because it introduced an 'imputer' step which was not specified in the original pipeline requirements. While necessary for handling NaNs, it adds a step beyond the requested discretization, normalization, and regression sequence.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code is not strictly compliant because it includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). However, this step is necessary to handle the NaN values present in the provided dataset to ensure the code is executable.",
+      "The code includes an 'imputer' step which was not part of the original three-step pipeline requirement (discretization, normalization, regression). While necessary for handling NaNs in the dataset, it technically adds a step beyond the requested pipeline."
+    ],
+    "9": [
+      "The code is not compliant because the pipeline requires 'iterative_imputer' for all features, but the categorical transformer uses 'OrdinalEncoder' instead of 'IterativeImputer'. Additionally, 'IterativeImputer' cannot handle string data directly, so a proper encoding step must precede it for categorical features."
+    ],
+    "16": [
+      "The pipeline order is incorrect. The provided pipeline requires imputation first, then normalization, then regression. The generated code performs imputation, then preprocessing (which includes normalization), then regression. However, the normalization step must be applied to the imputed data, and the current structure uses a ColumnTransformer that splits numeric and categorical data, which is not explicitly requested and complicates the normalization step. Furthermore, the normalization step should be applied to the entire dataset after imputation, not just numeric columns.",
+      "The code is not fully compliant because IterativeImputer cannot handle categorical string data directly. The pipeline attempts to impute the entire dataset (including the 'ocean_proximity' column) before encoding it, which will raise a ValueError. The categorical encoding must occur before or during the imputation process to handle non-numeric data."
+    ],
+    "18": [
+      "The generated code is not fully compliant because it drops the 'ocean_proximity' column (categorical feature) instead of including it in the pipeline, and the pipeline steps (imputation, normalization, regression) should be applied to the entire dataset or handled via appropriate encoding for categorical variables."
+    ],
+    "19": [
+      "The provided code is not fully compliant because the IterativeImputer cannot handle categorical features (strings) directly as implemented in the categorical_transformer pipeline. Additionally, the pipeline structure for categorical features is logically incorrect for an imputer, as IterativeImputer requires numerical input.",
+      "The code is not compliant because IterativeImputer requires numerical input and cannot process categorical features (strings) directly. Placing the imputer before the OneHotEncoder will cause a ValueError. Additionally, the pipeline order is incorrect: imputation must occur before normalization, but the current structure attempts to impute the entire dataset (including categorical strings) before encoding them.",
+      "The pipeline is not compliant because the IterativeImputer is placed inside the numeric_transformer branch of the ColumnTransformer, meaning it only imputes numerical columns. The pipeline requirement specifies imputation for the dataset, and the current implementation fails to impute missing values in the categorical features (if any) and does not perform imputation on the full feature set as a unified step.",
+      "The pipeline is not compliant because the requirement specifies 'imputation with iterative_imputer' as a global step. The current implementation uses SimpleImputer for categorical features, which deviates from the specified pipeline steps.",
+      "The code is not compliant because IterativeImputer cannot process categorical string data. Placing it before the ColumnTransformer (which handles the encoding) will result in a ValueError when the pipeline is fitted.",
+      "The pipeline is not compliant because the requirement specifies 'imputation with iterative_imputer' as a global step, but the current implementation only applies it to numerical features, leaving categorical features without imputation.",
+      "The code is not compliant because IterativeImputer cannot process categorical string data directly. Placing it before the ColumnTransformer (which handles the encoding) will result in a ValueError when the pipeline is fitted, as the imputer will encounter non-numeric data.",
+      "The code is not compliant because IterativeImputer cannot handle the output of OneHotEncoder if it produces sparse matrices, and more importantly, the pipeline order is logically flawed: the preprocessor (which includes OneHotEncoder) is placed before the imputer, meaning the imputer receives encoded categorical data mixed with numerical data, which is not the intended workflow for a standard imputation-normalization-regression pipeline."
+    ],
+    "26": [
+      "The implementation is not fully compliant because the pipeline steps are applied in parallel via ColumnTransformer rather than sequentially as requested. Additionally, applying Binarizer and PowerTransformer to the same features simultaneously is logically redundant for a standard pipeline flow.",
+      "The code is not compliant because Binarizer and PowerTransformer cannot be applied sequentially to the entire dataset in this manner. Binarizer transforms data into binary values (0 or 1), which makes the subsequent PowerTransformer (which expects continuous data for normalization) mathematically invalid or ineffective. Furthermore, the ColumnTransformer implementation is redundant as it passes through the numeric features only to have them immediately processed by the Binarizer.",
+      "The code is not compliant because Binarizer and PowerTransformer are applied sequentially to the entire output of the ColumnTransformer. Binarizer converts data to binary (0 or 1), which renders the subsequent PowerTransformer (which requires continuous data) ineffective or invalid. Additionally, the pipeline structure is logically flawed for the requested steps.",
+      "no. While the pipeline structure is now technically valid, applying a PowerTransformer to the output of a Binarizer is mathematically inappropriate because the Binarizer outputs only 0s and 1s, which prevents the PowerTransformer from performing meaningful normalization.",
+      "no. The pipeline applies the PowerTransformer before the Binarizer, which contradicts the specified order (1. discretization with binarizer, 2. normalization with power_transformer). Additionally, applying Binarizer to the entire output of the PowerTransformer (including the remainder columns) is logically incorrect for a regression task.",
+      "no. While the pipeline order now matches the requested sequence, applying a PowerTransformer to the output of a Binarizer is mathematically invalid for regression because the Binarizer outputs binary values (0 or 1), which prevents the PowerTransformer from performing meaningful normalization.",
+      "The code is not compliant because applying a PowerTransformer to the output of a Binarizer is mathematically invalid for regression. The Binarizer outputs binary values (0 or 1), which prevents the PowerTransformer from performing meaningful normalization, and the pipeline structure forces this sequence despite the logical incompatibility.",
+      "The pipeline steps are applied in parallel via ColumnTransformer rather than sequentially as requested by the pipeline definition. The pipeline requires discretization followed by normalization, which implies a sequential application of these transformations.",
+      "The code is not compliant because applying a PowerTransformer to the output of a Binarizer is mathematically invalid for regression. The Binarizer outputs binary values (0 or 1), which prevents the PowerTransformer from performing meaningful normalization, and the pipeline structure forces this sequence despite the logical incompatibility.",
+      "The pipeline order is incorrect. The requested pipeline specifies discretization (binarizer) as the first step and normalization (power_transformer) as the second step, but the code implements them in the reverse order."
+    ]
+  },
+  "semantic_validation_failures": 36,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.08824560000000001,
+    "input_tokens": 428962,
+    "output_cost": 0.23493500000000012,
+    "output_tokens": 10916,
+    "total_cost": 0.32318060000000004,
+    "total_tokens": 439878
+  },
+  "training_time": 3440.5809999999997,
+  "validation_metric": "rmse"
+}

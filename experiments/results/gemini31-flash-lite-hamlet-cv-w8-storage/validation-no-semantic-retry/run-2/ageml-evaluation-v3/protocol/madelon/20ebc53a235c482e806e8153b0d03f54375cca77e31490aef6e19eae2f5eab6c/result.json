@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/20ebc53a235c482e806e8153b0d03f54375cca77e31490aef6e19eae2f5eab6c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/20ebc53a235c482e806e8153b0d03f54375cca77e31490aef6e19eae2f5eab6c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/20ebc53a235c482e806e8153b0d03f54375cca77e31490aef6e19eae2f5eab6c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/20ebc53a235c482e806e8153b0d03f54375cca77e31490aef6e19eae2f5eab6c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 15,
+  "best_run_id": "07fd299b1a124038a7a335c9cb6b5c7f",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8807692307692307,
+    0.8538461538461539,
+    0.8807692307692307,
+    0.8615384615384616,
+    0.8923076923076922,
+    0.8730769230769231,
+    0.8884615384615384,
+    0.8307692307692308,
+    0.8846153846153846,
+    0.9038461538461539
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 911.0690000000002,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "2f1db4b3935a4de1a511fb96f44e7a50",
+    "1": "692aa844d8e6485a88e3f6706043733c",
+    "2": "e77e840f9be84f53968c81a7d6c3b1d6",
+    "3": "d34ddac8d1a74aac917ed4094ecda031",
+    "4": "19c63e435a0f48e8a5ad3942b8b0803d",
+    "5": "024c55f1026040fc84a448a4b3138aaf",
+    "6": "3108816df6a2459a910c7729e9ff45b3",
+    "7": "e0358060d880436fb634d272b6a306ec",
+    "8": null,
+    "9": "bef1fcfd16fe45058ada346f61ce0937",
+    "10": "6f80915847834eb68b6e94e2a66741af",
+    "11": "631eadb04b704d7bbe31fa026e0610db",
+    "12": "c84a03477dae4e6e8a449d0ed6b9f432",
+    "13": "90bd1945bbc54335b43d89166917f387",
+    "14": "875f4387a72447ec91441960e906b9f7",
+    "15": "cc4d0c1669a2469cb2fea17f19deb56f",
+    "16": "bded1f769827413f93ff5deb1423b7d6",
+    "17": "26fcb49821904fcabf0d7669ebe1ca7e",
+    "18": "51a286c29dec42f5914c20a08d7f9ed9",
+    "19": "82eb340869b54b7a866c0040fe510fdf",
+    "20": "dc7121db869f4a8b8a4fbe7c42dee620",
+    "21": "719108c0dc66460fb6d195099e29cb96",
+    "22": "3ea99013b8354e2db7ec408002cd0923",
+    "23": "b1b68c92c84f4e0ab09c7005824762db",
+    "24": "ae77b2737b854726bdb5f2f546707ce5",
+    "25": "c8c0250aab1f487298e39a15131837f8",
+    "26": "5babc6be262f414185104aaf9bd8c9af",
+    "27": "f26565a54e9d4ded91d0aba4cc6a548a",
+    "28": "0da4184169164712934a6a1a3129f6b3",
+    "29": "8ed75948c3e649da87de88ac4124ed6b"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "ac3f666faf26caaa26e2d4850096a82189b82bdefda48a8db9d0a42f69b099d3",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "1deb22aaadd0ed1c236f8cc4b3479561a80209a6eea60a92b97bf3fea3ecd2c4",
+  "runtime_human_readable": "1:01:24",
+  "runtime_seconds": 3684.110746461898,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.875,
+  "selected_candidate_key": "7e1815205055ee8b20d2814411eb9d40e8eb3a2ae752e46b79d38e800c905895",
+  "selection_sha256": "88282535247b2c580499d569de00bd6582d3e3150be09151c7bed07dbd51165b",
+  "selection_validation_score": 0.875,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The code uses semicolons to put multiple statements on a single line, which is considered poor practice in Python and often causes issues in certain execution environments. Additionally, the previous execution errors suggest that the environment may be sensitive to this formatting or the way imports are handled."
+    ],
+    "23": [
+      "The code is syntactically correct but the previous execution errors suggest that the environment might be sensitive to the formatting of multiple statements on a single line. I will provide the code in a standard multi-line format to ensure compatibility."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.10698513000000001,
+    "input_tokens": 4639214,
+    "output_cost": 0.1149525,
+    "output_tokens": 11150,
+    "total_cost": 0.22193763000000008,
+    "total_tokens": 4650364
+  },
+  "training_time": 4704.339999999999,
+  "validation_metric": "balanced_accuracy"
+}

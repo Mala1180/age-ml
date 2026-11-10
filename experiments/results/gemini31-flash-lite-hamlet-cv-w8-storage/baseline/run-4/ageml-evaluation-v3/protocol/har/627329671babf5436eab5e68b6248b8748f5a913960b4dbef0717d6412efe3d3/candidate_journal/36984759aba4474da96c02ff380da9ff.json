@@ -1,0 +1,82 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "cc7aeb2c7c55793335869db2117be44755904f44b5a9b9f9398962c5279e33b4",
+  "code_sha256": "01dcc4488aa1b4cb97f4aed5ee7c45729261f250f9de9ae238bd77fe6dcd218b",
+  "completed_at": 1794150520.2497935,
+  "cv_fold_scores": [
+    0.9148829944643437,
+    0.8800772452814011,
+    0.866126064980763,
+    0.8875237273030275,
+    0.9348657722335743,
+    0.9254948462062753,
+    0.9030393808413048,
+    0.8995039610183788,
+    0.9047661423842804,
+    0.9217719858642849
+  ],
+  "effective_random_states": [
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 5,
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "1237805d342531f510383297127db66e060ab192c0e0ac678fa56019c1e95e3f",
+  "pipeline_id": 13,
+  "pipeline_run_id": "407acbe03b4846c78ab75c8fc873cc40",
+  "run_id": "36984759aba4474da96c02ff380da9ff",
+  "run_identity": "c22cd26d23f4d1aa0ba9565f27c5e40f7b22eb7d39683de149c875d3ec0d9bd4",
+  "validation_score": 0.9038052120577633,
+  "validation_split_hash": "d38ac3c1eae9808cec541d3ddff66bf85327db7d30a2f2b23ad76a294e863893"
+}

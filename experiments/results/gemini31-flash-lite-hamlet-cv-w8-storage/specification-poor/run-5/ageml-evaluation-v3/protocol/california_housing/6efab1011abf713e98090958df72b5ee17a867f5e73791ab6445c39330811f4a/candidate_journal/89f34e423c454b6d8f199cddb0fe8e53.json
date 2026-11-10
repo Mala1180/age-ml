@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "e2773ddb5d45c5e65988b133a15164b3e8094b827c8e168662ebe7d8a9370bf6",
+  "code_sha256": "7c524b58e08785cfa8d30fe807d285a55dc692ea42321cd63c9dafa6ddfe4504",
+  "completed_at": 1794268421.1917617,
+  "cv_fold_scores": [
+    85744.20476832289,
+    64883.79601527898,
+    85278.1134847456,
+    64860.03203693235,
+    86792.42640796998,
+    82459.93783661525,
+    62784.93733822313,
+    99287.89610300818,
+    100113.50707359173,
+    61615.592918800685
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 4,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 3,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "n_bins": 10,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "ca2666e6d4dc335968790a0fd8354b6fd3f5b9c06ebef834003deaf048954fbd",
+  "pipeline_id": 20,
+  "pipeline_run_id": "8635652d550645778ef40db70ecf8a11",
+  "run_id": "89f34e423c454b6d8f199cddb0fe8e53",
+  "run_identity": "74d609a8c258f136883d7cbd76578794a7c8a8ffa983e3c3534beb0ffa13c73a",
+  "validation_score": 79382.04439834887,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

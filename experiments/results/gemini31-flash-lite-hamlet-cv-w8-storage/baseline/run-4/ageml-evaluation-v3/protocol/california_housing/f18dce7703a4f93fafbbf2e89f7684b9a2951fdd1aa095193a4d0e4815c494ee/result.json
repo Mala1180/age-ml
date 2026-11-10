@@ -1,0 +1,120 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/california_housing/f18dce7703a4f93fafbbf2e89f7684b9a2951fdd1aa095193a4d0e4815c494ee/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/california_housing/f18dce7703a4f93fafbbf2e89f7684b9a2951fdd1aa095193a4d0e4815c494ee/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/california_housing/f18dce7703a4f93fafbbf2e89f7684b9a2951fdd1aa095193a4d0e4815c494ee/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/california_housing/f18dce7703a4f93fafbbf2e89f7684b9a2951fdd1aa095193a4d0e4815c494ee/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 8,
+  "best_run_id": "a5cc1c0ff97d4bca9f52a863a5824525",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    85822.80804904242,
+    47564.49524359665,
+    79495.51974777397,
+    62727.46838585627,
+    75009.68578144236,
+    67930.6174725157,
+    54551.31391628602,
+    91922.95786129274,
+    84682.94636450984,
+    52532.37560993974
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1800.727,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "8a16c3ab490e42caa5341374bc62fe21",
+    "1": "ff8c879ff3924f558e05fe9ea9cf0891",
+    "2": "05272eeca2ff4f7a95a0da048950bc70",
+    "3": "31e34f8e7ed54f0fb283f40e1e9180c4",
+    "4": "80f1406db894435381b81420db1e2aaa",
+    "5": "aacedab541fc4b35ad10c3a5ab362469",
+    "6": "61b51981d32f48e592ac0cca071dd1f6",
+    "7": "7dcf56faa0734695acc3ff1cdbfb1fd9",
+    "8": "4379e58781834a92bee920bae5d456ed",
+    "9": "39904a607a7d46ed91165f754da35770",
+    "10": "3740c65b73b84892acf988056f7fdf92",
+    "11": "330f5f1a6ede4d1a820ce4a5b8907bdf",
+    "12": "6151a3ad4af04c958cc0b446f18a1376",
+    "13": "bddb913241f64ee28db92b7b88800330",
+    "14": "b39a5be9b43b4b60b401c9aa912bb3b5",
+    "15": "233f5a30a9114ab385e492e7b0f4086f",
+    "16": "75455baa785f4ff0be99d3b47df35e8d",
+    "17": "4674ab9c42be437b83c32a2517fb5c98",
+    "18": "201dba2ef201435885cf288cb766ebb9",
+    "19": "2ba19af036ad43119210190e2640fdec",
+    "20": "8a9ae9f65def442888f55187159158c6",
+    "21": "9cfa2003b63a487eb549ec39c5f6172d",
+    "22": "6fd5e6db42594981a942f56f3e37330d",
+    "23": "caa8984ebe0541c19cd90405c86e1628",
+    "24": "879e0af817f845eca467a329c6e3b37d",
+    "25": "e9be57aa9d3b49ebb2a748a993ed9e60",
+    "26": "19a5c3f33fc5460c9d5d0066043a7dae",
+    "27": "5ce0e8524bb144a083cf096a88f6c311",
+    "28": "e631b6ce249e4d4ab27f51ff864144ab",
+    "29": "1173e9660d994cbcbd382b27402fc7e6"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "2be8e1c83b8b64acdf243a2323c6e49a7381647593ecdb11ce8ed4f1d8fa2bc0",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "9598e13e630223c2e0b2ad9b771a4650b7b39e2f5d48f7b34c529f4668c85df5",
+  "runtime_human_readable": "0:17:58",
+  "runtime_seconds": 1078.2636921294034,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 70224.01884322558,
+  "selected_candidate_key": "874a9f5badaaa3d509f2d13c4cff3ec6c33f33b9c5cd1425d1544c6d93de931b",
+  "selection_sha256": "45284cf621469cee8494f8afbf1a38d7503333dab6c55e5cc6c4e6a07e545b7d",
+  "selection_validation_score": 70224.01884322558,
+  "semantic_validation_failure_reasons": {
+    "6": [
+      "The provided code is not fully compliant because the IterativeImputer cannot be applied directly to categorical features (strings) as implemented in the categorical_transformer pipeline. Additionally, the pipeline structure for categorical data should handle encoding before or during imputation if the imputer requires numerical input, or use a different imputation strategy for categorical columns.",
+      "The code is not compliant because the pipeline structure is defined as a single line, which is prone to syntax errors and violates standard Python formatting practices. Furthermore, the previous execution error indicates that the environment or the way the code is structured is not being parsed correctly by the evaluator."
+    ],
+    "14": [
+      "The provided code is not compliant because it includes an unnecessary OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) applied to the dataset as a whole.",
+      "The code is not compliant because the OneHotEncoder produces sparse output by default, which is incompatible with the IterativeImputer. Additionally, the pipeline structure is technically correct but the execution fails due to the interaction between sparse matrices and the imputer."
+    ],
+    "22": [
+      "The generated code includes a ColumnTransformer and a categorical transformer that were not requested in the pipeline steps. The pipeline specifically requested imputation, normalization, and regression, which should be applied to the dataset as a whole or handled consistently without adding extra preprocessing steps like one-hot encoding that were not specified.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OneHotEncoder to handle categorical data, which were not specified in the pipeline requirements. Furthermore, the pipeline should be a simple sequence of the three requested steps.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OneHotEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer, OrdinalEncoder, and separate handling for categorical features, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OrdinalEncoder to handle categorical data, which were not specified in the pipeline requirements."
+    ]
+  },
+  "semantic_validation_failures": 16,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.05622686999999999,
+    "input_tokens": 725265,
+    "output_cost": 0.07471000000000001,
+    "output_tokens": 4722,
+    "total_cost": 0.13093687,
+    "total_tokens": 729987
+  },
+  "training_time": 4858.1169999999975,
+  "validation_metric": "rmse"
+}

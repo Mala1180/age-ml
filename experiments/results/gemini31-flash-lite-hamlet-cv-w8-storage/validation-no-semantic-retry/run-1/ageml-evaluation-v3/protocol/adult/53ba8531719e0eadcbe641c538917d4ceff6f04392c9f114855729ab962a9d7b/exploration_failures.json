@@ -1,0 +1,244 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "9f2525f54b3040a0831cc8ccd4a1f2ca",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "7422854965004259919fa64e9de39a84",
+    "semantic_feedback": [
+      "The code uses semicolons to condense multiple statements onto single lines, which is considered poor practice and can lead to syntax errors in some execution environments. Additionally, the pipeline structure must strictly follow the steps provided; while the preprocessing is necessary for the data, the pipeline definition should be clean and readable."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "adb045a697ce4268b9b424120fb3a3fe",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "e01f8d58ed4a465489b109782b583e09",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because it includes an unnecessary SimpleImputer for categorical features and a ColumnTransformer that excludes categorical features entirely, whereas the pipeline steps (discretization, normalization, PCA) should ideally be applied to the relevant features of the dataset. Additionally, the pipeline structure should directly reflect the requested steps.",
+      "The code fails because PCA cannot handle sparse matrices produced by OneHotEncoder when n_components is an integer, and the pipeline structure does not account for the dense conversion required by PCA after OneHotEncoding."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 6,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "ea1f5ed95dde4c01ab2d35661cf0760b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "75db2e4ffde1403eb2b52cf369a73142",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "d21b3c70dc4d4328b374662e6b8e387f",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it adds a ColumnTransformer with OneHotEncoder which was not requested in the original pipeline steps. The original pipeline only specified discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "0b9a08affb094b9d963228876b787480",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "9ecb2d23393c444b9c57d197daf7b9c9",
+    "semantic_feedback": [
+      "The provided code uses an IterativeImputer on categorical features, which is not natively supported by scikit-learn's IterativeImputer as it requires numerical input. Additionally, the pipeline structure includes a ColumnTransformer that was not explicitly requested in the pipeline steps, and the PCA step is applied after the categorical encoding, which is technically correct but the implementation of the imputer for categorical data is invalid."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "b093d59f71284437ba0005245042a369",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because it uses KBinsDiscretizer on categorical features, which is not standard practice and may cause errors depending on the input data. Additionally, the pipeline structure for categorical features is inconsistent with the requested steps (discretization, normalization, pca, knn) as it applies a different transformation logic to categorical columns compared to numeric ones."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "a0043206895d481c8ba562bebe086d58",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly requested 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code introduced an 'OneHotEncoder' step which was not part of the requested pipeline steps, violating the requirement to implement only the specified steps.",
+      "The pipeline requires 'normalization' with 'minmax' as the first step. The generated code uses a ColumnTransformer that includes an OrdinalEncoder for categorical features, which is an additional preprocessing step not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' as the first step. The generated code uses a ColumnTransformer that includes an OrdinalEncoder for categorical features, which is an additional preprocessing step not specified in the pipeline requirements. Additionally, the code is provided as a single line which causes syntax errors in some environments.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes an 'OrdinalEncoder' step within the 'normalization' block, which is an additional preprocessing step not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes 'SimpleImputer' and 'OrdinalEncoder' steps, which are additional preprocessing steps not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes 'SimpleImputer' and 'OrdinalEncoder' steps, which are additional preprocessing steps not specified in the pipeline requirements."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "369df8f19167494eb8d9cad15906ef34",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "b20e4c0e7ac34138b72b2c1525e5bc0b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "c7180899d68148d68d0fbbc8387cac80",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "da6a78d57a4b4a38b9a45b3cbf4b1f6f",
+    "semantic_feedback": [
+      "The code is not compliant because the ColumnTransformer used for encoding assumes the output of the first preprocessor (imputer) maintains the order of columns such that numeric features come first, followed by categorical features. However, ColumnTransformer does not guarantee this column ordering, which can lead to incorrect indexing in the subsequent encoder step."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "b6f9d5e03477404890ede58f98780a95",
+    "semantic_feedback": [
+      "The pipeline steps were modified to include a preprocessor (OneHotEncoder) which was not part of the original 5-step pipeline requirement. Additionally, KBinsDiscretizer and PowerTransformer cannot handle categorical data directly, so the pipeline must be constructed to handle categorical features appropriately within the requested steps or via a ColumnTransformer that respects the original pipeline structure.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "1ad7892aa416484e98c0e65214aebbb0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "3e1f0696cf124e88b126b5982890dfec",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "eca287f7c8e34fd9b2032b64e8fb1dc7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 25,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 27,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

@@ -1,0 +1,134 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/68a803104981704f6089093bb7eb0ae23a3ea28300adc1c23c5646fd5e0cba36/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/68a803104981704f6089093bb7eb0ae23a3ea28300adc1c23c5646fd5e0cba36/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/68a803104981704f6089093bb7eb0ae23a3ea28300adc1c23c5646fd5e0cba36/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/68a803104981704f6089093bb7eb0ae23a3ea28300adc1c23c5646fd5e0cba36/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "b4501bb6a62544488d392545564e686f",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8192411885440253,
+    0.8264935989930028,
+    0.814862976834717,
+    0.8241462317707949,
+    0.8233633344146748,
+    0.8078255333209758,
+    0.8249432686252183,
+    0.8217188771850645,
+    0.8335033451650822,
+    0.8281437125748503
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1907.9349999999995,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "a56419d89a8848f9a7ca5778351b8750",
+    "2": "c382148c2cb44ff4b23abf220c484579",
+    "3": "e15f32a5ef084ff2b803b70885910ceb",
+    "4": "a5a20ebdd4e345ad93b3d7aed240c3f2",
+    "5": null,
+    "6": null,
+    "7": "af866ea516a044558269ba7a0662bc0b",
+    "8": null,
+    "9": "fdb69eed66f24b1cb0bb7d409753d745",
+    "10": "5750736880ee41989c5d122e9c2e97ec",
+    "11": "0de28ad0d1a44b538ff3cefc77845ea1",
+    "12": "868330684f3f4f0399ed586c66044c50",
+    "13": "1adeb9b6f0c7495c94910fb5f0b6e79d",
+    "14": "5425f84366194ca6ac53e72ad8c6bb80",
+    "15": "4a61186eb84546e59bc08494df07e2bb",
+    "16": "445df0919ac440f0b19380ab5fa539de",
+    "17": "188fb58f336c4855b720db06db2c9ed6",
+    "18": null,
+    "19": "9219bcf10007445d9d57152934513c37",
+    "20": "a721b194f1364b77a6a31bc6ef23592d",
+    "21": "5193bf9b776e48249dd46b30f3c2ba71",
+    "22": "4410d41c6fcd4403b2f752b07a62a444",
+    "23": "1006d1bc3b974f7a8dcd2f6bc5b9cb6c",
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "f8573e7aa615916e4a9b4fcb676516eed194ee7e6fc91a7bfb60d2a3da83e729",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "4b2f767555967910d15d5cd117d6b709a844cbda31b675ab30fd0211d93752ef",
+  "runtime_human_readable": "1:01:01",
+  "runtime_seconds": 3660.698921252042,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8224242067428404,
+  "selected_candidate_key": "ad55aa0c41ac430f47a3cf1d003d79a210aae78440302247f40063ea772bcd07",
+  "selection_sha256": "ae00dbb1e6a0ea785f70899c05ee656cfc5b84b2a525d1431f6e2397f72ccce7",
+  "selection_validation_score": 0.8224242067428404,
+  "semantic_validation_failure_reasons": {
+    "2": [
+      "The code uses semicolons to condense multiple statements onto single lines, which is considered poor practice and can lead to syntax errors in some execution environments. Additionally, the pipeline structure must strictly follow the steps provided; while the preprocessing is necessary for the data, the pipeline definition should be clean and readable."
+    ],
+    "4": [
+      "The generated code is not fully compliant because it includes an unnecessary SimpleImputer for categorical features and a ColumnTransformer that excludes categorical features entirely, whereas the pipeline steps (discretization, normalization, PCA) should ideally be applied to the relevant features of the dataset. Additionally, the pipeline structure should directly reflect the requested steps.",
+      "The code fails because PCA cannot handle sparse matrices produced by OneHotEncoder when n_components is an integer, and the pipeline structure does not account for the dense conversion required by PCA after OneHotEncoding."
+    ],
+    "10": [
+      "The pipeline is not compliant because it adds a ColumnTransformer with OneHotEncoder which was not requested in the original pipeline steps. The original pipeline only specified discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline steps. The original pipeline only requested discretization, normalization, features, rebalancing, and classification."
+    ],
+    "12": [
+      "The provided code uses an IterativeImputer on categorical features, which is not natively supported by scikit-learn's IterativeImputer as it requires numerical input. Additionally, the pipeline structure includes a ColumnTransformer that was not explicitly requested in the pipeline steps, and the PCA step is applied after the categorical encoding, which is technically correct but the implementation of the imputer for categorical data is invalid."
+    ],
+    "13": [
+      "The generated code is not fully compliant because it uses KBinsDiscretizer on categorical features, which is not standard practice and may cause errors depending on the input data. Additionally, the pipeline structure for categorical features is inconsistent with the requested steps (discretization, normalization, pca, knn) as it applies a different transformation logic to categorical columns compared to numeric ones."
+    ],
+    "14": [
+      "The pipeline definition in the prompt explicitly requested 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code introduced an 'OneHotEncoder' step which was not part of the requested pipeline steps, violating the requirement to implement only the specified steps.",
+      "The pipeline requires 'normalization' with 'minmax' as the first step. The generated code uses a ColumnTransformer that includes an OrdinalEncoder for categorical features, which is an additional preprocessing step not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' as the first step. The generated code uses a ColumnTransformer that includes an OrdinalEncoder for categorical features, which is an additional preprocessing step not specified in the pipeline requirements. Additionally, the code is provided as a single line which causes syntax errors in some environments.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes an 'OrdinalEncoder' step within the 'normalization' block, which is an additional preprocessing step not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes 'SimpleImputer' and 'OrdinalEncoder' steps, which are additional preprocessing steps not specified in the pipeline requirements.",
+      "The pipeline requires 'normalization' with 'minmax' and 'classification' with 'nn'. The generated code includes 'SimpleImputer' and 'OrdinalEncoder' steps, which are additional preprocessing steps not specified in the pipeline requirements."
+    ],
+    "19": [
+      "The code is not compliant because the ColumnTransformer used for encoding assumes the output of the first preprocessor (imputer) maintains the order of columns such that numeric features come first, followed by categorical features. However, ColumnTransformer does not guarantee this column ordering, which can lead to incorrect indexing in the subsequent encoder step."
+    ],
+    "20": [
+      "The pipeline steps were modified to include a preprocessor (OneHotEncoder) which was not part of the original 5-step pipeline requirement. Additionally, KBinsDiscretizer and PowerTransformer cannot handle categorical data directly, so the pipeline must be constructed to handle categorical features appropriately within the requested steps or via a ColumnTransformer that respects the original pipeline structure.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps.",
+      "The pipeline is not compliant because it adds an extra 'preprocessor' step that was not requested in the original 5-step pipeline. The original pipeline requires discretization, normalization, features, rebalancing, and classification as the only steps."
+    ]
+  },
+  "semantic_validation_failures": 24,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.07309628000000001,
+    "input_tokens": 269131,
+    "output_cost": 0.06918250000000001,
+    "output_tokens": 9223,
+    "total_cost": 0.14227878,
+    "total_tokens": 278354
+  },
+  "training_time": 6618.194,
+  "validation_metric": "balanced_accuracy"
+}

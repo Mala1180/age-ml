@@ -1,0 +1,159 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c27ac4e3b859d1bd5d7e72bf6949be1d418ed59777af4a270dbe402068a67c33/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c27ac4e3b859d1bd5d7e72bf6949be1d418ed59777af4a270dbe402068a67c33/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c27ac4e3b859d1bd5d7e72bf6949be1d418ed59777af4a270dbe402068a67c33/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c27ac4e3b859d1bd5d7e72bf6949be1d418ed59777af4a270dbe402068a67c33/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 28,
+  "best_run_id": "385faa31728e44f29dcf30c0e3dd9fa0",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    20528.234259757653,
+    25198.278333088696,
+    24960.872360570735,
+    36383.17221301319,
+    35284.7183714112,
+    28178.10779619872,
+    26240.325146616255,
+    24546.18485793792,
+    53291.295999042006,
+    25432.252042129283
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 409.3160000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "d2d852b6af5d49d69e7ec86998916287",
+    "1": "6c5e5fc7480d4769bddb5a656677847c",
+    "2": "6738ab055bc541dfbb09e05d26eb3f24",
+    "3": "8ed0a0063bf54e66882e5e654d366489",
+    "4": "bf5e1d333fe24aea92e6058ffa51cbac",
+    "5": "42a564c75f8d463da854bd1db03d7c60",
+    "6": "841486c7179c4560839305bb9b643d82",
+    "7": "474c92fb35f44b5d85bdac9a9503954e",
+    "8": "c3f9f8f3b3b14cebbefe4bf25e5aa21b",
+    "9": "7b2bc88c1ea246288f5bba8eae776571",
+    "10": "086a8938431b44afadb5d4ea47f3083a",
+    "11": "38db475c89d5460fae7b7809699b2886",
+    "12": "20f614ae523146f095ba438d5c785748",
+    "13": "52f309a09b3e4044960a32e22bdf596b",
+    "14": "9b3a3cfac12f4072bf66ce22cc820e18",
+    "15": null,
+    "16": "190df20805d44df883296576c37101b5",
+    "17": null,
+    "18": "fb2e3661dcd140feab8b733d8ca3dccd",
+    "19": null,
+    "20": "e75f08f7e7e445da8ddb91aec4a7a74e",
+    "21": null,
+    "22": "d54d815186464f0eb0bc2a7be58a3900",
+    "23": "71faad79af3f48509aaf0305302cd9c5",
+    "24": null,
+    "25": "6f6acacee9c640ad810a09ee8b2017f2",
+    "26": "d132e2e0f2d945d7899b961f89142f71",
+    "27": null,
+    "28": "773a1b4ffb164aadbf4a16daae3019c9",
+    "29": null
+  },
+  "pipelines_found": 184,
+  "protocol_sha256": "e5736757450898b392a345ffb20a0abf6896fec9846dfeddea2564d733677819",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "2d6b8475bf43c743901727f1865640ce48f34028f16272d5cdb710ce66845c45",
+  "runtime_human_readable": "0:10:46",
+  "runtime_seconds": 646.4004108384252,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 30004.344137976568,
+  "selected_candidate_key": "44e60b391cf8445bcb04d2bdd7ff7c0f4956553a2068be8d0bceb51cd23a753b",
+  "selection_sha256": "7fdeea914fbd66dba0bbcfb041c201c0a852cd3a1c3c0e1b26db680f0e986a93",
+  "selection_validation_score": 30004.344137976568,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "The generated code is not fully compliant because it introduces a OneHotEncoder for categorical features, which was not specified in the pipeline steps. The pipeline explicitly requested imputation, normalization, PCA, and regression, but the inclusion of an encoder changes the feature space structure beyond the requested steps.",
+      "The code is not fully compliant because it introduces an OrdinalEncoder to handle categorical variables, which was not specified in the pipeline steps. The pipeline requires direct application of iterative_imputer, robust_scaler, pca, and nn_regressor. Since IterativeImputer and PCA require numerical input, the dataset must be pre-filtered to only include numerical columns or the pipeline must be strictly limited to the requested steps.",
+      "The pipeline includes an OrdinalEncoder step which was not requested in the original pipeline specification. While necessary for handling categorical data, it deviates from the strict step-by-step instructions provided.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The code is not compliant because it fails to handle the categorical features present in the dataset. The pipeline will raise a ValueError when attempting to pass non-numeric data to the IterativeImputer or PCA, and the current implementation does not include the necessary preprocessing steps to convert categorical data into a numerical format required by the specified pipeline components.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps.",
+      "The code is not compliant because it fails to handle categorical features present in the dataset. The pipeline will raise a ValueError when attempting to pass non-numeric data to the IterativeImputer or PCA, and the current implementation does not include the necessary preprocessing steps to convert categorical data into a numerical format required by the specified pipeline components.",
+      "The pipeline includes an OrdinalEncoder step which was not explicitly requested in the pipeline steps. While necessary for handling categorical data, the instructions require implementing only the specified steps."
+    ],
+    "5": [
+      "The provided code includes an OneHotEncoder for categorical features which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without prior encoding, and the pipeline structure should strictly follow the requested steps (imputation, normalization, feature selection, regression) without adding extra preprocessing steps like encoding unless implicitly required by the data type handling."
+    ],
+    "8": [
+      "The generated code is not compliant because it includes a ColumnTransformer with custom logic (pd.get_dummies) and manual imputation that deviates from the requested pipeline steps. The pipeline specifically requested 'normalization' with 'standard', 'features' with 'pca', and 'regression' with 'ridge'. The implementation should focus on these steps directly, ensuring all features are numeric before the pipeline or handled within it using standard sklearn transformers.",
+      "The code is technically valid Python, but the previous execution error suggests issues with the environment or formatting. Furthermore, the pipeline includes OneHotEncoder and Imputers which were not explicitly requested in the 3-step pipeline (normalization, pca, ridge), though they are necessary for the dataset provided. The primary issue is the use of semicolons and single-line formatting which can cause syntax errors in some execution environments."
+    ],
+    "10": [
+      "The generated code is not fully compliant because it introduces an OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) without adding extra preprocessing steps like OneHotEncoding unless necessary for the algorithm to function."
+    ],
+    "11": [
+      "The generated code is not compliant because it adds an extra 'scaler' step (StandardScaler) after the preprocessor, which was not requested in the pipeline. The pipeline specifically requested imputation, normalization, PCA, and linear regression in that order."
+    ],
+    "15": [
+      "The generated code is not fully compliant because it introduces an OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical features without prior encoding or specific handling, which may cause runtime errors.",
+      "The pipeline is not fully compliant because it introduces an OrdinalEncoder to handle categorical data, which was not specified in the pipeline steps. While necessary for the IterativeImputer to function on non-numeric data, it adds a preprocessing step outside the requested sequence.",
+      "The pipeline is not strictly compliant because it introduces an OrdinalEncoder to handle categorical data, which was not explicitly requested in the pipeline steps. However, this step is technically required to enable the IterativeImputer to process the dataset provided.",
+      "The pipeline is not strictly compliant because it introduces an OrdinalEncoder to handle categorical data, which was not explicitly requested in the pipeline steps. However, this step is technically required to enable the IterativeImputer to process the dataset provided.",
+      "The pipeline is not strictly compliant because it introduces an OrdinalEncoder to handle categorical data, which was not explicitly requested in the pipeline steps. However, this step is technically required to enable the IterativeImputer to process the dataset provided.",
+      "The pipeline includes an OrdinalEncoder which was not specified in the requested steps. While necessary for the IterativeImputer to handle categorical data, it constitutes an additional preprocessing step not explicitly listed in the pipeline definition.",
+      "The code is not compliant because IterativeImputer and RobustScaler cannot process categorical data directly. The pipeline will fail at runtime when encountering the string columns present in the provided dataset.",
+      "The code includes an OrdinalEncoder which was not explicitly requested in the pipeline steps. While necessary for the IterativeImputer to handle categorical data, it constitutes an additional preprocessing step not listed in the pipeline definition.",
+      "The pipeline includes an OrdinalEncoder which was not explicitly requested in the pipeline steps. While necessary for the IterativeImputer to handle categorical data, it constitutes an additional preprocessing step not listed in the pipeline definition.",
+      "The pipeline includes an OrdinalEncoder which was not explicitly requested in the pipeline steps. While necessary for the IterativeImputer to handle categorical data, it constitutes an additional preprocessing step not listed in the pipeline definition."
+    ],
+    "16": [
+      "The provided code is not fully compliant because the IterativeImputer does not support categorical data directly (it requires numerical input), and the implementation attempts to apply it to categorical features without proper encoding, which will cause a runtime error. Additionally, the pipeline structure includes a ColumnTransformer which was not explicitly requested in the pipeline steps."
+    ],
+    "17": [
+      "The generated code is not fully compliant because the pipeline requires imputation and normalization on the entire dataset, but the implementation uses a ColumnTransformer that applies different logic to categorical features (including an imputer that does not support string data directly) and uses OneHotEncoder, which was not specified in the pipeline steps."
+    ],
+    "20": [
+      "The code is not fully compliant because it uses 'pd.get_dummies' inside a pipeline step, which is not a scikit-learn transformer and will fail during the fit process. Additionally, the pipeline structure should strictly follow the requested steps (normalization, features, regression) without unnecessary complexity like ColumnTransformer if not explicitly required, and it must handle categorical data correctly using sklearn-compatible transformers."
+    ],
+    "22": [
+      "The generated code is not fully compliant because it introduces a ColumnTransformer with OneHotEncoder for categorical variables, which was not specified in the pipeline steps. The pipeline explicitly requested 'imputation', 'normalization', 'pca', and 'svr'. Additionally, IterativeImputer cannot be applied directly to categorical columns without encoding, and the current implementation attempts to use it on categorical data, which will cause a runtime error."
+    ],
+    "24": [
+      "The generated code is not fully compliant because it introduces a StandardScaler and a ColumnTransformer with OneHot encoding logic (via StandardScaler with_mean=False) which were not specified in the pipeline steps. The pipeline explicitly requested imputation, normalization, PCA, and regression, but the implementation adds extra preprocessing steps not requested.",
+      "The pipeline requires imputation, normalization, PCA, and regression. While the code includes these, it introduces an implicit OneHotEncoder for categorical variables which was not requested. Furthermore, applying PowerTransformer directly to the output of a ColumnTransformer (which includes sparse one-hot encoded data) will raise an error because PowerTransformer does not support sparse input matrices."
+    ],
+    "25": [
+      "The generated code is not fully compliant because the pipeline includes a OneHotEncoder for categorical features, which is not specified in the requested pipeline steps. Furthermore, the IterativeImputer cannot be applied directly to categorical features without encoding them first, and the pipeline structure should strictly follow the requested steps (imputation, normalization, feature selection, regression) without adding extra preprocessing steps like OneHotEncoder."
+    ],
+    "29": [
+      "The generated code is not fully compliant because the pipeline requires an iterative imputer for the entire dataset, but the provided implementation splits the data into numeric and categorical features, applying the imputer separately. Furthermore, IterativeImputer does not natively support categorical data (strings) without prior encoding, which would cause a runtime error."
+    ]
+  },
+  "semantic_validation_failures": 35,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.11733524499999998,
+    "input_tokens": 1526191,
+    "output_cost": 0.21245850000000005,
+    "output_tokens": 24298,
+    "total_cost": 0.3297937450000001,
+    "total_tokens": 1550489
+  },
+  "training_time": 2737.0600000000004,
+  "validation_metric": "rmse"
+}

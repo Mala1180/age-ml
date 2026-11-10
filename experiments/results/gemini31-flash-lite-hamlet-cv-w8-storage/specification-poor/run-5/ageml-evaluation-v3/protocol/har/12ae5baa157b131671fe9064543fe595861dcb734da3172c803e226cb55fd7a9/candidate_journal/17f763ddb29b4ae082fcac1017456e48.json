@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "2764133a6609a601b4f7aa6b96190185f3e6b3a9e1e0cdadb3333ac73100a1e5",
+  "code_sha256": "9ca5a6e57bc5dd46e69bf9305c557f8e2de840f1c7a32da177bae497876b8079",
+  "completed_at": 1794254820.1027906,
+  "cv_fold_scores": [
+    0.6136465598199573,
+    0.6018622825420062,
+    0.619956904059111,
+    0.5590807411268925,
+    0.5435906314816183,
+    0.6873403768947709,
+    0.6397233107690106,
+    0.6441451251212758,
+    0.6229860941307022,
+    0.5935715200108205
+  ],
+  "effective_random_states": [
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    },
+    {
+      "classification__random_state": 42,
+      "discretization__random_state": 42
+    }
+  ],
+  "fit_attempt": 3,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "feature_range": [
+      0,
+      1
+    ],
+    "k": 5,
+    "max_depth": 20,
+    "n_bins": 10,
+    "n_estimators": 200
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "1e3b7fa498c4cfb6d14e1255134123d50deb72f8687688f4c51621dca25134cd",
+  "pipeline_id": 2,
+  "pipeline_run_id": "5f82f85ec7b64202b598eb8a4b2b4be0",
+  "run_id": "17f763ddb29b4ae082fcac1017456e48",
+  "run_identity": "c64f4e53d293ec443088f079f1464920252210bfa5830d4d592349c6301c8980",
+  "validation_score": 0.6125903545956166,
+  "validation_split_hash": "d38ac3c1eae9808cec541d3ddff66bf85327db7d30a2f2b23ad76a294e863893"
+}

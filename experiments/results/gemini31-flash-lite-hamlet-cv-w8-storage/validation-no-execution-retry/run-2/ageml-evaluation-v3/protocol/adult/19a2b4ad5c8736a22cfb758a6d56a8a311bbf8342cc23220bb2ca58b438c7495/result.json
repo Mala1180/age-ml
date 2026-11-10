@@ -1,0 +1,109 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/19a2b4ad5c8736a22cfb758a6d56a8a311bbf8342cc23220bb2ca58b438c7495/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/19a2b4ad5c8736a22cfb758a6d56a8a311bbf8342cc23220bb2ca58b438c7495/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/19a2b4ad5c8736a22cfb758a6d56a8a311bbf8342cc23220bb2ca58b438c7495/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/19a2b4ad5c8736a22cfb758a6d56a8a311bbf8342cc23220bb2ca58b438c7495/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 22,
+  "best_run_id": "17a5a277d5d94c99a2897047b19dc42a",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.7415371855090372,
+    0.7416236264975815,
+    0.7483084071840393,
+    0.7448593273073123,
+    0.744504512142973,
+    0.7364420937014646,
+    0.7492256786177692,
+    0.7419363157937153,
+    0.7574059341420984,
+    0.7485048361266315
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 321.11499999999995,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": "49783399fe2042f5932ca40373280fda",
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "2061a48cdd8d90586fa18f13d37b8726ae878da01540549f601c7c726e0b987b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "3a81d1aa583366ac86e1191f886802ece7cd3afdeebf855bfbe636a9b505b8e7",
+  "runtime_human_readable": "0:04:25",
+  "runtime_seconds": 265.3016522154212,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.7454347917022622,
+  "selected_candidate_key": "579ceb247949d930b63efb3055d414f4dcc651df05937d19486037b959a40357",
+  "selection_sha256": "b47c134cc143c16a2be072f05eeb117f27b72077e197654890b9fbccad2b4f54",
+  "selection_validation_score": 0.7454347917022622,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The generated code is not fully compliant because it includes an unnecessary SimpleImputer for categorical features and a ColumnTransformer that excludes categorical features entirely, whereas the pipeline steps (discretization, normalization, PCA) should ideally be applied to the relevant features of the dataset. Additionally, the pipeline structure should directly reflect the requested steps.",
+      "The pipeline steps (discretization, normalization, PCA) are applied to the entire feature set after concatenation, but the discretization step is only applied to numeric features within the ColumnTransformer, which deviates from the requirement to apply the pipeline steps to the dataset as a whole."
+    ],
+    "12": [
+      "The provided code uses an IterativeImputer on categorical features, which is not natively supported by scikit-learn's IterativeImputer as it requires numerical input. Additionally, the pipeline structure includes a ColumnTransformer that was not explicitly requested in the pipeline steps, and the PCA step is applied after the categorical encoding, which is technically correct but the implementation of the imputer for categorical data is invalid."
+    ],
+    "13": [
+      "The generated code is not fully compliant because it uses KBinsDiscretizer on categorical features, which is not standard practice and may cause errors depending on the input data. Additionally, the pipeline structure for categorical features is inconsistent with the requested steps (discretization, normalization, pca, knn) as it applies a different transformation logic to categorical columns compared to numeric ones.",
+      "The pipeline is not fully compliant because the discretization and normalization steps are only applied to numeric features, while categorical features are processed via OneHotEncoder, bypassing the requested discretization and normalization steps for the entire dataset."
+    ]
+  },
+  "semantic_validation_failures": 5,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.022135949999999998,
+    "input_tokens": 46450,
+    "output_cost": 0.044965,
+    "output_tokens": 3429,
+    "total_cost": 0.06710094999999999,
+    "total_tokens": 49879
+  },
+  "training_time": 228.816,
+  "validation_metric": "balanced_accuracy"
+}

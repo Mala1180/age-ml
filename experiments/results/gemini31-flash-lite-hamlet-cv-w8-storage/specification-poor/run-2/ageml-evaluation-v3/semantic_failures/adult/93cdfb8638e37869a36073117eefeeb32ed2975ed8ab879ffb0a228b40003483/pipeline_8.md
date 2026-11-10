@@ -1,0 +1,2 @@
+Attempt 1:
+The IterativeImputer cannot be applied to categorical features directly as it expects numerical input. Additionally, the pipeline requires a specific sequence of steps that must be applied to the entire dataset, whereas the current implementation uses a ColumnTransformer that splits the data, which was not explicitly requested in the pipeline steps.

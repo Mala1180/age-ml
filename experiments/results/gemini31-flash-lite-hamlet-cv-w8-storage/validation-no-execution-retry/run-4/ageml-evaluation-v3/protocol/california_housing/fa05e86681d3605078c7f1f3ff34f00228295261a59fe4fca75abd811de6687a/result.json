@@ -1,0 +1,108 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/fa05e86681d3605078c7f1f3ff34f00228295261a59fe4fca75abd811de6687a/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/fa05e86681d3605078c7f1f3ff34f00228295261a59fe4fca75abd811de6687a/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/fa05e86681d3605078c7f1f3ff34f00228295261a59fe4fca75abd811de6687a/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/fa05e86681d3605078c7f1f3ff34f00228295261a59fe4fca75abd811de6687a/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 21,
+  "best_run_id": "85b1b6f7615c481f918bf5fc552f37d9",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    95387.41626955487,
+    68650.75263206803,
+    98711.08460261952,
+    77503.555851143,
+    88019.13515561755,
+    74001.10781267568,
+    61425.88763854238,
+    94517.06367360319,
+    86543.25128497084,
+    62086.251955784166
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 146.097,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "017c95ce23a9465b9f08ab9d696d1e44",
+    "2": null,
+    "3": "5a220fbdc67e4a38a8aca3058e940756",
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": "02b288bb05dd45f08d972ac0f2172f5f",
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": "eb4de3d046db46a1bfbc3d24b5ac8a32",
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "dc780c1a9b4ac911ca23775497b050d6bc80b05ae8801b6bab59fe59ecf8e762",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "7ec8d9ec68cb082c9d8a0a7a5eb13a1df1af0f62d86ea6afecd5384b919b9e8f",
+  "runtime_human_readable": "0:01:51",
+  "runtime_seconds": 110.64036375656724,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 80684.55068765793,
+  "selected_candidate_key": "106cccc59c8f588964337e3a6b80a05afef53b7147862fce692891f21667ae23",
+  "selection_sha256": "0b6c236ad98687f2f113f06989e62afdb258647f939802969700bb4caaa3fab5",
+  "selection_validation_score": 80684.55068765793,
+  "semantic_validation_failure_reasons": {
+    "6": [
+      "The provided code is not fully compliant because the IterativeImputer cannot be applied directly to categorical features (strings) as implemented in the categorical_transformer pipeline. Additionally, the pipeline structure for categorical data should handle encoding before or during imputation if the imputer requires numerical input, or use a different imputation strategy for categorical columns."
+    ],
+    "14": [
+      "The provided code is not compliant because it includes an unnecessary OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) applied to the dataset as a whole."
+    ],
+    "22": [
+      "The generated code includes a ColumnTransformer and a categorical transformer that were not requested in the pipeline steps. The pipeline specifically requested imputation, normalization, and regression, which should be applied to the dataset as a whole or handled consistently without adding extra preprocessing steps like one-hot encoding that were not specified.",
+      "The pipeline steps requested were strictly imputation, normalization, and regression. The generated code introduces a ColumnTransformer and OneHotEncoder to handle categorical data, which were not specified in the pipeline requirements. Furthermore, the pipeline should be a simple sequence of the three requested steps."
+    ]
+  },
+  "semantic_validation_failures": 4,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.02306357,
+    "input_tokens": 120397,
+    "output_cost": 0.07822149999999999,
+    "output_tokens": 3498,
+    "total_cost": 0.10128506999999999,
+    "total_tokens": 123895
+  },
+  "training_time": 100.47699999999999,
+  "validation_metric": "rmse"
+}
