@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies 'imputation' with `iterative_imputer`. While `IterativeImputer` is correctly applied to numerical features, categorical features with missing values are handled by `OneHotEncoder` (which creates a new category for NaNs). This is a different imputation strategy than `iterative_imputer` and thus deviates from the specified pipeline step for all imputation.

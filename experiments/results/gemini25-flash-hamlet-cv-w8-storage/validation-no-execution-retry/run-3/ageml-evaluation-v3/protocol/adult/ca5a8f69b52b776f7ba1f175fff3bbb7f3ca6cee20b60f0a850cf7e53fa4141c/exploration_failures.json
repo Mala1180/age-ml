@@ -1,0 +1,228 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "c44915a1b5a849dd9de134ecb37942d1",
+    "semantic_feedback": [
+      "The code includes an additional imputation step (`SimpleImputer` for categorical features) within the `categorical_transformer`. The provided pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. While `SimpleImputer` might be a practical necessity for handling missing categorical values before `IterativeImputer` (which is designed for numerical data), it constitutes an extra step not explicitly listed in the pipeline, thus violating the 'only those steps' constraint.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The provided dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The code introduces a `CategoricalNanHandler` step within the `preprocessor` to handle missing categorical values before `OneHotEncoder`. While this is necessary for the pipeline to be executable given the data, it is an additional imputation/handling step not explicitly listed in the provided pipeline, which specifies 'imputation with `iterative_imputer`' as the sole imputation step. This violates the constraint to implement 'only those steps'.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The `CategoryConverter` only changes the dtype to 'category' but does not handle or fill NaN values. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step uses `handle_missing='indicator'`, which is a mechanism for handling missing categorical values by creating additional features. While this makes the code executable and robust to missing categorical data, it constitutes a form of missing data handling that is distinct from the specified 'imputation with `iterative_imputer`'. The pipeline explicitly states 'imputation with `iterative_imputer`' as the sole imputation step, and this additional handling violates the constraint to implement 'only those steps'.",
+      "The `OneHotEncoder` step uses `handle_missing='ignore'`. This means that if missing values (NaNs) are present in categorical columns, `OneHotEncoder` will effectively treat them as a new category that maps to all zeros. This is a form of missing data handling that is distinct from the specified 'imputation with `iterative_imputer`'. The pipeline explicitly states 'imputation with `iterative_imputer`' as the sole imputation step, and this additional handling by `OneHotEncoder` violates the constraint to implement 'only those steps' for imputation."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "a75b474c23df424486d17f264011458a",
+    "semantic_feedback": [
+      "The pipeline explicitly states 'discretization with binarizer' as the first step. The generated code includes an additional step, 'OneHotEncoder' for categorical features, which was not specified in the provided pipeline. The instruction was to implement all the steps of the pipeline and ONLY those steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "b25d6531086844a79007d563a06a0046",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "843e4f9c033949e0b6a83a41989dca00",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "7e69c8f5b8974200ac809aa11e698612",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "23bba1cbe81b474fb220a52bc68b3bac",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "15fe93190c2a49c8a383f425e8b6821e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "2e1387d4a83a4b45956c613760eb2488",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "ce28f6aa018a446482b1bde38cd3d959",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "12cf8970b6f147e09704c05ed884b9e3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "23e3407254ec4583ad54d006d613dbac",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "401abe51f5a24e32b95e8ce5f5f40b07",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "4583bf1234b74dc29fb131b53cb49cf7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "029caf4eede041a6b40e46c531a98f3d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "13b79c41fe0b400ab07527aa1de8c204",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "d43cdbb4ada146babf22cd3dd6a6b866",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "5c3616a359b0478ab7681e4c090d74f6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "8f8b9a3cccea455691bbad7a670ba314",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "95b3ba5644474b5e912d4a8eda84b7b1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "266cbf6396f744e3a845ec529ccb0564",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "c99584e410764650ad5eb51f31cf4a80",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "5ef3ba12788b42929422d89d46838a89",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "c85f873f23a7470db4cb3e8eb849d55e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "4ff5024f26194c028c3abfb7de8ea1b9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "c617df729aa24f0b92febe7e15ba8972",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "c6d20c1ddc59499fb83e14360e32b201",
+    "semantic_feedback": [
+      "The code is not compliant with the pipeline. While numerical features are correctly imputed and discretized with `Binarizer`, categorical features are only imputed. The `RandomForestClassifier` expects numerical input, but the categorical features, after imputation, remain as string/object types. There is no encoding step (e.g., OneHotEncoder) for categorical features to convert them into a numerical format suitable for the classifier. This will lead to an error when the model is fitted."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "a7187c53e2b144a380a77df61785eb72",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "d5a67d0831b4442387773f52014c9251",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "f41788b6020444bb9d08f88a378fe36e",
+    "semantic_feedback": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "e24790d3c2954ec9a2f96f2666356007",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

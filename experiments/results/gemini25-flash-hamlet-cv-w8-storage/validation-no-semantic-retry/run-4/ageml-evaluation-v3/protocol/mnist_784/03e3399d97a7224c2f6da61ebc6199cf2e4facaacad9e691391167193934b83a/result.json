@@ -1,0 +1,97 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/mnist_784/03e3399d97a7224c2f6da61ebc6199cf2e4facaacad9e691391167193934b83a/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/mnist_784/03e3399d97a7224c2f6da61ebc6199cf2e4facaacad9e691391167193934b83a/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/mnist_784/03e3399d97a7224c2f6da61ebc6199cf2e4facaacad9e691391167193934b83a/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/mnist_784/03e3399d97a7224c2f6da61ebc6199cf2e4facaacad9e691391167193934b83a/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 1,
+  "best_run_id": "acbb4e028836492b887adbb795d3ed7e",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9747224770149296,
+    0.9652132044397363,
+    0.9711357915229162,
+    0.9696868476062853,
+    0.9684111449507871,
+    0.9722764637383031,
+    0.9655091814768376,
+    0.9705240450639243,
+    0.9706010702379873,
+    0.9761891483046528
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 36.524,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": "32e26b03f96642d6b3cbbcea2c3468ec",
+    "4": "fee5aa0c379549cbab2f623d74b7a555",
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "b69a1e1a772d382f20b85da6f90e3927e7e99f1d8dd1926eef338e01bb282bc6",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "8b38740baa85b57eff9431c9960996b99df9eec9360cd1ea13992f86cc8cc7f5",
+  "runtime_human_readable": "1:07:06",
+  "runtime_seconds": 4025.5660091377795,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9704269374356358,
+  "selected_candidate_key": "fd47a7b09e8ad584d73dcf67d47dcd0012b1fd5ca50732805bf1ceafb7acd089",
+  "selection_sha256": "d4dacf39ff1a00133d3f96c3c3c7962ae1dab074f657c0c4a4b52a2c6169cc6b",
+  "selection_validation_score": 0.9704269374356358,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The `NearMiss` rebalancing step has a `random_state` parameter that should be exposed in the `build_model` function signature, as per the instruction: \"The host sets every exposed random_state\"."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "b7451a4d1c697c013386236b17547be25e785051cf778a04385b03991df0481a",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.031092329999999994,
+    "input_tokens": 708525,
+    "output_cost": 0.013330000000000002,
+    "output_tokens": 6017,
+    "total_cost": 0.04442233000000001,
+    "total_tokens": 714542
+  },
+  "training_time": 760.373,
+  "validation_metric": "balanced_accuracy"
+}

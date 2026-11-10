@@ -1,0 +1,2 @@
+Attempt 1:
+The `weights` parameter from the function signature `build_model(..., weights)` is not passed to the `KNeighborsClassifier` constructor. The `KNeighborsClassifier` is initialized as `KNeighborsClassifier(n_neighbors=n_neighbors)` instead of `KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights)`.

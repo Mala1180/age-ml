@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, 'select_numeric_columns' using `FunctionTransformer`, which was not specified in the original pipeline definition. The instruction states to implement 'all the steps of the pipeline and only those steps'.

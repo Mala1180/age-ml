@@ -1,0 +1,102 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/har/0cf0f2949a886e48dca4facae4a93e3a196b6f3e303bd09b759c99f53410cf71/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/har/0cf0f2949a886e48dca4facae4a93e3a196b6f3e303bd09b759c99f53410cf71/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/har/0cf0f2949a886e48dca4facae4a93e3a196b6f3e303bd09b759c99f53410cf71/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/har/0cf0f2949a886e48dca4facae4a93e3a196b6f3e303bd09b759c99f53410cf71/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "d41b6c5e9e764fc88b0ab82b1d3d39e1",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2263.4919999999997,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "bcf804a6aed24ba6894d0284d7609ca8",
+    "2": "98784eba363e48efbfe325789c91b9c5",
+    "3": "f52c7e63c7e041fbb3ac160a51bd4cb6",
+    "4": "d54e0a223eed4007be18717d95de1d04",
+    "5": null,
+    "6": null,
+    "7": "dff06cb9141a4672bc68e0a542365a90",
+    "8": null,
+    "9": "50dce31f105f40e1b83ffc6f8f3ecc57",
+    "10": "af7856c90e794f0085c4ca8028dd0865",
+    "11": "0c543dbb1dd44707b8e86399150e2bdf",
+    "12": null,
+    "13": "4f2a1f6d8d7b4c25a4087ac7db65e1b8",
+    "14": "3aa22b7e53c7412a8f6d7723c03e0a02",
+    "15": "227f8ca1c7a94ca48dd25195b89a46fa",
+    "16": "b235a935fc28414884d46912c746e1d2",
+    "17": "1e518bbc27cb4d84a74f8c4b82de8cf8",
+    "18": null,
+    "19": "fee4d2f1b1984adaa370cc30cb080959",
+    "20": "3074453730a74423a847d4a068029992",
+    "21": "bbd3c9fea42b4e9daf66245259203f80",
+    "22": "03e4b7c8d937444a96744ce721a0a02c",
+    "23": "db32ce48cd544d8bb9bd739ca3d4d881",
+    "24": null,
+    "25": "778d24e322f2426c96ea94f5ec431ffe",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "086aafba98225acd53f67646817acbebb0ffaacd83cf374242459b66d3ca63bd",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "4ffcad46ff0316e69e7c1c21d1ffc31bbb8b8cdf852fa55f963880cfffed6c43",
+  "runtime_human_readable": "1:00:41",
+  "runtime_seconds": 3641.4921520464122,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "ac1cc4393200e8d4ff0377177d8b3d4dfad30b51c78fef974496255165e6298b",
+  "selection_sha256": "0b703f1ca339f6b2024af4973ac1c23ee32d8444f096d0c0187e7ffde83ac61a",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "20": [
+      "The `KBinsDiscretizer` and `PCA` components accept a `random_state` parameter for reproducibility. Since `random_state` is not provided as an argument to the `build_model` function, it should be set to a fixed value (e.g., `random_state=42`) for these components to ensure consistent behavior across runs, as per standard practice when a random state is applicable and not exposed as a hyperparameter.",
+      "The `KBinsDiscretizer` component accepts a `random_state` parameter for reproducibility. Since `random_state` is not provided as an argument to the `build_model` function for this specific component, it should be set to a fixed value (e.g., `random_state=42`) to ensure consistent behavior across runs, as per standard practice when a random state is applicable and not exposed as a hyperparameter."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01443444,
+    "input_tokens": 890743,
+    "output_cost": 0.035827500000000005,
+    "output_tokens": 8339,
+    "total_cost": 0.050261940000000005,
+    "total_tokens": 899838
+  },
+  "training_time": 5397.44,
+  "validation_metric": "balanced_accuracy"
+}

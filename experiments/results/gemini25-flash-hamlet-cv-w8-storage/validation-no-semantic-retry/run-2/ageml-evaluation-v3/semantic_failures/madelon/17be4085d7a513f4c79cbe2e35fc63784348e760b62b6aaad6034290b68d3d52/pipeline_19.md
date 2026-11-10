@@ -1,0 +1,2 @@
+Attempt 1:
+The `PCA` step in the pipeline includes `random_state=42`, but `sklearn.decomposition.PCA` does not accept a `random_state` parameter in its constructor unless `svd_solver` is set to 'randomized'. This will cause an error during execution.

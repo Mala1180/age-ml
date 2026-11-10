@@ -1,0 +1,83 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "11e3b5daa04a317d3a4843ba2aa7377a7f4e9ae2d384a78e7c7789ef87c764ca",
+  "code_sha256": "f02ba74b6e9d48acc6ad031e2818f0e982fe78a15310c85ca176cc738932e983",
+  "completed_at": 1793476580.5389333,
+  "cv_fold_scores": [
+    0.7362989306639681,
+    0.7409993176801863,
+    0.7272512791777872,
+    0.7443137413922762,
+    0.731361144698232,
+    0.7339182814912378,
+    0.7450207065200497,
+    0.7271706155080725,
+    0.7452601814252672,
+    0.7431364534917859
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "preprocessor__num__imputer__random_state": 42,
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 4,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "k_neighbors": 5,
+    "max_iter": 10,
+    "n_neighbors": 5,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "520b2fc0688cfa539982ffec462fccd1a3d228df03341e332001e1ee5446d78c",
+  "pipeline_id": 24,
+  "pipeline_run_id": "7dca19226e6f4dbb946c63199f98b4a3",
+  "run_id": "9ffd50c5277a4bb0b97518b6c53ea4c9",
+  "run_identity": "9e090bf88296db3c85cafd1e35e775998eb633c39046bd3abb0737834d34f221",
+  "validation_score": 0.7374730652048863,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

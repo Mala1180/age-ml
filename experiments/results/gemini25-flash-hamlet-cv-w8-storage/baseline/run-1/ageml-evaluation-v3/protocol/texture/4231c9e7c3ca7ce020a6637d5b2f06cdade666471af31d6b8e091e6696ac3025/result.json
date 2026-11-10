@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/texture/4231c9e7c3ca7ce020a6637d5b2f06cdade666471af31d6b8e091e6696ac3025/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/texture/4231c9e7c3ca7ce020a6637d5b2f06cdade666471af31d6b8e091e6696ac3025/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/texture/4231c9e7c3ca7ce020a6637d5b2f06cdade666471af31d6b8e091e6696ac3025/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/texture/4231c9e7c3ca7ce020a6637d5b2f06cdade666471af31d6b8e091e6696ac3025/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "11e4261dfd0147108235e31923a47499",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9945454545454545,
+    0.9945454545454546,
+    0.9963636363636365,
+    0.9963636363636365,
+    1.0,
+    0.9945454545454546,
+    0.9981818181818182,
+    0.990909090909091,
+    0.9981818181818182,
+    0.9981818181818182
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 431.511,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "ac1534239a0142fcac0a815db09faa55",
+    "1": "33c84ed5bf9a40b7b0f543b3d935dbda",
+    "2": "30b066a0623f489db90a14182b6042d7",
+    "3": "4470986d66d347d6900b07b02498778b",
+    "4": "8b739b8899064268bc3de172d34e60a0",
+    "5": "2264a7e57d304ff9bc8951cfe8ca4099",
+    "6": "97819403aa844483b09d982323eb3b2c",
+    "7": "08dd7252aea04b4e98c31cd1e3edbdcd",
+    "8": "28b891456a464a54b8895ff5ac049900",
+    "9": "48fd4753153f44649cb6820e050452c5",
+    "10": "16710bd46d0441819d9387bf1c111cdc",
+    "11": "8a31c186ab8243f0b81381dfdc1d90b1",
+    "12": "1a9be1790dd9411cbf482878601f93e5",
+    "13": "d2b9581f5ce8406cb9e9985ddc467238",
+    "14": "5ffff583c05748a9b26edb817af0af3d",
+    "15": "22501ae13508477c854687c64f61e9da",
+    "16": "3283fd7362204e6896b66694e20d1171",
+    "17": "5c916e8a1bb643c4b97a80247a25eac1",
+    "18": "ed3a14709a9543dc8ee46800e2ff93e5",
+    "19": "14a0d133f8c8417fabf2b46c1d022c7a",
+    "20": "9f4f3ce62172417dadc6011ac7dea543",
+    "21": "cba3f0eae4e84191b27891aca26627e8",
+    "22": "16c1ba10bdd94c33a29697c65557bef4",
+    "23": "8b8be8a79d3f463fbaa9085153a38ff2",
+    "24": "a2c18334df8f4912a63c61fbb3c49709",
+    "25": "eaff2143b2b648518e465143a7dfd435",
+    "26": "13ef9d3b480e45209d7cc0363b4336a2",
+    "27": "88308f5cdc184921a054a44ddc16d5d2",
+    "28": "a79a0c3060554594894d57e63e448e90",
+    "29": "e4b2fa262c234b73b8b9721d7e520136"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "d07592cc019484242fc17c78e150ff65454aaf5f0f87d3d7e664a91793930f74",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "fa27a410caa49f6ed88014256a0322be9b382c47bba7b4b70401063ba7ab9c85",
+  "runtime_human_readable": "0:07:00",
+  "runtime_seconds": 420.33309407159686,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9961818181818183,
+  "selected_candidate_key": "0ecdcc5314479fe25b7e2b79c646937da4f956f8df1e1c7d8096e200c19206cd",
+  "selection_sha256": "909fb1cf2b89185b53db562fb58d16d1468abb8dde526bf089573fc8d23cab22",
+  "selection_validation_score": 0.9961818181818183,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The code is not fully compliant because the 'feature_range' parameter for MinMaxScaler is passed as a list `[0, 1]`, but it expects a tuple, e.g., `(0, 1)`. This causes an execution error."
+    ],
+    "14": [
+      "no, the code is not fully compliant because it will fail if the 'feature_range' parameter is passed as a list, as indicated by the previous execution error. The MinMaxScaler expects 'feature_range' to be a tuple, but the input might be a list (e.g., [0, 1]). The code should ensure that 'feature_range' is a tuple before passing it to MinMaxScaler to be robust and executable."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "a80eee61e65b7b4e1d809b5bfe009a74e2bef5667e7220f0055cae9ac7de8321",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01147785,
+    "input_tokens": 75863,
+    "output_cost": 0.033857500000000006,
+    "output_tokens": 7862,
+    "total_cost": 0.04533535000000001,
+    "total_tokens": 84445
+  },
+  "training_time": 1891.9959999999996,
+  "validation_metric": "balanced_accuracy"
+}

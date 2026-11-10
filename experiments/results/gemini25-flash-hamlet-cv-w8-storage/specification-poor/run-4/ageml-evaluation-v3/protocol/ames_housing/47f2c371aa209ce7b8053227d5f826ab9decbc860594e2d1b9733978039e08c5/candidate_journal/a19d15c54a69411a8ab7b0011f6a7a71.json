@@ -1,0 +1,88 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "0825cb069a6809a184094bbed9b09b2ce0326af2a0fe1e0d305b823ea57039fa",
+  "code_sha256": "79bc165dc19759111b3f457fee35c9a3d680f348c88bc26395ccfebb6961a442",
+  "completed_at": 1793748407.1595328,
+  "cv_fold_scores": [
+    187097.19543625668,
+    204783.51920517496,
+    199143.8489819687,
+    200643.9004248545,
+    209379.79273123917,
+    198165.16311451673,
+    187423.81406411453,
+    186389.0126263484,
+    208916.10314324824,
+    189770.18689541938
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "regression__random_state": 42
+    }
+  ],
+  "fit_attempt": 3,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "hidden_layer_sizes": [
+      20
+    ],
+    "k": 5,
+    "max_iter": 300,
+    "n_bins": 10,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "1064dd27e8074ce1a6a61d319346de4185a14dd6b305ab7d7b744797d2a7cec2",
+  "pipeline_id": 2,
+  "pipeline_run_id": "bb10287dc7b443669f6a09c103edf6d9",
+  "run_id": "a19d15c54a69411a8ab7b0011f6a7a71",
+  "run_identity": "e33dcc0e11de140e2ac58fc54ccca6896aaad55a68e5974d8879f2e96ee2562e",
+  "validation_score": 197171.25366231412,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

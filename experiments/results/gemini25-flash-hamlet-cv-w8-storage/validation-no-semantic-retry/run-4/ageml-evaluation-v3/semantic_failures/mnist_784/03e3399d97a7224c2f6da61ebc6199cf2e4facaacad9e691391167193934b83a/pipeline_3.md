@@ -1,0 +1,2 @@
+Attempt 1:
+The `NearMiss` rebalancing step has a `random_state` parameter that should be exposed in the `build_model` function signature, as per the instruction: "The host sets every exposed random_state".

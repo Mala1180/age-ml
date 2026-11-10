@@ -1,0 +1,82 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "da3b04e85b6a7f842e51a71a82b056f8304f2afcd4c7c34615845902f581c2da",
+  "code_sha256": "6fdbf5a906036aa115e6aba764d1aba39e2352c82ed03cc604d487e7d7bfd764",
+  "completed_at": 1793599243.6640248,
+  "cv_fold_scores": [
+    0.9148829944643437,
+    0.8800772452814011,
+    0.866126064980763,
+    0.8875237273030275,
+    0.9348657722335743,
+    0.9254948462062753,
+    0.9030393808413048,
+    0.8995039610183788,
+    0.9047661423842804,
+    0.9217719858642849
+  ],
+  "effective_random_states": [
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 5,
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "497d0725b69faa973a491e9fa081bbcd1e19b34e51a5e8dfd293e9ac7ca0a366",
+  "pipeline_id": 13,
+  "pipeline_run_id": "8b354dc8d8114be883e5bcdf88fd1c1a",
+  "run_id": "7c5f15f5d19c4d8fa7d35f5e7e2e78db",
+  "run_identity": "0e5d762daed970189a650081d40de922dfb5a04348c864378b43715229977b62",
+  "validation_score": 0.9038052120577633,
+  "validation_split_hash": "d38ac3c1eae9808cec541d3ddff66bf85327db7d30a2f2b23ad76a294e863893"
+}

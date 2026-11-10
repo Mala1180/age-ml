@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not fully compliant because it includes an additional step, `OneHotEncoder`, for categorical features. The provided pipeline only specifies 5 steps: imputation, discretization, normalization, PCA, and SVR, without mentioning any explicit handling for categorical features. The instruction was to implement all the steps of the pipeline and *only* those steps.

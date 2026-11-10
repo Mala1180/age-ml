@@ -1,0 +1,305 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "0464d529aa3a4f58932b07d9289dcdfa",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `iterative_imputer`' for the overall imputation step, but the code uses `SimpleImputer` for categorical features instead of `IterativeImputer`. Additionally, the pipeline specifies 'normalization with `robust_scaler`', but the code applies `OneHotEncoder` to categorical features, which is not `robust_scaler`. The instruction 'it implements all the steps of the pipeline and only those steps' is violated by the introduction of `SimpleImputer` and `OneHotEncoder` for categorical features, as these are not explicitly mentioned in the provided pipeline steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "8561a9320d164e3daa8a3968f9aa45d0",
+    "semantic_feedback": [
+      "The generated code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with iterative_imputer' and 'discretization with kbins'. While IterativeImputer and KBinsDiscretizer are correctly applied to numerical features, the code uses SimpleImputer for imputation and OneHotEncoder for encoding categorical features. These are different methods than what was explicitly requested in the pipeline steps for imputation and discretization, respectively.",
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with iterative_imputer' and 'discretization with kbins' as general steps. However, the code uses `SimpleImputer` for categorical features instead of `IterativeImputer`, and `OneHotEncoder` for categorical features instead of `KBinsDiscretizer` (which is applied only to numerical features). The pipeline does not specify separate handling for categorical features, implying the listed steps should apply to all relevant features or that categorical features should be handled implicitly by the specified steps if they can process them."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "3ff6f21b04c84bc5a7ae6a326d8a54d2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "017fd8249c1c4973a3ce1f1eb5bf2eef",
+    "semantic_feedback": [
+      "The generated code adds a `SimpleImputer` step for handling missing values, which was not explicitly listed in the provided pipeline definition. The instruction was to implement only the specified steps: normalization with `power_transformer`, features with `pca`, and regression with `linear`.",
+      "The generated code includes a 'SimpleImputer' step, which was not explicitly listed in the provided pipeline definition. The pipeline specifies only normalization with 'power_transformer', features with 'pca', and regression with 'linear'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "0d36d903d3eb4499b8aa8fbe73011569",
+    "semantic_feedback": [
+      "The pipeline includes a 'preprocessor' step for handling numerical and categorical features (imputation and one-hot encoding) which was not explicitly requested in the provided pipeline steps. The pipeline only specified 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'.",
+      "The pipeline includes a 'preprocessor' step for handling numerical and categorical features (imputation and one-hot encoding) which was not explicitly requested in the provided pipeline steps. The pipeline only specified 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. Adding extra preprocessing steps makes the code non-compliant with the given pipeline definition.",
+      "The pipeline includes a 'preprocessor' step for handling numerical and categorical features (imputation and one-hot encoding) which was not explicitly requested in the provided pipeline steps. The pipeline only specified 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. Adding extra preprocessing steps makes the code non-compliant with the given pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "587f89f04e004fd2aeba2813d1e6649f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "e54b7984674841149bdc1f9fd3067726",
+    "semantic_feedback": [
+      "The pipeline specified 'imputation' with `iterative_imputer` and 'normalization' with `power_transformer`. While the code correctly applies these to numerical features, it also introduces `SimpleImputer` for categorical imputation and `OneHotEncoder` for categorical feature encoding. These additional steps, while necessary for handling the mixed data types in the dataset, were not explicitly mentioned in the provided pipeline definition, thus violating the 'only those steps' constraint."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "8248b43f90e54c87bb74e973495862e3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "edef28d86929413b929bc90bf89349ec",
+    "semantic_feedback": [
+      "The code implements the specified steps (imputation with SimpleImputer, normalization with RobustScaler, features with PCA, and regression with KNeighborsRegressor). However, it also includes OneHotEncoder for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline description. The instruction was to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "eca1a2afe3984c0e8de5f93be89261ae",
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "8cab425c39274f4c80adefd4e809ff0a",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with iterative_imputer' as the first step. While the code correctly uses `IterativeImputer` for numerical features, it uses `SimpleImputer` for categorical features. This deviates from the explicit instruction to use `iterative_imputer` for the imputation step."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "fb2278b80798459cb0f214cbfdc40b0f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "e1d7f7e9de9b4278b20ff2020903bf32",
+    "semantic_feedback": [
+      "The generated code includes additional steps not specified in the pipeline definition. Specifically, it adds a `SimpleImputer` for handling missing values and a `ColumnTransformer` to select only numeric features and drop others. The pipeline only requested `minmax` normalization, `select_k_best` features, and `knn_regressor`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "2b96a24c5f904a8799761ddad1e0001e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "20ca51c3fbca4704913008f8d8a771ae",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "4455ceb403284e52887eceb550929d00",
+    "semantic_feedback": [
+      "no, because an additional imputation step (`SimpleImputer`) has been added to handle missing values, which was not explicitly listed in the provided pipeline steps. The pipeline only specifies 'normalization' and 'regression', not imputation.",
+      "no, because an additional imputation step (`SimpleImputer`) has been added to handle missing values, which was not explicitly listed in the provided pipeline steps. The pipeline only specifies 'normalization' and 'regression', not imputation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "49b493a7aa9944449ca8a006ee2ad34f",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `simple_imputer`' and 'normalization with `robust_scaler`'. The generated code adds `OneHotEncoder` for categorical features, which is not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'.",
+      "no"
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "51d8386915124323abc6d8dbde10c443",
+    "semantic_feedback": [
+      "The generated code introduces additional steps not explicitly mentioned in the pipeline. The pipeline specifies 'imputation with iterative_imputer', but the code uses 'SimpleImputer' for categorical features. Furthermore, 'OneHotEncoder' is added for categorical feature encoding, which is a new preprocessing step not listed in the provided pipeline. The instruction was to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "a44ef58ce2964320ac38f17657d9a8f5",
+    "semantic_feedback": [
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes additional preprocessing steps: `SimpleImputer` for handling missing values and `OneHotEncoder` for encoding categorical features. While these are often necessary for a robust pipeline, they are not explicitly listed in the provided pipeline steps, violating the 'implements all the steps of the pipeline and only those steps' requirement.",
+      "The code is not fully executable with the provided dataset because it does not handle categorical features. The `StandardScaler` and subsequent steps expect numerical input, but the dataset contains string columns (e.g., 'MSZoning', 'Street', 'Alley', etc.) which will cause a `could not convert string to float` error during execution. To be executable, these categorical features would need to be encoded (e.g., using `OneHotEncoder`) and potentially missing values imputed, which are not included in the current pipeline.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes additional preprocessing steps: `SimpleImputer` for handling missing values and `OneHotEncoder` for encoding categorical features. While these are often necessary for a robust pipeline, they are not explicitly listed in the provided pipeline steps, violating the 'implements all the steps of the pipeline and only those steps' requirement.",
+      "no, the code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes additional preprocessing steps: `SimpleImputer` for handling missing values and `OneHotEncoder` for encoding categorical features. While these are often necessary for a robust pipeline, they are not explicitly listed in the provided pipeline steps, violating the 'implements all the steps of the pipeline and only those steps' requirement.",
+      "no, the code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline.",
+      "no, the code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline description.",
+      "no, the code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline description.",
+      "no, the code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline description.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes additional preprocessing steps: `SimpleImputer` for handling missing values and `OneHotEncoder` for encoding categorical features. While these are often necessary for a robust pipeline, they are not explicitly listed in the provided pipeline steps, violating the 'implements all the steps of the pipeline and only those steps' requirement.",
+      "The code is not fully executable with the provided dataset. The dataset contains categorical features (string columns) which are not handled by the current pipeline. Steps like StandardScaler and SelectKBest expect numerical input, leading to a 'could not convert string to float' error during execution. To be executable, these categorical features would need to be encoded (e.g., using OneHotEncoder) and potentially missing values imputed, which are not included in the current pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "63169fc639924b9483b227c7ba8a8020",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "2c7aeb961d2645498c4409e5ff4f23dc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "01126020fdd24bd4a387eda46a6ef6a6",
+    "semantic_feedback": [
+      "The code introduces an additional step, OneHotEncoder, for categorical features which was not explicitly listed in the provided pipeline. While this step is necessary for handling categorical data and ensuring the pipeline's executability with SelectKBest and Ridge, it deviates from the strict instruction to implement 'only those steps' of the pipeline.",
+      "The code introduces an additional step, `OneHotEncoder`, for categorical features, which was not explicitly listed in the provided pipeline. While this step is necessary for handling categorical data and ensuring the pipeline's executability with `SelectKBest` and `Ridge`, it deviates from the strict instruction to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "d931ad8221174f12ae8b3f92106b98e1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "5e6e50fd814147458685e07dd52ef20a",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step within the `numerical_transformer` pipeline. The provided pipeline specification does not include an imputation step, only discretization, normalization, features (PCA), and regression. The instruction states to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `SimpleImputer` step within the `numerical_transformer` pipeline. The provided pipeline specification does not include an imputation step, only discretization, normalization, features (PCA), and regression. The instruction states to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `SimpleImputer` step within the `numerical_transformer` pipeline. The provided pipeline specification does not include an imputation step, only discretization, normalization, features (PCA), and regression. The instruction states to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "fc41afa64dab4c74b7cff78ce1ca7ff5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 25,
+    "pipeline_run_id": null,
+    "semantic_feedback": [
+      "The pipeline includes a `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' specified in the pipeline.",
+      "The code implements all the explicitly listed steps and only those steps. However, the `SelectKBest` step with `f_regression` expects numerical input. If the `X_train` dataset contains categorical features (object/string dtype), the `SimpleImputer` in the `categorical_transformer` will impute them but leave them as strings. Consequently, `f_regression` will fail when applied to these string columns, making the pipeline not \"correct and executable\" for datasets with categorical features. To make it executable, an encoding step (e.g., `OneHotEncoder`) would be required for categorical features before `SelectKBest`, but this step is not explicitly mentioned in the provided pipeline.",
+      "The code implements all the explicitly listed steps and only those steps. However, the `SelectKBest` step with `f_regression` expects numerical input. If the `X_train` dataset contains categorical features (object/string dtype), the `SimpleImputer` in the `categorical_transformer` will impute them but leave them as strings. Consequently, `f_regression` will fail when applied to these string columns, making the pipeline not \"correct and executable\" for datasets with categorical features. To make it executable, an encoding step (e.g., `OneHotEncoder`) would be required for categorical features before `SelectKBest`, but this step is not explicitly mentioned in the provided pipeline.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if `X_train` contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution.",
+      "No, because the pipeline includes a `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' specified in the pipeline.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if X_train contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if X_train contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if X_train contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if X_train contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution.",
+      "No, because while the code implements all the explicitly listed steps and only those steps, the pipeline as implemented is not 'correct and executable' if X_train contains categorical features. The `SelectKBest` step with `f_regression` expects numerical input, but the `categorical_transformer` only imputes string features without encoding them into a numerical format, which would lead to an error during execution."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "62397870580a4dee976cf58b535e052e",
+    "semantic_feedback": [
+      "The code introduces additional steps not explicitly mentioned in the pipeline. Specifically, it adds a `SimpleImputer` and `OneHotEncoder` for categorical features. The pipeline only specified `iterative_imputer` for imputation, `power_transformer` for normalization, and `pca` for features, which are typically applied to numerical data. The instruction was to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "dd84af24143c4d45b6cc3844f9df57a1",
+    "semantic_feedback": [
+      "The pipeline includes an additional step, `OneHotEncoder`, for categorical features. The original pipeline only specified 'imputation', 'normalization', 'features (pca)', and 'regression', without explicitly mentioning encoding for categorical data.",
+      "The pipeline implicitly performs feature selection by dropping categorical features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\".",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline includes an additional step, `OneHotEncoder`, for categorical features. The original pipeline only specified 'imputation', 'normalization', 'features (pca)', and 'regression', without explicitly mentioning encoding for categorical data.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline steps `simple_imputer` and `minmax` are designed for numerical features. The current implementation applies these steps to all features in `X_train` without distinguishing between numerical and categorical types. If `X_train` contains categorical features, this will lead to an error, as these transformers cannot process non-numeric data. The provided pipeline does not include a step for handling categorical features (e.g., encoding or dropping them), which is necessary for a robust implementation.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline steps `simple_imputer` and `minmax` are designed for numerical features. The current implementation applies these steps to all features in `X_train` without distinguishing between numerical and categorical types. If `X_train` contains categorical features, this will lead to an error, as these transformers cannot process non-numeric data. The provided pipeline does not include a step for handling categorical features (e.g., encoding or dropping them), which is necessary for a robust and executable implementation.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined.",
+      "The pipeline implicitly performs feature selection by dropping non-numeric features (`remainder='drop'`) which is not explicitly listed as a step in the provided pipeline. The pipeline only specifies `pca` for \"features\" after imputation and normalization, implying all features should be processed or their handling explicitly defined."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "999409aa31b442efadf8631e3c8041d5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "57d73f832cd448b6ac3fdba15d58e50d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

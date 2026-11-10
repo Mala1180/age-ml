@@ -1,0 +1,214 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "a3fc66d4385744ca9ece9b18dbd8537d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "1cebe54b38e44a7eb100699a9c75cfc9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "895e374ca97e47de9b36b71fbc526c97",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "c9671fd385fc46f6b9b36aef7560b81f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 6,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "add20a8486e3405c882dd2099268173c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "c042c4163b88488c8cd354bb23e7e6af",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "24347226fc57445cb080ff0e00df29e5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "385dc58eabf94ac7bc5cbd59b88046b3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 12,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "5aa15f4509514adca074508e4ad4ade3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "ea4870db1d1f4381a9a31c8682eae8dc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "de47ef5682e4493aa652537dce1d68aa",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "88b984115d6343528b2afbe4193283af",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "4f79d06d625e42e8b560a27c88abcea1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "ceda344608ee4871886fd6e63d1fc4e2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "e639c8e047cc492cbdeb749b441e80ba",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "78f6ac24ad004c8bbcd9a20662069252",
+    "semantic_feedback": [
+      "The code is not fully compliant with the instruction \"The host sets every exposed random_state\". While `NearMiss` correctly had `random_state` removed (as it does not support it), the `RandomForestClassifier` has `random_state=42` hardcoded. This prevents the host from initially setting this parameter, as it is already fixed. To be fully compliant, `random_state` for `RandomForestClassifier` should be set to `None` (or a variable provided by the host if it were part of the function signature) to allow the host to truly 'set' it via `set_params`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "99057664949048e3947fef85a3741367",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "565ae965d58244a4b8bbe3601bf0bddd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "0c08c46c23a94b06bb2d8ccd0a496873",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 27,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

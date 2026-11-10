@@ -1,0 +1,118 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/adult/ca5a8f69b52b776f7ba1f175fff3bbb7f3ca6cee20b60f0a850cf7e53fa4141c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/adult/ca5a8f69b52b776f7ba1f175fff3bbb7f3ca6cee20b60f0a850cf7e53fa4141c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/adult/ca5a8f69b52b776f7ba1f175fff3bbb7f3ca6cee20b60f0a850cf7e53fa4141c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/adult/ca5a8f69b52b776f7ba1f175fff3bbb7f3ca6cee20b60f0a850cf7e53fa4141c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "9957e6a5578f46728792b5b1da0197d8",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8205002803864822,
+    0.8215383779572947,
+    0.8105337710308624,
+    0.8228251212822744,
+    0.827118845569695,
+    0.8064408387608555,
+    0.8282064596053039,
+    0.8187785167983587,
+    0.8312632186118054,
+    0.8229780776842777
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2478.387,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "a75b474c23df424486d17f264011458a",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": "2e1387d4a83a4b45956c613760eb2488",
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": "029caf4eede041a6b40e46c531a98f3d",
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": "8f8b9a3cccea455691bbad7a670ba314",
+    "18": "95b3ba5644474b5e912d4a8eda84b7b1",
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": "c6d20c1ddc59499fb83e14360e32b201",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "ea7132ab11904a4e81ce0ad9c82f96cb06f94d5f57186eb2f596343b49743bf5",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "5752b9fe181ddc95b8e787584338e3150b16c8bd468989b8e5c7a776dfbc0b97",
+  "runtime_human_readable": "0:27:00",
+  "runtime_seconds": 1619.574735827744,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.821018350768721,
+  "selected_candidate_key": "4c154fdc8b649489a2d426c9e02a3060097b8a849b4b75b995e29f3f72932a0c",
+  "selection_sha256": "fd298a5a99ee8e9451cf6d58e30712fe692f9155fbc0720335a73868697184de",
+  "selection_validation_score": 0.821018350768721,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The code includes an additional imputation step (`SimpleImputer` for categorical features) within the `categorical_transformer`. The provided pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. While `SimpleImputer` might be a practical necessity for handling missing categorical values before `IterativeImputer` (which is designed for numerical data), it constitutes an extra step not explicitly listed in the pipeline, thus violating the 'only those steps' constraint.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The provided dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The code introduces a `CategoricalNanHandler` step within the `preprocessor` to handle missing categorical values before `OneHotEncoder`. While this is necessary for the pipeline to be executable given the data, it is an additional imputation/handling step not explicitly listed in the provided pipeline, which specifies 'imputation with `iterative_imputer`' as the sole imputation step. This violates the constraint to implement 'only those steps'.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step within the `preprocessor` will fail if there are missing values (NaNs) in the categorical columns of `X_train`. The `CategoryConverter` only changes the dtype to 'category' but does not handle or fill NaN values. The dataset information indicates that categorical columns like 'workclass' and 'occupation' can have 'nan' values. This makes the code non-executable under realistic data conditions, violating the requirement that the code must be correct and executable. The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step, but `IterativeImputer` works on numerical data, and `OneHotEncoder` does not handle missing categorical values, thus preventing `IterativeImputer` from handling all missing values as implied by the pipeline step.",
+      "The `OneHotEncoder` step uses `handle_missing='indicator'`, which is a mechanism for handling missing categorical values by creating additional features. While this makes the code executable and robust to missing categorical data, it constitutes a form of missing data handling that is distinct from the specified 'imputation with `iterative_imputer`'. The pipeline explicitly states 'imputation with `iterative_imputer`' as the sole imputation step, and this additional handling violates the constraint to implement 'only those steps'.",
+      "The `OneHotEncoder` step uses `handle_missing='ignore'`. This means that if missing values (NaNs) are present in categorical columns, `OneHotEncoder` will effectively treat them as a new category that maps to all zeros. This is a form of missing data handling that is distinct from the specified 'imputation with `iterative_imputer`'. The pipeline explicitly states 'imputation with `iterative_imputer`' as the sole imputation step, and this additional handling by `OneHotEncoder` violates the constraint to implement 'only those steps' for imputation."
+    ],
+    "1": [
+      "The pipeline explicitly states 'discretization with binarizer' as the first step. The generated code includes an additional step, 'OneHotEncoder' for categorical features, which was not specified in the provided pipeline. The instruction was to implement all the steps of the pipeline and ONLY those steps."
+    ],
+    "25": [
+      "The code is not compliant with the pipeline. While numerical features are correctly imputed and discretized with `Binarizer`, categorical features are only imputed. The `RandomForestClassifier` expects numerical input, but the categorical features, after imputation, remain as string/object types. There is no encoding step (e.g., OneHotEncoder) for categorical features to convert them into a numerical format suitable for the classifier. This will lead to an error when the model is fitted."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 12,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.025876949999999992,
+    "input_tokens": 154425,
+    "output_cost": 0.33315750000000005,
+    "output_tokens": 200033,
+    "total_cost": 0.35903445000000006,
+    "total_tokens": 354458
+  },
+  "training_time": 3053.6850000000004,
+  "validation_metric": "balanced_accuracy"
+}

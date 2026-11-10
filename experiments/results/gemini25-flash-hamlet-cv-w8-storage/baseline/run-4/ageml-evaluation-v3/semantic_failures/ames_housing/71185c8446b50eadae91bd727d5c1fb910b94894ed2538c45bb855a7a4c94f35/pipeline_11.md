@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces an additional step of dropping categorical features using `ColumnTransformer` which is not explicitly mentioned in the provided pipeline. The pipeline specifies only imputation, normalization, feature selection, and regression, without any instruction on how to handle or exclude categorical data.

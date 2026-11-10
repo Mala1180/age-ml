@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `binarizer`, `power_transformer`, `select_k_best`, and `lasso`.

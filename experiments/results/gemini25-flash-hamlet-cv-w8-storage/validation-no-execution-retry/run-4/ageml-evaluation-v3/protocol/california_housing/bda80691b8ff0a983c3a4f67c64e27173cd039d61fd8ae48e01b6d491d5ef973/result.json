@@ -1,0 +1,88 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/bda80691b8ff0a983c3a4f67c64e27173cd039d61fd8ae48e01b6d491d5ef973/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/bda80691b8ff0a983c3a4f67c64e27173cd039d61fd8ae48e01b6d491d5ef973/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/bda80691b8ff0a983c3a4f67c64e27173cd039d61fd8ae48e01b6d491d5ef973/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/california_housing/bda80691b8ff0a983c3a4f67c64e27173cd039d61fd8ae48e01b6d491d5ef973/validation_candidates.csv"
+  },
+  "artifacts": {},
+  "best_pipeline_id": null,
+  "best_run_id": null,
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": null,
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 184.929,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "b93ad47f562e9bcc84808c11a0a1e37bf2b1baba8f71dbbef61fc17378520ca1",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "6627f29d1fd91cb96336d5671e0442c37f777782361d99d862c8a2c032a7c597",
+  "runtime_human_readable": "0:02:28",
+  "runtime_seconds": 148.21175745129585,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": null,
+  "selected_candidate_key": null,
+  "selection_sha256": "032e38f93f4add620265ec7571b3aff0c5d35a3fb2b2f9e13f05a19407f19492",
+  "selection_validation_score": null,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code is not executable because the 'total_bedrooms' column contains missing values (NaNs), and the `MinMaxScaler` cannot handle them. The pipeline does not explicitly include an imputation step, which is necessary for the code to run correctly.",
+      "The generated code includes a 'SimpleImputer' step for numerical features. This imputation step is not explicitly listed in the provided pipeline, which specifies only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "9": [
+      "The code includes a `ColumnTransformer` with `OneHotEncoder` for categorical features. This is a feature transformation step that was not explicitly listed in the provided pipeline (which only specified imputation, normalization, and regression). While this step is necessary for the pipeline to function correctly with the given dataset's categorical column, it deviates from the instruction to implement 'only those steps' of the pipeline."
+    ],
+    "10": [
+      "The pipeline description specifies 'imputation with iterative_imputer', 'normalization with minmax', and 'regression with linear'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 5,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "no_valid_candidate",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.039912600000000006,
+    "input_tokens": 39665,
+    "output_cost": 0.0651825,
+    "output_tokens": 27254,
+    "total_cost": 0.10509510000000001,
+    "total_tokens": 66919
+  },
+  "training_time": 2.6690000000000005,
+  "validation_metric": "rmse"
+}

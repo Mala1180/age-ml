@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `OneHotEncoder`, for handling categorical features (`ocean_proximity`), which was not explicitly listed in the provided pipeline steps. The provided pipeline only specified steps for numerical data transformation.

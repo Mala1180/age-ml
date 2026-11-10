@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is correctly applied to numerical features, it is not used for categorical features that also contain missing values (e.g., 'Alley', 'MasVnrType', 'BsmtQual', etc.). Instead, categorical features are handled by `OneHotEncoder`, which treats missing values as a separate category rather than imputing them with `IterativeImputer`.

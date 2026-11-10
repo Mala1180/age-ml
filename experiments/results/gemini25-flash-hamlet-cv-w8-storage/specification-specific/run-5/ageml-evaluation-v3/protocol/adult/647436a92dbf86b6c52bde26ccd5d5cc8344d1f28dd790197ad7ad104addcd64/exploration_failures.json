@@ -1,0 +1,228 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "1091e45f3e414f46ba8c6ca18de8fec2",
+    "semantic_feedback": [
+      "The code is not fully compliant with the instructions. There are two main issues:\n1.  **Random State Handling**: The instruction states, \"The host sets every exposed random_state\". However, the `IterativeImputer` in the generated code has its `random_state` parameter hardcoded to `42`. This prevents the host from controlling or setting this exposed random state.\n2.  **Incomplete Imputation**: The pipeline specifies \"imputation with `iterative_imputer`\". While `IterativeImputer` is correctly applied to numerical columns, the `ColumnTransformer` uses `remainder='drop'`, which discards all categorical columns. The dataset preview indicates that categorical columns like 'workclass' and 'occupation' contain missing values (`nan`). By dropping these columns, the missing values within them are not imputed, meaning the 'imputation' step is not comprehensively applied to all missing values in the dataset. Although `IterativeImputer` is primarily for numerical data, the general instruction for 'imputation' implies handling all missing values if those features are to be retained."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "554ca73ca29c4aa1ba7c24a3f1227c53",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "94f54744846c42a180c39e72cbdd980c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "ad08eb084e3c45f387ac607db9c1a668",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "959f58d524cf4898a2ba2f1bc88601e0",
+    "semantic_feedback": [
+      "The generated code introduces an additional preprocessing step, `OneHotEncoder` for categorical features, which is not explicitly mentioned in the provided pipeline. The pipeline specifies only 'normalization with `power_transformer`' and 'classification with `nn`'. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The pipeline specifies only 'normalization with `power_transformer`' and 'classification with `nn`'. The generated code includes an additional step of dropping categorical features, which is not explicitly mentioned in the pipeline. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code is not fully compliant because it violates the 'correct and executable' requirement. The pipeline specifies 'normalization with `power_transformer`' and 'classification with `nn`'. The `PowerTransformer` is correctly applied to numerical columns. However, for categorical columns, the code uses 'passthrough'. This means if `X_train` contains categorical features as strings, these string columns will be passed directly to the `MLPClassifier` (nn), which expects numerical input. This will cause an error during execution, making the pipeline not 'correct and executable' as required, even though it attempts to adhere to 'only those steps' by not adding explicit transformations for categorical features."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "107ac303b5e346718f3f69868a21e173",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 7,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "e251a17ad28d46ceac7842d957283613",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "d754b9c5886e4ceebead5589d7b24442",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 10,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "4cd0e800f50d4e1591645187e7c318d7",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly defines only two steps: 'imputation with simple_imputer' and 'classification with ada_boost'. The generated code introduces an additional step, 'OneHotEncoder', for categorical features, which is not part of the specified pipeline. While this step might be necessary for the model to function correctly with categorical data, it violates the constraint to implement 'only those steps' explicitly mentioned in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 12,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "0944fa0988524c6db4fc48484067ef4d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "01ff50b3dcb6451c8cabae17472b2ac3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "46416e03c8c44ac7bd7f58baeb7b7c18",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `power_transformer`'. The generated code correctly applies these to numerical features. However, it also introduces `SimpleImputer` for imputation of categorical features and `OneHotEncoder` for transforming categorical features. These additional steps, while necessary for handling mixed data types and making the pipeline executable, are not explicitly listed in the provided pipeline definition, violating the 'only those steps' constraint."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "83ba1091fbd349d9b52f31a710534fad",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "2e1d08cffc6141b8848ee64da48ec1d5",
+    "semantic_feedback": [
+      "The code is mostly compliant, implementing imputation, rebalancing with SMOTE, and classification with Decision Tree. However, it includes `OneHotEncoder` for categorical features, which was not explicitly listed as a step in the provided pipeline. The instructions stated to implement 'only those steps' mentioned in the pipeline.",
+      "The code implements the explicitly listed steps (imputation, rebalancing, classification). However, the dataset contains categorical features (strings) which are only imputed but not encoded into a numerical format (e.g., one-hot encoding) before being passed to the DecisionTreeClassifier. DecisionTreeClassifier cannot handle string features directly, which will cause the pipeline to fail during execution for this dataset. Therefore, while it strictly adheres to the *explicitly listed* steps, it fails the implicit requirement of being 'correct and executable' for a dataset with categorical features."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "4a85d3a05baf44d6aaef968130fda3ed",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'imputation with iterative_imputer' and 'normalization with robust_scaler'. The generated code introduces additional steps for handling categorical features (SimpleImputer and OneHotEncoder) which were not explicitly mentioned in the pipeline description. While these steps are necessary for the code to be executable with the given dataset, they violate the constraint of implementing 'only those steps' specified in the pipeline.",
+      "The pipeline explicitly lists 'imputation with iterative_imputer' and 'normalization with robust_scaler'. The generated code introduces additional steps for handling categorical features (SimpleImputer and OneHotEncoder) which were not explicitly mentioned in the pipeline description. While these steps are necessary for the code to be executable with the given dataset, they violate the constraint of implementing 'only those steps' specified in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "670795838e3f4933924589c35f454039",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "2a9052896201433c86765807497ad466",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "ee845010a5e14586956ef3b6c3007e2c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "fa1abbf594074276b2c061c9072805e3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "d9104530e3ea4484a720c8369b4663ff",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "ac8e39e78ef348319bf34f6e6e0bb325",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "f473f6ebde4147b99331c6f12dbda21b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "96947ce2a9de4d9c9bc5ed7c7890c098",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "ca78c124768e41a5ab64c5a85c441429",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "89dafd82cb044058823ad80f78229910",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

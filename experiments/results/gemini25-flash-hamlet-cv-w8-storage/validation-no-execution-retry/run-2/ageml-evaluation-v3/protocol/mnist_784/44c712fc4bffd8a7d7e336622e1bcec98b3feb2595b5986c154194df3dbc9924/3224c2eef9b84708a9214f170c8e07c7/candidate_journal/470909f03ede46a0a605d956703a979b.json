@@ -1,0 +1,83 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "d431e36e7b2b275d6096c23347faa55b5a8f3ada484ed158a1764b6e5f03f142",
+  "code_sha256": "6fb4767b97d3a7cf2c487b7a6641dbcd9ebe6201e825eed174ef2a067b7e1133",
+  "completed_at": 1793615196.121448,
+  "cv_fold_scores": [
+    0.6224416314973671,
+    0.5945716469229613,
+    0.5982204166099285,
+    0.6014455480660867,
+    0.5989025499969922,
+    0.6043831114166309,
+    0.6077281505479257,
+    0.6054064644356622,
+    0.6081718565747093,
+    0.6447546054598192
+  ],
+  "effective_random_states": [
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 3,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "hidden_layer_sizes": [
+      20
+    ],
+    "imputation_strategy": "mean",
+    "k": 10,
+    "k_neighbors": 5,
+    "max_iter": 300
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "85be99eab4bf0a86adde6a3b541a649005effa483d7aff7af14dfcdf865a8376",
+  "pipeline_id": 17,
+  "pipeline_run_id": "09732c56a337481c825cc0e85c46ddee",
+  "run_id": "470909f03ede46a0a605d956703a979b",
+  "run_identity": "b76a6aef7510cc143cbd251a8722ef1a192b3fc7b89a5629bc2b70d10c233bea",
+  "validation_score": 0.6086025981528083,
+  "validation_split_hash": "dda30b451a9f45ecaeb4bff4ac31a8ee6abcf3716fb360064f30ecfb1e1b7ae7"
+}

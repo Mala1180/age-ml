@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code includes additional steps not specified in the pipeline definition. Specifically, it adds a `SimpleImputer` for handling missing values and a `ColumnTransformer` to select only numeric features and drop others. The pipeline only requested `minmax` normalization, `select_k_best` features, and `knn_regressor`.

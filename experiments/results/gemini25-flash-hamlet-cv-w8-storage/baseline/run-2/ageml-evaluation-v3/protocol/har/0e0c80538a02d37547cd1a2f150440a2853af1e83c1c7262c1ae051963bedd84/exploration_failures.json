@@ -1,0 +1,218 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "0a6a6aa2f89345998d04866fb9d8b186",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "ba836909277d4c5fa53b43bb98ca99b4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "d3b49924f08a4eb4a7d29332acab6edc",
+    "semantic_feedback": [
+      "The code is not fully compliant with the 'correct and executable' requirement. The previous execution failed because the 'feature_range' parameter was passed as a list (e.g., `[0, 1]`) instead of a tuple (e.g., `(0, 1)`), which `MinMaxScaler` expects. To ensure executability, the `feature_range` parameter should be explicitly converted to a tuple before being passed to `MinMaxScaler`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "a7792f8195084a7f941835bcd4ca7e18",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 6,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "e4ca1385be7846e0a5c54951721597ad",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "7479730ef6c645aea1427fd0f34f6c98",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "cbb88a5873bd43d5b6c7bb59f01851db",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "f0dbbfe06eaf47ad944cc1acc1bbd004",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 12,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "79756e262fd145a2984583ae24198a0a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "069de16edd01442cba341d0da6bef1bf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "b3f4a21fedb64ba2aa69620ee067b251",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "476024321b24496bb62e531b8d6186e7",
+    "semantic_feedback": [
+      "The code is not fully compliant with the 'correct and executable' constraint, given the error encountered in the previous turn. The `RobustScaler`'s `quantile_range` parameter expects a tuple, but the previous execution showed it received a list (e.g., `[25.0, 75.0]`). To ensure executability, the `quantile_range` parameter should be explicitly converted to a tuple: `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "b70f9a75d12e4a45858712a8fa5ec253",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "f3a17128f67c41379ceb409ee27acfec",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8d6281cde48b44f59fbb9bef2281ff1b",
+    "semantic_feedback": [
+      "The `KBinsDiscretizer` and `PCA` components accept a `random_state` parameter for reproducibility. Since `random_state` is not provided as an argument to the `build_model` function, it should be set to a fixed value (e.g., `random_state=42`) for these components to ensure consistent behavior across runs, as per standard practice when a random state is applicable and not exposed as a hyperparameter."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "47da6790eff24f30a0fabcd50e2f84a1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "60c7b6f019504eabaab23dbfa7c14b61",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "79bbe86520904b94af9eade0da634ad4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "98558d97f8fa43c4994afc36a79ecec1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 27,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

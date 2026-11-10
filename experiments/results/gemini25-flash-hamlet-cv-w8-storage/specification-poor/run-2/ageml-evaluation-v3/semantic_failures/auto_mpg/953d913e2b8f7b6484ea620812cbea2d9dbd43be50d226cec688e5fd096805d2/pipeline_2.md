@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, 'imputer', which was not specified in the provided pipeline definition. The pipeline should only contain 'discretization', 'normalization', 'features', and 'regression' steps.

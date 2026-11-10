@@ -1,0 +1,68 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-5/ageml-evaluation-v3/protocol/california_housing/ad2dcb01dc897604c9145fa581295f2f35d37f2e4ed8f8174a200044bf9ccfa2/b97cac683bf144a6821321be06e5396e/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-5/ageml-evaluation-v3/protocol/california_housing/ad2dcb01dc897604c9145fa581295f2f35d37f2e4ed8f8174a200044bf9ccfa2/b97cac683bf144a6821321be06e5396e/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-5/ageml-evaluation-v3/protocol/california_housing/ad2dcb01dc897604c9145fa581295f2f35d37f2e4ed8f8174a200044bf9ccfa2/b97cac683bf144a6821321be06e5396e/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-5/ageml-evaluation-v3/protocol/california_housing/ad2dcb01dc897604c9145fa581295f2f35d37f2e4ed8f8174a200044bf9ccfa2/b97cac683bf144a6821321be06e5396e/validation_candidates.csv"
+  },
+  "artifacts": {},
+  "best_pipeline_id": null,
+  "best_run_id": null,
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": null,
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 119.05199999999996,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "e1bf4e7bc8e84e648beb9fb8bd887829"
+  },
+  "pipelines_found": 1,
+  "protocol_sha256": "02658ed27bdb0c310880f99283630437ea5eb3ada9f3bb5518681c0f8fbf5b50",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "fcf80590f5c288a1260966179ae2ba898a483b542d8534bdbeb87dada854eb13",
+  "runtime_human_readable": "0:05:36",
+  "runtime_seconds": 335.8928391188383,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": null,
+  "selected_candidate_key": null,
+  "selection_sha256": "cae048bfe73a71888a8866ad81ffb5bada3cade7ed86cea2087de7febbd1b953",
+  "selection_validation_score": null,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "no, the code is not executable. The `method` parameter is passed to `IterativeImputer`'s `estimator` argument, but `IterativeImputer` expects an estimator object (e.g., `LinearRegression()`) for this parameter, not a string like 'yeo-johnson'. The string 'yeo-johnson' is a valid `method` for `PowerTransformer`, but it is being used incorrectly here.",
+      "The pipeline introduces `OneHotEncoder` and `ColumnTransformer` to handle categorical features. While this is a good practice for the dataset, the provided pipeline definition did not explicitly include a step for categorical encoding. The instruction was to implement 'only those steps' specified in the pipeline.",
+      "The pipeline introduces `OneHotEncoder` and `ColumnTransformer` to handle categorical features. While this is a good practice for the dataset, the provided pipeline definition did not explicitly include a step for categorical encoding or a column transformer. The instruction was to implement 'only those steps' specified in the pipeline.",
+      "The pipeline introduces `OneHotEncoder` and `ColumnTransformer` to handle categorical features. While this is a good practice for the dataset, the provided pipeline definition did not explicitly include a step for categorical encoding or a column transformer. The instruction was to implement 'only those steps' specified in the pipeline.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The pipeline introduces `OneHotEncoder` and `ColumnTransformer` to handle categorical features. While this is a good practice for the dataset and makes the code executable, the provided pipeline definition did not explicitly include a step for categorical encoding or a column transformer. The instruction was to implement 'only those steps' specified in the pipeline, which this code violates by adding extra steps.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable.",
+      "The code is compliant with the explicitly listed pipeline steps (imputation, normalization, features, regression). It correctly implements iterative_imputer for imputation, power_transformer for normalization, PCA for features, and MLPRegressor for regression, and only those steps. However, it is not executable for the provided dataset because it does not include any preprocessing step to handle the categorical feature 'ocean_proximity'. The numerical steps in the pipeline (IterativeImputer, PowerTransformer, PCA) will fail when encountering string values in the input data, leading to a 'could not convert string to float' error, thus violating the requirement that the code must be correct and executable."
+    ]
+  },
+  "semantic_validation_failures": 18,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "no_valid_candidate",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.029727119999999996,
+    "input_tokens": 388014,
+    "output_cost": 0.08659000000000001,
+    "output_tokens": 23669,
+    "total_cost": 0.11631712000000001,
+    "total_tokens": 411683
+  },
+  "training_time": 0.49999999999999994,
+  "validation_metric": "rmse"
+}

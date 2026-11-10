@@ -1,0 +1,216 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "8d61ca625ac04693a1d4af707033c023",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "5b4e79c463644a6e9b383ed0c68550d3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "2bb4f1ce918e4af6baf725c8d705da82",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "65118c2488624498996fb2a2f67091a7",
+    "semantic_feedback": [
+      "No, the code is not fully compliant. Based on the error from the previous execution, the `quantile_range` parameter for `RobustScaler` must be a tuple. The current code passes `quantile_range` directly, which might be a list if provided by the host, leading to an execution error. To ensure executability, `quantile_range` should be explicitly cast to a tuple: `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 6,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "e1acc1f3140b45748fcb068c56eb9d68",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "1975967b9873417294a6e53fa2d2f6cd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "341a1d92555a465f8f64b78bedb3ab8b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "cf28cd8dbd064ec78ad955efbc67edb5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 12,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "126b5c93000f44fbb725125821a57061",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "caed09b985954de6a3670f03b10b539a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "cbd8562739da48f5891632157675de28",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "b8eef41072cc4ed2b6cc13d4a9447344",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "0e9c32347e394244a9554478ef560b01",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "6150d1e5737b4086abee8c553e5ce328",
+    "semantic_feedback": [
+      "No, the code is not compliant. It re-introduces `random_state=42` to `NearMiss`, which caused an execution error in the previous attempt (`NearMiss.__init__() got an unexpected keyword argument 'random_state'`). `NearMiss` does not accept a `random_state` parameter in the version used by the host environment. This makes the code non-executable."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "3f2d41666aed4d5eaaf46aa444d0e9a4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "9b1c2b0be0354617bc7d8b07398bd4d7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "a11dfa2140914805b77bcb4be8d8b6d6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "27f1539d941c45c5b1d2586b23abed8d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "0168286687bf4510a7e6aee1d8c3af72",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 27,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

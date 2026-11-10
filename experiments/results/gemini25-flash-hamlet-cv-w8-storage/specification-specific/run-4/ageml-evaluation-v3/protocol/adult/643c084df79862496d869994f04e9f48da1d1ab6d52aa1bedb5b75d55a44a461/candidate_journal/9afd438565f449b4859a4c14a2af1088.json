@@ -1,0 +1,80 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "93c8aa228e3a99d9af18295b12022fdb22e6dcd3172939c33fce934358610d35",
+  "code_sha256": "c8a59f2a35629d2515ce7f6a15eef84b0590feeb59144c8131bbba2d897ad28b",
+  "completed_at": 1793750952.7157104,
+  "cv_fold_scores": [
+    0.7679829484503238,
+    0.7757592994849913,
+    0.7655713169264344,
+    0.7660851077163544,
+    0.7708797204240825,
+    0.7752836568739083,
+    0.7706745708736344,
+    0.7755049408969026,
+    0.7706118238431807,
+    0.7746107093638142
+  ],
+  "effective_random_states": [
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "imputer__random_state": 42,
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "k_neighbors": 5,
+    "max_iter": 10,
+    "method": "yeo-johnson",
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "689b9b95e908f27f8b4b0d950a9928124df9451a5c7277c4f59b6f8e5a4822d7",
+  "pipeline_id": 7,
+  "pipeline_run_id": "59c29cd9b1bc45f3af5ff31ed6f04e74",
+  "run_id": "9afd438565f449b4859a4c14a2af1088",
+  "run_identity": "cd2646660f456ff86c85e214d7167b9d2531f6bed3774feabaf11583a641d6f2",
+  "validation_score": 0.7712964094853627,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

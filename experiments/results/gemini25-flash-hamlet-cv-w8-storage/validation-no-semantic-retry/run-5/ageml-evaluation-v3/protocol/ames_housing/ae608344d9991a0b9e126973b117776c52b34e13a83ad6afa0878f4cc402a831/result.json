@@ -1,0 +1,150 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/ae608344d9991a0b9e126973b117776c52b34e13a83ad6afa0878f4cc402a831/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/ae608344d9991a0b9e126973b117776c52b34e13a83ad6afa0878f4cc402a831/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/ae608344d9991a0b9e126973b117776c52b34e13a83ad6afa0878f4cc402a831/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/ae608344d9991a0b9e126973b117776c52b34e13a83ad6afa0878f4cc402a831/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 24,
+  "best_run_id": "75867dc46c434642908b2d41b17e4f12",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    21167.49608593504,
+    25856.67913485519,
+    24804.092747974966,
+    36302.381910394644,
+    35130.76752196458,
+    27284.481095068266,
+    25326.990757038173,
+    24150.397437082753,
+    52244.78379481455,
+    26171.304907300146
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 386.75,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "2dbbf819e3c044c6afcc01956d95ee1b",
+    "1": "f085a416127245508eccfbcb104b0bed",
+    "2": "831385f5743f4303ad93f93e75031522",
+    "3": "414edd48bacd4acc87b4a7be7c04efca",
+    "4": "8da12e760dd54bcf9fb5b1a8ce5097ed",
+    "5": "76cffdbd259841e59241182c3fd05ae8",
+    "6": "b89b146eec03460aaec651ea0b12650b",
+    "7": "47408e53713344e8a24adadc94438b0c",
+    "8": "1b94893d1c9a4a46b8a040c870dd4932",
+    "9": "d8249678237a48bbbc2e6645d9f42001",
+    "10": "fe70a62ceefb4f6faacc0e35a1825e67",
+    "11": "1b0ccb241f674010bb8e90461a610a6b",
+    "12": "7e0bf0e579bc47fe901b103ea216f37c",
+    "13": "950752841d9f4561b26d15480779eba9",
+    "14": "e12aa81734a44640af25c82f72ac726e",
+    "15": "3976249b9b5d4649b9233ade3cf9ea81",
+    "16": "a407e99591f24715ba552b0b39b0d9a3",
+    "17": "bf96ced351ce4a34bd4b69a333fc87e0",
+    "18": "dae20003400c405ba693dd8895ea644c",
+    "19": "0b272362bbf74d36a202080ac39a044a",
+    "20": "5d8d68a4004b4032bd3bcc04f01ab6d5",
+    "21": "14938508a3964d28b07df6c231001fc8",
+    "22": "6984f14fa9094619beed60180deab73b",
+    "23": "4ed6fe588d6d494ba31af93e5f15401a",
+    "24": "c95f3bfe0f214e86a8a973a12f4203b5",
+    "25": "a45b87c4388c4cb191bf5819100ba7d4",
+    "26": "aca21fab44d8441c8995b890bdfa60ca",
+    "27": "a7ce414e922c4423be5a8576e99f6af0",
+    "28": "234dd2e64bd0489e914b7f6121cead41",
+    "29": "0bbe2b1525094999bc0cce5d395157e2"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "452fde35fac5f5b251638b7bbdd608115d6a864ff6d6b612fe3f867a30172778",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "81aabb26a708fa7a6e139b6ffb504529c382cb9423413daee79adbc68c64cf5d",
+  "runtime_human_readable": "0:07:16",
+  "runtime_seconds": 435.64395014569163,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 29843.93753924283,
+  "selected_candidate_key": "d14d3148d7bf73a19838fbbd123559c36a83ddeaaa7417d8c9a310f1aaf0dde6",
+  "selection_sha256": "74445123692980086a89a030d3c12d831096d102f6edf49d39977d5c3b05cc01",
+  "selection_validation_score": 29843.93753924283,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The pipeline explicitly lists 3 steps: normalization, features, and regression. The generated code adds an imputation step (`SimpleImputer`) for numerical features, which is not part of the specified pipeline steps. The instruction states to implement 'only those steps'."
+    ],
+    "4": [
+      "The pipeline specifies 'normalization with `minmax`'. While the code correctly applies `MinMaxScaler` to numerical features, it also introduces `OneHotEncoder` for categorical features. Although this is a necessary preprocessing step for the model to function with the given dataset (as indicated by previous errors), it is an additional step not explicitly listed in the provided pipeline description, violating the 'only those steps' constraint.",
+      "The pipeline specifies 'normalization with `minmax`'. While the code correctly applies `MinMaxScaler` to numerical features, it also introduces `SimpleImputer` for both numerical and categorical features, and `OneHotEncoder` for categorical features. These are additional preprocessing steps not explicitly listed in the provided pipeline description, violating the 'only those steps' constraint."
+    ],
+    "5": [
+      "The generated code includes `ColumnTransformer` and `OneHotEncoder` to handle categorical features. While these are necessary for the pipeline to execute correctly with mixed data types, they are not explicitly listed as steps in the provided pipeline. The instruction states to implement 'only those steps' listed in the pipeline.",
+      "The pipeline includes `ColumnTransformer` and `OneHotEncoder` for handling categorical features, which are not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `ColumnTransformer` and `OneHotEncoder` for handling categorical features, which are not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `ColumnTransformer` and `OneHotEncoder` for handling categorical features, which are not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `ColumnTransformer` and `OneHotEncoder` for handling categorical features, which are not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "7": [
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `power_transformer`'. The generated code uses `IterativeImputer` and `PowerTransformer` only for numerical features. For categorical features, it introduces `SimpleImputer` for imputation and `OneHotEncoder` for encoding/transformation. These additional steps (`SimpleImputer` and `OneHotEncoder`) are not explicitly mentioned in the provided pipeline, violating the constraint to implement 'only those steps'."
+    ],
+    "9": [
+      "The generated code includes a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies only 'imputation with `iterative_imputer`', 'normalization with `minmax`', and 'regression with `nn_regressor`'. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "10": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as the only imputation step. However, the code introduces `SimpleImputer` for categorical features and `OneHotEncoder` for encoding categorical features, which are additional steps not explicitly mentioned in the pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'imputation with `iterative_imputer`', 'normalization with `minmax`', and 'regression with `linear`'. The generated code introduces a `ColumnTransformer` with `remainder='drop'` as a 'feature_selector' step. This step implicitly performs feature selection by dropping categorical columns, which is an additional preprocessing/feature selection step not explicitly mentioned in the provided pipeline. The instructions state to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "16": [
+      "The pipeline includes an additional `OneHotEncoder` step for categorical features, which is not explicitly listed in the provided pipeline steps (imputation, normalization, regression). While this step is necessary for the `nn_regressor` to handle categorical data, it violates the \"only those steps\" constraint.",
+      "The pipeline includes an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`. This is a preprocessing step (feature selection) that is not explicitly listed in the provided pipeline steps (imputation, normalization, regression), violating the 'only those steps' constraint."
+    ],
+    "21": [
+      "The generated code introduces an additional preprocessing step, `OneHotEncoder`, for categorical features, which is not explicitly listed in the provided pipeline. The pipeline specifies only `simple_imputer`, `power_transformer`, `select_k_best`, and `ridge`. Additionally, the `imputation_strategy` parameter from the function signature is only applied to numerical columns, while categorical columns use a hardcoded 'most_frequent' strategy for imputation, which deviates from the expected parameter usage."
+    ],
+    "22": [
+      "The pipeline specifies three steps: imputation, normalization, and regression. The generated code introduces an additional step of dropping categorical columns, which is not part of the provided pipeline. The instruction was to implement ONLY the specified steps."
+    ],
+    "23": [
+      "The code is not compliant because it includes a `SimpleImputer` step, which was not specified in the original pipeline definition. The pipeline explicitly requested only discretization, normalization, features (PCA), and regression."
+    ],
+    "24": [
+      "The generated code includes a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' listed in the pipeline."
+    ],
+    "26": [
+      "The `method` parameter from the `build_model` function signature is intended for the `PowerTransformer`'s `method` argument, but it is currently being passed to the `IterativeImputer`'s `initial_strategy`. The `PowerTransformer`'s `method` is hardcoded to 'yeo-johnson'. This will likely lead to the same error as before if `method` is passed as 'yeo-johnson' or 'box-cox', as `IterativeImputer`'s `initial_strategy` only accepts 'mean', 'median', 'most_frequent', or 'constant'."
+    ],
+    "28": [
+      "The pipeline explicitly requests 'normalization' with `minmax`, 'features' with `pca`, and 'regression' with `svr`. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. While these steps are often necessary for real-world datasets, the instruction was to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly requests 'normalization' with `minmax`, 'features' with `pca`, and 'regression' with `svr`. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. While these steps are often necessary for real-world datasets, the instruction was to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly requests 'normalization' with `minmax`, 'features' with `pca`, and 'regression' with `svr`. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. While these steps are often necessary for real-world datasets, the instruction was to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "29": [
+      "The code is not compliant with the provided pipeline for two reasons: 1. The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is used for numerical columns, SimpleImputer is used for categorical columns, which is a different imputation method than specified. 2. The pipeline does not include a step for encoding categorical features, but the code adds OneHotEncoder for categorical columns, which is an extra step not requested."
+    ]
+  },
+  "semantic_validation_failures": 23,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0148278,
+    "input_tokens": 98406,
+    "output_cost": 0.0369175,
+    "output_tokens": 15580,
+    "total_cost": 0.05174530000000001,
+    "total_tokens": 113986
+  },
+  "training_time": 802.284,
+  "validation_metric": "rmse"
+}

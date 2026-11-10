@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/ames_housing/327aa7f6e4f63adbfe99a76e6f28100b1c4a858f41bd29c1726c239bf21858b9/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/ames_housing/327aa7f6e4f63adbfe99a76e6f28100b1c4a858f41bd29c1726c239bf21858b9/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/ames_housing/327aa7f6e4f63adbfe99a76e6f28100b1c4a858f41bd29c1726c239bf21858b9/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/ames_housing/327aa7f6e4f63adbfe99a76e6f28100b1c4a858f41bd29c1726c239bf21858b9/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 24,
+  "best_run_id": "ec84c152245640e7915e6d7f860b60d6",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    28855.04177256856,
+    33722.23098828646,
+    29957.959550508553,
+    41231.760432918636,
+    46844.46822014484,
+    34800.13258361508,
+    33192.49602781843,
+    32117.58361796158,
+    57519.28546248844,
+    32085.58256909872
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 242.79999999999998,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": "82fd0f513a1e460f82a89c4e7d0ad139",
+    "25": "42f4e9e7e8ed41f3a85207e80006b74e",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "0cd6f4e9bdbc1423565c3028f70c7cd8d50295b98db21518a8ee05406d29ba99",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "49aaaa0a1410a7d96db4b9755da80910cf105578c4337a1a1e432198de5ce2bb",
+  "runtime_human_readable": "0:03:40",
+  "runtime_seconds": 219.54180279001594,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 37032.65412254093,
+  "selected_candidate_key": "cc41baea858a4f1ee79ac384fa839519fe40894492989ef05df01f9b015cb1bd",
+  "selection_sha256": "3dd206045d19272141ed81874454663111a061fb1ffa05203ab00bf4eac05578",
+  "selection_validation_score": 37032.65412254093,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The generated code includes a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies only 'imputation with `iterative_imputer`', 'normalization with `minmax`', and 'regression with `nn_regressor`'. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.00174285,
+    "input_tokens": 27974,
+    "output_cost": 0.00389,
+    "output_tokens": 7001,
+    "total_cost": 0.00563285,
+    "total_tokens": 34975
+  },
+  "training_time": 166.555,
+  "validation_metric": "rmse"
+}

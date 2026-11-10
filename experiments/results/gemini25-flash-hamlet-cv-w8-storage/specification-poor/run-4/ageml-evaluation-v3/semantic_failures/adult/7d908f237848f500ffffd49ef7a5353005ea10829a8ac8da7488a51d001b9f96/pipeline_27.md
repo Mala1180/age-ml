@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces an additional 'to_dense' FunctionTransformer step, which is not explicitly listed in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.

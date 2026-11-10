@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specified 'imputation with iterative_imputer' as the first step. While IterativeImputer is correctly used for numerical features, SimpleImputer is used for categorical features. This deviates from the instruction to use IterativeImputer for the general imputation step.

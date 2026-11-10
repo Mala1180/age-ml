@@ -1,0 +1,152 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/adult/43c641f75a27b8ff9aaa200612db9e7efdac0be85fc984fd058cbc5b3515456c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/adult/43c641f75a27b8ff9aaa200612db9e7efdac0be85fc984fd058cbc5b3515456c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/adult/43c641f75a27b8ff9aaa200612db9e7efdac0be85fc984fd058cbc5b3515456c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/adult/43c641f75a27b8ff9aaa200612db9e7efdac0be85fc984fd058cbc5b3515456c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "87cb9c875f3840cf99216d1e8afe5c96",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8245376845877674,
+    0.8202034344351432,
+    0.8091122063789316,
+    0.8262852603329549,
+    0.817650349469897,
+    0.8106049389396557,
+    0.8277375262933084,
+    0.8175144807481749,
+    0.8264395262541635,
+    0.8260563664058156
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2373.57,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "d9b238372f86466cac8820126eec0f9d",
+    "1": "c2358eb93e7245a6a93b149f27f772d2",
+    "2": "58959e04def340dbbc8557be400adba9",
+    "3": "3e5039db0a1f46de8bb9a512d5b92370",
+    "4": "97fcf8149dab403981697e72febd7ce1",
+    "5": "9e1468e6f0f546998ebc27ab957ca1d2",
+    "6": null,
+    "7": "5c6cf122411d4ea39620f549d69508b3",
+    "8": "424e9e05cb334ec898d2dac6ec0951c1",
+    "9": "02dccb438dc246e39c536ee9dec8b824",
+    "10": "4a8d0b9497854b7ebfb97e1db391454f",
+    "11": "8bbe6a041cf541589b2f00cebb798b06",
+    "12": "9ac02b3c1e764d0083d253826cce2a2a",
+    "13": "06bbc0237f314ac8a5117ce97511574f",
+    "14": "cffaee9886b94dd580b1977ecde437ae",
+    "15": "c7b03bb970044e5aa7a82de7880689f6",
+    "16": "1446674f62c24679b923a270fb718568",
+    "17": "99b2a3a0e462416983c95524906ce30f",
+    "18": "a8f607e6f41e4101a1e9e7a59e84a32d",
+    "19": "c0c951b9e2044191a0a2ce91b2aa1559",
+    "20": "2b4d1df0b0054cf3b06b79209b66da89",
+    "21": "daa10cee140e4051b9f544c9277bb70a",
+    "22": "d085e61e02b74d80a4fb8993d9438dec",
+    "23": "8b75781d25ed45ab9e1daf4b443ca287",
+    "24": null,
+    "25": "75be3ba6cbdd4e7d9faea14cdaf65aaa",
+    "26": null,
+    "27": null,
+    "28": "1ec4c71320084925a09d001b62719423",
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "28927567b44ea32ff95f462f3d3fd2f78bde43b3c413b18391bfcbd4d2551e67",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "b8439d28be23f09864ce2280c6b16a72d66f7eee6ff0143bba9312ae52c87173",
+  "runtime_human_readable": "1:00:17",
+  "runtime_seconds": 3617.2959795109928,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8206141773845813,
+  "selected_candidate_key": "a2f89b716038052e3ab1c044860eeec5969f774de366ad786975d785699b241f",
+  "selection_sha256": "93b9f9f8c1286aa13053f9b3b0fa41b8345d1947026825d33fde92c1e860a132",
+  "selection_validation_score": 0.8206141773845813,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The code introduces a `ColumnTransformer` with `OneHotEncoder` to handle categorical features. While this is necessary for the pipeline to execute without errors (as indicated by the previous 'could not convert string to float' error), it adds a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps'.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition, which states to 'implement all the steps of the pipeline and only those steps'. The pipeline only specifies normalization, feature selection, rebalancing, and classification.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps', but the pipeline only specifies normalization, feature selection, rebalancing, and classification.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps', but the pipeline only specifies normalization, feature selection, rebalancing, and classification.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps', but the pipeline only specifies normalization, feature selection, rebalancing, and classification.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps', but the pipeline only specifies normalization, feature selection, rebalancing, and classification.",
+      "The code introduces a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. This is a preprocessing step that was not explicitly listed in the provided pipeline definition. The instructions state to 'implement all the steps of the pipeline and only those steps', but the pipeline only specifies normalization, feature selection, rebalancing, and classification."
+    ],
+    "4": [
+      "The pipeline includes an `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps. The instruction states to implement \"only those steps\" listed in the pipeline."
+    ],
+    "9": [
+      "no, the `feature_range` parameter for `MinMaxScaler` expects a tuple, but the previous execution indicated it was provided as a list. The current code passes `feature_range` directly, which will lead to a `TypeError` if `feature_range` is a list (e.g., `[0, 1]`). To ensure executability, `feature_range` should be converted to a tuple, e.g., `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "10": [
+      "The generated code introduces an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies 'discretization with binarizer', which typically applies to numerical features. While handling categorical features is necessary to avoid errors like 'could not convert string to float', the instruction states to implement 'only those steps' provided in the pipeline."
+    ],
+    "14": [
+      "The code is not fully compliant because it is not robust to the type of the `feature_range` parameter. The `MinMaxScaler` expects `feature_range` to be a tuple, but if it's passed as a list (e.g., `[0, 1]`), it will raise a `TypeError` during execution. To ensure executability, `feature_range` should be explicitly converted to a tuple before being passed to `MinMaxScaler`."
+    ],
+    "16": [
+      "The generated code introduces `OneHotEncoder` for categorical features, which is not explicitly mentioned as a step in the provided pipeline. The pipeline specifies 'discretization with `binarizer`' and 'normalization with `robust_scaler`', which are typically applied to numerical data. While `OneHotEncoder` is a necessary preprocessing step for categorical data before `PCA` and `KNN`, its inclusion violates the constraint to 'implement only those steps' explicitly listed in the pipeline."
+    ],
+    "19": [
+      "The pipeline explicitly lists 5 steps: imputation, normalization, features (PCA), rebalancing, and classification. The generated code includes an additional step, `OneHotEncoder`, for categorical feature encoding, which is not mentioned in the provided pipeline. The instructions state to \"implement all the steps of the pipeline and only those steps\"."
+    ],
+    "25": [
+      "The code is not fully compliant with the provided pipeline. While it correctly uses `SimpleImputer` for imputation, the `imputation_strategy` hyperparameter is not applied uniformly. It is used for numerical features, but a hardcoded `'most_frequent'` strategy is used for categorical features. The pipeline specifies a single `imputation_strategy` parameter, implying it should be used for all `simple_imputer` steps. Additionally, the `RandomForestClassifier` expects numerical input, but the categorical features are only imputed and not encoded into a numerical format (e.g., using `OneHotEncoder`), which will lead to an execution error. Although adding an encoder is not explicitly listed in the pipeline steps, the instruction to ensure the code is 'correct and executable' implies that such a necessary step should be considered if the classifier cannot handle the data type.",
+      "The code is not fully compliant with the provided pipeline for two reasons:\n1.  The `imputation_strategy` hyperparameter is not applied uniformly. It is used for numerical features, but a hardcoded `'most_frequent'` strategy is used for categorical features. The pipeline specifies a single `imputation_strategy` parameter, implying it should be used for all `simple_imputer` steps.\n2.  An `OneHotEncoder` step has been added for categorical features to ensure the `RandomForestClassifier` receives numerical input. However, this step is not explicitly listed in the provided pipeline (which only specifies 'imputation', 'discretization', and 'classification'). The instruction to implement 'only those steps' is violated by the addition of `OneHotEncoder`.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues:\n1.  The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features.\n2.  The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues:\n1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features.\n2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues:\n1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features.\n2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues:\n1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features.\n2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues: 1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features. 2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues: 1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features. 2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues: 1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features. 2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required.",
+      "The code is not fully compliant because it is not guaranteed to be executable, which is a requirement. While it strictly adheres to the specified steps (imputation, discretization, classification) and does not add any unlisted steps, it has two potential issues: 1. The `SimpleImputer` for categorical features uses the `imputation_strategy` parameter. If this strategy is set to 'mean' or 'median' (which are numerical strategies), it will raise an error when applied to string categorical features. 2. The `RandomForestClassifier` expects numerical input. After imputation, the categorical features will still be strings. Passing these string features directly to the classifier will result in a `TypeError`. The pipeline does not specify an encoding step (e.g., `OneHotEncoder`) to convert these categorical strings to numerical format, and adding one would violate the 'only those steps' constraint. Therefore, while compliant with the *listed steps*, it's not *executable* as required."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "29": [
+      "The code includes an `OrdinalEncoder` for categorical features, which is an additional preprocessing step not explicitly mentioned in the provided pipeline. The pipeline specifies only `imputation` and `discretization` for preprocessing, followed by `rebalancing` and `classification`.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization_and_drop_categorical` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The code is not executable because the `discretization` step uses `remainder='passthrough'`, which means categorical features (as strings) are passed to the `rebalancer` (NearMiss) and `classifier` (GaussianNB). Both NearMiss and GaussianNB require numerical input and will fail when encountering string features. The pipeline does not include an explicit step to encode or drop categorical features to make them compatible with these algorithms.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action.",
+      "The pipeline specifies 'discretization with `kbins`'. While `kbins` is applied to numerical features, categorical features are implicitly dropped by `remainder='drop'` in the `discretization` step. Dropping features is a form of feature selection, which is not explicitly listed as a step in the provided pipeline. The pipeline does not specify how to handle categorical features for the discretization step, and dropping them is an additional, unlisted action."
+    ]
+  },
+  "semantic_validation_failures": 34,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.06439245,
+    "input_tokens": 306814,
+    "output_cost": 0.21247750000000004,
+    "output_tokens": 52284,
+    "total_cost": 0.27686995,
+    "total_tokens": 361850
+  },
+  "training_time": 5730.421000000001,
+  "validation_metric": "balanced_accuracy"
+}

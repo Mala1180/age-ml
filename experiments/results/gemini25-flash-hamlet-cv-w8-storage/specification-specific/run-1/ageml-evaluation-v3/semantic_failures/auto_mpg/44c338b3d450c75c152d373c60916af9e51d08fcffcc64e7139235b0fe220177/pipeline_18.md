@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies only two steps: 'normalization' with `standard` and 'regression' with `linear`. The generated code includes an additional step, `SimpleImputer`, which was not part of the provided pipeline definition. The instruction was to implement all the steps of the pipeline and *only those steps*.

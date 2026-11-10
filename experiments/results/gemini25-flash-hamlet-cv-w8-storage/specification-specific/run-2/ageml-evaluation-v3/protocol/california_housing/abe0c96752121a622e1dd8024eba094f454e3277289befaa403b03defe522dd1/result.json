@@ -1,0 +1,189 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-2/ageml-evaluation-v3/protocol/california_housing/abe0c96752121a622e1dd8024eba094f454e3277289befaa403b03defe522dd1/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-2/ageml-evaluation-v3/protocol/california_housing/abe0c96752121a622e1dd8024eba094f454e3277289befaa403b03defe522dd1/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-2/ageml-evaluation-v3/protocol/california_housing/abe0c96752121a622e1dd8024eba094f454e3277289befaa403b03defe522dd1/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-2/ageml-evaluation-v3/protocol/california_housing/abe0c96752121a622e1dd8024eba094f454e3277289befaa403b03defe522dd1/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 19,
+  "best_run_id": "ca665d5b04904228adcd6869b7c177d2",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    85195.26877098944,
+    44689.480476145756,
+    78419.29061005996,
+    66892.60298319554,
+    74496.7674907938,
+    68085.22865635208,
+    52919.15079720618,
+    89155.96213238293,
+    81086.74751060815,
+    53111.82754723634
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1583.889,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "e77e9ac204cf424b85e29b3f5608aab5",
+    "1": "98e561d3116d48078e9844c530eb7493",
+    "2": "2cd955e6434e4d18aba69978122bf08c",
+    "3": "c18498205a834fd481d2c5372d310303",
+    "4": "b36fe52b65b54d8c9139d87959bdde93",
+    "5": "466528585a4b43138081ac5ea1dab02f",
+    "6": "848d9b28ef8d4588aed711f20e51c011",
+    "7": "861f797a5521476d92a94f2143976f9f",
+    "8": "e7a96444e16f4a3ba4b174a6d12225d2",
+    "9": "d25096ed989448ccb85c85467bb8e2d5",
+    "10": "314d33c8715643239a8663f5165e503b",
+    "11": "f1e6d67bceff4eb78d104cd1cb2b8a40",
+    "12": "b8f3e3c892c14472b5d32021f5007b2f",
+    "13": "f6c6579fa59d472f96cc3bc22b7f69bf",
+    "14": "92fe5bb9aa5b42a794ac49ecaf0fbd5a",
+    "15": "33afafe3850f4823b65649b46d10f27d",
+    "16": "30406c47176042c9868a93dfd2430c6b",
+    "17": "2dd4b860e10c4c77a79ce92ce2f2177c",
+    "18": "f7e7a07aeefb4aa9a326b13af91c7ffb",
+    "19": "4aef88b5c39f450aa9123cb8fe7ff8f2",
+    "20": "5229f150086f422399dbd3f3bfddf468",
+    "21": "c6733d6196be4227bbac512f00124188",
+    "22": "c05ad02ade454264a74cbb1ef62c6a3b",
+    "23": "71d424639fce4d70ba5ea1304c0744a9",
+    "24": "b58ab5b2e2f84c3da96b4b64c896375a",
+    "25": "181f7831a32c481cb1e4d62ef005d228",
+    "26": "2b075816bcb246508957750114db3eac",
+    "27": "38d9a3a94acd4da5865250da36fa6c3e",
+    "28": "18129fc8dfd64d8990afea852f258ce4",
+    "29": "0439bcf42923411ba8bf5b0398f48219"
+  },
+  "pipelines_found": 87,
+  "protocol_sha256": "a3bea3687e913fe91f6e1a62366824a0eb7a813a568a6d7131e52b573fe988a6",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "baa4147e78b084123073153e7659c3d5b34a1a649cac21ddab3e39ebd4dca68f",
+  "runtime_human_readable": "0:21:13",
+  "runtime_seconds": 1273.2715840376914,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 69405.23269749702,
+  "selected_candidate_key": "656cd298320e28543fb7ace2dc7a0c8d1d7717b90f75e7fadc7fc9f6f1c14fac",
+  "selection_sha256": "b921f8e86593beed6262d3c83dcbddeba1cb3ddb2526b51bef9b448c272379a7",
+  "selection_validation_score": 69405.23269749702,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "The pipeline explicitly lists three steps: imputation, normalization, and regression. The generated code includes an additional step, `OneHotEncoder`, for handling categorical features, which was not explicitly mentioned in the provided pipeline. While this step is necessary for the code to be executable with the given dataset (which contains a categorical column), it violates the constraint of implementing *only* the specified steps.",
+      "The pipeline explicitly lists three steps: imputation, normalization, and regression. The generated code includes an additional step, `OneHotEncoder`, for handling categorical features, which was not explicitly mentioned in the provided pipeline. While this step is necessary for the code to be executable with the given dataset (which contains a categorical column), it violates the constraint of implementing *only* the specified steps.",
+      "The pipeline explicitly lists three steps: imputation, normalization, and regression. The generated code includes an additional step, `OneHotEncoder`, for handling categorical features, which was not explicitly mentioned in the provided pipeline. While this step is necessary for the code to be executable with the given dataset (which contains a categorical column), it violates the constraint of implementing *only* the specified steps."
+    ],
+    "2": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `SimpleImputer`, which was not specified in the pipeline definition. The instructions state that the code must implement 'only those steps' listed in the pipeline.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility.",
+      "The code is not executable as is because the `Binarizer` step, and potentially subsequent steps, cannot handle missing values (NaNs) present in the input data. The provided pipeline definition does not include an imputation step to address these missing values, which are necessary for the pipeline to run successfully. While the code implements all and only the specified steps, it fails the 'correct and executable' requirement of the overall task due to this data incompatibility."
+    ],
+    "4": [
+      "The generated code implements the specified discretization, normalization, and regression steps. However, it also introduces an 'OneHotEncoder' for categorical features, which is not explicitly listed as a step in the provided pipeline description. While this is a necessary addition for handling mixed data types and resolving the previous execution error, it deviates from the strict instruction to implement 'only those steps' of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline.",
+      "The code includes a `SimpleImputer` step, which is not explicitly listed in the provided pipeline description. The instructions state to implement \"only those steps\" of the pipeline."
+    ],
+    "8": [
+      "The generated code is not fully compliant with the provided pipeline because it introduces `OneHotEncoder` for categorical features and a separate `SimpleImputer` for them. The pipeline explicitly states to implement 'imputation with `simple_imputer`', 'normalization with `robust_scaler`', and 'regression with `linear`', and 'only those steps'. The addition of categorical feature handling, while often necessary in practice, goes beyond the strict definition of the provided pipeline steps.",
+      "The generated code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `simple_imputer`', 'normalization with `robust_scaler`', and 'regression with `linear`'. The code introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly listed in the provided pipeline. The instruction states to implement 'only those steps'."
+    ],
+    "10": [
+      "The code introduces `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline description. The pipeline specifies 'imputation', 'normalization', and 'regression', but not categorical encoding. While `OneHotEncoder` is necessary for the pipeline to be executable with mixed data types, it goes beyond the strict interpretation of 'only those steps' as requested.",
+      "The code is not executable for the provided dataset because it does not handle the categorical feature 'ocean_proximity'. The `SimpleImputer` and `StandardScaler` are applied to all features, which will fail when encountering string data, as indicated by the previous execution error. The pipeline description is underspecified for mixed data types, leading to a non-executable pipeline if only numerical steps are included."
+    ],
+    "11": [
+      "The code correctly implements the 'imputation', 'discretization', 'normalization', and 'regression' steps as specified for numerical features. However, it also includes a 'OneHotEncoder' for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "17": [
+      "The generated code includes an `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps (imputation, normalization, regression). While this step is necessary for handling the categorical 'ocean_proximity' column and making the pipeline executable, it deviates from the strict instruction to implement \"only those steps\" of the pipeline."
+    ],
+    "18": [
+      "The code is not compliant because it introduces an additional step, 'OneHotEncoder' for categorical features, which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net'. While handling categorical features is necessary for the model to run, the instruction was to implement 'only those steps' listed in the pipeline.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via `remainder='drop'` in `ColumnTransformer`), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because the 'remainder='passthrough'' setting in 'ColumnTransformer' will pass categorical features (like 'ocean_proximity') directly to the 'ElasticNet' regressor. 'ElasticNet' expects all input features to be numerical, which will lead to an error during execution. The pipeline does not specify how to handle categorical features, and passing them through without transformation makes the pipeline non-executable for the given dataset, thus violating the implicit requirement that the data must be in a suitable format for the specified regression model.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps.",
+      "The code is not compliant because it implicitly performs an additional step of dropping categorical features (via 'remainder='drop'' in 'ColumnTransformer'), which was not explicitly listed in the provided pipeline. The pipeline specified only 'imputation' with 'simple_imputer', 'normalization' with 'standard', and 'regression' with 'elastic_net', and the instruction was to implement only those steps."
+    ],
+    "20": [
+      "The generated code is not fully compliant with the provided pipeline. While it correctly implements the four specified steps (imputation, discretization, normalization, and regression) for numerical features, it also adds an `OneHotEncoder` for categorical features. The instruction was to implement 'all the steps of the pipeline and only those steps'. The `OneHotEncoder` was not explicitly listed in the provided pipeline steps."
+    ],
+    "24": [
+      "The pipeline specifies 'imputation' and 'discretization' as preprocessing steps, followed by 'regression'. The generated code includes an additional step, 'OneHotEncoder', for categorical features. While necessary for the RandomForestRegressor to handle string data, this step was not explicitly listed in the provided pipeline description, violating the 'only those steps' constraint."
+    ],
+    "26": [
+      "The generated code includes an `OneHotEncoder` for categorical features, which was not explicitly listed as a step in the provided pipeline. The instruction was to implement 'only those steps' that were listed.",
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes `remainder='drop'` within the `ColumnTransformer`, which is a data cleaning/feature selection step not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes `remainder='drop'` within the `ColumnTransformer`. This is an implicit feature selection step that was not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes filtering of numerical features to exclude those with NaNs (`numerical_features_clean`) and `remainder='drop'` in the `ColumnTransformer`. These actions constitute implicit data cleaning/feature selection steps that were not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes `remainder='drop'` within the `ColumnTransformer`. This is an implicit feature selection step that was not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed.",
+      "The generated code includes filtering of numerical features to exclude those with NaNs (`numerical_features_clean`) and `remainder='drop'` in the `ColumnTransformer`. These actions constitute implicit data cleaning/feature selection steps that were not explicitly listed in the provided pipeline. The instructions state to implement 'only those steps' that were listed."
+    ],
+    "27": [
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline description. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline description. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "28": [
+      "The pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces a 'OneHotEncoder' for categorical features, which is a necessary preprocessing step for the given dataset but is not explicitly mentioned in the provided pipeline steps. This violates the 'only those steps' constraint.",
+      "The pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces a 'OneHotEncoder' for categorical features, which is a necessary preprocessing step for the given dataset but is not explicitly mentioned in the provided pipeline steps. This violates the 'only those steps' constraint.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code uses `remainder='passthrough'` in the `ColumnTransformer`, which means categorical features are passed directly to the `MLPRegressor`. Since `MLPRegressor` requires numerical input, this will lead to an execution error. The pipeline is underspecified for handling categorical features with an `nn_regressor` while strictly adhering to the 'only those steps' constraint and the 'correct and executable' requirement.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`.",
+      "no, the pipeline explicitly lists 'imputation', 'normalization', and 'regression' as the only steps. The generated code introduces an implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which is a preprocessing step not explicitly mentioned in the provided pipeline. This violates the 'only those steps' constraint. The pipeline is underspecified for handling categorical features with an `nn_regressor`."
+    ]
+  },
+  "semantic_validation_failures": 65,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.04111176,
+    "input_tokens": 387328,
+    "output_cost": 0.15699000000000002,
+    "output_tokens": 101375,
+    "total_cost": 0.19810176,
+    "total_tokens": 489239
+  },
+  "training_time": 2400.4109999999996,
+  "validation_metric": "rmse"
+}

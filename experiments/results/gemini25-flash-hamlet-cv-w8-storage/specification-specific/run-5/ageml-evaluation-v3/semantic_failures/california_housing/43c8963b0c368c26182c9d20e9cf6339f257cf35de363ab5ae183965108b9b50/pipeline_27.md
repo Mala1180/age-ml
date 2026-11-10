@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline description only specifies 'normalization' with `robust_scaler` and 'regression' with `ridge`. The generated code includes an additional step, `SimpleImputer`, for handling missing values, which was not explicitly requested in the pipeline definition. The instruction states to implement 'only those steps'.

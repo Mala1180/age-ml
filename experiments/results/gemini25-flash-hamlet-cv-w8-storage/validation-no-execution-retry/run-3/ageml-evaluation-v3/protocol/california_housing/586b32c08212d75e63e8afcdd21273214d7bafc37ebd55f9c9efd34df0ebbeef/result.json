@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/california_housing/586b32c08212d75e63e8afcdd21273214d7bafc37ebd55f9c9efd34df0ebbeef/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/california_housing/586b32c08212d75e63e8afcdd21273214d7bafc37ebd55f9c9efd34df0ebbeef/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/california_housing/586b32c08212d75e63e8afcdd21273214d7bafc37ebd55f9c9efd34df0ebbeef/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-3/ageml-evaluation-v3/protocol/california_housing/586b32c08212d75e63e8afcdd21273214d7bafc37ebd55f9c9efd34df0ebbeef/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 1,
+  "best_run_id": "591ba475713f4252ba58b9e77d773b51",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    89670.84515262418,
+    59321.39268200248,
+    80780.78280229401,
+    73291.1756113369,
+    81587.72910298506,
+    79609.35061626037,
+    56160.43298619262,
+    92532.62133902172,
+    94239.59119871203,
+    60544.180505863966
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 57.05499999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "82f701d40a634cf88f4dafe4a2a4abf5",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "e0942ab9239c1c7e32d37d3e0a1528af32cc677c689a807f777b8ae9b71743a0",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "3cc36c51482e6777ea4acb7643caf3a02ec8aa9e3bd66827f994cc94b56d13f3",
+  "runtime_human_readable": "0:01:23",
+  "runtime_seconds": 82.92736672237515,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 76773.81019972933,
+  "selected_candidate_key": "f42ec9f35eb8f5d1128504e5dd43fe606f1b22f5881ec86a99fd0eb15dff4aa6",
+  "selection_sha256": "cd8a6b14c33fbce36134bf00dd4f4c4c04a70dafe05efb6cee09d5c86db0202e",
+  "selection_validation_score": 76773.81019972933,
+  "semantic_validation_failure_reasons": {
+    "13": [
+      "The `method` parameter is included in the function signature but is not used in the construction of the pipeline. The prompt specifies that `method` is a hyperparameter for the pipeline, implying it should influence the pipeline's components or their parameters."
+    ],
+    "16": [
+      "The pipeline explicitly lists 'imputation', 'normalization', and 'regression'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not specified in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0115968,
+    "input_tokens": 21851,
+    "output_cost": 0.028285000000000005,
+    "output_tokens": 8121,
+    "total_cost": 0.0398818,
+    "total_tokens": 29972
+  },
+  "training_time": 12.796999999999999,
+  "validation_metric": "rmse"
+}

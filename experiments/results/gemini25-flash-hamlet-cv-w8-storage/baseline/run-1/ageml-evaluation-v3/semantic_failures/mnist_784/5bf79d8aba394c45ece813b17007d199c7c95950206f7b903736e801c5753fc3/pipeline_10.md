@@ -1,0 +1,2 @@
+Attempt 1:
+The `pca` step includes `random_state=42`. The instructions state: "The host sets every exposed random_state and fits separately on each fold." This implies that if a component has a `random_state` parameter, it should either be exposed through the `build_model` function signature (if it's a hyperparameter to be tuned) or left to its default value so that the host can set it via `set_params` on the pipeline. Hardcoding `random_state=42` prevents the host from managing this parameter.

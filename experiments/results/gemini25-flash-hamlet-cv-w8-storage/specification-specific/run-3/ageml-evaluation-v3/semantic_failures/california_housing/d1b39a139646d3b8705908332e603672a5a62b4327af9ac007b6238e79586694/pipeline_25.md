@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes an additional step, `OneHotEncoder`, for categorical features. The pipeline explicitly requested only 'imputation', 'discretization', and 'regression' steps, with the instruction to implement 'only those steps'.

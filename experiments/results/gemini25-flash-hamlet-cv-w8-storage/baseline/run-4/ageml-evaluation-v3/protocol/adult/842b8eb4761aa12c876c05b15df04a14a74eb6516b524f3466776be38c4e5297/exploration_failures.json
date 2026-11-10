@@ -1,0 +1,266 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "98e8fa5f98c448ffaa693f2982784844",
+    "semantic_feedback": [
+      "The code includes an additional imputation step (`SimpleImputer` for categorical features) within the `categorical_transformer`. The provided pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. While `SimpleImputer` might be a practical necessity for handling missing categorical values before `IterativeImputer` (which is designed for numerical data), it constitutes an extra step not explicitly listed in the pipeline, thus violating the 'only those steps' constraint."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "db8f410c02d74554b782ee9d53466639",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "1fe54eea933a483da5dbd8f1739915e0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "b56ad2f21db048a28f41e84dbff35345",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "5bd1db2592e14df5a1b587aa41f3cf29",
+    "semantic_feedback": [
+      "The code is not compliant because it includes `OneHotEncoder` for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline. The instruction was to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because the pipeline specifies steps for numerical features only. The `ColumnTransformer` uses `remainder='passthrough'`, which means if `X_train` contains categorical features (as indicated by the dataset info), these features will be passed through without transformation. Subsequent steps like `RobustScaler` and `PCA` are designed for numerical data and will raise an error when encountering non-numerical (e.g., string) categorical features. This violates the requirement that the code must be \"correct and executable\".",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'. If categorical features are present in `X_train`, this constitutes an unrequested preprocessing step.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'. If categorical features are present in `X_train`, this constitutes an unrequested preprocessing step.",
+      "The code is not compliant because it implicitly drops categorical features using `remainder='drop'` in the `ColumnTransformer`. Dropping features is an operation not explicitly listed as one of the four steps in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'. If categorical features are present in `X_train`, this constitutes an unrequested preprocessing step."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "ca87fd73c5754eb1a5149f3ae78dd5b0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "6d333b50045e49189e4ee603bac19ecf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "6cc7a0300e504a3a8ca84bead730ea77",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "bf58ade68270429c9e184696146e4904",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "2b706104229844a783ed0df543bd386f",
+    "semantic_feedback": [
+      "The generated code introduces an additional step, `OneHotEncoder`, for handling categorical features. While this is a necessary preprocessing step for the given dataset to ensure executability (as indicated by the previous error), it is not explicitly listed in the provided pipeline steps. The pipeline specifies 'discretization with `binarizer`' and 'normalization with `standard`', which are applied to numerical features, but does not include a step for encoding categorical features."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "7f5cac2063544ab3a6f1dbceda8aba44",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "fd615d02c2d14f0b9cf5d94e14cd533a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "2fc0fa12a309434ba4174a329f945cdd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "c20d9732ff584d18a37d4942fc8766a8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "52f330c783b2425187e7a5e1788bc384",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "57b47a01006f4246bb9c780ea49908b9",
+    "semantic_feedback": [
+      "The code is not compliant because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline explicitly states to implement 'only those steps' listed: discretization with binarizer, normalization with robust_scaler, features with pca, and classification with knn. While the `OneHotEncoder` is a necessary addition to handle the previous error, it deviates from the strict instruction of the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "eb46cf684c744fdaae1b1d8982712cda",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "e7d4f0ba667c4070b57063022f0cc0d3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "5f8f420205b24406b98dec976766342b",
+    "semantic_feedback": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for the given dataset and subsequent models (PCA, MLPClassifier). However, it is not explicitly listed as one of the five steps in the provided pipeline. The instruction was to implement 'only those steps'.",
+      "The pipeline includes `OneHotEncoder` for categorical features, which is not explicitly listed as one of the five steps in the provided pipeline. The instructions state to implement \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8cd3cd0b5a3547a79c166802402dbb51",
+    "semantic_feedback": [
+      "The 'normalization' step with `power_transformer` is implemented conditionally based on the `encode` parameter of `KBinsDiscretizer`. The pipeline description lists 'normalization' as a distinct step without any conditions, implying it should always be applied to the output of the discretization step for numerical features. If `encode` is set to 'onehot', the `power_transformer` is skipped, which means this step is not always present in the pipeline as described."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "535d5b859eed41849cdca4fc74e02a63",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "f7ed7692be6c463b991ba0c01cbcb025",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "796f4aa87c8b42ff8b8f1435037968df",
+    "semantic_feedback": [
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, it introduces an additional step, `OneHotEncoder`, to handle categorical features, which was not explicitly listed in the provided pipeline. The instruction was to implement 'only those steps' listed in the pipeline.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant.",
+      "The code strictly implements the requested steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of these steps. Applying `Binarizer` directly to non-numeric (categorical) data will result in a runtime error, thus violating the requirement that the code be \"correct and executable\" for the given dataset.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant.",
+      "The code strictly implements the requested steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of these steps. Applying `Binarizer` or `MinMaxScaler` directly to non-numeric (categorical) data will result in a runtime error, thus violating the requirement that the code be \"correct and executable\" for the given dataset.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant.",
+      "The code strictly implements the requested steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of these steps. Applying `Binarizer` or `MinMaxScaler` directly to non-numeric (categorical) data will result in a runtime error, thus violating the requirement that the code be \"correct and executable\" for the given dataset.",
+      "The code implements all the specified steps (binarizer, minmax, pca, knn). However, the dataset contains categorical features that are not addressed by any of the listed pipeline steps. The current implementation uses `ColumnTransformer` with `remainder='drop'` to implicitly discard these categorical features. Dropping features is a form of preprocessing/feature selection. Since this action is not explicitly listed as a step in the provided pipeline, and the instruction is to implement 'only those steps', the code is not compliant."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "647ec90973804fb189577348eef77bfb",
+    "semantic_feedback": [
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code implements 'imputation with simple_imputer' for both numerical and categorical features, and 'discretization with binarizer' for numerical features. It also includes 'classification with random_forest'. However, the 'discretization with binarizer' step is not applied to categorical features, and no other encoding or transformation is performed on them. As a result, categorical features remain as string/object data types after preprocessing. The 'RandomForestClassifier' cannot handle string features directly, which will cause an error during the classification step. Therefore, the generated pipeline is not fully functional or compliant with the implicit requirement of the classifier for numerical input.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features. `OneHotEncoder` is an additional transformation step not explicitly mentioned in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features. `OneHotEncoder` is an additional transformation step not explicitly mentioned in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features. `OneHotEncoder` is an additional transformation step not explicitly mentioned in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features. `OneHotEncoder` is an additional transformation step not explicitly mentioned in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features. `OneHotEncoder` is an additional transformation step not explicitly mentioned in the provided pipeline, which states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "d5cb676cbd3148a9bb2fe15ac398ecad",
+    "semantic_feedback": [
+      "The generated code is not compliant because it includes an additional preprocessing step (OneHotEncoder for categorical features) that was not explicitly listed in the provided pipeline definition. The instruction states to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "f705de1e46ec482faaed8209a6576057",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "8a8f938c2fcc4ea598ec6889265505d3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

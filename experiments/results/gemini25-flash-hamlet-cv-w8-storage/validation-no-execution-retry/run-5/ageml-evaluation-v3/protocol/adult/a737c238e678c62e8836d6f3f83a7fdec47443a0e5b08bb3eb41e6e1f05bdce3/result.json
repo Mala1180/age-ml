@@ -1,0 +1,115 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/adult/a737c238e678c62e8836d6f3f83a7fdec47443a0e5b08bb3eb41e6e1f05bdce3/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/adult/a737c238e678c62e8836d6f3f83a7fdec47443a0e5b08bb3eb41e6e1f05bdce3/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/adult/a737c238e678c62e8836d6f3f83a7fdec47443a0e5b08bb3eb41e6e1f05bdce3/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/adult/a737c238e678c62e8836d6f3f83a7fdec47443a0e5b08bb3eb41e6e1f05bdce3/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "ab42a0f2f32944738d434bd82d92721b",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8245376845877674,
+    0.8202034344351432,
+    0.8091122063789316,
+    0.8262852603329549,
+    0.817650349469897,
+    0.8106049389396557,
+    0.8277375262933084,
+    0.8175144807481749,
+    0.8264395262541635,
+    0.8260563664058156
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1349.23,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "103e073f173c4e1d9bff1a1eaddef9ce",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": "7614ff26b5b1496abd3fa64d42038bda",
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": "a9a2611c29934478a4a6d86c7dffe05c",
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": "07a6c5aadf8a49bb94a097d44fb95aa5",
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "a945fd74a930fa98aed745dccb63fed8341d8fb6ba9ed20b67f6c518cdf0683b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "d3bef256d4c78bc7d3f36d29b6659aef4dfa66020b84d9874e66f44d1a1d45e0",
+  "runtime_human_readable": "0:18:12",
+  "runtime_seconds": 1092.1373870112002,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8206141773845813,
+  "selected_candidate_key": "e5d662dbfa9bcddb542114637a3d34754f4f39cfd204d40e4da5dddbf2bede6d",
+  "selection_sha256": "99947ff3c1f388bb11ef61ad2f533bc6768a6cfd9d784f652badd2d58b0cad45",
+  "selection_validation_score": 0.8206141773845813,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is used for numerical features, `SimpleImputer` is used for categorical features. The pipeline only mentioned `iterative_imputer` for the imputation step, implying it should be the sole imputation method or that specific instructions for categorical imputation should have been provided if different."
+    ],
+    "5": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `IterativeImputer` for numerical columns but `SimpleImputer` for categorical columns. While `IterativeImputer` is primarily for numerical data, the instruction implies a single imputation strategy for the overall imputation step, which is not fully met by using two different imputers."
+    ],
+    "8": [
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code uses `IterativeImputer` for numerical features but `SimpleImputer` for categorical features. To be fully compliant, `IterativeImputer` should be used for all features, potentially after one-hot encoding categorical features if `IterativeImputer` cannot directly handle string categories."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "29": [
+      "The code is not fully compliant with the provided pipeline. While it correctly implements imputation, discretization, rebalancing, and classification, it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the pipeline definition, which states to implement 'only those steps'.",
+      "The code is not compliant because it is not \"correct and executable\" for datasets containing categorical features. The `NearMiss` rebalancer and `GaussianNB` classifier expect numerical input. However, the `ColumnTransformer` for categorical features only performs imputation and does not include a step to convert these features to a numerical format (e.g., via ordinal or one-hot encoding). As a result, if `X_train` contains categorical features, the pipeline will fail at the rebalancing or classification step, violating the requirement that the code must be correct and executable.",
+      "The code includes an `OrdinalEncoder` for categorical features. This step is not explicitly listed in the provided pipeline definition, violating the instruction to implement \"only those steps\" of the pipeline. While this step is necessary for the pipeline to be executable with categorical data, its inclusion makes the code non-compliant with the strict pipeline definition."
+    ]
+  },
+  "semantic_validation_failures": 7,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.009254459999999999,
+    "input_tokens": 30320,
+    "output_cost": 0.039922500000000014,
+    "output_tokens": 28910,
+    "total_cost": 0.04917696000000001,
+    "total_tokens": 59230
+  },
+  "training_time": 2055.844,
+  "validation_metric": "balanced_accuracy"
+}

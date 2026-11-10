@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "cb1b4bfb91ff89b3b497f822b8fde589125e22f1f0b7a44c5ee1e270362a40e2",
+  "code_sha256": "5b393b650e4855807ac1e97ea6d6ef99d481695d386db7a133976e219bffa478",
+  "completed_at": 1793561764.55673,
+  "cv_fold_scores": [
+    88198.7829614182,
+    64701.29156290608,
+    86934.2237136704,
+    68803.8093262345,
+    88904.24049397386,
+    83581.99356424449,
+    65136.94965467717,
+    101046.67133762644,
+    99935.42725735849,
+    64927.960034830045
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "cf541485490cbe6820d855183fafb24531f76de96dbda92acf1af9aabbbfb86f",
+  "pipeline_id": 20,
+  "pipeline_run_id": "ffd1e8dcbe06447da7f37d8775a4d656",
+  "run_id": "7b30b341feab49c7ad7261a0cd574129",
+  "run_identity": "27e58661ea95f80b83a41a080247beed23c00baa061830d7628195c45821a728",
+  "validation_score": 81217.13499069397,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

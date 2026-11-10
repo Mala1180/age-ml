@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code includes an `imputer` step (`SimpleImputer`) which was not specified in the provided pipeline. The pipeline only defines normalization, feature selection, and regression steps.

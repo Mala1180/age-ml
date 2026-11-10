@@ -1,0 +1,74 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "c5d4eda9462322dca6a607fb8b02caaba2a7e0766ab18ecf2b7db303a8466f95",
+  "code_sha256": "f73120d814c17acd497dd192befcdc1f06bbe06e62036d485acc469936826de3",
+  "completed_at": 1793495721.8977752,
+  "cv_fold_scores": [
+    0.7391478631069769,
+    0.7398074452413504,
+    0.6782757653072805,
+    0.7608271223602957,
+    0.7049862477983456,
+    0.7030522747484323,
+    0.7583318397606499,
+    0.7256740154255056,
+    0.7651636139008026,
+    0.7143568284930595
+  ],
+  "effective_random_states": [
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    },
+    {
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 12,
+  "hyperparameters": {
+    "imputation_strategy": "median",
+    "k": 10,
+    "k_neighbors": 5,
+    "n_neighbors": 5,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "13ad12bc98773c18515e4853534543f774c6d10a98fc64e1a7688ae28a748947",
+  "pipeline_id": 15,
+  "pipeline_run_id": "4d5601fd59954215a2a7d9937b6dc47a",
+  "run_id": "5eed993dc9ae433589f46d53bbdba7dd",
+  "run_identity": "3520a5e6b0bb4972ca7d824b4eeab14174f68999530bdbf505e09c204a7c17cc",
+  "validation_score": 0.7289623016142699,
+  "validation_split_hash": "d38ac3c1eae9808cec541d3ddff66bf85327db7d30a2f2b23ad76a294e863893"
+}

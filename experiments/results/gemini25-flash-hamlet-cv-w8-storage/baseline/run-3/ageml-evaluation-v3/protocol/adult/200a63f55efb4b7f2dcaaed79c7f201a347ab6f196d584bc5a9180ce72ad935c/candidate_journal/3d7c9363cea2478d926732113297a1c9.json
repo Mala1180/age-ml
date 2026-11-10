@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "c7ad53b91e39b7a86722832425973f33603439428d3222b5dfa523fc9c2670fd",
+  "code_sha256": "7e565d51baec4621ca380e0018c62d5311c69b7c30d743c1637fbb3c3e2792a0",
+  "completed_at": 1793633536.8404095,
+  "cv_fold_scores": [
+    0.6450996592084169,
+    0.6450034346193052,
+    0.6474270831797337,
+    0.645678351298347,
+    0.6485159510152322,
+    0.6499749587539015,
+    0.646615977811729,
+    0.6343080038730461,
+    0.6556789516525495,
+    0.6413430397424724
+  ],
+  "effective_random_states": [
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 11,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "28c60c5d72a4791730906925d969db6e21832d238a54a8f154e230a5a5b2df51",
+  "pipeline_id": 4,
+  "pipeline_run_id": "cfeef9319ea54fd39b1200df0c2a0491",
+  "run_id": "3d7c9363cea2478d926732113297a1c9",
+  "run_identity": "637718255052d9e9a6396574af7c8beeefcea15b98a4d281e2a8f99fc1d3b430",
+  "validation_score": 0.6459645411154733,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

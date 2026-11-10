@@ -1,0 +1,64 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-2/ageml-evaluation-v3/protocol/adult/b32b85b5e8a4b212d15d493e0041503034e10be2d0cea37a1fc31e95c7dffa97/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-2/ageml-evaluation-v3/protocol/adult/b32b85b5e8a4b212d15d493e0041503034e10be2d0cea37a1fc31e95c7dffa97/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-2/ageml-evaluation-v3/protocol/adult/b32b85b5e8a4b212d15d493e0041503034e10be2d0cea37a1fc31e95c7dffa97/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-2/ageml-evaluation-v3/protocol/adult/b32b85b5e8a4b212d15d493e0041503034e10be2d0cea37a1fc31e95c7dffa97/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 0,
+  "best_run_id": "d10ae69509fa429296942550d5dee919",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8068488196603871,
+    0.7992897796595031,
+    0.7895291741008892,
+    0.8038646283380273,
+    0.7998409322146365,
+    0.7906799360325686,
+    0.7955491055957686,
+    0.7955879051357005,
+    0.7919448931400801,
+    0.7986925591232454
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 28.186000000000003,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null
+  },
+  "pipelines_found": 1,
+  "protocol_sha256": "2196e7481a263ce171f2f1694584f4858d0ef3e05ac7c2f6d4a35cffc0e6d2e3",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "8e32c4f4aa56370416e075ca208c0af475f4a065abc6f16228f97857e906be17",
+  "runtime_human_readable": "1:00:01",
+  "runtime_seconds": 3600.6702731773257,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.7971827733000807,
+  "selected_candidate_key": "723cbfc0884346181d213725818712cbd9aeff90dce9d978cb15443f88a700a6",
+  "selection_sha256": "fd50a7764da31dc43bd6bf4626b347f923aa70939b90d75390a0adea282fd30e",
+  "selection_validation_score": 0.7971827733000807,
+  "semantic_validation_failure_reasons": {},
+  "semantic_validation_failures": 0,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.00136935,
+    "input_tokens": 10812,
+    "output_cost": 0.0025450000000000004,
+    "output_tokens": 5934,
+    "total_cost": 0.0039143500000000005,
+    "total_tokens": 16746
+  },
+  "training_time": 0.0,
+  "validation_metric": "balanced_accuracy"
+}

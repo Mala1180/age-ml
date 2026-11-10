@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/har/2c3a07e1e84b09c5f093e5457ade7c8b587059ad0e2e1373d4a2aec3429c021c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/har/2c3a07e1e84b09c5f093e5457ade7c8b587059ad0e2e1373d4a2aec3429c021c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/har/2c3a07e1e84b09c5f093e5457ade7c8b587059ad0e2e1373d4a2aec3429c021c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/har/2c3a07e1e84b09c5f093e5457ade7c8b587059ad0e2e1373d4a2aec3429c021c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "2dae324ea7544bd79a1f3cef8bba1dc8",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 3330.5299999999993,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "a3fc66d4385744ca9ece9b18dbd8537d",
+    "2": "1cebe54b38e44a7eb100699a9c75cfc9",
+    "3": "895e374ca97e47de9b36b71fbc526c97",
+    "4": "c9671fd385fc46f6b9b36aef7560b81f",
+    "5": null,
+    "6": null,
+    "7": "add20a8486e3405c882dd2099268173c",
+    "8": null,
+    "9": "c042c4163b88488c8cd354bb23e7e6af",
+    "10": "24347226fc57445cb080ff0e00df29e5",
+    "11": "385dc58eabf94ac7bc5cbd59b88046b3",
+    "12": null,
+    "13": "5aa15f4509514adca074508e4ad4ade3",
+    "14": "ea4870db1d1f4381a9a31c8682eae8dc",
+    "15": "de47ef5682e4493aa652537dce1d68aa",
+    "16": "88b984115d6343528b2afbe4193283af",
+    "17": "4f79d06d625e42e8b560a27c88abcea1",
+    "18": null,
+    "19": "ceda344608ee4871886fd6e63d1fc4e2",
+    "20": "e639c8e047cc492cbdeb749b441e80ba",
+    "21": "78f6ac24ad004c8bbcd9a20662069252",
+    "22": "99057664949048e3947fef85a3741367",
+    "23": "565ae965d58244a4b8bbe3601bf0bddd",
+    "24": null,
+    "25": "0c08c46c23a94b06bb2d8ccd0a496873",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "efb469a071104ea52e6716cb3c46c4771ae9cfd90376e6d9d4ab663dacc50423",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "40fb45f078a0a7f932a74a1a267f44f46cf1eb870fc859cdda550adab9d1f396",
+  "runtime_human_readable": "1:00:44",
+  "runtime_seconds": 3644.3314137645066,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "0d15c8082652ebcd627199c94311fe54d52e9c5cb36cebfe461fe38cefa3b184",
+  "selection_sha256": "b437e353647d4019692ead7819aeeb000ab449dccbb9b3108d39ccca8682025a",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "21": [
+      "The code is not fully compliant with the instruction \"The host sets every exposed random_state\". While `NearMiss` correctly had `random_state` removed (as it does not support it), the `RandomForestClassifier` has `random_state=42` hardcoded. This prevents the host from initially setting this parameter, as it is already fixed. To be fully compliant, `random_state` for `RandomForestClassifier` should be set to `None` (or a variable provided by the host if it were part of the function signature) to allow the host to truly 'set' it via `set_params`."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.011477850000000001,
+    "input_tokens": 803007,
+    "output_cost": 0.033857500000000006,
+    "output_tokens": 8066,
+    "total_cost": 0.04533535000000001,
+    "total_tokens": 811863
+  },
+  "training_time": 5354.872000000001,
+  "validation_metric": "balanced_accuracy"
+}

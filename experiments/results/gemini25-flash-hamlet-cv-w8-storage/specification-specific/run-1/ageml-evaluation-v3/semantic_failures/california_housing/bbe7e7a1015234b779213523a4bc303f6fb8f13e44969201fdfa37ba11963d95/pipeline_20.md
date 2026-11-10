@@ -1,0 +1,2 @@
+Attempt 1:
+The code is mostly compliant, implementing the specified imputation, discretization, normalization, and regression steps in the correct order. However, it includes an additional `OneHotEncoder` for categorical features, which was not explicitly listed in the provided pipeline steps. The instruction stated to implement 'only those steps', making the inclusion of `OneHotEncoder` a non-compliance.

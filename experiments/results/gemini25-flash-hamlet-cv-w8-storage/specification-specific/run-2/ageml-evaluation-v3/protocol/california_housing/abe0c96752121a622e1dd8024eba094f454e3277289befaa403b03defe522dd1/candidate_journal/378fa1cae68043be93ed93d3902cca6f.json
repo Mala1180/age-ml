@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "9d2e5f0095fc534478faf1c561ed1608fe0e5635d04fa841fc59680e3e72e469",
+  "code_sha256": "6be6bbfb976707204b6a7140ed774faf2e95425005d7d99ff3fd7fcc0afb11b1",
+  "completed_at": 1793575600.0426328,
+  "cv_fold_scores": [
+    76046.82790218288,
+    73391.70282977722,
+    77912.2864752516,
+    56867.4540813276,
+    81226.52722697736,
+    76645.01988244243,
+    57974.89333689649,
+    86156.29493757042,
+    98540.81490899225,
+    61102.21643137347
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "imputation_strategy": "mean",
+    "n_bins": 10,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "cf9beef8052dc84fbf07dc48a559a8ead151dfdd272a6d470a4973932ee4693b",
+  "pipeline_id": 22,
+  "pipeline_run_id": "c05ad02ade454264a74cbb1ef62c6a3b",
+  "run_id": "378fa1cae68043be93ed93d3902cca6f",
+  "run_identity": "baa4147e78b084123073153e7659c3d5b34a1a649cac21ddab3e39ebd4dca68f",
+  "validation_score": 74586.40380127917,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

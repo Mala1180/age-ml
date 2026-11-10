@@ -1,0 +1,87 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/har/68108108146b632cf6540c840ad756055bf354b77b47ad17419d397d4fe69972/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/har/68108108146b632cf6540c840ad756055bf354b77b47ad17419d397d4fe69972/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/har/68108108146b632cf6540c840ad756055bf354b77b47ad17419d397d4fe69972/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/har/68108108146b632cf6540c840ad756055bf354b77b47ad17419d397d4fe69972/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 3,
+  "best_run_id": "eaf1b2739aca46578c6be354635a97c6",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9711771929607189,
+    0.9370273518995201,
+    0.8907447361530014,
+    0.9600717294857115,
+    0.9765552315649444,
+    0.9719624024193744,
+    0.9691965902475027,
+    0.9496488226161383,
+    0.9179739542123689,
+    0.9718815691756305
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 752.1250000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "04d81fb034664ced96e17141b7d0483b",
+    "1": "49bab153ad1949c89be55459a145a03f",
+    "2": "d409fc59dc0542d49417abf83dc7d8ad",
+    "3": "f2cf2750e3db4d9ca9503ce01ce02b2c",
+    "4": "2854271bbc144a989f8d69e56e70e344",
+    "5": "a46ac7f26bee48199ceb6b2563bd1064",
+    "6": "743642fc61064287a21e8076214830cf",
+    "7": "0e86d48142c6417183b76eba8148a73e",
+    "8": "5c1e47e56d8b4755a9847d606c56ae0d",
+    "9": "2db2e1d8442948f496e82907068a0a31",
+    "10": "b31b1b78359146ec92c63a9b5b9e71c9",
+    "11": "709a6630d7df4d0ba47b77b35dbe982c",
+    "12": "764b78ed234840f5b764b140936f6340",
+    "13": "e4e0ff204f2741b3bdf6a51d77876236",
+    "14": "471d2ca8561f4ef1b312f615b2006a2d",
+    "15": "dcdeee289a404673804ec4a91e530e79"
+  },
+  "pipelines_found": 16,
+  "protocol_sha256": "fad2b9ec035b844919ea9123db13360fcdcc6937122cd19f3bec91450bcae7cb",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "7cd100703b702b1858f6ecd2a408b34539d8533965bd9994527688bc6d5504f4",
+  "runtime_human_readable": "0:13:10",
+  "runtime_seconds": 790.418681807816,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9516239580734911,
+  "selected_candidate_key": "352ffe9cc3089b8ac97103b12d70056a161c96b6fbe442112b4854dcf4a2827b",
+  "selection_sha256": "a3fca5406cee35a2e3ef21e2ad0abdb6e42ed3531d64f664a63207ff6f8a888e",
+  "selection_validation_score": 0.9516239580734911,
+  "semantic_validation_failure_reasons": {
+    "11": [
+      "no, the code is compliant with the pipeline definition and instructions, but previous execution attempts indicated an error with the 'var_smoothing' parameter of GaussianNB, suggesting it might not be executable in the target environment despite being syntactically correct and logically following the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01049922,
+    "input_tokens": 535612,
+    "output_cost": 0.030757500000000004,
+    "output_tokens": 5315,
+    "total_cost": 0.041256720000000004,
+    "total_tokens": 540927
+  },
+  "training_time": 4559.847,
+  "validation_metric": "balanced_accuracy"
+}

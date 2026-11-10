@@ -1,0 +1,218 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "2faf694d18324c53a7a6f49e46ad7727",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "1e38a0473ca54034aed8c143ce99ceed",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "4da47ba1a63c477ba87f224200fc9e32",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "f089a4f0c37a4012a8e327ba0f5448b0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 5,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 6,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "eba8dc5b163f4b708e9ad251c8aa9f66",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 8,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "e6e8d775a948405ba1711f03b691a419",
+    "semantic_feedback": [
+      "The code is not fully compliant because the `feature_range` parameter for `MinMaxScaler` expects a tuple, but if a list (e.g., `[0, 1]`) is passed as the `feature_range` argument, it will cause a runtime error. To ensure the code is robust and executable as required, `feature_range` should be explicitly cast to a tuple, e.g., `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "257be5bc6149428a8b0ac2357a319a60",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "dc69a994b16f4ead834f78517c3e689b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 12,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "de66ff3da8b348669099ad67a2f34297",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "b80f625d642b42c3ba7109f38b9e84bf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "4a76363e410f4c038dca75b0e5f68a0f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "84bae667b1ef41148e9471d5b6e2ec71",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "ef83aa2f1b0a4b0d94610c6ef5e8f875",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "67875780e5df4e35a0ccb5385e3f844f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "7281ad53d52643f8a2c14472f0ba10a2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "fee2981ac28c4d53af4460b77808f76d",
+    "semantic_feedback": [
+      "The code is not fully compliant with the instruction \"The host sets every exposed random_state\". While `NearMiss` correctly had `random_state` removed (as it does not support it), the `RandomForestClassifier` has `random_state=42` hardcoded. This prevents the host from initially setting this parameter, as it is already fixed. To be fully compliant, `random_state` for `RandomForestClassifier` should be set to `None` (or a variable provided by the host if it were part of the function signature) to allow the host to truly 'set' it via `set_params`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "e4c30a1bb5f1435b8d2fa28e1cb92d18",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "25ce275e170f4ce4997369e9dd49b9d8",
+    "semantic_feedback": [
+      "The code contains a hidden control character (form feed, \\f) in the import statement for `KNeighborsClassifier`, which will cause a syntax error and prevent execution. Specifically, `from sklearn.decomposition import PCA\f rom sklearn.neighbors import KNeighborsClassifier` should be `from sklearn.decomposition import PCA\nfrom sklearn.neighbors import KNeighborsClassifier` or `from sklearn.decomposition import PCA\nfrom sklearn.neighbors import KNeighborsClassifier`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "8ed7eeba00484422b1e7a17990074d16",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 27,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

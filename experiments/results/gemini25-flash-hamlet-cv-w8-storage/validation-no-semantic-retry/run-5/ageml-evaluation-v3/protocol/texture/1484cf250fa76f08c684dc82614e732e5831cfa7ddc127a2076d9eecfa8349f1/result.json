@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/texture/1484cf250fa76f08c684dc82614e732e5831cfa7ddc127a2076d9eecfa8349f1/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/texture/1484cf250fa76f08c684dc82614e732e5831cfa7ddc127a2076d9eecfa8349f1/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/texture/1484cf250fa76f08c684dc82614e732e5831cfa7ddc127a2076d9eecfa8349f1/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/texture/1484cf250fa76f08c684dc82614e732e5831cfa7ddc127a2076d9eecfa8349f1/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "44cf00e30c9a42839cec6547e62f6866",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9945454545454545,
+    0.9945454545454546,
+    0.9963636363636365,
+    0.9963636363636365,
+    1.0,
+    0.9945454545454546,
+    0.9981818181818182,
+    0.990909090909091,
+    0.9981818181818182,
+    0.9981818181818182
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 193.797,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "a7572dd7e5d24894b4303896f6ec6aa1",
+    "1": "476b02d05f0d4b28a0a89e0c9afff699",
+    "2": "18c927965e05428c9987f568c2ef38f4",
+    "3": "fdcd2874581d4ba6ab3dac836d5971f5",
+    "4": "4690a1dd43274b12b74f0accbc298070",
+    "5": "2e76f50bcd2f4849ac85c30cfbb4866d",
+    "6": "1563db561f724167b97fda36d9697d75",
+    "7": "6b867cc0c73348929669add73b03fd9a",
+    "8": "55c630c57030473289d7b69088f75ea4",
+    "9": "a6185532de9341a581019584988e7de7",
+    "10": "1e9ba0343fdb44cb9b2c8d200c4fae8c",
+    "11": "9316ec4f334748629ef0cf4906b28439",
+    "12": "72230626a64d4c35b50487fb54390df1",
+    "13": "8a8eb241d319416cb608c844aa6d940c",
+    "14": "4083eb34e6ff491486ebdb6b4562069d",
+    "15": "0bbdc1b5885845f78f5ecd51f12634f4",
+    "16": "55ad5b78685044ceb8bbcf6c3edaa000",
+    "17": "5461a09f42a744859e70633a6d4a10bc",
+    "18": "39b69aeecbe54e7ea5d7dc4f09afc789",
+    "19": "27c6f99d7eb34e8095351de029086bfe",
+    "20": "e3b8e79619ee4b75ad561fc2883cf0f7",
+    "21": "3499b2210ea14671adbb559496e9cdf8",
+    "22": "ce6d0710591a41b887acc5a0a17a470b",
+    "23": "16273dd6678b42b7b63577d86f0b4c82",
+    "24": "ead55007c2d04be2931bc928705c9fe1",
+    "25": "8bc73117bb294f449940fa627f737c37",
+    "26": "a771dbce400543baaa80e5d1526edbc8",
+    "27": "3c2baf9026104f5ba5d80338ed9699b4",
+    "28": "fd87991ea212420c87b40f23090a618f",
+    "29": "703db17efa014194a426504b1b6def71"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "b760727a813fba2b2fee7831b71ae7eb118f540d280834e79c8c23baf7fae5ff",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "85d6064f7ab5e2b46ebef81bf8fa91275148eee7a38e49a68ad983fce849f6bc",
+  "runtime_human_readable": "0:07:20",
+  "runtime_seconds": 440.4624084383249,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9961818181818183,
+  "selected_candidate_key": "0ecdcc5314479fe25b7e2b79c646937da4f956f8df1e1c7d8096e200c19206cd",
+  "selection_sha256": "608f74dcc4243989427c437084e0b57a65cc807305094f6c90deaac86aee1fd2",
+  "selection_validation_score": 0.9961818181818183,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The code is not fully compliant because it is not robustly executable. The `RobustScaler` expects the `quantile_range` parameter to be a tuple, but the generated code passes the `quantile_range` argument directly without ensuring it is a tuple. As indicated by the previous execution error, if `quantile_range` is provided as a list (e.g., `[25.0, 75.0]`), it will cause a runtime error. To fix this, `quantile_range` should be explicitly converted to a tuple, for example, `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "a80eee61e65b7b4e1d809b5bfe009a74e2bef5667e7220f0055cae9ac7de8321",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.011967900000000002,
+    "input_tokens": 85776,
+    "output_cost": 0.03524750000000001,
+    "output_tokens": 9720,
+    "total_cost": 0.047215400000000005,
+    "total_tokens": 95978
+  },
+  "training_time": 1901.4559999999997,
+  "validation_metric": "balanced_accuracy"
+}

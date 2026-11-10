@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant with the provided pipeline for two reasons: 1. It includes an additional step, `OneHotEncoder`, for categorical feature encoding, which was not explicitly listed in the pipeline definition. The instructions state to implement "only those steps". 2. The `imputation_strategy` parameter from the function signature is only applied to numerical features, while categorical features use a hardcoded 'most_frequent' strategy. The pipeline implies a single configurable imputation step.

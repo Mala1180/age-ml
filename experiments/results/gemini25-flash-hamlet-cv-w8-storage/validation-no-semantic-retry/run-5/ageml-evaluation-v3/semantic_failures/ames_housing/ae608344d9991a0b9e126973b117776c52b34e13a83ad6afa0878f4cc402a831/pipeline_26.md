@@ -1,0 +1,2 @@
+Attempt 1:
+The `method` parameter from the `build_model` function signature is intended for the `PowerTransformer`'s `method` argument, but it is currently being passed to the `IterativeImputer`'s `initial_strategy`. The `PowerTransformer`'s `method` is hardcoded to 'yeo-johnson'. This will likely lead to the same error as before if `method` is passed as 'yeo-johnson' or 'box-cox', as `IterativeImputer`'s `initial_strategy` only accepts 'mean', 'median', 'most_frequent', or 'constant'.

@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists 'imputation', 'normalization', and 'regression'. While the code correctly implements these steps for numerical features and imputation for categorical features, it introduces 'OneHotEncoder' for categorical features. One-hot encoding is a necessary step for categorical data before a linear model like Ridge, but it was not explicitly mentioned in the provided pipeline steps, violating the 'only those steps' constraint.

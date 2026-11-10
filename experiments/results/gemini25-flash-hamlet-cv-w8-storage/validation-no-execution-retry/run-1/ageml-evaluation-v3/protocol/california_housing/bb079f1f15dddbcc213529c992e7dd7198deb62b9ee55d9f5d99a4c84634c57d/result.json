@@ -1,0 +1,83 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-1/ageml-evaluation-v3/protocol/california_housing/bb079f1f15dddbcc213529c992e7dd7198deb62b9ee55d9f5d99a4c84634c57d/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-1/ageml-evaluation-v3/protocol/california_housing/bb079f1f15dddbcc213529c992e7dd7198deb62b9ee55d9f5d99a4c84634c57d/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-1/ageml-evaluation-v3/protocol/california_housing/bb079f1f15dddbcc213529c992e7dd7198deb62b9ee55d9f5d99a4c84634c57d/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-1/ageml-evaluation-v3/protocol/california_housing/bb079f1f15dddbcc213529c992e7dd7198deb62b9ee55d9f5d99a4c84634c57d/validation_candidates.csv"
+  },
+  "artifacts": {},
+  "best_pipeline_id": null,
+  "best_run_id": null,
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": null,
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 106.618,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "fa1eb1d70bd71dc70d3f411b3779959107dfece7bc18cd013387e529af70ee46",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "1e9f44694983ed13320daae848bfd1a3713205a4d481726a4c30939805b4b793",
+  "runtime_human_readable": "0:01:13",
+  "runtime_seconds": 72.64317819103599,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": null,
+  "selected_candidate_key": null,
+  "selection_sha256": "06648df031e3737f9b34847eb12e18dcffcb09d991f31191f9a4c500104ae616",
+  "selection_validation_score": null,
+  "semantic_validation_failure_reasons": {
+    "10": [
+      "The pipeline description specifies 'imputation with iterative_imputer', 'normalization with minmax', and 'regression with linear'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "13": [
+      "The `method` parameter is included in the function signature but is not used in the construction of the pipeline. The prompt specifies that `method` is a hyperparameter for the pipeline, implying it should influence the pipeline's components or their parameters."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "no_valid_candidate",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0073713599999999995,
+    "input_tokens": 106576,
+    "output_cost": 0.00808,
+    "output_tokens": 9224,
+    "total_cost": 0.015451359999999999,
+    "total_tokens": 115800
+  },
+  "training_time": 2.7439999999999998,
+  "validation_metric": "rmse"
+}

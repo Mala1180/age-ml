@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/madelon/5f29fe4b6cc8ad148e862006061de230839660bc04028ca0c328c8b7795d90b8/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/madelon/5f29fe4b6cc8ad148e862006061de230839660bc04028ca0c328c8b7795d90b8/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/madelon/5f29fe4b6cc8ad148e862006061de230839660bc04028ca0c328c8b7795d90b8/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/madelon/5f29fe4b6cc8ad148e862006061de230839660bc04028ca0c328c8b7795d90b8/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "73cde445b70a4a718781267bdeb4c445",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8500000000000001,
+    0.8038461538461539,
+    0.823076923076923,
+    0.8346153846153846,
+    0.8307692307692307,
+    0.8,
+    0.823076923076923,
+    0.823076923076923,
+    0.8269230769230769,
+    0.8423076923076923
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 356.01200000000006,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "04a3048b579141988f1cfda0a4d159d5",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": "c18807a5d9db499d86d1efe96da1e75f",
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": "93e32d98ae454401a97627e5b7a38867",
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": "1e8c2dc6befd464986a2a482a3a60f89",
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": "e3d3f007481b4b57806b9904b6d27a3f",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "ad1ccea8cffebd88f481b76aa21edbdbd05f7bf8d2af27edc79eaa4dcc1d91a8",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "47737850e219d44ff8fa0839a327fe6aa27a166389f7f6e73253900e59862d4d",
+  "runtime_human_readable": "0:03:30",
+  "runtime_seconds": 209.71232526376843,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8257692307692308,
+  "selected_candidate_key": "1933daee7ab4d0aa141a613623ca953055f4ffe77f5408c965337166c1b84a56",
+  "selection_sha256": "1e58aed75cb650a70301317c99de43e39106267a9fe7ec2fa3f3c281ecb80341",
+  "selection_validation_score": 0.8257692307692308,
+  "semantic_validation_failure_reasons": {
+    "13": [
+      "The `KBinsDiscretizer` step includes `subsample=200000`, which was not specified in the pipeline description. The instructions state to implement \"only those steps\" of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.03666201,
+    "input_tokens": 491744,
+    "output_cost": 0.03560000000000001,
+    "output_tokens": 10088,
+    "total_cost": 0.07226201,
+    "total_tokens": 502093
+  },
+  "training_time": 583.34,
+  "validation_metric": "balanced_accuracy"
+}

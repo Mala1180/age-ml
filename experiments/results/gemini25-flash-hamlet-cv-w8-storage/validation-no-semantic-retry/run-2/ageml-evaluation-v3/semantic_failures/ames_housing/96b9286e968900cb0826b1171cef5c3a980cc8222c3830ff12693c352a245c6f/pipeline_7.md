@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly states 'imputation with iterative_imputer' and 'normalization with power_transformer'. The current code applies these steps only to numerical features and adds 'SimpleImputer' and 'OneHotEncoder' for categorical features. While handling categorical features is often necessary, the pipeline definition did not specify these additional steps, violating the constraint to implement 'only those steps'.

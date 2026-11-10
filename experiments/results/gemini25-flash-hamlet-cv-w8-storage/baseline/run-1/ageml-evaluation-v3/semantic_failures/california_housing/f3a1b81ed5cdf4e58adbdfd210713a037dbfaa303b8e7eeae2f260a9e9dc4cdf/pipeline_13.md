@@ -1,0 +1,2 @@
+Attempt 1:
+The `method` parameter is included in the function signature but is not used in the construction of the pipeline. The prompt specifies that `method` is a hyperparameter for the pipeline, implying it should influence the pipeline's components or their parameters.

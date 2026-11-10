@@ -1,0 +1,220 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "d4b27be7961a49e6bd08142cb40e7afe",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "aab5306532b046d7b7ab71dbb49a12ee",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "feb69660815f4d40ac7a2841dbc1afc6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "d88ffebf1d3946f9ad58646cccfc427e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "f5517691c7ec430e932d7b2f9123d405",
+    "semantic_feedback": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code is not executable because the 'total_bedrooms' column contains missing values (NaNs), and the `MinMaxScaler` cannot handle them. The pipeline does not explicitly include an imputation step, which is necessary for the code to run correctly.",
+      "The generated code includes a 'SimpleImputer' step for numerical features. This imputation step is not explicitly listed in the provided pipeline, which specifies only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "72d20b0d0fe54070bde92cce8a74508c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "0dd0b6d96b1d460390246e7e3cf299a9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "42aacf2a2f9e49be84cc545ad2759a2d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "dd54404ffa2f4a08860ce06e24a54fc5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "c2c43c0865c84b26818f49cf6a8b486a",
+    "semantic_feedback": [
+      "The code includes a `ColumnTransformer` with `OneHotEncoder` for categorical features. This is a feature transformation step that was not explicitly listed in the provided pipeline (which only specified imputation, normalization, and regression). While this step is necessary for the pipeline to function correctly with the given dataset's categorical column, it deviates from the instruction to implement 'only those steps' of the pipeline."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "53c06a0dc8d04b45b4ff9bc1785d9b2c",
+    "semantic_feedback": [
+      "The pipeline description specifies 'imputation with iterative_imputer', 'normalization with minmax', and 'regression with linear'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "b6ce8b787ff74b88886aaf0a5d4b0827",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "887a8fb6b43547f6adb10a1b403e7724",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "1ac66f952e9847058835453bc938d0e6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "bf5cbefa978c434abceb22bddb6c4faa",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "a9fe820684fa4a22977158cd18481845",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "88307d68368d4254a19eb11d73debd7f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "0096225dad81416c97d351c5422e9195",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "83b889ef5d9146b88ec269e254fdaeb4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "58b90e32d79e4a54a071db3a1aaee054",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "681673ffc2594824ae11b04d1a996789",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "e5ca77c448ce438588373413dfbb67c0",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "309f9989c70d4d26a3bb84c1ab431bb8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "00ec0d66f9c74c599d57d4636ddf17c9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "f7fb7b55062e44cb997f870acd2a9cf1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "8040d22f26fa44be8d4ac2ac16053537",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "28c21f7df45c4a9ab91e48f55643fbd5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "b4a8819dd7c64a5f8a8411238958bee7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "e3426f058c404f7c85686da6f8cf18b8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "d8bff81ceccc44bc9bdb1e527048832d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

@@ -1,0 +1,111 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/adult/bc210a0747eb1a6970c6285ccb3770e758fe3d61085701d3a40b5034115559b5/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/adult/bc210a0747eb1a6970c6285ccb3770e758fe3d61085701d3a40b5034115559b5/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/adult/bc210a0747eb1a6970c6285ccb3770e758fe3d61085701d3a40b5034115559b5/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/adult/bc210a0747eb1a6970c6285ccb3770e758fe3d61085701d3a40b5034115559b5/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "3ababb8e381441a8a508b6fb2401864c",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8245376845877674,
+    0.8202034344351432,
+    0.8091122063789316,
+    0.8262852603329549,
+    0.817650349469897,
+    0.8106049389396557,
+    0.8277375262933084,
+    0.8175144807481749,
+    0.8264395262541635,
+    0.8260563664058156
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1087.245,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "f60759ed155a42ac9ba5d561bae11084",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": "02193b217ab44ac48739f195591ab52f",
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": "9c612252c35042c6999c7f227b217ee2",
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "386061234368d2b680cbc59f18f9cab9d9ae710e2318e5c7a94fda9a236def5d",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "5a5431a48fa4eb88c764e16540f2f998ead030e15e2968f3241d3c214321c032",
+  "runtime_human_readable": "0:17:46",
+  "runtime_seconds": 1065.5261653251946,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8206141773845813,
+  "selected_candidate_key": "e5d662dbfa9bcddb542114637a3d34754f4f39cfd204d40e4da5dddbf2bede6d",
+  "selection_sha256": "7aaeb6455f5ab5b46c35fe65d34d1cae842f29fabc1fd1eb3ec8849948798d1d",
+  "selection_validation_score": 0.8206141773845813,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The pipeline includes an `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps. The instruction states to implement \"only those steps\" listed in the pipeline."
+    ],
+    "19": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step but was not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "29": [
+      "The code includes an `OrdinalEncoder` for categorical features, which is an additional preprocessing step not explicitly mentioned in the provided pipeline. The pipeline specifies only `imputation` and `discretization` for preprocessing, followed by `rebalancing` and `classification`.",
+      "The code is not compliant because categorical features are dropped using `remainder='drop'` in the `ColumnTransformer`. This means that if categorical features have missing values, they are not imputed as per the 'imputation with simple_imputer' step. Additionally, dropping features is not an explicit step mentioned in the provided pipeline."
+    ]
+  },
+  "semantic_validation_failures": 5,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01018539,
+    "input_tokens": 24379,
+    "output_cost": 0.05580250000000001,
+    "output_tokens": 21872,
+    "total_cost": 0.06598789000000001,
+    "total_tokens": 46251
+  },
+  "training_time": 1170.793,
+  "validation_metric": "balanced_accuracy"
+}

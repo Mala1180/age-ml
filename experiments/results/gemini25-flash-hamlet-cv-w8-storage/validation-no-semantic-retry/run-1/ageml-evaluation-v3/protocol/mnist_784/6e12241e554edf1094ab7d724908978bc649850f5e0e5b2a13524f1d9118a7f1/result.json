@@ -1,0 +1,108 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/mnist_784/6e12241e554edf1094ab7d724908978bc649850f5e0e5b2a13524f1d9118a7f1/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/mnist_784/6e12241e554edf1094ab7d724908978bc649850f5e0e5b2a13524f1d9118a7f1/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/mnist_784/6e12241e554edf1094ab7d724908978bc649850f5e0e5b2a13524f1d9118a7f1/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/mnist_784/6e12241e554edf1094ab7d724908978bc649850f5e0e5b2a13524f1d9118a7f1/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 9,
+  "best_run_id": "b43d433c74b94bf3a4355d58ec9ffa09",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9774973431204781,
+    0.9722767401365913,
+    0.9762759219333292,
+    0.9744043307633061,
+    0.9737286478134948,
+    0.9730715992103731,
+    0.9705354977385863,
+    0.9703503432843513,
+    0.9719772841114903,
+    0.9777107223777894
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2130.2649999999994,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "6aab1e8ce9d04117bb465c06dbcc3e73",
+    "2": null,
+    "3": "4dca2e04801c4395b935acaf678ccfaf",
+    "4": "f104315f724b4b50a0d66985fa28d833",
+    "5": null,
+    "6": null,
+    "7": "262f1925cf154d17b8827ae6a2b31959",
+    "8": null,
+    "9": "3c752f4b1f21414986564a1cb8059cf3",
+    "10": "2210be7df9664e45af5f46b7f031616a",
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "fbaf72c92f3803a799e997bf02f9560f0f7562ba3766503e6cbdb47cd1219ae5",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "b88052d183039e84699f582430fa5df34187f5bd77d9d794cc2764a89fe563b5",
+  "runtime_human_readable": "1:09:53",
+  "runtime_seconds": 4192.8173149339855,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.973782843048979,
+  "selected_candidate_key": "04c8fbede40075330c3f98cf747b6844dee7bf777f051c99a98e7ce131825fa7",
+  "selection_sha256": "2bebbb8e9e84d24a046d5f131c7e0de88ae0573fd498bba89587b0fd701d0369",
+  "selection_validation_score": 0.973782843048979,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The `NearMiss` rebalancing step has a `random_state` parameter that should be exposed in the `build_model` function signature, as per the instruction: \"The host sets every exposed random_state\".",
+      "The `build_model` function signature does not exactly match the one provided in the prompt. The prompt explicitly states: `def build_model(X_train, y_train, feature_range, k, version, n_neighbors, weights):` but the generated code includes `random_state` as an additional parameter.",
+      "The `NearMiss` rebalancing step has a `random_state` parameter that should be exposed in the `build_model` function signature, as per the instruction: \"The host sets every exposed random_state and fits separately on each fold.\" The current signature does not include `random_state`.",
+      "The `build_model` function signature does not exactly match the one provided in the prompt. The prompt explicitly states: `def build_model(X_train, y_train, feature_range, k, version, n_neighbors, weights):` but the generated code includes `random_state` as an additional parameter.",
+      "The `build_model` function signature does not exactly match the one provided in the prompt. The prompt explicitly states: `def build_model(X_train, y_train, feature_range, k, version, n_neighbors, weights):` but the generated code includes `random_state` as an additional parameter.",
+      "The `build_model` function signature does not exactly match the one provided in the prompt. The prompt explicitly states: `def build_model(X_train, y_train, feature_range, k, version, n_neighbors, weights):` but the generated code includes `random_state` as an additional parameter.",
+      "The `build_model` function signature does not exactly match the one provided in the prompt. The prompt explicitly states: `def build_model(X_train, y_train, feature_range, k, version, n_neighbors, weights):` but the generated code includes `random_state` as an additional parameter.",
+      "The `NearMiss` rebalancing step has a `random_state` parameter that should be exposed in the `build_model` function signature, as per the instruction: \"The host sets every exposed random_state and fits separately on each fold.\" The current signature does not include `random_state`."
+    ]
+  },
+  "semantic_validation_failures": 8,
+  "split_identity": "b7451a4d1c697c013386236b17547be25e785051cf778a04385b03991df0481a",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.010953510000000003,
+    "input_tokens": 861405,
+    "output_cost": 0.031400000000000004,
+    "output_tokens": 6365,
+    "total_cost": 0.04235351,
+    "total_tokens": 868130
+  },
+  "training_time": 6717.849999999999,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The 'features' step with `pca` is not fully compliant. The current implementation applies PCA only to the numerical features within the `numerical_transformer`. The pipeline step 'features with `pca`' implies applying PCA to the combined feature set after all initial preprocessing (imputation and scaling/one-hot encoding for both numerical and categorical features). To be fully compliant, PCA should be applied after the `ColumnTransformer` to the entire preprocessed feature space.

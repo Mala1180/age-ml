@@ -1,0 +1,143 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/049fb758c19ccb3a86ab8c81972c656e1b2026a92418ef2f0d8fe531b59c2732/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/049fb758c19ccb3a86ab8c81972c656e1b2026a92418ef2f0d8fe531b59c2732/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/049fb758c19ccb3a86ab8c81972c656e1b2026a92418ef2f0d8fe531b59c2732/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/adult/049fb758c19ccb3a86ab8c81972c656e1b2026a92418ef2f0d8fe531b59c2732/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "825f5fb65246472383438a20d0299a8d",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8205002803864822,
+    0.8215383779572947,
+    0.8105337710308624,
+    0.8228251212822744,
+    0.827118845569695,
+    0.8064408387608555,
+    0.8282064596053039,
+    0.8187785167983587,
+    0.8312632186118054,
+    0.8229780776842777
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2639.839,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "7e7faa6fdb764c98bf443ea2d9fcbdd2",
+    "1": "c670bf7c03194ace87e1cb21d343161a",
+    "2": "b20955216a664f2c8c1780a60a6da21f",
+    "3": "c7921bedb42a40dca430f591cabff049",
+    "4": "6e04b743414f4924b6fb620db4a9c190",
+    "5": "f14381dc7ebe4b8dba174a106197ab9e",
+    "6": "8f05b81d8f61435a9c900d52ce5d5031",
+    "7": "a2d4cf69af834ee1a50b0f9ff9f02e2a",
+    "8": "77dfcd06126e473a9dfcc4b89ca6fac0",
+    "9": "ff4ec425f7bf4fc9a7957b0e7b7c8b2b",
+    "10": "5337726060e248a2ae43ff92337bf9d9",
+    "11": "cb65ac2b5deb467e9d8996daa9c91a90",
+    "12": "45282689386b4eee9481fc9c65da0960",
+    "13": "8f0b9ae1984e4af48aebde07d6c6a8d5",
+    "14": "398cf9dcca5c454b8c9053f7e02400cf",
+    "15": "27afbf76fcc242ffa15c7591b8e395a9",
+    "16": "ba12063b6e804f238361d39e6697d1f9",
+    "17": "5e29fe7577804635b1a29a2b6bebeac1",
+    "18": "e5dd38f2484946b7bd328b1eacc3865d",
+    "19": "acd938c43a6c464b95f9f550d5c77f50",
+    "20": "e2f6db7e6193400faf57ae7a105e86b6",
+    "21": "c4699a83cd8545558bb288d1f571fe2a",
+    "22": "b591fac62be941d7b40ed0b5dc33868b",
+    "23": "60dd82516aac415d958bc524458c9fe8",
+    "24": null,
+    "25": "ba9ec29f37604148a1db61309226f649",
+    "26": null,
+    "27": "69cce9124b9447e1946697d8f9521fd9",
+    "28": "fbb26fdf68644bc7affbbbfe86ee2695",
+    "29": "f5178fd969324fa5a594437f690a85a3"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "37d333c2b68c4513a305ac01fc60fa57e88716037b96f5c9f63a94cfe43ac810",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "11a6bb10bf747d027bafadd6aa5eb02bfa3389300c3ab68b7559346505a99b8b",
+  "runtime_human_readable": "1:00:45",
+  "runtime_seconds": 3644.7914756201208,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.821018350768721,
+  "selected_candidate_key": "430fdb663d1b062f5fff70f0674b9a3e8f56156306358d9cd214163ef250b108",
+  "selection_sha256": "66a1e8a6b78381da8164b412e8319c749517545888e78968eb42092f3471782f",
+  "selection_validation_score": 0.821018350768721,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline specifies 'imputation with iterative_imputer'. However, the code uses 'SimpleImputer' for categorical features within the 'categorical_transformer' before applying 'IterativeImputer' to the combined dataset. This introduces an additional imputation method not explicitly mentioned in the provided pipeline, violating the constraint to implement only the specified steps.",
+      "The pipeline specifies 'imputation with iterative_imputer'. However, the code uses 'OneHotEncoder(handle_missing='create_category')' within the 'categorical_transformer'. This effectively imputes missing values in categorical columns by creating a new category for them, which is an additional imputation step not explicitly mentioned as 'iterative_imputer' and thus violates the constraint to implement only the specified steps.",
+      "The pipeline specifies 'imputation with iterative_imputer'. However, the dataset preview shows missing values (NaN) in categorical columns ('workclass', 'occupation'). The `OneHotEncoder` used in the `categorical_transformer` does not handle NaN values by default and will raise an error if it encounters them during fitting or transforming. This means the `iterative_imputer` step is not correctly implemented for all missing values, as the pipeline will fail before `IterativeImputer` can process the categorical features. To be compliant, all imputation should be handled by `iterative_imputer` or a compatible strategy that allows `iterative_imputer` to function correctly across all feature types."
+    ],
+    "4": [
+      "The code is not compliant because the `ColumnTransformer` uses `remainder='passthrough'`, which will pass non-numerical (e.g., categorical) columns to the subsequent `RobustScaler` and `PCA` steps. These steps are designed for numerical data and will raise an error when encountering string or object data types. The provided pipeline only specifies steps for numerical feature processing (discretization, normalization, PCA) and does not include any steps for handling categorical features. Therefore, passing through categorical features without further processing makes the pipeline non-executable as intended by the specified steps."
+    ],
+    "5": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `IterativeImputer` for numerical columns but `SimpleImputer` for categorical columns. While `IterativeImputer` is primarily for numerical data, the instruction implies a single imputation strategy for the overall imputation step, which is not fully met by using two different imputers.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `SimpleImputer` for categorical columns within the `feature_encoding` step, and then `IterativeImputer` as a separate step. This means two different imputation strategies are used, which does not fully meet the instruction implying a single imputation strategy for the overall imputation step.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `SimpleImputer` for categorical columns within the `initial_preprocessing` step, and then `IterativeImputer` as a separate step. This means two different imputation strategies are used, which does not fully meet the instruction implying a single imputation strategy for the overall imputation step."
+    ],
+    "11": [
+      "no, the code is structurally compliant with the pipeline steps, but it is not robustly executable. The error 'n_components=0.95 must be between 1 and min(n_samples, n_features)=108 with svd_solver='arpack'' indicates that when 'n_components' is a float (e.g., 0.95, representing explained variance ratio), the default 'svd_solver' chosen by PCA can be incompatible with a float 'n_components' value under certain conditions. To make the code robust for float 'n_components', 'svd_solver' might need to be explicitly set to 'full' or 'randomized', or 'n_components' should be constrained to integers. As it stands, it fails for a valid type of 'n_components' input, thus not being fully correct and executable as required."
+    ],
+    "13": [
+      "The code introduces an additional step, `OneHotEncoder`, for categorical features. The provided pipeline description only specifies 'discretization with kbins', 'normalization with power_transformer', 'features with pca', and 'classification with knn'. While handling categorical features is necessary for the pipeline to be executable on the given dataset, the instruction was to implement *only* the steps explicitly listed in the pipeline.",
+      "no, the code is not executable. The `KBinsDiscretizer` in scikit-learn does not have a `sparse_output` argument, which will cause an `unexpected keyword argument` error. This was the same error encountered in the previous execution attempt."
+    ],
+    "16": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `robust_scaler`, features with `pca`, and classification with `knn`. While `OneHotEncoder` is necessary for the dataset's string columns, it is not one of the four specified steps."
+    ],
+    "19": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step but was not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline.",
+      "The code is not compliant because it will fail during execution. Categorical features are imputed but not encoded (e.g., with OneHotEncoder) before being passed to PCA, which expects numerical input. This violates the requirement that the code must be 'correct and executable'.",
+      "The code is not fully compliant because the `MinMaxScaler`'s `feature_range` parameter expects a tuple, but the provided `feature_range` argument might be a list (as indicated by previous execution errors). The code should ensure `feature_range` is a tuple, e.g., by converting it with `tuple(feature_range)`."
+    ],
+    "25": [
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "27": [
+      "The pipeline explicitly states 'discretization with kbins' as the first step. While the code correctly applies `KBinsDiscretizer` to numerical features, it also introduces `OneHotEncoder` for categorical features. This `OneHotEncoder` is an additional preprocessing step not explicitly mentioned in the provided pipeline description, violating the 'only those steps' constraint, even though it is necessary for the pipeline to be executable with categorical data."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "29": [
+      "The code is not fully compliant with the provided pipeline. While it correctly implements imputation, discretization, rebalancing, and classification, it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the pipeline definition, which states to implement 'only those steps'.",
+      "The code is not fully compliant. While it correctly implements discretization, rebalancing, and classification, the imputation step is incomplete. The pipeline specifies 'imputation with simple_imputer', but the current code drops all categorical features (via `remainder='drop'` in `ColumnTransformer`). If categorical features contain missing values, they are not imputed as per the pipeline step, but rather discarded. The pipeline does not explicitly state to drop categorical features, making this an implicit step and an incomplete application of the imputation step.",
+      "The code implements all the specified steps and only those steps. However, the `GaussianNB` classifier requires numerical input. The categorical features, after `SimpleImputer`, remain as string/object types. Since the pipeline does not include an explicit step to encode these categorical features into a numerical format, the pipeline as constructed will fail during execution when `GaussianNB` attempts to process non-numerical data. This violates the requirement that the code must be \"correct and executable\".",
+      "The code implements all the specified steps and only those steps. However, the `GaussianNB` classifier requires numerical input. The categorical features, after `SimpleImputer`, remain as string/object types. Since the pipeline does not include an explicit step to encode these categorical features into a numerical format, the pipeline as constructed will fail during execution when `GaussianNB` attempts to process non-numerical data. This violates the requirement that the code must be 'correct and executable'.",
+      "The code implements all the specified steps and only those steps. However, the `GaussianNB` classifier requires numerical input. The categorical features, after `SimpleImputer`, remain as string/object types. Since the pipeline does not include an explicit step to encode these categorical features into a numerical format, the pipeline as constructed will fail during execution when `GaussianNB` attempts to process non-numerical data. This violates the requirement that the code must be 'correct and executable'.",
+      "The code implements all the specified steps and only those steps. However, the `GaussianNB` classifier requires numerical input. The categorical features, after `SimpleImputer`, remain as string/object types. Since the pipeline does not include an explicit step to encode these categorical features into a numerical format, the pipeline as constructed will fail during execution when `GaussianNB` attempts to process non-numerical data. This violates the requirement that the code must be 'correct and executable'."
+    ]
+  },
+  "semantic_validation_failures": 23,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.018502619999999997,
+    "input_tokens": 57178,
+    "output_cost": 0.03942750000000001,
+    "output_tokens": 18027,
+    "total_cost": 0.05793012000000001,
+    "total_tokens": 76653
+  },
+  "training_time": 12938.992000000002,
+  "validation_metric": "balanced_accuracy"
+}

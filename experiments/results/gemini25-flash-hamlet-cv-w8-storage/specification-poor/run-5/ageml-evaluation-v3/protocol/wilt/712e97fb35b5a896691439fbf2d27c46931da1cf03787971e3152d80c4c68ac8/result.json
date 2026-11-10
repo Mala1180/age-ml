@@ -1,0 +1,108 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/712e97fb35b5a896691439fbf2d27c46931da1cf03787971e3152d80c4c68ac8/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/712e97fb35b5a896691439fbf2d27c46931da1cf03787971e3152d80c4c68ac8/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/712e97fb35b5a896691439fbf2d27c46931da1cf03787971e3152d80c4c68ac8/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/712e97fb35b5a896691439fbf2d27c46931da1cf03787971e3152d80c4c68ac8/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 20,
+  "best_run_id": "b0e224d5043045169d88c4ff9ecef668",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9560799462546188,
+    0.9912663755458515,
+    0.9774941215989251,
+    0.9774941215989251,
+    0.9582633523681559,
+    0.9785858246556937,
+    0.8758817601612361,
+    0.9611185757473968,
+    0.8705605116983672
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 255.767,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "adb78b0e6ff046a7a2637cc0196e8b29",
+    "1": "c8684f1df4f04ba28002f41a896861fe",
+    "2": "c6d5a8957387488c86587bde02b77243",
+    "3": "8a43a82291f34d07a26a3656600bfc50",
+    "4": "776829200bb34a9abe498627f285768b",
+    "5": "bd9e0d2ffc014763b29e844da3eabfc3",
+    "6": "37821c54fffb45dbbc42447053457e4c",
+    "7": "7386f2d7a4b54e4598d5a6b544321e37",
+    "8": "b65e21436bc340e0b53d7ca746f1d67c",
+    "9": "041f9f8f7fc44d60a50b63cd80e341f8",
+    "10": "ff1e3df3552b4288963336d19577b708",
+    "11": "2df3a89dc9b240d2beb26cbeb36cdcf5",
+    "12": "f9843240c6f34112905aa93e9a103bbb",
+    "13": "3ec81de88d5f433fae1a78cbca150bec",
+    "14": "f9d746b79efc441294f87c93231583e4",
+    "15": "198a8fd838ac4e6bac57903d7d35ab7b",
+    "16": "059abaabd5d24e3aaca21f4e95ef1997",
+    "17": "f272a1a19a3f4838a3be33708cea99bc",
+    "18": "97ef2a88a7094026a04b7cf59e4595ac",
+    "19": "a382198c43714d0fb6e130895208d758",
+    "20": "b27acbe7eec348d7bd806372d03d82f8",
+    "21": "a5de262b6fd54af4bf4e5ce3c39386b0",
+    "22": "b6d983f982064ce7b31bf1007ac7e0a9",
+    "23": "7d8947f39cae4b6e8df7497df28ae5da",
+    "24": "71dd750b98a64e40bcdb8b8bee4d1eb8",
+    "25": "60a29047596946ba9013d2252a4854ef",
+    "26": "1ea1d902ea0e49fc91e1e8936e6e91dc",
+    "27": "588e2e36de8140f79e9016c8da3d09ac",
+    "28": "aae089080d034408aa4a66f5c33fb85c",
+    "29": "bfd2edc0bb2b4d9295379c0caeca7f22"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "7eb43ccaf4001a4f3d3d08c5a464d202c264de7d9ccc232fe549e12f1f5cd50b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "31323c994f768f5ed6e9581851b738ea5f332ab97ad4424c489c55032250f4ae",
+  "runtime_human_readable": "0:05:36",
+  "runtime_seconds": 336.4662960655987,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9506425276880973,
+  "selected_candidate_key": "d5d9d3af64c76742eb8caa2f8a0681d262fa1d0fd926704142562137a02ae8a0",
+  "selection_sha256": "013fed5016d48ce3414435b9ade8615af8a74d459f473e9e96484496f0026f0b",
+  "selection_validation_score": 0.9506425276880973,
+  "semantic_validation_failure_reasons": {
+    "14": [
+      "The 'method' parameter from the function signature is intended for the 'initial_strategy' of IterativeImputer, as indicated by the previous error message. In the current code, 'method' is incorrectly passed to PowerTransformer, leaving IterativeImputer with its default initial strategy. This deviates from the implied intent of the pipeline's hyperparameter configuration."
+    ],
+    "27": [
+      "The `KBinsDiscretizer` step includes invalid parameters: `subsample` and `random_state`. These parameters were removed from `KBinsDiscretizer` in scikit-learn version 0.24 and are not present in current versions (1.x+). This will cause an error during execution."
+    ],
+    "28": [
+      "No, the code is not fully compliant because it failed during execution. The `RobustScaler` expects the `quantile_range` parameter to be a tuple, but it was provided as a list, leading to a TypeError. While the code correctly implements the pipeline steps, it relies on the caller to provide `quantile_range` in the correct tuple format.",
+      "The code is not fully compliant because it failed during execution in previous attempts. The `RobustScaler` expects the `quantile_range` parameter to be an instance of 'tuple', but it was provided as a list, leading to a TypeError. While the pipeline steps are correctly implemented, the function's executability depends on the `quantile_range` parameter being passed as a tuple."
+    ]
+  },
+  "semantic_validation_failures": 4,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.012700200000000002,
+    "input_tokens": 82940,
+    "output_cost": 0.035757500000000005,
+    "output_tokens": 9373,
+    "total_cost": 0.048457700000000006,
+    "total_tokens": 93730
+  },
+  "training_time": 555.277,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it introduces `SimpleImputer` for categorical features instead of `IterativeImputer` (which was specified for the imputation step) and adds `OneHotEncoder` for categorical feature handling, neither of which are explicitly listed in the provided 5-step pipeline. The instructions state to implement 'only those steps'.

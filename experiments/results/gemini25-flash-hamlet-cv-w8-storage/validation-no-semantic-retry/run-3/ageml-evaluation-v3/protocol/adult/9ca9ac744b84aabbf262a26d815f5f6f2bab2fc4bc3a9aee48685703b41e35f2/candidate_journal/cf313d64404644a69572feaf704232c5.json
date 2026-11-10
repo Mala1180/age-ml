@@ -1,0 +1,83 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "7dc16f1363c2c2b4053878d656a95b65cce7bfdc9d93e2ec158f39ab9b04d81a",
+  "code_sha256": "aebf149b8b1c841941b6138a5409cc41e7d90a396551ee8dad666614748079b7",
+  "completed_at": 1793685532.0081348,
+  "cv_fold_scores": [
+    0.444995676799561,
+    0.4541159492486655,
+    0.4499139227627291,
+    0.4512359548490791,
+    0.44225636639780586,
+    0.44163616623703184,
+    0.4630756176552874,
+    0.4551405936444742,
+    0.43748450033215625,
+    0.4577011330156453
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__kbins__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 3,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 11,
+    "version": 1,
+    "weights": "distance"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "751e710261adbb0862c7e3428246e4f08410ed54df930ed878e83ec6321fa142",
+  "pipeline_id": 20,
+  "pipeline_run_id": "bd61ce2aec7b4a4884c434eedc8415ed",
+  "run_id": "cf313d64404644a69572feaf704232c5",
+  "run_identity": "ed95e480d02616c49b451983b08c36bf4345e7d374534f94989c6c25ffed7a6d",
+  "validation_score": 0.44975558809424354,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

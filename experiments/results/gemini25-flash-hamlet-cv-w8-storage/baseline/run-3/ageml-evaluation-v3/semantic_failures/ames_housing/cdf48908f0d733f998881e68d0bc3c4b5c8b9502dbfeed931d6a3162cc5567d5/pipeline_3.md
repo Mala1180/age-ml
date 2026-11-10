@@ -1,0 +1,12 @@
+Attempt 1:
+The pipeline explicitly lists 3 steps: normalization, features, and regression. The generated code adds an imputation step (`SimpleImputer`) for numerical features, which is not part of the specified pipeline steps. The instruction states to implement 'only those steps'.
+
+---
+
+Attempt 2:
+The pipeline explicitly lists 3 steps: normalization, features, and regression. The generated code adds an imputation step (`SimpleImputer`) for numerical features, which is not part of the specified pipeline steps. The instruction states to implement 'only those steps'.
+
+---
+
+Attempt 3:
+The pipeline explicitly lists 3 steps: normalization, features, and regression. The generated code adds an imputation step (`SimpleImputer`) for numerical features, which is not part of the specified pipeline steps. The instruction states to implement 'only those steps'.

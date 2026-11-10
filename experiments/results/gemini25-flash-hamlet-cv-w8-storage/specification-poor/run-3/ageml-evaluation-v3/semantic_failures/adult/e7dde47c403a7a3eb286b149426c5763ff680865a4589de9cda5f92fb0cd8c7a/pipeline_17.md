@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `OneHotEncoder`, for categorical features within the `ColumnTransformer`. While this is a necessary preprocessing step for the given dataset, it was not explicitly listed in the provided pipeline steps, which stated to implement 'only those steps'.

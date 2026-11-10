@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes a `SimpleImputer` step, which was not explicitly requested in the provided pipeline description. The instructions state to implement "only those steps" of the pipeline.

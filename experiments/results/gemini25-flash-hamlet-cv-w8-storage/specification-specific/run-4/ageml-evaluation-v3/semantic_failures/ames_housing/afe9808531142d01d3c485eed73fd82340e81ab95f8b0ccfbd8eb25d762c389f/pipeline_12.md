@@ -1,0 +1,2 @@
+Attempt 1:
+The code includes `OneHotEncoder` for categorical features, which is a transformation step not explicitly mentioned in the provided pipeline. The pipeline specifies imputation, normalization, and feature extraction for numerical data, but no specific transformation for categorical features beyond imputation.

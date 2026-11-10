@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-3/ageml-evaluation-v3/protocol/madelon/b2d55373bb585621bc7dfa750734126071b09aa64b5c9eeb2d9086a3a4733bef/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-3/ageml-evaluation-v3/protocol/madelon/b2d55373bb585621bc7dfa750734126071b09aa64b5c9eeb2d9086a3a4733bef/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-3/ageml-evaluation-v3/protocol/madelon/b2d55373bb585621bc7dfa750734126071b09aa64b5c9eeb2d9086a3a4733bef/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-3/ageml-evaluation-v3/protocol/madelon/b2d55373bb585621bc7dfa750734126071b09aa64b5c9eeb2d9086a3a4733bef/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "22140a77dea2461da87e3d97a21adcd8",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8615384615384616,
+    0.8384615384615385,
+    0.8769230769230769,
+    0.8653846153846154,
+    0.8769230769230769,
+    0.8692307692307693,
+    0.9,
+    0.8307692307692307,
+    0.8692307692307693,
+    0.8769230769230769
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1451.533,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "69968cebada8403e80f7b329ffa44c88",
+    "1": "41221f5636004bf7883fc46b02f2a0d5",
+    "2": "260a2eb745934e9d9b1b097b09108d72",
+    "3": "be7f666dbe334d848426a8d3c3abafad",
+    "4": "4f48802e613d4143981b50194a2e44fd",
+    "5": null,
+    "6": "a51da3551a544d52add901c386eb478a",
+    "7": "323b38dccfa84565a3ec6d0f56ef28a9",
+    "8": "401b7ec11a834710a9b55ffa2cf5dcb8",
+    "9": "ccb4eaf96ce045948e9c30acc70bd4c0",
+    "10": "04efe579af924bd4bfbc36459f5bf1da",
+    "11": "88623dfdd94d4a62887cf8d6cbef7b44",
+    "12": "2bae5a6bca7a44ddb2ac5fb709001e86",
+    "13": "205aa0b2f42342d1a63c0734018cbd21",
+    "14": "1e493f1c264d4f2db8345d51ac6d4e23",
+    "15": null,
+    "16": "01a97446dc324043aa91c55e3b8261c0",
+    "17": "fbd74f5aab7e45169129afff3b06483e",
+    "18": "a0a64a8eb5ca4e46b73622adb8f27419",
+    "19": null,
+    "20": "138c50d9523b4011bd29fae77659bc6f",
+    "21": "0fb3b6bba4c649caa0eea998c85145c9",
+    "22": null,
+    "23": "4159d2c1afc54400a7b80aa6dbe90b82",
+    "24": "2afe345f991647828c627603cdd9a5eb",
+    "25": "d2d5d611d3384ce6b3028765112e32f1",
+    "26": "3416a320fba2484d8ea537b7728db20a",
+    "27": null,
+    "28": "c90018d5ae804c95a82baa316b447160",
+    "29": "c116f126e0cd4728add49d91704e7a0a"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "baa7c423377b2f954c16f4f3862b1b1bd3ab58df43fba2980d673f4f59e8e57b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "fd11e1776d2ad0e270242766c52040106e58e67d2740847d0ab28c43dc26bb0c",
+  "runtime_human_readable": "1:01:49",
+  "runtime_seconds": 3708.950694795698,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8665384615384616,
+  "selected_candidate_key": "afdf229240a67b07686edc25d813933df847a68fbdfedd2a087b5aa763bc6674",
+  "selection_sha256": "204104b7bf969495e8e9c295b5782f28fd3f5a6afbba9078a350786903dbb0c2",
+  "selection_validation_score": 0.8665384615384616,
+  "semantic_validation_failure_reasons": {
+    "14": [
+      "The `random_state` parameters for `IterativeImputer` and `AdaBoostClassifier` are hardcoded to `42`. The instructions state: \"The host sets every exposed random_state\", implying that `random_state` should either be exposed as a hyperparameter in the `build_model` function signature or not set within the function, allowing the host to manage it externally."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.015486660000000001,
+    "input_tokens": 845300,
+    "output_cost": 0.039982500000000004,
+    "output_tokens": 11996,
+    "total_cost": 0.05546916000000002,
+    "total_tokens": 857620
+  },
+  "training_time": 18788.852999999996,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is used for numerical features, SimpleImputer is used for categorical features, which deviates from the specified imputer. Additionally, OneHotEncoder is used for categorical features, which is a necessary preprocessing step but not explicitly listed as one of the four pipeline steps, violating the 'only those steps' constraint.

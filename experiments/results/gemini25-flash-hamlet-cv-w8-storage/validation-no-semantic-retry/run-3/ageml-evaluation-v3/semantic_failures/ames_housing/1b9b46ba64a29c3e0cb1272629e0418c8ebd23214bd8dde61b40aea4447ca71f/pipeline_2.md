@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies only two steps: normalization with `robust_scaler` and regression with `lasso`. The generated code adds `SimpleImputer` for handling missing values and `ColumnTransformer` for selecting numerical features, which are not explicitly part of the requested pipeline steps. The instruction states to implement 'only those steps'.

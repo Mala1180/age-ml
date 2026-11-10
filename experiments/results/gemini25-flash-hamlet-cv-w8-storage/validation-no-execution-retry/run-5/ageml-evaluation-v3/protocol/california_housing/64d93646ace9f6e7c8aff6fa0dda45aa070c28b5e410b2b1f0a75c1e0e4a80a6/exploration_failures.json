@@ -1,0 +1,217 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "7478393bf3484ad5baa699407c3807ee",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "375db99e778343da847c976cb740b56b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "1f0d016797464358b0f23c69ca07b7d2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "6967d56ab5184e5887ddde355e35dc29",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "dce0281e562b4e58ae51c8b7d4240410",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "2509c846890e4b2ba1091989f56b9e7c",
+    "semantic_feedback": [
+      "The code is not compliant because it includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state that the code must implement 'only those steps' of the pipeline."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "fdd66ccd7b9f43a397aadf6c7a49d434",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "1220fea9efa34b2485162c76379c67f2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "7086da4969c741c1a20e24c3d3c1c860",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "3df4bafcf91d45f7a79de2be16eac17d",
+    "semantic_feedback": [
+      "The code includes a `ColumnTransformer` with `OneHotEncoder` for categorical features. This is a feature transformation step that was not explicitly listed in the provided pipeline (which only specified imputation, normalization, and regression). While this step is necessary for the pipeline to function correctly with the given dataset's categorical column, it deviates from the instruction to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly lists three steps: imputation, normalization, and regression. The generated code includes a `ColumnTransformer` with `OneHotEncoder` for categorical features, which is an additional preprocessing step not mentioned in the provided pipeline definition. The instruction was to implement 'only those steps' of the pipeline."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "ff6b6d1789ee49b581a7a818db3c994f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "c4ec823370454e5591d0b5b5db2f46d5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "62c787552a6b4e928e7aa9781374a134",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "d402766ec27b41e1ac4b4403ee7ca45c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "fb4893ecde394fa58ef39642b742dc08",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "4421c29a77f9400cb2e9db139dd6d7bc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "03d5cbd760f04c4f98b03f78a20b1a67",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "0dd1b0c3f6e347e78d4b1a474b61b167",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "c559b89a01e94da087d76cab964edeea",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "c920d4c159824d3c81e8337ffd03402d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "9e3f8301ddca4cbaa515ac6a7fcd243f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "32967b4f92ba48689f178b4ba7f29264",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "9ef274b1fb24454094b9ab85908c3ab2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "b98f64d4679e46ecb7971aa35f34398c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "2b60d6e89ac94627a51836b081d2ffa6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "4f3918f97a4e41728a1e452d9377a750",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "51a61cc228b14db18f932a673b08e96c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "b4ab3e63aa274b01bd65ca57bfa2c324",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "646e5c6e2cf94df4aab215b055de214b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "4e3aee228f5d4ba4906c73bbefdd4e27",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

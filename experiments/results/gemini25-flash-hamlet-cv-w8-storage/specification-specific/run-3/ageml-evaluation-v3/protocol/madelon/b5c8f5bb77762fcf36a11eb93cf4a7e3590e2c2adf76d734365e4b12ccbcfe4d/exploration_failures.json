@@ -1,0 +1,117 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "42a00a2f10564aa1a3df606cf6dcc4e7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "86d5e708320c49b3b7ca6e6aa7c5f83d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "e1ee5875cc524ee3a011081012de2695",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "c36b2a0ea54544b593d5e8a6fbe8ecba",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "e8f41df2269c40bfa47bee1d87766b6f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "aec762368b634f9dbdd3aaf12a6ee79c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "a43c60268b4947d497b5f6e7878d333e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "f56dbf02174348779a405749f21affa7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "6e0c088ea31c4da6aaebc3f9d84a3594",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "bbbae2c1cc8343a88feb23ff376d8ee9",
+    "semantic_feedback": [
+      "The previous execution failed because the 'quantile_range' parameter for `RobustScaler` expects a tuple, but it was likely passed as a list. The code itself uses `quantile_range=quantile_range`, so the issue is with the type of the `quantile_range` argument being passed to the `build_model` function, not directly with the code's structure. To be fully compliant and executable, the `quantile_range` argument should be ensured to be a tuple, e.g., `(25.0, 75.0)` instead of `[25.0, 75.0]`.",
+      "The code is syntactically correct and implements the pipeline steps as requested. However, it is not fully executable because the `RobustScaler` expects the `quantile_range` parameter to be a tuple, but it is being passed as a list, causing a `TypeError`. To ensure executability, the `quantile_range` argument should be explicitly converted to a tuple before being passed to `RobustScaler`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "7c6d27e7ffc94355abaa0c4867c85ffe",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "0a2fb8ea79ed40a499ea00c83568df61",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "156acd27f4544a54b6886c7548671425",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "639f4564a564420faf20f25d8810acab",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "94353ab2af0942d4bc1a304ef96d67a4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "fc9082a6461e4ee0a579445215162577",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

@@ -1,0 +1,102 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-5/ageml-evaluation-v3/protocol/madelon/681f2ceb10bd6fd5369c04d2b71bc1580a75049a81e22d41ed02eb126d540b00/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-5/ageml-evaluation-v3/protocol/madelon/681f2ceb10bd6fd5369c04d2b71bc1580a75049a81e22d41ed02eb126d540b00/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-5/ageml-evaluation-v3/protocol/madelon/681f2ceb10bd6fd5369c04d2b71bc1580a75049a81e22d41ed02eb126d540b00/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-5/ageml-evaluation-v3/protocol/madelon/681f2ceb10bd6fd5369c04d2b71bc1580a75049a81e22d41ed02eb126d540b00/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 15,
+  "best_run_id": "3e1223f6e129418982d8993c864f1b3e",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8807692307692307,
+    0.8538461538461539,
+    0.8807692307692307,
+    0.8615384615384616,
+    0.8923076923076922,
+    0.8730769230769231,
+    0.8884615384615384,
+    0.8307692307692308,
+    0.8846153846153846,
+    0.9038461538461539
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 5361.485999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "91e1e40e251743e6b8fec8632badfe07",
+    "1": "6fc59ac5de804ca4a9bac5288c61b724",
+    "2": "c50738d0eb134d78858c97755d655a73",
+    "3": "577be9ce4a7b46658d60a5336928016c",
+    "4": "a2076530e7b046d5b4bf9090126de9fb",
+    "5": "4ce5d26dc54e4d8baae04732b554380a",
+    "6": null,
+    "7": "348ec36c0ec14eb0ba319e211cef1215",
+    "8": null,
+    "9": "5ea0b28223b64f39a1ebb9470bd33248",
+    "10": "37a8b6ae19124d37982287070f2b3a2a",
+    "11": "d64dd0ff530e431994225320ef20561b",
+    "12": "867d721fa0c54fbbb9f82ba52ce46799",
+    "13": "827dfbef3d0b41bd92b5ede97a5b6e7a",
+    "14": "14b3d7e6b0a64b0799be83f22c5160dc",
+    "15": "b7814174e5d7412dbe28c67674aafe0b",
+    "16": "680868e03c12477aa02367f19210fbac",
+    "17": "d9d057b20bdc4c25a14fd3ac1cbac8c9",
+    "18": "5755308ec21d47ea862cf6fb0ecd361c",
+    "19": "cc305db721c74358b61491b502274a62",
+    "20": "8e2eb33758864e768fdaee3c63794077",
+    "21": "fe6e7b7cbb334e019ff6cfea1cc1f16a",
+    "22": "892d5cea598b4711a3de38a020b7f204",
+    "23": "05c0833554624e57baaae59868e6a5ed",
+    "24": "a141bf25e21249d7bc06830db6b2ead2",
+    "25": "1bfff2cdcd64447e8c35dbacaa2afce8",
+    "26": null,
+    "27": "db64bbe99688421f817f9e24720c0d20",
+    "28": "78eebee6cebf43568d551079cc13f03a",
+    "29": "35ab6e012c174073adc4015c601c3014"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "ca557ef4ca51b200529e9ede3818f795a5e30c5494ae7828240072781254be0b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "4f3b3f77c209195c48b156cfe57082547b6eede5bf7244a7a729637d96cdfb63",
+  "runtime_human_readable": "1:02:11",
+  "runtime_seconds": 3731.1558134779334,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.875,
+  "selected_candidate_key": "3962980d145ca9fd7609029c051e24c87d25a5a47b28f87c1a738d206fb5a46f",
+  "selection_sha256": "5a7e7a1470a3cd1c7051e829412abfa23f9a7544430a01caaf90f3bb7c4cd797",
+  "selection_validation_score": 0.875,
+  "semantic_validation_failure_reasons": {
+    "24": [
+      "The code is not fully compliant because it hardcodes `random_state=42` for `IterativeImputer` and `NearMiss`. The instructions state, \"The host sets every exposed random_state\", implying that if a component requires a `random_state`, it should be exposed as a parameter in the `build_model` function signature. Since `random_state` is not a parameter in `build_model`, the host cannot control these specific random states.",
+      "The code has a syntax error in the import statement: `from sklearn.experimental.enable_iterative_imputer` should be `from sklearn.experimental import enable_iterative_imputer`. This makes the code non-executable, violating the requirement that the code must be correct and executable."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.015826350000000003,
+    "input_tokens": 798992,
+    "output_cost": 0.0373025,
+    "output_tokens": 9666,
+    "total_cost": 0.05312885,
+    "total_tokens": 810844
+  },
+  "training_time": 14488.309,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only implement the steps: normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`.

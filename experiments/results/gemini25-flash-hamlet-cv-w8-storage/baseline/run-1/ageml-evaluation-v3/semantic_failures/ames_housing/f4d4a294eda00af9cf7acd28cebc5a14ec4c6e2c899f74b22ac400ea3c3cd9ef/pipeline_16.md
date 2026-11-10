@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces `OneHotEncoder` for categorical features, which is a preprocessing step not explicitly mentioned in the provided pipeline. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction states to implement 'only those steps'.

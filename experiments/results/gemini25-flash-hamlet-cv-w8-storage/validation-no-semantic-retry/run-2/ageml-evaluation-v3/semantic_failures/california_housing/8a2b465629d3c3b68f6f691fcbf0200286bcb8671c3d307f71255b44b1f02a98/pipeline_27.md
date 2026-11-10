@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies 'normalization with `minmax`'. While `MinMaxScaler` is correctly applied to numerical features, `OneHotEncoder` is applied to categorical features. `OneHotEncoder` is a categorical encoding step, not a `minmax` normalization step, and it is not explicitly listed in the provided pipeline steps. The pipeline states to implement 'only those steps'.

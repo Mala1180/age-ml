@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies only two steps: 'normalization' with `standard` and 'regression' with `ridge`. The generated code adds an additional step, `SimpleImputer`, which is not part of the provided pipeline definition. Therefore, it is not compliant as it includes a step not explicitly requested.

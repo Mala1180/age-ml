@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, 'to_dense', which is not specified in the provided pipeline description. The instruction states to implement 'all the steps of the pipeline and only those steps'.

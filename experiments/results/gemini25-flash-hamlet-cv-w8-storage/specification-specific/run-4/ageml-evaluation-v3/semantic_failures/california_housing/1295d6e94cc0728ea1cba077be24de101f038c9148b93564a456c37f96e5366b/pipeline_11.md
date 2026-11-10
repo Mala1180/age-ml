@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an `OneHotEncoder` for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline. While this step is often necessary for handling categorical data in a real-world scenario, the instruction was to implement 'only those steps' explicitly mentioned.

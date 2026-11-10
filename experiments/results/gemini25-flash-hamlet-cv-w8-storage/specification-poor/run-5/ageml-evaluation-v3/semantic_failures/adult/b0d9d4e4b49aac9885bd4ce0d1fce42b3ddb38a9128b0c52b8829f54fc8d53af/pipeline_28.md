@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes an additional preprocessing step, `OneHotEncoder`, for categorical features. The pipeline explicitly lists 'discretization with `binarizer`' but does not mention any specific encoding or transformation for categorical features beyond imputation. The instruction was to implement all the steps of the pipeline and *only* those steps.

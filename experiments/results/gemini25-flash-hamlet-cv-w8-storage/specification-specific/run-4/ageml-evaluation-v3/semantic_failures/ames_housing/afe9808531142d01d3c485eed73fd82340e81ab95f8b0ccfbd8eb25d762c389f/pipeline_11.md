@@ -1,0 +1,2 @@
+Attempt 1:
+The PCA step is not compliant with the pipeline. The pipeline specifies "features with pca" as a step after normalization. In the generated code, PCA is applied only to the numerical features *before* they are combined with the one-hot encoded categorical features. For full compliance with the sequential pipeline, PCA should be applied to the entire feature set (numerical features after scaling and categorical features after one-hot encoding) as a single step after the initial preprocessing.

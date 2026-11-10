@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `SimpleImputer`, which is not specified in the provided pipeline description. The pipeline should only implement normalization, feature selection, and regression.

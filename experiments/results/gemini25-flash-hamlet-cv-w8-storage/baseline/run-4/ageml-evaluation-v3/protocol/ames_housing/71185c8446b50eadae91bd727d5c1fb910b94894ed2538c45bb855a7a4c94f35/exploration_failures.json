@@ -1,0 +1,306 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "4fbecae37589476a8beb64f25d63231d",
+    "semantic_feedback": [
+      "The pipeline specified 'imputation with `iterative_imputer`'. While the code correctly uses `IterativeImputer` for numerical columns, it introduces `SimpleImputer` for categorical columns. The pipeline did not explicitly mention using a different imputer for categorical features, thus deviating from the specified imputation method for all data requiring imputation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "f42675a780fc493db683743402fe4db2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "0015bdbfae0b4fde8803646d3112e68b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "747b73140a8d43aa964af45228306c7c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "66665d6fcfd04096bec84553393e8f5d",
+    "semantic_feedback": [
+      "no, the code includes an additional step, 'numerical_feature_selector' using `ColumnTransformer`, which is not explicitly listed in the provided pipeline steps (normalization, features, regression). While this step is practical for handling non-numeric data and making the pipeline executable, it violates the constraint to implement 'only those steps' that were explicitly provided in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "1c6277201e5744ed8134bbb41a91a248",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "c19d7f2bb022400db3749572e9b548f3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "89ea7e81a6ec449facbadfb693a2d832",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "367cf911c3e24d80b426c81e97b394ad",
+    "semantic_feedback": [
+      "The code implements the specified steps (imputation with SimpleImputer, normalization with RobustScaler, features with PCA, and regression with KNeighborsRegressor). However, it also includes OneHotEncoder for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline description. The instruction was to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "44baaf8c1fa84e7695262690315e4b93",
+    "semantic_feedback": [
+      "no, the code is not executable due to an incorrect import statement. The line `from sklearn.experimental.enable_iterative_imputer import enable_iterative_imputer # noqa` will raise an `ImportError` because `enable_iterative_imputer` is not a named export from that module. To correctly enable the experimental `IterativeImputer`, the import should be `import sklearn.experimental.enable_iterative_imputer # noqa`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "8c62fe696b554144bd86365f690cc067",
+    "semantic_feedback": [
+      "The pipeline description specifies only 'imputation with iterative_imputer' and 'normalization with minmax' as preprocessing steps. The generated code adds an additional step, 'OneHotEncoder' for categorical features, which is not explicitly mentioned in the provided pipeline definition. While this step is often necessary for handling categorical data with linear models, it violates the instruction to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "6b75fd24524648a781011c1218210af7",
+    "semantic_feedback": [
+      "The code introduces an additional step of dropping categorical features using `ColumnTransformer` which is not explicitly mentioned in the provided pipeline. The pipeline specifies only imputation, normalization, feature selection, and regression, without any instruction on how to handle or exclude categorical data."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "fd42b6c18d5d468daca14cfaa513c72f",
+    "semantic_feedback": [
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces additional preprocessing steps, namely imputation with `SimpleImputer` and a `ColumnTransformer` to handle numeric features and drop others. These steps were not explicitly requested in the provided pipeline definition, violating the instruction to implement \"only those steps\".",
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces an additional preprocessing step, namely imputation with `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. This violates the instruction to implement \"only those steps\".",
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces an additional preprocessing step, namely imputation with `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. This violates the instruction to implement \"only those steps\".",
+      "The code implements the specified pipeline steps (MinMaxScaler, SelectKBest, KNeighborsRegressor) and correctly uses a ColumnTransformer to apply scaling to numeric features. However, the `MinMaxScaler` and `SelectKBest` components do not inherently handle missing values (NaNs). If the input `X_train` contains NaNs in the numeric features, the pipeline will raise an error during execution, making it not \"correct and executable\" as required by the prompt. To be executable with missing data, an imputation step would be necessary, but adding it would violate the \"only those steps\" constraint. Given the current implementation, it is not robust to missing data.",
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces an additional preprocessing step, namely imputation with `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. This violates the instruction to implement \"only those steps\".",
+      "The code implements the specified pipeline steps (MinMaxScaler, SelectKBest, KNeighborsRegressor) and correctly uses a ColumnTransformer to apply scaling to numeric features. However, the `SelectKBest` component does not inherently handle missing values (NaNs). If the input `X_train` contains NaNs in the numeric features, the pipeline will raise an error during execution, making it not \"correct and executable\" as required by the prompt. To be executable with missing data, an imputation step would be necessary, but adding it would violate the \"only those steps\" constraint. Given the current implementation, it is not robust to missing data and will fail if NaNs are present.",
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces an additional preprocessing step, namely imputation with `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. This violates the instruction to implement \"only those steps\".",
+      "The pipeline explicitly defines three steps: normalization, features with `select_k_best`, and regression. The generated code introduces an additional preprocessing step, namely imputation with `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. This violates the instruction to implement \"only those steps\".",
+      "The code implements the specified pipeline steps (MinMaxScaler, SelectKBest, KNeighborsRegressor) and correctly uses a ColumnTransformer to apply scaling to numeric features. However, the `SelectKBest` component does not inherently handle missing values (NaNs). The dataset information indicates the presence of NaNs in numeric columns (e.g., 'LotFrontage', 'MasVnrArea'). If the input `X_train` contains NaNs in these numeric features, the pipeline will raise an error during execution, making it not 'correct and executable' as required by the prompt. To be executable with missing data, an imputation step would be necessary before `SelectKBest`, but adding it would violate the 'only those steps' constraint of the provided pipeline definition. Therefore, the code is not compliant because it is not executable for data with missing values, which is a common scenario.",
+      "The code implements the specified pipeline steps (MinMaxScaler, SelectKBest, KNeighborsRegressor) and correctly uses a ColumnTransformer to apply scaling to numeric features. However, the `SelectKBest` component does not inherently handle missing values (NaNs). The dataset information indicates the presence of NaNs in numeric columns (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). If the input `X_train` contains NaNs in these numeric features, the pipeline will raise an error during execution, making it not 'correct and executable' as required by the prompt. To be executable with missing data, an imputation step would be necessary before `SelectKBest`, but adding it would violate the 'only those steps' constraint of the provided pipeline definition.",
+      "The code implements the specified pipeline steps (MinMaxScaler, SelectKBest, KNeighborsRegressor) and correctly uses a ColumnTransformer to apply scaling to numeric features. However, the `SelectKBest` component does not inherently handle missing values (NaNs). The dataset information indicates the presence of NaNs in numeric columns (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). If the input `X_train` contains NaNs in these numeric features, the pipeline will raise an error during execution, making it not 'correct and executable' as required by the prompt. To be executable with missing data, an imputation step would be necessary before `SelectKBest`, but adding it would violate the 'only those steps' constraint of the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "261591318ca14c44bc0a8e723d1cdacf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "a50d171eb2bc4ad5ba2ee69ac20ff94c",
+    "semantic_feedback": [
+      "The generated code deviates from the pipeline specification for categorical features. The pipeline explicitly states 'imputation with `iterative_imputer`' and 'normalization with `minmax`'. However, the code uses `SimpleImputer` for categorical feature imputation and `OneHotEncoder` for categorical feature transformation, which is not `minmax` normalization. While these steps are necessary for handling categorical data, they do not strictly adhere to the specified methods for all features as described in the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `minmax`'. While the code correctly applies these to numerical features and attempts to apply them to categorical features, it introduces an `OrdinalEncoder` for categorical features. This `OrdinalEncoder` is an additional preprocessing step (encoding) that is not explicitly listed in the provided pipeline steps of 'imputation', 'normalization', or 'regression'. The instruction states to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "c6a41d37ea554bf29a3c2be9b5a0dee1",
+    "semantic_feedback": [
+      "no"
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "e44226b724044519a0c1516798ef5026",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline because it introduces an additional preprocessing step, `OneHotEncoder`, for categorical features. The pipeline explicitly lists only three steps: imputation, normalization, and regression, and the instruction was to implement all steps and *only* those steps. Additionally, the `imputation_strategy` parameter is only applied to numerical features, while categorical features use a hardcoded 'most_frequent' strategy, which deviates from the expectation that the parameter would control all imputation steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (including categorical ones) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it is not 'correct and executable' for the given dataset. The dataset contains non-numerical features, but the pipeline applies `SimpleImputer` (which will fail with numerical strategies on non-numeric data) and `RobustScaler` (which is designed for numerical data) directly to all features. The pipeline definition does not include any steps to handle these non-numerical features, which is necessary to prevent runtime errors.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps.",
+      "The generated code is not compliant with the provided pipeline because it implicitly performs an unrequested feature selection step. By using `remainder='drop'` in the `ColumnTransformer`, it drops all non-numerical features (e.g., categorical columns) without this step being explicitly mentioned in the pipeline definition. The pipeline only specifies 'imputation', 'normalization', and 'regression', and the instruction was to implement all steps and *only* those steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "ae39fdf85fa24527a48c92f3cc242854",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "dd60724f7f294442bc5664aeafce987c",
+    "semantic_feedback": [
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes additional preprocessing steps: `SimpleImputer` for handling missing values and `OneHotEncoder` for encoding categorical features. While these are often necessary for a robust pipeline, they are not explicitly listed in the provided pipeline steps, violating the 'implements all the steps of the pipeline and only those steps' requirement.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `SelectKBest` does not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `SelectKBest` does not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `SelectKBest` does not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `StandardScaler` and `SelectKBest` do not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs, which is the case for this dataset.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `StandardScaler` and `SelectKBest` do not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs, which is the case for this dataset.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as `StandardScaler` and `SelectKBest` do not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this, leading to a runtime error if the input data contains NaNs, which is the case for this dataset. The prompt requires the code to be correct and executable.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as StandardScaler and SelectKBest do not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this. The dataset information indicates that numerical features like 'LotFrontage', 'MasVnrArea', and 'GarageYrBlt' contain NaNs, which will cause a runtime error during execution.",
+      "The pipeline description specifies 'normalization with `standard`', 'features with `select_k_best`', and 'regression with `linear`'. The generated code includes an additional preprocessing step, `SimpleImputer`, for handling missing values. While this step is necessary for the code to execute without errors given the dataset, it is not explicitly listed in the provided pipeline steps, violating the requirement to implement 'only those steps'.",
+      "The code strictly adheres to the specified pipeline steps (standard normalization, select k best features, linear regression) and does not include any additional, unrequested steps. However, it is not fully executable as StandardScaler and SelectKBest do not handle missing values (NaNs) natively, and the pipeline does not include an explicit imputation step to address this. The dataset information indicates that numerical features like 'LotFrontage', 'MasVnrArea', and 'GarageYrBlt' contain NaNs, which will cause a runtime error during execution. The prompt requires the code to be correct and executable."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "f8ee8a91330445a4b52077690c49a152",
+    "semantic_feedback": [
+      "The pipeline explicitly requests 'normalization with `robust_scaler`' and 'regression with `ridge`'. The generated code adds a `OneHotEncoder` for categorical features and a `ColumnTransformer` to handle both numerical and categorical features. While this is a good practice for real-world data, the instructions state to 'implement all the steps of the pipeline and only those steps'. The `OneHotEncoder` and `ColumnTransformer` are additional steps not explicitly mentioned in the provided pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "3d812d84f189416ab90c5a3b282cfbf4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "fb388b36e0fd4e2bbee4a750128e4f45",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "cc543ac802804beba8099666f53f69ce",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "98328b96f89e44cba299c16a8ccfc47d",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline because it includes a `SimpleImputer` step, which was not explicitly listed in the original pipeline definition. The pipeline specifies only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "no",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The 'Binarizer' step cannot handle missing values (NaNs) that are present in the input 'X_train', leading to an execution error. To make it executable, an imputation step would be required before the 'Binarizer', but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because, while it implements the specified steps, it is not executable with the provided dataset. The `Binarizer` step cannot handle missing values (NaNs) that are present in the input `X_train`, leading to an execution error. To make it executable, an imputation step would be required before the `Binarizer`, but adding such a step would violate the constraint of implementing 'only those steps' explicitly listed in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "fea90022aca144c795b268fb8928c438",
+    "semantic_feedback": [
+      "The generated code includes a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' listed in the pipeline.",
+      "The generated pipeline is not executable for the provided dataset. The dataset contains categorical features (type 'str'), but the PowerTransformer and PCA steps are applied to all features without distinguishing between numerical and categorical types. PowerTransformer and PCA can only process numerical data, which will lead to an error."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "f89cae1716ea4eeeb7002d59feb0028b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "9b2a97a327d34ee7abd23aec07b406f0",
+    "semantic_feedback": [
+      "The generated code introduces additional steps and deviates from the specified pipeline in a few ways:\n1.  **Imputation**: The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is correctly used for numerical columns, `SimpleImputer` is used for categorical columns. This is an additional imputation method not explicitly mentioned in the pipeline.\n2.  **Categorical Feature Handling**: The pipeline does not explicitly mention handling categorical features (e.g., with `OneHotEncoder`). While necessary for the model to run, `OneHotEncoder` is an additional preprocessing step not listed in the pipeline.\n3.  **Features with PCA**: The pipeline specifies 'features with `pca`'. The code applies `PCA` only to the numerical features. The one-hot encoded categorical features are passed directly to the regressor without undergoing `PCA`. This means `PCA` is not applied to the entire feature set that the `LinearRegression` model receives."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "cd3fc86d7f8348e898fba87df337a912",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "f575f10a556f44778036ccd183b88120",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with pca', and 'regression with svr'. The generated code adds `SimpleImputer` for handling missing values in numerical columns, which is not explicitly mentioned in the provided pipeline steps. The instruction states to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "22455d77c5da4d53b116c09446dd768b",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While the code correctly uses `IterativeImputer` for numerical columns, it uses `SimpleImputer` for categorical columns. This deviates from the explicit instruction to use `iterative_imputer` for the imputation step.",
+      "The pipeline specifies 'imputation with iterative_imputer'. While the code correctly uses `IterativeImputer` as a step in the pipeline, it also uses `SimpleImputer` within the `categorical_transformer` for handling missing values in categorical columns. This means that categorical features are imputed using `SimpleImputer` (most frequent strategy), not `IterativeImputer`, which deviates from the explicit instruction for the imputation step.",
+      "The pipeline specifies 'imputation with iterative_imputer'. While the code correctly uses `IterativeImputer` as a step in the pipeline, it also uses `CategoricalNaNToPlaceholder` to handle missing values in categorical columns before one-hot encoding. This `CategoricalNaNToPlaceholder` performs an imputation for categorical features that is not `IterativeImputer`, thus deviating from the explicit instruction for the imputation step."
+    ],
+    "status": "COMPLETED"
+  }
+]

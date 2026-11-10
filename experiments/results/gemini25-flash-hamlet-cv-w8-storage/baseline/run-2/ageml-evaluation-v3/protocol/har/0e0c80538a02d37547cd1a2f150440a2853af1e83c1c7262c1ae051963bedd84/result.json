@@ -1,0 +1,107 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/har/0e0c80538a02d37547cd1a2f150440a2853af1e83c1c7262c1ae051963bedd84/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/har/0e0c80538a02d37547cd1a2f150440a2853af1e83c1c7262c1ae051963bedd84/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/har/0e0c80538a02d37547cd1a2f150440a2853af1e83c1c7262c1ae051963bedd84/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/har/0e0c80538a02d37547cd1a2f150440a2853af1e83c1c7262c1ae051963bedd84/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "f5586a179af9402a8016a5890600d656",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1708.7709999999997,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "0a6a6aa2f89345998d04866fb9d8b186",
+    "2": "ba836909277d4c5fa53b43bb98ca99b4",
+    "3": "d3b49924f08a4eb4a7d29332acab6edc",
+    "4": "a7792f8195084a7f941835bcd4ca7e18",
+    "5": null,
+    "6": null,
+    "7": "e4ca1385be7846e0a5c54951721597ad",
+    "8": null,
+    "9": "7479730ef6c645aea1427fd0f34f6c98",
+    "10": "cbb88a5873bd43d5b6c7bb59f01851db",
+    "11": "f0dbbfe06eaf47ad944cc1acc1bbd004",
+    "12": null,
+    "13": "79756e262fd145a2984583ae24198a0a",
+    "14": "069de16edd01442cba341d0da6bef1bf",
+    "15": "b3f4a21fedb64ba2aa69620ee067b251",
+    "16": "476024321b24496bb62e531b8d6186e7",
+    "17": "b70f9a75d12e4a45858712a8fa5ec253",
+    "18": null,
+    "19": "f3a17128f67c41379ceb409ee27acfec",
+    "20": "8d6281cde48b44f59fbb9bef2281ff1b",
+    "21": "47da6790eff24f30a0fabcd50e2f84a1",
+    "22": "60c7b6f019504eabaab23dbfa7c14b61",
+    "23": "79bbe86520904b94af9eade0da634ad4",
+    "24": null,
+    "25": "98558d97f8fa43c4994afc36a79ecec1",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "769ee77a8f3c88a7d3be07f71e89e40f89271204a5b943f0629bbe78d0923beb",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "103d44e9a8b031d4513460324d5c273a0695e86453703b22430da4a0b4526d1a",
+  "runtime_human_readable": "1:00:35",
+  "runtime_seconds": 3635.1136726923287,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "b043f2df74a6b7c32a68a1a95a9ed5d0d3d45711ec8b3fa495972881b2506424",
+  "selection_sha256": "4fc1f075ac42dda3cfd0138271fcd1107bb63b542363a7685e442f513d77edfc",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The code is not fully compliant with the 'correct and executable' requirement. The previous execution failed because the 'feature_range' parameter was passed as a list (e.g., `[0, 1]`) instead of a tuple (e.g., `(0, 1)`), which `MinMaxScaler` expects. To ensure executability, the `feature_range` parameter should be explicitly converted to a tuple before being passed to `MinMaxScaler`."
+    ],
+    "16": [
+      "The code is not fully compliant with the 'correct and executable' constraint, given the error encountered in the previous turn. The `RobustScaler`'s `quantile_range` parameter expects a tuple, but the previous execution showed it received a list (e.g., `[25.0, 75.0]`). To ensure executability, the `quantile_range` parameter should be explicitly converted to a tuple: `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ],
+    "20": [
+      "The `KBinsDiscretizer` and `PCA` components accept a `random_state` parameter for reproducibility. Since `random_state` is not provided as an argument to the `build_model` function, it should be set to a fixed value (e.g., `random_state=42`) for these components to ensure consistent behavior across runs, as per standard practice when a random state is applicable and not exposed as a hyperparameter."
+    ]
+  },
+  "semantic_validation_failures": 3,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.018283169999999994,
+    "input_tokens": 980780,
+    "output_cost": 0.03633,
+    "output_tokens": 8862,
+    "total_cost": 0.054613169999999996,
+    "total_tokens": 990340
+  },
+  "training_time": 5592.490000000001,
+  "validation_metric": "balanced_accuracy"
+}

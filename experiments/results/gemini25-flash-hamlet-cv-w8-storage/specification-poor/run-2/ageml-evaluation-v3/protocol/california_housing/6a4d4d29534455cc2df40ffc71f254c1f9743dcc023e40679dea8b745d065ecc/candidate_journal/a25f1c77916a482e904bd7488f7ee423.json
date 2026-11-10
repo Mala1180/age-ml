@@ -1,0 +1,95 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "978ee7e4eae05c5117f8f015ab1ceee0a0bcc573967df8416c9c86d5635364c5",
+  "code_sha256": "3d20a266ec214b797c6b55d9813e4bf089d9b1fb590e1010fd918f7ffcbf5817",
+  "completed_at": 1793562060.8154683,
+  "cv_fold_scores": [
+    80616.38289139002,
+    53275.49690909538,
+    73258.54902310147,
+    68221.30326624813,
+    76137.98574818806,
+    74803.35168280276,
+    55617.66488839457,
+    86507.38131128692,
+    83236.72226723665,
+    58793.531639315566
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__imputer__random_state": 42,
+      "regressor__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "max_depth": 20,
+    "max_iter": 10,
+    "n_bins": 10,
+    "n_estimators": 200,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "4868bdc473913e5f53054d70739efcd07fa0593be01f305cdf545a045657cf25",
+  "pipeline_id": 25,
+  "pipeline_run_id": "4bdd18084a2b414f9dd05cdb3f6a8503",
+  "run_id": "a25f1c77916a482e904bd7488f7ee423",
+  "run_identity": "27e58661ea95f80b83a41a080247beed23c00baa061830d7628195c45821a728",
+  "validation_score": 71046.83696270596,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

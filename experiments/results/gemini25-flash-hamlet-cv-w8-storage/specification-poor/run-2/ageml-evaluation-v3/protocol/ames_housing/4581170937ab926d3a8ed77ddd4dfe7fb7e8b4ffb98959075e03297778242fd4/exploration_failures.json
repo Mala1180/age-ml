@@ -1,0 +1,296 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "e33aa65e8463414da158f0a80f0e2bd5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "7055f19b02684a849a7429341b5511b5",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'discretization with binarizer', 'normalization with power_transformer', and 'regression with ridge'. The generated code includes a `SimpleImputer` for handling missing values, which is an additional preprocessing step not explicitly requested in the pipeline definition. The instruction was to implement 'only those steps'.",
+      "no",
+      "The pipeline explicitly lists 'discretization with binarizer', 'normalization with power_transformer', and 'regression with ridge'. The generated code includes a step to filter out numerical features that contain NaN values (`X_train[col].isnull().sum() == 0`). This is an implicit feature selection/preprocessing step that is not explicitly requested in the pipeline definition, violating the 'only those steps' requirement.",
+      "The code implements the specified steps (binarizer, power_transformer, ridge) and only those steps, making it compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values. Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' in the presence of such data.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required.",
+      "The pipeline explicitly lists 'discretization with binarizer', 'normalization with power_transformer', and 'regression with ridge'. The generated code includes a `SimpleImputer` for handling missing values, which is an additional preprocessing step not explicitly requested in the pipeline definition. The instruction was to implement 'only those steps'.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required.",
+      "The code implements all the explicitly requested steps (binarizer, power_transformer, ridge) and only those steps, which is compliant with the pipeline definition. However, the `Binarizer` and `PowerTransformer` do not handle missing values (NaNs) natively. The dataset description indicates that some numerical columns have missing values (e.g., 'LotFrontage', 'MasVnrArea', 'GarageYrBlt'). Without an explicit imputation step, the pipeline will fail during execution if these columns are included and contain NaNs, thus it is not 'correct and executable' as required."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "d7a5dfbd54fc4cc3bcb0c60c8df50903",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` and a `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `SimpleImputer` and a `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `SimpleImputer` and a `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `SimpleImputer` and `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `SimpleImputer` and `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `SimpleImputer` and `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes `SimpleImputer` and `ColumnTransformer` which were not explicitly listed as steps in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "4dd0b4d9125648c3aab82a2a8c0d47c0",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline definition. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline definition. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "eb04bd3431584fefbcc4e182f28215c2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "aec2c973e0064f21a6182347fc476c2c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "151f2c331b974c38920421dfa511a7cb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "5b17888a09c04f33a00abf15593618e2",
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline for two reasons:\n1.  The pipeline explicitly lists 5 steps. The use of `ColumnTransformer` with `remainder='drop'` implicitly performs an additional feature selection/preprocessing step by dropping all non-numerical columns. This step is not explicitly mentioned in the provided pipeline, which states that 'only those steps' should be implemented.\n2.  The `random_state` parameter is set for `IterativeImputer` and `RandomForestRegressor` within the `build_model` function. The instructions state: 'The host sets every exposed random_state'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "3ba8b0a227794bf29b8c499ae6d49a04",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "e04637db5c3c43cf933e45b9f090f65f",
+    "semantic_feedback": [
+      "no, the pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "no, the generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "no, the pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "no, the generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "no, the generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The code implicitly adds a step of filtering out numerical features that contain NaN values, which is not explicitly listed in the provided pipeline steps. The pipeline should implement *only* the specified steps: discretization, normalization, and regression. While this addresses the executability issue, it introduces an unrequested preprocessing step.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "no, the generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The generated code is not executable because the `Binarizer` step, as part of the pipeline, cannot handle missing values (NaNs) present in the input data. Although the pipeline definition does not explicitly mention imputation, the requirement for the code to be 'correct and executable' implies that necessary preprocessing for handling NaNs should be included if the data contains them and subsequent steps cannot handle them. An imputation step would be required before binarization and scaling to ensure executability.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The pipeline should implement only the steps listed: discretization, normalization, and regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "8b2589aa92fc4c8c87f6d5f1bf6f90d3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "a90941f5afa5476fbee4a16e9248a7a2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "0ed0857563b44d2dae07baf3f5b478fc",
+    "semantic_feedback": [
+      "The pipeline explicitly states \"imputation with `iterative_imputer`\" and \"normalization with `robust_scaler`\". While the code correctly applies these to numerical features, it introduces additional steps (`SimpleImputer` for imputation and `OneHotEncoder` for encoding) for categorical features that were not specified in the pipeline description. The prompt requires implementing \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "b31845f487ca404696f5ec0c7f731cfb",
+    "semantic_feedback": [
+      "The generated code introduces additional preprocessing steps not explicitly mentioned in the pipeline. The pipeline specifies:\n1. **imputation** with `iterative_imputer`\n2. **normalization** with `standard`\n\nThe generated code:\n- Uses `IterativeImputer` for numerical columns, which is compliant with the first step for numerical data.\n- However, it also uses `SimpleImputer` for categorical columns, which is an additional imputation method not specified in the pipeline.\n- Uses `StandardScaler` for numerical columns, which is compliant with the second step for numerical data.\n- However, it also uses `OneHotEncoder` for categorical columns. This is an encoding step, not 'normalization with `standard`', and is not explicitly mentioned in the pipeline.\n\nThe instruction states to implement 'all the steps of the pipeline and *only those steps*'. The introduction of `SimpleImputer` and `OneHotEncoder` for categorical features, while practical for handling mixed data types, deviates from this strict requirement.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `standard`'. While the code correctly applies these steps to numerical columns, it drops all categorical columns using `remainder='drop'` in the `ColumnTransformer`. Dropping columns means that the specified 'imputation' and 'normalization' steps are not applied to these categorical features. This violates the requirement to implement 'all the steps of the pipeline' for the entire feature set, as a significant portion of the features (categorical) are not processed by the specified imputation step.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is correctly applied to numerical columns, categorical columns are imputed using `OrdinalEncoder`'s `unknown_value` parameter, which is not `iterative_imputer`. The pipeline implies that `iterative_imputer` should be the method for imputation across the dataset, or at least for all features that can be processed by it after appropriate encoding.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `SimpleImputer` for categorical columns within the `ColumnTransformer` before applying `IterativeImputer` globally. This means an additional imputation step (`SimpleImputer`) is introduced that is not `iterative_imputer`, violating the requirement to implement 'only those steps' and that imputation should be done with `iterative_imputer`.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `OrdinalEncoder` for categorical columns. `OrdinalEncoder` does not handle NaN values in its input directly; it expects non-NaNs. If categorical columns in `X_train` contain NaNs, the `preprocessor` step will fail. This means that `iterative_imputer` is not effectively applied to the missing values in categorical features, violating the requirement that imputation should be performed with `iterative_imputer` for all relevant features.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code's `categorical_transformer` includes a `ColumnTransformer` with `passthrough` for handling NaNs in categorical columns, which means it does not convert `np.nan` to a string. Consequently, if categorical columns contain `np.nan` values, the subsequent `OrdinalEncoder` will raise an error because it cannot handle `np.nan` directly. This prevents the `IterativeImputer` from effectively imputing these missing categorical values, violating the requirement that `iterative_imputer` should be the method for imputation.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code introduces a custom `ReplaceNaNWithStr` transformer to handle missing values in categorical columns before `OrdinalEncoder`. This `ReplaceNaNWithStr` performs an imputation step that is not `iterative_imputer`, violating the requirement to implement 'only those steps' and that imputation should be performed with `iterative_imputer`.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `OrdinalEncoder` for categorical columns. `OrdinalEncoder` does not handle `np.nan` values in its input directly; it expects non-NaNs. If categorical columns in `X_train` contain `np.nan` values, the `preprocessor` step will raise an error before `IterativeImputer` can be applied. This means that `iterative_imputer` is not effectively applied to the missing values in categorical features, violating the requirement that `iterative_imputer` should be the method for imputation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "dade0a2f57c1488896785e6b35bdaf47",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "d609a01b79f7443cb52f9e6aed260474",
+    "semantic_feedback": [
+      "The code is not compliant with the provided pipeline because it includes an imputation step (`SimpleImputer`) which was not specified in the pipeline definition. The pipeline explicitly states only discretization, normalization, feature selection, and regression.",
+      "no, the code introduces an implicit feature selection step by filtering `numerical_features_without_nan` to exclude columns with missing values. This step (dropping columns with NaNs) is not explicitly defined in the provided pipeline, which only specifies discretization, normalization, feature selection with `select_k_best`, and regression.",
+      "The code is not compliant with the provided pipeline because it includes an imputation step (`SimpleImputer`) which was not specified in the pipeline definition. The pipeline explicitly states only discretization, normalization, feature selection, and regression.",
+      "no, the code is structurally compliant with the pipeline steps, but it is not executable with the provided dataset. The `Binarizer` and `PowerTransformer` steps do not handle missing values (NaNs) natively, and the pipeline definition does not include an explicit imputation step to address this data characteristic, leading to an execution error.",
+      "no, the code is structurally compliant with the pipeline steps, but it is not executable with the provided dataset. The `Binarizer` and `PowerTransformer` steps do not handle missing values (NaNs) natively, and the pipeline definition does not include an explicit imputation step to address this data characteristic, leading to an execution error. While the code implements the specified steps, it fails the implicit requirement of being 'correct and executable' for the given data due to unhandled NaNs.",
+      "The code is structurally compliant with the pipeline steps, but it is not executable with the provided dataset. The `Binarizer` and `PowerTransformer` steps do not handle missing values (NaNs) natively, and the pipeline definition does not include an explicit imputation step to address this data characteristic, leading to an execution error. While the code implements the specified steps, it fails the implicit requirement of being 'correct and executable' for the given data due to unhandled NaNs."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "5654867cd77747f0a47ee11262b7642e",
+    "semantic_feedback": [
+      "The `method` parameter in the `build_model` function signature is passed to the `estimator` argument of `IterativeImputer`. However, the previous error message ('The 'estimator' parameter of IterativeImputer must be None or an object implementing 'fit' and 'predict'. Got 'yeo-johnson' instead.') indicates that `method` is being provided as a string (like 'yeo-johnson'), which is an invalid type for `IterativeImputer`'s `estimator`. This suggests that the `method` parameter in the `build_model` signature was likely intended for the `method` argument of `PowerTransformer`. If so, the current code is non-compliant because it misuses the `method` parameter by passing it to the wrong component, and the `PowerTransformer`'s `method` is not being configured by the function's arguments."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "52c5c70f6105485d833cf8dd2cb26e54",
+    "semantic_feedback": [
+      "The `imputation_strategy` parameter is provided in the function signature, but it is only used for numerical features. For categorical features, the `SimpleImputer` is hardcoded to use `strategy='most_frequent'`, which means the provided `imputation_strategy` parameter is not fully utilized across all imputation steps as implied by the pipeline definition.",
+      "The `imputation_strategy` parameter is provided in the function signature, but it is only used for numerical features. For categorical features, the `SimpleImputer` is hardcoded to use `strategy='most_frequent'`, which means the provided `imputation_strategy` parameter is not fully utilized across all imputation steps as implied by the pipeline definition.",
+      "The `imputation_strategy` parameter is used for both numerical and categorical features. While this directly follows the instruction to use the provided parameter for imputation, it makes the code non-executable if `imputation_strategy` is set to 'mean' or 'median' (which are valid strategies for `SimpleImputer`) because these strategies are not applicable to non-numeric (categorical) data. The code is required to be correct and executable, but this implementation will fail for certain valid `imputation_strategy` values when categorical features are present.",
+      "The `imputation_strategy` parameter is used for both numerical and categorical features. While this directly follows the instruction to use the provided parameter for imputation, it makes the code non-executable if `imputation_strategy` is set to 'mean' or 'median' (which are valid strategies for `SimpleImputer`) because these strategies are not applicable to non-numeric (categorical) data. The code is required to be correct and executable, but this implementation will fail for certain valid `imputation_strategy` values when categorical features are present."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "a670ffb16e6e4202b1f4f2b00aad1cae",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "541116ab9ecf48e38d8df8b5f1b86b8b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "b850bd07a57e47f8896aca7f48fd43e6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "ecabd77b2dbb42c2858e91633bdc2128",
+    "semantic_feedback": [
+      "The pipeline includes an additional step, `OneHotEncoder`, for categorical features which was not explicitly requested in the provided pipeline definition. The instructions state to implement 'only those steps' specified in the pipeline.",
+      "The pipeline includes an additional step, `SimpleImputer`, for handling missing values which was not explicitly requested in the provided pipeline definition. The instructions state to implement 'only those steps' specified in the pipeline.",
+      "The pipeline includes an additional step, `SimpleImputer`, for handling missing values which was not explicitly requested in the provided pipeline definition. The instructions state to implement 'only those steps' specified in the pipeline.",
+      "The pipeline includes an additional step, `SimpleImputer`, for handling missing values which was not explicitly requested in the provided pipeline definition. The instructions state to implement 'only those steps' specified in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "d81d9ebccaea438b8580bac057be3233",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "cad5be871f7b44cb8bf0536905a9f0a6",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `OneHotEncoder`, for categorical features which was not specified in the provided pipeline. The instructions explicitly state to implement 'only those steps' listed in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "9599c0c0f74a4125a15ab5ad1f030b6b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "aca02c7c24c3401c9241fde6ab93ad68",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "1d00a13fdb2b4cba99f827b4cdc90e4b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "e497fcc4ca2b4d5ebfc8aeed5705cde1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "7c0fbeacb37a4dd8a925fcf6bf7e6fce",
+    "semantic_feedback": [
+      "The code is not fully compliant with the 'only those steps' requirement. While it correctly implements 'imputation with iterative_imputer', 'discretization with binarizer', and 'normalization with robust_scaler' for numerical features, it introduces additional steps (SimpleImputer and OneHotEncoder) for categorical features. These additional steps were not explicitly mentioned in the provided pipeline description.",
+      "The code is not compliant because it introduces additional steps (`SimpleImputer` and `OneHotEncoder`) for categorical features that were not explicitly mentioned in the provided pipeline description. The pipeline specifies only `iterative_imputer`, `binarizer`, `robust_scaler`, `pca`, and `elastic_net`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "d073d6a782744034af62e33ca5318b22",
+    "semantic_feedback": [
+      "The generated code is not fully compliant with the provided pipeline. While it correctly addresses the issue of applying numerical imputation strategies to categorical data, it introduces new deviations from the specified pipeline:\n1.  **Imputation Strategy**: The `imputation_strategy` parameter is only applied to numerical columns. Categorical columns use a hardcoded `strategy='most_frequent'` for their `SimpleImputer`, which means the provided `imputation_strategy` is not universally applied as implied by a single 'imputation' step.\n2.  **Discretization (Binarizer)**: The `binarizer` step is only applied to numerical features. The pipeline description does not specify that this step should be limited to numerical features.\n3.  **Normalization (RobustScaler)**: The `robust_scaler` step is only applied to numerical features. The pipeline description does not specify that this step should be limited to numerical features.\n4.  **Additional Step (OneHotEncoder)**: An `OneHotEncoder` is added for categorical features, which is not explicitly listed as a step in the provided pipeline.",
+      "no, the generated code includes an additional step, `NonNumericColumnDropper`, which is not specified in the provided pipeline. The pipeline explicitly states to implement only the listed steps.",
+      "no, the generated code is not executable with the provided dataset. The pipeline steps, specifically `SimpleImputer` (if using numerical strategies like 'mean' or 'median'), `Binarizer`, `RobustScaler`, and `SelectKBest` (with `f_regression`), are designed for numerical data. The dataset contains categorical (string) columns, and applying these transformers directly to such columns will lead to a `TypeError` or `ValueError` during execution, as indicated by the previous execution error. The pipeline does not include any explicit handling for non-numeric features."
+    ],
+    "status": "COMPLETED"
+  }
+]

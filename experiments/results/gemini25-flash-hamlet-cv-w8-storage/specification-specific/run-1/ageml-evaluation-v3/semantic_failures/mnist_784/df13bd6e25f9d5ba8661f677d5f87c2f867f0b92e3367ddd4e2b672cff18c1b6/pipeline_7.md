@@ -1,0 +1,2 @@
+Attempt 1:
+The `quantile_range` parameter for `RobustScaler` expects a tuple, but the previous execution indicated it might be passed as a list. To ensure correctness and executability, `quantile_range` should be explicitly converted to a tuple, e.g., `RobustScaler(quantile_range=tuple(quantile_range))`.

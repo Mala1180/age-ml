@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "9296e480d4a72277097e602dfd0713a3b0d7cf3f5de8a9275c85084ae613cfbc",
+  "code_sha256": "e41d62e6f2f346636dc440398ed05e41e3dba549aa38e98f79ffb72e430d3f35",
+  "completed_at": 1793473127.9554048,
+  "cv_fold_scores": [
+    63509.91287120829,
+    72906.55930457856,
+    77228.46640866913,
+    76543.21886603282,
+    83313.98679622448,
+    61695.565207642874,
+    62312.88996544324,
+    66577.35021825496,
+    86562.40375549707,
+    63424.83089192822
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 3,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "n_bins": 10,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "a45847e8727a16ef772c949ed17f6d20681b20f0bd53683093931b4d8e10e4a0",
+  "pipeline_id": 20,
+  "pipeline_run_id": "7e6679bb926949d5a3ba358242af8c6a",
+  "run_id": "820844517bcf4a34b99d00d0e8dc3fbb",
+  "run_identity": "7d8e4a79c9f8b0ba3b9a423565102f22e90664c84e9290844c27afb396b8ebaf",
+  "validation_score": 71407.51842854796,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

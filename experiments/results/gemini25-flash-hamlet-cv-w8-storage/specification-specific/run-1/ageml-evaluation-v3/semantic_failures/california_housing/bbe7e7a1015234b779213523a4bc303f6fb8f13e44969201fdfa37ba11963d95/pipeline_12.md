@@ -1,0 +1,2 @@
+Attempt 1:
+The code includes `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. While handling categorical features is necessary for an executable pipeline with mixed data types, the instruction was to implement "only those steps" explicitly mentioned in the pipeline.

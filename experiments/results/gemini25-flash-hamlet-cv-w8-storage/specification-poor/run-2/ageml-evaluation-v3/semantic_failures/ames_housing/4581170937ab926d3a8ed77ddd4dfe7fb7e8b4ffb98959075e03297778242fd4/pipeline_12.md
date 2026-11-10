@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly states "imputation with `iterative_imputer`" and "normalization with `robust_scaler`". While the code correctly applies these to numerical features, it introduces additional steps (`SimpleImputer` for imputation and `OneHotEncoder` for encoding) for categorical features that were not specified in the pipeline description. The prompt requires implementing "only those steps".

@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "bfa7b0e523263f55e6bf94eecdf2b93f925f781d9fb89825e4036a2af19f3079",
+  "code_sha256": "7e565d51baec4621ca380e0018c62d5311c69b7c30d743c1637fbb3c3e2792a0",
+  "completed_at": 1793633528.1700072,
+  "cv_fold_scores": [
+    0.6334318522726958,
+    0.6377330683857566,
+    0.6249705088694575,
+    0.6319419356503532,
+    0.6325409742394975,
+    0.6490989181030364,
+    0.6393481447027115,
+    0.6375596816365346,
+    0.6243210944003168,
+    0.6390641136492636
+  ],
+  "effective_random_states": [
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 5,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "c9ab686412bb9ed0cd19c5fe183b0d0f35dd283a8846be9a3b08f6717e688e24",
+  "pipeline_id": 4,
+  "pipeline_run_id": "cfeef9319ea54fd39b1200df0c2a0491",
+  "run_id": "9a70b3f17729498990b6578c7f31d692",
+  "run_identity": "637718255052d9e9a6396574af7c8beeefcea15b98a4d281e2a8f99fc1d3b430",
+  "validation_score": 0.6350010291909622,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

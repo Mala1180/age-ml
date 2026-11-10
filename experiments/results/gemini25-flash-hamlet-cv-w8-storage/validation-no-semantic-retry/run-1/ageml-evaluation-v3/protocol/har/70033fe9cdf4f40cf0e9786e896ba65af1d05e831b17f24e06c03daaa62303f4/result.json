@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/har/70033fe9cdf4f40cf0e9786e896ba65af1d05e831b17f24e06c03daaa62303f4/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/har/70033fe9cdf4f40cf0e9786e896ba65af1d05e831b17f24e06c03daaa62303f4/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/har/70033fe9cdf4f40cf0e9786e896ba65af1d05e831b17f24e06c03daaa62303f4/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/har/70033fe9cdf4f40cf0e9786e896ba65af1d05e831b17f24e06c03daaa62303f4/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "e9eaa36360ba4cb7b821fdb5782df5d4",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2239.5689999999995,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "1ca2386864a4483cbed934b662f1b4cd",
+    "2": "3c0c7e99e95b492cbe59cab38bf0357d",
+    "3": "46f43251080b45c68b2dcb1f1c9dca01",
+    "4": "ad4285c429ec43319092fe1337c2ee0f",
+    "5": null,
+    "6": null,
+    "7": "bfd164fb145f401a8048a680a969c853",
+    "8": null,
+    "9": "a7b72f6cbd914b0ea44af1e74cc4d46a",
+    "10": "719dee8ea262430c8210025d3121329d",
+    "11": "5a4e0199f66c4c17aeba01be5277cb95",
+    "12": null,
+    "13": "24e1fde1fd544563903018e0ab72291a",
+    "14": "b312b8f343054f9db5ab14c8db6e66b8",
+    "15": "4d5601fd59954215a2a7d9937b6dc47a",
+    "16": "8ecefb2333b14c1f8e26d88d46d3a3d1",
+    "17": "c384a0c967cb4d52b7b6451778c7296a",
+    "18": null,
+    "19": "58cda795e5204234802ad5d591981ddd",
+    "20": "6079faacc22444739e67256167bfc9a9",
+    "21": "27c703856e4140c7a98b17f5352ded5f",
+    "22": "9cde4d8639824957a3edb1c41f5020c0",
+    "23": "42eeceed09a64877a2f79146337e5104",
+    "24": null,
+    "25": "6bea7450fe9a42b5bc909ed7f2fa21b1",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "c4049a47838690f3e381f6752bbe7a87bbe1c169dc8f8398db4d7bf705548dcb",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "3520a5e6b0bb4972ca7d824b4eeab14174f68999530bdbf505e09c204a7c17cc",
+  "runtime_human_readable": "1:00:32",
+  "runtime_seconds": 3631.502818096429,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "0d15c8082652ebcd627199c94311fe54d52e9c5cb36cebfe461fe38cefa3b184",
+  "selection_sha256": "09a787cc2440b4d3dd78a11110a21467a8adeaa4678a93fc86b060a8784518a7",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "20": [
+      "The `random_state=42` parameter should be removed from `KBinsDiscretizer` and `PCA` as the prompt states that \"The host sets every exposed random_state\". Since `random_state` is not a parameter of the `build_model` function, it should not be hardcoded within the pipeline components."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0143673,
+    "input_tokens": 981406,
+    "output_cost": 0.038997500000000004,
+    "output_tokens": 5776,
+    "total_cost": 0.053364800000000004,
+    "total_tokens": 989762
+  },
+  "training_time": 5285.045999999999,
+  "validation_metric": "balanced_accuracy"
+}

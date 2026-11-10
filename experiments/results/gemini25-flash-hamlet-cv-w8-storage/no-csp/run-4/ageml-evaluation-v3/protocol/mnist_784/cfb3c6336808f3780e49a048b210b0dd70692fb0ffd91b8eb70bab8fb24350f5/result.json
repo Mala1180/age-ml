@@ -1,0 +1,47 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-4/ageml-evaluation-v3/protocol/mnist_784/cfb3c6336808f3780e49a048b210b0dd70692fb0ffd91b8eb70bab8fb24350f5/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-4/ageml-evaluation-v3/protocol/mnist_784/cfb3c6336808f3780e49a048b210b0dd70692fb0ffd91b8eb70bab8fb24350f5/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-4/ageml-evaluation-v3/protocol/mnist_784/cfb3c6336808f3780e49a048b210b0dd70692fb0ffd91b8eb70bab8fb24350f5/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-4/ageml-evaluation-v3/protocol/mnist_784/cfb3c6336808f3780e49a048b210b0dd70692fb0ffd91b8eb70bab8fb24350f5/validation_candidates.csv"
+  },
+  "artifacts": {},
+  "best_pipeline_id": null,
+  "best_run_id": null,
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": null,
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 12.503,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "5355f6e4af074174bd27ec37748be11f"
+  },
+  "pipelines_found": 1,
+  "protocol_sha256": "8f28ae7c92a850ff141f47dd5a499c5386dae256b0f7d98a8cf422d65b98a367",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "23faa70b6ddd480893a65d5cce832655532d07cb05b9b68f9a01b451c862bcfa",
+  "runtime_human_readable": "0:02:12",
+  "runtime_seconds": 132.0725359134376,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": null,
+  "selected_candidate_key": null,
+  "selection_sha256": "e072177ca1474a3710bfa134d37acf34d41b6852f46d7698a26576faf4f14682",
+  "selection_validation_score": null,
+  "semantic_validation_failure_reasons": {},
+  "semantic_validation_failures": 0,
+  "split_identity": "b7451a4d1c697c013386236b17547be25e785051cf778a04385b03991df0481a",
+  "status": "no_valid_candidate",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.00138774,
+    "input_tokens": 245943,
+    "output_cost": 0.0026100000000000003,
+    "output_tokens": 2301,
+    "total_cost": 0.0039977400000000005,
+    "total_tokens": 248244
+  },
+  "training_time": 12.427,
+  "validation_metric": "balanced_accuracy"
+}

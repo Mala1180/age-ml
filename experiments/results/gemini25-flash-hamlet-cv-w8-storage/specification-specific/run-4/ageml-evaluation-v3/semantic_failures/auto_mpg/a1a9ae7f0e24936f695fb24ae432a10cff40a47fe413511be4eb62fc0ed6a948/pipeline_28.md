@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies only two steps: 'normalization' with `standard` and 'regression' with `elastic_net`. The generated code adds an extra step, `SimpleImputer`, which is not part of the provided pipeline definition.

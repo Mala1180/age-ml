@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/wilt/cf508dc9d3651d0309f96fd32c7c90a9b3d08b72569546a772ee4341338e95a6/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/wilt/cf508dc9d3651d0309f96fd32c7c90a9b3d08b72569546a772ee4341338e95a6/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/wilt/cf508dc9d3651d0309f96fd32c7c90a9b3d08b72569546a772ee4341338e95a6/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-2/ageml-evaluation-v3/protocol/wilt/cf508dc9d3651d0309f96fd32c7c90a9b3d08b72569546a772ee4341338e95a6/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "10c1b228e4794027b06021a39ab4b8fd",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9796775277124623,
+    0.9764024185421565,
+    0.960446758481693,
+    0.9774941215989251,
+    0.9764024185421565,
+    0.9978165938864629,
+    0.9989082969432315,
+    0.9720356063150823,
+    0.9321663019693655
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 325.658,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "609c3cb18a88441c8a2913b99ebb8593",
+    "1": "f37af2bc2a6e4e71a1627933bbd95c51",
+    "2": "af45835fa6f74ca88847f5719dc182cb",
+    "3": "1ee004e7fd5741b781da7ad4cb8522c8",
+    "4": "72ff05c6a3d94c5eb47d706421fc67ea",
+    "5": "34e5958825c2426ea3455418fc1c8274",
+    "6": "0371e4335854457d84e5962ab8211610",
+    "7": "d1415f27506a4e768e3e494ac2666977",
+    "8": "39d7f1beeee346bc980f9eac9c712162",
+    "9": "43dbcae03d154a798bf19a695d0d12ec",
+    "10": "6b841c7309db4ce6ba29619de1ba5384",
+    "11": "cf7637afa25a42ccb5aa935fcbcd27e1",
+    "12": "4551561c0f4c4bd89fee0a4090f5fe45",
+    "13": "5a213c9fd6a54400a955ac06c5caa69e",
+    "14": "d9a53b0aa3f54baea8a40b816647d2da",
+    "15": "9621688361764fd699bc120dbb59b6b8",
+    "16": "1563172cf7064ee0b674b5fa1035549a",
+    "17": "022dfe89b53f4103908b69753800a469",
+    "18": "ba8c3f030ec8402c8adb8fa90d64ed1d",
+    "19": "b5d21f31e23a487a8c6fcc20662290c8",
+    "20": "58742ea093d0491ba95a1feda64d394b",
+    "21": "46c5d8af925242d399f80527ca9dbe7d",
+    "22": "4d2998b3a6a6480c8691613ca54d1fae",
+    "23": "ceb5255b20d646fbbbad1bc54b65325e",
+    "24": "41807608f43e43beabc2c63efeef5b3f",
+    "25": "60499738ff4743f1b866666dacd96861",
+    "26": "781223cc07fc432c9387e1cdb6b074ea",
+    "27": "b3f2fdb081444727a6844e1afe35a109",
+    "28": "269d3a138379497cb1108b4685a7fe24",
+    "29": "3597329dc21a4656a37b60da4ad72e2d"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "f332b2ccfa1acd5d797099c305f7a9c796058a5fbb45f7e8d473fe40ba7a0824",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "79feb43560df71c6cd9763429e8187e264c7a8c5e620174e6996fa383aad58cf",
+  "runtime_human_readable": "0:05:56",
+  "runtime_seconds": 356.3597594834864,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9731030731243339,
+  "selected_candidate_key": "0c6c52374afaaffd622d062727914aa9bed63bacff47fbc503b31c9c9764b413",
+  "selection_sha256": "22c0e74cb1551a86dbbf968b914745ca816393538227d4734694c2a3e050bc1e",
+  "selection_validation_score": 0.9731030731243339,
+  "semantic_validation_failure_reasons": {
+    "3": [
+      "The `NearMiss` class in `imblearn` does not accept a `random_state` parameter. Including `random_state=42` in its constructor will cause an error, making the code non-executable."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.017063759999999997,
+    "input_tokens": 45211,
+    "output_cost": 0.038477500000000005,
+    "output_tokens": 7902,
+    "total_cost": 0.05554126000000001,
+    "total_tokens": 53320
+  },
+  "training_time": 1060.727,
+  "validation_metric": "balanced_accuracy"
+}

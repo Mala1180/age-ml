@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes an additional step, `OneHotEncoder`, for categorical features. The provided pipeline explicitly lists only four steps: imputation, discretization with `kbins`, normalization with `standard`, and regression with `knn_regressor`. The instruction was to implement 'only those steps'.

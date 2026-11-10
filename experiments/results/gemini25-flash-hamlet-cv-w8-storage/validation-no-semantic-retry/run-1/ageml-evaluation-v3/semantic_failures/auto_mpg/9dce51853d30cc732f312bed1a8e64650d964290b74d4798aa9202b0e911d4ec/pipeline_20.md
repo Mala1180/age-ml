@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists three steps: normalization, feature selection, and regression. The generated code adds an extra step, `SimpleImputer`, which was not requested in the provided pipeline definition.

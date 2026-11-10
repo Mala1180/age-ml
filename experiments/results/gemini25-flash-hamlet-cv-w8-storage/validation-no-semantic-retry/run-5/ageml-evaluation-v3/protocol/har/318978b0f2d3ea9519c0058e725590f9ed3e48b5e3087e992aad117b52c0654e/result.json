@@ -1,0 +1,107 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/har/318978b0f2d3ea9519c0058e725590f9ed3e48b5e3087e992aad117b52c0654e/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/har/318978b0f2d3ea9519c0058e725590f9ed3e48b5e3087e992aad117b52c0654e/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/har/318978b0f2d3ea9519c0058e725590f9ed3e48b5e3087e992aad117b52c0654e/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-5/ageml-evaluation-v3/protocol/har/318978b0f2d3ea9519c0058e725590f9ed3e48b5e3087e992aad117b52c0654e/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "b5530c13fa8e4f54b1c94390279f859f",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1642.5049999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "2faf694d18324c53a7a6f49e46ad7727",
+    "2": "1e38a0473ca54034aed8c143ce99ceed",
+    "3": "4da47ba1a63c477ba87f224200fc9e32",
+    "4": "f089a4f0c37a4012a8e327ba0f5448b0",
+    "5": null,
+    "6": null,
+    "7": "eba8dc5b163f4b708e9ad251c8aa9f66",
+    "8": null,
+    "9": "e6e8d775a948405ba1711f03b691a419",
+    "10": "257be5bc6149428a8b0ac2357a319a60",
+    "11": "dc69a994b16f4ead834f78517c3e689b",
+    "12": null,
+    "13": "de66ff3da8b348669099ad67a2f34297",
+    "14": "b80f625d642b42c3ba7109f38b9e84bf",
+    "15": "4a76363e410f4c038dca75b0e5f68a0f",
+    "16": "84bae667b1ef41148e9471d5b6e2ec71",
+    "17": "ef83aa2f1b0a4b0d94610c6ef5e8f875",
+    "18": null,
+    "19": "67875780e5df4e35a0ccb5385e3f844f",
+    "20": "7281ad53d52643f8a2c14472f0ba10a2",
+    "21": "fee2981ac28c4d53af4460b77808f76d",
+    "22": "e4c30a1bb5f1435b8d2fa28e1cb92d18",
+    "23": "25ce275e170f4ce4997369e9dd49b9d8",
+    "24": null,
+    "25": "8ed7eeba00484422b1e7a17990074d16",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "d24b5be5939177d177f0d7a0a1edb5d9d72912f471cc4fd1b2a2e99643e50858",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "f8b24e3c645cfb4ccf92614f39f601593ffe1baf6e2e8d70899fc213f42d97b7",
+  "runtime_human_readable": "1:00:47",
+  "runtime_seconds": 3646.5580551587045,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "b043f2df74a6b7c32a68a1a95a9ed5d0d3d45711ec8b3fa495972881b2506424",
+  "selection_sha256": "ac8df0ac793983ac9311b9009d1566a30c2fa57a1ba365b7c72cf803bb63c408",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The code is not fully compliant because the `feature_range` parameter for `MinMaxScaler` expects a tuple, but if a list (e.g., `[0, 1]`) is passed as the `feature_range` argument, it will cause a runtime error. To ensure the code is robust and executable as required, `feature_range` should be explicitly cast to a tuple, e.g., `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "21": [
+      "The code is not fully compliant with the instruction \"The host sets every exposed random_state\". While `NearMiss` correctly had `random_state` removed (as it does not support it), the `RandomForestClassifier` has `random_state=42` hardcoded. This prevents the host from initially setting this parameter, as it is already fixed. To be fully compliant, `random_state` for `RandomForestClassifier` should be set to `None` (or a variable provided by the host if it were part of the function signature) to allow the host to truly 'set' it via `set_params`."
+    ],
+    "23": [
+      "The code contains a hidden control character (form feed, \\f) in the import statement for `KNeighborsClassifier`, which will cause a syntax error and prevent execution. Specifically, `from sklearn.decomposition import PCA\f rom sklearn.neighbors import KNeighborsClassifier` should be `from sklearn.decomposition import PCA\nfrom sklearn.neighbors import KNeighborsClassifier` or `from sklearn.decomposition import PCA\nfrom sklearn.neighbors import KNeighborsClassifier`."
+    ]
+  },
+  "semantic_validation_failures": 3,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.017359019999999996,
+    "input_tokens": 890373,
+    "output_cost": 0.0372725,
+    "output_tokens": 10080,
+    "total_cost": 0.05463152,
+    "total_tokens": 900453
+  },
+  "training_time": 5208.278,
+  "validation_metric": "balanced_accuracy"
+}

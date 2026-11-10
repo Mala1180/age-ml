@@ -1,0 +1,95 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "09865c61341f771c021ffa7504061a0be79c809ecf59358e78c731e71fd2029c",
+  "code_sha256": "e1b2b845c47bfa6f4d758d3b336190af208f2d526966b054937b4f9e7749e044",
+  "completed_at": 1793473313.4119096,
+  "cv_fold_scores": [
+    27883.225523658984,
+    29539.516743294138,
+    22634.994764508923,
+    36152.13894826725,
+    36605.89798831038,
+    25144.772202216427,
+    24331.666637126473,
+    27932.929430588043,
+    44250.00282780055,
+    28952.74301906689
+  ],
+  "effective_random_states": [
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "discretizer__random_state": 42,
+      "imputer__random_state": 42,
+      "regressor__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "max_depth": 20,
+    "max_iter": 10,
+    "n_bins": 10,
+    "n_estimators": 200,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "ede10f28f73593c5c98f139190eda51d1633571a448a8458a0ec22a1cd74bff4",
+  "pipeline_id": 25,
+  "pipeline_run_id": "a5df78480dcf4018b4604773be5a6593",
+  "run_id": "d39d3ec741374611a92359dd95864065",
+  "run_identity": "7d8e4a79c9f8b0ba3b9a423565102f22e90664c84e9290844c27afb396b8ebaf",
+  "validation_score": 30342.788808483805,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

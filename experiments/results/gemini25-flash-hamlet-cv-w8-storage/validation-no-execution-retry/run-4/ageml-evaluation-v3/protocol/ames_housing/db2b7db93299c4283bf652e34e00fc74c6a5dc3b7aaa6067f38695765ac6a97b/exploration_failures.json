@@ -1,0 +1,219 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "7a7c7da0d43d430ab274599405cee1af",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "fda9918cee2241e4955046c641535e50",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "6667361d81e04d569a6921e6443c3ecb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "82fd9797a8ae4d0bb120c2d828d96b16",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "7376c3e5da5f42bbaea8c243d93238da",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "a9e0387f11f14619b7905839ffed00ff",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "0e6f333d4f994bc9a926a9a58434d143",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "b691979cfa894cc2a70145250e49b705",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "513d73a33cb54fa399f38eee52cf1938",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "3d7fd8dafadd47c2a56eca808cf95e81",
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `minmax`'. While `IterativeImputer` is used, the code implicitly adds an `OrdinalEncoder` for categorical features within the `ColumnTransformer` to make the `IterativeImputer` work. This `OrdinalEncoder` step is not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "9c00365ab5554328a104497931dd4a3f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "f852ac8902c74a0f87be436f8f13451a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "81afabde4e4f47afa4464929fb6672cd",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "54811e25cd8d43ab9977cf708a097c87",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "410161c616534144a5a004ae556e44e7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "49686284717e478da8f8a106763fcbb1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "2c3837e9ad3148ed99e3478b56a45eb5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "dd0deae054c94f6ba24e8d8ce6c5b81b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "d44ff2ddfc954ec48fd32e91bd22aa4b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "4090eec1c49244c2910900d502449a13",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "a570b6a828e242908253fd932afa324f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "bc70d458efd044fb8729f65fbb0c42f6",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "26b108fc877b469eb6498a52940eb572",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "86f2f27901684f1bb3f938ca722488c4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "d58cb5e52cfe4d80b9ec4166b0220f4f",
+    "semantic_feedback": [
+      "The pipeline explicitly lists four steps: imputation, normalization, features (PCA), and regression. The generated code includes an additional step, `OneHotEncoder`, for categorical features, which was not specified in the provided pipeline. The instructions state to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "52eaccec35754b4597546768d60fb518",
+    "semantic_feedback": [
+      "The generated code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for mixed data types. However, the pipeline description explicitly states to implement 'only those steps' listed: imputation, normalization, features, and regression. One-hot encoding is an additional transformation step not explicitly mentioned in the provided pipeline steps, making the code non-compliant with the strict 'only those steps' constraint."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "489411cc025d484280f0892b608cd440",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "0d212c8d26864f288fcf5e8f89562a79",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "5dfcdf01444e4fc6809cf4d106b8f231",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "3732171b22364a36a540749006cb6161",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

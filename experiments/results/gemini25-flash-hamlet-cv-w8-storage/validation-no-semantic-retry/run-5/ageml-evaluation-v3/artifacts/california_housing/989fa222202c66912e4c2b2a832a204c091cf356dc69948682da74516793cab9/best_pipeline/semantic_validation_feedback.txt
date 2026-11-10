@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline step 'imputation with `simple_imputer`' is not fully compliant. While `SimpleImputer` is correctly applied to numerical features, it is not applied to categorical features. Instead, `OneHotEncoder` is used, which handles missing values by treating them as a separate category, but this is not 'imputation with `simple_imputer`' as specified in the pipeline step. To be fully compliant, a `SimpleImputer` (e.g., with `strategy='most_frequent'`) should also be included in the `categorical_transformer` before `OneHotEncoder`.

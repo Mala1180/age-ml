@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/17be4085d7a513f4c79cbe2e35fc63784348e760b62b6aaad6034290b68d3d52/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/17be4085d7a513f4c79cbe2e35fc63784348e760b62b6aaad6034290b68d3d52/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/17be4085d7a513f4c79cbe2e35fc63784348e760b62b6aaad6034290b68d3d52/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/madelon/17be4085d7a513f4c79cbe2e35fc63784348e760b62b6aaad6034290b68d3d52/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 15,
+  "best_run_id": "4e16be5b65ce4b8992d89b6671a8f11a",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8807692307692307,
+    0.8538461538461539,
+    0.8807692307692307,
+    0.8615384615384616,
+    0.8923076923076922,
+    0.8730769230769231,
+    0.8884615384615384,
+    0.8307692307692308,
+    0.8846153846153846,
+    0.9038461538461539
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2732.218,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "91283b73f6784f0dadf9ced9c098392c",
+    "1": "02718d0c83b0436eab805a8580e633ae",
+    "2": "f5bd02df8c7a41f39ea8c0c89d3015da",
+    "3": "be0f30eb991a41f7b80b6cbbdef5bd4e",
+    "4": "18f574ad230f4b97806991662ca38b7e",
+    "5": "1175548649ad4b8795acc389198e6150",
+    "6": null,
+    "7": "dd2e844b8f0c4a81a5d8e9183fa37f66",
+    "8": null,
+    "9": "d8437655d85043ed888f2aef2a86223a",
+    "10": "8d64b5115a474b229a195c1737ba3aa9",
+    "11": "24ff2b0c33b6453fb934f87dfbbb1fd5",
+    "12": "c8db9448fb004ec09eb692a06c93c2f1",
+    "13": "0c8f8bcd91f5441eb7df86a52803292e",
+    "14": "03642b01614f43edaca11a7a95673c13",
+    "15": "016fb348fdb8409a88f42cd88d5f8238",
+    "16": "6d73f70483924062815f0c6855afbe48",
+    "17": "b9d4ba9404884aadbde860b6d6c7088a",
+    "18": "b48c637292f14648b19db3edc06d4c76",
+    "19": "f4330916b71c498391df906518f68597",
+    "20": "c65e791bdab8453ba14032c9da42c9ce",
+    "21": "ac3000243d8442798537e872706fa34a",
+    "22": "94dd62b30fcd43a8b7604153006ce491",
+    "23": "8e7ed8869aa941c085e5136aa6c9d4cc",
+    "24": null,
+    "25": "47d6fb9bc8da4621823e52e0935ef58f",
+    "26": null,
+    "27": "3f31801c2dc945c3bcc7fc09025c1d6b",
+    "28": "12bd194024a94b82924cba94141c2632",
+    "29": "8cf1a9045d19495997bedc107b5b4f52"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "0fbb6e5216fd5304a391c1d2293f0b36cac2e981dae98eaf49578d44ce964c22",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "c1dfa8cc9b697698756193a2554d173af3eee0bfb7378edb96d780fef05ba24d",
+  "runtime_human_readable": "1:02:07",
+  "runtime_seconds": 3726.609194237739,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.875,
+  "selected_candidate_key": "0b85bdf71d5d0b93babf37aa3672fb5c3305510ef1938122a9e371392835915b",
+  "selection_sha256": "556634216a5fc0ce667ae889e673f3b8422f4c6f5b949f9c818d4ffe2537fe70",
+  "selection_validation_score": 0.875,
+  "semantic_validation_failure_reasons": {
+    "19": [
+      "The `PCA` step in the pipeline includes `random_state=42`, but `sklearn.decomposition.PCA` does not accept a `random_state` parameter in its constructor unless `svd_solver` is set to 'randomized'. This will cause an error during execution."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.014319360000000001,
+    "input_tokens": 621941,
+    "output_cost": 0.03546250000000001,
+    "output_tokens": 8768,
+    "total_cost": 0.04978186000000001,
+    "total_tokens": 631234
+  },
+  "training_time": 13322.942000000001,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies only `imputation` with `iterative_imputer`, `discretization` with `binarizer`, `features` with `select_k_best`, and `regression` with `knn_regressor`. The instruction was to implement all the steps of the pipeline and *only those steps*.

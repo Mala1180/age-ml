@@ -1,0 +1,109 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/ames_housing/db2b7db93299c4283bf652e34e00fc74c6a5dc3b7aaa6067f38695765ac6a97b/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/ames_housing/db2b7db93299c4283bf652e34e00fc74c6a5dc3b7aaa6067f38695765ac6a97b/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/ames_housing/db2b7db93299c4283bf652e34e00fc74c6a5dc3b7aaa6067f38695765ac6a97b/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-4/ageml-evaluation-v3/protocol/ames_housing/db2b7db93299c4283bf652e34e00fc74c6a5dc3b7aaa6067f38695765ac6a97b/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 24,
+  "best_run_id": "92ed0fa9cf094f44ad8c188ec5b7289c",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    29414.15668860528,
+    33628.09413704831,
+    29951.009862206276,
+    41245.31934549377,
+    46865.66827138019,
+    34801.82794566373,
+    33088.39597188768,
+    32059.720701296483,
+    57533.84177604485,
+    31989.81959175917
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 513.9649999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": "d58cb5e52cfe4d80b9ec4166b0220f4f",
+    "25": "52eaccec35754b4597546768d60fb518",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "139083947411cfc195c2ff63b9fdc379dae68c525ad02fcb61678c58d662a189",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "3602d30c8d039144a1d4181f5c5d892723a5ca68a56649d0b8f9f4c896a1173a",
+  "runtime_human_readable": "0:05:16",
+  "runtime_seconds": 315.8738010972738,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 37057.78542913858,
+  "selected_candidate_key": "84abe201133ae01f4c715f3effbbbddc1240ef0f5941cabee323e1d95ddeb9c7",
+  "selection_sha256": "3823062aa48eb1adbf1150239dbde79c8bc807a083a3c757fdffef5ee281da19",
+  "selection_validation_score": 37057.78542913858,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `minmax`'. While `IterativeImputer` is used, the code implicitly adds an `OrdinalEncoder` for categorical features within the `ColumnTransformer` to make the `IterativeImputer` work. This `OrdinalEncoder` step is not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'."
+    ],
+    "24": [
+      "The pipeline explicitly lists four steps: imputation, normalization, features (PCA), and regression. The generated code includes an additional step, `OneHotEncoder`, for categorical features, which was not specified in the provided pipeline. The instructions state to implement 'only those steps'."
+    ],
+    "25": [
+      "The generated code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for mixed data types. However, the pipeline description explicitly states to implement 'only those steps' listed: imputation, normalization, features, and regression. One-hot encoding is an additional transformation step not explicitly mentioned in the provided pipeline steps, making the code non-compliant with the strict 'only those steps' constraint."
+    ]
+  },
+  "semantic_validation_failures": 4,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.030965219999999995,
+    "input_tokens": 66722,
+    "output_cost": 0.031395000000000006,
+    "output_tokens": 11965,
+    "total_cost": 0.06236022000000001,
+    "total_tokens": 79714
+  },
+  "training_time": 127.99400000000001,
+  "validation_metric": "rmse"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not fully compliant with the instruction "The host sets every exposed random_state". While `NearMiss` correctly had `random_state` removed (as it does not support it), the `RandomForestClassifier` has `random_state=42` hardcoded. This prevents the host from initially setting this parameter, as it is already fixed. To be fully compliant, `random_state` for `RandomForestClassifier` should be set to `None` (or a variable provided by the host if it were part of the function signature) to allow the host to truly 'set' it via `set_params`.

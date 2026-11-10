@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists 'discretization with kbins' as the first step. The current code introduces an additional step, 'OneHotEncoder' for categorical features, which was not specified in the provided pipeline.

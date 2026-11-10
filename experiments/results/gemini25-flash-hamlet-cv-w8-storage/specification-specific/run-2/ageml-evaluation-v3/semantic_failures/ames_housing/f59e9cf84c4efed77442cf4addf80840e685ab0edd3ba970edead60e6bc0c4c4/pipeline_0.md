@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies only three steps: imputation, normalization, and regression. The generated code includes an additional step, `OneHotEncoder`, for categorical features, which was not explicitly requested in the pipeline definition.

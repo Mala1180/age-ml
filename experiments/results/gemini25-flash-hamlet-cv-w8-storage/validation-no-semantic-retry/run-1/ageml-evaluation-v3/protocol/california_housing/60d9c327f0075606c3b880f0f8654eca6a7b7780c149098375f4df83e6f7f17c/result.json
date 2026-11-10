@@ -1,0 +1,149 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/california_housing/60d9c327f0075606c3b880f0f8654eca6a7b7780c149098375f4df83e6f7f17c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/california_housing/60d9c327f0075606c3b880f0f8654eca6a7b7780c149098375f4df83e6f7f17c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/california_housing/60d9c327f0075606c3b880f0f8654eca6a7b7780c149098375f4df83e6f7f17c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/california_housing/60d9c327f0075606c3b880f0f8654eca6a7b7780c149098375f4df83e6f7f17c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 8,
+  "best_run_id": "dc381b3999fb4b369ac68fd4671bab35",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    85822.80804904242,
+    47564.49524359665,
+    79495.51974777397,
+    62727.46838585627,
+    75009.68578144236,
+    67930.6174725157,
+    54551.31391628602,
+    91922.95786129274,
+    84682.94636450984,
+    52532.37560993974
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 752.0359999999998,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "887307b4e2bb42ab83bd8423bbb0d7ac",
+    "1": "fd50bbb735cc43ffad16c0c17d53e935",
+    "2": "3285e0c3aa7946a3ba6d84273c0736e9",
+    "3": "c8b6bb3bdc214c308abc0f2bd5dbeef7",
+    "4": "925a52b95a3b413a915a4dd4ee86afcc",
+    "5": "734cc45fcb4c428db5d43979e66f1f72",
+    "6": "198cf307ae394721a2c68c23cbf4b108",
+    "7": "200cb8bdb30a4b9fa7765cd85ad41128",
+    "8": "e734a0553c1a4728999e7c49262de028",
+    "9": "8ee633651ad641ca9042518a6e011aeb",
+    "10": "4e471ff982dc4ab691bfcfeba9d8ccdc",
+    "11": "c49319da85e04077a33da9977754ad11",
+    "12": "827fcad5025e4a3e8eb786a0decaeb01",
+    "13": "27671387e9f54ea89feff5693423863a",
+    "14": "5aecb6511fd64e26834950c4c51c0598",
+    "15": "681313675a40445ca3b65152871fe03a",
+    "16": "82dbe7659ac24d778740bebf2796f809",
+    "17": "7da64ef9e6394a139d333fa6cee423a7",
+    "18": "303443742b8c455cb3052040851c542a",
+    "19": "ecbe9c3c1b5b4283ba2fca4eeb4f7ff6",
+    "20": "37203d270da146c498434d0705e32a76",
+    "21": "dee6c373f85140b2b821b187fb99ac28",
+    "22": "f79d3abb4ef744abbf31549dd889e6ff",
+    "23": "422e533256f94f2ab3483472cc0fe049",
+    "24": "e05b4e8592264d95a9368009555ce933",
+    "25": "cbd9785ef9284454988fcf5b9594dad1",
+    "26": "780eefe68c9d4e1e88e160fd56993052",
+    "27": "f440a5a7fc584db99a5a9cbcff452caa",
+    "28": "358a2a9c8ecc4e61a2b5bbece75f06cf",
+    "29": "83a550f245fa4f0199c636a6ab0a8129"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "c6f5ef6828327de4d6615da07869192adc75f0aae4ea37ccd3008a56126cdc88",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "55def6ab8e12573f42d399aef6d13582464dbe04ec401e9182e129a02dd3d354",
+  "runtime_human_readable": "0:16:59",
+  "runtime_seconds": 1018.711670037359,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 70224.01884322558,
+  "selected_candidate_key": "65115bbc08fca32e9beb93eac777fd64420313ccb0ef01fbe067b60ef4eb51ee",
+  "selection_sha256": "7138b562bbda212c5abd428890f7e93b90e60a5f0dec74710132915e9891fa04",
+  "selection_validation_score": 70224.01884322558,
+  "semantic_validation_failure_reasons": {
+    "2": [
+      "The pipeline specifies 'normalization' with `robust_scaler` and 'regression' with `lasso`. The generated code includes additional steps: `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features. While these are often necessary preprocessing steps, the prompt explicitly states to implement 'only those steps' mentioned in the pipeline."
+    ],
+    "3": [
+      "The code is not compliant with the provided pipeline. The pipeline specifies 'normalization' with `power_transformer`, 'features' with `pca`, and 'regression' with `linear`. However, the generated code also includes `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly requested in the pipeline definition. The pipeline only mentioned `power_transformer` for normalization, which typically applies to numerical data.",
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies 'normalization' with `power_transformer`, 'features' with `pca`, and 'regression' with `linear`. However, the code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are additional preprocessing steps not explicitly requested in the pipeline definition. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "4": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline."
+    ],
+    "5": [
+      "The code is not compliant because it includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state that the code must implement 'only those steps' of the pipeline."
+    ],
+    "6": [
+      "The generated code introduces an additional preprocessing step, `OneHotEncoder` for categorical features, which was not specified in the provided pipeline. The pipeline only listed `imputation`, `normalization`, and `regression`."
+    ],
+    "9": [
+      "no, the code is not fully compliant because it is not executable as written if the `feature_range` parameter is passed as a list (e.g., `[0, 1]`). The `MinMaxScaler` expects `feature_range` to be a tuple (e.g., `(0, 1)`). To make the code robust and executable, `feature_range` should be explicitly converted to a tuple before being passed to `MinMaxScaler`, for example, `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "12": [
+      "The code is not compliant because it includes an `OneHotEncoder` for categorical features, which was not explicitly listed as a step in the provided pipeline. The instructions stated to implement \"only those steps\".",
+      "The code is not compliant because it includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline. The instructions stated to implement 'only those steps'."
+    ],
+    "16": [
+      "The pipeline includes an additional step, `OneHotEncoder`, for handling categorical features. While this is a necessary preprocessing step for the given dataset and model, it is not explicitly listed in the provided pipeline definition, which specifies only 'imputation', 'normalization', and 'regression'.",
+      "The code implements the specified imputation, normalization, and regression steps. However, the pipeline definition is incomplete for the given dataset, as it does not specify how to handle categorical features (e.g., 'ocean_proximity'). The current implementation uses `remainder='passthrough'` in the `ColumnTransformer`, which means these string categorical features will be passed directly to the `MLPRegressor`. An `MLPRegressor` expects numerical input and will raise an error when encountering string data, thus making the pipeline non-executable and not 'correct and executable' as required by the prompt."
+    ],
+    "17": [
+      "The generated code introduces a `OneHotEncoder` for categorical features, which is a necessary step for the pipeline to be executable with the given dataset (as indicated by the previous error). However, the pipeline description explicitly states to implement 'only those steps': imputation with `iterative_imputer`, normalization with `robust_scaler`, and regression with `nn_regressor`. The `OneHotEncoder` is an additional preprocessing step not listed in the provided pipeline definition, thus violating the 'only those steps' constraint.",
+      "The generated code includes a `OneHotEncoder` and `ColumnTransformer` to handle categorical features, which are not explicitly listed in the provided pipeline definition. The instructions state to implement 'only those steps' specified in the pipeline: imputation, normalization, and regression. While these additions are necessary for the code to execute with mixed data types, they violate the strict 'only those steps' constraint of the pipeline definition."
+    ],
+    "18": [
+      "The pipeline explicitly lists 'normalization with standard', 'features with select_k_best', and 'regression with linear'. The generated code includes a 'SimpleImputer' step for numerical features, which is not specified in the provided pipeline. While imputation is often necessary for real-world datasets, the instruction states to implement 'only those steps' listed in the pipeline."
+    ],
+    "19": [
+      "The code is not compliant because it introduces additional preprocessing steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that were not explicitly requested in the provided pipeline. The pipeline only specified 'normalization with robust_scaler' and 'regression with ridge', implying that only these direct steps should be implemented."
+    ],
+    "21": [
+      "The code introduces an additional preprocessing step, `OneHotEncoder`, for categorical features. While this is necessary for the pipeline to be executable with mixed data types, the provided pipeline explicitly states to implement \"only those steps\" listed: imputation, normalization, features, and regression. Categorical encoding is not listed as one of these steps."
+    ],
+    "23": [
+      "The code introduces an additional step, `OneHotEncoder`, for handling categorical features. The provided pipeline description does not include any step for categorical feature encoding, and the instruction was to implement 'only those steps'.",
+      "The code introduces a `SimpleImputer` step to handle missing values and uses `remainder='drop'` in `ColumnTransformer` to implicitly drop non-numerical features. Neither of these steps (imputation or explicit dropping of features) are mentioned in the provided pipeline description, which strictly states to implement 'only those steps'."
+    ],
+    "25": [
+      "The code introduces an additional step, `OneHotEncoder`, for handling categorical features. While this is a necessary preprocessing step for the given dataset, it is not explicitly listed in the provided pipeline definition, which specifies only 'imputation', 'normalization', 'features', and 'regression'. The instruction was to implement 'only those steps'."
+    ],
+    "28": [
+      "The code is not fully compliant because the `MinMaxScaler` expects the `feature_range` parameter to be a tuple, but it was likely passed as a list in the previous execution, causing a `TypeError`. To ensure correctness and executability, `feature_range` should be explicitly cast to a tuple, e.g., `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ]
+  },
+  "semantic_validation_failures": 21,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.05257665,
+    "input_tokens": 216161,
+    "output_cost": 0.103905,
+    "output_tokens": 34833,
+    "total_cost": 0.15648165000000003,
+    "total_tokens": 252027
+  },
+  "training_time": 2919.597,
+  "validation_metric": "rmse"
+}

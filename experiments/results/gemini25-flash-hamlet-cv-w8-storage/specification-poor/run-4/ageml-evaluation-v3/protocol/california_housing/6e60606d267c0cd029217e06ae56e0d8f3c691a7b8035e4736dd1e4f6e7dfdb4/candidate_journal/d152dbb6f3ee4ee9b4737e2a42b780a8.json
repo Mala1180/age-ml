@@ -1,0 +1,88 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "2e7b0d44d726e644262c5cc54507378b3a58547a94f76193ad5c29d5f300612f",
+  "code_sha256": "d3ade3fb88029ad2fc639d3fd9bb9d421175c237681613d2684b3c430f700e43",
+  "completed_at": 1793747455.487276,
+  "cv_fold_scores": [
+    181820.50457272463,
+    158001.83197226646,
+    238975.72718846396,
+    192888.87873178144,
+    252979.3555746981,
+    217901.0662442848,
+    133887.73063263734,
+    233144.30878393227,
+    285417.70519287937,
+    160212.65835630108
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "regressor__random_state": 42
+    }
+  ],
+  "fit_attempt": 3,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "hidden_layer_sizes": [
+      20
+    ],
+    "k": 5,
+    "max_iter": 300,
+    "n_bins": 10,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "3c14328660e5e4e5ddca405c0c5e1f390c1b79a9711a943b04a6cc3ae0bd76bb",
+  "pipeline_id": 2,
+  "pipeline_run_id": "1bc3e0e54ead41fda28145d743db9d05",
+  "run_id": "d152dbb6f3ee4ee9b4737e2a42b780a8",
+  "run_identity": "fd67b4c21084a0d244928197a98853c763e9a5010eaa875d3a22c8b42a6ef580",
+  "validation_score": 205522.97672499693,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

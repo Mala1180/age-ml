@@ -1,0 +1,2 @@
+Attempt 1:
+The 'normalization' step with `power_transformer` is implemented conditionally based on the `encode` parameter of `KBinsDiscretizer`. The pipeline description lists 'normalization' as a distinct step without any conditions, implying it should always be applied to the output of the discretization step for numerical features. If `encode` is set to 'onehot', the `power_transformer` is skipped, which means this step is not always present in the pipeline as described.

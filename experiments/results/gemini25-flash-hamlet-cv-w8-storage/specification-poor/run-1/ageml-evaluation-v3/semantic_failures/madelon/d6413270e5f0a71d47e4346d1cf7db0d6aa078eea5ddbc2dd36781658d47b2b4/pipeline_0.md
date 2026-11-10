@@ -1,0 +1,2 @@
+Attempt 1:
+The import statement for `IterativeImputer` is incorrect. The line `from sklearn.experimental.enable_iterative_imputer import enable_iterative_imputer` should be `from sklearn.experimental import enable_iterative_imputer` to correctly enable the experimental feature. This makes the code not executable as written.

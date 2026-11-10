@@ -1,0 +1,124 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/adult/80fb3db1b2e32f234fa253d3b63d77dd16c30af5ae67ddf25b9fa6205be9d63d/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/adult/80fb3db1b2e32f234fa253d3b63d77dd16c30af5ae67ddf25b9fa6205be9d63d/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/adult/80fb3db1b2e32f234fa253d3b63d77dd16c30af5ae67ddf25b9fa6205be9d63d/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/adult/80fb3db1b2e32f234fa253d3b63d77dd16c30af5ae67ddf25b9fa6205be9d63d/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "70240e75d6d14519b27614cf6dcc4934",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8199477947073713,
+    0.8239701206536643,
+    0.8171388626745506,
+    0.8267884527478361,
+    0.8264705014966749,
+    0.812644390127647,
+    0.8311525766003083,
+    0.8196248533504036,
+    0.8276202066161851,
+    0.8260017937591457
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 2106.527,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "89f9b4e29e5043f8a1cd87412d612d6c",
+    "1": "6260006e0803437ca15792e6e0bfc48e",
+    "2": "de99169b4e304a8bb4988072304f354b",
+    "3": "dec62bd5f2094d1ba8df42cb963ced19",
+    "4": "e60f7674f0b94d62b2239775235ca283",
+    "5": "6888f71e800d4529b818e0cabcb54bdb",
+    "6": "1f523001ef1041e494d59cd381fc79b6",
+    "7": "e31a89ff914c4f8081d4e89c4bdf8fca",
+    "8": "afc0935405f84644a2fb6660dc344123",
+    "9": "a29bf6671341405693446a878df970f6",
+    "10": "405386b4e8e94cdfa1c54761b25b6827",
+    "11": "770a488fccd74b19b4cbe00188e8c628",
+    "12": "e377878f6c6a4366bdc603340eb12e77",
+    "13": "61969abff17147e784be116fa8ec9894",
+    "14": "d70547cd39ba4f40aa9de3a3ef68b62a",
+    "15": "5a088bcded7048629697ca1bf9b43ece",
+    "16": "1504ef44832549cbbf19f5dfbc664dc9",
+    "17": "3134081dd290455187a0069ca408f0be",
+    "18": "26185226ccff4c61bfa8bdc87d3301c0",
+    "19": "8a69ca396a22499689a38bbb5bd12697",
+    "20": "97b933a141684c5c8bc8e6336fe14a08",
+    "21": "7e03202d77a84fc28a57c6e28629c008",
+    "22": "81edfd1a98144692b027a9668652811c",
+    "23": "f047285c04524a22b627f693d922ff3f",
+    "24": "fc50593b8bc14dfb9b9d6107a9cbc1b9",
+    "25": "bad3149d179f40c1a0a07818a15a1077",
+    "26": null,
+    "27": "e3d27b55b4ea4a11b5ae6e603529b351",
+    "28": "1b151ef1a24745ac8ec314ddd1cee117",
+    "29": "195014462715418fb43558825d12ec4d"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "82cc6f83a1c874be5ae375ebeb34a2a22b81b946be92fea0270954ed71c83bfd",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "9a75ed071c668e5810d619602ea078509497198336cdca1ffac9a7db912dc81a",
+  "runtime_human_readable": "1:00:30",
+  "runtime_seconds": 3629.6411218978465,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8231359552733787,
+  "selected_candidate_key": "1141d9028ebccbb97de23f530314deab9211c6bd1af0d97e99e37d92e1cc5f62",
+  "selection_sha256": "f2ac35a51e21ab8f30ab85e3ed498ee0a678a7fd34ac26b8798b3f68a5d6ce1d",
+  "selection_validation_score": 0.8231359552733787,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The code is not compliant because the `ColumnTransformer` uses `remainder='passthrough'`, which will pass non-numerical (e.g., categorical) columns to the subsequent `RobustScaler` and `PCA` steps. These steps are designed for numerical data and will raise an error when encountering string or object data types. The provided pipeline only specifies steps for numerical feature processing (discretization, normalization, PCA) and does not include any steps for handling categorical features. Therefore, passing through categorical features without further processing makes the pipeline non-executable as intended by the specified steps."
+    ],
+    "6": [
+      "No, the generated code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with iterative_imputer'. While the code correctly uses `IterativeImputer` for numerical features, it introduces `SimpleImputer` for categorical features. The pipeline did not explicitly mention using a different imputation strategy for categorical data, thus adding `SimpleImputer` deviates from the strict instruction to implement 'only those steps' of the pipeline."
+    ],
+    "7": [
+      "The 'features' step with `pca` is not fully compliant. The current implementation applies PCA only to the numerical features within the `numerical_transformer`. The pipeline step 'features with `pca`' implies applying PCA to the combined feature set after all initial preprocessing (imputation and scaling/one-hot encoding for both numerical and categorical features). To be fully compliant, PCA should be applied after the `ColumnTransformer` to the entire preprocessed feature space."
+    ],
+    "10": [
+      "The generated code is not compliant with the provided pipeline because it includes `OneHotEncoder` for categorical features. This step is not explicitly listed in the 5 required pipeline steps. The pipeline specifies 'discretization with binarizer' and 'normalization with standard', which are applied to numerical features, but does not mention any specific handling for categorical features, thus adding `OneHotEncoder` violates the 'only those steps' constraint."
+    ],
+    "14": [
+      "The `MinMaxScaler` expects the `feature_range` parameter to be a tuple (e.g., `(0, 1)`), but it is often provided as a list (e.g., `[0, 1]`). The current code directly passes the `feature_range` argument, which can lead to a `TypeError` if it's not a tuple, making the code not fully executable under common parameter inputs."
+    ],
+    "18": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly used for numerical features, a SimpleImputer is used for categorical features. To be fully compliant, the imputation strategy for categorical features should also align with 'iterative_imputer' if possible (e.g., by encoding them first and then applying IterativeImputer, or by using a more advanced imputer that handles mixed data types if that was the intent)."
+    ],
+    "24": [
+      "The code introduces `SimpleImputer` for categorical features and `OneHotEncoder` for encoding them. These steps are not explicitly listed in the provided pipeline description, violating the instruction to implement 'only those steps'. Additionally, the pipeline specified 'imputation with `iterative_imputer`', but `SimpleImputer` is used for categorical columns instead of `IterativeImputer`.",
+      "The pipeline specifies 'imputation with iterative_imputer' but the code uses 'SimpleImputer' for categorical features. Additionally, the code includes 'OneHotEncoder' for categorical feature encoding, which is not explicitly listed as a step in the provided pipeline."
+    ],
+    "27": [
+      "The pipeline explicitly requests 'discretization with kbins' as the first step. The generated code correctly applies `KBinsDiscretizer` to numerical features but also adds `OneHotEncoder` for categorical features. The pipeline description does not mention any encoding for categorical features, making the addition of `OneHotEncoder` an extra step not specified in the provided pipeline."
+    ]
+  },
+  "semantic_validation_failures": 9,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.012388680000000001,
+    "input_tokens": 41281,
+    "output_cost": 0.03648750000000001,
+    "output_tokens": 10574,
+    "total_cost": 0.04887618,
+    "total_tokens": 51855
+  },
+  "training_time": 10671.876000000002,
+  "validation_metric": "balanced_accuracy"
+}

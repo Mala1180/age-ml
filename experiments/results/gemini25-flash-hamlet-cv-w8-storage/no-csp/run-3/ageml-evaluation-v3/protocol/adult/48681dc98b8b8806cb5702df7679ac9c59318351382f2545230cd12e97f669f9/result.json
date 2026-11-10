@@ -1,0 +1,73 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-3/ageml-evaluation-v3/protocol/adult/48681dc98b8b8806cb5702df7679ac9c59318351382f2545230cd12e97f669f9/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-3/ageml-evaluation-v3/protocol/adult/48681dc98b8b8806cb5702df7679ac9c59318351382f2545230cd12e97f669f9/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-3/ageml-evaluation-v3/protocol/adult/48681dc98b8b8806cb5702df7679ac9c59318351382f2545230cd12e97f669f9/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/no-csp/run-3/ageml-evaluation-v3/protocol/adult/48681dc98b8b8806cb5702df7679ac9c59318351382f2545230cd12e97f669f9/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 0,
+  "best_run_id": "4805815278b44bd797b352bec86302f8",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8251142264141562,
+    0.8125571477374329,
+    0.8175411401271068,
+    0.8240107568898654,
+    0.8214431853370099,
+    0.8031843254463962,
+    0.8239235430312227,
+    0.8217370680672879,
+    0.8228137840834386,
+    0.8261636695844995
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 64.588,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "f715e203b5934873bc5ad96cd81b7f7b"
+  },
+  "pipelines_found": 1,
+  "protocol_sha256": "e1b2e323a12f105019c342c88d95e6b37705fb090f3bbfbaab89ed433faa67be",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "afe9c2c65c8686ef4f0156ecd1b30e8d848969f03c1f4091c7381956fc79a9ae",
+  "runtime_human_readable": "0:08:01",
+  "runtime_seconds": 480.7253417521715,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8198488846718416,
+  "selected_candidate_key": "403f2a785dfa4822241369cafe6b7839e3944182cd7337be77649918e9fbf751",
+  "selection_sha256": "bc734336bf90cdf8dc0d657a381309bea802f0067789b64a50afaafa7f7e146b",
+  "selection_validation_score": 0.8198488846718416,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with iterative_imputer' for all imputation. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, `OneHotEncoder` is introduced for categorical features, which is a necessary preprocessing step but is not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0042615,
+    "input_tokens": 23556,
+    "output_cost": 0.023270000000000002,
+    "output_tokens": 12446,
+    "total_cost": 0.0275315,
+    "total_tokens": 36002
+  },
+  "training_time": 301.83799999999997,
+  "validation_metric": "balanced_accuracy"
+}

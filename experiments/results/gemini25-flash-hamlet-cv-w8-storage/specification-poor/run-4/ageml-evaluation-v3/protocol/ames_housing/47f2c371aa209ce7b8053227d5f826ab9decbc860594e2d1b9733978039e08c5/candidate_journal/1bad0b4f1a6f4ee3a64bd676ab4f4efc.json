@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "be270ea87e9d7151786a140e1e62eb2776dc839ba09b6d86dab05e1d248b12c4",
+  "code_sha256": "e41d62e6f2f346636dc440398ed05e41e3dba549aa38e98f79ffb72e430d3f35",
+  "completed_at": 1793748618.4363244,
+  "cv_fold_scores": [
+    62518.589684868384,
+    73161.88784601646,
+    82981.46913343042,
+    80654.19146897264,
+    88450.8528819269,
+    61241.82462951324,
+    65853.35886413042,
+    67441.82146748654,
+    86318.43251911011,
+    63634.89190146816
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "aecb04f7f7d81fe45dc52d0908be9ce553424563e5a0a0ef3bb1d49a829ecb1e",
+  "pipeline_id": 20,
+  "pipeline_run_id": "8b202307406f49b7971db4fcf3cdeb94",
+  "run_id": "1bad0b4f1a6f4ee3a64bd676ab4f4efc",
+  "run_identity": "e33dcc0e11de140e2ac58fc54ccca6896aaad55a68e5974d8879f2e96ee2562e",
+  "validation_score": 73225.73203969232,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

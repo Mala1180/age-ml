@@ -1,0 +1,138 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/adult/78b02e4de093cff8d784cc5a64f85e82d3721fd0946122b45af98485238ab7f4/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/adult/78b02e4de093cff8d784cc5a64f85e82d3721fd0946122b45af98485238ab7f4/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/adult/78b02e4de093cff8d784cc5a64f85e82d3721fd0946122b45af98485238ab7f4/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/adult/78b02e4de093cff8d784cc5a64f85e82d3721fd0946122b45af98485238ab7f4/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "a03946920cc743cea08018d7c682bdd6",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8205002803864822,
+    0.8215383779572947,
+    0.8105337710308624,
+    0.8228251212822744,
+    0.827118845569695,
+    0.8064408387608555,
+    0.8282064596053039,
+    0.8187785167983587,
+    0.8312632186118054,
+    0.8229780776842777
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 4052.0519999999983,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "dfe68006a5d640a7a612fc9026b4f1cd",
+    "1": "17150bd335b6400aa2f984d11f5002ff",
+    "2": "b3c32ad9b95248a28d0d4dd6f18416eb",
+    "3": "7fbc74ab20ae441cbd3cd7e3b8dd5714",
+    "4": "c1282a2d9de448558ff6213edd2eda97",
+    "5": "887d58818c1649ae92e0c2a05d7a66be",
+    "6": "cd36c245df7d46bfa4df5012f0de38ec",
+    "7": "51d8199b5e5a48b089eaf01014654a97",
+    "8": "8d6ff7755587402fb6978df148007277",
+    "9": "56f36871f1194813b93a8e5cf5c910be",
+    "10": "824bb95a7c204b8ba28f7b0b9413cff0",
+    "11": "c55b8f7ad8bf47179616bc017a68be43",
+    "12": "506ee65d190442879029db007a1382ee",
+    "13": "80b442ae7862466caf098c4058b4848c",
+    "14": "dfa10120002940c3b4501ec57fdd7d79",
+    "15": "469a505c52874a4694c4ea24ded3049c",
+    "16": "0257395280f44d138041182399eb5892",
+    "17": "3456d97dcb0142c894d991d79f38251b",
+    "18": "a92d609e3ea44ade82a2cb590f58c64e",
+    "19": "871075be0cf04b6fb548c61d18bcef5d",
+    "20": "02cfa571293a4a1a961d02845363e6da",
+    "21": "075875c91b7b4926ba1b5c61d1e4f1eb",
+    "22": "64d33a7e91c34bb28b40472319d089fd",
+    "23": "38a74ed4ffc64b909fa11fb3273d0ad9",
+    "24": null,
+    "25": "487ec5c1fb344839a9d687a3f3ae81db",
+    "26": "3a34300ca6654e53829ff8dac27ec1ee",
+    "27": "3f6727464b754a9582086b4a3d5f16bd",
+    "28": "fbbe5979f6e34a4f88f200d097efc303",
+    "29": "e46370a149bb484f8570ae02c6529cb9"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "f6a712e6320d276ce19a25b9cb621732e75be0c34a17a2680e5c45a4ca2f3b2b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "1740e523a0a436c577c432202088f27562226903bf8eb80e391cf38f20846de7",
+  "runtime_human_readable": "1:00:35",
+  "runtime_seconds": 3634.629385717213,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.821018350768721,
+  "selected_candidate_key": "4c154fdc8b649489a2d426c9e02a3060097b8a849b4b75b995e29f3f72932a0c",
+  "selection_sha256": "7f29925b724932b6f43ffe0f3f7ca7073db5715eea25f7986b49b7b6c4bb17fc",
+  "selection_validation_score": 0.821018350768721,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is used for numerical features, `SimpleImputer` is used for categorical features. The pipeline only mentioned `iterative_imputer` for the imputation step, implying it should be the sole imputation method or that specific instructions for categorical imputation should have been provided if different.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is used for numerical features, `SimpleImputer` is used for categorical features. The pipeline only mentioned `iterative_imputer` for the imputation step, implying it should be the sole imputation method or that specific instructions for categorical imputation should have been provided if different."
+    ],
+    "4": [
+      "The code is not compliant because it includes `OneHotEncoder` for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline. The instruction was to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "6": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly used for numerical features, SimpleImputer is used for categorical features. To be fully compliant with the strict wording, IterativeImputer should be used for all imputation, which would typically require encoding categorical features before imputation if IterativeImputer is to be applied to them."
+    ],
+    "8": [
+      "The pipeline includes an extra step, `OneHotEncoder`, for categorical features. The instructions state to implement only the steps provided in the pipeline. While necessary for processing categorical data, it was not explicitly listed as one of the four pipeline steps.",
+      "The code is not compliant because it includes `SimpleImputer` for categorical features and `OneHotEncoder`. These steps are necessary for processing categorical data but were not explicitly listed in the provided pipeline steps. The instructions state to implement only the steps provided in the pipeline."
+    ],
+    "13": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists four steps: discretization, normalization, features (PCA), and classification. The generated code introduces an additional step, `OneHotEncoder`, for categorical features, which is not part of the provided pipeline definition. While this step is necessary for handling the dataset's mixed data types and preventing errors, it violates the constraint to implement \"only those steps\" specified in the pipeline.",
+      "The generated code is not compliant with the provided pipeline. It introduces an additional step, `FunctionTransformer` named 'to_dense', within the numerical pipeline. While this step is a technical necessity to convert sparse output from `KBinsDiscretizer` (if `encode='onehot'`) to dense input required by `PowerTransformer`, it is not explicitly listed as one of the four steps in the provided pipeline definition. The instruction states to implement 'only those steps'.",
+      "no, the pipeline is not robustly executable for all valid parameter combinations. Specifically, if the 'encode' parameter for `KBinsDiscretizer` is set to 'onehot', the discretizer will output a sparse matrix. However, `PowerTransformer` expects dense input, which will lead to a runtime error. While the code implements the specified steps, it fails the 'correct and executable' requirement for certain valid inputs without an explicit sparse-to-dense conversion, which was previously deemed non-compliant as an 'additional step'. This creates a conflict between strict step compliance and robust executability."
+    ],
+    "14": [
+      "The pipeline description specifies 'normalization with `minmax`' and 'classification with `nn`'. The generated code correctly implements these steps. However, it also introduces `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly mentioned in the provided pipeline. The instructions state to 'implement all the steps of the pipeline and only those steps'."
+    ],
+    "25": [
+      "The generated code includes an `OneHotEncoder` step for categorical features within the `categorical_transformer`. While this is a necessary preprocessing step for `RandomForestClassifier` to handle string categorical data, it is not explicitly listed in the provided pipeline steps ('imputation', 'discretization with binarizer', 'classification'). The instruction was to implement 'only those steps'."
+    ],
+    "26": [
+      "The code introduces `OneHotEncoder` for categorical features, which is not explicitly listed as one of the five steps in the provided pipeline description. The prompt specifies to implement 'only those steps'. While `OneHotEncoder` is necessary for handling string data and resolving previous execution errors, it is an additional step beyond the explicit instructions."
+    ],
+    "29": [
+      "The code is not fully compliant with the provided pipeline. While it correctly implements imputation, discretization, rebalancing, and classification, it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the pipeline definition, which states to implement 'only those steps'.",
+      "The code is not compliant because it implicitly drops categorical features by setting `remainder='drop'` in the `ColumnTransformer`. This action is not explicitly listed as a step in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because the 'discretization' step with `kbins` is only applied to numerical features. Categorical features are imputed but not discretized, which means the 'discretization' step is not fully implemented for all relevant features. Furthermore, the `GaussianNB` classifier will likely fail as it will receive non-numerical (string/object) data from the categorical features, making the pipeline non-executable.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the provided pipeline, violating the requirement to implement 'only those steps'.",
+      "The code is not compliant because the 'discretization' step with `kbins` is not applied to categorical features. This means the pipeline step is not fully implemented for all relevant features. Additionally, the pipeline is not executable as the `GaussianNB` classifier will receive non-numerical (string) data from the categorical features, which it cannot handle."
+    ]
+  },
+  "semantic_validation_failures": 22,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.06241962,
+    "input_tokens": 373179,
+    "output_cost": 0.17691,
+    "output_tokens": 73924,
+    "total_cost": 0.23932962,
+    "total_tokens": 448197
+  },
+  "training_time": 8786.603,
+  "validation_metric": "balanced_accuracy"
+}

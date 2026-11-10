@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, `OneHotEncoder`, for categorical features which was not specified in the provided pipeline. The instructions explicitly state to implement 'only those steps' listed in the pipeline.

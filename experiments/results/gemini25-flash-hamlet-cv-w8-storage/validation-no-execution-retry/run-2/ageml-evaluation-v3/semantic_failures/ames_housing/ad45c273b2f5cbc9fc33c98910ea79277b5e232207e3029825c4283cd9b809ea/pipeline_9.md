@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline.

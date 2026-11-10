@@ -1,0 +1,2 @@
+Attempt 1:
+The `random_state` parameters for `IterativeImputer` and `AdaBoostClassifier` are hardcoded to `42`. The instructions state: "The host sets every exposed random_state", implying that `random_state` should either be exposed as a hyperparameter in the `build_model` function signature or not set within the function, allowing the host to manage it externally.

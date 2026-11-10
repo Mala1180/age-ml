@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly defines only two steps: 'normalization' with `minmax` and 'regression' with `nn_regressor`. The generated code includes additional steps for handling missing values (`SimpleImputer`) and categorical features (`OneHotEncoder`) which are not specified in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.

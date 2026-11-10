@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces additional steps not explicitly mentioned in the pipeline. Specifically, it adds a `SimpleImputer` and `OneHotEncoder` for categorical features. The pipeline only specified `iterative_imputer` for imputation, `power_transformer` for normalization, and `pca` for features, which are typically applied to numerical data. The instruction was to implement 'only those steps'.

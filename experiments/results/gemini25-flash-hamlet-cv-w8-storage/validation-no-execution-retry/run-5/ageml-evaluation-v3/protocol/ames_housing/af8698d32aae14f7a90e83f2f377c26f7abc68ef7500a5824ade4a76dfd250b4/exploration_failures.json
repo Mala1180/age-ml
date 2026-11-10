@@ -1,0 +1,223 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "61dbffcf365b443e8b0786e70320c7c3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "dbab9b7ecf2149f3b3524f1c3062c5a8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "fc7fcdc8a5bc4c3686d78ed35cd3f7d3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "6e73a119e903415b81ea34c12a1c3617",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "48aa12ebe55a40fba4f16cc864e9bf8c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "fab81e6f2c90428bb8478a28ffc5a9d0",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "a4d88dd0607c49fcbeea53ee29866d4a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "f9c5662c6b0545458497b4dc89e6b466",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "595fe7708afa46d5bde413ffb6e78df9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 9,
+    "pipeline_run_id": null,
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to make categorical features compatible with `IterativeImputer`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code drops categorical features instead of imputing them. This means the imputation step is not applied to all features that might require it, thus not implementing 'all the steps' of the pipeline for the entire dataset. The pipeline does not specify dropping features.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "9587e9779b49452992d981168cff45df",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "90ff1b8bae4e42b88c47db04870734ff",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "e8a726beac094300ab1d9ff0510b1bf0",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "0940241024c1415a8aaf7d0092601477",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "bc68ed427d964ce486701312e18b9c17",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "a2d343f6c2b146069e56dc4d4b7aa5ec",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "f70215c5ad324c898e5f5b9e75a63ad4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "bb6bc41e8cb74c77852f16ee375488fe",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "45017df5f14a48abaa145651f292ba5b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "dc61708f9ff74097aed0f660fa945ce3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "b9697959483d43f7b3ea80891dafe00a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "102c96659c7046af835845fdd99073ad",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "cfc5a73b86e6420fa09ff206b92b4470",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "26fd7e8c915e4d2fa456a0abb9c22d92",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "f54fbdd3dddc4782ad045543482309fb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "2d3e93c0f1934d2ba4bf6a28e3387077",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "46c1368376354efb98782311bfdcdb51",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "302316e96c534dd789fe848f72247c0c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "016de794231949c2abc1475bbc0afa9e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "87bfbec0f2374741bef063bd1afa66b4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

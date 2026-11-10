@@ -1,0 +1,95 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "53237dfa775e0bc4afb00fd22eae385a278fc145826eea9d4acdd3c89edf25a2",
+  "code_sha256": "391a3258c6b2d73de7fb9b03393cb90afe990d382e12bda4cf20949e0c752fea",
+  "completed_at": 1793469710.1981957,
+  "cv_fold_scores": [
+    71204.5598439571,
+    80152.08536520926,
+    95853.29255192558,
+    72682.3879615002,
+    80923.25228285257,
+    78646.49081794311,
+    56674.345510161766,
+    82430.7378504444,
+    87406.65108532186,
+    64045.614842934956
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    },
+    {
+      "preprocessor__num__discretization__random_state": 42,
+      "preprocessor__num__imputation__random_state": 42,
+      "regression__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "alpha": 1.0,
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "max_iter": 10,
+    "n_bins": 10,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "2ec2d208ca965b61b4aa64cbf4a15a1d9b3816c8d3157379dcb21a4b86f4b3c5",
+  "pipeline_id": 22,
+  "pipeline_run_id": "cbaa69951eaf4192aecb689563b1229b",
+  "run_id": "2e7e61fcccb24c81b5521bbcc7004f39",
+  "run_identity": "5843bbe415e68bffe3380b15fdccfb9f223e3d1112551c63ff67055ea65a73ff",
+  "validation_score": 77001.94181122509,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

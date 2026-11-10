@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `ColumnTransformer` for selecting numerical features, which was not specified in the provided pipeline. The instruction states to implement 'only those steps' listed in the pipeline.

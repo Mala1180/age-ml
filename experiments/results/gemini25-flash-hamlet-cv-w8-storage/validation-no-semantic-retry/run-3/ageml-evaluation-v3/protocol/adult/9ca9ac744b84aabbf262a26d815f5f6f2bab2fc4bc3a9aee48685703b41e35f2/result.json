@@ -1,0 +1,134 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-3/ageml-evaluation-v3/protocol/adult/9ca9ac744b84aabbf262a26d815f5f6f2bab2fc4bc3a9aee48685703b41e35f2/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-3/ageml-evaluation-v3/protocol/adult/9ca9ac744b84aabbf262a26d815f5f6f2bab2fc4bc3a9aee48685703b41e35f2/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-3/ageml-evaluation-v3/protocol/adult/9ca9ac744b84aabbf262a26d815f5f6f2bab2fc4bc3a9aee48685703b41e35f2/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-3/ageml-evaluation-v3/protocol/adult/9ca9ac744b84aabbf262a26d815f5f6f2bab2fc4bc3a9aee48685703b41e35f2/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "7481a28487314a91b449bec5c7cb49d7",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8205002803864822,
+    0.8215383779572947,
+    0.8105337710308624,
+    0.8228251212822744,
+    0.827118845569695,
+    0.8064408387608555,
+    0.8282064596053039,
+    0.8187785167983587,
+    0.8312632186118054,
+    0.8229780776842777
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 3688.442000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "8a46a4eb922443318e704b1a27f54ce5",
+    "1": "9c2bc80a09d540e79e97d13771c5835f",
+    "2": "8fc133d951504af2b8619788ddbc1fc3",
+    "3": "c948254386244c1e9bd846af071c8197",
+    "4": "9527cdd1ede64a39a7f309026fb73255",
+    "5": "28e379fc419946f588d1561eba50bc9f",
+    "6": "e791b8f3e274463288211ad790d48ed1",
+    "7": "56e51c17a1ea416e93ed20adb456ca9b",
+    "8": "dd12d777456c4a46a6d20d113a426172",
+    "9": "7876261db34a4735a1d9d61b3bd2cd75",
+    "10": "a8dbeab166ec4f9c839d1820a37491b8",
+    "11": "39dcba90a8e74c90bc9ec991bb59d322",
+    "12": "c71e51dd41fb4fd1b7e58a70f2021222",
+    "13": "41df8b72466f4ceebaaf3d2a0731bb7c",
+    "14": "f0a38a81f5b5461d9ef6d5c70a9d83ae",
+    "15": "a1337dc1cc1e4d198c6350a9da1adca9",
+    "16": "239dc3c9b0964bfd99dde17f8a4185e4",
+    "17": "37bcc40312da4084ad5c00de1834dc63",
+    "18": "4a672d997f4d41b3b686673c6b22e966",
+    "19": "5223ab0f43344fcf8622259e21af4237",
+    "20": "bd61ce2aec7b4a4884c434eedc8415ed",
+    "21": "3f46fede2f744a528c243f57c75bf464",
+    "22": "cd2f9ec433394b07ba8290976b8b3447",
+    "23": "cf658aaa943341f5b6c3e83c08a96ae1",
+    "24": null,
+    "25": "cc286624d7494c9aa4132cff64830123",
+    "26": null,
+    "27": "eab2021f575f4892b3dd284df9a07926",
+    "28": "84f616ad86bd45129e07060530fc2b6d",
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "2e8c83287649f45c44240bc2b854a7baac1abe6553a3477cc9dda7c413d5e208",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "ed95e480d02616c49b451983b08c36bf4345e7d374534f94989c6c25ffed7a6d",
+  "runtime_human_readable": "1:00:33",
+  "runtime_seconds": 3632.6430054716766,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.821018350768721,
+  "selected_candidate_key": "430fdb663d1b062f5fff70f0674b9a3e8f56156306358d9cd214163ef250b108",
+  "selection_sha256": "cfdd0ac5757e1e2074e359a75e88385ad273106a18faf28380a654d4023f6030",
+  "selection_validation_score": 0.821018350768721,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline specifies 'imputation with iterative_imputer'. However, the code uses 'SimpleImputer' for categorical features within the 'categorical_transformer' before applying 'IterativeImputer' to the combined dataset. This introduces an additional imputation method not explicitly mentioned in the provided pipeline, violating the constraint to implement only the specified steps.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder(handle_missing='create_missing_category')' to handle missing values in categorical features *before* the 'IterativeImputer' step. This introduces an additional method for handling missing values that is not 'iterative_imputer', violating the constraint to implement only the specified steps.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The generated code is incomplete and ends abruptly, making it non-executable and therefore not compliant with the request to provide correct and executable code.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method.",
+      "The pipeline specifies 'imputation with iterative_imputer' as the sole imputation step. However, the code uses 'OneHotEncoder' for categorical features. If categorical columns contain NaN values, OneHotEncoder implicitly handles these NaNs by treating 'NaN' as a distinct category and creating a corresponding one-hot encoded column. This constitutes an implicit form of imputation that is not 'iterative_imputer', violating the constraint to implement only the specified imputation method."
+    ],
+    "1": [
+      "The pipeline explicitly states 'discretization with binarizer' as the first step. The generated code includes an additional step, 'OneHotEncoder' for categorical features, which was not specified in the provided pipeline. The instruction was to implement all the steps of the pipeline and ONLY those steps."
+    ],
+    "8": [
+      "The pipeline includes an extra step, `OneHotEncoder`, for categorical features. The instructions state to implement only the steps provided in the pipeline. While necessary for processing categorical data, it was not explicitly listed as one of the four pipeline steps."
+    ],
+    "9": [
+      "No, the code is not fully compliant because it is not robustly executable. The `MinMaxScaler` expects the `feature_range` parameter to be a tuple (e.g., `(0, 1)`), but the code passes `feature_range` directly, which might be a list (e.g., `[0, 1]`) based on previous execution errors. To ensure executability, `feature_range` should be explicitly converted to a tuple, for example, `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "12": [
+      "no, the pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly used for numerical features, SimpleImputer is used for categorical features. To be strictly compliant with the instruction, IterativeImputer would need to be applied to all features, which would typically require encoding categorical features before imputation, or the pipeline instruction would need to specify different imputation strategies for different data types."
+    ],
+    "16": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `robust_scaler`, features with `pca`, and classification with `knn`. While `OneHotEncoder` is necessary for the dataset's string columns, it is not one of the four specified steps."
+    ],
+    "19": [
+      "The pipeline explicitly lists 5 steps: imputation, normalization, features (PCA), rebalancing, and classification. The generated code includes an additional step, `OneHotEncoder`, for categorical feature encoding, which is not mentioned in the provided pipeline. The instructions state to \"implement all the steps of the pipeline and only those steps\".",
+      "The code correctly implements all the steps specified in the pipeline (imputation, normalization, PCA, rebalancing, classification) and does not add any extra steps, thus being compliant with the *structure* of the provided pipeline. However, the dataset contains categorical features (e.g., 'workclass', 'education'). The pipeline specifies imputation and normalization, but it does *not* include a step for encoding these categorical features into a numerical format. The `PCA` step and the `MLPClassifier` (Neural Network) require all input features to be numerical. As a result, if categorical features are present in `X_train`, they will be passed to `PCA` as object/string types after only imputation, which will cause a runtime error. Therefore, the code is not executable for the given dataset without an additional categorical encoding step, which is not part of the provided pipeline definition.",
+      "The generated code is incomplete and stops abruptly in the middle of a comment. It is not executable and therefore cannot be fully compliant with the pipeline requirements."
+    ],
+    "25": [
+      "The generated code is not fully compliant with the provided pipeline and function signature for the following reasons:\n1.  **Inconsistent use of `imputation_strategy` parameter**: The `build_model` function receives `imputation_strategy` as a parameter. However, the code uses this parameter only for numerical features. For categorical features, it hardcodes the imputation strategy to `'most_frequent'`. This means the `imputation_strategy` parameter does not universally control all imputation steps as implied by its presence in the function signature.\n2.  **Missing Categorical Encoding**: The pipeline specifies `random_forest` for classification. `RandomForestClassifier` expects numerical input. The `categorical_transformer` only performs imputation but does not include any encoding step (e.g., `OneHotEncoder` or `OrdinalEncoder`) to convert string categorical features into a numerical format. As a result, the pipeline will fail during the `fit` stage when the classifier receives string data, making the code not fully executable. While the pipeline does not explicitly list an encoding step, the requirement for executability implies that such a step is necessary when using `RandomForestClassifier` with categorical features.",
+      "The generated code is not fully compliant with the provided pipeline for two reasons:\n1.  **Inconsistent Imputation Strategy**: The `imputation_strategy` parameter from the function signature is used for numerical features, but for categorical features, the `SimpleImputer` is hardcoded to use `'most_frequent'` strategy. This means the provided `imputation_strategy` parameter does not control all imputation steps as implied.\n2.  **Extra Step (OneHotEncoder)**: An `OneHotEncoder` was added for categorical features to make the pipeline executable with `RandomForestClassifier`. However, the pipeline explicitly states to implement \"only those steps\" listed. `OneHotEncoder` is not mentioned in the provided pipeline steps (imputation, binarization, classification)."
+    ]
+  },
+  "semantic_validation_failures": 20,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.042814740000000004,
+    "input_tokens": 229471,
+    "output_cost": 0.09946250000000001,
+    "output_tokens": 246076,
+    "total_cost": 0.14227724,
+    "total_tokens": 475969
+  },
+  "training_time": 11707.099,
+  "validation_metric": "balanced_accuracy"
+}

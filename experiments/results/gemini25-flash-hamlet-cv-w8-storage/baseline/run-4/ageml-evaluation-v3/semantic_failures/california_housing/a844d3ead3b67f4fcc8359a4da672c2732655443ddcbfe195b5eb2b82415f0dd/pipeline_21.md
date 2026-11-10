@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces an additional step, `OneHotEncoder`, for categorical features. The pipeline explicitly lists "normalization with `power_transformer`" and states that only the specified steps should be implemented. `OneHotEncoder` is not `power_transformer` and is not listed as a step in the provided pipeline, violating the 'only those steps' rule.

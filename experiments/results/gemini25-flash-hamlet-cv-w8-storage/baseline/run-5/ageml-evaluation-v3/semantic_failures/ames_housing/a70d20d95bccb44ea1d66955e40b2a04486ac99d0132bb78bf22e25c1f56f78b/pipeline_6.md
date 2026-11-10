@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specified 'imputation' with `iterative_imputer` and 'normalization' with `power_transformer`. While the code correctly applies these to numerical features, it also introduces `SimpleImputer` for categorical imputation and `OneHotEncoder` for categorical feature encoding. These additional steps, while necessary for handling the mixed data types in the dataset, were not explicitly mentioned in the provided pipeline definition, thus violating the 'only those steps' constraint.

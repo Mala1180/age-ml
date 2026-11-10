@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state that the code must implement 'only those steps' of the pipeline.

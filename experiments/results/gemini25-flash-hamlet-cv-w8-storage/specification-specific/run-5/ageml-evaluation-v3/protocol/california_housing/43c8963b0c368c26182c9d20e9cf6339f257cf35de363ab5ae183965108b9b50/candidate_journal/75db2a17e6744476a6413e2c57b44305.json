@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "ecf5ccf3f0d2af9ce996a7285ec81fe44a1253a389d9e7969566a6901aa51071",
+  "code_sha256": "6be6bbfb976707204b6a7140ed774faf2e95425005d7d99ff3fd7fcc0afb11b1",
+  "completed_at": 1793837401.6460755,
+  "cv_fold_scores": [
+    79520.74280515345,
+    74917.86017484358,
+    78379.11273754168,
+    61299.42364236559,
+    83110.262688985,
+    78030.17453222442,
+    59416.2915017493,
+    86328.4728816836,
+    99123.70629226169,
+    63801.12898272296
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "imputation_strategy": "mean",
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "4aabeae5c718e3463afa9d05ac318e23a12b9de09423a041d0d91f1d479063ab",
+  "pipeline_id": 22,
+  "pipeline_run_id": "a2bcf6164d45420088ac8af271f12fb7",
+  "run_id": "75db2a17e6744476a6413e2c57b44305",
+  "run_identity": "f1f18b4a581035f7af87b04ce04ae6ced4f7d938c5c8b34a5715355ef4d2ff02",
+  "validation_score": 76392.71762395314,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

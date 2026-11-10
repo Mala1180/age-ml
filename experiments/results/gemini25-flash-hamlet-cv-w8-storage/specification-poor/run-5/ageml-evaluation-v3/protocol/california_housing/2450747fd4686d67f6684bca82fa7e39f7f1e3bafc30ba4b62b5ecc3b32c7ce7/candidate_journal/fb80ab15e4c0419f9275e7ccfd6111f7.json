@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "d0e478ee50bf931187f7fd6f9712915bf13e7acde4e79c6d865e78cd3de6621a",
+  "code_sha256": "4420392089c8a02d334d95decda51db8e24e8d6fb93eecc441ede29322ebb378",
+  "completed_at": 1793826680.0591743,
+  "cv_fold_scores": [
+    88198.7829614182,
+    64701.29156290608,
+    86934.2237136704,
+    68803.8093262345,
+    88904.24049397386,
+    83581.99356424449,
+    65343.53447792654,
+    100965.95998733233,
+    99776.94030964538,
+    64927.960034830045
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 10,
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "947bbabbf4d89cda114d4f30154377e9ab03f905175dfb71ce340af6a582aab4",
+  "pipeline_id": 20,
+  "pipeline_run_id": "be5699c4e5c7472185f566b1ca96b261",
+  "run_id": "fb80ab15e4c0419f9275e7ccfd6111f7",
+  "run_identity": "15966a47f2db312734b30db629171eaea0b4350ac267e6697ee594695f58fbe2",
+  "validation_score": 81213.87364321818,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

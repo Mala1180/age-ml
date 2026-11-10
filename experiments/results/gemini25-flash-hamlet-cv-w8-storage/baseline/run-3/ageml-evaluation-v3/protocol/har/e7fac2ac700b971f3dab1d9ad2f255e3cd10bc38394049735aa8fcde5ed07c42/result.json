@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/har/e7fac2ac700b971f3dab1d9ad2f255e3cd10bc38394049735aa8fcde5ed07c42/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/har/e7fac2ac700b971f3dab1d9ad2f255e3cd10bc38394049735aa8fcde5ed07c42/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/har/e7fac2ac700b971f3dab1d9ad2f255e3cd10bc38394049735aa8fcde5ed07c42/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/har/e7fac2ac700b971f3dab1d9ad2f255e3cd10bc38394049735aa8fcde5ed07c42/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "2dbc18698c61490cb959e4429017341b",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1677.1790000000003,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "8d61ca625ac04693a1d4af707033c023",
+    "2": "5b4e79c463644a6e9b383ed0c68550d3",
+    "3": "2bb4f1ce918e4af6baf725c8d705da82",
+    "4": "65118c2488624498996fb2a2f67091a7",
+    "5": null,
+    "6": null,
+    "7": "e1acc1f3140b45748fcb068c56eb9d68",
+    "8": null,
+    "9": "1975967b9873417294a6e53fa2d2f6cd",
+    "10": "341a1d92555a465f8f64b78bedb3ab8b",
+    "11": "cf28cd8dbd064ec78ad955efbc67edb5",
+    "12": null,
+    "13": "126b5c93000f44fbb725125821a57061",
+    "14": "caed09b985954de6a3670f03b10b539a",
+    "15": "cbd8562739da48f5891632157675de28",
+    "16": "b8eef41072cc4ed2b6cc13d4a9447344",
+    "17": "0e9c32347e394244a9554478ef560b01",
+    "18": null,
+    "19": "6150d1e5737b4086abee8c553e5ce328",
+    "20": "3f2d41666aed4d5eaaf46aa444d0e9a4",
+    "21": "9b1c2b0be0354617bc7d8b07398bd4d7",
+    "22": "a11dfa2140914805b77bcb4be8d8b6d6",
+    "23": "27f1539d941c45c5b1d2586b23abed8d",
+    "24": null,
+    "25": "0168286687bf4510a7e6aee1d8c3af72",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "4df01f7f03c88e470b24b01d000e0b8e14fa4ed475e34ccbfc77f01f3583fd23",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "a97c246b24813a67635dae9a836a481a73ac5908f665837edd38bfd61fdab810",
+  "runtime_human_readable": "1:00:37",
+  "runtime_seconds": 3636.9509744271636,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "b043f2df74a6b7c32a68a1a95a9ed5d0d3d45711ec8b3fa495972881b2506424",
+  "selection_sha256": "3a1cffb29f4fd2c8915a7d1824f4c293313b0e1af143968998f750051649a279",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "No, the code is not fully compliant. Based on the error from the previous execution, the `quantile_range` parameter for `RobustScaler` must be a tuple. The current code passes `quantile_range` directly, which might be a list if provided by the host, leading to an execution error. To ensure executability, `quantile_range` should be explicitly cast to a tuple: `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ],
+    "19": [
+      "No, the code is not compliant. It re-introduces `random_state=42` to `NearMiss`, which caused an execution error in the previous attempt (`NearMiss.__init__() got an unexpected keyword argument 'random_state'`). `NearMiss` does not accept a `random_state` parameter in the version used by the host environment. This makes the code non-executable."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.018283169999999994,
+    "input_tokens": 981291,
+    "output_cost": 0.03633,
+    "output_tokens": 10003,
+    "total_cost": 0.054613169999999996,
+    "total_tokens": 992084
+  },
+  "training_time": 5455.074999999999,
+  "validation_metric": "balanced_accuracy"
+}

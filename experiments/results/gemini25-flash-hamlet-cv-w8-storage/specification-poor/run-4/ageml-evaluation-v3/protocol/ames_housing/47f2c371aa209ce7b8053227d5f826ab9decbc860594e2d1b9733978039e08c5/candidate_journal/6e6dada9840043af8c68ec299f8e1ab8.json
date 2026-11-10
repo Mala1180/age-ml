@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "643d7ada06601ba4e01b435b9d88393add1e0e4f4901b14e71cd81f9d7e9ac6b",
+  "code_sha256": "e41d62e6f2f346636dc440398ed05e41e3dba549aa38e98f79ffb72e430d3f35",
+  "completed_at": 1793748606.6554947,
+  "cv_fold_scores": [
+    76574.97965175602,
+    90009.0255525781,
+    83527.9109454578,
+    86973.83294085861,
+    98985.88846429312,
+    81618.61723847748,
+    81491.60284062385,
+    70958.38999743016,
+    93709.46228406443,
+    73033.67258031388
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 5,
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "04dba2764fe490c5468c25ac330d8c3f524ba063049ee9300a0a84aa1b480a95",
+  "pipeline_id": 20,
+  "pipeline_run_id": "8b202307406f49b7971db4fcf3cdeb94",
+  "run_id": "6e6dada9840043af8c68ec299f8e1ab8",
+  "run_identity": "e33dcc0e11de140e2ac58fc54ccca6896aaad55a68e5974d8879f2e96ee2562e",
+  "validation_score": 83688.33824958533,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

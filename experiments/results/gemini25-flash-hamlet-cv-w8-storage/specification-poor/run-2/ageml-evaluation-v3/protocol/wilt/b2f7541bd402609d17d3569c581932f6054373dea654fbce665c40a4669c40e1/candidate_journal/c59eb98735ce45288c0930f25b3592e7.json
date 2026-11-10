@@ -1,0 +1,88 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "152a073cf7aec18f89a201495e1c5582f66523028b7170ed98d6802aecfc6e11",
+  "code_sha256": "35555d1a29d6680688bd52099a6b7afc14408f917df57b8d1dfe2cb9db9c79e8",
+  "completed_at": 1793545108.1863751,
+  "cv_fold_scores": [
+    0.5,
+    0.4978165938864629,
+    0.49563318777292575,
+    0.5,
+    0.49890829694323147,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "effective_random_states": [
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "hidden_layer_sizes": [
+      20
+    ],
+    "imputation_strategy": "mean",
+    "max_iter": 300,
+    "n_components": 0.95,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "threshold": 0.0,
+    "version": 1
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "8321038d7c6d5743c26ed47da09b7f551ecf6771e1237d9e380671687661f66f",
+  "pipeline_id": 21,
+  "pipeline_run_id": "9600792a61d54c91b80df472ba8424f8",
+  "run_id": "c59eb98735ce45288c0930f25b3592e7",
+  "run_identity": "e77a3ce8045937bc5cdc75e0dd594875f5f663d0f16393fa37cc926b30ac18e0",
+  "validation_score": 0.49923580786026206,
+  "validation_split_hash": "1f460de770027eb1de5961ee77125e873a8c21a8737b51f25ca1e066e8dc30c8"
+}

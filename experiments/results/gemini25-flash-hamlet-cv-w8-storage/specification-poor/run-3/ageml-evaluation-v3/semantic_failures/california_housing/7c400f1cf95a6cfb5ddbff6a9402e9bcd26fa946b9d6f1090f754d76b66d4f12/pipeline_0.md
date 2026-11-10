@@ -1,0 +1,2 @@
+Attempt 1:
+The code includes an additional step, `OneHotEncoder`, for categorical features. The provided pipeline explicitly lists only five steps: imputation, discretization, normalization, PCA, and SVR. The instruction was to implement all the steps of the pipeline and *only* those steps.

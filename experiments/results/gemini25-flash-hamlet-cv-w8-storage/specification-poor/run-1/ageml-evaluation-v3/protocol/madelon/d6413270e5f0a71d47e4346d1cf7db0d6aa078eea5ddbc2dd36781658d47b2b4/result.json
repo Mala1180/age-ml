@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-1/ageml-evaluation-v3/protocol/madelon/d6413270e5f0a71d47e4346d1cf7db0d6aa078eea5ddbc2dd36781658d47b2b4/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-1/ageml-evaluation-v3/protocol/madelon/d6413270e5f0a71d47e4346d1cf7db0d6aa078eea5ddbc2dd36781658d47b2b4/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-1/ageml-evaluation-v3/protocol/madelon/d6413270e5f0a71d47e4346d1cf7db0d6aa078eea5ddbc2dd36781658d47b2b4/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-1/ageml-evaluation-v3/protocol/madelon/d6413270e5f0a71d47e4346d1cf7db0d6aa078eea5ddbc2dd36781658d47b2b4/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "5cb4ed2d13b644c6abe54f97f0003f85",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8615384615384616,
+    0.8384615384615385,
+    0.8769230769230769,
+    0.8653846153846154,
+    0.8769230769230769,
+    0.8692307692307693,
+    0.9,
+    0.8307692307692307,
+    0.8692307692307693,
+    0.8769230769230769
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1235.6070000000004,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "a8dc428c904148788ffc99610405743b",
+    "1": "5f99076075474b8aad6c0f10234ae521",
+    "2": "ccaa91c06b9d4ec58d6498fa21cdd7fe",
+    "3": "cfaeebb4166e4123b4f320f05cc66088",
+    "4": "909a32e4261543f5b3e564d9ec463886",
+    "5": null,
+    "6": "1794127b49aa4f47a23aa815c21d2f38",
+    "7": "3c61db6cd9ff48f08cddfa3e1f4b6b2f",
+    "8": "d478b3c7aae64f7f960dd68478e49242",
+    "9": "c91bd28388c5458ab020727a4658987f",
+    "10": "0ca0deedbe4e42eda029744af9d74171",
+    "11": "e5afc569dfe94453ba6d3c6d54edaf9f",
+    "12": "d3492a91b672467996c05975cb338e5c",
+    "13": "ffb77545f88548e1ae6f0f13bcb33169",
+    "14": "fcef801eda124fb8997b0e7c41808a84",
+    "15": null,
+    "16": "7f35ec02b1f4484c8b4e0ed20349d9a0",
+    "17": "14ea2ad951014625a91a5b04a03a4d21",
+    "18": "715aa171ae1a4bf5a13cf7767ec49c51",
+    "19": null,
+    "20": "8a7cfd98c52d471e8d6b5fec1fdfbd37",
+    "21": "12dfb97dc773424db4b71b1ba660c1a2",
+    "22": null,
+    "23": "6b02645fdd2b470181b6f254ea3e2740",
+    "24": "1d36c6065d174ebdb0265c3642a325ac",
+    "25": "db5d6e0134ed4ce9a37fad932b771333",
+    "26": "ad9a13597254452b9897152f8c16d55c",
+    "27": null,
+    "28": "330677590e4e4247954652551f1ef0b8",
+    "29": "c233a8c62d2b478f8b490c3ee7ddfcc1"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "89cd972930d1de61aced1e74daa5867c316ba208488ddb11b38e8cd349c39228",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "7e0c48486d34f6cd5aa1265e2ef805b635a746a2e79b5b11b6cf8ab7d266861d",
+  "runtime_human_readable": "1:02:04",
+  "runtime_seconds": 3723.6602861210704,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8665384615384616,
+  "selected_candidate_key": "afdf229240a67b07686edc25d813933df847a68fbdfedd2a087b5aa763bc6674",
+  "selection_sha256": "703aeddaee88ca497ada9f8aec98392a7b3004268005cbc57ca69141e646d70d",
+  "selection_validation_score": 0.8665384615384616,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The import statement for `IterativeImputer` is incorrect. The line `from sklearn.experimental.enable_iterative_imputer import enable_iterative_imputer` should be `from sklearn.experimental import enable_iterative_imputer` to correctly enable the experimental feature. This makes the code not executable as written."
+    ],
+    "25": [
+      "The previous execution failed because the 'var_smoothing' parameter was passed as a string ('1e-9') to GaussianNB, which expects a float. To ensure the code is 'correct and executable' as required, 'var_smoothing' should be explicitly converted to a float before being passed to GaussianNB."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.021369089999999993,
+    "input_tokens": 781819,
+    "output_cost": 0.040747500000000006,
+    "output_tokens": 12419,
+    "total_cost": 0.06211659,
+    "total_tokens": 794238
+  },
+  "training_time": 17869.048,
+  "validation_metric": "balanced_accuracy"
+}

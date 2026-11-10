@@ -1,0 +1,228 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "2e7b9fb4ffdd4df5a2897de1b831b87c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "55856f8edf414f69aefcebfce07f6673",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "120646aa45304e7dbb7d8a875c76f187",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "4e7db808092348938d8ad5d7e9885f9a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 4,
+    "pipeline_run_id": null,
+    "semantic_feedback": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code implements all the specified steps of the pipeline (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression) and only those steps. However, the dataset description indicates that the 'total_bedrooms' column has missing values. The current pipeline does not include any imputation step to handle these missing values. Consequently, the MinMaxScaler will produce NaN values, which will cause subsequent steps like SelectKBest and MLPRegressor to fail, making the pipeline non-executable. While strictly adhering to the listed steps, it violates the requirement for the code to be 'correct and executable'.",
+      "The pipeline includes `SimpleImputer` for handling missing values and drops categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code implements all the specified steps of the pipeline (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression) and only those steps. However, the dataset description indicates that the 'total_bedrooms' column has missing values. The current pipeline does not include any imputation step to handle these missing values. Consequently, the MinMaxScaler will produce NaN values, which will cause subsequent steps like SelectKBest and MLPRegressor to fail, making the pipeline non-executable. While strictly adhering to the listed steps, it violates the requirement for the code to be 'correct and executable'.",
+      "The pipeline includes `SimpleImputer` for handling missing values and drops categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code implements all the specified steps of the pipeline (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression). However, the dataset description indicates that the 'total_bedrooms' column has missing values. The current pipeline does not include any imputation step to handle these missing values. Consequently, the MinMaxScaler will produce NaN values, which will cause subsequent steps like SelectKBest and MLPRegressor to fail, making the pipeline non-executable. While strictly adhering to the listed steps, it violates the requirement for the code to be 'correct and executable'. Additionally, the pipeline drops categorical features ('ocean_proximity') which is a preprocessing step not explicitly mentioned in the provided pipeline.",
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code implements all the specified steps of the pipeline (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression). However, the dataset description indicates that the 'total_bedrooms' column has missing values. The current pipeline does not include any imputation step to handle these missing values. Consequently, the MinMaxScaler will produce NaN values, which will cause subsequent steps like SelectKBest and MLPRegressor to fail, making the pipeline non-executable. While strictly adhering to the listed steps, it violates the requirement for the code to be 'correct and executable'. Additionally, the pipeline drops categorical features ('ocean_proximity') which is a preprocessing step not explicitly mentioned in the provided pipeline.",
+      "The code implements all the specified steps of the pipeline (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression). However, the dataset description indicates that the 'total_bedrooms' column has missing values. The current pipeline does not include any imputation step to handle these missing values. Consequently, the MinMaxScaler will produce NaN values, which will cause subsequent steps like SelectKBest and MLPRegressor to fail, making the pipeline non-executable. While strictly adhering to the listed steps, it violates the requirement for the code to be 'correct and executable'. Additionally, the pipeline drops categorical features ('ocean_proximity') which is a preprocessing step not explicitly mentioned in the provided pipeline.",
+      "The code implements the specified steps (MinMaxScaler for normalization, SelectKBest for feature selection, and MLPRegressor for regression). However, it is not fully compliant because:\n1. The 'total_bedrooms' column has missing values, but no imputation step is included. This will cause the MinMaxScaler to produce NaN values, making the pipeline non-executable.\n2. The 'ocean_proximity' categorical column is passed through without any transformation (due to `remainder='passthrough'`). This will cause `SelectKBest` (which expects numerical input for `f_regression`) and the `MLPRegressor` to fail, making the pipeline non-executable.\nWhile the core steps are present, the lack of handling for missing values and categorical features violates the requirement for the code to be 'correct and executable' and implicitly adds preprocessing steps not explicitly mentioned in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "e0c545f7b31c47c189560f99bc737d7c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "50834fb2296241d58f2595473627a90e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "46c17b020d1e42cf96f6f5785f880022",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "c03d263449c840c7a17a24a374078fc4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "32842c203791489dba97be2faae0702a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "3e4632236c274b41978e42dcb5eada09",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "81e87f8c036b4407b40b39c17014c40a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "14902ca69d804ee7aea2675b439dc7cd",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "aba4223e853942d9b3d74b3a25950e13",
+    "semantic_feedback": [
+      "The `method` parameter is included in the function signature but is not used in the construction of the pipeline. The prompt specifies that `method` is a hyperparameter for the pipeline, implying it should influence the pipeline's components or their parameters."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "5e076fd1c2dc491ca12a1eef8b494da2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "31cc1b8136034e2d87dc541abcf0c24a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "27770cd2331347788a1d96723361afe5",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'imputation', 'normalization', and 'regression'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not specified in the provided pipeline steps. The instruction was to implement 'only those steps'.",
+      "The pipeline specifies 'imputation', 'normalization', and 'regression'. The generated code includes an additional implicit step of dropping categorical features via `remainder='drop'` in the `ColumnTransformer`, which was not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "3ab8777c0f4444268e00da5169b2a11e",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "bf6e3e458bdb48a3a995b98df121c509",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "2256cdf39efd4b278f1df2f60aec5646",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "906759192eba41dcb921eef9f7dd27ac",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "c0adb6e31fba49c89d0dd6dabe3530d9",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "3b48d34965ff4f34a81f1e45562bea53",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "92a8f5a9ef594c6d9c0a491527bc8665",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "02fd46511dd842d186ce8a3adb0ce576",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "689d9a0cfad649718029ab62322b7de8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "397a5480401a45acae4362cd19e3e2db",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "8ca1574080d44be7ba7d1406a1af8e8c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "c2c9785fc3c241f79d4a1fa56477de3c",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "063c52f0edc44b509c21c10779c5bb08",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

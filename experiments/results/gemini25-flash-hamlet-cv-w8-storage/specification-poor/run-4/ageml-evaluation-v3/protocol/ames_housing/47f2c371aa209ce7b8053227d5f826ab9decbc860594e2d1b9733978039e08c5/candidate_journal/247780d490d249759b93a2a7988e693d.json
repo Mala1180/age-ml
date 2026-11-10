@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "c393c803eeabc909a504af584b0f12f60e73e6a8e5ed2a147cbb91e2e507c733",
+  "code_sha256": "e41d62e6f2f346636dc440398ed05e41e3dba549aa38e98f79ffb72e430d3f35",
+  "completed_at": 1793748612.5548935,
+  "cv_fold_scores": [
+    69449.57583161887,
+    90359.1964884369,
+    79124.60369266027,
+    82991.96712527012,
+    96224.37404847353,
+    77318.18412853278,
+    71858.8351759621,
+    70684.10478377485,
+    91837.23084240261,
+    72378.12944101743
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 5,
+    "n_bins": 10,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "811918ffe612ade1adac810e7f33e9bf8f82c2a13c2a6605b1be3c4ca68b154a",
+  "pipeline_id": 20,
+  "pipeline_run_id": "8b202307406f49b7971db4fcf3cdeb94",
+  "run_id": "247780d490d249759b93a2a7988e693d",
+  "run_identity": "e33dcc0e11de140e2ac58fc54ccca6896aaad55a68e5974d8879f2e96ee2562e",
+  "validation_score": 80222.62015581495,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

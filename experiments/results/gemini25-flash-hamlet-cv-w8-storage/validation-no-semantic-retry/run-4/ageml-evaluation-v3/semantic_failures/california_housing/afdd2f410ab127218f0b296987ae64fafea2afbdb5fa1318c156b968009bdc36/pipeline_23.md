@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which were not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline.

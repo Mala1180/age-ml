@@ -1,0 +1,161 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c6397ffeff6e1212c94e2ae7a4098f34e7dd0119690aa07f91cd4608b0d8b800/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c6397ffeff6e1212c94e2ae7a4098f34e7dd0119690aa07f91cd4608b0d8b800/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c6397ffeff6e1212c94e2ae7a4098f34e7dd0119690aa07f91cd4608b0d8b800/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-5/ageml-evaluation-v3/protocol/ames_housing/c6397ffeff6e1212c94e2ae7a4098f34e7dd0119690aa07f91cd4608b0d8b800/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 21,
+  "best_run_id": "15fcf21118ae4aa0991c74f5b8907480",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    26677.534276584443,
+    27256.550562523975,
+    22975.782021281113,
+    40451.57395129858,
+    32577.865421890532,
+    26147.816097013045,
+    24283.556329088573,
+    24782.779910593174,
+    38433.42708582074,
+    27328.092452772413
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1552.7920000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "b9524f46958b44e9947895a70588d679",
+    "1": "fa7c67bbdd8541b5a8c4754dd9359ea0",
+    "2": "e28510aaf3c14474971f02ee19a49925",
+    "3": "8619379f6b1843118e9fb5a2dcf7d543",
+    "4": "40d0334e66f84ecf85842aecfe7ab812",
+    "5": "6ad1e37c5c2b47e4af02897e0bc447db",
+    "6": "efd1b3478a52413097852b7204f08344",
+    "7": "94cbfc4157864cada89840b958063778",
+    "8": "c3309f42bbc148728fa5232ccd6ca95f",
+    "9": "aeb2bc8de14845698a77c560235d9948",
+    "10": "00ed3c25c96b4ec38a2d44ad8bed6893",
+    "11": "9c39afa21c3a462c8d4f08619261a889",
+    "12": "0a69ab03f6cb434182a282462c65b975",
+    "13": "b5d55097e5db461c890e0fbeff67a739",
+    "14": "8679ebd264944076879be12ba6f8777f",
+    "15": "c377db8f30e6410fab949476f4696d80",
+    "16": "5399e863f2124290ac42d4a8ed60f5a7",
+    "17": null,
+    "18": "4931f31997f94fbaad1fda674d619570",
+    "19": "5776563073e447f88825f24c4f5f6fd7",
+    "20": "2f925b58439741c8a7e073fb51be2ae5",
+    "21": "c3ec5788ca324921b7b5cfc3cfce22df",
+    "22": "33fc91e857c64dac9cb0d22f518ccd9f",
+    "23": "5ef4562e5c11407c84a1de5fc3a60c3e",
+    "24": "9fd23f6971734cc6850701f6ee393a0e",
+    "25": "4484d13dd9b24b5e88955e6e0cb25cbc",
+    "26": "c62934f149fc4fc39a8bc4cb0baf8195",
+    "27": "0ba2fbd65436492486bbceb6b0ca8685",
+    "28": "2994f745be524fb0bf0656290bcbb1b6",
+    "29": "0bc24a6a3339421f8a5394a6ad8c8f1b"
+  },
+  "pipelines_found": 184,
+  "protocol_sha256": "95888aa3ad3cb42b5c5e3fdbcd98d41d26f7e2ee5a80399b6430e67b66058cb4",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "e283c7b40beda4ee3e795f035643227b9098b4ca5c122ecb784362354f0e12d7",
+  "runtime_human_readable": "1:00:31",
+  "runtime_seconds": 3631.1824884600937,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 29091.49781088666,
+  "selected_candidate_key": "d0e0cb7e5d87c6da8505cbe5c3429ffeceba6a43a1e5a1a2b461cd139805c3d8",
+  "selection_sha256": "68798aa49b9eb0304fa7069bb8e54d6ba9751d6587dbf12b43160a787b08db6f",
+  "selection_validation_score": 29091.49781088666,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline specifies only three steps: imputation, normalization, and regression. The generated code includes an additional step, `OneHotEncoder`, for categorical features, which was not explicitly requested in the pipeline definition."
+    ],
+    "2": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly applied to numerical features, the code also uses SimpleImputer for categorical features. The pipeline did not specify an imputation method for categorical features, nor did it imply that IterativeImputer should be used for all feature types (which would require prior encoding for categorical features). Therefore, the use of SimpleImputer for categorical features is an additional step not explicitly requested by the provided pipeline."
+    ],
+    "3": [
+      "The pipeline explicitly states 'normalization with `power_transformer`', 'features with `pca`', and 'regression with `svr`'. The generated code adds `SimpleImputer` for both numerical and categorical features, and `OneHotEncoder` for categorical features, which are not part of the specified pipeline steps. The instruction was to implement 'only those steps'.",
+      "The pipeline explicitly states 'normalization with `power_transformer`', 'features with `pca`', and 'regression with `svr`'. The generated code adds `SimpleImputer` for numerical features and uses `ColumnTransformer` with `remainder='drop'` to handle other (e.g., categorical) columns, which are not part of the specified pipeline steps. The instruction was to implement 'only those steps'.",
+      "The pipeline explicitly states 'normalization with `power_transformer`', 'features with `pca`', and 'regression with `svr`'. The generated code adds `SimpleImputer` for numerical features and uses `ColumnTransformer` with `remainder='drop'` to handle other (e.g., categorical) columns, which are not part of the specified pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "6": [
+      "The generated code introduces `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly listed in the provided pipeline. The pipeline specifies 'imputation' with `iterative_imputer` and 'normalization' with `robust_scaler`, but not categorical encoding. While `OneHotEncoder` is necessary to handle string columns and make the pipeline executable, its inclusion violates the constraint to implement 'only those steps' explicitly mentioned in the pipeline."
+    ],
+    "7": [
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code uses 'IterativeImputer' for numerical columns but 'SimpleImputer' for categorical columns, which is a deviation. Additionally, the code introduces 'OneHotEncoder' for categorical features, which is not explicitly listed as a step in the provided pipeline.",
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code introduces additional preprocessing steps, 'SimpleImputer' and 'OneHotEncoder', for categorical features within an 'initial_preprocessing' step before the 'IterativeImputer'. These steps are not explicitly listed in the provided pipeline, violating the constraint to implement 'only those steps'.",
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code uses a `ColumnTransformer` with `remainder='drop'` which implicitly drops all categorical columns. This is a form of feature selection that is not explicitly listed as a step in the provided pipeline, violating the constraint to implement 'only those steps'.",
+      "The pipeline specifies 'imputation with iterative_imputer'. However, the `IterativeImputer` expects numerical input. The provided dataset contains categorical (string) features, which are not handled by this pipeline. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code introduces additional preprocessing steps, 'SimpleImputer' and 'OneHotEncoder', for categorical features within a 'data_preparation_for_imputation' step before the 'IterativeImputer'. These steps are not explicitly listed in the provided pipeline, violating the constraint to implement 'only those steps'.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline and only those steps. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code introduces additional preprocessing steps, 'SimpleImputer' and 'OneHotEncoder', for categorical features within an 'initial_data_preparation' step before the 'IterativeImputer'. These steps are not explicitly listed in the provided pipeline, violating the constraint to implement 'only those steps'.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code introduces additional preprocessing steps, 'SimpleImputer' and 'OneHotEncoder', for categorical features within an 'initial_data_preparation' step before the 'IterativeImputer'. These steps are not explicitly listed in the provided pipeline, violating the constraint to implement 'only those steps'.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable.",
+      "The code implements all the specified steps of the pipeline. However, the `IterativeImputer` expects numerical input, but the provided dataset contains categorical (string) features. Without a preprocessing step (e.g., one-hot encoding) to convert these categorical features to numerical format, the `IterativeImputer` will fail, making the code not executable with the given data, which violates the requirement for the code to be correct and executable."
+    ],
+    "10": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While the code correctly uses `IterativeImputer` for numerical columns, it uses `SimpleImputer` for categorical columns. This deviates from the strict instruction to use `iterative_imputer` for the imputation step, even though `IterativeImputer` is not directly suitable for categorical data.",
+      "no, the pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is correctly applied to numerical columns, it is not applied to categorical columns. `OneHotEncoder` handles NaNs in categorical features, but this is not an imputation step using `iterative_imputer` as explicitly stated in the pipeline."
+    ],
+    "14": [
+      "The pipeline includes an extra step, 'select_numeric_columns' using `FunctionTransformer`, which was not specified in the original pipeline definition. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "16": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists four steps: 'imputation with iterative_imputer', 'normalization with standard', 'features with select_k_best', and 'regression with linear'. The generated code introduces an additional step, 'OneHotEncoder', for handling categorical features, which is not mentioned in the provided pipeline. The instructions state to 'implement all the steps of the pipeline and only those steps', which is violated by the inclusion of the OneHotEncoder."
+    ],
+    "18": [
+      "The code is not strictly compliant with the provided pipeline. While it correctly implements the specified steps (imputation, normalization, features, regression) for numerical data, the `ColumnTransformer` with `remainder='drop'` implicitly adds a step of dropping non-numerical columns. This step is not explicitly mentioned in the pipeline description, violating the requirement to implement 'only those steps'."
+    ],
+    "20": [
+      "The generated code is not fully compliant because it does not handle categorical features present in the dataset. The previous execution error 'could not convert string to float: 'RM'' indicates that non-numeric data is being passed to `StandardScaler` or `SelectKBest`, which expect numerical input. To be correct and executable with the provided dataset, the pipeline needs an additional step for encoding categorical features (e.g., using `OneHotEncoder` or `OrdinalEncoder`) and potentially a `ColumnTransformer` to apply different preprocessing steps to numerical and categorical columns."
+    ],
+    "21": [
+      "no, the pipeline includes an additional step, `OneHotEncoder`, for categorical feature encoding. While this is a necessary preprocessing step for handling categorical data before feature selection and regression, the provided pipeline explicitly lists only 'imputation', 'features', and 'regression' steps, and the instruction states to implement 'only those steps'."
+    ],
+    "26": [
+      "no, The pipeline includes an additional step, `OneHotEncoder`, which was not explicitly listed in the provided pipeline steps. While this step is necessary for handling categorical features and making the pipeline executable with mixed data types, it violates the 'only those steps' constraint of the pipeline definition."
+    ],
+    "27": [
+      "The pipeline specifies 'imputation' and 'normalization' without distinguishing between numerical and categorical features. The generated code correctly handles numerical features with `SimpleImputer` and `StandardScaler` as requested. However, it introduces `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly listed in the provided pipeline. The pipeline states to implement 'only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 36,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.04422237,
+    "input_tokens": 594893,
+    "output_cost": 0.14932750000000003,
+    "output_tokens": 68847,
+    "total_cost": 0.19354986999999998,
+    "total_tokens": 664361
+  },
+  "training_time": 1601.19,
+  "validation_metric": "rmse"
+}

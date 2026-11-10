@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'normalization' with `minmax` and 'regression' with `svr`. However, the generated code adds an extra step, `SimpleImputer`, which was not part of the original pipeline definition. The instruction is to implement all the steps of the pipeline and *only* those steps.

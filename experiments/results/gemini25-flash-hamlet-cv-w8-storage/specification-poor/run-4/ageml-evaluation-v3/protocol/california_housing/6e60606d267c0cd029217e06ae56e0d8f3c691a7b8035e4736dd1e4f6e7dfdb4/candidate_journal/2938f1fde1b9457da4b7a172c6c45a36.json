@@ -1,0 +1,83 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "9e0de6853983d51e70505f72316ec09356e96d6463fce5087f7d986d6e37d5d3",
+  "code_sha256": "9ef848fa69bc1e56225c614081cf3d472cf1d7525456410323f786e95f8d6dfe",
+  "completed_at": 1793747656.2849443,
+  "cv_fold_scores": [
+    75969.57806734026,
+    82998.44570791641,
+    89835.53807655805,
+    62260.525753262256,
+    90680.7188896539,
+    79945.84826221052,
+    73209.79028287117,
+    96703.93539432317,
+    113618.29367450516,
+    70206.78765946002
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "imputation_strategy": "mean",
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "9a6d7bab77cf2db2559fcb32732cb473b804d6ece77e112221029eca7bccee01",
+  "pipeline_id": 17,
+  "pipeline_run_id": "d106f62d1b9a4bd597da94e41b5f0646",
+  "run_id": "2938f1fde1b9457da4b7a172c6c45a36",
+  "run_identity": "fd67b4c21084a0d244928197a98853c763e9a5010eaa875d3a22c8b42a6ef580",
+  "validation_score": 83542.94617681009,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

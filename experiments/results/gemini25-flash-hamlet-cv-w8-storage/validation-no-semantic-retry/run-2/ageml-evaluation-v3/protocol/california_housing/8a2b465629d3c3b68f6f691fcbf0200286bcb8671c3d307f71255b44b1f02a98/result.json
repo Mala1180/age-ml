@@ -1,0 +1,131 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/california_housing/8a2b465629d3c3b68f6f691fcbf0200286bcb8671c3d307f71255b44b1f02a98/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/california_housing/8a2b465629d3c3b68f6f691fcbf0200286bcb8671c3d307f71255b44b1f02a98/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/california_housing/8a2b465629d3c3b68f6f691fcbf0200286bcb8671c3d307f71255b44b1f02a98/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/california_housing/8a2b465629d3c3b68f6f691fcbf0200286bcb8671c3d307f71255b44b1f02a98/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 8,
+  "best_run_id": "9fd21fd63b71415291e4350ac3693c5b",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    85822.80804904242,
+    47564.49524359665,
+    79495.51974777397,
+    62727.46838585627,
+    75009.68578144236,
+    67930.6174725157,
+    54551.31391628602,
+    91922.95786129274,
+    84682.94636450984,
+    52532.37560993974
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 752.3539999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "dd2c2d9aa22946428e23aec37ad15d5f",
+    "1": "2e1d1c47a70244a0a60584c94f60ad97",
+    "2": "1bc6fe84e15e4856bedbf0406e81f41e",
+    "3": "5c2e8ec0266940a582110b352d26aa3a",
+    "4": "d343125d102e4cefafa1882c45a883e6",
+    "5": "dd99cfd90e3f44c2bd7f8161438687af",
+    "6": "f5614fb94a9e4e6295ec67d46a4cb2d3",
+    "7": "713b3feb8a854f69a08295980456a6ce",
+    "8": "e2271bcc433344f2b977548571e5ec37",
+    "9": "2a18c2b9015d44f991a64b2ae47700e7",
+    "10": "a2afc38097c94605983e0e5cee580ebe",
+    "11": "796d81dfd45044fbb5bc0ea271e284a6",
+    "12": "81a79c0d32624e6c976c1268faf19b01",
+    "13": "1467179860734127a2164c24b7f51b8d",
+    "14": "588efd8e962a4ae29e550ca0c276621d",
+    "15": "594e0d77293b49c2a7362f958882f839",
+    "16": "6dc9360922e1491eb7372c38552a9371",
+    "17": "fbc912f502614e24934055159115058e",
+    "18": "033942fb34464ba2baac60faa2474b6e",
+    "19": "e2d741349d49438eb3bd2286d500acf1",
+    "20": "ebe5d0b1fa554fd3966a8eb227907327",
+    "21": "1ac00381c3634d5ba300407f64c0ea31",
+    "22": "e75bf1a30cf549609afb86bbb483b035",
+    "23": "a090252b84ce418da54b19974479b412",
+    "24": "9bcc3a0ae2744920943f984dfa22339b",
+    "25": "61c92ddfc85c49d9b10e412540443105",
+    "26": "2eb5127aa86e430cbec3cac67e81a4db",
+    "27": "1f93c23f577a4fe4bd70d4fdc07b20ae",
+    "28": "4b32a20c9f8e4b5a9f0a4e44faabbddd",
+    "29": "7cb6c6d769d34ccc9cdbce9415baf42a"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "eb16e97bddc4a3e0b3317929fbb0a95ef301017204e03e6977d000ad22978b74",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "702abc8a55512f574869c97266e79f3c368ab83be5fe5611a0d2cd6f54353db7",
+  "runtime_human_readable": "0:17:33",
+  "runtime_seconds": 1053.1358850300312,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 70224.01884322558,
+  "selected_candidate_key": "9a25833234191fde867117f885d1b7bab75cda4704dea4b57cd7ebb7d048ec49",
+  "selection_sha256": "c5bc9ece290226c7f651a0465ec0bb63e4dfb9d990347cf21cc2d4162eba8bc6",
+  "selection_validation_score": 70224.01884322558,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The code correctly implements the specified steps: `iterative_imputer` for imputation, `robust_scaler` for normalization, `pca` for feature extraction, and `elastic_net` for regression. It also correctly uses `ColumnTransformer` to apply these steps to appropriate numerical columns and passes all hyperparameters. However, the provided pipeline description did not explicitly include a step for handling categorical features. The code adds `OneHotEncoder` for the 'ocean_proximity' column, which is necessary for the pipeline to execute successfully with the given dataset (as indicated by the previous error). While this addition resolves a critical issue, it means the code implements a step (`OneHotEncoder`) that was not explicitly listed in the provided pipeline, thus not strictly adhering to the 'only those steps' constraint.",
+      "The code implements all the specified steps (imputation, normalization, PCA, regression). However, it also includes `OneHotEncoder` for categorical features, which was not explicitly listed as a step in the provided pipeline description. The instruction was to implement 'only those steps'."
+    ],
+    "3": [
+      "The generated code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for the given dataset but was not explicitly listed in the provided pipeline steps. The pipeline only specified 'normalization with `power_transformer`', 'features with `pca`', and 'regression with `linear`'. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code includes `SimpleImputer` and `OneHotEncoder`, which are necessary for handling missing values and categorical features in the dataset, respectively. However, these steps were not explicitly listed in the provided pipeline. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "5": [
+      "The code is not compliant because it includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state that the code must implement 'only those steps' of the pipeline."
+    ],
+    "7": [
+      "The pipeline explicitly lists 3 steps: imputation, normalization, and regression. The generated code introduces an additional step, OneHotEncoder, for categorical features, which was not specified in the provided pipeline. The instruction states to implement 'only those steps'."
+    ],
+    "9": [
+      "The code includes a 'feature_encoding' step using `OneHotEncoder` for categorical features, which was not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline."
+    ],
+    "11": [
+      "no, the pipeline includes `OneHotEncoder` for categorical features and `ColumnTransformer` to handle different data types. These are additional preprocessing steps not explicitly listed in the provided pipeline definition, violating the 'only those steps' constraint. While these additions address the previous error related to categorical data, they are not part of the defined pipeline steps."
+    ],
+    "13": [
+      "The `method` parameter is included in the function signature but is not used in the construction of the pipeline. The prompt specifies that `method` is a hyperparameter for the pipeline, implying it should influence the pipeline's components or their parameters.",
+      "The generated code includes additional preprocessing steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that are not explicitly mentioned in the provided pipeline steps. The pipeline only specifies 'normalization with power_transformer' and 'regression with lasso'. Additionally, the 'method' parameter, which is defined as a hyperparameter in the function signature, is not used in the construction of the pipeline."
+    ],
+    "15": [
+      "The pipeline explicitly defines only two steps: 'normalization' with `minmax` and 'regression' with `nn_regressor`. The generated code includes additional steps for handling missing values (`SimpleImputer`) and categorical features (`OneHotEncoder`) which are not specified in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "26": [
+      "no, the code introduces an additional step, `OneHotEncoder`, for handling categorical features, which was not explicitly listed in the provided pipeline steps. While this step is necessary to make the code executable given the 'ocean_proximity' column, it deviates from the strict instruction to implement 'only those steps' of the pipeline."
+    ],
+    "27": [
+      "The pipeline specifies 'normalization with `minmax`'. While `MinMaxScaler` is correctly applied to numerical features, `OneHotEncoder` is applied to categorical features. `OneHotEncoder` is a categorical encoding step, not a `minmax` normalization step, and it is not explicitly listed in the provided pipeline steps. The pipeline states to implement 'only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 13,
+  "split_identity": "62eb71d8795c31ec883e6c7af8174e312c7b5219109140940433193c185c27a5",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.017927310000000002,
+    "input_tokens": 61896,
+    "output_cost": 0.041212500000000006,
+    "output_tokens": 18549,
+    "total_cost": 0.05913981,
+    "total_tokens": 81779
+  },
+  "training_time": 3233.984999999999,
+  "validation_metric": "rmse"
+}

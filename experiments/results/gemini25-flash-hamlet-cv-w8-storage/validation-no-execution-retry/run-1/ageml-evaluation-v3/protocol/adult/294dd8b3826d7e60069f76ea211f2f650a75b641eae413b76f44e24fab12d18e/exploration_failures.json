@@ -1,0 +1,229 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "0bac238588324011b59dcd0130ee0c8a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "c53072507d924b539bfab32f8fbea63c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "063db2fedae9482babb1e5d8c0e22520",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "ebec66d9471548a6960415a252d4600d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "ea852211e0a34130b9791b802ca115e6",
+    "semantic_feedback": [
+      "The code is not compliant because it includes `OneHotEncoder` for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline. The instruction was to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "bcd497ed620042aba356958bec00bb7a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "637455a1efd44c5ea86f4c35d2ee3521",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "233d145120d945f6976af0a68cf6d277",
+    "semantic_feedback": [
+      "The 'features' step with `pca` is not fully compliant. The current implementation applies PCA only to the numerical features within the `numerical_transformer`. The pipeline step 'features with `pca`' implies applying PCA to the combined feature set after all initial preprocessing (imputation and scaling/one-hot encoding for both numerical and categorical features). To be fully compliant, PCA should be applied after the `ColumnTransformer` to the entire preprocessed feature space."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "03708e5c1a984f66a94418cc89ff4a03",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "1c524cec4a754550aaa30fce6c09b2df",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "b3173f5681df45c6b9036c37113503c4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "df3ffa8b8f064616a1648c59bba150e7",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "bba2406207e24f5ea30d23501ecc2f14",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "22c8a627b3ea4715aa3c642b2d958c5a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "520d7bf78ec24d119168aaac97aa1fe8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "f73585fd64a94bfbb16248a667addd37",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "0a9eb2809bbc46cb9b37613a0670adf1",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "52e298d0b1e94679848477b45f2871e2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "aaaec27f8da9418a994caa0e190cfd08",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "3fb4b81fcd9340c7a7919d8eed6aca6f",
+    "semantic_feedback": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for the given dataset and subsequent models (PCA, MLPClassifier). However, it is not explicitly listed as one of the five steps in the provided pipeline. The instruction was to implement 'only those steps'."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "944e11fd1a1e46379a815b49e9f79f32",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "0d2364a35a64453ca1dbbdc73374cdf2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "f08c1a2edcf14a619d79982752533ea8",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "4eb830e9af06471580eb1edf30f54f7d",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "2aa03bfbf53c429796212bf8e189990b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 25,
+    "pipeline_run_id": null,
+    "semantic_feedback": [
+      "The code correctly implements the `imputation` with `SimpleImputer` and `classification` with `RandomForestClassifier`. However, the `discretization` step with `Binarizer` is only applied to numerical features. While `Binarizer` cannot directly handle string categorical features, the pipeline does not specify any alternative discretization or encoding for these features. Consequently, string categorical features will be passed directly to the `RandomForestClassifier`, which expects numerical input, leading to an execution error. This makes the pipeline non-executable and thus not fully compliant with the implicit requirement of a functional machine learning pipeline.",
+      "The pipeline specifies 'discretization with `binarizer`'. While the `Binarizer` is applied to categorical features, an `OrdinalEncoder` was added before it to convert categorical strings to numerical values. The `OrdinalEncoder` is an additional step not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'.",
+      "The `discretization` step with `binarizer` is only applied to numerical features. Categorical features are only imputed and then passed as strings to the `RandomForestClassifier`. The `RandomForestClassifier` expects numerical input, so the pipeline will fail during execution if categorical features are present in `X_train`. This means the pipeline does not fully implement the `binarizer` step for all relevant features and is not executable as required.",
+      "The `discretization` step with `binarizer` is only applied to numerical features. Categorical features are only imputed and then passed as strings to the `RandomForestClassifier`. The `RandomForestClassifier` expects numerical input, so the pipeline will fail during execution if categorical features are present in `X_train`. This means the pipeline does not fully implement the `binarizer` step for all relevant features and is not executable as required.",
+      "The `discretization` step with `binarizer` is only applied to numerical features. Categorical features are only imputed and then passed as strings to the `RandomForestClassifier`. The `RandomForestClassifier` expects numerical input, so the pipeline will fail during execution if categorical features are present in `X_train`. This means the pipeline does not fully implement the `binarizer` step for all relevant features and is not executable as required.",
+      "The pipeline specifies 'discretization with `binarizer`'. While the `Binarizer` is applied to categorical features, an `OrdinalEncoder` was added before it to convert categorical strings to numerical values. The `OrdinalEncoder` is an additional step not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'.",
+      "The `discretization` step with `binarizer` is only applied to numerical features. Categorical features are only imputed and then passed as strings to the `RandomForestClassifier`. The `RandomForestClassifier` expects numerical input, so the pipeline will fail during execution if categorical features are present in `X_train`. This means the pipeline does not fully implement the `binarizer` step for all relevant features and is not executable as required.",
+      "The `discretization` step with `binarizer` is only applied to numerical features. Categorical features are only imputed and then passed as strings to the `RandomForestClassifier`. The `RandomForestClassifier` expects numerical input, so the pipeline will fail during execution if categorical features are present in `X_train`. This means the pipeline does not fully implement the `binarizer` step for all relevant features and is not executable as required.",
+      "The pipeline specifies 'discretization with `binarizer`'. While the `Binarizer` is applied to categorical features, an `OrdinalEncoder` was added before it to convert categorical strings to numerical values. The `OrdinalEncoder` is an additional step not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'.",
+      "The pipeline specifies 'discretization with `binarizer`'. While the `Binarizer` is applied to categorical features, an `OrdinalEncoder` was added before it to convert categorical strings to numerical values. The `OrdinalEncoder` is an additional step not explicitly mentioned in the provided pipeline, which states to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "778fe99ae9004f07acc515a5abb69ea3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "5465d612314f40c681a721f0501def20",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "8605dd9b593f485c927cfc5d95ac3281",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "0fe3fc2194564e188a4aae4ee9009bdc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  }
+]

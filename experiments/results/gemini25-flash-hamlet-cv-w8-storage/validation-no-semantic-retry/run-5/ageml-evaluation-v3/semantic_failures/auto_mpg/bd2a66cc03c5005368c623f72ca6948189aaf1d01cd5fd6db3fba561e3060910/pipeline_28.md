@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only implement normalization with `minmax`, features with `pca`, and regression with `svr`.

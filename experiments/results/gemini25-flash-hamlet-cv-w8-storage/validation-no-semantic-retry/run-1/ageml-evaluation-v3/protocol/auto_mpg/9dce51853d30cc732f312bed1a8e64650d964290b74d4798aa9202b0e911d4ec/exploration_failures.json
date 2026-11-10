@@ -1,0 +1,234 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "7b4257d7713f44c981845022dd4889e8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "b79a8c6e6b9a4c45a90d26af24d82de6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "b099891856114050a48e35361193e455",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists only two steps: 'normalization' with `robust_scaler` and 'regression' with `lasso`. However, the generated code adds an additional step, `SimpleImputer`, which is not part of the specified pipeline. While imputation might be necessary for execution due to missing values, it was not requested in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "3aee70d9d6634558b31d9a8390b14643",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'normalization', 'features', and 'regression' steps. The generated code adds an 'imputer' step, which is not part of the provided pipeline definition. While imputation might be necessary for execution due to missing values, it was not requested in the pipeline specification."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "54e380204f934ba4a13dcaac75c3344c",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline steps. The pipeline should only contain normalization, feature selection, and regression as per the instructions."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "50039b70fe3e41cc93121d3e988ce41b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "8db76b1e5e924e5d80f20c1cc07a7f60",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "5530da7ba08749c1b05ce14057109f1b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "a3edca4cb9ea4b9081b87c567a3aee36",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "4d332e23d63f4f179279c9a2ccb84356",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "ba03947bf44040a883cfa18599bcfbfe",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "6d2a091a5fe14a018432a0d368818dd3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "2f9c8bbb90b4462bac5a6383b9b50d7e",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline only defines normalization, feature selection, and regression steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "d4be93052f1f47c082dc44e5d751d194",
+    "semantic_feedback": [
+      "The pipeline explicitly defines two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds an additional step, 'imputer' with `SimpleImputer`, which is not part of the specified pipeline. Therefore, it is not compliant with the provided pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "5ce2458e0cc24a31a6947d9a0fd3483d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "8343663511e445f6b649431143f40e41",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `minmax` normalization and `nn_regressor`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "30f8e17023e743449df1283a56d3093b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "af4a5df55b01484eb18d7d3f8cff50f7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "9b091d570559487da67debbd8ed8c19b",
+    "semantic_feedback": [
+      "The code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "85a2d1277d944a03b6d77706ef2c5e6b",
+    "semantic_feedback": [
+      "The pipeline explicitly defines two steps: 'normalization' with `robust_scaler` and 'regression' with `ridge`. The generated code adds an additional step, `SimpleImputer`, which is not part of the specified pipeline. The code should only implement the steps explicitly mentioned in the pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "a4f803fbf0984e088e2a0e423d5768d4",
+    "semantic_feedback": [
+      "The pipeline explicitly lists three steps: normalization, feature selection, and regression. The generated code adds an extra step, `SimpleImputer`, which was not requested in the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "16f76c0ee7d2479ba4633b109d540094",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "ca917811c885401b9f195b1767691fab",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "06a8e61c4f254f9f82d1c8b4f609ffc2",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, 'imputer' with `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain 'binarizer', 'power_transformer', 'pca', and 'knn_regressor'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "e611f88d219a4916a2f1977ddaa12614",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "87476ac39d474cbaa089b1313428aa1f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "a21f885c92114bdc84ec1038e8054a33",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "c116c03eff30479da3d71899c5778192",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "91cec8a0cc8e4cdcbb9aa99b19931d0e",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `minmax` normalization, `pca` for features, and `svr` for regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "0246daca78e447ae899966129c84c4a5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

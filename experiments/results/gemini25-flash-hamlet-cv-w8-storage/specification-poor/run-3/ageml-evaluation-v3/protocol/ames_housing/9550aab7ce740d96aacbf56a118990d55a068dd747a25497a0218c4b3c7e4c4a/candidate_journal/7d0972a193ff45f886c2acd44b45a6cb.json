@@ -1,0 +1,84 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "23b4a89340a4a670c37b16650c3bbb8e4f9b0091c7b8a55be0b0bf223a886439",
+  "code_sha256": "07c289e9cbf110d9cf002a94dd3dc844d4be22f26129ab18f4a7d1b2189d6d2e",
+  "completed_at": 1793664487.2729838,
+  "cv_fold_scores": [
+    68354.50035046981,
+    83461.3623834879,
+    81055.36090038449,
+    84596.27302037529,
+    98126.19719514943,
+    78814.27421946469,
+    71839.17572078574,
+    70601.02988600393,
+    93339.81475420795,
+    72729.55093993152
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42,
+      "preprocessor__num__pca__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 3,
+  "hyperparameters": {
+    "C": 10.0,
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "epsilon": 0.1,
+    "imputation_strategy": "median",
+    "kernel": "rbf",
+    "method": "yeo-johnson",
+    "n_bins": 10,
+    "n_components": 0.95
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "978c92f68e1d4e4b85e762a805dbd4d65437ede0934384985364b02ca4d0ebf7",
+  "pipeline_id": 23,
+  "pipeline_run_id": "2d2a1f7adea046c2afdd276350c0319b",
+  "run_id": "7d0972a193ff45f886c2acd44b45a6cb",
+  "run_identity": "662084c703a7978500cf24fae073a29111a7a68542f97854e95139890b75e56c",
+  "validation_score": 80291.75393702608,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

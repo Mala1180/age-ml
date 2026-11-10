@@ -1,0 +1,144 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/adult/200a63f55efb4b7f2dcaaed79c7f201a347ab6f196d584bc5a9180ce72ad935c/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/adult/200a63f55efb4b7f2dcaaed79c7f201a347ab6f196d584bc5a9180ce72ad935c/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/adult/200a63f55efb4b7f2dcaaed79c7f201a347ab6f196d584bc5a9180ce72ad935c/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-3/ageml-evaluation-v3/protocol/adult/200a63f55efb4b7f2dcaaed79c7f201a347ab6f196d584bc5a9180ce72ad935c/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "16720f564473407f83c84a5021c08ffb",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8245376845877674,
+    0.8202034344351432,
+    0.8091122063789316,
+    0.8262852603329549,
+    0.817650349469897,
+    0.8106049389396557,
+    0.8277375262933084,
+    0.8175144807481749,
+    0.8264395262541635,
+    0.8260563664058156
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 4723.472000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "3a44531b208e43bca9479fe1246ef2aa",
+    "1": "c7e40fdae7f14f9c845cefc9bea2ce15",
+    "2": "c9abedec1a8f49e58820f7671daf75f4",
+    "3": "26824e07795c4ebc88cb8be1a28c7900",
+    "4": "cfeef9319ea54fd39b1200df0c2a0491",
+    "5": "082f4d28f4654c0b91ece007a510f866",
+    "6": "0cac7d7a7eb04b6cbe9f3772501f366e",
+    "7": "270525dd6c8d465e996209e84264ece5",
+    "8": null,
+    "9": "f89638efb8444e0f8e7f2c2470c4e6f8",
+    "10": "b2dbd4199173417bb27caa6de0c89e56",
+    "11": "0a05305198fe456e9210a4f6b0d4bac7",
+    "12": "7381bd57aacf4a18b0f1de3d338b5333",
+    "13": "a7870f54571b4852b6e99cbe20535b29",
+    "14": "08d75e8f151a4989b28229d8e171a40b",
+    "15": "d1af8632d8724887bbbae13afc08108b",
+    "16": "6bc7d483cc084966a23fb6dfc607ae4d",
+    "17": "3124a456090d43a0b8a83aad822c6955",
+    "18": "f71fa7f7a13e4145a0db62eab0518901",
+    "19": "9df45fa2bf524c9e8441b6ba02106856",
+    "20": "b5f79676e070478a8d7b3bba48e4bc4f",
+    "21": "e9c7d8e3d9a9491f899ce01726fa670b",
+    "22": "de794f040c414069915271498b62a6ab",
+    "23": "42c64e0321c64c769daf2fb5a621e414",
+    "24": null,
+    "25": "4e7d858941b04a849991c9cd6e9ea66a",
+    "26": "248efeaebf754f589cbea44d949d924b",
+    "27": "2335750dc295437d88950388d7009be2",
+    "28": "4dfc00a2ee764f4b92e6e69feca3202c",
+    "29": "477e6f7d06fc4a55a4e61ebcafa994eb"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "64e14401e03f82168c5da38fad711a646726381e83807086b35bd0fcd916e913",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "637718255052d9e9a6396574af7c8beeefcea15b98a4d281e2a8f99fc1d3b430",
+  "runtime_human_readable": "1:00:24",
+  "runtime_seconds": 3623.793450076133,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8206141773845813,
+  "selected_candidate_key": "e5d662dbfa9bcddb542114637a3d34754f4f39cfd204d40e4da5dddbf2bede6d",
+  "selection_sha256": "7ef3834eab95e838c40eedd5ab56005913d0f7776c9defc48abe271cf0a90658",
+  "selection_validation_score": 0.8206141773845813,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for categorical features. The pipeline explicitly states 'discretization with kbins' as the first step, which is typically for numerical data. The instruction was to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "6": [
+      "The code is not strictly compliant with the pipeline because it introduces additional steps not explicitly listed in the provided pipeline. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and resolve the previous 'could not convert string to float' error, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline.",
+      "The code is not strictly compliant with the provided pipeline because it introduces additional steps not explicitly listed. Specifically, it adds `SimpleImputer` for categorical features, `OneHotEncoder` for categorical feature encoding, and `ColumnTransformer` to manage these different preprocessing steps for numerical and categorical data. While these additions are necessary to handle the mixed data types in the dataset and ensure executability, they go beyond the explicit instruction to implement 'only those steps' of the pipeline."
+    ],
+    "7": [
+      "The 'features' step with `pca` is not fully compliant. The current implementation applies PCA only to the numerical features within the `numerical_transformer`. The pipeline step 'features with `pca`' implies applying PCA to the combined feature set after all initial preprocessing (imputation and scaling/one-hot encoding for both numerical and categorical features). To be fully compliant, PCA should be applied after the `ColumnTransformer` to the entire preprocessed feature space."
+    ],
+    "13": [
+      "The generated code includes an additional step, OneHotEncoder for categorical features, which was not explicitly listed in the provided pipeline definition. The pipeline only specified 'discretization' with 'kbins', 'normalization', 'features' with 'pca', and 'classification' with 'knn'. While handling categorical features is necessary for the dataset, the instruction was to implement 'only those steps' explicitly mentioned in the pipeline."
+    ],
+    "18": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly used for numerical features, a SimpleImputer is used for categorical features. To be fully compliant, the imputation strategy for categorical features should also align with 'iterative_imputer' if possible (e.g., by encoding them first and then applying IterativeImputer, or by using a more advanced imputer that handles mixed data types if that was the intent)."
+    ],
+    "19": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step but was not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline.",
+      "The code is not fully compliant because it is not \"correct and executable\" for the provided dataset. While it strictly adheres to implementing only the explicitly listed steps, it omits a necessary categorical encoding step (e.g., OneHotEncoder) for the categorical features present in the dataset. Without this, subsequent steps like PCA and MLPClassifier will fail as they expect numerical input, making the pipeline non-functional for such data."
+    ],
+    "20": [
+      "The pipeline specifies 'normalization with `power_transformer`' as a distinct step after discretization. However, the generated code applies `PowerTransformer` conditionally, only if the `encode` parameter for `KBinsDiscretizer` is set to 'ordinal'. If `encode` is 'onehot' or 'dense', the `PowerTransformer` step is skipped for the numerical features, which deviates from the explicit pipeline requirement to include this step."
+    ],
+    "25": [
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not executable because the RandomForestClassifier cannot handle string/object type features. The categorical features are imputed but not encoded into a numerical format (e.g., using OneHotEncoder), which is a necessary preprocessing step for the classifier. While the code correctly implements the explicitly listed steps (imputation and binarization for numerical features), the absence of categorical encoding makes the overall pipeline non-executable, thus violating the requirement to \"ensure that it is correct and executable\".",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not executable because the RandomForestClassifier cannot handle string/object type features. The categorical features are imputed but not encoded into a numerical format (e.g., using OneHotEncoder), which is a necessary preprocessing step for the classifier. While the code correctly implements the explicitly listed steps (imputation and binarization for numerical features), the absence of categorical encoding makes the overall pipeline non-executable, thus violating the requirement to \"ensure that it is correct and executable\".",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not executable because the RandomForestClassifier cannot handle string/object type features. The categorical features are imputed but not encoded into a numerical format (e.g., using OneHotEncoder), which is a necessary preprocessing step for the classifier. While the code correctly implements the explicitly listed steps (imputation and binarization for numerical features), the absence of categorical encoding makes the overall pipeline non-executable, thus violating the requirement to \"ensure that it is correct and executable\".",
+      "The pipeline specifies 'discretization with binarizer'. The generated code applies `Binarizer` to numerical features, which is correct. However, it also introduces `OneHotEncoder` for categorical features, which is an additional step not explicitly mentioned in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "28": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 28,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.06903161999999999,
+    "input_tokens": 339700,
+    "output_cost": 0.165185,
+    "output_tokens": 56730,
+    "total_cost": 0.23421662000000004,
+    "total_tokens": 398759
+  },
+  "training_time": 8685.079,
+  "validation_metric": "balanced_accuracy"
+}

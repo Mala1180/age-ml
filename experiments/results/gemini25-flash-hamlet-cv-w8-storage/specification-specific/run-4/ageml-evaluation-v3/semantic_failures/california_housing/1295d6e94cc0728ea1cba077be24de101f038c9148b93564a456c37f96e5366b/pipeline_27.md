@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly states 'normalization with `robust_scaler`' and 'regression with `ridge`'. The generated code adds `OneHotEncoder` for categorical features, which was not specified in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline.

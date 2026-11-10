@@ -1,0 +1,135 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-3/ageml-evaluation-v3/protocol/ames_housing/6be0b95abeeced6aae9817cf58fef1c871c073319d523f26f86bc0d4a135d7a7/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-3/ageml-evaluation-v3/protocol/ames_housing/6be0b95abeeced6aae9817cf58fef1c871c073319d523f26f86bc0d4a135d7a7/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-3/ageml-evaluation-v3/protocol/ames_housing/6be0b95abeeced6aae9817cf58fef1c871c073319d523f26f86bc0d4a135d7a7/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-3/ageml-evaluation-v3/protocol/ames_housing/6be0b95abeeced6aae9817cf58fef1c871c073319d523f26f86bc0d4a135d7a7/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 21,
+  "best_run_id": "20324802fa924931b58352cb14d3a823",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    28729.760062212146,
+    29009.696040941548,
+    25769.0373709572,
+    44440.08860694272,
+    34244.62087311234,
+    25477.131506367034,
+    23315.684312572594,
+    24954.044976089743,
+    40996.8485156149,
+    29337.6449403411
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 468.5170000000001,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "d228d12b757040959b74b2fbee81d718",
+    "1": "757669a173d84163b0593a608cca5aac",
+    "2": "e90de2f0ab9d496a93f0d410d2e5d3cc",
+    "3": "63b606f5981f4b438266565eef6e5757",
+    "4": "a00e9f72c3934bb2aa7330163a8e1d48",
+    "5": "bc74ab9e98e2400daa953e5d8208b99e",
+    "6": "78bda8bdcf5f46439abfe4bc45df305b",
+    "7": "0377425f3c5a4a7fba370c2d51cc4e3a",
+    "8": "20fa9b1bbb5443ac9f62bdc468a842a9",
+    "9": "8aecac9ec96143b697202fb5530db0f8",
+    "10": "dbd871ba60d7480789b3eb902c932b6b",
+    "11": "27599d0c60e14f50bc098e4b083e1644",
+    "12": "ad1ba9c3059447e585e3969c5bb0e17b",
+    "13": "2bccfb9c4c7c4dbf90b6b213523358fe",
+    "14": "586bf560ed5d498693b0d98468b2ef83",
+    "15": "ab77853039bf4ccf91e502b62ef34969",
+    "16": "f1e144259d4c44d3a6b2a843c536e478",
+    "17": "d3442828105542119768e6ceda358c78",
+    "18": "b97ebb0889024dbab77ceb62d1c0e8d9",
+    "19": "58bfc29ab1b3472eb2cb93147af1c12e",
+    "20": "a9bed2e5e83f44289ceb4ad795e98a4e",
+    "21": "2fc2af9ae7454d92a842e64c2e5bb56d",
+    "22": "2d6a502bea9a4386b4eff4897d480166",
+    "23": "94286491a48e46dfb2673156eb4aee43",
+    "24": "6beefbc39a1b4bccaa50e603ac3f3842",
+    "25": "315923d5b7fe443ca05ef6ff66b2688a",
+    "26": "f09d6fbed152415a9886672f19d57bdf",
+    "27": "29f533f6a7844b2f8f645b02d6a85690",
+    "28": "20818e02d78f442baf79359f0c7338da",
+    "29": "bd28eb8c939d474fa52a0995fd62ff4f"
+  },
+  "pipelines_found": 184,
+  "protocol_sha256": "7d007b76ca7e0d24bb05658a8e33ac27ebc36e0c33f1553b5b2d853da38ee541",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "ec77e07487d95f786c6835356f01800f8654e6af5a69bcd0a6d1b50f84aa498b",
+  "runtime_human_readable": "0:08:57",
+  "runtime_seconds": 537.1667583808303,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 30627.455720515136,
+  "selected_candidate_key": "a842a40125a4126675f2f26fd1f48bde6b59f90d2443f805de7f9d4673a24ddd",
+  "selection_sha256": "339668c485596767212420997c7a1dac953441acd46e349cdd86df9495517573",
+  "selection_validation_score": 30627.455720515136,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "The code is mostly compliant, but the 'imputation' step is not fully handled for all data types. While `IterativeImputer` is correctly applied to numerical columns as specified, it does not address potential missing values in categorical columns. If `X_train` contains `np.nan` in categorical features, the `OneHotEncoder` will raise an error, as it does not handle missing values by default. To be fully compliant with a comprehensive 'imputation' step, a strategy for imputing categorical missing values (e.g., using `SimpleImputer` with 'most_frequent' or 'constant' strategy) should be included before `OneHotEncoder` for the categorical features."
+    ],
+    "7": [
+      "The generated code introduces additional steps not explicitly mentioned in the provided pipeline. Specifically, it adds a `ColumnTransformer` to handle numerical and categorical features separately, including a `SimpleImputer` and `OneHotEncoder` for categorical columns. The pipeline description only specified 'imputation with `iterative_imputer`', 'normalization with `robust_scaler`', 'features with `pca`', and 'regression with `lasso`', implying these operations would apply to the data or its numerical parts without explicit handling for categorical features or additional preprocessing steps like one-hot encoding."
+    ],
+    "10": [
+      "The pipeline specifies 'imputation' with `iterative_imputer`. While `IterativeImputer` is correctly applied to numerical features, categorical features with missing values are handled by `OneHotEncoder` (which creates a new category for NaNs). This is a different imputation strategy than `iterative_imputer` and thus deviates from the specified pipeline step for all imputation."
+    ],
+    "11": [
+      "The PCA step is not compliant with the pipeline. The pipeline specifies \"features with pca\" as a step after normalization. In the generated code, PCA is applied only to the numerical features *before* they are combined with the one-hot encoded categorical features. For full compliance with the sequential pipeline, PCA should be applied to the entire feature set (numerical features after scaling and categorical features after one-hot encoding) as a single step after the initial preprocessing."
+    ],
+    "13": [
+      "The generated code is not compliant with the provided pipeline because it introduces additional steps not explicitly mentioned in the pipeline definition. Specifically, for categorical features, it uses `SimpleImputer` for imputation and `OneHotEncoder` for encoding. The pipeline only specifies `iterative_imputer` for imputation and `power_transformer` for normalization, and does not include any explicit steps for handling categorical feature encoding."
+    ],
+    "19": [
+      "The pipeline explicitly lists four steps: imputation, normalization, PCA, and SVR. The generated code includes `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "23": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies 'normalization with standard', 'features with pca', and 'regression with svr'. However, the code adds a 'SimpleImputer' step for numerical features and implicitly drops non-numerical features using 'ColumnTransformer' with 'remainder=\\'drop\\''. These steps (imputation and handling of non-numerical features) were not explicitly requested in the pipeline definition, violating the constraint to implement 'only those steps'.",
+      "The pipeline definition specifies 'normalization with standard', 'features with pca', and 'regression with svr'. However, the generated code includes a 'SimpleImputer' step for numerical features, which was not explicitly requested in the pipeline definition. The constraint is to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline definition specifies 'normalization with standard', 'features with pca', and 'regression with svr'. However, the generated code includes a 'SimpleImputer' step for numerical features, which was not explicitly requested in the pipeline definition. The constraint is to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "25": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly applied to numerical features, it is not applied to categorical features that may contain missing values (as indicated in the dataset info, e.g., 'Alley', 'MasVnrType', 'BsmtQual', etc.). For these categorical columns, OneHotEncoder is used, which handles missing values by treating them as a separate category (due to `handle_unknown='ignore'`), but this is not 'imputation with iterative_imputer'."
+    ],
+    "26": [
+      "The generated code introduces `OneHotEncoder` for categorical features, which is an additional transformation step not explicitly listed in the provided pipeline. The pipeline specifies 'imputation' and 'normalization' but does not explicitly mention encoding for categorical data. While this addition is necessary for handling the mixed data types in the dataset and making the pipeline executable, it deviates from the strict instruction to implement 'only those steps'. Additionally, the `imputation_strategy` parameter is only applied to numerical columns, with categorical columns using a hardcoded 'most_frequent' strategy, which might not align with the user's expectation if `imputation_strategy` was meant to be universal.",
+      "The generated code introduces `OneHotEncoder` for categorical features, which is an additional transformation step not explicitly listed in the provided pipeline. The pipeline specifies 'imputation' and 'normalization' but does not explicitly mention encoding for categorical data. While this addition is necessary for handling the mixed data types in the dataset and making the pipeline executable, it deviates from the strict instruction to implement 'only those steps'. Additionally, the `imputation_strategy` parameter is only applied to numerical columns, with categorical columns using a hardcoded 'most_frequent' strategy, which might not align with the user's expectation if `imputation_strategy` was meant to be universal."
+    ],
+    "28": [
+      "The generated code is not fully compliant because the `PowerTransformer` expects numerical input, but the dataset contains categorical (string) columns. Applying `PowerTransformer` directly to `X_train` (which includes these string columns) will cause an error, making the code not executable. To correctly implement the normalization step, a `ColumnTransformer` should be used to apply `PowerTransformer` only to the numerical features, and handle or drop the categorical features."
+    ],
+    "29": [
+      "The generated code is not fully compliant because the IterativeImputer expects numerical input, but the dataset contains string columns. This causes an execution error (as observed previously: \"could not convert string to float: 'RM'\"). To be executable, the pipeline needs to explicitly handle categorical features (e.g., by encoding them or by applying the imputer only to numerical columns) before the imputation step.",
+      "The pipeline explicitly states 'imputation with iterative_imputer', 'normalization with power_transformer', and 'regression with lasso'. The generated code adds `SimpleImputer` and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. While these steps are necessary for handling mixed data types and making the pipeline executable, they violate the constraint to implement 'only those steps' of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 15,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.025015319999999994,
+    "input_tokens": 183722,
+    "output_cost": 0.06150500000000001,
+    "output_tokens": 21619,
+    "total_cost": 0.08652032,
+    "total_tokens": 206500
+  },
+  "training_time": 975.3279999999999,
+  "validation_metric": "rmse"
+}

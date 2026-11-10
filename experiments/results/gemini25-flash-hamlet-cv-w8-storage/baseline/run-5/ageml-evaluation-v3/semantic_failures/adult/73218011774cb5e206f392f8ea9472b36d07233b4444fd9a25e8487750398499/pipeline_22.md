@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists three steps: normalization with `power_transformer`, features with `select_k_best`, and classification with `nn`. The generated code includes an additional preprocessing step, `OneHotEncoder`, for categorical features, which is not explicitly mentioned in the provided pipeline description. While this step is necessary for the pipeline to be executable with the given dataset, the instruction explicitly states to implement 'only those steps'.

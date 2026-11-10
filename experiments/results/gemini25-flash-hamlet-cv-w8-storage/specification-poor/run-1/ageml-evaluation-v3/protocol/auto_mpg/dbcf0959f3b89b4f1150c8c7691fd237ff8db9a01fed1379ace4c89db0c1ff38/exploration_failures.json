@@ -1,0 +1,251 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "49c118394e6548feacc06a9bb950a581",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "8cb5ea1903444a7e8981f584cca7b36c",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `SimpleImputer`, which was not specified in the original pipeline definition. The pipeline explicitly listed only three steps: binarization, normalization, and regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "91f7bd171df74538b3b1ac4313e84dab",
+    "semantic_feedback": [
+      "The generated code includes an additional step, 'imputer' (SimpleImputer), which is not specified in the provided pipeline. The pipeline only defines discretization, normalization, features, and regression steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "44520c56fa20425fa53c5994e90f7280",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "66068f5c877449e2993da93a47810410",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "18ca089c160f4375bfca71e9f08c2058",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "30fb8b8feeb64c88ae8e613fc3eb87d9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "b94dcf07bb4e43c59603694f6dc89a55",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "124c94194202442782bcdd5ea29b18d6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "85119a78f2df433d83ffc7d99edba19b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "65537ebb205c442ca3d6fd673942dfd2",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists two steps: 'discretization with binarizer' and 'regression with random_forest_regressor'. The generated code adds an extra step, 'imputer' (SimpleImputer), which was not specified in the pipeline description. The instructions state to 'implement all the steps of the pipeline and only those steps'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists two steps: 'discretization with binarizer' and 'regression with random_forest_regressor'. The generated code adds an extra step, 'imputer' (SimpleImputer), which was not specified in the pipeline description. The instructions state to 'implement all the steps of the pipeline and only those steps'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable with the provided dataset due to missing values (NaNs). The `Binarizer` step does not handle NaN values natively, which causes an error during execution. The instructions state that the code must be 'correct and executable'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "8f55ed26336c4dfeb684986a8139dd9c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "94eebd17e02d49429dd43d7203e2774b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "6bea5d8ce85a4876aa46b7d5da767402",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "7a2628bd4e3d4c0486dcb3c7391de629",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "05094280063e43209647d970bce504f5",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The original pipeline only listed `binarizer`, `power_transformer`, `select_k_best`, and `lasso`.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The original pipeline only listed `binarizer`, `power_transformer`, `select_k_best`, and `lasso`.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The original pipeline only listed `binarizer`, `power_transformer`, `select_k_best`, and `lasso`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "28eb7a57eab1486fa49211fd19423932",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "33c504f6b15f450190aff08c8749b799",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "4e9df849a5ac4a108c4c357015e1a9fd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "de47840e2be247adb9f46790e03cd26b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "23506c004ed043baacb2d26da88a92db",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline definition. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition.",
+      "The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline definition. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition. The instruction 'The code eventually will be executed, so ensure that it is correct and executable' is not met.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition. The instruction 'The code eventually will be executed, so ensure that it is correct and executable' is not met.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition. The instruction 'The code eventually will be executed, so ensure that it is correct and executable' is not met.",
+      "The generated code is not fully compliant because while it implements the specified pipeline steps, it is not executable with the provided dataset due to missing values (NaNs). The `KBinsDiscretizer` does not handle NaN values natively, which leads to an execution error. To be fully compliant and executable, an imputation step would be required before discretization, even though it's not explicitly in the pipeline definition. The instruction 'The code eventually will be executed, so ensure that it is correct and executable' is not met."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "2279ca5d7e7246828a8b974033cbeec4",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "b2a8c505cf6542208d3d49d916252e74",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "d88bb196d6174af0bc76aa07f9fc83b9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "c3a14bc689d247f9bb665bdec406f933",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "6a60d2420b9d4e8787e203dc2e4c5314",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "42a6d70a137c4b28affae61731c1144b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "3186a6b65b35450aa1595e1927af1247",
+    "semantic_feedback": [
+      "The pipeline includes a `SimpleImputer` step, which was not specified in the original pipeline definition. The instruction was to implement all the steps of the pipeline and *only* those steps.",
+      "The pipeline includes a `SimpleImputer` step, which was not specified in the original pipeline definition. The instruction was to implement all the steps of the pipeline and *only* those steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "f37929fd21754ef39a561da618f99c3b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "44da01600947442793cd1d0975034f89",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

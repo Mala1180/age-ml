@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/texture/6908861e2a0260a88ba9487a3b1128d2520ee9992683213de55eccf1a540be93/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/texture/6908861e2a0260a88ba9487a3b1128d2520ee9992683213de55eccf1a540be93/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/texture/6908861e2a0260a88ba9487a3b1128d2520ee9992683213de55eccf1a540be93/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-4/ageml-evaluation-v3/protocol/texture/6908861e2a0260a88ba9487a3b1128d2520ee9992683213de55eccf1a540be93/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 18,
+  "best_run_id": "552e6202e61943dc8e61e997c97571e0",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9945454545454545,
+    0.9945454545454546,
+    0.9963636363636365,
+    0.9963636363636365,
+    1.0,
+    0.9945454545454546,
+    0.9981818181818182,
+    0.990909090909091,
+    0.9981818181818182,
+    0.9981818181818182
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 453.88800000000003,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "a7ab78232a0c4ca5a721369603c29915",
+    "1": "b824fe1e60014501a7a7a42061ab1ac4",
+    "2": "651c272228f64abaaba856ab284237c7",
+    "3": "77cb05c836ed430889c25669a2f4cc9d",
+    "4": "9fdad7ce420c48a68111a0eddc76c144",
+    "5": "0c8e49c73b214a7ca1134eb67843b755",
+    "6": "520e4b607f3345acacbeb4ae4ded206d",
+    "7": "4cb372f9636a461a95096ed9297eb187",
+    "8": "c2a1ec4caba749e2ae960e95536aa78e",
+    "9": "df9663182355440591ee25369d4c5478",
+    "10": "a1a9d50341af49abb436e4367e63c2df",
+    "11": "0adb6f2f93fb45ae905e6bd586e0f2db",
+    "12": "3533ced7389a4ccdb23452e81ce0ed17",
+    "13": "0d150337dc75472a819863ae41ee66a3",
+    "14": "5f677a375d524dd68b9dc9ce1fb79886",
+    "15": "53d3e08fca5045f9b1925ad9a2e81607",
+    "16": "25ac7b216e42490dbf04f52849d2483d",
+    "17": "6a6cf8ccb3dd42e68b394c6318a39be5",
+    "18": "33443d594c264423b83b4aec824822ca",
+    "19": "83c49d5320354130a454ef0fab68951a",
+    "20": "f613f8b3a35643f98b27cd9a9b03a086",
+    "21": "7caae273ef0e476998f5b76843f9aa88",
+    "22": "edffef8e5edb494bae755d81749dc970",
+    "23": "fe82d7515ad24dc5b2608f06e85a1126",
+    "24": "fd41e7b1e6a24950bf145905ce5ba11f",
+    "25": "5c50466546184d508d6f5b97035b28db",
+    "26": "103a1b6be87d4990be42c49a38a4fbc6",
+    "27": "2294fc58650e4bb3b6ee88244b8216d0",
+    "28": "d1d9d3f4f65c4ed993a015c7bb179c51",
+    "29": "791106e2d7a84a3281e47fa1508edef7"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "8cc5a16b8a57176ff2ba983b47d754d4396193ac50b77bf18f7e66ed2484d6fa",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "8a5906897604f11476db0d63f7b0dc4469b0c634e0ad30e330f8233b89eb3334",
+  "runtime_human_readable": "0:07:12",
+  "runtime_seconds": 431.771379776299,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9961818181818183,
+  "selected_candidate_key": "0ecdcc5314479fe25b7e2b79c646937da4f956f8df1e1c7d8096e200c19206cd",
+  "selection_sha256": "c3f47a1764bab8b95f88fe22181d39b895d795032696e00d9b75dcd1a47bfe38",
+  "selection_validation_score": 0.9961818181818183,
+  "semantic_validation_failure_reasons": {
+    "12": [
+      "The code is not fully compliant because it is not executable as demonstrated by the previous error. The `feature_range` parameter for `MinMaxScaler` expects a tuple, but if it is passed as a list (e.g., `[0, 1]`), it will raise a TypeError. To fix this, `feature_range` should be explicitly converted to a tuple: `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "19": [
+      "The code hardcodes 'random_state=42' for `NearMiss` and `MLPClassifier`. The instructions state: \"The host sets every exposed random_state and fits separately on each fold.\" This means the `random_state` parameter for these components should not be hardcoded within the `build_model` function, but rather be left to the host to manage, or passed as an argument if it's meant to be configurable."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "a80eee61e65b7b4e1d809b5bfe009a74e2bef5667e7220f0055cae9ac7de8321",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.014105160000000002,
+    "input_tokens": 89982,
+    "output_cost": 0.0362625,
+    "output_tokens": 7758,
+    "total_cost": 0.05036766000000001,
+    "total_tokens": 98234
+  },
+  "training_time": 1904.732,
+  "validation_metric": "balanced_accuracy"
+}

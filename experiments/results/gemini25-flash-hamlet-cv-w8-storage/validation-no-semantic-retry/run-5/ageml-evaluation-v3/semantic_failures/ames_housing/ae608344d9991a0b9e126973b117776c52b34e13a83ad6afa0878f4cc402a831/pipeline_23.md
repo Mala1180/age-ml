@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it includes a `SimpleImputer` step, which was not specified in the original pipeline definition. The pipeline explicitly requested only discretization, normalization, features (PCA), and regression.

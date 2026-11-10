@@ -1,0 +1,105 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-2/ageml-evaluation-v3/protocol/wilt/b2f7541bd402609d17d3569c581932f6054373dea654fbce665c40a4669c40e1/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-2/ageml-evaluation-v3/protocol/wilt/b2f7541bd402609d17d3569c581932f6054373dea654fbce665c40a4669c40e1/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-2/ageml-evaluation-v3/protocol/wilt/b2f7541bd402609d17d3569c581932f6054373dea654fbce665c40a4669c40e1/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-2/ageml-evaluation-v3/protocol/wilt/b2f7541bd402609d17d3569c581932f6054373dea654fbce665c40a4669c40e1/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 20,
+  "best_run_id": "7c15c3e0fafb402a983eef8e08f20149",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9560799462546188,
+    0.9912663755458515,
+    0.9774941215989251,
+    0.9774941215989251,
+    0.9582633523681559,
+    0.9785858246556937,
+    0.8758817601612361,
+    0.9611185757473968,
+    0.8705605116983672
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 140.88199999999998,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "7991e18954f948e78a5fbd05ff00ff75",
+    "1": "e750131eb8f2437c8639b0cc2bf3ca78",
+    "2": "088ba442ad1c4f8a97b0de081f0e5ac5",
+    "3": "ed84be601abf439397839bdeec08d26e",
+    "4": "236f519a5f9e4bf0903c82c124509e5f",
+    "5": "8bc24d9bfa464b9e83c14dfe01c3f6fa",
+    "6": "34eece8f138242f1af0a5f02b96b95ea",
+    "7": "1da5026ca7e047b0bf9de2208c6039e4",
+    "8": "d331afb029a742fa8c4ddb5961fbec51",
+    "9": "cb83aa3048f140d0a64a7c5729e49441",
+    "10": "72f1d43cd0e64c6c8a7fb6b796b4c7d7",
+    "11": "cebb33fee3f249e7854b6fab2457261e",
+    "12": "9f52aac5c83b4dc8ac1ff6e7135c4778",
+    "13": "8ce36b46e8e44f75ae43f5b7844881e1",
+    "14": "996ef3af20424512a88c4d374cdc393a",
+    "15": "ac34c40b6e5243bcbb06097416fd8200",
+    "16": "73e34728a2704a5fb7f0b928b0bbaf70",
+    "17": "cd1d5e1a71544ecba8ff174a33ac0487",
+    "18": "25316fae4ce64060bc7491257a0078c2",
+    "19": "7be8b264142e4b2ea27311a40aa62321",
+    "20": "79b58ff7d38843ebadd50632963aad20",
+    "21": "9600792a61d54c91b80df472ba8424f8",
+    "22": "f3c90fee84434067953d8dcc4e329330",
+    "23": "66896dce7f0b4eca969ce5108050cc82",
+    "24": "8d14ae7e05894f84a225b89daa020023",
+    "25": "1a585e3f61d942ee8ab6ba2e3056ebcd",
+    "26": "c52b23d4530342988fd3ddf22ac8da8b",
+    "27": "836fe53302a142f89716ed73ff9525e8",
+    "28": "0e9083fbffba45bba89f9359273bb5a3",
+    "29": "523f6d669e724d509b93c6dcf91e1d23"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "81dfe7ac6a52a0831ce6195793dc36e431fc11f7a880dd7505a2a073adae37e0",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "e77a3ce8045937bc5cdc75e0dd594875f5f663d0f16393fa37cc926b30ac18e0",
+  "runtime_human_readable": "0:04:52",
+  "runtime_seconds": 291.88789320364594,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9506425276880973,
+  "selected_candidate_key": "3ae05e6ce02ed874e3f0459d243dbae3a3c64831e08f8b58cdf25d9f29286321",
+  "selection_sha256": "44bb20e193f5283f093e1a11f34a5b5141873bd4b05abc3a78e0f70d2b19b30a",
+  "selection_validation_score": 0.9506425276880973,
+  "semantic_validation_failure_reasons": {
+    "5": [
+      "no, the code is not fully executable as the `feature_range` parameter for `MinMaxScaler` expects a tuple, but the previous execution indicated it received a list (e.g., `[0, 1]`). While the pipeline steps are correctly implemented, this type mismatch will cause a runtime error if `feature_range` is passed as a list.",
+      "no, the code is not fully executable as the `feature_range` parameter for `MinMaxScaler` expects a tuple, but the previous execution indicated it received a list (e.g., `[0, 1]`). The current code passes `feature_range` directly without ensuring it's a tuple, which will lead to a runtime error if a list is provided."
+    ],
+    "27": [
+      "The code is not compliant because it hardcodes `random_state=42` for `IterativeImputer`, `PCA`, and `SMOTE`. The instructions state: \"The host sets every exposed random_state\", which means the `build_model` function should not set `random_state` itself, but rather allow the host environment to control it."
+    ]
+  },
+  "semantic_validation_failures": 3,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01733394,
+    "input_tokens": 98770,
+    "output_cost": 0.06528500000000001,
+    "output_tokens": 13296,
+    "total_cost": 0.08261894,
+    "total_tokens": 113493
+  },
+  "training_time": 591.5580000000002,
+  "validation_metric": "balanced_accuracy"
+}

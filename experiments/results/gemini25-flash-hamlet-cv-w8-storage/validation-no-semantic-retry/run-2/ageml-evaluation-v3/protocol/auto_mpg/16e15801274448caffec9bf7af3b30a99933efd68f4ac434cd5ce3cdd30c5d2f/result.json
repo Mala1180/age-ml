@@ -1,0 +1,142 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/auto_mpg/16e15801274448caffec9bf7af3b30a99933efd68f4ac434cd5ce3cdd30c5d2f/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/auto_mpg/16e15801274448caffec9bf7af3b30a99933efd68f4ac434cd5ce3cdd30c5d2f/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/auto_mpg/16e15801274448caffec9bf7af3b30a99933efd68f4ac434cd5ce3cdd30c5d2f/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/auto_mpg/16e15801274448caffec9bf7af3b30a99933efd68f4ac434cd5ce3cdd30c5d2f/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 6,
+  "best_run_id": "fb109b2125fa447eab62c502973611f4",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    2.5816351862804297,
+    1.7963263846283,
+    1.9891728559248227,
+    1.9217700119800796,
+    2.057919489936164,
+    1.7425045621563042,
+    2.9512954212948173,
+    2.814176599432274,
+    4.26112401821572,
+    4.03158846295987
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 192.43200000000002,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "652535abf53244f8b801186f78c2ea9e",
+    "1": "af11fcb9b08a4c7db564088ab7d2e252",
+    "2": "be0add8c8218474da6960ca9775a088a",
+    "3": "5d068142b1b24b6fbfa49bbfebe4ba52",
+    "4": "31307b04507348aba2e8d12237314c9e",
+    "5": "190508de79264fa49e3406f30d45d5a7",
+    "6": "18c3c700f6554f068a1b9147982dcce2",
+    "7": "e362ddfaf2f04f9d950e78b4411ac716",
+    "8": "9043aeee496942f9a2a18aa38764df70",
+    "9": "a123d7694be048c693d6612b62c36e44",
+    "10": "6bbe3be94bb54bb0b4a3053c2eef449e",
+    "11": "dd95d857288641ff8554b66afa06c0a6",
+    "12": "d29884f4d40b4851acf26c51bb49ed46",
+    "13": "3ce004e8bec34081a60aac35c09fcc40",
+    "14": "d68658a6fbe8455abb9299e93dd6905f",
+    "15": "12a05a555f5248c5b30d8f86442e96ae",
+    "16": "57dc1025fc9b4878aa9640f35428aefc",
+    "17": "4eda3538496643888d72c60e04adb6bf",
+    "18": "0a3e16986f494da8ba778b73d0626962",
+    "19": "83f6783a59d2407fb8e12577c0fe786b",
+    "20": "e055230786b14d428ffb274b4006d4c1",
+    "21": "ffe2bc05b1aa44acb0651d1cd86a3464",
+    "22": "79a80f9f4c3c4bb7b69830156a34a8e5",
+    "23": "9cddaf87b66043c68054a25574a67c25",
+    "24": "9b5b9de722dd49eab7ea26ecef92a108",
+    "25": "c40c111c73dd463b8fc917d1bb71d054",
+    "26": "14862bb5af35497ca9a036c85873389e",
+    "27": "527e899e86b54351b26c12e1a1815760",
+    "28": "920b2618755d437b9e180984d5b4cfea",
+    "29": "2386f69911f24eb6a95c84b72756321a"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "b2206a79d0cd7c914e6c9e49520d1c3314e4e5305be0de436586be099e04da47",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "362d589966526f10c4020fc0266a2925df3b8a432e7fb649e5593df3da0cc921",
+  "runtime_human_readable": "0:03:51",
+  "runtime_seconds": 230.8094795718789,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 2.6147512992808783,
+  "selected_candidate_key": "ed131917abab5fa2901a3ed0018479938e6a0cafbd9fd075b0373efaf187c072",
+  "selection_sha256": "422e6a459d82a8414ca450b4a58cade3a939783834fd14e86852fac111195905",
+  "selection_validation_score": 2.6147512992808783,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "no, the code hardcodes `random_state=42` for `IterativeImputer`, `PCA`, and `ElasticNet`. The instruction states: \"The host sets every exposed random_state\". Since `random_state` is not included in the `build_model` function signature, it is not \"exposed\" by this function, and thus the host cannot set it for these components. This contradicts the spirit of the instruction, which implies that if a component has a `random_state` parameter, it should either be exposed for host control or left to its default (often `None` for non-reproducible behavior) if not explicitly controlled by the host. Hardcoding a specific value prevents host control."
+    ],
+    "2": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists only two steps: 'normalization with robust_scaler' and 'regression with lasso'. The generated code adds an extra step, 'imputer' with `SimpleImputer`, which was not specified in the pipeline definition. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "3": [
+      "The pipeline explicitly defines three steps: normalization, features, and regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline definition, making it non-compliant with the provided pipeline."
+    ],
+    "4": [
+      "no, the code is not fully compliant because it may not be executable depending on the type of the `feature_range` parameter. The `MinMaxScaler` expects `feature_range` to be a tuple (e.g., `(0, 1)`), but if `feature_range` is passed as a list (e.g., `[0, 1]`), it will raise a TypeError. To ensure executability, `feature_range` should be explicitly converted to a tuple before being passed to `MinMaxScaler`, like `MinMaxScaler(feature_range=tuple(feature_range))`.",
+      "no, the code is not compliant because it includes an additional step, `SimpleImputer`, which was not specified in the provided pipeline. The pipeline only lists normalization, feature selection, and regression."
+    ],
+    "11": [
+      "No, the generated code is not compliant. The `method` parameter in the `build_model` function signature is passed to the `estimator` argument of `IterativeImputer`. However, `IterativeImputer`'s `estimator` parameter expects an object that implements `fit` and `predict` (e.g., `LinearRegression()`), not a string. This leads to a runtime error if a string is provided for `method`, making the code non-executable under typical hyperparameter inputs. Additionally, the `PowerTransformer`'s `method` is hardcoded to 'yeo-johnson' instead of utilizing the `method` parameter from the function signature, which is a more common and expected use for a 'method' parameter in a preprocessing pipeline."
+    ],
+    "12": [
+      "The code implements all the specified steps of the pipeline and only those steps. However, it is not fully executable as `SelectKBest` does not handle missing values (NaNs) in the input data, which are present in the dataset. The pipeline would require an additional imputation step to handle these missing values before feature selection to be fully correct and executable.",
+      "The code implements all the specified steps of the pipeline and only those steps. However, it is not fully executable as `SelectKBest` does not handle missing values (NaNs) in the input data, which are present in the dataset. The pipeline would require an additional imputation step to handle these missing values before feature selection to be fully correct and executable.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline steps. The pipeline should only contain `minmax` normalization, `select_k_best` features, and `knn_regressor`."
+    ],
+    "13": [
+      "The pipeline explicitly defines two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds an extra step, `SimpleImputer`, which was not part of the original pipeline definition. While `SimpleImputer` might be necessary for execution due to missing values, it deviates from the specified pipeline steps."
+    ],
+    "15": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'normalization' with `minmax` and 'regression' with `nn_regressor`. However, the generated code includes an additional step, `SimpleImputer`, which was not requested in the pipeline definition."
+    ],
+    "18": [
+      "The code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "19": [
+      "The generated code is not fully compliant because it is not robustly executable. The `RobustScaler` expects the `quantile_range` parameter to be a tuple, but if it is passed as a list (e.g., `[25.0, 75.0]`), it will raise a TypeError. To ensure it is 'correct and executable' as per the instructions, `quantile_range` should be explicitly converted to a tuple before being passed to `RobustScaler`.",
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'normalization' with `robust_scaler` and 'regression' with `ridge`. However, the generated code includes an additional step, `SimpleImputer`, which is not part of the defined pipeline."
+    ],
+    "20": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only implement normalization, feature selection, and regression."
+    ],
+    "23": [
+      "The generated code is compliant with the pipeline steps, but it is not executable due to missing values (NaNs) in the input data. The `Binarizer` transformer does not handle NaN values natively, which causes an error during execution. An imputation step would be required before the `Binarizer` to make the pipeline executable.",
+      "The code correctly implements all the steps of the pipeline as specified. However, the `Binarizer` transformer does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. Therefore, the pipeline as generated is not executable with the provided data without an additional imputation step to handle NaNs before the `Binarizer`."
+    ],
+    "28": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only implement normalization with `minmax`, features with `pca`, and regression with `svr`."
+    ]
+  },
+  "semantic_validation_failures": 18,
+  "split_identity": "981dc16bf8d750f0f41efb96cce0133a14a978e1c95f7ea1485df4316b242f26",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01708374,
+    "input_tokens": 50794,
+    "output_cost": 0.03848750000000001,
+    "output_tokens": 12365,
+    "total_cost": 0.05557124000000001,
+    "total_tokens": 63375
+  },
+  "training_time": 328.932,
+  "validation_metric": "rmse"
+}

@@ -1,0 +1,88 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/madelon/986c5f6bd45e2c2e4bc5e23949808c759b4fd18be558c0d16f6f120edb8eae84/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/madelon/986c5f6bd45e2c2e4bc5e23949808c759b4fd18be558c0d16f6f120edb8eae84/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/madelon/986c5f6bd45e2c2e4bc5e23949808c759b4fd18be558c0d16f6f120edb8eae84/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-4/ageml-evaluation-v3/protocol/madelon/986c5f6bd45e2c2e4bc5e23949808c759b4fd18be558c0d16f6f120edb8eae84/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 12,
+  "best_run_id": "506f6843d4bf4f4a9398a2540147533a",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8192307692307692,
+    0.7923076923076923,
+    0.8153846153846154,
+    0.7961538461538462,
+    0.8,
+    0.7961538461538462,
+    0.8192307692307692,
+    0.8038461538461539,
+    0.8346153846153846,
+    0.8269230769230769
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 254.138,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "0bfa8322ae984653a88a89bca3e0fc2b",
+    "1": "1c07b4412aa64e6c936b53b1bd43c676",
+    "2": "fc68285e57d2453cb17839f03d7db0c5",
+    "3": "528ca697bcb147f681136daa3dde7339",
+    "4": "6d0df7db4365428fad24b3b3da3977fa",
+    "5": "ad77ea09685c481da16e70e36ad839d2",
+    "6": "cc69b10f9aff47bfbd2f134a0c6d55ba",
+    "7": "b1e7aeba847f4ec5a76fa1bb248e451a",
+    "8": "14b3fa7726bb40679de9b84ea89ff7bf",
+    "9": "f2990c16f13947bda21e945a2b0b9dca",
+    "10": "8db31818a2684eac93e277eb47de688e",
+    "11": "c4f984b59fda472686cdb45192d6c346",
+    "12": "25bd78dd8a064622891e2abaf5f0ebb4",
+    "13": "e7e3b4b60af8428bb375de05d17483f3",
+    "14": "29e6976ca4df41548c7e0fac80cc7538",
+    "15": "1661fdbe351d455babfdaf646e872d04"
+  },
+  "pipelines_found": 16,
+  "protocol_sha256": "48d9a12b769f545c4bdf2a8d5ace46bdc9097dbea5bc32ad256411a20cc39258",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "aa34bc1cdaa419cf80489dbf54819ff6b9df29d18511a597b9c02dd360a349c2",
+  "runtime_human_readable": "0:03:52",
+  "runtime_seconds": 231.58536822721362,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8103846153846155,
+  "selected_candidate_key": "df8129156416443a20d64f783b4e885808de1027c88f2750fa15340b0507c90e",
+  "selection_sha256": "ea5c04f44b37b197eac2969eeac8cdf655a0ebe978b83e8f758048c382340d96",
+  "selection_validation_score": 0.8103846153846155,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The previous execution failed because the 'quantile_range' parameter for `RobustScaler` expects a tuple, but it was likely passed as a list. The code itself uses `quantile_range=quantile_range`, so the issue is with the type of the `quantile_range` argument being passed to the `build_model` function, not directly with the code's structure. To be fully compliant and executable, the `quantile_range` argument should be ensured to be a tuple, e.g., `(25.0, 75.0)` instead of `[25.0, 75.0]`.",
+      "The code is syntactically correct and implements the pipeline steps as requested. However, it is not fully executable because the `RobustScaler` expects the `quantile_range` parameter to be a tuple, but it is being passed as a list, causing a `TypeError`. To ensure executability, the `quantile_range` argument should be explicitly converted to a tuple before being passed to `RobustScaler`."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01051761,
+    "input_tokens": 361468,
+    "output_cost": 0.030822500000000006,
+    "output_tokens": 4976,
+    "total_cost": 0.041340110000000006,
+    "total_tokens": 366444
+  },
+  "training_time": 1040.306,
+  "validation_metric": "balanced_accuracy"
+}

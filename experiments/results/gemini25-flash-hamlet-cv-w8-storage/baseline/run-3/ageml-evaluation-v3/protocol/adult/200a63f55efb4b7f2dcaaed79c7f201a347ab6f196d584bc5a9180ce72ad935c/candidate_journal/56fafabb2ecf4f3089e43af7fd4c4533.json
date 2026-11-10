@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "07d422468161e2a2686692d6a0487be368f72d734bd1f04a98c739c9c07ba1f9",
+  "code_sha256": "7e565d51baec4621ca380e0018c62d5311c69b7c30d743c1637fbb3c3e2792a0",
+  "completed_at": 1793633532.5251975,
+  "cv_fold_scores": [
+    0.6316104911505607,
+    0.6387230536620132,
+    0.624432295737057,
+    0.6325045711252341,
+    0.6307673592167156,
+    0.6462155481384856,
+    0.6371468176893665,
+    0.6357381756387245,
+    0.6254696528880328,
+    0.6364111231488186
+  ],
+  "effective_random_states": [
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization_and_feature_selection__num_discretizer__random_state": 42,
+      "features__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 5,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "distance"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "12c89f27bbc6e98e6dcb0beaf0d4286cbcafc29d674b28b6d4e73810a0d4bbc9",
+  "pipeline_id": 4,
+  "pipeline_run_id": "cfeef9319ea54fd39b1200df0c2a0491",
+  "run_id": "56fafabb2ecf4f3089e43af7fd4c4533",
+  "run_identity": "637718255052d9e9a6396574af7c8beeefcea15b98a4d281e2a8f99fc1d3b430",
+  "validation_score": 0.6339019088395008,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

@@ -1,0 +1,110 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/af8698d32aae14f7a90e83f2f377c26f7abc68ef7500a5824ade4a76dfd250b4/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/af8698d32aae14f7a90e83f2f377c26f7abc68ef7500a5824ade4a76dfd250b4/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/af8698d32aae14f7a90e83f2f377c26f7abc68ef7500a5824ade4a76dfd250b4/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-5/ageml-evaluation-v3/protocol/ames_housing/af8698d32aae14f7a90e83f2f377c26f7abc68ef7500a5824ade4a76dfd250b4/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 24,
+  "best_run_id": "3d0302fbe04c4bcc853c480d2c935071",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    28855.04177256856,
+    33722.23098828646,
+    29957.959550508553,
+    41231.760432918636,
+    46844.46822014484,
+    34800.13258361508,
+    33192.49602781843,
+    32117.58361796158,
+    57519.28546248844,
+    32085.58256909872
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 895.747,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": "f54fbdd3dddc4782ad045543482309fb",
+    "25": "2d3e93c0f1934d2ba4bf6a28e3387077",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "c32920198e6b53631cf913fff3b5bc2f39df14e23bf955537908a90d6539de66",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "9dac8850723f13c644dd3484dcd667e0124377c8a6ad5bd54c5ba31715c5f8f0",
+  "runtime_human_readable": "0:11:41",
+  "runtime_seconds": 700.8439236469567,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 37032.65412254093,
+  "selected_candidate_key": "cc41baea858a4f1ee79ac384fa839519fe40894492989ef05df01f9b015cb1bd",
+  "selection_sha256": "a1af7a09c5e92b66cb9575fefc7876a0430991480eab77ef3e5a6242fb7a4455",
+  "selection_validation_score": 37032.65412254093,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The code is not fully compliant with the provided pipeline. The pipeline specifies 'imputation with `iterative_imputer`' as a general step. However, the code uses `SimpleImputer` for categorical features, which deviates from the specified `iterative_imputer`. Additionally, the pipeline does not explicitly list one-hot encoding as a step, but the code includes it for categorical features. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to make categorical features compatible with `IterativeImputer`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code drops categorical features instead of imputing them. This means the imputation step is not applied to all features that might require it, thus not implementing 'all the steps' of the pipeline for the entire dataset. The pipeline does not specify dropping features.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. However, the code includes an `OrdinalEncoder` step for categorical features before the `IterativeImputer`. While `OrdinalEncoder` is necessary to convert categorical features to a numerical format compatible with `IterativeImputer` and `MinMaxScaler`, it is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 10,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.008097479999999999,
+    "input_tokens": 43964,
+    "output_cost": 0.027607500000000004,
+    "output_tokens": 6211,
+    "total_cost": 0.035704980000000004,
+    "total_tokens": 52304
+  },
+  "training_time": 167.39600000000004,
+  "validation_metric": "rmse"
+}

@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists 4 steps: imputation, normalization, features (PCA), and regression. The generated code adds an additional step, `OneHotEncoder`, for categorical features, which was not specified in the provided pipeline. The instruction was to implement ONLY the steps listed in the pipeline.

@@ -1,0 +1,229 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/auto_mpg/44c338b3d450c75c152d373c60916af9e51d08fcffcc64e7139235b0fe220177/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/auto_mpg/44c338b3d450c75c152d373c60916af9e51d08fcffcc64e7139235b0fe220177/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/auto_mpg/44c338b3d450c75c152d373c60916af9e51d08fcffcc64e7139235b0fe220177/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/auto_mpg/44c338b3d450c75c152d373c60916af9e51d08fcffcc64e7139235b0fe220177/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 13,
+  "best_run_id": "3f89bb9979944114bee3b012d905e5b5",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    2.513748084902004,
+    2.016704030673324,
+    2.322631923112636,
+    1.8838995806082508,
+    2.087384448554717,
+    1.9068380908976637,
+    2.883178501622722,
+    2.9392076512901935,
+    4.566923205511023,
+    3.993572251532249
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 524.8669999999997,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "1572994b5f5e444590b74f15a5457ade",
+    "1": "d9c41f4e8e3d4a5d830427856a185310",
+    "2": "e7c9b10bf8b8484d8a16ee1be7e573de",
+    "3": "b960bfd4235b4dfc9f3db4cdafff0de3",
+    "4": "2094ead08b2a4465856dcd1d4bfa86b7",
+    "5": "6ef64720ece64ec9a1dd112f20f287a1",
+    "6": "1412c47cbe3e4ef2b5c4422bf2cd4ac8",
+    "7": "29aa73bf7cac4915ace1b3af0d77d337",
+    "8": "f323d8b9a7f1476ca3a7d4f903dabffc",
+    "9": "81ac4d2222d849c4955d9db48c49db2d",
+    "10": "e155934f534842a3ade4cfc99d352a64",
+    "11": "884d9408416f49e88ef3746aab5434bf",
+    "12": "4a5d95eebe784279a9ec055c5997240c",
+    "13": "9ad539d702a84872b83559e4e32ab4dd",
+    "14": "d2b34695b40f478088700fae7053003b",
+    "15": "52d08fe03f3e466293c77e4fd34c1611",
+    "16": "422c7f74b6e142749a10ce5bf998f45f",
+    "17": "81fc7ef6b6fa41d7932a48398e8e6ecb",
+    "18": "125f53f20c3d421b833294f88adf0d93",
+    "19": "d8e028a3b5864f48b96b693db733d3ec",
+    "20": "ef2b2f0882334e309baaade67f3480df",
+    "21": "a4fd708e1df04a528245f7a1a08bfdbf",
+    "22": "7a0d347ac05d4b0bb7e337c990bf141b",
+    "23": "a8da698928774ae990c808f6edf91275",
+    "24": "2e15a4c8ef444ac2b20c5f06a23f546c",
+    "25": "dbd97eb8fd6c4dadb82f7f8ec7c5fd03",
+    "26": "f5aacd7bd8644f7eb2e479a596ca7763",
+    "27": "4795aa4d98c74c8987967dd835d68fa8",
+    "28": "2da25bf206ae4a84b072087d89c9553a",
+    "29": "c89ad71307d142c5b083df0a49980fa5"
+  },
+  "pipelines_found": 78,
+  "protocol_sha256": "c381c5609ce0b7aaf02f5a257fc7fd9d8b3eb9d02259420a9b56e65a226acc81",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "bb5a9e0b83914ed7a00d852601a3cc7daa3c62f0cf5bfbd2f92e860cedb28e1b",
+  "runtime_human_readable": "0:08:35",
+  "runtime_seconds": 515.2860377542675,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 2.7114087768704787,
+  "selected_candidate_key": "0cafcd61630b3541a29c1633852ee4247fda15b7f51b8a8310554127fa4ca594",
+  "selection_sha256": "d3e642cd1b86e61debcaa35cc6af94101b31974bee98329bb8e7e04f8734075e",
+  "selection_validation_score": 2.7114087768704787,
+  "semantic_validation_failure_reasons": {
+    "2": [
+      "The pipeline description only specifies 'normalization' with `minmax` and 'regression' with `linear`. The generated code adds an extra step, `SimpleImputer`, which is not part of the provided pipeline definition.",
+      "The generated code correctly implements the specified normalization and regression steps. However, it is not fully executable because the input data `X_train` contains NaN values, and `LinearRegression` does not handle missing values natively. The pipeline, as defined, does not include a step for handling these missing values, which leads to an execution error."
+    ],
+    "3": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `discretization`, `normalization`, and `regression`.",
+      "no, the code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the pipeline.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `discretization`, `normalization`, and `regression`.",
+      "no, the code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the pipeline.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the provided pipeline definition, making the current implementation not fully correct and executable for the given dataset.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the pipeline. While the code implements the explicitly listed steps, it does not meet the overall requirement for executability with the given dataset.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain `discretization`, `normalization`, and `regression`.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the pipeline. While the code implements the explicitly listed steps, it does not meet the overall requirement for executability with the given dataset.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the pipeline. While the code implements the explicitly listed steps, it does not meet the overall requirement for executability with the given dataset.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the provided pipeline definition. While the code implements the explicitly listed steps, it does not meet the overall requirement for executability with the given dataset.",
+      "The code is not executable as `KBinsDiscretizer` does not accept missing values (NaNs) natively. An imputation step is required before discretization to handle the NaNs in the input data, which was not included in the provided pipeline definition. While the code implements the explicitly listed steps, it does not meet the overall requirement for executability with the given dataset."
+    ],
+    "4": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only contain discretization, normalization, and regression."
+    ],
+    "8": [
+      "No, because while the pipeline steps are correctly implemented, the `MinMaxScaler` expects the `feature_range` parameter to be a tuple, but it might be passed as a list, which would cause a runtime error. To ensure executability, `feature_range` should be explicitly converted to a tuple before being passed to `MinMaxScaler`."
+    ],
+    "10": [
+      "The code is not fully compliant because it may not be 'correct and executable' under all circumstances, as required. The `MinMaxScaler` expects its `feature_range` parameter to be a tuple (e.g., `(0, 1)`), but if `feature_range` is passed as a list (e.g., `[0, 1]`), it will raise a `TypeError`. To ensure robustness and compliance with the 'correct and executable' requirement, the `feature_range` parameter should be explicitly cast to a tuple, for example: `MinMaxScaler(feature_range=tuple(feature_range))`."
+    ],
+    "11": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'normalization' with `standard` and 'regression' with `ridge`. However, the generated code adds an additional step, `SimpleImputer`, which was not requested in the pipeline definition."
+    ],
+    "14": [
+      "The pipeline explicitly defines two steps: 'discretization' and 'regression'. The generated code adds an extra step, 'imputer' (SimpleImputer), which was not part of the provided pipeline definition. While imputation might be necessary for data handling, it was not requested as a step in the given pipeline."
+    ],
+    "15": [
+      "The pipeline specifies only two steps: 'normalization' with `minmax` and 'regression' with `elastic_net`. The generated code adds an extra step, `SimpleImputer`, which was not requested in the pipeline definition.",
+      "No, the generated code is not fully compliant because it is not executable given the dataset. While it correctly implements the specified normalization and regression steps, the `ElasticNet` regressor (and `MinMaxScaler` if NaNs are present in features) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because ElasticNet (and potentially MinMaxScaler) cannot handle missing values (NaNs) in the input X_train. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "No, the generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because `ElasticNet` (and potentially `MinMaxScaler`) cannot handle missing values (NaNs) in the input `X_train`. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "The generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because ElasticNet (and potentially MinMaxScaler) cannot handle missing values (NaNs) in the input X_train. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "The generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because ElasticNet (and potentially MinMaxScaler) cannot handle missing values (NaNs) in the input X_train. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "The generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because ElasticNet (and potentially MinMaxScaler) cannot handle missing values (NaNs) in the input X_train. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement.",
+      "The generated code is not fully compliant. While it correctly implements the specified normalization and regression steps as per the pipeline definition, it is not executable with the provided dataset because ElasticNet (and potentially MinMaxScaler) cannot handle missing values (NaNs) in the input X_train. The pipeline definition does not include a step for handling missing values, which leads to an execution error, thus failing the 'correct and executable' requirement."
+    ],
+    "17": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'discretization with binarizer' and 'regression with random_forest_regressor'. The generated code adds an extra step, 'imputer' (SimpleImputer), which was not part of the original pipeline definition. The instructions explicitly state to implement 'all the steps of the pipeline and only those steps'.",
+      "no, the code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during execution. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility.",
+      "The code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs) in the input data, which was identified as an issue during previous execution attempts. Although the pipeline steps themselves are correctly implemented as requested, the code fails the 'correct and executable' requirement due to this data incompatibility."
+    ],
+    "18": [
+      "The pipeline specifies only two steps: 'normalization' with `standard` and 'regression' with `linear`. The generated code includes an additional step, `SimpleImputer`, which was not part of the provided pipeline definition. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "20": [
+      "The code is structurally compliant with the pipeline steps. However, it failed execution because the `MinMaxScaler` expects the `feature_range` parameter to be a tuple (e.g., `(0, 1)`), but it received a list (e.g., `[0, 1]`) during the previous execution attempt. While the `build_model` function correctly passes the `feature_range` argument, it does not explicitly ensure its type is a tuple, which led to a runtime error. To make the code robust and executable, `feature_range` should be cast to a tuple before being passed to `MinMaxScaler`."
+    ],
+    "21": [
+      "The pipeline description specifies two steps: 'normalization' with `robust_scaler` and 'regression' with `lasso`. The generated code includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline definition. While this step might be necessary for execution due to missing values, it deviates from the instruction to implement 'only those steps' of the pipeline."
+    ],
+    "22": [
+      "The pipeline explicitly defines two steps: 'normalization' with `robust_scaler` and 'regression' with `svr`. The generated code adds an extra step, `SimpleImputer`, which is not part of the specified pipeline. While `SimpleImputer` might be necessary for data handling, it deviates from the exact steps outlined in the pipeline description."
+    ],
+    "23": [
+      "The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds a `SimpleImputer` step, which was not part of the specified pipeline.",
+      "no, the code is not executable because the dataset contains NaN values, and the pipeline does not include a step to handle missing data (e.g., imputation). The prompt requires the code to be correct and executable.",
+      "no, the code is not executable because the dataset contains NaN values, and the pipeline does not include a step to handle missing data (e.g., imputation). The prompt requires the code to be correct and executable, but the current implementation will fail when encountering NaNs in the input data for MinMaxScaler or Lasso.",
+      "The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds a `SimpleImputer` step, which was not part of the specified pipeline. While imputation is necessary for execution given the dataset's NaNs, it deviates from the exact steps outlined in the pipeline description.",
+      "no, the code is not executable because the dataset contains NaN values, and the pipeline does not include a step to handle missing data (e.g., imputation). The prompt requires the code to be correct and executable, but the current implementation will fail when encountering NaNs in the input data for MinMaxScaler or Lasso.",
+      "no, the code is not executable because the dataset contains NaN values, and the pipeline does not include a step to handle missing data (e.g., imputation). The prompt requires the code to be correct and executable, but the current implementation will fail when encountering NaNs in the input data for MinMaxScaler or Lasso.",
+      "no, the code is not executable because the dataset contains NaN values, specifically in the 'horsepower' column, and the pipeline does not include a step to handle missing data (e.g., imputation). Both MinMaxScaler and Lasso do not handle NaN values natively, which will cause the pipeline to fail during execution. The prompt requires the code to be correct and executable.",
+      "The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds a `SimpleImputer` step, which was not part of the specified pipeline. While imputation is necessary for execution given the dataset's NaNs, it deviates from the exact steps outlined in the pipeline description.",
+      "no, the code is not executable because the dataset contains NaN values, specifically in the 'horsepower' column, and the pipeline does not include a step to handle missing data (e.g., imputation). Both MinMaxScaler and Lasso do not handle NaN values natively, which will cause the pipeline to fail during execution. The prompt requires the code to be correct and executable.",
+      "The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds a `SimpleImputer` step, which was not part of the specified pipeline. While imputation is necessary for execution given the dataset's NaNs, it deviates from the exact steps outlined in the pipeline description.",
+      "The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds a `SimpleImputer` step, which was not part of the specified pipeline. While imputation is necessary for execution given the dataset's NaNs, it deviates from the exact steps outlined in the pipeline description."
+    ],
+    "25": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression.",
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the input features. The SVR regressor does not handle NaN values natively. To make the code executable and compliant with the 'correct and executable' requirement, an imputation step would be necessary in the pipeline, which is currently not present.",
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the input features. The SVR regressor does not handle NaN values natively. To make the code executable and compliant with the 'correct and executable' requirement, an imputation step would be necessary in the pipeline, which is currently not present.",
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the input features. The SVR regressor does not handle NaN values natively, which violates the requirement to ensure the code is correct and executable.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression.",
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the input features. The SVR regressor does not handle NaN values natively, which violates the requirement to ensure the code is correct and executable.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression.",
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the input features. The SVR regressor does not handle NaN values natively, which violates the requirement to ensure the code is correct and executable.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only include standard normalization and SVR regression."
+    ],
+    "27": [
+      "The code is not fully compliant because it failed execution in the previous attempt. The `MinMaxScaler` expects the `feature_range` parameter to be a tuple, but the previous execution indicated it received a list. While the code correctly uses `MinMaxScaler` as specified by the pipeline, it does not explicitly convert the `feature_range` parameter to a tuple, which can lead to a runtime error if the input `feature_range` is a list. This violates the 'correct and executable' requirement.",
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists only two steps: 'normalization' with `minmax` and 'regression' with `svr`. However, the generated code includes an additional step, `SimpleImputer`, which was not specified in the pipeline definition. The instruction states to implement 'only those steps' of the pipeline.",
+      "The generated code is compliant with the explicitly provided pipeline steps (normalization with minmax, regression with svr). However, it is not 'correct and executable' in the context of the provided dataset, as the dataset contains NaN values and SVR does not handle missing values natively. The pipeline definition does not include a step for handling missing values, which would be necessary for successful execution with this dataset.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error. Therefore, it fails the 'correct and executable' requirement.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error. Therefore, it fails the 'correct and executable' requirement.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error. Therefore, it fails the 'correct and executable' requirement.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error. Therefore, it fails the 'correct and executable' requirement.",
+      "The generated code is not fully compliant because it is not executable with the provided dataset. While it correctly implements only the specified 'normalization' with `minmax` and 'regression' with `svr` steps, the dataset contains NaN values. SVR does not handle missing values natively, and the pipeline definition does not include a step for imputation, which is necessary for the code to run without error. Therefore, it fails the 'correct and executable' requirement."
+    ],
+    "28": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The code is not executable because the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. An imputation step is required before normalization and regression to make the pipeline executable with the provided data.",
+      "The code is not executable because the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. An imputation step is required before normalization and regression to make the pipeline executable with the provided data, as the prompt states the code must be 'correct and executable'.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The code is not executable because the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. An imputation step is required before normalization and regression to make the pipeline executable with the provided data, as the prompt states the code must be 'correct and executable' and 'put all preprocessing... inside the pipeline'.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The code is not executable because the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. An imputation step is required before normalization and regression to make the pipeline executable with the provided data, as the prompt states the code must be 'correct and executable' and 'put all preprocessing... inside the pipeline'.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The code implements the specified normalization and regression steps. However, the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. To be 'correct and executable' as required by the prompt, and to 'put all preprocessing... inside the pipeline', an imputation step is necessary before normalization and regression. Without it, the pipeline will fail during execution.",
+      "The code correctly implements the specified normalization and regression steps. However, the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. To be 'correct and executable' as required by the prompt, and to 'put all preprocessing... inside the pipeline', an imputation step is necessary before normalization and regression. Without it, the pipeline will fail during execution.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The code correctly implements the specified normalization and regression steps. However, the dataset contains NaN values, and `ElasticNet` does not natively handle missing values. To be 'correct and executable' as required by the prompt, and to 'put all preprocessing... inside the pipeline', an imputation step is necessary before normalization and regression. Without it, the pipeline will fail during execution.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression.",
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline should only include standard normalization and elastic net regression."
+    ],
+    "29": [
+      "The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline description. The instructions state to implement 'all the steps of the pipeline and only those steps'."
+    ]
+  },
+  "semantic_validation_failures": 95,
+  "split_identity": "981dc16bf8d750f0f41efb96cce0133a14a978e1c95f7ea1485df4316b242f26",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.039002880000000004,
+    "input_tokens": 499492,
+    "output_cost": 0.12393749999999999,
+    "output_tokens": 49167,
+    "total_cost": 0.16294038000000005,
+    "total_tokens": 549385
+  },
+  "training_time": 106.882,
+  "validation_metric": "rmse"
+}

@@ -1,0 +1,249 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "a789ff9b16d94c1aac5fcf1e55abf146",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "6c105e5aef924b0eb1ced590b66cf824",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "408b59e89dc843cb8d41b15190f04495",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. The pipeline explicitly lists only two steps: 'normalization' with `robust_scaler` and 'regression' with `lasso`. The generated code adds an additional step, `SimpleImputer`, which is not part of the specified pipeline. While imputation might be necessary for execution due to missing values, it was not requested in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "ac9deb69de4c439fa536e73015be1a4c",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline because it includes an additional step, `SimpleImputer`, which was not specified in the pipeline description. The pipeline explicitly lists only 'normalization', 'features', and 'regression' steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "fbdd40633e9b42c4905723f73f283296",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline steps. The pipeline should only contain normalization, feature selection, and regression as per the instructions."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "2dc3b27d9fed4d8d8a4ad4bc17e18213",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "e8dbd09ae0cf4c079c9cd93ebc68e6fb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "2adeab324e08418ea06f565fe8934999",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "675261133af84299a058273ace2bca41",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "fb14b01e6ef74502bf860174e28d8eda",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "9cc7425c2b064efda821375751052ebd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "96b1575be2364c598d71b08728534108",
+    "semantic_feedback": [
+      "no, the `method` parameter in the `build_model` function signature is incorrectly used. It is passed as the `estimator` for `IterativeImputer`, which expects an estimator object (e.g., `LinearRegression`), not a string. The `PowerTransformer`'s `method` is hardcoded to 'yeo-johnson', meaning the `method` parameter from the function signature does not control the `PowerTransformer` as might be expected, and its current usage makes the code non-executable if a string is passed for `method`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "497e2888cb0143558bc7102f747bdb83",
+    "semantic_feedback": [
+      "No, the generated code is not fully compliant. While it correctly implements the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`), it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present. To make the pipeline executable, an imputation step would be required before `SelectKBest`. However, adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline, creating a conflict between the requirement for executability and the strict adherence to the defined pipeline steps.",
+      "No, the generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "No, the generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "The generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "The generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present in the 'horsepower' column. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "No, the generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present in the 'horsepower' column. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "No, the generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present in the 'horsepower' column. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline.",
+      "No, the generated code is not fully compliant. While it correctly implements all the specified steps of the pipeline (normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`) and only those steps, it is not executable with the provided dataset. The `SelectKBest` step does not handle missing values (NaNs) in the input data, which are present in the 'horsepower' column. To make the pipeline executable, an imputation step would be required before `SelectKBest`, but adding such a step would violate the constraint of implementing *only* the specified steps of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "b355b0c5d2dc4c18b9f4d32e8c46a603",
+    "semantic_feedback": [
+      "The pipeline description specifies only two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds an extra step, 'imputer' with `SimpleImputer`, which is not part of the provided pipeline definition. While practical for execution, it deviates from the explicit instructions."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "53461ab2296945ed8895b440f27db344",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "e9e9c50efdc147bda92d26df326ca096",
+    "semantic_feedback": [
+      "The code correctly implements the specified normalization and regression steps. However, the previous execution indicated that the input data contains NaN values. The current pipeline does not include a step to handle these missing values (e.g., an imputer), which makes the pipeline not executable as required. To be fully compliant with the requirement that the code is \"correct and executable\", an imputation step would be necessary before the MinMaxScaler.",
+      "The generated code includes a `SimpleImputer` step, which was not explicitly listed in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "8a1f8e95f2c74e6a950c3ae95c6e4a06",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "71538bee0a5e4672bcb1eb73083934bd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "d9273880e86b4d5b989402099205dfa3",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step, which was not explicitly requested in the provided pipeline definition. The pipeline only specifies normalization, feature selection, and regression, without mentioning imputation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "2d9209e0df2f492c8be609b822923377",
+    "semantic_feedback": [
+      "The pipeline description only specifies 'normalization with robust_scaler' and 'regression with ridge'. The generated code adds a 'SimpleImputer' step, which is not part of the provided pipeline definition. While practical for handling missing values, it deviates from the explicit instructions to implement only the specified steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8a77fd805ddc487c93e5578c245e00bf",
+    "semantic_feedback": [
+      "The pipeline explicitly lists three steps: normalization, feature selection, and regression. The generated code adds an extra step, `SimpleImputer`, which was not requested in the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "5fe4b5682881411892cde8a1cd1f9c0b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "e8fb64742d074f9090acfc4d5b8cf29c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "f23ba6634c504460b739d1b5533bbdc0",
+    "semantic_feedback": [
+      "The generated code is structurally compliant with the pipeline definition, meaning it includes all specified steps and only those steps. However, it is not executable with the provided dataset because the `Binarizer` step does not handle missing values (NaNs), and the dataset contains NaNs in at least one column (`horsepower`). To make it executable, an imputation step would be required before the `Binarizer`.",
+      "No, the generated code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs), and the dataset description indicates that the 'horsepower' column has missing values (392 non-null values out of 398 rows). To be executable and correct, an imputation step for missing values would need to be added before the `Binarizer`.",
+      "No, the generated code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step does not handle missing values (NaNs), and the dataset description indicates that the 'horsepower' column has missing values (392 non-null values out of 398 rows). To be executable and correct, an imputation step for missing values would need to be added before the `Binarizer`.",
+      "No, the generated code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step, which is the first step in the pipeline, does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values (392 non-null values out of 398 rows). To be executable and correct, an imputation step for missing values would need to be added before the `Binarizer`.",
+      "No, the generated code is not fully compliant because it is not executable with the provided dataset. The `Binarizer` step, which is the first step in the pipeline, does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values (392 non-null values out of 398 rows). To be executable and correct, an imputation step for missing values would need to be added before the `Binarizer`.",
+      "No, the generated code is not fully compliant because it is not executable with the provided dataset. While the code correctly implements all the specified steps of the pipeline (binarizer, power_transformer, pca, knn_regressor) and only those steps, the `Binarizer` component does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values (392 non-null values out of 398 rows). To be executable and correct, an imputation step for missing values would need to be added before the `Binarizer` in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "1889534209de4746936081a5fe080b89",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "bbb8d7fc96cb4f4abc54a7fa127aaace",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "40af5df0d9264dd6b04268d7024b6080",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "ac5676c3538e48a0bb51dea18105cef3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "d4bf022ec67e4bb98e5b6baeb0488ebf",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only implement normalization with `minmax`, features with `pca`, and regression with `svr`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "4a786695ee4a4c4c805f29be64f0a71f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

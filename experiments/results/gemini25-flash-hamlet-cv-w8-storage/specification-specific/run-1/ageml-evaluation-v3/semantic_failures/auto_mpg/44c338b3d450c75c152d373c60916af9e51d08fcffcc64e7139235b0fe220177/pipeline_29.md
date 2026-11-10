@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline description. The instructions state to implement 'all the steps of the pipeline and only those steps'.

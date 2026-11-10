@@ -1,0 +1,2 @@
+Attempt 1:
+no, the code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline steps. The pipeline specifies only 'normalization with standard', 'features with pca', and 'regression with ridge'.

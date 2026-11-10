@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "9071f9a04d9bebe2f62b6310f876fce9f3700c3254166ecd7703a41d501c150d",
+  "code_sha256": "4420392089c8a02d334d95decda51db8e24e8d6fb93eecc441ede29322ebb378",
+  "completed_at": 1793747679.3768542,
+  "cv_fold_scores": [
+    110859.51941274642,
+    76800.94959375389,
+    106095.10380204575,
+    74215.93697888988,
+    97380.6232311687,
+    80274.6137365178,
+    61547.13361488626,
+    114309.58508933484,
+    104235.41619041302,
+    64153.04147297429
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 0,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "k": 5,
+    "n_bins": 10,
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "1e3fa939ed0fc8f0029fcc248273f221accb80b9d48cec4e2e01245b66ac476f",
+  "pipeline_id": 20,
+  "pipeline_run_id": "c4baee96d358434e8357f7ebdc8a01c9",
+  "run_id": "78e8366e25294eaeb2055fe07fe330f7",
+  "run_identity": "fd67b4c21084a0d244928197a98853c763e9a5010eaa875d3a22c8b42a6ef580",
+  "validation_score": 88987.19231227308,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

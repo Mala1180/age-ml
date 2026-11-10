@@ -1,0 +1,243 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "6e0f2349d1ba450fa1ee0a63bd61b760",
+    "semantic_feedback": [
+      "The generated code introduces `OneHotEncoder` for categorical features. While this is a necessary step for handling the 'ocean_proximity' column and making the pipeline executable (as indicated by the previous error), it is an additional preprocessing step not explicitly mentioned in the provided pipeline definition. The instruction states to implement \"all the steps of the pipeline and only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "2ebb0490cd3d4a3ebd169a3e0118c7b2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "14fe13772d6a4a14941cfaa318bfd780",
+    "semantic_feedback": [
+      "no, the code is not fully \"correct and executable\" as required. The `RobustScaler` expects the `quantile_range` parameter to be a tuple, but the code does not explicitly ensure this type. If `quantile_range` is passed as a list (e.g., `[25.0, 75.0]`), it will cause a runtime error, as indicated by the provided execution error. To fix this, `quantile_range` should be explicitly converted to a tuple before being passed to `RobustScaler`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "35df32c9bbe041ebacd758f027557c13",
+    "semantic_feedback": [
+      "The code is not compliant with the provided pipeline. The pipeline specifies 'normalization' with `power_transformer`, 'features' with `pca`, and 'regression' with `linear`. However, the generated code also includes `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly requested in the pipeline definition. The pipeline only mentioned `power_transformer` for normalization, which typically applies to numerical data.",
+      "The code is not compliant with the provided pipeline. The pipeline specifies 'normalization' with `power_transformer`, 'features' with `pca`, and 'regression` with `linear`. However, the generated code includes `SimpleImputer` for handling missing values, which is an additional preprocessing step not explicitly requested in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "79731d58c2e94fbba6a1ecba91496466",
+    "semantic_feedback": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The pipeline explicitly lists 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The generated code includes a `SimpleImputer` step to handle missing values, which was not explicitly mentioned in the provided pipeline. The instructions state to implement only the steps of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "b569b9a6b836465583a4f41332a826ad",
+    "semantic_feedback": [
+      "The code is not compliant because it includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state that the code must implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "0662dad38ce94c5c823d7f8421e98df5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "d2e7e7667b674b2281146676b600500f",
+    "semantic_feedback": [
+      "The pipeline explicitly lists three steps: imputation, normalization, and regression. The generated code introduces an additional step, `OneHotEncoder`, for handling categorical features. While this is often a necessary preprocessing step for mixed-type data, it was not explicitly mentioned in the provided pipeline definition, which states to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "0fbecf90c37248cf89e4f816a7c5070f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "5f5a1622d44246fa8fb9ed405b5a51bf",
+    "semantic_feedback": [
+      "The code includes a 'feature_encoding' step using `OneHotEncoder` for categorical features, which was not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline.",
+      "The code includes a 'preprocessor' step using `ColumnTransformer` with `OneHotEncoder` for categorical features. This step was not explicitly listed in the provided pipeline steps, which specified only 'imputation', 'normalization', and 'regression'. The instruction was to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "ccb5b6bd70764194abe3d46ff3edd4df",
+    "semantic_feedback": [
+      "The pipeline description specifies 'imputation with iterative_imputer', 'normalization with minmax', and 'regression with linear'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not explicitly mentioned in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "d0bceca8c61d4247931b1a3901422019",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "97c3e4545f354f50bdf980e8e778b293",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "cea7f13a67da4af4ba64c3879e3f5a99",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "90dd9ad059374e3b8b05292598d67794",
+    "semantic_feedback": [
+      "The pipeline explicitly lists imputation and normalization steps, which are applied to numerical features. The generated code correctly applies these to numerical features. However, it also introduces a OneHotEncoder for categorical features, which is a necessary step for the ElasticNet regressor to process the 'ocean_proximity' column. While essential for the code's executability and correctness with the given dataset, this step was not explicitly mentioned in the provided pipeline definition, violating the 'only those steps' constraint.",
+      "The pipeline explicitly lists imputation, normalization, and regression. The generated code introduces a OneHotEncoder for categorical features, which is not explicitly mentioned in the provided pipeline definition. While necessary for handling the 'ocean_proximity' column, it violates the constraint of implementing 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "dcec506395614fa5bd86804a53ab4796",
+    "semantic_feedback": [
+      "The pipeline explicitly states 'normalization with `minmax`' and 'regression with `nn_regressor`'. The generated code correctly implements these. However, it also includes `OneHotEncoder` for categorical features, which is an additional preprocessing step not explicitly mentioned in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'normalization with `minmax`' and 'regression with `nn_regressor`'. The generated code correctly implements these. However, it also includes `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which are additional preprocessing steps not explicitly mentioned in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "d2bee54bb37c47a69ff6ec52ddc4b5d0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "1110b2a2e71e4a0e86cf2a9829b74725",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "e898432c90f046d39b8ea6bb0627bb2f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "76696e0ae7f346958485863200dadfb2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "6be68872ee254c25a44237fb43324f55",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "8f439c3add0f44adb83b5053d760e970",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "b662c83ff1ba474c8f9831cec3014774",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "5860560faad743b1a07c4f56fa78d78d",
+    "semantic_feedback": [
+      "The code introduces `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which were not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "8712419880d04ad5b2e300f4f909de8a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "5fe4a0df97b644b69f4898a27b9cbba9",
+    "semantic_feedback": [
+      "The generated code introduces an additional step, `OneHotEncoder`, for categorical features. The provided pipeline explicitly states to implement 'only those steps': imputation, normalization, features, and regression. While `OneHotEncoder` is a necessary and good practice for handling categorical data in this context, it is not explicitly listed as one of the four steps in the pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "00975b84c94a455eafc5ea673f0ea43e",
+    "semantic_feedback": [
+      "The generated code introduces a `OneHotEncoder` for categorical features, which was not explicitly listed as a step in the provided pipeline. The pipeline specified only imputation, normalization, features (PCA), and regression. While handling categorical features is necessary for the code to be executable given the dataset, it violates the constraint to implement \"only those steps\" from the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "301a77d1ad0343babb3d0172083f2068",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "dc2bb2ff47fb44abb9aa81c08de9e611",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "60d362291c87495e945c700137cc88f0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

@@ -1,0 +1,136 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/auto_mpg/b83f3681534dc4907b025619a8b31ebad47b92d6d48f698528f38af0bf301fdc/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/auto_mpg/b83f3681534dc4907b025619a8b31ebad47b92d6d48f698528f38af0bf301fdc/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/auto_mpg/b83f3681534dc4907b025619a8b31ebad47b92d6d48f698528f38af0bf301fdc/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/auto_mpg/b83f3681534dc4907b025619a8b31ebad47b92d6d48f698528f38af0bf301fdc/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 6,
+  "best_run_id": "f989c4e133e84e4e8a504635a0d842dc",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    2.5816351862804297,
+    1.7963263846283,
+    1.9891728559248227,
+    1.9217700119800796,
+    2.057919489936164,
+    1.7425045621563042,
+    2.9512954212948173,
+    2.814176599432274,
+    4.26112401821572,
+    4.03158846295987
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 174.32500000000002,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "e100a77fc610497db7d47b2c7252e505",
+    "1": "e9d15adb8b3447a6869b90234dfdcacf",
+    "2": "cd7c7cd0926c4df7b8ad0619c31361a8",
+    "3": "281dfa45366545c1b12032f52bd54c12",
+    "4": "e431e162ab7c43c0ad9ef8eb24c178a2",
+    "5": "c3fdec55a98d41a7a3ff9b24e812e17b",
+    "6": "36298438b37c4acf9dd30eade1b70016",
+    "7": "4f06640dc7a14109930e823f63b5e9fc",
+    "8": "870652429ed4419497bbe95ad4ddcc08",
+    "9": "5f2d801ecc0b448f8eb512caacdb1ed4",
+    "10": "7b15d769de0541fc853c4dd444098986",
+    "11": "de6c342abdaa47828313c2a5d771214d",
+    "12": "b1f9c0b6c15d45ecbfe23c8bf5cda8dd",
+    "13": "ade5462d72104e7991ac3a23c19904a8",
+    "14": "db9f6f165bbe4506ac1bfbfadb2856ec",
+    "15": "b3d79ebdd2834985840714ff8d1d3f19",
+    "16": "3ee66c225a654dc1a9b9d5628fe76cad",
+    "17": "c54523ed2aed45629d3e7f41903965b2",
+    "18": "a0ad34c2515b4f87bf4a71c36a798c20",
+    "19": "db56bc07be804179b5a9299128658de2",
+    "20": "70a98d8fb6ae429ca4535a7758fa0df9",
+    "21": "f0394af16888423687d88ab6b39b7c3e",
+    "22": "e8ba1e311c064895a66cbca0b9b22d84",
+    "23": "a1c78d7a38254209b7e04a0afa295c22",
+    "24": "3c614cb6372f42d0bd346dde9eee82bf",
+    "25": "2544a35d1cd04f4daa9cf96461ebb1c1",
+    "26": "e367b56dd4f64605929842ac7f730a08",
+    "27": "7ad61938854c4316af7f9c907b54543a",
+    "28": "bd94b09b90aa43dea1e0a54767dc652d",
+    "29": "34227f5b9aa04e20a281bf5de2ebd523"
+  },
+  "pipelines_found": 272,
+  "protocol_sha256": "0584778f6ce3dbb2337fb67081023282478832b054a3fa4af8940d22bda98ef8",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "048b563589da4dfdc17542f2390cbf5cbc38f429f09a60bd69459d6a21ea0a4d",
+  "runtime_human_readable": "0:03:12",
+  "runtime_seconds": 191.767946023494,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 2.6147512992808783,
+  "selected_candidate_key": "555c0f3733b76f3009c7531b78d25cc3e7c07633ee4b798d47ea854e32280ce5",
+  "selection_sha256": "fb42495a768292d37aab9d65f027d925dab787897f0148904ce47effc891c72b",
+  "selection_validation_score": 2.6147512992808783,
+  "semantic_validation_failure_reasons": {
+    "2": [
+      "The generated code is not compliant with the provided pipeline because it includes a `SimpleImputer` step, which was not specified in the pipeline description. The pipeline only requested 'normalization with `robust_scaler`' and 'regression with `lasso`'."
+    ],
+    "3": [
+      "The code is not fully compliant because it is not executable with the provided dataset due to missing values (NaNs) in the 'horsepower' column. The `PowerTransformer` and `PCA` steps in the pipeline do not handle missing values natively, leading to an error during execution. While the code correctly implements the requested steps (normalization, features, regression), it fails the requirement to be 'correct and executable'.",
+      "The code is not compliant with the provided pipeline because it includes an additional step, `SimpleImputer`, which was not specified in the pipeline description. The pipeline explicitly listed only 'normalization', 'features', and 'regression' steps."
+    ],
+    "4": [
+      "The code is not fully compliant because it is not executable as written. The `feature_range` parameter for `MinMaxScaler` expects a tuple (e.g., `(0, 1)`), but the error message indicates it received a list (e.g., `[0, 1]`). This causes a `TypeError` during execution. The prompt explicitly states that the code must be correct and executable.",
+      "The generated code is not compliant with the provided pipeline because it includes a `SimpleImputer` step, which was not specified in the pipeline definition. The pipeline explicitly states to implement 'only those steps' listed: normalization, features, and regression."
+    ],
+    "11": [
+      "no, the `method` parameter in the `build_model` function signature is incorrectly used. It is passed as the `estimator` for `IterativeImputer`, which expects an estimator object (e.g., `LinearRegression`), not a string. The `PowerTransformer`'s `method` is hardcoded to 'yeo-johnson', meaning the `method` parameter from the function signature does not control the `PowerTransformer` as might be expected, and its current usage makes the code non-executable if a string is passed for `method`."
+    ],
+    "12": [
+      "The pipeline includes an additional step, `SimpleImputer`, which was not specified in the provided pipeline description. The pipeline should only implement the steps: normalization with `minmax`, features with `select_k_best`, and regression with `knn_regressor`."
+    ],
+    "13": [
+      "The pipeline explicitly defines two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds an extra step, `SimpleImputer`, which was not part of the original pipeline definition. While `SimpleImputer` might be necessary for execution due to missing values, it deviates from the specified pipeline steps."
+    ],
+    "15": [
+      "The generated code is not compliant with the provided pipeline. The pipeline specifies only two steps: 'normalization' with `minmax` and 'regression' with `nn_regressor`. The code, however, includes an additional step, `SimpleImputer`, which was not part of the original pipeline definition. The instruction explicitly states to implement 'only those steps' of the pipeline."
+    ],
+    "18": [
+      "The generated code includes an `imputer` step (`SimpleImputer`) which was not specified in the provided pipeline. The pipeline only defines normalization, feature selection, and regression steps."
+    ],
+    "19": [
+      "The pipeline explicitly defines two steps: 'normalization' with `robust_scaler` and 'regression' with `ridge`. The generated code adds an additional step, `SimpleImputer`, which is not part of the specified pipeline. The code should only implement the steps explicitly mentioned in the pipeline description."
+    ],
+    "20": [
+      "The pipeline explicitly lists three steps: normalization, feature selection, and regression. The generated code adds an extra step, `SimpleImputer`, which was not requested in the provided pipeline definition."
+    ],
+    "23": [
+      "The generated code is not compliant with the provided pipeline. It includes an additional step, `SimpleImputer`, which was not specified in the pipeline definition. The pipeline explicitly lists only four steps: discretization, normalization, features, and regression. Adding an imputer, while potentially necessary for execution, deviates from the instruction to implement 'only those steps'."
+    ],
+    "28": [
+      "No, the generated code is not compliant with the provided pipeline. It includes a `SimpleImputer` step, which was not specified in the original pipeline definition (normalization with `minmax`, features with `pca`, regression with `svr`). While imputation might be necessary for execution due to missing values, it was not part of the requested pipeline steps."
+    ]
+  },
+  "semantic_validation_failures": 14,
+  "split_identity": "981dc16bf8d750f0f41efb96cce0133a14a978e1c95f7ea1485df4316b242f26",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.017504520000000003,
+    "input_tokens": 57425,
+    "output_cost": 0.039727500000000006,
+    "output_tokens": 11490,
+    "total_cost": 0.05723202,
+    "total_tokens": 69830
+  },
+  "training_time": 335.483,
+  "validation_metric": "rmse"
+}

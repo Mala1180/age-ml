@@ -1,0 +1,2 @@
+Attempt 1:
+The `KBinsDiscretizer` step includes invalid parameters: `subsample` and `random_state`. These parameters were removed from `KBinsDiscretizer` in scikit-learn version 0.24 and are not present in current versions (1.x+). This will cause an error during execution.

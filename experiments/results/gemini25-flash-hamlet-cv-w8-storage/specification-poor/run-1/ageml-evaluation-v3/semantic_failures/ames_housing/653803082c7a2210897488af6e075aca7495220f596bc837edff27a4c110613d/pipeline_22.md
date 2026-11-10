@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, 'numerical_selector' (FunctionTransformer), which was not specified in the provided pipeline description. The instructions state to implement 'all the steps of the pipeline and only those steps'.

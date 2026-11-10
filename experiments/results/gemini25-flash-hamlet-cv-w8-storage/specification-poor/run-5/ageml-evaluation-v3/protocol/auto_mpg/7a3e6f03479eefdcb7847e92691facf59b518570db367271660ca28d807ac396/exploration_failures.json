@@ -1,0 +1,290 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "80b6387911524fd988339ad2f2b29856",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "f7db2a37e11646a8b11f25239eb88cfa",
+    "semantic_feedback": [
+      "The generated code adds a `SimpleImputer` step, which was not specified in the provided pipeline. The pipeline only requested `binarizer`, `power_transformer`, and `ridge`."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "50eec186e66b43b08d97c40876f4aa7d",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline because it includes a 'SimpleImputer' step, which was not specified in the pipeline definition. The pipeline explicitly lists only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "no, the code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable.",
+      "The generated code is not compliant with the provided pipeline because it includes a 'SimpleImputer' step, which was not specified in the pipeline definition. The pipeline explicitly lists only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "The code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable.",
+      "The code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable.",
+      "The code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable.",
+      "The code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable.",
+      "The generated code is not compliant with the provided pipeline because it includes a 'SimpleImputer' step, which was not specified in the pipeline definition. The pipeline explicitly lists only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "The generated code is not compliant with the provided pipeline because it includes a 'SimpleImputer' step, which was not specified in the pipeline definition. The pipeline explicitly lists only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "The generated code is not compliant with the provided pipeline because it includes a 'SimpleImputer' step, which was not specified in the pipeline definition. The pipeline explicitly lists only 'discretization', 'normalization', 'features', and 'regression' steps.",
+      "The code is not fully compliant because it is not executable. While the pipeline steps match the definition, the `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, leading to an execution error. The prompt requires the code to be correct and executable."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "d0265f42d57243f6892905af611c5311",
+    "semantic_feedback": [
+      "The generated code is not compliant with the provided pipeline. It includes an extra step, `SimpleImputer`, which was not specified in the pipeline description."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "29ad9801e80f49bdbebee07782a12c8e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "9b415eae04794eee86c65dfe74e1ff22",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "d7214b1bef0f47d4bd4688be486689a9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "9ef8ac9ee4f84a229a2b3087b07e9d4b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "eb0e800269d84484950c823fb81890e3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "13798868298447309fec94807013f062",
+    "semantic_feedback": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "c7d82673dd7e448e835adf12edd6b4fa",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step, which is not specified in the provided pipeline. The pipeline explicitly lists only 'discretization with binarizer' and 'regression with random_forest_regressor'. The instructions state to implement 'only those steps'.",
+      "No, the generated code is not fully compliant. While it correctly implements the 'binarizer' and 'random_forest_regressor' steps as specified in the pipeline, it fails to meet the instruction to 'ensure that it is correct and executable'. The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column). This will cause an execution error, making the pipeline non-executable without an additional imputation step, which is not part of the provided pipeline definition.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs, which will cause an execution error.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step.",
+      "The code implements all the specified steps (binarizer and random_forest_regressor) and only those steps. However, it is not fully compliant because it fails to meet the instruction to \"ensure that it is correct and executable\". The `Binarizer` transformer does not handle missing values (NaNs) natively, and the dataset contains NaNs (e.g., in the 'horsepower' column), which will cause an execution error during the `fit` or `transform` step."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "33f90e9cc57e406e85edf40a18f2e7d5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "1490b0c5dd834204b3b6dcc3e9f827e6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "2e0b281f7516468297eebc4630d4f420",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "78cbae0ab0d44d5199caa968104562aa",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "1f6fda42feba4780b634f559f3a9bfe7",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step, which is not part of the explicitly provided pipeline steps (discretization, normalization, features, regression). The instructions state to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "b6919ba8e82b4fd6ad57800484fa9567",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "bb2ca874cce34922a9f5bea99972ad98",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "6134bcb624644958b263ba6fbb281492",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "efd012e2c1dd4751aa41bc5dba0629d7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "e5e3ff6d2043428cb36738d072a9a113",
+    "semantic_feedback": [
+      "no, the generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values (392 non-null out of 398 rows). This will cause an error during execution, making the pipeline not executable as required by the prompt.",
+      "no, the generated code is not compliant because it includes an additional step, `SimpleImputer`, which was not specified in the provided pipeline. The pipeline only lists discretization, feature selection, and regression.",
+      "no, the generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps.",
+      "The generated code is not fully compliant because the `KBinsDiscretizer` does not handle missing values (NaNs) natively. The dataset description indicates that the 'horsepower' column has missing values. This will cause an error during execution, making the pipeline not executable as required by the prompt, even though it implements the specified steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "521768bfaa2c47ccbd3084182af8c650",
+    "semantic_feedback": [
+      "The generated code includes an additional step, 'imputer' (SimpleImputer), which is not specified in the provided pipeline definition. The pipeline should only contain 'binarizer', 'minmax', 'pca', and 'nn_regressor'.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "no, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "no, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt.",
+      "The generated code correctly implements all the specified steps of the pipeline in the correct order and uses the specified transformers and regressor with the provided hyperparameters. No extra steps are included, and the function signature and return requirements are met. However, the code is not fully executable with the provided dataset because the 'Binarizer' step does not handle missing values (NaNs) in the input data, which are present in the dataset. An imputation step would be required before binarization to make the pipeline executable without errors, but adding it would violate the 'only those steps' constraint of the prompt."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "be1d9e06e76a4462920f7c984f155f11",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "25f2955b85854f14a4b2c47c346ce72b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "8916916a40444c2daed6d2dd3480f60b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "b87fd674ba0040418052f787b57b2f4c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "5493424219374cdf8f76286fa17362c2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "89ade139d9e24e148d4f53937d8b7024",
+    "semantic_feedback": [
+      "The generated code includes a `SimpleImputer` step, which was not specified in the provided pipeline definition. The instructions state to implement 'only those steps' of the pipeline.",
+      "The code is not fully executable because `SelectKBest` does not handle missing values (NaNs) natively, which are present in the dataset. Although the pipeline steps are correctly implemented, an imputer or other NaN handling mechanism would be required for the code to run without error on the given data.",
+      "The generated code includes a `SimpleImputer` step, which was not specified in the provided pipeline definition. The instructions state to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline.",
+      "The generated code is not fully executable because the dataset contains missing values (NaNs) in the 'horsepower' column, and `SelectKBest` does not handle missing values natively. An imputation step would be required within the pipeline to make it executable on the provided data, but adding it would violate the instruction to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "9c8df23273ff494a95806c7f86d5349c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "cc8ed008122c47b6818c798e9c4fa2d0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

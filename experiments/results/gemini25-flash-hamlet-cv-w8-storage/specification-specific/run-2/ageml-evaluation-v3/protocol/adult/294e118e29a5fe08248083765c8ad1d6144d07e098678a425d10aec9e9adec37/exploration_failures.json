@@ -1,0 +1,275 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "2681a6139d984b0eae038923c9c7b5c0",
+    "semantic_feedback": [
+      "The pipeline specifies imputation and normalization for numerical features, and then classification with KNN. KNN requires numerical input. The `ColumnTransformer` uses `remainder='passthrough'`, which means any categorical columns in `X_train` (which exist in the dataset) will be passed directly to the `KNeighborsClassifier` without any processing. This is problematic as KNN cannot handle non-numerical (string/object) data. The pipeline does not specify any handling for categorical features, so either they should be dropped (`remainder='drop'`) or an encoding step should be added if they are intended to be used. As it stands, the code is not compliant because it passes incompatible data types to the final classifier, which is not specified by the pipeline and will likely lead to an error or incorrect behavior."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "95988837289b41ca899b72a9539836dd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "848c759c704540609fbd19ac67eeadcc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "e2a054a2aca8466fbd13308e3c3151af",
+    "semantic_feedback": [
+      "The code includes a `ColumnTransformer` with `OneHotEncoder` to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization, rebalancing, classification). However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code includes a 'ColumnTransformer' with 'OneHotEncoder' to handle categorical features. While this step is necessary for the pipeline to execute given the dataset's mixed data types, it is not explicitly listed as one of the three steps (normalization, rebalancing, classification) in the provided pipeline description. The instruction was to implement 'only those steps'.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset.",
+      "The code strictly implements the three requested steps (normalization with `robust_scaler`, rebalancing with `near_miss`, and classification with `knn`). It implements all these steps and only these steps, as described in the pipeline. However, the dataset contains categorical features (strings) which cannot be directly processed by `RobustScaler`. The pipeline, as currently implemented, lacks a necessary preprocessing step (e.g., one-hot encoding) to convert these categorical features into a numerical format, making it non-executable for the given data. While it adheres to the instruction to implement 'only those steps' from the provided pipeline description, it fails the implicit requirement for the code to be 'correct and executable' with the given dataset."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "dc42f4fb3ce145caa797d0cdf6094802",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "f682830e3b00494693df216b62fc652b",
+    "semantic_feedback": [
+      "The code is not compliant because it introduces a 'preprocessor' step with `OneHotEncoder` via `ColumnTransformer`, which was not explicitly listed in the provided pipeline steps. The pipeline only specified imputation, normalization, and classification.",
+      "The code is not compliant because it introduces a 'data_preparation' step with `OneHotEncoder` via `ColumnTransformer`, which was not explicitly listed in the provided pipeline steps. The pipeline only specified imputation, normalization, and classification.",
+      "The generated code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data.",
+      "The code is not compliant because it introduces a 'data_preparation' step with `OneHotEncoder` via `ColumnTransformer`, which was not explicitly listed in the provided pipeline steps. The pipeline only specified imputation, normalization, and classification.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data.",
+      "The code is not compliant because it introduces a 'preprocessor' step with `OneHotEncoder` via `ColumnTransformer`, which was not explicitly listed in the provided pipeline steps. The pipeline only specified imputation, normalization, and classification.",
+      "The code is not executable for the provided dataset. The `IterativeImputer` and `RobustScaler` expect numerical input, but the dataset contains categorical (string) columns. The pipeline, as defined, does not include a step to handle these categorical features (e.g., one-hot encoding) before imputation and normalization, leading to a `could not convert string to float` error during execution. While the code implements the explicitly listed steps, it fails the implicit requirement of being 'correct and executable' for the given data."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "cc85373a44534a97a52e172f33adfd7f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "053fac887a3a4ec59cedcbc3c1a55bdf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "de952613feba451cb41fa9e65752ffba",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "5e637442c5d54663879dc1dc7d4d02c8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 10,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "9b3c6fd8fc94407f8c7d78e6a14711bc",
+    "semantic_feedback": [
+      "The pipeline explicitly states 'imputation with simple_imputer' and 'classification with ada_boost'. The generated code adds a 'OneHotEncoder' for categorical features, which is not listed as one of the steps in the provided pipeline. While this step is necessary for the AdaBoostClassifier to handle categorical data, it violates the 'only those steps' constraint of the pipeline definition.",
+      "no, the pipeline explicitly states 'imputation with simple_imputer' and 'classification with ada_boost'. The generated code adds a 'OneHotEncoder' for categorical features, which is not listed as one of the steps in the provided pipeline. While this step is necessary for the AdaBoostClassifier to handle categorical data, it violates the 'only those steps' constraint of the pipeline definition.",
+      "The pipeline explicitly states 'imputation with simple_imputer' and 'classification with ada_boost'. The generated code adds a 'OneHotEncoder' for categorical features, which is not listed as one of the steps in the provided pipeline. While this step is necessary for the AdaBoostClassifier to handle categorical data, it violates the 'only those steps' constraint of the pipeline definition.",
+      "The pipeline explicitly states 'imputation with simple_imputer' and 'classification with ada_boost'. The generated code adds a 'OneHotEncoder' for categorical features, which is not listed as one of the steps in the provided pipeline. While this step is necessary for the AdaBoostClassifier to handle categorical data, it violates the 'only those steps' constraint of the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "544e4332d16741aeab28e24603dc8df6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "da67050c307e481abcce288027255d2c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "976fa8e50cd943998f3a190ca9884f8b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 15,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "600f608517ff4e32bf9566138d1603bc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "3fb7c79252734792abe52d5817fa8c0e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "bbfcee2a23554db997cc2ec36fec72c8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "614316ae766b434a96725b9e5235ad25",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "1cd2811537124f2996574e53e2b0b8d8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "f1ca8bf2f80242aeaea5b71bca374052",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "6aa473e2890c429dbda3fc97df95da88",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "74885db76fe94361a95279dbcbf332b1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "ba400768a3394c04af6780c0a8dec409",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "b58afa8e159a42f18f48ded07a29c69b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "21ebb8efa3e448f391c4388eb3142181",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "26ce247bb2364131868742f8c45d969e",
+    "semantic_feedback": [
+      "The code introduces an additional step, `OneHotEncoder`, for categorical features. The pipeline description explicitly states to implement 'only those steps' listed: imputation, normalization, and classification. While one-hot encoding is a necessary preprocessing step for categorical data when using KNN, it is not part of the provided pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "afeddf39849c4c0297e185222bcb39de",
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline. The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The code applies the `imputation_strategy` parameter to `SimpleImputer` for both numerical and categorical features. While this ensures consistent application of the parameter as implied by the function signature, `SimpleImputer` with strategies like 'mean' or 'median' cannot be applied to non-numeric (categorical) data. If `imputation_strategy` is set to 'mean' or 'median', the pipeline will fail during execution when processing categorical features, violating the requirement that the code must be correct and executable.",
+      "The code applies the 'imputation_strategy' parameter to 'SimpleImputer' for both numerical and categorical features. While this ensures consistent application of the parameter as implied by the function signature, 'SimpleImputer' with strategies like 'mean' or 'median' cannot be applied to non-numeric (categorical) data. If 'imputation_strategy' is set to 'mean' or 'median', the pipeline will fail during execution when processing categorical features, violating the requirement that the code must be correct and executable.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature.",
+      "The code applies the 'imputation_strategy' parameter to 'SimpleImputer' for both numerical and categorical features. While this ensures consistent application of the parameter as implied by the function signature, 'SimpleImputer' with strategies like 'mean' or 'median' cannot be applied to non-numeric (categorical) data. If 'imputation_strategy' is set to 'mean' or 'median', the pipeline will fail during execution when processing categorical features, violating the requirement that the code must be correct and executable.",
+      "The `imputation_strategy` parameter is passed to the `build_model` function, but it is only used for numerical feature imputation. For categorical features, the `SimpleImputer` is hardcoded to use the 'most_frequent' strategy, which means the `imputation_strategy` parameter is not consistently applied across all imputation steps as implied by the pipeline description and function signature."
+    ],
+    "status": "COMPLETED"
+  }
+]

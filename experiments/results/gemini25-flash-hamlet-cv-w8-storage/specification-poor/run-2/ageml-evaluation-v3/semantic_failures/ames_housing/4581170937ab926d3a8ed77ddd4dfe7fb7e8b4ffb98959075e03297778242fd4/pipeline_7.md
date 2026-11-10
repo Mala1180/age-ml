@@ -1,0 +1,4 @@
+Attempt 1:
+The code is not fully compliant with the provided pipeline for two reasons:
+1.  The pipeline explicitly lists 5 steps. The use of `ColumnTransformer` with `remainder='drop'` implicitly performs an additional feature selection/preprocessing step by dropping all non-numerical columns. This step is not explicitly mentioned in the provided pipeline, which states that 'only those steps' should be implemented.
+2.  The `random_state` parameter is set for `IterativeImputer` and `RandomForestRegressor` within the `build_model` function. The instructions state: 'The host sets every exposed random_state'.

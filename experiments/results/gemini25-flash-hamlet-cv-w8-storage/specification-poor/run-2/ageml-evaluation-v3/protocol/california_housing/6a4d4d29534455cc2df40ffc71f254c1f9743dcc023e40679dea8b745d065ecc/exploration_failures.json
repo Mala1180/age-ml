@@ -1,0 +1,296 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "d9f07f0c94d842549bd509706cc4d407",
+    "semantic_feedback": [
+      "The code is not fully compliant because it includes an additional step, `OneHotEncoder`, for categorical features. The provided pipeline only specifies 5 steps: imputation, discretization, normalization, PCA, and SVR, without mentioning any explicit handling for categorical features. The instruction was to implement all the steps of the pipeline and *only* those steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "c0b37f580ffc4fdfa5ad5ad728bbb251",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "5b1394633aae4114a602fb03d011511b",
+    "semantic_feedback": [
+      "The generated code is not strictly compliant with the provided pipeline. While it correctly implements all the specified steps (discretization, normalization, feature selection, and regression), it also includes `SimpleImputer` steps for both numerical and categorical features. Imputation was not explicitly listed as a step in the provided pipeline description, violating the instruction to implement 'only those steps'.",
+      "The generated code is not compliant with the provided pipeline for two reasons:\n1.  **Extra Step (OneHotEncoder):** The pipeline description explicitly lists four steps: discretization, normalization, features, and regression. The code includes an additional preprocessing step, `OneHotEncoder`, for categorical features within the `ColumnTransformer`. This step was not specified in the provided pipeline, violating the instruction to implement \"only those steps\".\n2.  **Non-Executable due to Missing Values:** The dataset information indicates that the 'total_bedrooms' column has missing values (NaNs). The `KBinsDiscretizer` (used for discretization) does not natively handle missing values. Therefore, the pipeline will fail during execution when it encounters these NaNs, violating the requirement that the code be \"correct and executable\".",
+      "The generated code is not compliant because it is not executable. The `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, which will cause an error. Additionally, the categorical feature 'ocean_proximity' is passed through by `remainder='passthrough'` without any encoding, which will lead to an error in `SelectKBest` and `MLPRegressor` as they expect numerical input. While the code implements only the explicitly listed steps, the lack of handling for missing values and categorical features makes it non-executable and thus non-compliant with the requirement for correctness and executability.",
+      "The generated code is not compliant with the provided pipeline. It includes additional steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that were not explicitly listed in the pipeline description. The instruction was to implement 'only those steps' of the pipeline.",
+      "The generated code is not compliant because it is not executable. The `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, which will cause an error. Additionally, the categorical feature 'ocean_proximity' is passed through by `remainder='passthrough'` without any encoding, which will lead to an error in `SelectKBest` and `MLPRegressor` as they expect numerical input. While the code implements only the explicitly listed steps, the lack of handling for missing values and categorical features makes it non-executable and thus non-compliant with the requirement for correctness and executability.",
+      "The generated code is not compliant with the provided pipeline for two reasons:\n1.  **Extra Step (OneHotEncoder):** The pipeline description explicitly lists four steps: discretization, normalization, features, and regression. The code includes an additional preprocessing step, `OneHotEncoder`, for categorical features within the `ColumnTransformer`. This step was not specified in the provided pipeline, violating the instruction to implement \"only those steps\".\n2.  **Non-Executable due to Missing Values:** The dataset information indicates that the 'total_bedrooms' column has missing values (NaNs). The `KBinsDiscretizer` (used for discretization) does not natively handle missing values, and no imputer is included in the numerical pipeline. Therefore, the pipeline will fail during execution when it encounters these NaNs, violating the requirement that the code be \"correct and executable\".",
+      "The generated code is not compliant because it is not executable. The `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, which will cause an error. Additionally, the categorical feature 'ocean_proximity' is passed through by `remainder='passthrough'` without any encoding, which will lead to an error in `SelectKBest` and `MLPRegressor` as they expect numerical input. While the code implements only the explicitly listed steps, the lack of handling for missing values and categorical features makes it non-executable and thus non-compliant with the requirement for correctness and executability.",
+      "The generated code is not compliant with the provided pipeline. It includes additional steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that were not explicitly listed in the pipeline description. The instruction was to implement 'only those steps' of the pipeline.",
+      "The generated code is not compliant with the provided pipeline. It includes additional steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that were not explicitly listed in the pipeline description. The instruction was to implement 'only those steps' of the pipeline.",
+      "The generated code is not compliant with the provided pipeline. It includes additional steps (SimpleImputer for numerical features and OneHotEncoder for categorical features) that were not explicitly listed in the pipeline description. The instruction was to implement 'only those steps' of the pipeline.",
+      "The generated code is not compliant because it is not executable. The `KBinsDiscretizer` does not handle missing values (NaNs) present in the dataset, which will cause an error. Additionally, the categorical feature 'ocean_proximity' is passed through by `remainder='passthrough'` without any encoding, which will lead to an error in `SelectKBest` and `MLPRegressor` as they expect numerical input. While the code implements only the explicitly listed steps, the lack of handling for missing values and categorical features makes it non-executable and thus non-compliant with the requirement for correctness and executability."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 3,
+    "pipeline_run_id": null,
+    "semantic_feedback": [
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression). However, it is not fully compliant with the requirement for the code to be \"correct and executable\" because it does not handle the categorical feature 'ocean_proximity'. The `remainder='passthrough'` in `ColumnTransformer` will pass this string column directly to `SelectKBest` and `KNeighborsRegressor`, which expect numerical input, leading to an error during execution. To be executable, the categorical feature should be appropriately encoded (e.g., using `OneHotEncoder`).",
+      "The code implements the four specified steps (discretization, normalization, feature selection, regression). However, it also includes `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features. While these additions are necessary for the code to be 'correct and executable' given the dataset's missing values and categorical features, they were not explicitly listed in the provided pipeline description and thus violate the constraint to implement 'only those steps'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning `KBinsDiscretizer` will fail on NaNs, and `SelectKBest` and `KNeighborsRegressor` will fail when encountering the string values from 'ocean_proximity' passed through by `remainder='passthrough'`.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'.",
+      "The code implements all the specified steps (discretization, normalization, feature selection, regression) and only those steps. However, it is not fully compliant with the requirement for the code to be 'correct and executable'. The dataset contains missing values in 'total_bedrooms' and a categorical feature 'ocean_proximity'. The current pipeline does not include steps to handle these, meaning KBinsDiscretizer will fail on NaNs, and SelectKBest and KNeighborsRegressor will fail when encountering the string values from 'ocean_proximity' passed through by remainder='passthrough'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "75eb8dfc741941728ce52121b6f2a799",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "0ba9e9e6fdbb492a9c93b35a73556d48",
+    "semantic_feedback": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "4eab8025f1784f39a1ba1c3631a005d1",
+    "semantic_feedback": [
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code implements the specified steps (imputation, discretization, feature selection, regression). However, it introduces additional preprocessing steps, `OneHotEncoder` for categorical features and `ColumnTransformer` to manage different data types, which were not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "b580c264344749afad9343dd5f910053",
+    "semantic_feedback": [
+      "The pipeline includes an additional step, `OneHotEncoder`, for handling categorical features (`ocean_proximity`), which was not explicitly listed in the provided pipeline steps. The provided pipeline only specified steps for numerical data transformation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "3d8be6e8904f4c46bf4804c1831166d7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 9,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "bb0dd19f69c048b7ba0f8e8909518ca6",
+    "semantic_feedback": [
+      "The pipeline explicitly states 'discretization with `binarizer`' as the first step. The generated code applies `Binarizer` to numerical columns, which is compliant. However, it also introduces `OneHotEncoder` for categorical columns. While `OneHotEncoder` is necessary for handling categorical features with `RandomForestRegressor`, it is an additional preprocessing step not explicitly mentioned in the provided pipeline, violating the 'implements all the steps of the pipeline and only those steps' constraint.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, it also introduces `OneHotEncoder` for categorical columns. While `OneHotEncoder` is necessary for handling categorical features with `RandomForestRegressor`, it is an additional preprocessing step not explicitly mentioned in the provided pipeline, violating the 'implements all the steps of the pipeline and only those steps' constraint.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns. However, the dataset contains a categorical column ('ocean_proximity'). By setting `remainder='passthrough'` in the `ColumnTransformer`, this categorical column is passed directly to the `RandomForestRegressor`. `RandomForestRegressor` cannot handle string/object type features, which will cause an error during execution (fitting the model). Therefore, the generated code is not correct and executable for the given dataset, violating the requirement.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The pipeline explicitly states 'discretization with `binarizer`' and 'regression with `random_forest_regressor`'. The generated code applies `Binarizer` to numerical columns, which is compliant with the first step. However, the dataset contains categorical columns ('ocean_proximity') which `Binarizer` cannot process. By setting `remainder='drop'` in the `ColumnTransformer`, the code implicitly performs a feature selection step (dropping categorical columns) that is not explicitly mentioned in the provided pipeline. This violates the constraint to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "ea7d896bed5f4e74959fda9be1499c8d",
+    "semantic_feedback": [
+      "The code includes a `OneHotEncoder` for categorical features, which is not explicitly listed as one of the five steps in the provided pipeline. The instructions state to implement \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "3498f4fe357643ee9f8d40c1c98cfe65",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "b75eb48d4dae41a784946c4bdbda61e4",
+    "semantic_feedback": [
+      "The pipeline includes an additional step, `OneHotEncoder`, for categorical features, which was not explicitly listed in the provided pipeline definition. The instruction was to implement only the steps of the pipeline.",
+      "The pipeline includes an additional step, `OneHotEncoder`, for categorical features, which was not explicitly listed in the provided pipeline definition. The instruction was to implement only the steps of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "ab67f91f0522428fbe5e0ff828004cca",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "c3d81fc639d84e84a21785f8b8fa05d6",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "c4dce4b00de64f93b150723ee3e37d3d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "6edb4143db494090bdcfb62010066b9e",
+    "semantic_feedback": [
+      "The generated code introduces a `ColumnTransformer` with `OneHotEncoder` for categorical features. While this preprocessing step is necessary to handle the 'ocean_proximity' column and enable the `IterativeImputer` to function correctly (as it expects numerical input), it is not explicitly listed in the provided pipeline steps. The pipeline specifies only 'imputation', 'features', and 'regression', violating the 'only those steps' constraint.",
+      "The generated code includes a `ColumnTransformer` with `OneHotEncoder` to handle categorical features. This step is not explicitly listed in the provided pipeline, which only specifies 'imputation', 'features', and 'regression'. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `ColumnTransformer` with `OneHotEncoder` for handling categorical features. This preprocessing step is not explicitly listed in the provided pipeline, which only specifies 'imputation', 'features', and 'regression'. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `ColumnTransformer` with `OneHotEncoder` for handling categorical features. This preprocessing step is not explicitly listed in the provided pipeline, which only specifies 'imputation', 'features', and 'regression'. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `ColumnTransformer` with `OneHotEncoder` for handling categorical features. This preprocessing step is not explicitly listed in the provided pipeline, which only specifies 'imputation', 'features', and 'regression'. This violates the constraint to implement 'only those steps' of the pipeline.",
+      "The generated code includes a `ColumnTransformer` with `OneHotEncoder` for handling categorical features. This preprocessing step is not explicitly listed in the provided pipeline, which only specifies 'imputation', 'features', and 'regression'. This violates the constraint to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "ffd1e8dcbe06447da7f37d8775a4d656",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "b7a024223f594524afd0a3e7227703bf",
+    "semantic_feedback": [
+      "The code includes `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which are not explicitly listed in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The code includes `SimpleImputer` for numerical features, which is not explicitly listed in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The code includes `SimpleImputer` for numerical features, which is not explicitly listed in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column (20433 non-null values out of 20640). To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column (20433 non-null values out of 20640). To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline.",
+      "The generated code is not fully compliant because while it implements the specified steps, it is not executable due to missing values (NaNs) in the input data. The `Binarizer` step, as defined in the pipeline, does not handle NaN values, which are present in the 'total_bedrooms' column. To make the pipeline executable, an imputation step would be required before `Binarizer`, but adding such a step would violate the instruction to implement 'only those steps' explicitly listed in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "f6e15052f2f34599b829b9592fa11165",
+    "semantic_feedback": [
+      "no, the pipeline explicitly states to implement \"only those steps\", but the generated code includes an additional `OneHotEncoder` for categorical features (`ocean_proximity`) which is not listed as one of the five pipeline steps. While this is standard practice for handling categorical data, it deviates from the strict instruction to implement *only* the specified steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "d722319c5f8b4cd2bb55066745ca9dd9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "4bdd18084a2b414f9dd05cdb3f6a8503",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "d4182ef4c16f41d284a4b48ae8299623",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "093d8acbf9f143769b8bd051dbf574da",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "28a044ee2e014d359cbbb9d8d755b988",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

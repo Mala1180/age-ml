@@ -1,0 +1,102 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/2367009e8c89a1d637be6d527f47c5d32778281c5342378f5b9fd8513009095a/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/2367009e8c89a1d637be6d527f47c5d32778281c5342378f5b9fd8513009095a/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/2367009e8c89a1d637be6d527f47c5d32778281c5342378f5b9fd8513009095a/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/adult/2367009e8c89a1d637be6d527f47c5d32778281c5342378f5b9fd8513009095a/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "e29c584e5d544a9c92d8e3870f7b7145",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8245376845877674,
+    0.8202034344351432,
+    0.8091122063789316,
+    0.8262852603329549,
+    0.817650349469897,
+    0.8106049389396557,
+    0.8277375262933084,
+    0.8175144807481749,
+    0.8264395262541635,
+    0.8260563664058156
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1393.985,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "096314b748674d8d9bedf3d0a72f120d",
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": null,
+    "12": null,
+    "13": "6e1f597b2be9481b9e4efdd06280b73e",
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": "b4a37b57cd04462abd7e5a50b40d6945",
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "98fa65ebe83780dfa2b6d7da41e5fa8ed4ac92e377ae5b3c929aed1d9189d516",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "2ea940829b94fa861eda5cd518b2e50c4979ba5e2be3fe2edde04a0065649c08",
+  "runtime_human_readable": "1:00:04",
+  "runtime_seconds": 3604.408426504582,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8206141773845813,
+  "selected_candidate_key": "a2f89b716038052e3ab1c044860eeec5969f774de366ad786975d785699b241f",
+  "selection_sha256": "a45c09ec9db9cfc6c842206ac4a28a19a672d7de5f3d41044881f817d7ec7c37",
+  "selection_validation_score": 0.8206141773845813,
+  "semantic_validation_failure_reasons": {
+    "19": [
+      "The code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step but was not explicitly listed in the provided pipeline steps. The instructions state to implement 'only those steps' of the pipeline.",
+      "The code is not fully compliant because it does not handle categorical features appropriately for subsequent steps. After imputation, categorical features remain as strings, which will cause an error when passed to PCA, violating the 'correct and executable' requirement. A step like OneHotEncoder is implicitly required before PCA for categorical data, even if not explicitly listed in the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "c4733339d10dbb58b745c82e5a9b4bab34faf057116830def4ed586a8b704f2c",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.0164739,
+    "input_tokens": 90635,
+    "output_cost": 0.29182,
+    "output_tokens": 68884,
+    "total_cost": 0.3082939,
+    "total_tokens": 159519
+  },
+  "training_time": 1015.511,
+  "validation_metric": "balanced_accuracy"
+}

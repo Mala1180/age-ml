@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/wilt/bd5b622a266743deb95de14cf42c62459487ff7b69b48ad6c2daabc987b26335/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/wilt/bd5b622a266743deb95de14cf42c62459487ff7b69b48ad6c2daabc987b26335/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/wilt/bd5b622a266743deb95de14cf42c62459487ff7b69b48ad6c2daabc987b26335/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-1/ageml-evaluation-v3/protocol/wilt/bd5b622a266743deb95de14cf42c62459487ff7b69b48ad6c2daabc987b26335/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "1b7d68a387d34b179ba9bd9c8c92dfd3",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9796775277124623,
+    0.9764024185421565,
+    0.960446758481693,
+    0.9774941215989251,
+    0.9764024185421565,
+    0.9978165938864629,
+    0.9989082969432315,
+    0.9720356063150823,
+    0.9321663019693655
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 230.85899999999998,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "7ad4dd4ca7b84ac9b234eb20100ed024",
+    "1": "47e41654762b469684f7acd0e3e04836",
+    "2": "93891f638ece4b3d8f5e85b16f9f02e3",
+    "3": "1ed43fe0fe3b4560a920d56f4506b5f8",
+    "4": "86b8f53cfc38444fa8ab286f82f33d88",
+    "5": "e9e1f253982a4597a03ed002f9956803",
+    "6": "dc9912c1a3f646a3b060233ae0d79529",
+    "7": "8c2024289d4a49eb80cf0047aeed0a7a",
+    "8": "cd977575fdf846fba73b02d600c33415",
+    "9": "c3bca49ddf044989bd6d843699201c81",
+    "10": "9496851462a142e8a5ab96e3dceb8d4f",
+    "11": "de3789480d2b4dffa1d098c1af742e5a",
+    "12": "68c2f1081a124725ad88220c75c2ba18",
+    "13": "8ec5b613672144c095d0273c8edf62a6",
+    "14": "1517a83799bd4c1fa7445eb63dd4b731",
+    "15": "bd0ff55895064095b2a1979ad1f05bc2",
+    "16": "7ccc4fd0b9b945cf922af2f39ba88045",
+    "17": "db3c03ac411a4c88b30787f1fb4e17a0",
+    "18": "d3bb165e9d9743a2a72378049c9d43e4",
+    "19": "416c3c0fbf99489c99661c741ffd7bde",
+    "20": "fb9cec44e7704bb2a1160b1dd38d6b3f",
+    "21": "72af329f153948b6895df6b21fe57547",
+    "22": "68880ee604884363beb6099f0294e28a",
+    "23": "5fbe2c39c4aa480ead4af229782773c6",
+    "24": "e308804cd27442439de62d3b7cdce043",
+    "25": "e8eea965d58949bdb6d693dd62498f0e",
+    "26": "854fa741cb0f4ac5afe57ffaafed56a8",
+    "27": "6d980b05d87f4ca0bb9f30a41be623f9",
+    "28": "566f2096cd71493e9a55ba78cecf9ebd",
+    "29": "5216eb7742ca42a9b7e84bcfc926f633"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "7358a1c5544e63639cbf94e7d655e6eb7e3280d1f64d73b8a470f0c2dc349ead",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "e5ccabbc167c19d21a6d27cbb0db1fccdd63c761a2e384a66e294fbe05934368",
+  "runtime_human_readable": "0:06:03",
+  "runtime_seconds": 362.76828456670046,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9731030731243339,
+  "selected_candidate_key": "0c6c52374afaaffd622d062727914aa9bed63bacff47fbc503b31c9c9764b413",
+  "selection_sha256": "05cd51e4fdc95d4346ceb57fd635355dc845ffb40f3ae6ff6b826e4c3154677e",
+  "selection_validation_score": 0.9731030731243339,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The generated function signature `def build_model(X_train, y_train, imputation_strategy, feature_range, n_components, k_neighbors_smote, n_neighbors_knn, weights):` does not exactly match the required signature `def build_model(X_train, y_train, imputation_strategy, feature_range, n_components, k_neighbors, n_neighbors, weights):`. Specifically, `k_neighbors` was changed to `k_neighbors_smote` and the second `n_neighbors` was changed to `n_neighbors_knn`."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.01708374,
+    "input_tokens": 81194,
+    "output_cost": 0.038487500000000015,
+    "output_tokens": 9444,
+    "total_cost": 0.05557124,
+    "total_tokens": 92012
+  },
+  "training_time": 974.2180000000001,
+  "validation_metric": "balanced_accuracy"
+}

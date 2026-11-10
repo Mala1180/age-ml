@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline specifies 'imputation with `simple_imputer`'. However, the current code drops all categorical features using `remainder='drop'` in the `ColumnTransformer` instead of applying imputation to them. `SimpleImputer` can be used for categorical features with strategies like 'most_frequent' or 'constant'.

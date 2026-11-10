@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code is not compliant because it includes an additional preprocessing step (OneHotEncoder for categorical features) that was not explicitly listed in the provided pipeline definition. The instruction states to implement 'only those steps' of the pipeline.

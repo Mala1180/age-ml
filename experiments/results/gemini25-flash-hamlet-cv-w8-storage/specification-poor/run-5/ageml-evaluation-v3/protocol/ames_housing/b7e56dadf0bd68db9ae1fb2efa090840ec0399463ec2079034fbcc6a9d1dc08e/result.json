@@ -1,0 +1,167 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/b7e56dadf0bd68db9ae1fb2efa090840ec0399463ec2079034fbcc6a9d1dc08e/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/b7e56dadf0bd68db9ae1fb2efa090840ec0399463ec2079034fbcc6a9d1dc08e/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/b7e56dadf0bd68db9ae1fb2efa090840ec0399463ec2079034fbcc6a9d1dc08e/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/b7e56dadf0bd68db9ae1fb2efa090840ec0399463ec2079034fbcc6a9d1dc08e/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/semantic_validation_feedback.txt",
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 13,
+  "best_run_id": "b4cbcb331dfa456db799c6040194e41d",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    28491.22875766603,
+    30176.49557922822,
+    26054.63327631459,
+    46835.87608037128,
+    33896.03611342659,
+    26932.97095191661,
+    26563.471304560524,
+    25096.083199810466,
+    36731.07193277716,
+    28935.034583054
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1218.321,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "abbee89cd3da491599ad553b8fb5abdb",
+    "1": "8d58dce11f8b46bbac5e108a1c7ed519",
+    "2": "fe127ebcb4524526a2ffd9d6961d0e43",
+    "3": "cfe5dec43e2f4fc6a8741a548d2bf3ce",
+    "4": "a5ecdb1e2ffd4bb2b78996c26ba465a1",
+    "5": "54d4c30c337e4123967efc7f1ecc9307",
+    "6": "7d0c730f22ae480b91db35d573d461d1",
+    "7": "cce02f99e4bc45a2b9cbd7279bc309f8",
+    "8": "55752984d9f5420d8d9781df6d43e3d0",
+    "9": "ab6a6ba92e38422c881d3ee788798616",
+    "10": "a1a247b655de4e6fb1cf37b827bc31fb",
+    "11": "a7a5d1a1dec245eab5ef68ff046b03b6",
+    "12": "70c03ab30d1c48afa9ec0f64fcb9b671",
+    "13": "74af2fb53cd444a2944eb60383b16620",
+    "14": "5c8f0d9830df4905829fd5f4f3ca1f95",
+    "15": "41ab4c1312464c4fbf10aff8bfba3054",
+    "16": "93f88601b23c4586902433cd3afd7d34",
+    "17": "20a187c28be84ca293da060a59f5644c",
+    "18": "2161c27f86764868a4e63933afdd4cb2",
+    "19": "d4e1e0e3949f445ab7216dc3aaef6dff",
+    "20": "acd6d90e3f624b498c4a303773ca97de",
+    "21": "d9eeb572f9494522a3f3a867d5204d08",
+    "22": "01cbd36f74a04850b0c5acdc9eba03e6",
+    "23": "36f280f9a0794d2c9c4730697807d202",
+    "24": "ea3e7405045548a49efde759a03eeab2",
+    "25": "917506c0906f4f8598812fbf43750b09",
+    "26": "cff97d63ebb24be5ad8a7a9552a43b90",
+    "27": "aee81642a9e0449e9675a72b27a6dee1",
+    "28": "1753529f17d44cf5818e87b870db4041",
+    "29": "1505cd6dd075421bb37d1018b556b8a1"
+  },
+  "pipelines_found": 1080,
+  "protocol_sha256": "dc50f07ded14ff85144e1e970ae61e273837c96c95a464af0a3cfb8163780777",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "dede20b11153deb2a1882d32f2bdb1f1e874b8ec95462ef80a87d7080579df40",
+  "runtime_human_readable": "0:09:58",
+  "runtime_seconds": 597.6468767262995,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 30971.29017791255,
+  "selected_candidate_key": "d3b673a20f80c35281b581d6b50832e82c76e2b33b2f96b9a960951b12617aad",
+  "selection_sha256": "726f534fc23fc5afa5ee21b8314c9553335d6bbe4ef96a2c6a0abc9fd6a37951",
+  "selection_validation_score": 30971.29017791255,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "No, the generated code is not compliant with the provided pipeline. The pipeline explicitly lists three steps: discretization with `binarizer`, normalization with `power_transformer`, and regression with `ridge`. The generated code adds an extra step, `SimpleImputer`, for handling missing values, which was not part of the original pipeline definition."
+    ],
+    "2": [
+      "The pipeline includes an extra step, `SimpleImputer`, which was not specified in the provided pipeline definition. The pipeline only lists 'discretization', 'normalization', 'features', and 'regression'."
+    ],
+    "3": [
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline.",
+      "no, the code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline.",
+      "no, the code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "no, the code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "The code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline.",
+      "The code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "The code is not executable because `KBinsDiscretizer` does not handle NaN values natively, and the dataset contains NaNs in numerical features. The pipeline, as implemented, will fail during execution, violating the requirement that the code must be correct and executable.",
+      "The pipeline includes an additional step, `SimpleImputer`, which was not explicitly requested in the provided pipeline description. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "8": [
+      "The pipeline includes an extra step, 'to_dense', which is not specified in the provided pipeline description. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "13": [
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `standard`'. While `IterativeImputer` and `StandardScaler` are correctly applied to numerical features, the code introduces `SimpleImputer` for categorical features and `OneHotEncoder` for categorical feature encoding. These additional steps (`SimpleImputer` and `OneHotEncoder`) are not explicitly mentioned in the provided pipeline description, making the code non-compliant with the instruction to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' and 'normalization with `standard`'. While `IterativeImputer` and `StandardScaler` are correctly applied, the code introduces an additional `preprocessor` step using `ColumnTransformer` and `OrdinalEncoder` to handle categorical features. These additional steps are not explicitly mentioned in the provided pipeline description, making the code non-compliant with the instruction to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "15": [
+      "The pipeline includes a `SimpleImputer` step, which was not explicitly requested in the provided pipeline definition. The instructions state to implement 'only those steps'."
+    ],
+    "17": [
+      "The code introduces a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution to ensure executability given the numerical nature of the specified pipeline steps, dropping columns is an additional operation not explicitly listed in the provided pipeline steps (imputation, discretization, normalization, features, regression). The pipeline description states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is necessary for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a ColumnTransformer with `remainder='drop'` (which is the default behavior) to handle non-numerical columns. While this is a practical necessity for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'.",
+      "The code uses a `ColumnTransformer` with `remainder='drop'` to handle non-numerical columns. While this is a practical solution for the subsequent numerical steps, dropping columns is an operation not explicitly listed in the provided pipeline steps. The instruction states to implement 'only those steps'."
+    ],
+    "20": [
+      "The pipeline explicitly requests 'discretization with `kbins`' as the first step. The current code adds a `SimpleImputer` before the `KBinsDiscretizer` within the numerical transformer. While this resolves the NaN issue, it introduces an additional preprocessing step (imputation) that was not explicitly listed in the provided pipeline steps. The instruction states to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "21": [
+      "The generated code is not compliant because it introduces an additional preprocessing step, `OneHotEncoder`, for categorical features, and uses `ColumnTransformer` to manage different data types. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `minmax`, features with `pca`, and regression with `nn_regressor`. While handling categorical features is often necessary for real-world datasets, it was not specified as one of the required steps in the provided pipeline.",
+      "The generated code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `minmax`, features with `pca`, and regression with `nn_regressor`.",
+      "The generated code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `minmax`, features with `pca`, and regression with `nn_regressor`.",
+      "The generated code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `minmax`, features with `pca`, and regression with `nn_regressor`.",
+      "The generated code is not compliant because it includes a `SimpleImputer` step, which was not specified in the provided pipeline. The pipeline explicitly states to implement 'only those steps' listed: discretization with `binarizer`, normalization with `minmax`, features with `pca`, and regression with `nn_regressor`."
+    ],
+    "22": [
+      "The code is not fully compliant with the provided pipeline due to the handling of categorical features. The pipeline specifies 'imputation with iterative_imputer' and 'discretization with kbins'. However, the generated code uses `SimpleImputer` for categorical imputation instead of `IterativeImputer`, and introduces `OneHotEncoder` for categorical features, which is not `KBinsDiscretizer` and is an additional step not explicitly listed in the pipeline. The instruction was to implement 'only those steps'."
+    ],
+    "23": [
+      "The pipeline includes an extra step, `OneHotEncoder`, for categorical features which was not specified in the provided pipeline. The instructions explicitly state to implement 'only those steps' listed in the pipeline."
+    ],
+    "26": [
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the first step. The generated code uses `IterativeImputer` for numerical columns but `SimpleImputer` for categorical columns, which deviates from the explicit instruction to use `iterative_imputer` for the overall imputation step. Additionally, `OneHotEncoder` is introduced for categorical features, which is not explicitly listed as one of the four steps in the provided pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. However, `IterativeImputer` is designed for numerical data and cannot directly handle categorical (string) columns present in the `X_train` dataset. This will lead to an error during execution, making the code not 'correct and executable' for the given mixed-type dataset, despite strictly implementing the listed steps. To be executable, categorical features would need separate handling (e.g., imputation with a different strategy and encoding), which is not specified in the provided pipeline.",
+      "The pipeline specifies 'imputation with `iterative_imputer`'. However, `IterativeImputer` is designed for numerical data and cannot directly handle categorical (string) columns present in the `X_train` dataset. This will lead to an error during execution, making the code not 'correct and executable' for the given mixed-type dataset, despite strictly implementing the listed steps. To be executable, categorical features would need separate handling (e.g., imputation with a different strategy and encoding), which is not specified in the provided pipeline."
+    ],
+    "28": [
+      "The code is not fully compliant with the provided pipeline. While it correctly applies `IterativeImputer`, `Binarizer`, `RobustScaler`, and `PCA` to numerical features, it introduces additional steps for categorical features (`SimpleImputer` and `OneHotEncoder`) that were not specified in the pipeline. The pipeline explicitly requested `iterative_imputer` for imputation and `binarizer` for discretization, implying these specific methods should be used for these steps, or at least no other methods should be introduced."
+    ],
+    "29": [
+      "The generated code is not fully compliant with the provided pipeline. While it correctly addresses the previous error by separating numerical and categorical processing, it introduces additional steps not explicitly listed in the pipeline description:\n1.  **OneHotEncoder**: A `OneHotEncoder` is applied to categorical columns, which was not specified as a step in the provided pipeline.\n2.  **Additional Imputation Strategy**: A `SimpleImputer` with a fixed `strategy='most_frequent'` is applied to categorical columns. The pipeline only specified one `imputation` step with `simple_imputer` and expected the `imputation_strategy` parameter to control it. The current implementation uses `imputation_strategy` only for numerical columns, and introduces a separate, fixed strategy for categorical columns. The prompt explicitly states to implement 'only those steps' of the pipeline."
+    ]
+  },
+  "semantic_validation_failures": 40,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.04164753,
+    "input_tokens": 499955,
+    "output_cost": 0.13006,
+    "output_tokens": 46466,
+    "total_cost": 0.17170753000000005,
+    "total_tokens": 548913
+  },
+  "training_time": 1111.8559999999998,
+  "validation_metric": "rmse"
+}

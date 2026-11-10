@@ -1,0 +1,104 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/har/c58eedc9f70b97d660fa042e9c00579c7c632af4957e5f221eb3db197963084d/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/har/c58eedc9f70b97d660fa042e9c00579c7c632af4957e5f221eb3db197963084d/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/har/c58eedc9f70b97d660fa042e9c00579c7c632af4957e5f221eb3db197963084d/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/har/c58eedc9f70b97d660fa042e9c00579c7c632af4957e5f221eb3db197963084d/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "f91cd80160bb4aabae9ec5ce7efceb97",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 819.355,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "801d346ed834423386498de78446964c",
+    "2": "aa3357281fe24569a653ef8db3cce731",
+    "3": "6bcf02aec9ab4464a779b6ebbbaa5129",
+    "4": "a850f6b110df44718a779331ab7b6e6d",
+    "5": null,
+    "6": null,
+    "7": "487f4edb0370458a8f8478eccb7512c5",
+    "8": null,
+    "9": "449de8c03a634282a44c5e4ffefd010c",
+    "10": "88b2c5d9466e41fcb648a772f6780b0b",
+    "11": "5a96ec37b25b4cf28bdfc31d0b0b5ec7",
+    "12": null,
+    "13": "787bddc393ae40d6aa9bf2f93bfda6da",
+    "14": "0beef23a4a6a4af59729a8f24c55cd06",
+    "15": "28344152bd5146b19e5ae466f3581017",
+    "16": "f18247d6020e4fe8a6de2e65bb387aca",
+    "17": "71c7c45443634638982fb8f66dd6f80d",
+    "18": null,
+    "19": "6d0f237cda0040f5b1661d6ed5bbb1bb",
+    "20": "e2e37cf0ee5e4983b934438b6b3c5cd2",
+    "21": "6f2a0b29e6434819af330f801c2ea002",
+    "22": "0d9f7615894141d58c22dcb52a1dd777",
+    "23": "d9e6048ef6dd47549351cf35f1da1b63",
+    "24": null,
+    "25": "704188dc99814f0daa9661a058fb5cc2",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "b6aec7fbdcb75b9794216ac73b1613729d870d9cc8cccda099486aa28bf19f53",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "fc605e65f7a1bd137e8a0c4c5a4ed8f5374c57abdd2f7bb673cc7d07044dadbd",
+  "runtime_human_readable": "1:00:32",
+  "runtime_seconds": 3632.318001329899,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "653b20d407e50e2bccf7d3ce0c4d219493b3d6a6178f0dd34794710456c1f4ad",
+  "selection_sha256": "0c8a4cf9838abf88a92660add5403d7033326ca63b7399ebb37040c861d3f338",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "No, the code is not fully compliant. Based on the error from the previous execution, the `quantile_range` parameter for `RobustScaler` must be a tuple. The current code passes `quantile_range` directly, which might be a list if provided by the host, leading to an execution error. To ensure executability, `quantile_range` should be explicitly cast to a tuple: `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ],
+    "23": [
+      "The code is structurally compliant with the pipeline steps and constraints. However, based on the previous execution error, the `feature_range` parameter passed to `MinMaxScaler` is expected to be a tuple, but it was received as a list. To ensure the code is correct and executable, `feature_range` should be explicitly converted to a tuple before being passed to `MinMaxScaler`."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.018283169999999998,
+    "input_tokens": 979943,
+    "output_cost": 0.03633,
+    "output_tokens": 8835,
+    "total_cost": 0.05461317,
+    "total_tokens": 989359
+  },
+  "training_time": 5383.2480000000005,
+  "validation_metric": "balanced_accuracy"
+}

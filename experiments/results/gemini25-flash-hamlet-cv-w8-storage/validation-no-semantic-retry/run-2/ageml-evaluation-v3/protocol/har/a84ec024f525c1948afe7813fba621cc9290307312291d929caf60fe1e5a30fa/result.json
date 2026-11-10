@@ -1,0 +1,105 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/har/a84ec024f525c1948afe7813fba621cc9290307312291d929caf60fe1e5a30fa/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/har/a84ec024f525c1948afe7813fba621cc9290307312291d929caf60fe1e5a30fa/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/har/a84ec024f525c1948afe7813fba621cc9290307312291d929caf60fe1e5a30fa/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/validation-no-semantic-retry/run-2/ageml-evaluation-v3/protocol/har/a84ec024f525c1948afe7813fba621cc9290307312291d929caf60fe1e5a30fa/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 14,
+  "best_run_id": "6893bed63c394dd6b510b40b549023ff",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9730119363160982,
+    0.9273765929346296,
+    0.8889070099502554,
+    0.9617989089326388,
+    0.9762713845166663,
+    0.9777448152990248,
+    0.9757795118501683,
+    0.9645017082394279,
+    0.9510925089206496,
+    0.9702172861475568
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1668.9890000000003,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "ca052513fe844c7cabca210f439452cf",
+    "2": "d549bd2dfc39451a8f1e63ff63b9fe76",
+    "3": "6942f5a7bebe407cb5b9ccaef64879ae",
+    "4": "842bcc63d7234e4a9ad3c9614a1e879f",
+    "5": null,
+    "6": null,
+    "7": "7b468c81586240fea948b62cf1f2178a",
+    "8": null,
+    "9": "586e03d280b6414ebf5631d22f864b6c",
+    "10": "25e776c90c6b4a3eb8ef5b8c0cdf1eb4",
+    "11": "ef085265433c49b6ba56cd6db7ebdb83",
+    "12": null,
+    "13": "507743930ed44eb9b79ce90cd0f71861",
+    "14": "b8841e7cca86463ca3f65443fc68ce80",
+    "15": "84c7f2492d8449df8205ce064786eb06",
+    "16": "00d13d46634b4468b45f67ac3dc51690",
+    "17": "a0c60eabb9c24c058428f8f163c653a0",
+    "18": null,
+    "19": "eaf7bbdbc3754322b971fdbd3f601900",
+    "20": "c881b4eb96614dfca8679dfe9b020723",
+    "21": "3ff1e77dbce140b898bab505bff35a51",
+    "22": "018803ddceb04986b0d1465563305a16",
+    "23": "e47f3b95a99744fa89d641e4f09cb770",
+    "24": null,
+    "25": "dcb3effbb61f46108e88f6365f1c5c19",
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "3196521c491a0279bd5a3909e172b2b4a6f21ca51c8f4a68be3ae61980991d87",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "c5d3d1aa958081d2c602fcb0138248efba54ffaa0f20dc753040cdef7927ab74",
+  "runtime_human_readable": "1:00:36",
+  "runtime_seconds": 3636.1122195348144,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9566701663107116,
+  "selected_candidate_key": "ac1cc4393200e8d4ff0377177d8b3d4dfad30b51c78fef974496255165e6298b",
+  "selection_sha256": "438111e475ae2df4b72ff2ff4a18d9ef2bda23b09c906070e98b2746c4b35587",
+  "selection_validation_score": 0.9566701663107116,
+  "semantic_validation_failure_reasons": {
+    "9": [
+      "The `random_state` parameter for the `SMOTE` step is hardcoded to `42` within the pipeline. The instructions state that \"The host sets every exposed random_state\", implying that if a component has a `random_state` parameter, it should be exposed as an argument in the `build_model` function signature to allow the host to set it. Since `random_state` is not a parameter of `build_model`, the host cannot control it.",
+      "The `random_state` parameter for the `SMOTE` step is hardcoded to `42` within the pipeline. The instructions state that \"The host sets every exposed random_state\", implying that if a component has a `random_state` parameter, it should be exposed as an argument in the `build_model` function signature to allow the host to set it. Since `random_state` is not a parameter of `build_model`, the host cannot control it."
+    ],
+    "20": [
+      "The `random_state=42` parameter should be removed from `KBinsDiscretizer` and `PCA` as the prompt states that \"The host sets every exposed random_state\". Since `random_state` is not a parameter of the `build_model` function, it should not be hardcoded within the pipeline components."
+    ]
+  },
+  "semantic_validation_failures": 3,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.011477850000000001,
+    "input_tokens": 802964,
+    "output_cost": 0.0338575,
+    "output_tokens": 8368,
+    "total_cost": 0.045335349999999996,
+    "total_tokens": 812088
+  },
+  "training_time": 5343.445000000001,
+  "validation_metric": "balanced_accuracy"
+}

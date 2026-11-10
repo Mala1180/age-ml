@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly lists 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code includes additional preprocessing steps, `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which are not explicitly mentioned in the provided pipeline definition. The instruction states to implement 'only those steps'.

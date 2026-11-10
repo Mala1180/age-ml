@@ -1,0 +1,2 @@
+Attempt 1:
+The code hardcodes 'random_state=42' for `NearMiss` and `MLPClassifier`. The instructions state: "The host sets every exposed random_state and fits separately on each fold." This means the `random_state` parameter for these components should not be hardcoded within the `build_model` function, but rather be left to the host to manage, or passed as an argument if it's meant to be configurable.

@@ -1,0 +1,250 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "971dce9c4c97443ab1e0636fc1b440c6",
+    "semantic_feedback": [
+      "The code includes an additional imputation step (`SimpleImputer` for categorical features) within the `categorical_transformer`. The provided pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. While `SimpleImputer` might be a practical necessity for handling missing categorical values before `IterativeImputer` (which is designed for numerical data), it constitutes an extra step not explicitly listed in the pipeline, thus violating the 'only those steps' constraint.",
+      "The dataset contains missing values in categorical columns (e.g., 'workclass', 'occupation'). The pipeline specifies 'imputation with `iterative_imputer`'. However, `IterativeImputer` works on numerical data, and `OneHotEncoder` (applied to categorical columns before `IterativeImputer`) does not handle missing values in string columns. This means the pipeline will fail if categorical columns have NaNs, as `OneHotEncoder` will raise an error, preventing `IterativeImputer` from performing the required imputation for all data types.",
+      "The pipeline specifies \"imputation with `iterative_imputer`\" as the first step. However, the `OneHotEncoder` for categorical features uses `handle_missing='ignore'`, which implicitly handles missing categorical values by encoding them as all zeros. This constitutes an additional imputation mechanism not explicitly listed in the pipeline, thus violating the constraint to implement \"only those steps\". `IterativeImputer` is designed for numerical data, and for it to be the *sole* imputer for all data types, categorical missing values would need to be converted to a numerical representation that preserves their missingness, allowing `IterativeImputer` to then impute them.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. However, the `OneHotEncoder` for categorical features uses `handle_missing='ignore'`, which implicitly handles missing categorical values by encoding them as all zeros. This constitutes an additional imputation mechanism not explicitly listed in the pipeline, thus violating the constraint to implement 'only those steps'.",
+      "The pipeline specifies 'imputation with `iterative_imputer`' as the sole imputation step. However, the custom `CategoricalNaNToNumericalNaN` transformer uses `fillna(placeholder)` for categorical columns. Although this placeholder is later converted back to `np.nan` after encoding, the act of filling missing values with a placeholder string is a form of handling missing data that occurs before `IterativeImputer` processes the data. This constitutes an additional, implicit imputation mechanism not explicitly listed in the pipeline, thus violating the constraint to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "35abf0a8f7174ec19e216d3e56995e23",
+    "semantic_feedback": [
+      "The pipeline explicitly states 'discretization with binarizer' as the first step. The generated code includes an additional step, 'OneHotEncoder' for categorical features, which was not specified in the provided pipeline. The instruction was to implement all the steps of the pipeline and ONLY those steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "cc7e92838d4b4a6e96062e1dfd807509",
+    "semantic_feedback": [
+      "The pipeline explicitly lists four steps: normalization with `power_transformer`, features with `select_k_best`, rebalancing with `near_miss`, and classification with `knn`. The generated code includes a `OneHotEncoder` for categorical features within the `ColumnTransformer`. This step is not explicitly mentioned in the provided pipeline description, violating the constraint 'it implements all the steps of the pipeline and only those steps'. While this step is necessary for handling the dataset's categorical features and making the pipeline executable, it is an addition beyond the explicitly defined steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "43681950d06142ea9c30b28eda67e216",
+    "semantic_feedback": [
+      "The code introduces a `ColumnTransformer` for handling categorical features, which is a preprocessing step not explicitly listed in the provided pipeline steps (normalization, features, rebalancing, classification). While this step is necessary to make the pipeline executable given the dataset's mixed data types and to resolve the previous error, it deviates from the strict instruction to implement \"only those steps\".",
+      "The code introduces a `ColumnTransformer` for handling categorical features (one-hot encoding), which is a preprocessing step not explicitly listed in the provided pipeline steps (normalization, features, rebalancing, classification). While this step is necessary for the pipeline to be executable with the given dataset's mixed data types, it deviates from the strict instruction to implement \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "598be0bffe5f4f20a7a26e1d39f2d9d7",
+    "semantic_feedback": [
+      "The pipeline includes an `OneHotEncoder` for categorical features, which is not explicitly listed in the provided pipeline steps. The instruction states to implement \"only those steps\" listed in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "e797e9bc84df4eab9a2397d160814f10",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "f25df1012b5e4258ae86f22b6619ab09",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with iterative_imputer'. While IterativeImputer is correctly used for numerical features, SimpleImputer is used for categorical features. To be fully compliant with the strict wording, IterativeImputer should be used for all imputation, which would typically require encoding categorical features before imputation if IterativeImputer is to be applied to them."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "079c7a3178db427c94f21f3acfc9f596",
+    "semantic_feedback": [
+      "The 'features' step with `pca` is not fully compliant. The current implementation applies PCA only to the numerical features within the `numerical_transformer`. The pipeline step 'features with `pca`' implies applying PCA to the combined feature set after all initial preprocessing (imputation and scaling/one-hot encoding for both numerical and categorical features). To be fully compliant, PCA should be applied after the `ColumnTransformer` to the entire preprocessed feature space."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "68cd03abf2c94c419fa453f5696329c7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "f7c612de830444d5aaec50ce862e95a0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "ea7520e6ca8b4f14ae8a56530793d9b4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "5c8bc43671a64e8b9d56667394f81639",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "9daff778c0e14a8eb317481aae0b1cb2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "141fe9917552411397165f662a4a1054",
+    "semantic_feedback": [
+      "The pipeline includes an additional step, OneHotEncoder, for categorical features. While this step is necessary for handling mixed data types and making the pipeline executable, it was not explicitly listed as one of the four required steps in the provided pipeline definition. The instruction states to implement \"only those steps\".",
+      "The pipeline includes an additional step, OneHotEncoder, for categorical features. While this step is necessary for handling mixed data types and making the pipeline executable, it was not explicitly listed as one of the four required steps in the provided pipeline definition. The instruction states to implement \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "69cad2181b4147418d100dcbb0b5752a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "ab34588898ed4c0b8ecdfc1e5a8d300e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "14abbe93e5124d7190bc52ad937fb6cf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "07fbc7b1c80e415ea18b0ec920f55f3e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 18,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "e28147beb2624639a941d62c5e03cf69",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 5 steps: imputation, normalization, features (PCA), rebalancing, and classification. The generated code includes an additional step, `OneHotEncoder`, for categorical feature encoding, which is not mentioned in the provided pipeline. The instructions state to \"implement all the steps of the pipeline and only those steps\".",
+      "The pipeline includes a 'pca' step, which requires numerical input. However, the dataset contains categorical features, and the pipeline does not specify any encoding step to convert these categorical features into a numerical format before 'pca'. As a result, the 'pca' step will receive string data and fail, making the generated code not executable and thus not fully compliant with the functional requirements of the 'pca' step within the pipeline.",
+      "no, the code is not executable. The 'pca' step requires numerical input, but the categorical features are only imputed and not encoded into a numerical format. This will cause the PCA step to fail when it receives string data, violating the requirement that the code must be correct and executable."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "660aebf8c78841e89d8ad5e9e186be4c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "01229346656240c0924a1780101983c8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "2b2be235a95b48bd960d61b6c97081ee",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "cc49d7a0f6ba44e7a59e4a53a57cb742",
+    "semantic_feedback": [
+      "The generated code is not strictly compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline definition explicitly lists only four steps: `binarizer`, `minmax`, `pca`, and `knn`. While the `OneHotEncoder` is necessary for the code to be executable given the dataset's mixed data types and to resolve the previous error, it deviates from the instruction to implement 'only those steps' specified in the pipeline.",
+      "The generated code is not strictly compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline definition explicitly lists only four steps: `binarizer`, `minmax`, `pca`, and `knn`. While the `OneHotEncoder` is necessary for the code to be executable given the dataset's mixed data types, it deviates from the instruction to implement 'only those steps' specified in the pipeline.",
+      "The generated code is not strictly compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline definition explicitly lists only four steps: `binarizer`, `minmax`, `pca`, and `knn`. While the `OneHotEncoder` is necessary for the code to be executable given the dataset's mixed data types, it deviates from the instruction to implement 'only those steps' specified in the pipeline.",
+      "The generated code is not strictly compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline definition explicitly lists only four steps: `binarizer`, `minmax`, `pca`, and `knn`. While the `OneHotEncoder` is necessary for the code to be executable given the dataset's mixed data types, it deviates from the instruction to implement 'only those steps' specified in the pipeline.",
+      "The generated code is not strictly compliant with the provided pipeline because it includes an additional step, `OneHotEncoder`, for handling categorical features. The pipeline definition explicitly lists only four steps: `binarizer`, `minmax`, `pca`, and `knn`. While the `OneHotEncoder` is necessary for the code to be executable given the dataset's mixed data types, it deviates from the instruction to implement 'only those steps' specified in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 24,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "1d79f4415724487283ca05415d47f4f9",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `simple_imputer`'. However, the current code drops all categorical features using `remainder='drop'` in the `ColumnTransformer` instead of applying imputation to them. `SimpleImputer` can be used for categorical features with strategies like 'most_frequent' or 'constant'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 26,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "c57d208172054b5b924a98f5aaf473cc",
+    "semantic_feedback": [
+      "The generated code is not compliant because it includes an additional preprocessing step (OneHotEncoder for categorical features) that was not explicitly listed in the provided pipeline definition. The instruction states to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "08c727f1697e49d3a134d53d2229342c",
+    "semantic_feedback": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "b55db5ce919c403999e500d67ec69ada",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

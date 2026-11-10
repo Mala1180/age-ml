@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces additional preprocessing steps (SimpleImputer and OneHotEncoder) for categorical features that are not explicitly mentioned in the provided pipeline. The pipeline specifies 'imputation with iterative_imputer' as the only imputation step, and does not include any explicit categorical encoding. While these additions are practical for handling mixed data types, they violate the instruction to implement 'only those steps' of the pipeline.

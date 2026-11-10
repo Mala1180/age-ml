@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it hardcodes `random_state=42` for `IterativeImputer`, `PCA`, and `SMOTE`. The instructions state: "The host sets every exposed random_state", which means the `build_model` function should not set `random_state` itself, but rather allow the host environment to control it.

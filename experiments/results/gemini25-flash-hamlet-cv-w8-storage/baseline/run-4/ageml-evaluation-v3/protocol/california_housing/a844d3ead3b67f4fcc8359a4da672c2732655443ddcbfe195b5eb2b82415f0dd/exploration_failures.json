@@ -1,0 +1,298 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "8e9a1bcb28124d4a88ee6c57941a1ead",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "e93413c43a9442b1a32377f10e3ae820",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "d9549ade90cd46669eea819095aec6f8",
+    "semantic_feedback": [
+      "The pipeline explicitly lists only two steps: normalization with `robust_scaler` and regression with `lasso`. The code correctly implements these two steps. However, it also includes `OneHotEncoder` within a `ColumnTransformer` to handle categorical features. While this is a necessary preprocessing step for the given dataset to make the pipeline executable (as indicated by the previous error), it is not explicitly listed as one of the steps in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps'. Therefore, the inclusion of `OneHotEncoder` makes the code non-compliant with the strict interpretation of the pipeline definition.",
+      "no, the code is not executable. The pipeline definition specifies 'normalization with robust_scaler' and 'regression with lasso'. The code correctly implements these steps. However, the dataset contains a categorical feature ('ocean_proximity') which is passed through by the `ColumnTransformer` with `remainder='passthrough'`. The `Lasso` regression model expects numerical input and cannot handle string (categorical) features directly, which will lead to an execution error. While the code adheres to 'only those steps' by not adding an explicit categorical encoder, it fails the 'ensure that it is correct and executable' requirement due to unhandled data types for the final model.",
+      "no, the code is not strictly compliant with the provided pipeline. The pipeline explicitly lists only two steps: 'normalization with `robust_scaler`' and 'regression with `lasso`'. The code correctly implements these two steps. However, it also includes a `SimpleImputer` for handling missing values in numerical features. While this step is necessary for the code to be executable given the dataset's missing values (as indicated by the previous error), it is not explicitly listed as one of the steps in the provided pipeline. The instruction states to implement 'all the steps of the pipeline and only those steps', and the `SimpleImputer` is an additional preprocessing step not specified in the pipeline definition."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "bc04f6a201b74a2989d9aee92eb3ab6a",
+    "semantic_feedback": [
+      "The generated code includes `OneHotEncoder` for categorical features, which is a necessary preprocessing step for the given dataset but was not explicitly listed in the provided pipeline steps. The pipeline only specified 'normalization with `power_transformer`', 'features with `pca`', and 'regression with `linear`'. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code implements the specified steps: PowerTransformer, PCA, and LinearRegression. However, the dataset contains a categorical column ('ocean_proximity') which PowerTransformer cannot process directly, leading to a TypeError or ValueError during execution (as observed in the previous error message: 'could not convert string to float: 'INLAND''). To make the pipeline executable and robust, categorical features need to be encoded (e.g., using OneHotEncoder) before applying PowerTransformer and PCA. Since the code is not executable as is, it is not compliant with the requirement that 'The code eventually will be executed, so ensure that it is correct and executable.'",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code implements only the explicitly listed steps: PowerTransformer, PCA, and LinearRegression. However, the dataset contains a categorical column ('ocean_proximity') which PowerTransformer cannot process directly. This will lead to an execution error (as observed in previous attempts: 'could not convert string to float: 'INLAND''). To be 'correct and executable' as required, the pipeline needs to include a step for handling categorical features (e.g., OneHotEncoder) and potentially missing values (e.g., SimpleImputer) before PowerTransformer and PCA. Since these necessary steps are not explicitly listed in the pipeline description, the code is not compliant with the 'only those steps' rule if they were added, but it's also not compliant with the 'correct and executable' rule without them.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*.",
+      "The generated code implements only the explicitly listed steps: PowerTransformer, PCA, and LinearRegression. However, the dataset contains a categorical column ('ocean_proximity') which PowerTransformer cannot process directly. This will lead to an execution error (as observed in previous attempts: 'could not convert string to float: 'INLAND''). To be 'correct and executable' as required, the pipeline needs to include a step for handling categorical features (e.g., OneHotEncoder) and potentially missing values (e.g., SimpleImputer) before PowerTransformer and PCA. Since these necessary steps are not explicitly listed in the pipeline description, the code is not compliant with the 'only those steps' rule if they were added, but it's also not compliant with the 'correct and executable' rule without them.",
+      "The generated code implements only the explicitly listed steps: PowerTransformer, PCA, and LinearRegression. However, the dataset contains a categorical column ('ocean_proximity') and missing values in 'total_bedrooms'. PowerTransformer cannot process string (categorical) data or missing values directly. This will lead to an execution error (as observed in previous attempts: 'could not convert string to float: 'INLAND''). To be 'correct and executable' as required, the pipeline needs to include steps for handling categorical features (e.g., OneHotEncoder) and missing values (e.g., SimpleImputer) before PowerTransformer and PCA. Since these necessary steps are not explicitly listed in the pipeline description, the code is not compliant with the 'correct and executable' rule without them.",
+      "The generated code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. While these are necessary preprocessing steps for the given dataset to be executable, they are not explicitly listed in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "a023eb01c75540ccb0cf4755395a8485",
+    "semantic_feedback": [
+      "The code includes `SimpleImputer` for handling missing values and `OneHotEncoder` for categorical features. These steps were not explicitly listed in the provided pipeline, which specified only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement only the steps of the pipeline.",
+      "The code is not executable because the 'total_bedrooms' column contains missing values (NaNs), and the `MinMaxScaler` cannot handle them. The pipeline does not explicitly include an imputation step, which is necessary for the code to run correctly.",
+      "The generated code includes a 'SimpleImputer' step for numerical features. This imputation step is not explicitly listed in the provided pipeline, which specifies only 'normalization with minmax', 'features with select_k_best', and 'regression with nn_regressor'. The instructions state to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "e82825c0a5a041ce96f3576055fe0aa5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "4bd1aacf9f8044e18a19f5ea75f2faf6",
+    "semantic_feedback": [
+      "The `method` parameter from the `build_model` function signature is currently passed to `IterativeImputer` as `initial_strategy`. However, based on the previous execution error, the value provided for `method` (e.g., 'yeo-johnson') is intended for `PowerTransformer`'s `method` parameter, not `IterativeImputer`'s `initial_strategy`. To make the code correct and executable with the likely intended parameter usage, the `method` parameter should be passed to `PowerTransformer`, and `IterativeImputer`'s `initial_strategy` should be set to a valid default (e.g., 'mean') as there is no separate parameter in the signature for it.",
+      "The pipeline introduces an additional step, `OneHotEncoder`, for categorical features. The prompt explicitly states to implement \"only those steps\" of the provided pipeline, which lists only imputation, normalization, and regression.",
+      "The code implements the specified steps (imputation, normalization, regression). However, the dataset contains a categorical feature ('ocean_proximity') which is not handled by the current pipeline. `IterativeImputer` and `PowerTransformer` expect numerical input, leading to an error when processing string values. To make the pipeline executable, the categorical feature would need appropriate preprocessing, but adding such a step would go beyond the explicitly defined pipeline steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "33a2f530d9c84b9e9b66e1be6d3e14cf",
+    "semantic_feedback": [
+      "No, the generated code is not strictly compliant with the provided pipeline. While it correctly implements 'imputation' with `IterativeImputer`, 'normalization' with `PowerTransformer`, and 'regression' with `Ridge`, it introduces an additional step: 'categorical encoding' using `OneHotEncoder` within a `ColumnTransformer`. The pipeline description stated to implement 'only those steps' (imputation, normalization, regression), and categorical encoding was not explicitly listed. However, this addition was necessary to handle the 'ocean_proximity' categorical column and make the pipeline executable, as the previous version failed due to string data."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "f54a234ca03845579d2483844a9d3cbf",
+    "semantic_feedback": [
+      "The code introduces `OneHotEncoder` for categorical features. While this is a necessary preprocessing step to handle the 'ocean_proximity' column and ensure the pipeline is executable, it was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement \"all the steps of the pipeline and only those steps\".",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not fully compliant because it does not handle categorical features in the dataset, specifically the 'ocean_proximity' column. While it implements the listed steps, the `SimpleImputer` and subsequent numerical transformers will fail when encountering non-numeric data, making the pipeline non-executable for the given dataset. To be executable and correct, a step like `OneHotEncoder` would be required for categorical features before numerical processing.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces OneHotEncoder for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code is not fully compliant because it does not handle categorical features in the dataset, specifically the 'ocean_proximity' column. While it implements the listed steps, the `SimpleImputer` and subsequent numerical transformers will fail when encountering non-numeric data, making the pipeline non-executable for the given dataset. To be executable and correct, a step like `OneHotEncoder` would be required for categorical features before numerical processing, even though it's not explicitly listed in the pipeline steps.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code does not handle the categorical feature 'ocean_proximity' present in the dataset. The `SimpleImputer` and subsequent numerical steps will fail when encountering non-numeric data, making the pipeline non-executable. To be executable and correct for the given dataset, a preprocessing step for categorical features (e.g., `OneHotEncoder`) would be required, even though it is not explicitly listed in the provided pipeline steps.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'.",
+      "The code introduces `OneHotEncoder` for categorical features, which was not explicitly listed as one of the four steps in the provided pipeline. The instructions stated to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "376ce540642c4d488ed985333048d78e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "437540c8c47b47c0bd7823c7f351b66c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "36ec9d40bcf048d1be322e93c9257713",
+    "semantic_feedback": [
+      "no, the pipeline includes `OneHotEncoder` for categorical features and `ColumnTransformer` to handle different data types. These are additional preprocessing steps not explicitly listed in the provided pipeline definition, violating the 'only those steps' constraint. While these additions address the previous error related to categorical data, they are not part of the defined pipeline steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "aff7146f3cba44528630ed2091289e08",
+    "semantic_feedback": [
+      "The code introduces imputation steps (`SimpleImputer`) for both numerical and categorical features. While this addresses a previous execution error, these imputation steps were not explicitly listed in the provided pipeline description, which stated to implement 'all the steps of the pipeline and only those steps'.",
+      "no, The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint, as per previous feedback. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code introduces imputation steps (`SimpleImputer`) for both numerical and categorical features. These imputation steps were not explicitly listed in the provided pipeline description, which stated to implement 'all the steps of the pipeline and only those steps'. While this addresses a previous execution error, it deviates from the strict definition of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code introduces imputation steps (`SimpleImputer`) for both numerical and categorical features. These imputation steps were not explicitly listed in the provided pipeline description, which stated to implement 'all the steps of the pipeline and only those steps'. While this addresses a previous execution error, it deviates from the strict definition of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps.",
+      "The code implements the explicitly listed steps of the pipeline. However, the dataset contains missing values (NaNs), particularly in 'total_bedrooms'. The current pipeline does not include any imputation step, which leads to `SelectKBest` receiving NaN values and failing, as indicated by the execution error. While adding an imputer would resolve the execution error, it would introduce a step not explicitly defined in the provided pipeline, violating the 'implement all the steps of the pipeline and only those steps' constraint. Therefore, the code is not fully compliant with the requirement that it must be 'correct and executable' given the provided data and the strict interpretation of the pipeline steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "004af748ba40437fa2d065955722f679",
+    "semantic_feedback": [
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code adds 'SimpleImputer' for numerical features and 'OneHotEncoder' for categorical features, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code adds 'SimpleImputer' for numerical features, which is not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code implicitly performs a feature selection step by dropping numerical columns that contain NaNs (e.g., 'total_bedrooms') and all categorical features. This dropping of columns is not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code uses `ColumnTransformer` with `remainder='drop'`, which implicitly performs a feature selection step by dropping all categorical features. This dropping of features is not specified as a step in the provided pipeline. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The generated code is not compliant because the implementation of the specified steps is not executable with the provided dataset. Specifically, the 'normalization' step with `PowerTransformer` will fail due to missing values in numerical features (e.g., 'total_bedrooms'), as `PowerTransformer` does not handle NaNs. Additionally, the 'regression' step with `Lasso` will fail if `X_train` contains categorical features (e.g., 'ocean_proximity'), because `remainder='passthrough'` will pass these non-numerical features directly to `Lasso`, which expects numerical input. The instructions require the code to be 'correct and executable', and to 'Put all preprocessing... INSIDE the pipeline', implying that necessary data handling for the specified steps to function should be included.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code adds 'SimpleImputer' for numerical features and 'OneHotEncoder' for categorical features, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code uses `ColumnTransformer` with `remainder='drop'`, which implicitly performs a feature selection step by dropping all categorical features. This dropping of features is not specified as a step in the provided pipeline. The instructions state to implement 'all the steps of the pipeline and only those steps'. Additionally, the `PowerTransformer` does not handle missing values, and the dataset contains NaNs in numerical features (e.g., 'total_bedrooms'), which will cause the pipeline to fail during execution. The instructions require the code to be 'correct and executable'.",
+      "The pipeline explicitly states only two steps: 'normalization with power_transformer' and 'regression with lasso'. The generated code adds 'SimpleImputer' for numerical features and 'OneHotEncoder' for categorical features, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code uses `ColumnTransformer` with `remainder='drop'`, which implicitly performs a feature selection step by dropping all categorical features. This dropping of features is not specified as a step in the provided pipeline. The instructions state to implement 'all the steps of the pipeline and only those steps'. Additionally, the `PowerTransformer` does not handle missing values, and the dataset contains NaNs in numerical features (e.g., 'total_bedrooms'), which will cause the pipeline to fail during execution. The instructions require the code to be 'correct and executable'.",
+      "The pipeline explicitly states only two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds 'SimpleImputer' for numerical features and 'OneHotEncoder' for categorical features, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds 'SimpleImputer' for numerical features and 'OneHotEncoder' for categorical features, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'.",
+      "The pipeline explicitly states only two steps: 'normalization' with `power_transformer` and 'regression' with `lasso`. The generated code adds 'SimpleImputer' for numerical features and implicitly drops categorical features via `remainder='drop'`, which are not specified in the provided pipeline steps. The instructions state to implement 'all the steps of the pipeline and only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "c170f1e52fdb408e9d64a220051d635e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "4ec9f7f196ee43a39dad9eed87e8e1e4",
+    "semantic_feedback": [
+      "no, the pipeline explicitly states 'normalization with `minmax`' and 'regression with `nn_regressor`'. The generated code adds `OneHotEncoder` for categorical features, which is not explicitly mentioned in the provided pipeline steps. The instruction was to implement all the steps of the pipeline and *only those steps*."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "94cf860fead84c4794b5c296f0cf4da2",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'imputation', 'normalization', and 'regression'. The generated code includes an additional step, 'OneHotEncoder', for categorical features, which was not specified in the provided pipeline steps. The instruction was to implement 'only those steps'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "a726776c307f4a2aa08858b996ce7f77",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "cf38fa86362e4a3aa3e0f276325c8a90",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "b7b4c6a48c114857a983520dab3de1d2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "90678dac43c64b2cb85c7da1782d9595",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "9ed3f071ee834fc5ade49ca040a94abd",
+    "semantic_feedback": [
+      "The code introduces an additional step, `OneHotEncoder`, for categorical features. The pipeline explicitly lists \"normalization with `power_transformer`\" and states that only the specified steps should be implemented. `OneHotEncoder` is not `power_transformer` and is not listed as a step in the provided pipeline, violating the 'only those steps' rule."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "23d7fc00eede4893baeb2cfff90cd33e",
+    "semantic_feedback": [
+      "The pipeline explicitly lists 'imputation' with `simple_imputer` and 'normalization' with `robust_scaler` as preprocessing steps. The generated code introduces an additional `OneHotEncoder` for categorical features. While this step is necessary to handle the dataset's categorical columns and make the pipeline executable, it is a distinct preprocessing step not explicitly mentioned in the provided pipeline, thus violating the constraint of implementing \"only those steps\"."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "4be1c1e575e64a69856fda40f10ae074",
+    "semantic_feedback": [
+      "The code introduces `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which were not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline.",
+      "The code introduces `SimpleImputer` for numerical features and `OneHotEncoder` for categorical features, which were not explicitly listed in the provided pipeline steps. The instruction was to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "3aeb59df1b534d7e82793f4443fd7b9c",
+    "semantic_feedback": [
+      "no, the pipeline explicitly states to implement 'only those steps'. The generated code introduces an additional step, 'OneHotEncoder', for categorical features, which was not part of the provided pipeline description. While necessary for handling categorical data, it deviates from the strict instruction to implement only the listed steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "e48e21bac4f449588f25b7d7c0190d09",
+    "semantic_feedback": [
+      "The code introduces an additional step, `OneHotEncoder`, for categorical features within the `ColumnTransformer`. While this is a necessary and correct approach to handle categorical data and make the pipeline executable with mixed data types (especially after the previous error), it is not explicitly listed as one of the four steps in the provided pipeline definition. The pipeline specifies 'imputation with `simple_imputer`' and 'normalization with `power_transformer`', but not an explicit encoding step for categorical features."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "54577e5d75dc4372856e4cc0034807cf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "1f147935d1f044c4b07828cf481210bc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "ba7df4b0e4a34a31bc7ccd82f4d965fe",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "a6d3df768e4f4ab498592bee62c9b140",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

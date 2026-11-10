@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces a `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The pipeline specifies only 'imputation' with `iterative_imputer`, 'normalization' with `robust_scaler`, and 'regression' with `linear`. While handling categorical features is necessary for `LinearRegression` to work with the given dataset, adding `OneHotEncoder` goes against the instruction to implement 'only those steps' of the pipeline.

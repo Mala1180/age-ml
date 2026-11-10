@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "de571996fa9f0b85865b3ee430dfd1670d2be9639e163f58d4cea12597b51818",
+  "code_sha256": "818f44a1c73d20414ba5cc13e89138fe806375ce35c04fa5a6e242c4e26869b2",
+  "completed_at": 1793665605.730638,
+  "cv_fold_scores": [
+    0.9411621687332847,
+    0.9989082969432315,
+    0.975310715485388,
+    0.9615384615384616,
+    0.9956331877729258,
+    0.9764024185421565,
+    0.9989082969432315,
+    0.9774941215989251,
+    0.9742190124286194,
+    0.9288840262582057
+  ],
+  "effective_random_states": [
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    },
+    {
+      "nn__random_state": 42,
+      "smote__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "hidden_layer_sizes": [
+      20
+    ],
+    "k_neighbors": 5,
+    "max_iter": 300,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "08c40b066a7818bf1ef6173ac7c53b5e0fe5b830023342fdccd37939179689a4",
+  "pipeline_id": 16,
+  "pipeline_run_id": "939383bdc7904012a1c57415d799bdee",
+  "run_id": "1ea3c08a99f34570aa6255bfe02f0c3b",
+  "run_identity": "2a993d4da725440a2ed9318842d944eee472ef9fc316917ed71f53de42b45fb3",
+  "validation_score": 0.9728460706244431,
+  "validation_split_hash": "1f460de770027eb1de5961ee77125e873a8c21a8737b51f25ca1e066e8dc30c8"
+}

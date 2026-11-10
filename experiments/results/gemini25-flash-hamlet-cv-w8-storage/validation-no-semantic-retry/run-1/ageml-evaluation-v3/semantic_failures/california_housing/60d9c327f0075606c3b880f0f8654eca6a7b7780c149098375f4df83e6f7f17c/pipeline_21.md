@@ -1,0 +1,2 @@
+Attempt 1:
+The code introduces an additional preprocessing step, `OneHotEncoder`, for categorical features. While this is necessary for the pipeline to be executable with mixed data types, the provided pipeline explicitly states to implement "only those steps" listed: imputation, normalization, features, and regression. Categorical encoding is not listed as one of these steps.

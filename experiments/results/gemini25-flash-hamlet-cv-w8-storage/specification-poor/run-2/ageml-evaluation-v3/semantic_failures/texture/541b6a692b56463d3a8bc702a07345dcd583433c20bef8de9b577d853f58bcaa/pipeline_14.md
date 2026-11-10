@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because it hardcodes `random_state=42` for both `IterativeImputer` and `AdaBoostClassifier`. The instructions state: "The host sets every exposed random_state". By hardcoding these values, the host is prevented from setting these exposed random states.

@@ -1,0 +1,74 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "694f2f6650deb7a71fa0db6357a8aa3d76f80f3bc3ccd6a840a7d834a68c5230",
+  "code_sha256": "44712a77c56022bdfcfec3bffd3d97ebb1e3f51710c3ec60c9a90563626c90bd",
+  "completed_at": 1793757322.3278959,
+  "cv_fold_scores": [
+    0.939701167923011,
+    0.9341360809638204,
+    0.9279781001954304,
+    0.9403045056758199,
+    0.9275834500340541,
+    0.9255671038483818,
+    0.9316096374717766,
+    0.9328837743224361,
+    0.9366752775530427,
+    0.9438880925612448
+  ],
+  "effective_random_states": [
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    },
+    {
+      "mlp_classifier__random_state": 42
+    }
+  ],
+  "fit_attempt": 1,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "alpha": 0.001,
+    "hidden_layer_sizes": [
+      20
+    ],
+    "max_iter": 300,
+    "quantile_range": [
+      25.0,
+      75.0
+    ]
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "2bd54ecafa25eaed7eeff36cac972355dde43bfd483dc12a5f679a67807279f8",
+  "pipeline_id": 7,
+  "pipeline_run_id": "b59fc5ca1fac4fb281f2d365af3a27d1",
+  "run_id": "e69e342e39a34e08a6e55e299a0e9bc2",
+  "run_identity": "852d7bbba5e89aa3da0bb21336051723ec2c6430c429e5079b09e197e5253666",
+  "validation_score": 0.9340327190549018,
+  "validation_split_hash": "dda30b451a9f45ecaeb4bff4ac31a8ee6abcf3716fb360064f30ecfb1e1b7ae7"
+}

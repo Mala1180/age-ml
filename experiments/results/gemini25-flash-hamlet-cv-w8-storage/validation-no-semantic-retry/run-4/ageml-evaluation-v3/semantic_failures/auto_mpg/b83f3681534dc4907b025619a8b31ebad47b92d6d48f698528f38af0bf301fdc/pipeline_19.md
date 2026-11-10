@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly defines two steps: 'normalization' with `robust_scaler` and 'regression' with `ridge`. The generated code adds an additional step, `SimpleImputer`, which is not part of the specified pipeline. The code should only implement the steps explicitly mentioned in the pipeline description.

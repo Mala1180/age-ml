@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline explicitly requests only 'normalization' with `minmax` and 'regression' with `lasso`. The generated code adds an extra step, `SimpleImputer`, which was not specified in the pipeline description. While imputation is often necessary, it was not part of the given pipeline definition.

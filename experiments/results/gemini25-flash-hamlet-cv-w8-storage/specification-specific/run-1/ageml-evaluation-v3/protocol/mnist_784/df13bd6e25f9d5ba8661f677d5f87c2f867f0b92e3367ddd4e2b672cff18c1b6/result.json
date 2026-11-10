@@ -1,0 +1,87 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/mnist_784/df13bd6e25f9d5ba8661f677d5f87c2f867f0b92e3367ddd4e2b672cff18c1b6/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/mnist_784/df13bd6e25f9d5ba8661f677d5f87c2f867f0b92e3367ddd4e2b672cff18c1b6/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/mnist_784/df13bd6e25f9d5ba8661f677d5f87c2f867f0b92e3367ddd4e2b672cff18c1b6/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini25-flash-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/mnist_784/df13bd6e25f9d5ba8661f677d5f87c2f867f0b92e3367ddd4e2b672cff18c1b6/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 6,
+  "best_run_id": "e8196b5521db4fee8b5c8be2411215db",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9740738457705922,
+    0.9673332942450132,
+    0.9707531458161565,
+    0.9684052434713373,
+    0.9673651021306338,
+    0.9708264832243028,
+    0.9652283395836605,
+    0.9699084734308414,
+    0.9706307012648123,
+    0.976212961061797
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 3116.457,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "0132c66ec8314972ace1f0f2efbad76e",
+    "1": "3fcaee7b24254bae9e014ba7522130d0",
+    "2": "3d2967f4a43d41cda68bb0831a42d705",
+    "3": null,
+    "4": "6e83107f5abc4648944065438c7d621b",
+    "5": null,
+    "6": "fbd858fb34ae401d87c67a0e52608487",
+    "7": "1f13a46facd8441796cd423be0efd440",
+    "8": "bc5df6954dd84fe7867e0e4255ec2b76",
+    "9": "e8537349adc54427bae2a1a7f758e8a0",
+    "10": "03805a62b8744a79b27bc08f2e035c1e",
+    "11": "a93f799b97ad408b91cb97d688a691db",
+    "12": "0dfe460a32594ab38a87a8bd2cc255ab",
+    "13": null,
+    "14": "1e04d580ab194f3185d987699f8e4705",
+    "15": null
+  },
+  "pipelines_found": 16,
+  "protocol_sha256": "e2af6e840765f909ca86fd4349886e3d0f7c25c3e60017e152c745dcb49be7be",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "b4136c938af24b0514dbf2eda0fa6b589dc0151d65fe95ff05574218a669049c",
+  "runtime_human_readable": "1:00:22",
+  "runtime_seconds": 3621.82984784618,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9700737589999147,
+  "selected_candidate_key": "d88675869aa5cf69b5c0394ddce804b2536dc394d161cb7c4defd5d47856772a",
+  "selection_sha256": "653c04f6084965995735ce29d22df7c5f47dddde4122bc3228de0c22881137db",
+  "selection_validation_score": 0.9700737589999147,
+  "semantic_validation_failure_reasons": {
+    "7": [
+      "The `quantile_range` parameter for `RobustScaler` expects a tuple, but the previous execution indicated it might be passed as a list. To ensure correctness and executability, `quantile_range` should be explicitly converted to a tuple, e.g., `RobustScaler(quantile_range=tuple(quantile_range))`."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "b7451a4d1c697c013386236b17547be25e785051cf778a04385b03991df0481a",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.014319360000000001,
+    "input_tokens": 715638,
+    "output_cost": 0.035462500000000015,
+    "output_tokens": 7079,
+    "total_cost": 0.049781860000000004,
+    "total_tokens": 722717
+  },
+  "training_time": 13874.234,
+  "validation_metric": "balanced_accuracy"
+}

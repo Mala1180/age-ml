@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline includes an additional step, `OneHotEncoder`, for categorical features which was not specified in the provided pipeline definition. The pipeline should only implement the steps listed: imputation, discretization, normalization, feature selection, and regression.

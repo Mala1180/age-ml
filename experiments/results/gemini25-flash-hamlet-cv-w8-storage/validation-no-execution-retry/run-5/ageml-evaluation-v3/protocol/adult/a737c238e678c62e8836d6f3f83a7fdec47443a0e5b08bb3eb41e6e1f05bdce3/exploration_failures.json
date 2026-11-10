@@ -1,0 +1,224 @@
+[
+  {
+    "execution_feedback": false,
+    "pipeline_id": 0,
+    "pipeline_run_id": "1f98bea196a14bb2976bb7b803ca3c51",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. While `IterativeImputer` is used for numerical features, `SimpleImputer` is used for categorical features. The pipeline only mentioned `iterative_imputer` for the imputation step, implying it should be the sole imputation method or that specific instructions for categorical imputation should have been provided if different."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "103e073f173c4e1d9bff1a1eaddef9ce",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "f98a4694a2614129b2ffa2ce1d6b9ea3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "d910d8440c344596ac35d53db064cf7b",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "a624db0178b14936b63b1a8a04f816bc",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "ffbfd6cc115c40e6ba096e4bbee30feb",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with `iterative_imputer`'. The generated code uses `IterativeImputer` for numerical columns but `SimpleImputer` for categorical columns. While `IterativeImputer` is primarily for numerical data, the instruction implies a single imputation strategy for the overall imputation step, which is not fully met by using two different imputers."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "04ab620fee0645b9bc5c9e791eb037a3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "7614ff26b5b1496abd3fa64d42038bda",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "9c7ed77bf08a4ab0a965a953d8c59396",
+    "semantic_feedback": [
+      "The pipeline specifies 'imputation with iterative_imputer'. The generated code uses `IterativeImputer` for numerical features but `SimpleImputer` for categorical features. To be fully compliant, `IterativeImputer` should be used for all features, potentially after one-hot encoding categorical features if `IterativeImputer` cannot directly handle string categories."
+    ],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "14598572dc6d419e8b88feef2ea62575",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "767762570aab44b3b7df60b419aa8d4f",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "15efc38b18a243a4aba5d7396002e7e2",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "81c0bb7d8872468cb6a2f73e482ebaf4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "b72450ee3b7d42ee81e4b0ed4d58ba61",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "72b695db2ede41ebb7c77c16b1c111b5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "c1e8593d3f3f4cc7a78a5effe6d669ad",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 16,
+    "pipeline_run_id": "c1a7a1628b0345c5863e7204d4e59bdb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "a9a2611c29934478a4a6d86c7dffe05c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "cbf13ebfa4214187934878c336d6d9cb",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "4d544ccbac4b4a71ab091d2dae890721",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "27686adc044842a18b79ebaccb593f86",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "d9b98999d239495fa445dd70f1d431d4",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "b9df4e45564144c58f2a50023b9c667a",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "a76522545bb0490bb47f7c1332183fc5",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 24,
+    "pipeline_run_id": "28e90d38abf5440093809c943c1dd367",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "55a3452fbe834ff7b47e670292889ae3",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "7122bad2c5a14c1aa366e72b27f6d541",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "7d4f038aae90468e9a0e4eddd4c0be18",
+    "semantic_feedback": [],
+    "status": "FAILED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "07a6c5aadf8a49bb94a097d44fb95aa5",
+    "semantic_feedback": [
+      "The code includes an `OneHotEncoder` for categorical features, which is not explicitly listed as a step in the provided pipeline. The instructions state to implement 'only those steps' of the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "cd438d2198354cf087f1cbf600d9e0eb",
+    "semantic_feedback": [
+      "The code is not fully compliant with the provided pipeline. While it correctly implements imputation, discretization, rebalancing, and classification, it includes an `OrdinalEncoder` for categorical features. This step is not explicitly mentioned in the pipeline definition, which states to implement 'only those steps'.",
+      "The code is not compliant because it is not \"correct and executable\" for datasets containing categorical features. The `NearMiss` rebalancer and `GaussianNB` classifier expect numerical input. However, the `ColumnTransformer` for categorical features only performs imputation and does not include a step to convert these features to a numerical format (e.g., via ordinal or one-hot encoding). As a result, if `X_train` contains categorical features, the pipeline will fail at the rebalancing or classification step, violating the requirement that the code must be correct and executable.",
+      "The code includes an `OrdinalEncoder` for categorical features. This step is not explicitly listed in the provided pipeline definition, violating the instruction to implement \"only those steps\" of the pipeline. While this step is necessary for the pipeline to be executable with categorical data, its inclusion makes the code non-compliant with the strict pipeline definition."
+    ],
+    "status": "FAILED"
+  }
+]
