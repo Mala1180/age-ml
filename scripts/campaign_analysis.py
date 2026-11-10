@@ -33,6 +33,12 @@ RESOURCE_COLUMNS = {
     "total_tokens": "Total Tokens",
     "workers": "Workers",
     "actual_pipelines": "Actual Pipelines",
+    "input_tokens": "Input Tokens",
+    "output_tokens": "Output Tokens",
+    "features": "Features",
+    "instances": "Instances",
+    "numeric_features": "Numeric Features",
+    "discrete_features": "Discrete Features",
 }
 EVIDENCE_FILES = (
     "selection.json",
@@ -238,12 +244,18 @@ def load_campaign(root, repetitions="1", allow_incomplete=False):
                 }
                 for target, source in RESOURCE_COLUMNS.items():
                     row[target] = _number(original.get(source))
-                value = original.get("Actual Time", "")
-                row["actual_time_hours"] = (
-                    pd.to_timedelta(value).total_seconds() / 3600
-                    if value
-                    else float("nan")
-                )
+                for target, source in (
+                    ("actual_time_hours", "Actual Time"),
+                    ("equivalent_time_hours", "Equivalent Time"),
+                    ("llm_inference_hours", "LLM Inference Time"),
+                    ("ml_training_hours", "ML Training Time"),
+                ):
+                    value = original.get(source, "")
+                    row[target] = (
+                        pd.to_timedelta(value).total_seconds() / 3600
+                        if value
+                        else float("nan")
+                    )
                 rows.append(row)
                 if name not in order:
                     order.append(name)
@@ -277,7 +289,13 @@ def load_campaign(root, repetitions="1", allow_incomplete=False):
         )
     info.update(repetitions=selected, dataset_order=order, root=root, missing=missing)
     frame = pd.DataFrame(rows)
-    for column in [*RESOURCE_COLUMNS, "actual_time_hours"]:
+    for column in [
+        *RESOURCE_COLUMNS,
+        "actual_time_hours",
+        "equivalent_time_hours",
+        "llm_inference_hours",
+        "ml_training_hours",
+    ]:
         if column not in frame:
             frame[column] = float("nan")
     return frame, info, inputs
@@ -489,6 +507,57 @@ def snapshot_campaign(root, outdir, repetitions="1", allow_incomplete=False):
     return manifest
 
 
+def mean_interval(values, bounds=None):
+    """95% Student-t interval across repetitions, never across CV folds.
+
+    This is a conditional descriptive interval: independent, representative
+    repetitions are not established by identical recorded seeds.
+    """
+    from scipy.stats import t
+
+    values = np.asarray(values, dtype=float)
+    values = values[np.isfinite(values)]
+    if len(values) < 2:
+        low = high = float("nan")
+    else:
+        half = (
+            float(t.ppf(0.975, len(values) - 1))
+            * values.std(ddof=1)
+            / math.sqrt(len(values))
+        )
+        low, high = float(values.mean() - half), float(values.mean() + half)
+    raw_low, raw_high = low, high
+    if bounds is not None and math.isfinite(low):
+        low = max(bounds[0], low)
+        high = min(bounds[1], high) if bounds[1] is not None else high
+    return {
+        "ci95_low": low,
+        "ci95_high": high,
+        "ci95_low_unbounded": raw_low,
+        "ci95_high_unbounded": raw_high,
+    }
+
+
+def format_mean_interval(mean, low, high):
+    """Compact mean +/- the unbounded 95% Student-t half-width.
+
+    Do not derive a symmetric margin from range-clipped endpoints. Distinguish
+    zero variability from positive margins hidden by three-decimal rounding.
+    """
+    if not math.isfinite(mean):
+        return "N/A"
+    if not math.isfinite(low) or not math.isfinite(high):
+        return f"{mean:,.3f} (CI N/A)"
+    half = (high - low) / 2
+    if half <= 4 * np.finfo(float).eps * max(1, abs(mean)):
+        margin = "0"
+    elif half < 0.0005:
+        margin = "<0.001"
+    else:
+        margin = f"{half:,.3f}"
+    return f"{mean:,.3f} ± {margin}"
+
+
 def summarize(frame, info):
     summary, scores, deltas = [], [], []
     for condition in info["conditions"]:
@@ -533,6 +602,12 @@ def summarize(frame, info):
                     "missing": missing_count,
                     "mean_score_successful": valid.mean(),
                     "std_score_successful": valid.std(ddof=1),
+                    **mean_interval(
+                        valid,
+                        (0, 1)
+                        if info["datasets"][name]["problem"] == "classification"
+                        else (0, None),
+                    ),
                 }
             )
     baseline = frame.loc[frame.condition.eq("baseline")].set_index(
@@ -606,6 +681,8 @@ def latex_table(frame):
             "&": r"\&",
             "#": r"\#",
             "$": r"\$",
+            "±": r"\ensuremath{\pm}",
+            "<": r"\textless{}",
             "{": r"\{",
             "}": r"\}",
         }
@@ -626,9 +703,19 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.colors import TwoSlopeNorm
+    from matplotlib.ticker import MaxNLocator, NullLocator, StrMethodFormatter
 
     directory.mkdir(parents=True, exist_ok=True)
+    # Remove only figures owned by the old report that the user retired.
+    for pattern in (
+        "06_pipeline_activity_run-*.*",
+        "07_candidate_instances_run-*.*",
+        "08_instances_per_pipeline_*.*",
+        "03_regression_rmse_ratio.*",
+    ):
+        for path in directory.glob(pattern):
+            if path.suffix in {".png", ".pdf", ".svg"}:
+                path.unlink()
     plt.rcParams.update(
         {
             "font.family": "DejaVu Sans",
@@ -650,37 +737,100 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
         "validation-no-execution-retry": "No execution\nretry",
         "no-csp": "No CSP",
     }
-    labels = [long_labels.get(name, name) for name in info["conditions"]]
-    pretty = lambda name: (
-        name.replace("_", " ")
-        .replace("mnist 784", "MNIST")
-        .replace("har", "HAR")
-        .replace("ames housing", "Ames housing")
-        .replace("california housing", "California housing")
+    conditions = info["conditions"]
+    labels = [long_labels.get(c, c) for c in conditions]
+    pretty = lambda n: {"har": "HAR", "mnist_784": "MNIST", "auto_mpg": "Auto MPG"}.get(
+        n, n.replace("_", " ").capitalize()
     )
-    palette = ["#345995", "#8c6bb1", "#479f76", "#d79b35", "#c65f53", "#66717e"]
+    palette = dict(
+        zip(
+            conditions,
+            ["#345995", "#8c6bb1", "#479f76", "#d79b35", "#c65f53", "#66717e"],
+        )
+    )
 
-    def save(fig, name, footnote):
+    def save(fig, name, footnote, layout=True):
         fig.text(0.01, 0.015, footnote, fontsize=8, color="#555555", va="bottom")
-        fig.tight_layout(rect=(0, 0.07, 1, 0.98))
+        if layout:
+            fig.tight_layout(rect=(0, 0.08, 1, 0.98))
         for extension in formats:
             fig.savefig(directory / f"{name}.{extension}", dpi=200, bbox_inches="tight")
         plt.close(fig)
 
-    def heat(ax, matrix, annotations, names, title, cmap, norm=None, limits=None):
-        cmap = plt.get_cmap(cmap).with_extremes(bad="#eeeeee")
-        args = (
-            {"norm": norm}
-            if norm is not None
-            else {"vmin": limits[0], "vmax": limits[1]}
-        )
+    # 01: explicit numeric row positions, aligned summary, external legend.
+    part = summary.set_index("condition").reindex(conditions)
+    fig, ax = plt.subplots(figsize=(11.5, 5.4))
+    positions = np.arange(len(conditions))
+    left = np.zeros(len(conditions))
+    for field, color, label in [
+        ("completed", "#479f76", "Valid result"),
+        ("failed", "#c65f53", "Recorded unsuccessful outcome"),
+        ("missing", "#cccccc", "Missing outcome"),
+    ]:
+        values = part[field].to_numpy()
+        ax.barh(positions, values, left=left, label=label, color=color, height=0.64)
+        for i, value in enumerate(values):
+            if value:
+                ax.text(
+                    left[i] + value / 2,
+                    i,
+                    str(int(value)),
+                    ha="center",
+                    va="center",
+                    color="white" if field != "missing" else "#222222",
+                    fontsize=10,
+                )
+        left += values
+    ax.set_yticks(positions, labels)
+    ax.set_ylim(len(conditions) - 0.4, -0.6)
+    ax.set_xlim(0, max(1, float(part.expected.max())) * 1.015)
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.set_xlabel("Dataset executions")
+    ax.set_title("Execution outcomes", pad=48)
+    ax.legend(
+        loc="lower left", bbox_to_anchor=(0, 1.015), ncol=3, frameon=False, fontsize=9
+    )
+    save(
+        fig,
+        "01_outcomes",
+        "All selected repetitions. Unsuccessful outcomes include no valid candidate; missing outcomes remain separate.",
+    )
+
+    # 02: annotations keep the actual values, even below the color scale floor.
+    names = [
+        n
+        for n in info["dataset_order"]
+        if info["datasets"][n]["problem"] == "classification"
+    ]
+    if names:
+        matrix = np.full((len(names), len(conditions)), np.nan)
+        annotations = []
+        for i, name in enumerate(names):
+            line = []
+            for j, condition in enumerate(conditions):
+                cell = scores.loc[
+                    scores.dataset.eq(name) & scores.condition.eq(condition)
+                ].iloc[0]
+                matrix[i, j] = cell.mean_score_successful
+                n = int(cell.completed)
+                if n:
+                    value = format_mean_interval(
+                        cell.mean_score_successful,
+                        cell.ci95_low_unbounded,
+                        cell.ci95_high_unbounded,
+                    )
+                    line.append(f"{value}\nn={n}/{int(cell.expected)}")
+                else:
+                    line.append("NO VALID SCORE" if cell.failed else "MISSING")
+            annotations.append(line)
+        fig, ax = plt.subplots(figsize=(13.2, max(5, len(names) * 0.95 + 1.6)))
+        cmap = plt.get_cmap("Blues").with_extremes(bad="#eeeeee", under="#fff0cc")
         artist = ax.imshow(
-            np.ma.masked_invalid(matrix), aspect="auto", cmap=cmap, **args
+            np.ma.masked_invalid(matrix), aspect="auto", cmap=cmap, vmin=0.8, vmax=1
         )
-        ax.set_xticks(range(len(labels)), labels, fontsize=9)
-        ax.set_yticks(range(len(names)), [pretty(name) for name in names])
-        ax.set_title(title, pad=15)
-        ax.set_xticks(np.arange(-0.5, len(labels), 1), minor=True)
+        ax.set_xticks(range(len(conditions)), labels, fontsize=9)
+        ax.set_yticks(range(len(names)), [pretty(n) for n in names])
+        ax.set_xticks(np.arange(-0.5, len(conditions), 1), minor=True)
         ax.set_yticks(np.arange(-0.5, len(names), 1), minor=True)
         ax.grid(which="minor", color="white", linewidth=2)
         ax.tick_params(which="both", length=0)
@@ -689,152 +839,135 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
         for i, line in enumerate(annotations):
             for j, label in enumerate(line):
                 value = matrix[i, j]
-                color = "#222222"
-                if np.isfinite(value):
-                    rgb = cmap(artist.norm(value))[:3]
-                    color = (
-                        "white"
-                        if sum(a * b for a, b in zip(rgb, (0.2126, 0.7152, 0.0722)))
-                        < 0.48
-                        else "#222222"
-                    )
-                ax.text(j, i, label, ha="center", va="center", fontsize=9, color=color)
-        return artist
-
-    def status_label(cell):
-        return (
-            "FAIL"
-            if cell.failed and not cell.completed
-            else "MISSING"
-            if cell.missing and not cell.completed
-            else "N/A"
-        )
-
-    fig, ax = plt.subplots(figsize=(10, 4.8))
-    left = np.zeros(len(summary))
-    for field, color in (
-        ("completed", "#479f76"),
-        ("failed", "#c65f53"),
-        ("missing", "#cccccc"),
-    ):
-        values = summary[field].to_numpy()
-        ax.barh(
-            labels, values, left=left, label=field.title(), color=color, height=0.68
-        )
-        for i, v in enumerate(values):
-            if v:
+                rgb = cmap(artist.norm(value))[:3] if np.isfinite(value) else (1, 1, 1)
+                luminance = sum(a * b for a, b in zip(rgb, (0.2126, 0.7152, 0.0722)))
                 ax.text(
-                    left[i] + v / 2,
+                    j,
                     i,
-                    str(v),
+                    label,
                     ha="center",
                     va="center",
-                    color="white" if field != "missing" else "#222222",
+                    fontsize=8.5,
+                    color="white" if luminance < 0.48 else "#222222",
                 )
-        left += values
-    ax.invert_yaxis()
-    ax.set_xlabel("Dataset executions")
-    ax.set_title("Execution outcomes")
-    ax.legend(loc="lower right", frameon=False)
-    save(
-        fig,
-        "01_outcomes",
-        "All selected repetitions. Missing outcomes are not failures.",
-    )
-
-    for problem, stem in (
-        ("classification", "02_classification_scores"),
-        ("regression", "03_regression_rmse_ratio"),
-    ):
-        names = [
-            n
-            for n in info["dataset_order"]
-            if info["datasets"][n]["problem"] == problem
-        ]
-        if not names:
-            continue
-        matrix = np.full((len(names), len(labels)), np.nan)
-        annotations = []
-        for i, name in enumerate(names):
-            line = []
-            for j, condition in enumerate(info["conditions"]):
-                cell = scores.loc[
-                    scores.dataset.eq(name) & scores.condition.eq(condition)
-                ].iloc[0]
-                value, n = cell.mean_score_successful, int(cell.completed)
-                if problem == "regression":
-                    if condition == "baseline":
-                        ref = frame.loc[
-                            frame.dataset.eq(name) & frame.condition.eq("baseline")
-                        ]
-                        n = int((ref.status.eq("completed") & ref.score.gt(0)).sum())
-                        value = 1.0 if n else float("nan")
-                    else:
-                        pairs = deltas.loc[
-                            deltas.dataset.eq(name) & deltas.condition.eq(condition),
-                            "rmse_ratio",
-                        ]
-                        value, n = pairs.mean(), int(pairs.notna().sum())
-                matrix[i, j] = value
-                line.append(
-                    f"{value:.3f}"
-                    + ("x" if problem == "regression" else "")
-                    + f"\nn={n}/{int(cell.expected)}"
-                    if pd.notna(value)
-                    else status_label(cell)
-                )
-            annotations.append(line)
-        fig, ax = plt.subplots(figsize=(11.5, max(3.8, len(names) * 0.66 + 1.6)))
-        if problem == "classification":
-            artist = heat(
-                ax,
-                matrix,
-                annotations,
-                names,
-                "Classification",
-                "Blues",
-                limits=(0, 1),
-            )
-            fig.colorbar(
-                artist, ax=ax, shrink=0.8, label="Balanced accuracy"
-            )
-        else:
-            # Symmetric log-ratios put neutral white exactly at 1x. A 6.55x outlier
-            # cannot shift the baseline into the green end of a linear palette.
-            logs = np.log2(np.where(matrix > 0, matrix, np.nan))
-            span = max(
-                0.15, float(np.nanmax(np.abs(logs))) if np.isfinite(logs).any() else 1
-            )
-            artist = heat(
-                ax,
-                logs,
-                annotations,
-                names,
-                "Regression | RMSE relative to AGE-ML baseline",
-                "BrBG_r",
-                norm=TwoSlopeNorm(vmin=-span, vcenter=0, vmax=span),
-            )
-            bar = fig.colorbar(
-                artist,
-                ax=ax,
-                shrink=0.8,
-                label="RMSE ratio (log scale; lower is better)",
-            )
-            ticks = np.linspace(-span, span, 5)
-            bar.set_ticks(ticks, labels=[f"{2**x:.2g}x" for x in ticks])
+        ax.set_title("Classification | mean balanced accuracy ± 95% margin", pad=16)
+        extend = (
+            "min"
+            if np.isfinite(matrix).any() and np.nanmin(matrix) < 0.8
+            else "neither"
+        )
+        fig.colorbar(
+            artist,
+            ax=ax,
+            shrink=0.8,
+            extend=extend,
+            label="Balanced accuracy (color range 0.8-1.0)",
+        )
         save(
             fig,
-            stem,
-            "Selection CV, not independent test. Means use successful observations; regression ratios use matched repetitions.\nn = valid observations / expected; FAIL is not zero. See paired changes for small differences.",
+            "02_classification_scores",
+            "Cells: mean ± 95% Student-t margin; valid/expected repetitions. ± 0 = no observed variation; ± <0.001 = a positive margin hidden by rounding.\nSelection CV; intervals describe technical repetition variability under an independence assumption, not generalization uncertainty.",
         )
 
+    # 03: absolute RMSE on a separate target scale for each dataset.
+    regression = [
+        n
+        for n in info["dataset_order"]
+        if info["datasets"][n]["problem"] == "regression"
+    ]
+    if regression:
+        fig, axes = plt.subplots(
+            len(regression), 1, figsize=(12, 3.1 * len(regression) + 0.8), squeeze=False
+        )
+        for ax, name in zip(axes.flat, regression):
+            positive = []
+            for j, condition in enumerate(conditions):
+                values = (
+                    frame.loc[
+                        frame.dataset.eq(name)
+                        & frame.condition.eq(condition)
+                        & frame.status.eq("completed"),
+                        "score",
+                    ]
+                    .dropna()
+                    .to_numpy()
+                )
+                if len(values):
+                    positive.extend(values)
+                    ax.scatter(
+                        values,
+                        j + np.linspace(-0.12, 0.12, len(values)),
+                        s=27,
+                        color=palette[condition],
+                        alpha=0.6,
+                    )
+                    ax.scatter(
+                        [values.mean()],
+                        [j],
+                        marker="D",
+                        s=65,
+                        color=palette[condition],
+                        edgecolors="white",
+                        linewidths=0.7,
+                        zorder=4,
+                    )
+                    text = f"{values.mean():,.3f}  (n={len(values)}/{len(info['repetitions'])})"
+                else:
+                    text = "No valid score"
+                ax.text(
+                    1.015,
+                    j,
+                    text,
+                    transform=ax.get_yaxis_transform(),
+                    va="center",
+                    fontsize=9,
+                )
+            if positive and min(positive) > 0:
+                ax.set_xscale("log")
+                low, high = min(positive), max(positive)
+                if math.isclose(low, high):
+                    low, high = low / 1.02, high * 1.02
+                ax.set_xticks(np.geomspace(low, high, 5))
+                ax.xaxis.set_major_formatter(
+                    StrMethodFormatter("{x:,.0f}" if high >= 1000 else "{x:.2f}")
+                )
+                ax.xaxis.set_minor_locator(NullLocator())
+            ax.set_yticks(
+                range(len(conditions)),
+                [x.replace("\n", " ") for x in labels],
+                fontsize=9,
+            )
+            ax.set_ylim(len(conditions) - 0.5, -0.5)
+            ax.set_title(pretty(name), loc="left")
+            ax.set_xlabel(
+                "Absolute RMSE (lower is better; logarithmic axis when all values are positive)"
+            )
+            ax.text(
+                1.015,
+                1.04,
+                "Mean RMSE and valid/expected",
+                transform=ax.transAxes,
+                fontsize=9,
+            )
+            ax.grid(axis="x", which="major", alpha=0.2)
+            ax.margins(x=0.12)
+        save(
+            fig,
+            "03_regression_rmse",
+            "Dots: successful repetitions; diamonds: arithmetic means of absolute RMSE. Separate target scales for each dataset.\nSelection CV only; unsuccessful outcomes are not zero scores. No ratios to the AGE-ML baseline.",
+        )
+
+    # 04: unchanged resource totals, including recorded unsuccessful outcomes.
     fig, axes = plt.subplots(1, 2, figsize=(12, 5.2))
     for ax, field, title in zip(
         axes,
         ("actual_time_hours", "estimated_cost_usd"),
         ("Recorded wall time (hours)", "Estimated LLM cost (USD)"),
     ):
-        ax.barh(labels, summary[field], color=palette[: len(labels)])
+        ax.barh(
+            range(len(conditions)), part[field], color=[palette[c] for c in conditions]
+        )
+        ax.set_yticks(range(len(conditions)), labels)
         ax.invert_yaxis()
         ax.set_title(title)
         ax.grid(axis="x", alpha=0.15)
@@ -845,18 +978,71 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
         "Totals across recorded outcomes, including failures. Cost is estimated; wall time includes overhead.",
     )
 
-    names = [
-        n
-        for n in info["dataset_order"]
-        if info["datasets"][n]["problem"] == "classification"
-    ]
+    # 05: separate absolute baseline strip, retaining genuinely paired deltas.
     if names and not deltas.empty:
-        rows = math.ceil(len(names) / 3)
-        fig, axes = plt.subplots(rows, 3, figsize=(13, rows * 3.6), squeeze=False)
-        conditions = [c for c in info["conditions"] if c != "baseline"]
-        for ax, name in zip(axes.flat, names):
-            for j, condition in enumerate(conditions):
-                values = (
+        rows = math.ceil(len(names) / 2)
+        fig = plt.figure(figsize=(17, rows * 3.6 + 0.6))
+        grid = fig.add_gridspec(rows, 2, wspace=0.35, hspace=0.5)
+        ablations = [c for c in conditions if c != "baseline"]
+        for index, name in enumerate(names):
+            inner = grid[index // 2, index % 2].subgridspec(
+                1, 2, width_ratios=[1, 3.1], wspace=1.25
+            )
+            base_ax = fig.add_subplot(inner[0])
+            ax = fig.add_subplot(inner[1])
+            values = (
+                frame.loc[
+                    frame.dataset.eq(name)
+                    & frame.condition.eq("baseline")
+                    & frame.status.eq("completed"),
+                    "score",
+                ]
+                .dropna()
+                .to_numpy()
+            )
+            if len(values):
+                base_ax.scatter(
+                    values,
+                    np.linspace(-0.14, 0.14, len(values)),
+                    color=palette["baseline"],
+                    s=30,
+                    alpha=0.7,
+                )
+                base_ax.scatter(
+                    [values.mean()],
+                    [0],
+                    marker="D",
+                    color=palette["baseline"],
+                    s=65,
+                    edgecolors="white",
+                    zorder=4,
+                )
+                base_ax.set_title(
+                    f"Baseline\nmean {values.mean():.3f}\nn={len(values)}/{len(info['repetitions'])}",
+                    fontsize=10,
+                )
+                padding = max(float(np.ptp(values)) * 0.2, 0.0005)
+                base_ax.set_xlim(
+                    max(0, values.min() - padding), min(1, values.max() + padding)
+                )
+            else:
+                base_ax.text(
+                    0.5,
+                    0.5,
+                    "No valid baseline",
+                    transform=base_ax.transAxes,
+                    ha="center",
+                )
+                base_ax.set_title("Baseline", fontsize=10)
+            base_ax.set_ylim(-0.6, 0.6)
+            base_ax.set_yticks([])
+            base_ax.xaxis.set_major_locator(MaxNLocator(2))
+            base_ax.xaxis.set_major_formatter(StrMethodFormatter("{x:.4f}"))
+            base_ax.tick_params(axis="x", labelrotation=35, labelsize=8)
+            base_ax.set_xlabel("Absolute BA", fontsize=9)
+            base_ax.grid(axis="x", alpha=0.15)
+            for j, condition in enumerate(ablations):
+                paired = (
                     deltas.loc[
                         deltas.dataset.eq(name) & deltas.condition.eq(condition),
                         "improvement",
@@ -864,142 +1050,216 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
                     .dropna()
                     .to_numpy()
                 )
-                if len(values):
-                    offsets = (
-                        np.linspace(-0.1, 0.1, len(values)) if len(values) > 1 else [0]
-                    )
+                if len(paired):
                     ax.scatter(
-                        values,
-                        j + np.array(offsets),
-                        s=24,
+                        paired,
+                        j + np.linspace(-0.12, 0.12, len(paired)),
+                        s=25,
                         alpha=0.65,
-                        color=palette[j + 1],
+                        color=palette[condition],
                     )
                     ax.scatter(
-                        [np.mean(values)],
+                        [paired.mean()],
                         [j],
-                        s=70,
+                        s=65,
                         marker="D",
-                        color=palette[j + 1],
+                        color=palette[condition],
                         edgecolors="white",
-                        linewidths=0.8,
+                        linewidths=0.7,
+                        zorder=4,
                     )
                 else:
                     ax.text(
-                        0.97,
+                        0.98,
                         j,
                         "No valid pair",
                         transform=ax.get_yaxis_transform(),
                         ha="right",
                         va="center",
                         fontsize=8,
-                        color="#777777",
                     )
             ax.axvline(0, color="#777777", linewidth=0.8)
             ax.set_yticks(
-                range(len(conditions)),
-                [long_labels.get(c, c).replace("\n", " ") for c in conditions],
+                range(len(ablations)),
+                [long_labels.get(c, c).replace("\n", " ") for c in ablations],
                 fontsize=8,
             )
-            ax.invert_yaxis()
-            ax.set_title(pretty(name))
-            ax.set_xlabel("Change in balanced accuracy (pp)")
+            ax.set_ylim(len(ablations) - 0.5, -0.5)
+            ax.set_title(pretty(name), fontsize=12)
+            ax.set_xlabel("Paired change in BA (pp)", fontsize=9)
             ax.grid(axis="x", alpha=0.15)
-        for ax in list(axes.flat)[len(names) :]:
-            ax.set_visible(False)
-        fig.suptitle("Classification | paired changes from baseline", fontsize=15)
+        fig.subplots_adjust(left=0.055, right=0.99, bottom=0.11, top=0.94)
         save(
             fig,
             "05_classification_paired_changes",
-            "Dots: individual matched repetitions. Diamonds: mean; positive is better. No confidence intervals.\nSelection CV only. Identical points can overlap; technical repetitions share the recorded seeds.",
+            "Left strips: actual baseline balanced accuracy in each successful repetition. Right panels: ablation minus baseline in the SAME repetition.\nDots: individual repetitions; diamonds: means. Positive paired changes are better. Technical repetitions share recorded seeds; axes vary by dataset.",
+            layout=False,
         )
 
-    for repetition in info["repetitions"]:
-        part = counts.loc[counts.repetition.eq(repetition)]
-        for stem, fields, titles, note in (
-            (
-                "06_pipeline_activity",
-                ("pipelines_found", "pipeline_budget", "actual_pipelines"),
-                (
-                    "Enumerated structures",
-                    "Configured pipeline budget",
-                    "Completed pipeline-agent runs",
-                ),
-                "Counts per dataset and condition. Completed pipeline-agent runs come from returned worker states, not all starts or successful fits.\nNo CSP proposes one structure; the configured budget is an upper bound, not the number evaluated.",
-            ),
-            (
-                "07_candidate_instances",
-                ("candidate_records", "eligible_candidates"),
-                ("Recorded candidate attempts", "Candidates eligible for selection"),
-                "One candidate = pipeline code + hyperparameters + execution attempt. Counts exclude unrecorded/interrupted work.\nN/A = detailed evidence unavailable; it never means zero. Ten CV folds are not ten hyperparameter instances.",
-            ),
-        ):
-            fig, axes = plt.subplots(
-                1, len(fields), figsize=(6.4 * len(fields), 8), squeeze=False
+
+def _paper_tables(frame, info, scores, directory):
+    """Generate the paper's table layouts using current recorded observations.
+
+    Historical reference scores and the qualitative comparison are explicitly
+    sourced from the supplied draft; they are not current experimental results.
+    """
+    reference_path = (
+        Path(__file__).resolve().parents[1] / "resources/paper-analysis-reference.json"
+    )
+    reference = json.loads(reference_path.read_text(encoding="utf-8"))
+    names = info["dataset_order"]
+    pretty = lambda n: {
+        "har": "HAR",
+        "mnist_784": "MNIST_784",
+        "auto_mpg": "Auto MPG",
+    }.get(n, n.replace("_", " ").title())
+
+    def export(name, table):
+        table.to_csv(directory / f"{name}.csv", index=False)
+        (directory / f"{name}.md").write_text(
+            markdown_table(table) + "\n", encoding="utf-8"
+        )
+        (directory / f"{name}.tex").write_text(latex_table(table), encoding="utf-8")
+
+    datasets, discrepancies = [], []
+    for name in names:
+        entry = {
+            "Dataset": pretty(name),
+            "Problem": "C"
+            if info["datasets"][name]["problem"] == "classification"
+            else "R",
+        }
+        for field, title in [
+            ("features", "Features"),
+            ("instances", "Instances"),
+            ("numeric_features", "Numeric"),
+            ("discrete_features", "Discrete"),
+        ]:
+            observed = frame.loc[frame.dataset.eq(name), field].dropna().unique()
+            if len(observed) > 1:
+                raise ValueError(
+                    f"Inconsistent dataset metadata: {name}.{field}: {observed}"
+                )
+            current = int(observed[0]) if len(observed) else float("nan")
+            entry[title] = current
+            historical = reference.get("dataset_table", {}).get(name, {}).get(field)
+            if historical is not None and pd.notna(current) and current != historical:
+                discrepancies.append(
+                    {
+                        "dataset": name,
+                        "field": field,
+                        "paper_value": historical,
+                        "campaign_value": current,
+                    }
+                )
+        datasets.append(entry)
+    export("paper_table_1_datasets", pd.DataFrame(datasets))
+    pd.DataFrame(
+        discrepancies, columns=["dataset", "field", "paper_value", "campaign_value"]
+    ).to_csv(directory / "paper_dataset_differences.csv", index=False)
+
+    def duration(value):
+        if pd.isna(value):
+            return "N/A"
+        seconds = round(value * 3600)
+        return f"{seconds // 3600}:{seconds % 3600 // 60:02d}:{seconds % 60:02d}"
+
+    resource_fields = [
+        ("actual_time_hours", "Actual Time"),
+        ("equivalent_time_hours", "Equivalent Time"),
+        ("llm_inference_hours", "LLM Inference Time"),
+        ("ml_training_hours", "ML Training Time"),
+        ("actual_pipelines", "Actual P."),
+        ("input_tokens", "Input Tokens"),
+        ("output_tokens", "Output Tokens"),
+        ("total_tokens", "Total Tokens"),
+        ("estimated_cost_usd", "Putative Cost ($)"),
+    ]
+    for condition in info["conditions"]:
+        presentation, numeric = [], []
+        for name in names:
+            part = frame.loc[frame.dataset.eq(name) & frame.condition.eq(condition)]
+            cell = scores.loc[
+                scores.dataset.eq(name) & scores.condition.eq(condition)
+            ].iloc[0]
+            n = int(cell.completed)
+            historical = reference.get("performance_references", {}).get(name, {})
+            score = float(cell.mean_score_successful)
+            entry = {
+                "Dataset": pretty(name),
+                "Selected Score (mean ± 95% margin)": format_mean_interval(
+                    score, cell.ci95_low_unbounded, cell.ci95_high_unbounded
+                )
+                if n
+                else "N/A",
+                "Valid/Expected": f"{n}/{int(cell.expected)}",
+                "Historical Reference": f"{historical['score']:,.3f}"
+                if historical
+                else "N/A",
+            }
+            raw = {
+                "dataset": name,
+                "condition": condition,
+                "model": info["frozen"]["config"]
+                .get("model", {})
+                .get("name", "unknown"),
+                "score_role": info["score_role"],
+                "expected": int(cell.expected),
+                "completed": n,
+                "failed": int(cell.failed),
+                "missing": int(cell.missing),
+                "mean_score_successful": score,
+                "ci95_low": cell.ci95_low,
+                "ci95_high": cell.ci95_high,
+                "ci95_low_unbounded": cell.ci95_low_unbounded,
+                "ci95_high_unbounded": cell.ci95_high_unbounded,
+                "historical_reference_score": historical.get("score"),
+                "historical_reference_source": historical.get("source", ""),
+            }
+            for field, label in resource_fields:
+                values = part.loc[part.status.ne("missing"), field].dropna()
+                mean = values.mean()
+                raw[field + "_mean_recorded"] = mean
+                raw[field + "_n_recorded"] = len(values)
+                if field.endswith("_hours"):
+                    entry[label] = duration(mean)
+                elif pd.isna(mean):
+                    entry[label] = "N/A"
+                elif field == "estimated_cost_usd":
+                    entry[label] = f"{mean:.3f}"
+                elif field == "actual_pipelines":
+                    entry[label] = f"{mean:.1f}"
+                else:
+                    entry[label] = f"{mean:,.0f}"
+            presentation.append(entry)
+            numeric.append(raw)
+        table = pd.DataFrame(presentation)
+        export(f"paper_results_{condition}", table)
+        pd.DataFrame(numeric).to_csv(
+            directory / f"paper_results_{condition}_statistics.csv", index=False
+        )
+        if condition == "baseline":
+            model_name = info["frozen"]["config"].get("model", {}).get("name", "")
+            number = (
+                2
+                if model_name.startswith("gemini-3.1-flash-lite")
+                else 3
+                if model_name.startswith("gemini-2.5-flash")
+                else None
             )
-            for ax, field, title in zip(axes.flat, fields, titles):
-                matrix = np.full((len(info["dataset_order"]), len(labels)), np.nan)
-                annotations = []
-                for i, name in enumerate(info["dataset_order"]):
-                    line = []
-                    for j, condition in enumerate(info["conditions"]):
-                        cell = part.loc[
-                            part.dataset.eq(name) & part.condition.eq(condition)
-                        ].iloc[0]
-                        value = cell[field]
-                        matrix[i, j] = value
-                        line.append(
-                            f"{value:.0f}"
-                            if pd.notna(value)
-                            else "MISSING"
-                            if cell.status == "missing"
-                            else "N/A"
-                        )
-                    annotations.append(line)
-                vmax = (
-                    max(1, float(np.nanmax(matrix))) if np.isfinite(matrix).any() else 1
-                )
-                heat(
-                    ax,
-                    matrix,
-                    annotations,
-                    info["dataset_order"],
-                    title,
-                    "Blues",
-                    limits=(0, vmax),
-                )
-            fig.suptitle(f"Exploration activity | repetition {repetition}", fontsize=15)
-            save(fig, f"{stem}_run-{repetition}", note)
-        subset = details.loc[details.repetition.eq(repetition)]
-        if not subset.empty:
-            # Pipeline IDs are local to a dataset/condition/run. Each panel has
-            # one condition; IDs are never treated as matched across conditions.
-            for condition in info["conditions"]:
-                local = subset.loc[subset.condition.eq(condition)]
-                if local.empty:
-                    continue
-                wide = local.pivot(
-                    index="dataset", columns="pipeline_id", values="candidate_records"
-                ).reindex(info["dataset_order"])
-                fig, ax = plt.subplots(figsize=(max(9, len(wide.columns) * 0.35), 6))
-                artist = ax.imshow(
-                    np.ma.masked_invalid(wide.to_numpy(dtype=float)),
-                    aspect="auto",
-                    cmap=plt.get_cmap("Blues").with_extremes(bad="#eeeeee"),
-                    vmin=0,
-                )
-                ax.set_xticks(range(len(wide.columns)), wide.columns)
-                ax.set_yticks(range(len(wide.index)), [pretty(n) for n in wide.index])
-                ax.set_xlabel("Local pipeline ID")
-                ax.set_title(
-                    f"Candidate records per pipeline | {condition} | repetition {repetition}"
-                )
-                fig.colorbar(artist, ax=ax, label="Recorded candidate attempts")
-                save(
-                    fig,
-                    f"08_instances_per_pipeline_{condition}_run-{repetition}",
-                    "Grey = no recorded candidate for this local pipeline ID; not evidence of zero attempts. IDs are not matched across conditions.",
-                )
+            if number:
+                export(f"paper_table_{number}_results", table)
+    qualitative = pd.DataFrame(reference["qualitative_comparison"]).map(
+        lambda v: "Yes" if v is True else "No" if v is False else v
+    )
+    export("paper_table_4_qualitative", qualitative)
+    (directory / "paper_reference_used.json").write_text(
+        json.dumps(reference, indent=2) + "\n", encoding="utf-8"
+    )
+    return {
+        "paper_reference_sha256": sha256(reference_path.read_bytes()),
+        "dataset_metadata_differences": discrepancies,
+    }
 
 
 def make_report(
@@ -1043,6 +1303,7 @@ def make_report(
             markdown_table(table) + "\n", encoding="utf-8"
         )
         (tables / f"{name}.tex").write_text(latex_table(table), encoding="utf-8")
+    paper_provenance = _paper_tables(frame, info, scores, tables)
     _figures(
         frame,
         info,
@@ -1061,11 +1322,14 @@ def make_report(
         f"# {info['frozen']['config']['name']} — repetitions {info['repetitions']}",
         f"Recorded outcomes: {recorded}/{len(frame)}; valid candidates: {completed}; failures: {len(failures)}; missing: {len(info['missing'])}.",
         f"Score role: **{info['score_role']}**. The CSV Baseline field is a protocol/reference label, never a HAMLET numeric score.",
-        "This is descriptive analysis. No p-values or confidence intervals are inferred from CV folds or a single repetition. The campaign uses the recorded seeds; repetitions with the same seed are technical repetitions, not different seeds.",
+        "This is descriptive analysis. No p-values are computed. 95% Student-t intervals are calculated across successful repetitions (n >= 2), never across CV folds. They assume independent representative repetitions and describe technical variability here, not uncertainty on generalization or different data splits. Compact annotations use mean ± the original symmetric t margin. CSVs retain both original endpoints and endpoints intersected with the known metric range ([0,1] for BA and [0,infinity) for RMSE). The ± notation is a 95% margin, not a standard deviation; it may extend beyond the metric bounds. Zero-width intervals indicate identical observed values, not guaranteed reproducibility. The campaign uses the recorded seeds; repetitions with the same seed are technical repetitions, not different seeds.",
         "Performance means/std use successful observations only. Missing outcomes are distinct from failures. Paired deltas require both conditions to succeed; exclusions remain in paired_deltas.csv. Regression RMSE is never averaged across datasets with different target scales.",
         f"Recorded worker settings: {workers}."
         + (" Resource settings differ across rows." if len(workers) > 1 else ""),
         "Failure status alone does not establish whether the cause was generated code, timeout or infrastructure. Detailed evidence must be inspected before attributing causes.",
+        "## Paper tables",
+        "paper_table_1_datasets uses current recorded metadata. paper_dataset_differences.csv lists discrepancies from the supplied paper; historical values are never substituted for observed values. paper_results_<condition> mirrors Tables 2/3 and adds intervals and valid/expected counts. For the full AGE-ML baseline condition, paper_table_2_results or paper_table_3_results is also generated according to the model. Score means use successful runs; resource means include all recorded outcomes, including unsuccessful ones. Numeric statistics retain resource-specific denominators. Actual P. counts returned completed execution-agent states, not every attempted pipeline or successful fit.",
+        "Historical Reference is transcribed from Tables 2/3: HAMLET for classification and Kaggle notebooks for regression. It is separate from the AGE-ML baseline condition. Protocol and dataset comparability must be checked before making claims. Table 4 is a static transcription of the paper's qualitative comparison, not a recomputed experiment or an independently verified current assessment. Reference provenance is saved in tables/paper_reference_used.json.",
         "## Exploration counts",
         "Pipelines Found counts enumerated structures; Pipeline Budget is the configured upper bound. Actual Pipelines counts completed execution-agent states with a tracking ID, not all started structures or fitted instances. Timed-out/failed agents can still have candidate records. In no-csp the planner proposes one structure. Candidate records require validation_candidates.csv with matching provenance. Their counts include only recorded evidence; killed workers can leave unrecorded work. Missing evidence is N/A, not zero. A candidate is a code/hyperparameter/execution-attempt combination; ten CV folds are not ten candidate instances. Local pipeline IDs are not comparable across conditions. See exploration_counts.csv and pipeline_instances.csv.",
         "## Outcomes and recorded resources",
@@ -1078,6 +1342,7 @@ def make_report(
     ]
     (outdir / "report.md").write_text("\n\n".join(text) + "\n", encoding="utf-8")
     provenance = {
+        **paper_provenance,
         "campaign_identity": info["frozen"]["campaign_identity"],
         "repetitions": info["repetitions"],
         "analysis_script_sha256": sha256(Path(__file__).read_bytes()),
