@@ -1,2 +1,0 @@
-Attempt 1:
-The code uses semicolons to condense multiple statements onto single lines, which is considered poor practice and can lead to syntax errors in some execution environments. Additionally, the pipeline structure must strictly follow the steps provided; while the preprocessing is necessary for the data, the pipeline definition should be clean and readable.

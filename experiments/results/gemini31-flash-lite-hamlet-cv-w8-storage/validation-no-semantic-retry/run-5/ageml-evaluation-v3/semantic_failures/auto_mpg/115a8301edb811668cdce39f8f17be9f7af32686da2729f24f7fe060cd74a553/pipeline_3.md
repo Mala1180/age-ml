@@ -1,2 +1,0 @@
-Attempt 1:
-The pipeline definition in the prompt explicitly lists three steps: normalization, features, and regression. The generated code adds an 'imputer' step which was not requested in the pipeline specification.

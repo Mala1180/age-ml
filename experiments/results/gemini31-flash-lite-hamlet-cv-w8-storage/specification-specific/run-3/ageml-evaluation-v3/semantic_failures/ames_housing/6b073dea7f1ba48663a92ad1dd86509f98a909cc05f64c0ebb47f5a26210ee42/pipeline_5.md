@@ -1,2 +1,0 @@
-Attempt 1:
-The provided code includes an OneHotEncoder for categorical features which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without prior encoding, and the pipeline structure should strictly follow the requested steps (imputation, normalization, feature selection, regression) without adding extra preprocessing steps like encoding unless implicitly required by the data type handling.

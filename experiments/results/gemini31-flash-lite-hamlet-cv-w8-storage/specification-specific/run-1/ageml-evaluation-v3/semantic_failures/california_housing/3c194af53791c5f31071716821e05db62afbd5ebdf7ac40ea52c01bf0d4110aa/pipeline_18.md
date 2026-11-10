@@ -1,2 +1,0 @@
-Attempt 1:
-The generated code is not fully compliant because it drops the 'ocean_proximity' column (categorical feature) instead of including it in the pipeline, and the pipeline steps (imputation, normalization, regression) should be applied to the entire dataset or handled via appropriate encoding for categorical variables.

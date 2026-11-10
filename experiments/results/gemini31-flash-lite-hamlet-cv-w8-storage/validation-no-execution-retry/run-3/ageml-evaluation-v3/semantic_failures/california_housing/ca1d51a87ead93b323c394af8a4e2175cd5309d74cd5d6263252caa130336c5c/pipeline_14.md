@@ -1,2 +1,0 @@
-Attempt 1:
-The provided code is not compliant because it includes an unnecessary OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) applied to the dataset as a whole.

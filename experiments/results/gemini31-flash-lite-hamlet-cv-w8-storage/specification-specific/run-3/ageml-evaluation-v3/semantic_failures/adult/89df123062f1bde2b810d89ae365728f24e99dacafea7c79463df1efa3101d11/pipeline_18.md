@@ -1,2 +1,0 @@
-Attempt 1:
-The code is not compliant because the pipeline order is incorrect. The IterativeImputer requires numerical input, but it is placed before the ColumnTransformer (which handles categorical encoding). Additionally, the IterativeImputer cannot handle categorical strings directly, so the encoding must occur before imputation.

@@ -1,2 +1,0 @@
-Attempt 1:
-The code uses a lambda function inside the pipeline, which causes pickling errors during cross-validation in many environments. Additionally, the previous attempts indicate that the environment requires a structure that avoids local function definitions or lambdas to ensure successful serialization.

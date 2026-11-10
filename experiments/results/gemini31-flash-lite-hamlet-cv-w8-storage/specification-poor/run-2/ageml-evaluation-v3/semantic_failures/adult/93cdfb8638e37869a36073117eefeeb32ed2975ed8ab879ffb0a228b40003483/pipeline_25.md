@@ -1,2 +1,0 @@
-Attempt 1:
-The code uses a lambda function inside FunctionTransformer, which causes pickling errors in distributed environments. Additionally, the previous execution failed due to the use of a local function/lambda. To ensure compatibility, one should use standard scikit-learn transformers like MaxAbsScaler or similar that handle sparse-to-dense conversion natively, or avoid custom functions entirely.

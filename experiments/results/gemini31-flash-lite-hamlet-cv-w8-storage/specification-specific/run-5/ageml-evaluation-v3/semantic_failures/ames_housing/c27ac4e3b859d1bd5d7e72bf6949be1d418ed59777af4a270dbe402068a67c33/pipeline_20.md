@@ -1,2 +1,0 @@
-Attempt 1:
-The code is not fully compliant because it uses 'pd.get_dummies' inside a pipeline step, which is not a scikit-learn transformer and will fail during the fit process. Additionally, the pipeline structure should strictly follow the requested steps (normalization, features, regression) without unnecessary complexity like ColumnTransformer if not explicitly required, and it must handle categorical data correctly using sklearn-compatible transformers.

@@ -1,2 +1,0 @@
-Attempt 1:
-The pipeline is not compliant because it introduces an 'OneHotEncoder' step for categorical features, which was not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, and regression.
