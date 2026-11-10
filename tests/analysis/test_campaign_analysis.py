@@ -288,12 +288,18 @@ def test_real_report_generates_csv_markdown_latex_and_headless_figures(
     campaign, tmp_path
 ):
     output = tmp_path / "report"
+    figures = output / "figures"
+    figures.mkdir(parents=True)
+    for name in ("06_pipeline_activity_run-1.png", "03_regression_rmse_ratio.pdf"):
+        (figures / name).write_text("retired output")
     result = analysis.make_report(campaign, output, formats=("png", "pdf"))
+    assert not (figures / "06_pipeline_activity_run-1.png").exists()
+    assert not (figures / "03_regression_rmse_ratio.pdf").exists()
     assert (
         result["recorded"] == 54 and result["completed"] == 51 and result["failed"] == 3
     )
-    assert len(list((output / "figures").glob("*.png"))) == 7
-    assert len(list((output / "figures").glob("*.pdf"))) == 7
+    assert len(list((output / "figures").glob("*.png"))) == 5
+    assert len(list((output / "figures").glob("*.pdf"))) == 5
     for name in ("score_matrix", "condition_summary", "failed_runs"):
         assert (
             (output / "tables" / f"{name}.tex")
@@ -475,4 +481,71 @@ def test_detailed_candidate_report_exports_local_pipeline_counts(campaign, tmp_p
     detail = pd.read_csv(output / "tables/pipeline_instances.csv")
     assert detail.pipeline_id.tolist() == [7]
     assert result["candidate_evidence_sha256"]
-    assert (output / "figures/08_instances_per_pipeline_baseline_run-1.png").exists()
+    assert not (
+        output / "figures/08_instances_per_pipeline_baseline_run-1.png"
+    ).exists()
+
+
+def test_intervals_use_repetition_values_and_small_sample_t():
+    interval = analysis.mean_interval([0.8, 0.9])
+    # t(.975, 1)=12.7062 and SEM=.05, rather than a normal 1.96 multiplier.
+    assert interval["ci95_low"] == pytest.approx(0.85 - 12.7062047364 * 0.05)
+    assert interval["ci95_high"] == pytest.approx(0.85 + 12.7062047364 * 0.05)
+    bounded = analysis.mean_interval([0.8, 0.9], (0, 1))
+    assert bounded["ci95_low"] == pytest.approx(interval["ci95_low"])
+    assert bounded["ci95_high"] == 1
+    assert bounded["ci95_high_unbounded"] > 1
+    assert pd.isna(analysis.mean_interval([0.9])["ci95_low"])
+    assert analysis.mean_interval([0.9] * 5)["ci95_low"] == pytest.approx(0.9)
+
+
+def test_paper_tables_use_current_metadata_and_separate_historical_references(
+    campaign, tmp_path
+):
+    frame, info, _ = analysis.load_campaign(campaign)
+    for field, value in [
+        ("features", 9),
+        ("instances", 20640),
+        ("numeric_features", 8),
+        ("discrete_features", 1),
+    ]:
+        frame.loc[frame.dataset.eq("california_housing"), field] = value
+    frame.loc[:, "input_tokens"] = 100
+    frame.loc[:, "output_tokens"] = 10
+    frame.loc[:, "total_tokens"] = 150
+    _, scores, _ = analysis.summarize(frame, info)
+    out = tmp_path / "tables"
+    out.mkdir()
+    provenance = analysis._paper_tables(frame, info, scores, out)
+    datasets = pd.read_csv(out / "paper_table_1_datasets.csv").set_index("Dataset")
+    assert datasets.loc["California Housing", "Features"] == 9
+    assert provenance["dataset_metadata_differences"]
+    stats = pd.read_csv(out / "paper_results_baseline_statistics.csv")
+    assert stats.total_tokens_mean_recorded.eq(150).all()
+    assert (
+        stats.loc[stats.dataset.eq("wilt"), "historical_reference_score"].iloc[0]
+        == 0.975
+    )
+    assert stats.ci95_low.isna().all()
+    assert (out / "paper_table_4_qualitative.tex").exists()
+
+
+def test_paper_tables_reject_inconsistent_dataset_metadata(campaign, tmp_path):
+    frame, info, _ = analysis.load_campaign(campaign)
+    frame["features"] = 5
+    frame.loc[frame.condition.eq("baseline") & frame.dataset.eq("wilt"), "features"] = 6
+    _, scores, _ = analysis.summarize(frame, info)
+    with pytest.raises(ValueError, match="Inconsistent dataset metadata"):
+        analysis._paper_tables(frame, info, scores, tmp_path)
+
+
+def test_compact_interval_distinguishes_zero_small_and_unavailable_margins():
+    assert analysis.format_mean_interval(0.9, 0.88, 0.92) == "0.900 ± 0.020"
+    assert analysis.format_mean_interval(0.9, 0.9, 0.9) == "0.900 ± 0"
+    assert analysis.format_mean_interval(0.9, 0.8999, 0.9001) == "0.900 ± <0.001"
+    assert (
+        analysis.format_mean_interval(0.9, float("nan"), float("nan"))
+        == "0.900 (CI N/A)"
+    )
+    table = pd.DataFrame({"Score": ["0.900 ± 0.020"]})
+    assert r"\ensuremath{\pm}" in analysis.latex_table(table)
