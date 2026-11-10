@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "00ca577f3300b970de8273e0484bfda776ff0eac7dbb5a5a5ee53763e8833715",
+  "code_sha256": "6c6e8eb304a380558002075b12cd5d5ed6de23b1195973a1b11b01aeb987bbd7",
+  "completed_at": 1794072154.0368242,
+  "cv_fold_scores": [
+    0.7169086400472928,
+    0.7207197553225089,
+    0.7163593752303994,
+    0.7203710905820074,
+    0.6966063081528231,
+    0.7167738355244904,
+    0.7185177424424368,
+    0.714375171978673,
+    0.730407095825653,
+    0.7200700694362093
+  ],
+  "effective_random_states": [
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    },
+    {
+      "discretization__random_state": 42,
+      "features__random_state": 42
+    }
+  ],
+  "fit_attempt": 6,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 0,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "n_bins": 10,
+    "n_components": 0.95,
+    "n_neighbors": 5,
+    "quantile_range": [
+      25.0,
+      75.0
+    ],
+    "weights": "uniform"
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "601a0b8ed9c954406468cf46a5873ef3f56fee6de0cb418cbc62a8ba29f59dec",
+  "pipeline_id": 4,
+  "pipeline_run_id": "090ab08992344d23923aa2974e04ae29",
+  "run_id": "2407170847004a8c8efa896cab7f5bb6",
+  "run_identity": "a23411a36d446b562d7b9b07043226a546c5c29f3b8f97fa38e10a47e0d8fee6",
+  "validation_score": 0.7171109084542493,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

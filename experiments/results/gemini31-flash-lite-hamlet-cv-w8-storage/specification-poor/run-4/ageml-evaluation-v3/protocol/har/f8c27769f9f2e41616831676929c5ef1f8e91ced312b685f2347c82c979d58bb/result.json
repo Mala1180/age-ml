@@ -1,0 +1,101 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-4/ageml-evaluation-v3/protocol/har/f8c27769f9f2e41616831676929c5ef1f8e91ced312b685f2347c82c979d58bb/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-4/ageml-evaluation-v3/protocol/har/f8c27769f9f2e41616831676929c5ef1f8e91ced312b685f2347c82c979d58bb/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-4/ageml-evaluation-v3/protocol/har/f8c27769f9f2e41616831676929c5ef1f8e91ced312b685f2347c82c979d58bb/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-4/ageml-evaluation-v3/protocol/har/f8c27769f9f2e41616831676929c5ef1f8e91ced312b685f2347c82c979d58bb/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 16,
+  "best_run_id": "a3cdb25bd7374f108330306b13289dca",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9398451099462607,
+    0.9024304885652082,
+    0.8732727810965022,
+    0.943336515719325,
+    0.9784867083437415,
+    0.9532901855944637,
+    0.9443797433421798,
+    0.924981802105662,
+    0.9317905367864543,
+    0.9351747941690016
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1840.3650000000002,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "7dfb6104d3764f26825753c342a336c8",
+    "2": "7577d2ba485e45379e26bf0dac9a312c",
+    "3": null,
+    "4": null,
+    "5": "556e0b71e6aa4c09957725d42302e651",
+    "6": "7ea6d590e24b43a9ba338a87bcb2901a",
+    "7": "face5b007d9845dab945ef5c690da91d",
+    "8": null,
+    "9": "9ebb19f38a12467f8d58ea52a546f45b",
+    "10": "fd53f52b721a44cebb46b9cd8751e34d",
+    "11": "ade74313c80f44c6b1b5de2c74abc56d",
+    "12": "41fe90adacb648b8b904403c09d13e1d",
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": "4e9fd25f8b154921b5911e1638c311c5",
+    "17": "676af0ff819647dfaf112ab73e33cf5a",
+    "18": "bc84025d7c4d410a9407a141f3f0cde7",
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "534894181702e9463e0df12e9487daf55259c560189e52a7a23ebb920dcad922",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "2461cffa56a354d6501f89e9b885abb119db137fdc07487b0121eedbd225e928",
+  "runtime_human_readable": "1:00:52",
+  "runtime_seconds": 3652.3666024394333,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9326988665668801,
+  "selected_candidate_key": "e7223fbbeff5f7e770e408717cf84d530992ddf69e40f78fd5831a8e7db34d22",
+  "selection_sha256": "cd36ca4ffb5f4df57b2232d82c666d885c5bdc364032d9688be7cff2ba1b4d47",
+  "selection_validation_score": 0.9326988665668801,
+  "semantic_validation_failure_reasons": {
+    "11": [
+      "The code is not executable because the imports are not separated by newlines, which causes a syntax error in Python."
+    ]
+  },
+  "semantic_validation_failures": 1,
+  "split_identity": "14111795c93d148a933b7fdd1a5a887e407e2a9bf12d9578e312bc47d58ac446",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.06712777499999999,
+    "input_tokens": 5006414,
+    "output_cost": 0.14619750000000004,
+    "output_tokens": 9035,
+    "total_cost": 0.21332527500000004,
+    "total_tokens": 5015449
+  },
+  "training_time": 3672.574,
+  "validation_metric": "balanced_accuracy"
+}

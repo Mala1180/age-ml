@@ -1,0 +1,275 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "fc94d12cd9ac4d12858bf994ec50805a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "accfdd70de9248ad83a84685877e89be",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not requested in the original pipeline definition. The pipeline must only contain the steps specified: discretization with binarizer, normalization with power_transformer, and regression with ridge.",
+      "The code is not compliant because it fails to handle missing values present in the dataset, which causes the pipeline to crash during execution. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The code is not compliant because it adds an 'imputer' step using ColumnTransformer, which was not requested in the original pipeline definition. The pipeline must only contain the three specified steps: binarizer, power_transformer, and ridge.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested pipeline steps (discretization, normalization, regression). While necessary for the data, it violates the instruction to only implement the specified steps.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the pipeline to crash during execution. While the steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested pipeline steps (discretization, normalization, regression). While necessary for the data, it violates the instruction to only implement the specified steps.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested pipeline steps (discretization, normalization, regression). While necessary for the data, it violates the instruction to only implement the specified steps.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested pipeline steps (discretization, normalization, regression). While necessary for the data, it violates the instruction to only implement the specified steps.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested pipeline steps (discretization, normalization, regression). While necessary for the data, it violates the instruction to only implement the specified steps.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the pipeline to crash during execution. While the steps match the request, the implementation is not robust enough for the provided dataset."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "800ce7c854f34d9092c67e62fa25f51e",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not part of the original pipeline definition. The pipeline must only contain the four specified steps: discretization, normalization, features, and regression.",
+      "The code is compliant with the pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which KBinsDiscretizer cannot handle. While the pipeline steps are correct, the implementation is not robust to the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression).",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression).",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression).",
+      "The code is compliant with the pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which KBinsDiscretizer cannot handle. While the pipeline steps are correct, the implementation is not robust to the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression).",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression).",
+      "The code is compliant with the pipeline steps and signature, but it fails during execution because the dataset contains missing values (NaNs) which KBinsDiscretizer cannot handle. While the pipeline steps are correct, the implementation is not robust to the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not part of the four steps defined in the pipeline (discretization, normalization, features, regression)."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 3,
+    "pipeline_run_id": "b3c6716db0204f6daa99daaa7cbb935e",
+    "semantic_feedback": [
+      "The generated code is not strictly compliant because it added an 'imputer' step which was not part of the original 4-step pipeline definition. While necessary for the data, the instructions explicitly stated to implement only the steps of the pipeline provided.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested 4-step pipeline. While the dataset contains NaNs, the instructions explicitly stated to implement only the steps of the pipeline provided.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested 4-step pipeline. While the dataset contains NaNs, the instructions explicitly stated to implement only the steps of the pipeline provided.",
+      "The code is compliant with the pipeline steps and function signature, but it fails during execution because the dataset contains NaN values, which the KBinsDiscretizer does not support. While the instructions restricted the implementation to only the four specified steps, the pipeline cannot be executed on the provided dataset without handling missing values.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested 4-step pipeline. While the dataset contains NaNs, the instructions explicitly stated to implement only the steps of the pipeline provided.",
+      "The code is compliant with the requested pipeline steps and function signature, but it fails during execution because the dataset contains NaN values, which the KBinsDiscretizer does not support. While the instructions restricted the implementation to only the four specified steps, the pipeline cannot be executed on the provided dataset without handling missing values.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested 4-step pipeline. While the dataset contains NaNs, the instructions explicitly stated to implement only the steps of the pipeline provided.",
+      "The code is compliant with the requested pipeline steps and function signature, but it fails during execution because the dataset contains NaN values, which the KBinsDiscretizer does not support. While the instructions restricted the implementation to only the four specified steps, the pipeline cannot be executed on the provided dataset without handling missing values.",
+      "The code is not compliant because it includes an 'imputer' step, which was not part of the requested 4-step pipeline. While the dataset contains NaNs, the instructions explicitly stated to implement only the steps of the pipeline provided."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "39beef90e4df45988537d47f86583218",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "0a8aea4bd1bd4fa79b31033f03d4ffaf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "734c14e305e2422aab5cb75df933a2bb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "171a0cdcca2c4e6ea43ec39ef1f354ce",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "a038a6cfcb9d4b8e9f6aa139cecdbe8a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 9,
+    "pipeline_run_id": "2ad09b1dabd7412aac08b4f5b0fdf696",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression.",
+      "The code is not compliant because it performs data manipulation (dropping rows) inside the build_model function. The function must only return an unfitted pipeline object, and any data cleaning must be handled by the pipeline itself or the caller, not by modifying the input data within the function.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the requirements, the implementation fails to handle the data quality issues present in the provided dataset, leading to runtime errors.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the requirements, the implementation fails to handle the data quality issues present in the provided dataset, leading to runtime errors.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the requirements, the implementation fails to handle the data quality issues present in the provided dataset, leading to runtime errors.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the requirements, the implementation fails to handle the data quality issues present in the provided dataset, leading to runtime errors.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the requirements, the implementation fails to handle the data quality issues present in the provided dataset, leading to runtime errors.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain discretization, normalization, and regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "583019dac7474480a1aa1822aa6b8ac1",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. discretization with binarizer, 2. regression with random_forest_regressor. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is compliant with the pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which the Binarizer transformer does not support. While the pipeline steps are strictly followed, the model cannot be fitted on the provided dataset without handling missing values.",
+      "The generated code is not compliant because it adds an 'imputer' step and a 'ColumnTransformer' which were not part of the requested two-step pipeline (discretization and regression). The pipeline must strictly contain only the steps specified.",
+      "The code is compliant with the requested pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which the Binarizer transformer does not support. While the pipeline steps are strictly followed, the model cannot be fitted on the provided dataset without handling missing values.",
+      "The generated code is not compliant because it adds an 'imputer' step which was not part of the requested two-step pipeline (discretization and regression). The pipeline must strictly contain only the steps specified.",
+      "The code is compliant with the requested pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which the Binarizer transformer does not support. While the pipeline steps are strictly followed, the model cannot be fitted on the provided dataset without handling missing values.",
+      "The code is compliant with the requested pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which the Binarizer transformer does not support. While the pipeline steps are strictly followed, the model cannot be fitted on the provided dataset without handling missing values.",
+      "The generated code is not compliant because it adds an 'imputer' step which was not part of the requested two-step pipeline (discretization and regression). The pipeline must strictly contain only the steps specified."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "5ff39a92a6eb483194027c65cbc38db1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "9039063db24a466da65d872936b7fe51",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "e214e749ba244098b0f7a267d1b273b2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "13c54c9a4ef44cb185ad3fb1b6d00e57",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "b73d071996fb4a13971116a60f35990f",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression.",
+      "The code is not compliant because it fails to handle missing values present in the dataset, which causes the Binarizer step to crash. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The code is not compliant because it adds an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression.",
+      "The code is not compliant because it fails to handle missing values present in the dataset, which causes the Binarizer step to crash. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The code is not compliant because it adds an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression.",
+      "The code is not compliant because it adds an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression.",
+      "The code is not compliant because it adds an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression.",
+      "The code is not compliant because it adds an 'imputer' step which was not part of the original pipeline definition. The pipeline must strictly follow the steps: discretization, normalization, features, and regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "4dc4e8dcf9ff4e5ba1f6beaecfb56607",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "8f6b62739c624788bad44ce33b326b9e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "181266303f3a4cdda28f28c5d23e72c8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "ab7a11d9df0c4e139340a1c92d1930bd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "7d040039b00744bf9fc52fa7535692c0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "03bc3063f88341a0a18da94d83c218d4",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "9f629d863f4341a286c2eec4cb4a7724",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "f8298283cb5f4ad6b58a4a5418ea743e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "2782f9aa5e884f0db4c24ed8ccb3c058",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "d95734f29146458e87f8490ba8e83f71",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "f5172a6374084377b961cb3d13334170",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "2be1f78a0414431a81ea945bea6afdc9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "d5b416f1e6614b4f971b9d898b5d3659",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "fbee70fb207d47088e0518bd1ea573ea",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

@@ -1,0 +1,254 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "758c7a80028847fba41d03e8d771e9d0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 1,
+    "pipeline_run_id": "7e97a69782634f5ab9a54e63d4667bdb",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it introduces an extra 'preprocessing' step (SimpleImputer) that was not requested in the original pipeline definition. Additionally, the ColumnTransformer logic is redundant and potentially incorrect as it applies the Binarizer only to numeric features while passing through others, which may cause issues with the subsequent PowerTransformer if non-numeric data remains.",
+      "The code is not compliant because it includes an 'imputer' step which was not part of the requested pipeline. Furthermore, applying Binarizer directly to the output of a ColumnTransformer that includes non-numeric columns will cause a runtime error.",
+      "The code is not compliant because it includes an 'imputer' step which was not part of the requested pipeline. Additionally, applying Binarizer directly to the output of a ColumnTransformer that includes non-numeric columns will cause a runtime error.",
+      "The code is not compliant because it introduces additional steps (SimpleImputer, OneHotEncoder, ColumnTransformer) that were not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge).",
+      "The code is not compliant because it fails to handle the non-numeric 'ocean_proximity' column present in the dataset. Applying Binarizer directly to a DataFrame containing strings will raise a TypeError. The pipeline must include a mechanism to handle categorical data or select only numeric features to be executable.",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge).",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge).",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge).",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge).",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The pipeline must strictly follow the sequence: discretization (binarizer), normalization (power_transformer), and regression (ridge)."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "f1087346de644b28a77534b054302ecd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "cc77fcff07d84753a012570c63867bfa",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "924ee193cbdc4dea80419ea481e98ef9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "7cb0fddf251f410b80f0221efa20e12d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "a7219b080f9c4c61bb18ae18d2d7fdf8",
+    "semantic_feedback": [
+      "The Binarizer transformer in scikit-learn is designed for feature-wise binarization (thresholding) and is typically applied to numeric data. Applying it to the entire feature matrix after OneHotEncoding (which produces sparse binary columns) will likely result in unexpected behavior or errors, as Binarizer is not a standard discretization method for multi-column regression pipelines. Additionally, the pipeline structure assumes all features are numeric for the Binarizer step, which conflicts with the inclusion of categorical data.",
+      "The code is not compliant because the Binarizer transformer is applied to the entire feature matrix after OneHotEncoding. Binarizer is intended for numeric data and will transform the sparse binary output of the OneHotEncoder, effectively destroying the categorical information and leading to incorrect feature representation for the subsequent regression step.",
+      "The code is not compliant because the Binarizer is applied to the entire feature matrix after imputation, which includes the encoded categorical features. Binarizer is mathematically inappropriate for categorical data (even if ordinal encoded), as it will threshold these values based on the same numeric threshold used for continuous variables, leading to loss of information and incorrect feature representation.",
+      "The code is not compliant because the Binarizer is applied to the entire feature matrix after imputation, which includes the encoded categorical features. Binarizer is mathematically inappropriate for categorical data, as it will threshold these values based on the same numeric threshold used for continuous variables, leading to loss of information and incorrect feature representation.",
+      "The code is not compliant because the Binarizer is applied to the entire feature matrix after OneHotEncoding. Binarizer is intended for numeric data and will transform the sparse binary output of the OneHotEncoder, which is mathematically inappropriate and will lead to incorrect feature representation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "2909a94c6eb147878cc9f7adf72d6073",
+    "semantic_feedback": [
+      "The code uses semicolons to condense multiple statements onto single lines, which is non-standard and can cause syntax errors in certain execution environments. Additionally, the Binarizer step is applied to the entire dataset including categorical features, which will cause a runtime error because Binarizer expects numerical input.",
+      "The code is not compliant because the Binarizer step is applied to the output of the OneHotEncoder, which produces sparse or binary data. Applying Binarizer to categorical features (encoded as one-hot) is mathematically inappropriate and will likely lead to data corruption or runtime errors. Furthermore, the pipeline structure does not correctly isolate numerical features for the Binarizer and PowerTransformer steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "88b4a2d97d814a0cb4ec673ed0b26503",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "8c14d845d9a544d98c4d75844a1279ca",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "d8473f2dc8de47319534806670709a7d",
+    "semantic_feedback": [
+      "The code is not compliant because it uses a single-line format which causes syntax errors in the execution environment, and it includes extra preprocessing steps (OneHotEncoder, StandardScaler) not specified in the original pipeline requirements."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "5c5ec0c867c34bb6a3a365d818e57ad5",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because it drops the 'ocean_proximity' column (categorical) during preprocessing, whereas the pipeline implies all features should be processed. Additionally, the Binarizer is applied to all numeric features, which may not be appropriate for all continuous variables in the dataset.",
+      "The code is not compliant because the Binarizer component in scikit-learn only accepts 2D arrays of shape (n_samples, n_features) and applies binarization element-wise. When placed after an IterativeImputer and before a PCA, it will binarize the entire feature matrix (including one-hot encoded columns), which is mathematically incorrect for categorical data and likely to cause data loss or dimensionality issues. Furthermore, the pipeline structure does not correctly handle the categorical features through the entire sequence of steps.",
+      "The code is not compliant because IterativeImputer cannot be applied to categorical features (strings) as it requires numerical input, and the pipeline structure applies the imputer to categorical data before encoding, which will raise a ValueError.",
+      "The code is not compliant because applying Binarizer and RobustScaler to categorical features (even after ordinal encoding) is statistically inappropriate and violates the standard preprocessing logic for categorical variables. Furthermore, the pipeline applies these steps to both numeric and categorical branches separately, whereas the pipeline definition implies a unified sequence of operations.",
+      "The code is not compliant because the Binarizer is applied to the entire feature matrix after OneHotEncoding. Binarizing one-hot encoded columns (which contain 0s and 1s) with a threshold will result in data loss or incorrect transformations, and applying a RobustScaler to binary indicators is statistically inappropriate. The pipeline steps must be applied in a way that respects the data types of the features.",
+      "The code is not compliant because the pipeline steps (imputation, discretization, normalization) are applied only to the numeric features, while the categorical features are only encoded. The pipeline definition requires these steps to be applied to the entire feature set, which is impossible given the data types. Furthermore, applying Binarizer and RobustScaler to categorical data is statistically invalid.",
+      "The code is not compliant because the pipeline definition requires the imputation, discretization, and normalization steps to be applied to the entire feature set. In the provided code, these steps are only applied to the numeric features, while the categorical features are only encoded. Applying these steps to the entire dataset is technically challenging due to the nature of categorical data, but the current implementation fails to follow the requested pipeline sequence for all features.",
+      "The code is not compliant because the Binarizer and RobustScaler are applied to the entire feature matrix after OneHotEncoding. Binarizing one-hot encoded columns (which contain 0s and 1s) with a threshold will result in data loss or incorrect transformations, and applying a RobustScaler to binary indicators is statistically inappropriate. The pipeline steps must be applied in a way that respects the data types of the features."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "bf61dfde063a44b395e00061cdf7c935",
+    "semantic_feedback": [
+      "The generated code is not compliant because it introduced a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not specified in the original pipeline requirements. The pipeline must only contain the three specified steps: imputation, normalization, and regression.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression.",
+      "The generated code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline definition. The pipeline must only consist of the three specified steps: imputation, normalization, and regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "dd7c27d8fa0b4c52af91517a90fb036c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "2c22a6c9b757431e8560c92ca3bc9348",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "08d1ecb995184bfba6c7d32edbbdeaec",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "4a5c90d3109147c18312b53bae9747f8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "aac7e3c304704c10a823c5b2212e60be",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "5f672cd0a23f4fd1b88080a4338c7a69",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "784d9bb011e24d9993ba9feb32c2b162",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "8635652d550645778ef40db70ecf8a11",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "ba126d3e132b42eebba93987a320ac1a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "79bee76418374fd5a6367a5e9c481b82",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "0ce81bcf34044d8b8570f72955c465dc",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "b4076cefacf443c0bb4e40dd5ed6e023",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "709b0a984c934853aa7a9f5dcb71d11a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "d2444df6a5d545ec90a84ba4f5d23d58",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "e45a2d0df53b4d57b23fe115b3f6ef7b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "0bb7ad13de6740e082e0c93ed48aa36e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "35fd4160d5684bbca8d0b272c7e18733",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

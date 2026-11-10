@@ -1,0 +1,108 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/wilt/9a044d0b224773369a3ed8eb3ea4fae8ada38ef01fd234a6e96fce9d1c8ec2ee/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/wilt/9a044d0b224773369a3ed8eb3ea4fae8ada38ef01fd234a6e96fce9d1c8ec2ee/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/wilt/9a044d0b224773369a3ed8eb3ea4fae8ada38ef01fd234a6e96fce9d1c8ec2ee/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/baseline/run-1/ageml-evaluation-v3/protocol/wilt/9a044d0b224773369a3ed8eb3ea4fae8ada38ef01fd234a6e96fce9d1c8ec2ee/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "2b3e9077cd724fdebd93b21e1749d867",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9796775277124623,
+    0.9764024185421565,
+    0.960446758481693,
+    0.9774941215989251,
+    0.9764024185421565,
+    0.9978165938864629,
+    0.9989082969432315,
+    0.9720356063150823,
+    0.9321663019693655
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 106.09599999999999,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "0210ea98fce94d9896d6f52a29bfd917",
+    "1": "3ba1fe588732484bb7153756b27a502c",
+    "2": "9581a226c1b043d0ad0619400be15264",
+    "3": "5441e1f233e445da950d023df752f495",
+    "4": "39c0cd434a2b40ca9ce5fd3558b91c5f",
+    "5": "25f90db8fced42a0a8ef9d08b674b4e6",
+    "6": "b2d29757648b4e25b67282854e44b910",
+    "7": "23e93078bcee4e27af6086d6041ff7f7",
+    "8": "473cb0cfae194018bf6e4ec3167c93d3",
+    "9": "72b21ed64fd1473784f969a3cce6d49e",
+    "10": "43ecb3c561cf4c1aa0e37282b627a1a8",
+    "11": "e877f41a33664eb4b7dbcbc269b07e37",
+    "12": "e55a34c3500b4defaf87b7c16e7be3b6",
+    "13": "aef023a2b0fb44ffb6b51700d8f1c31b",
+    "14": "0e69dcdcf3f147538d053f11768769e5",
+    "15": "bea7abd8fdaf46a19a32001335bed0be",
+    "16": "714dccd2eb55474294aa425378419070",
+    "17": "9911705bbb304b45bc5877c0dbbdd1d6",
+    "18": "8f2a073809c247099edd53c227634944",
+    "19": "160eb4ed662d49a9a821ff0ae2dea0ff",
+    "20": "8ba40b84213b4fa7befac0492c7d2ad5",
+    "21": "22a472fc4ee34e9b99e640a808fab91c",
+    "22": "af305af6e5ca4db58f15d2a628bab440",
+    "23": "c597682005cc48b4989c8c429c806b91",
+    "24": "535a0550ab13487b975d0f2aceb89233",
+    "25": "c9a5e7ffdc9345d4968e5f0a08411c3c",
+    "26": "e05cf2d8b4704476b08bec4d9b8dd64d",
+    "27": "e226d6f7d9254586b712668ac08e6039",
+    "28": "336c1b88607549679a77816cac3b7b7c",
+    "29": "ddbc4d2082584b349162309dc71abde1"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "786f124ee6b0cf8f8c78d90f1396681c926dc9faf342907f5bc1026a258fdf98",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "34cc77c3ca75d4f014382e6d25cbc957ab9d7b94563ba1db46b95b8755f426ae",
+  "runtime_human_readable": "0:06:08",
+  "runtime_seconds": 368.13219947740436,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9731030731243339,
+  "selected_candidate_key": "256a44ad74e069a7d9b8b314166a3db72b14c49ed20d7a968029bf4fc5992046",
+  "selection_sha256": "075e1775ac77441845fb54cb3a52a374916d3e3579c14302c5ecb559e91aef5d",
+  "selection_validation_score": 0.9731030731243339,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' parameter passed to the function is used as the 'imputation_order' for the IterativeImputer, but 'method' is intended to control the PowerTransformer, while the 'imputation_order' should be a fixed valid string like 'ascending'. Additionally, the previous execution failed because 'method' (which can be 'yeo-johnson') is not a valid value for 'imputation_order'.",
+      "The code is not compliant because the 'method' parameter provided in the function signature is ignored in the configuration of the pipeline components, failing to utilize the provided hyperparameter for the PowerTransformer as intended.",
+      "The code is not compliant because the 'method' parameter provided in the function signature is ignored in the configuration of the pipeline components, failing to utilize the provided hyperparameter for the PowerTransformer as intended.",
+      "The code is not compliant because the 'version' parameter passed to the function is being used as the 'method' argument for the PowerTransformer, but the provided 'version' value is an integer (1) which is invalid for the PowerTransformer, which expects 'yeo-johnson' or 'box-cox'. Additionally, the 'method' parameter passed to the function is completely ignored."
+    ]
+  },
+  "semantic_validation_failures": 8,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.06232569,
+    "input_tokens": 245028,
+    "output_cost": 0.118095,
+    "output_tokens": 6802,
+    "total_cost": 0.18042069000000005,
+    "total_tokens": 251830
+  },
+  "training_time": 1117.5109999999997,
+  "validation_metric": "balanced_accuracy"
+}

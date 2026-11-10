@@ -1,0 +1,232 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "03ff02686458470b829e697612a78c1b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "ded8cf1b84bb4e888fe82033dde16d06",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "16c2334898734b6d9635a48bdf256e20",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "baadda2f117c4ad3973b4259b25a9912",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "5a736a6a044740c7b8ce819332c22a55",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "6b074c86f3a742afa52264ebd2e226c2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "860a3ca3ff014c4a98032afc71ef1516",
+    "semantic_feedback": [
+      "The provided code is not fully compliant because the IterativeImputer cannot be applied directly to categorical features (strings) as implemented in the categorical_transformer pipeline. Additionally, the pipeline structure for categorical data should handle encoding before or during imputation if the imputer requires numerical input, or use a different imputation strategy for categorical columns.",
+      "The code is technically valid Python, but the previous execution error 'invalid syntax' was likely due to the use of semicolons for one-line formatting. Furthermore, the pipeline logic is flawed: the IterativeImputer will receive the output of OneHotEncoder, which is sparse. IterativeImputer does not support sparse input matrices, which will cause a runtime error during fitting."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "a4b1f9530a9d484c9495f3858bc39de3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "8a55d51e0d2e4c69985e6b45db48cf13",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "fe0fbe1cfd834dac8ad9b97e2f5b3a92",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "82c1599bfda3404c9358189704a2732e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "0637e0dc71da4de98dfd448f5ca29fe3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "fa623c728ab8488c9adf626daad5fbe1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "395f44cfec0842d69c71058235e50edb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 14,
+    "pipeline_run_id": "b0ed67516a7e4e91b4740c4bbaf1a58b",
+    "semantic_feedback": [
+      "The provided code is not compliant because it includes an unnecessary OneHotEncoder for categorical features, which was not specified in the pipeline steps. Additionally, the IterativeImputer cannot be applied directly to categorical columns without encoding, and the pipeline steps should strictly follow the requested sequence (imputation, normalization, regression) applied to the dataset as a whole.",
+      "The code is not compliant because it introduces a OneHotEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. Additionally, applying IterativeImputer after OneHotEncoder on the entire dataset is technically problematic for categorical data handling in this specific sequence.",
+      "The pipeline is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements.",
+      "The code is not compliant because it introduces an OrdinalEncoder step which was not requested in the pipeline. The pipeline explicitly requires only three steps: imputation, normalization, and regression. While encoding is necessary for the IterativeImputer to handle categorical data, it must be integrated in a way that respects the requested pipeline structure without adding extra steps not specified in the requirements."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 15,
+    "pipeline_run_id": "cf8e46d9fb9d4d24a45cc85dd9ef6e85",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "3aaf0e5bc1a64356bb4903451008eb19",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "35198372e32f43d59061ff433a6eb23a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "346aeb1fd528483fada3f0735623d58b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "3fcdda78e7eb456ab3be7549902c75ef",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "a386b4be3c0e4201a0e404d1062cc50e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "af7697454d9f47cb92c3765e18368b5c",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "dd48edbc24db4820a2eb1c26891d4557",
+    "semantic_feedback": [
+      "The generated code includes a ColumnTransformer and a categorical transformer that were not requested in the pipeline steps. The pipeline specifically requested imputation, normalization, and regression, which should be applied to the dataset as a whole or handled consistently without adding extra preprocessing steps like one-hot encoding that were not specified.",
+      "The generated code is not compliant because it introduces a ColumnTransformer and OneHotEncoder, which were not specified in the pipeline steps. The pipeline only requested imputation, normalization, and regression. Additionally, the pipeline must handle the entire dataset as specified, and the inclusion of extra preprocessing steps violates the requirement to implement only the requested steps.",
+      "The generated code is not compliant because it includes a ColumnTransformer and OneHotEncoder, which were not requested in the pipeline steps. The pipeline only specified imputation, normalization, and regression. Furthermore, the dataset contains a categorical column ('ocean_proximity') that cannot be processed by RobustScaler or Ridge without encoding, but the pipeline instructions did not authorize adding encoding steps.",
+      "The pipeline is not compliant because it introduces a ColumnTransformer and OneHotEncoder, which were not specified in the requested steps. The pipeline only requested imputation, normalization, and regression. Additionally, the code structure is overly condensed, making it difficult to maintain and debug.",
+      "The pipeline is not compliant because it includes a ColumnTransformer and OneHotEncoder, which were not specified in the requested steps. The pipeline only requested imputation, normalization, and regression. Furthermore, the dataset contains a categorical column that requires encoding to be processed by Ridge, but the instructions did not authorize adding encoding steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "b2c72fe10c4c4c17a9ea7724270dbab0",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "674fb2c0a539409ea4378ec886f8453f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "d29d59eb853f4f7ab478612fdf577cdf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "612fbf253bd340509dae0f3533c51f83",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "b80880c1e0604f06a7c7b9ab9b306f3e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "b5ad94c22a014ba69eb5df33345e029a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 29,
+    "pipeline_run_id": "6fe3411dab8440e89df0c4425f33ced8",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  }
+]

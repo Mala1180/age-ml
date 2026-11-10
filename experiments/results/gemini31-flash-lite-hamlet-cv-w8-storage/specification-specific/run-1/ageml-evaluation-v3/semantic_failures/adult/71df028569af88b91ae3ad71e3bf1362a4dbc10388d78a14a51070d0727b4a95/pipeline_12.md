@@ -1,0 +1,2 @@
+Attempt 1:
+The provided code uses IterativeImputer on categorical features, which is not supported by scikit-learn's IterativeImputer as it only works on numerical data. Additionally, the categorical pipeline uses IterativeImputer with a 'strategy' parameter, which is not a valid argument for IterativeImputer (it belongs to SimpleImputer).

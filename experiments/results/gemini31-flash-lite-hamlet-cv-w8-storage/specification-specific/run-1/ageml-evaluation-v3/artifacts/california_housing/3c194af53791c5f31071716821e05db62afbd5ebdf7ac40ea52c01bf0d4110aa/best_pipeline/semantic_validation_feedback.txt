@@ -1,0 +1,2 @@
+Attempt 1:
+The code is not compliant because the pipeline requires 'iterative_imputer' for all features, but the categorical transformer uses 'OrdinalEncoder' instead of 'IterativeImputer'. Additionally, 'IterativeImputer' cannot handle string data directly, so a proper encoding step must precede it for categorical features.

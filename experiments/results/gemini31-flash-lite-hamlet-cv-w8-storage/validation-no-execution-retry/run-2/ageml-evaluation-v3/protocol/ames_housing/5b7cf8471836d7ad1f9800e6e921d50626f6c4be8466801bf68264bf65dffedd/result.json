@@ -1,0 +1,113 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/ames_housing/5b7cf8471836d7ad1f9800e6e921d50626f6c4be8466801bf68264bf65dffedd/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/ames_housing/5b7cf8471836d7ad1f9800e6e921d50626f6c4be8466801bf68264bf65dffedd/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/ames_housing/5b7cf8471836d7ad1f9800e6e921d50626f6c4be8466801bf68264bf65dffedd/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-execution-retry/run-2/ageml-evaluation-v3/protocol/ames_housing/5b7cf8471836d7ad1f9800e6e921d50626f6c4be8466801bf68264bf65dffedd/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 11,
+  "best_run_id": "340bf4d8dc8c4a28802457f8171f04ef",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    29107.284505632328,
+    31710.691404417357,
+    27144.05705055722,
+    45175.29816817386,
+    43261.08923834948,
+    35031.02417473735,
+    32264.865407637226,
+    29871.62475917944,
+    59465.00911372868,
+    30528.844977068733
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 49.862,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": null,
+    "1": "dbb33a7e0fe44f5aa196c194283fb56c",
+    "2": null,
+    "3": "6f90aa0684664416aaa70ac0f96392db",
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+    "8": null,
+    "9": null,
+    "10": null,
+    "11": "eff719d20cad467bacb26fa5e3cd1109",
+    "12": null,
+    "13": null,
+    "14": null,
+    "15": null,
+    "16": null,
+    "17": null,
+    "18": null,
+    "19": null,
+    "20": null,
+    "21": null,
+    "22": null,
+    "23": null,
+    "24": null,
+    "25": null,
+    "26": null,
+    "27": null,
+    "28": null,
+    "29": null
+  },
+  "pipelines_found": 815,
+  "protocol_sha256": "f711bbd645a5c45d7fdf4a5680038b1f3844f9af0066113c49fb7d23a26c9a8d",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "9710aaacf4fd97f1a88d9a319b74dd31104f7b889394c16e7def5c52a3ef3656",
+  "runtime_human_readable": "0:02:04",
+  "runtime_seconds": 124.08040484413505,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 36355.97887994817,
+  "selected_candidate_key": "4ed58924e8b2fe706a6464a83d7aa2e72bb76857bf2b00920106127fbdd47bb1",
+  "selection_sha256": "3132635e26c0a38bd010970768e1e5dc16e4ea3ed28fa3d58e70b1605808a11b",
+  "selection_validation_score": 36355.97887994817,
+  "semantic_validation_failure_reasons": {
+    "4": [
+      "The pipeline implementation is not fully compliant because it introduces a ColumnTransformer with OneHotEncoder for categorical variables, which was not specified in the pipeline steps. Additionally, the IterativeImputer is applied to categorical columns in a way that is not standard for that imputer, and the pipeline structure deviates from the requested sequence by adding extra preprocessing steps not explicitly requested.",
+      "The code is not compliant because the pipeline steps must be applied to the entire dataset. The use of ColumnTransformer with OneHotEncoder is necessary to handle categorical data for the IterativeImputer and Lasso, but the pipeline structure must strictly follow the sequence: imputation, normalization, feature selection, and regression. The current implementation is technically correct for the data type constraints, but the prompt implies a direct sequence of operations.",
+      "The code is not compliant because the IterativeImputer cannot handle the sparse output of the OneHotEncoder directly, and the pipeline structure forces the imputer to run after the categorical encoding, which is not standard. Furthermore, the pipeline steps must be applied to the entire dataset, and the current implementation uses a ColumnTransformer that splits the data, which is not explicitly requested in the pipeline steps."
+    ],
+    "9": [
+      "The generated code is not fully compliant because the pipeline steps (imputation, discretization, normalization, pca, regression) must be applied to the entire dataset, but the implementation introduced a ColumnTransformer that splits numeric and categorical features. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure should strictly follow the sequence provided without branching."
+    ],
+    "13": [
+      "The generated code is not fully compliant with the pipeline requirements. Specifically, the pipeline steps were defined as 1. imputation, 2. discretization, 3. normalization, 4. pca. The provided code introduces a ColumnTransformer that splits the data into numeric and categorical branches, applying different transformations to each, which deviates from the requested linear sequence of operations. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure does not strictly follow the requested sequential order for all features."
+    ],
+    "16": [
+      "The pipeline implementation is incorrect because it applies the Binarizer and RobustScaler in parallel via ColumnTransformer, whereas the pipeline requirements specify a sequential process (discretization followed by normalization). Additionally, the Binarizer is applied to all numeric features, which may not be appropriate for all columns, and the pipeline lacks a final estimator.",
+      "The code is not compliant because the Binarizer and RobustScaler are applied to the entire dataset after a ColumnTransformer that only selects numeric columns. While the sequence is correct, the Binarizer will transform the entire feature matrix into binary values (0 or 1) before the RobustScaler is applied, which effectively renders the RobustScaler useless as it will only be scaling binary data. Furthermore, the pipeline lacks a final estimator (regressor) to actually perform the task of predicting the target variable."
+    ]
+  },
+  "semantic_validation_failures": 7,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.016737149999999996,
+    "input_tokens": 145459,
+    "output_cost": 0.04341,
+    "output_tokens": 3265,
+    "total_cost": 0.06014715000000001,
+    "total_tokens": 148724
+  },
+  "training_time": 128.91500000000002,
+  "validation_metric": "rmse"
+}

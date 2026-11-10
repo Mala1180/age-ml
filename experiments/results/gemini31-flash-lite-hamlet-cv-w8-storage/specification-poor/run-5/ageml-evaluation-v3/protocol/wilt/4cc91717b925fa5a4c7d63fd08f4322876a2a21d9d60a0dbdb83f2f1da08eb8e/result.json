@@ -1,0 +1,102 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/4cc91717b925fa5a4c7d63fd08f4322876a2a21d9d60a0dbdb83f2f1da08eb8e/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/4cc91717b925fa5a4c7d63fd08f4322876a2a21d9d60a0dbdb83f2f1da08eb8e/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/4cc91717b925fa5a4c7d63fd08f4322876a2a21d9d60a0dbdb83f2f1da08eb8e/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/wilt/4cc91717b925fa5a4c7d63fd08f4322876a2a21d9d60a0dbdb83f2f1da08eb8e/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 20,
+  "best_run_id": "998407b77f484460a2666fc74f0a29c4",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9560799462546188,
+    0.9912663755458515,
+    0.9774941215989251,
+    0.9774941215989251,
+    0.9582633523681559,
+    0.9785858246556937,
+    0.8758817601612361,
+    0.9611185757473968,
+    0.8705605116983672
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 77.465,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "bda39567e25f485e961b97d7ddaae410",
+    "1": "c240bac6fd4d4e58b8260b5266a3f461",
+    "2": "b85a4ed719fc4428bf7e2280f732bbc0",
+    "3": "683b57f03173438990c58ccabc61a96a",
+    "4": "70d328c84c3d4ef0b0e17b53e46e1b5c",
+    "5": "4afff886b7f147b0aa3931a400340a1b",
+    "6": "d989ecf92ba34a1589b4283949ca2bb0",
+    "7": "ff1ad740584f45f09744ddb75ab7b110",
+    "8": "8849d736d14d405ba4aeff8235a17799",
+    "9": "621fc2347cb141b7875d0a8813b88b47",
+    "10": "a7358443dbd44d8c814d46c56c54367a",
+    "11": "cbb04426a74847b99fdc6cf4aab30d09",
+    "12": "957949e1634045eb9a7579ab3e39cc64",
+    "13": "b858c628e8e64160b12db02315e77218",
+    "14": "148b6552ae26440ea3c7040e2a6669c0",
+    "15": "c9c577faf29a4b0799cb55446c08b93e",
+    "16": "20526e9beae941e7850ae77e7ba3ac7c",
+    "17": "57c0a58c27dc482687703c4b66ca6aec",
+    "18": "cb1635344cfd4d94af0cd50b48396dd6",
+    "19": "764b9a4dc9734aeabd24914b40e28f19",
+    "20": "747145dfa0824bb2a9d1780145ad7381",
+    "21": "aa0f689d743041418302fcb6623a69fc",
+    "22": "1066c6627279456d885a7fe1100adab6",
+    "23": "3b036de366f749daaaa360e4f844a6b0",
+    "24": "d50f9d35ac874abd828c37e061559b7a",
+    "25": "91117d1e7d8a4b20aded8d9bf02e8bfb",
+    "26": "58c592319bab40c8a44f81ff824eac29",
+    "27": "e71eda95718a439da7804d3e14a022c6",
+    "28": "ee962f7a70b84d4080defbca521f7113",
+    "29": "66898b01a9564f99b8ddb49bc68a87e7"
+  },
+  "pipelines_found": 2430,
+  "protocol_sha256": "f83edb8f4849a2d8e506c973589fda3e92cbe3d42bf7ce4d67414511705baafc",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "b7832201e382337ac841eb6632e3039d4e641e2df668647b9f31e65eb276daf0",
+  "runtime_human_readable": "0:04:10",
+  "runtime_seconds": 250.3327298089862,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9506425276880973,
+  "selected_candidate_key": "0a6b14a7a4fd4501a9a2bd94000be077dc82e18185f88da50a40585203d8941b",
+  "selection_sha256": "bc8fa42d6d86c7d0ad23bdc4ea58aeeb81744b02f6bb6e64e8f0fba36d160997",
+  "selection_validation_score": 0.9506425276880973,
+  "semantic_validation_failure_reasons": {
+    "1": [
+      "The code is syntactically correct and follows the pipeline structure, but it fails during execution because the Binarizer step transforms the data into a sparse binary representation, which causes the subsequent PCA and NearMiss steps to fail or produce empty feature sets when the threshold is not appropriately set for the input data distribution.",
+      "The code is compliant with the pipeline structure, but the Binarizer step is logically incompatible with the subsequent PowerTransformer and PCA steps for this specific dataset, as it collapses the feature variance to binary values, leading to runtime errors in downstream components."
+    ]
+  },
+  "semantic_validation_failures": 2,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.059943540000000003,
+    "input_tokens": 148268,
+    "output_cost": 0.08786249999999998,
+    "output_tokens": 4694,
+    "total_cost": 0.14780604000000003,
+    "total_tokens": 152962
+  },
+  "training_time": 678.464,
+  "validation_metric": "balanced_accuracy"
+}

@@ -1,0 +1,85 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "a4329a2632b9935d6699823a8aaeeb2871be8cb2dc43c0b37c040158e35260bc",
+  "code_sha256": "81b98a411db044128bd9f7e9bbdad6f746ca9bd57c4dd01847cfeb26e59f09ed",
+  "completed_at": 1794258771.3182983,
+  "cv_fold_scores": [
+    0.713245544893605,
+    0.7200747282921471,
+    0.7195656140790657,
+    0.7254606145951605,
+    0.7056960275447159,
+    0.7203565182651425,
+    0.7279984157813962,
+    0.714864713948377,
+    0.735024356209711,
+    0.7294879957447151
+  ],
+  "effective_random_states": [
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "classifier__random_state": 42,
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "feature_range": [
+      0,
+      1
+    ],
+    "k": 5,
+    "max_depth": 20,
+    "n_bins": 10,
+    "n_estimators": 200
+  },
+  "maximize": true,
+  "metric": "balanced_accuracy",
+  "model_sha256": "cbf1fc772e77eb33a7a06eabdf093dc493965a5e1f1c417c0c8397d01a4331cd",
+  "pipeline_id": 2,
+  "pipeline_run_id": "00bcc8041ef0461aaf0104c83bf5278c",
+  "run_id": "257c0ce966bc46199a0ce9beb86936da",
+  "run_identity": "1aa28e80e5db834187376936fdf3ac2167d04900b235273ac3f36f358d8fb362",
+  "validation_score": 0.7211774529354036,
+  "validation_split_hash": "88ada5f9c32fa1a678d8f101958d11e710d7b6116c601f3a85da151feb6f2293"
+}

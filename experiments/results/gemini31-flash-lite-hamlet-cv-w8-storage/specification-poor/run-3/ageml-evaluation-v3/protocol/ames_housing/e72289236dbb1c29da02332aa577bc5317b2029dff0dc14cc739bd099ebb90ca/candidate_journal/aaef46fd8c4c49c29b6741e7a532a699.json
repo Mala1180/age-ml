@@ -1,0 +1,75 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "90e91574e08ca369242ce9849340917d8c335d04f1731671a4f49fb158cd4888",
+  "code_sha256": "b6e3f3aa1b383337410a1ec354dba42c81c3adc6869fa0741bc77d55398ec52b",
+  "completed_at": 1794099418.6235945,
+  "cv_fold_scores": [
+    76355.89564627741,
+    102170.37384625527,
+    89291.49418583137,
+    93334.74375839473,
+    106733.62823059621,
+    88225.9659995559,
+    79116.8042368414,
+    77843.86949449977,
+    103042.4820075721,
+    80687.8280300835
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 6,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 2,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "feature_range": [
+      0,
+      1
+    ],
+    "imputation_strategy": "median",
+    "k": 5,
+    "n_bins": 10,
+    "var_smoothing": "1e-9"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "463433a982950fb7c854a488022e9983825f91aa5097ec2c7a59ac78bce373e2",
+  "pipeline_id": 8,
+  "pipeline_run_id": "4d37f0d2cf9d43eca3a1da7c7e3c289c",
+  "run_id": "aaef46fd8c4c49c29b6741e7a532a699",
+  "run_identity": "b1f19a87f9e91bc6f8c4daba5b1cef0692b24db1d8480117b8b81d061412c07b",
+  "validation_score": 89680.30854359076,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

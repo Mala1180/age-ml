@@ -1,0 +1,295 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "c3a44367aed0441eb05c005ddb9dcf96",
+    "semantic_feedback": [
+      "The generated code includes an OneHotEncoder step which was not specified in the original pipeline requirements. The pipeline only requested imputation, normalization, feature selection, and regression.",
+      "The pipeline is not strictly compliant because it introduces an OrdinalEncoder step to handle categorical data, which was not specified in the original pipeline requirements. While necessary for the code to execute on the provided dataset, it adds a transformation step beyond the four requested."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "7036ffaf9a16413bac41f3ba78843b46",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "64d20e55d7b041658f0d1e4801b92caf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "2746861f4bd64dccb5ae3e4e17c7fa89",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "e538c7f452e94ab8abcbfe22c5c457f1",
+    "semantic_feedback": [
+      "The pipeline implementation is not fully compliant because it introduces a ColumnTransformer with OneHotEncoder for categorical variables, which was not specified in the pipeline steps. Additionally, the IterativeImputer is applied to categorical columns in a way that is not standard for that imputer, and the pipeline structure deviates from the requested sequence by adding extra preprocessing steps not explicitly requested."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 5,
+    "pipeline_run_id": "6dbe9107e55647e48c2a83c39694bbf9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 6,
+    "pipeline_run_id": "3ad4490dc18e4bfa890d335350a1c46b",
+    "semantic_feedback": [
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not part of the requested pipeline steps. The pipeline must only contain the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it adds a 'preprocessor' step (ColumnTransformer) which was not requested in the original pipeline. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline steps. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline steps. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline steps. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline steps. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline steps. The pipeline must strictly consist of the five specified steps: imputation, normalization, features, rebalancing, and classification."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 7,
+    "pipeline_run_id": "3266f2d24f36492e883a02e0c44b53b5",
+    "semantic_feedback": [
+      "The code is not compliant because SMOTE is a classification-only technique, but the dataset provided is a regression task (predicting 'SalePrice'). Applying SMOTE to a continuous target variable will cause an error.",
+      "The code is not compliant because the build_model function is required to return an unfitted pipeline that can be fitted by the host. By calculating y_binned inside the function using y_train, the pipeline structure becomes dependent on the specific training data provided during construction, which violates the requirement to return a generic, unfitted estimator. Furthermore, SMOTE is inherently designed for classification and cannot be applied to a regression target like SalePrice without external discretization logic that is not part of the standard pipeline flow.",
+      "The code is not compliant because SMOTE is a classification-based resampling technique that requires a discrete target variable. Applying it to a regression dataset (SalePrice) without a proper target discretization step within the pipeline will cause a runtime error. Additionally, the code structure is overly condensed, making it difficult to maintain and debug.",
+      "The code is not compliant because SMOTE is a classification-based resampling technique that requires a discrete target variable. While the pipeline includes a discretization step in the logic, it is not correctly integrated into the ImbPipeline flow, as SMOTE expects the target to be passed during the fit process, and the current structure does not handle the target transformation dynamically within the pipeline steps.",
+      "The code is not compliant because SMOTE is a classification-based resampling technique that requires a discrete target variable. Applying it to a regression dataset (SalePrice) without a proper target discretization step within the pipeline will cause a runtime error, and the current implementation does not handle the target transformation dynamically within the pipeline flow.",
+      "The code is not compliant because SMOTE is a classification-based resampling technique that requires a discrete target variable. Applying it to a regression dataset (SalePrice) without a proper target discretization step within the pipeline will cause a runtime error, and the current implementation does not handle the target transformation dynamically within the pipeline flow.",
+      "The code is not compliant because the pipeline returns an imblearn Pipeline object that only contains preprocessing and resampling steps, but lacks a final estimator (regressor) to perform predictions, which is required for the pipeline to be functional for the regression task."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 8,
+    "pipeline_run_id": "76d8eeab19f34a2b9ff5b2b4ef818c34",
+    "semantic_feedback": [
+      "The pipeline definition provided in the prompt only included four specific steps (imputation, normalization, features, rebalancing). The generated code added a fifth step (LogisticRegression) which was not requested and violates the instruction to implement only the steps of the pipeline.",
+      "The pipeline is not compliant because it includes an 'IdentityTransformer' as a final step, which was not requested in the pipeline definition. Furthermore, a machine learning pipeline must end with an estimator that supports 'fit' and 'predict' to be functional for training and evaluation, whereas the current implementation returns a transformer.",
+      "The pipeline is not compliant because it includes a LogisticRegression classifier, which was not requested in the pipeline steps. The pipeline should only contain imputation, normalization, PCA, and SMOTE.",
+      "The pipeline is not compliant because it includes a 'DummyClassifier' as a final step, which was not requested in the pipeline definition. The pipeline should only contain the four specified steps: imputation, normalization, PCA, and SMOTE."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "04409b9296124559831fa6410a5fcb13",
+    "semantic_feedback": [
+      "The generated code is not fully compliant because the pipeline steps (imputation, discretization, normalization, pca, regression) must be applied to the entire dataset, but the implementation introduced a ColumnTransformer that splits numeric and categorical features. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure should strictly follow the sequence provided without branching.",
+      "The code is not compliant because the pipeline steps must be applied to the entire dataset. The use of ColumnTransformer to handle categorical features separately from the main pipeline sequence violates the requirement that the pipeline steps (imputation, discretization, normalization, pca, regression) be applied sequentially to the data. Additionally, the IterativeImputer and KBinsDiscretizer require numerical input, so categorical features must be encoded before entering the pipeline, not inside a ColumnTransformer that branches the data flow."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 10,
+    "pipeline_run_id": "3939ddfdf9404e4194bb8b0a1c0a87f5",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "9154040524d54b1b95351bac52cf0a96",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 12,
+    "pipeline_run_id": "e0f13b6e65034fc7b9a683eaa264ec9d",
+    "semantic_feedback": [
+      "The generated code is not compliant because it introduces additional steps (ColumnTransformer, OneHotEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it fails to handle non-numeric data present in the dataset. The 'simple_imputer' with 'mean' or 'median' strategies and 'KBinsDiscretizer' will raise errors on categorical columns. The pipeline must include a mechanism to handle categorical features (e.g., ColumnTransformer) to be executable on the provided dataset.",
+      "The generated code is not compliant because it introduces additional steps (ColumnTransformer, OneHotEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it introduces additional steps (ColumnTransformer, OneHotEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it fails to handle non-numeric data present in the dataset. The 'simple_imputer' with 'mean' or 'median' strategies and 'KBinsDiscretizer' will raise errors on categorical columns. The pipeline must include a mechanism to handle categorical features (e.g., ColumnTransformer) to be executable on the provided dataset.",
+      "The code is not compliant because it introduces additional steps (ColumnTransformer, OrdinalEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it introduces additional steps (ColumnTransformer, OrdinalEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it introduces additional steps (ColumnTransformer, OrdinalEncoder) that were not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, and rebalancing.",
+      "The code is not compliant because it fails to handle non-numeric data present in the dataset. The 'simple_imputer' with 'mean' or 'median' strategies and 'KBinsDiscretizer' will raise errors on categorical columns. The pipeline must include a mechanism to handle categorical features (e.g., ColumnTransformer) to be executable on the provided dataset."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 13,
+    "pipeline_run_id": "4644350d4d7a4811b2bbde364c587220",
+    "semantic_feedback": [
+      "The generated code is not fully compliant with the pipeline requirements. Specifically, the pipeline steps were defined as 1. imputation, 2. discretization, 3. normalization, 4. pca. The provided code introduces a ColumnTransformer that splits the data into numeric and categorical branches, applying different transformations to each, which deviates from the requested linear sequence of operations. Furthermore, the IterativeImputer cannot be applied directly to categorical features without prior encoding, and the pipeline structure does not strictly follow the requested sequential order for all features.",
+      "The pipeline requirements only specified four steps: imputation, discretization, normalization, and PCA. The generated code adds a fifth step, 'regressor' (LinearRegression), which was not requested and violates the instruction to implement only the specified steps.",
+      "The pipeline requirements only specified four steps: imputation, discretization, normalization, and PCA. The generated code adds a fifth step, 'regressor' (Ridge), which was not requested and violates the instruction to implement only the specified steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "14d2118afad84135b2317a94446ec751",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "27157d8a40554b41aab8922e09b9fe1d",
+    "semantic_feedback": [
+      "The code is not compliant because it uses a single-line format which causes syntax errors in the execution environment. Additionally, the logic for calculating n_components inside the function is problematic because the pipeline must be constructed as a static object that can be cloned and fitted by the host, rather than relying on the specific shape of the training data passed during the initial construction call.",
+      "The code is not compliant because PCA with n_components as a float (e.g., 0.95) requires the input data to be centered. However, the RobustScaler is configured with with_centering=False to handle sparse matrices, which causes a conflict during the PCA fit step. Additionally, the pipeline construction relies on the specific columns of the provided X_train, which may not be available or consistent when the pipeline is cloned and fitted on different folds by the host."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "8fb546c2794445a59b1e14149d1fe9ca",
+    "semantic_feedback": [
+      "The pipeline implementation is incorrect because it applies the Binarizer and RobustScaler in parallel via ColumnTransformer, whereas the pipeline requirements specify a sequential process (discretization followed by normalization). Additionally, the Binarizer is applied to all numeric features, which may not be appropriate for all columns, and the pipeline lacks a final estimator.",
+      "The code uses a semicolon-separated one-liner format which causes syntax errors in some environments, and the pipeline includes an extra estimator (Ridge) not specified in the original requirements.",
+      "The pipeline is not compliant because it includes a Ridge regressor, which was not requested in the original pipeline steps. The original requirements only specified discretization and normalization."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 17,
+    "pipeline_run_id": "65345c831ddc4466a346abb48a7d4600",
+    "semantic_feedback": [
+      "The code is not compliant because the Binarizer step is applied after the OneHotEncoder, which creates sparse/binary data. Applying Binarizer to one-hot encoded categorical features is mathematically invalid and will cause errors or unexpected behavior in the pipeline.",
+      "The code is not compliant because applying Binarizer to the output of a ColumnTransformer (which includes one-hot encoded categorical features) is mathematically inappropriate and will likely cause errors or produce invalid feature representations. Furthermore, the pipeline structure does not correctly isolate the discretization step to only the numeric features before normalization and PCA."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "ff02d183ae2d489485736709b10ce966",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it introduced additional steps (SimpleImputer, OneHotEncoder, ColumnTransformer) that were not specified in the original pipeline requirements. The original pipeline required direct application of iterative_imputer, kbins, power_transformer, pca, near_miss, and knn.",
+      "The code is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested pipeline. While necessary for handling categorical data, the prompt explicitly requested only the six specified steps.",
+      "The pipeline is not compliant because it includes an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because the dataset contains categorical features (strings) that cannot be processed by IterativeImputer or KBinsDiscretizer without prior encoding. While the pipeline steps match the request, the code will fail at runtime due to data type incompatibility.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' step via 'ColumnTransformer' which was not part of the requested six-step pipeline. The prompt explicitly requested only the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 19,
+    "pipeline_run_id": "c1033ffbb5e34c36a74a4d700fb538f2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "7924ad76ba98487ea0299ae8841fc019",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "6ea3f685ea4f4adca550b2fadb09b8f9",
+    "semantic_feedback": [
+      "The generated code includes an additional step (OneHotEncoder) and a regressor (LinearRegression) that were not specified in the original pipeline requirements. The pipeline should only contain the three specified steps: imputation, discretization, and normalization.",
+      "The pipeline is not compliant because it includes an OrdinalEncoder for categorical features, which was not requested in the pipeline steps. Additionally, the pipeline lacks a final estimator (regressor or classifier), which is required for the pipeline to be executable for prediction tasks."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "f5e4612a46274e7ab9ba34a47cecedf6",
+    "semantic_feedback": [
+      "The code is not compliant because it fails to dynamically handle the k_neighbors parameter for SMOTE based on the actual number of samples in the training fold, leading to runtime errors when the fold size is smaller than the default or provided k_neighbors value."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "96911ba947d14f969c5ef645d0f1d4b9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "257fcd7c8a7b479ca41ce9f73902dd8d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "1c50dd6ed6764db8960249d811b78571",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it added a 'RandomForestClassifier' which was not requested in the original pipeline steps. The original pipeline only specified imputation, normalization, feature selection, and rebalancing.",
+      "The pipeline is not compliant because it includes a 'RandomForestRegressor' which was not requested in the original pipeline steps. The original pipeline only specified imputation, normalization, feature selection, and rebalancing."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "6c68a34d6a7c4ca8bc9b57a3bf927450",
+    "semantic_feedback": [
+      "The code is compliant with the pipeline steps, but the previous execution error regarding SMOTE's k_neighbors parameter indicates that the pipeline construction needs to be robust to small fold sizes during cross-validation. While the code is logically correct for a standard dataset, it fails when the number of samples in a fold is smaller than the k_neighbors value."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "bdd1b8cacf6c4f0f9ed6273864c29acc",
+    "semantic_feedback": [
+      "The pipeline definition provided in the prompt only specified three steps (imputation, normalization, and feature selection). The generated code includes an additional 'regressor' step (Ridge), which was not requested and violates the requirement to implement only the specified steps.",
+      "The pipeline is not compliant because it includes an 'IdentityTransformer' as an estimator, which was not requested. The pipeline steps were strictly defined as imputation, normalization, and feature selection. Furthermore, a pipeline must end with an estimator to be used for prediction, and an identity transformer does not fulfill the role of a predictive model.",
+      "The pipeline is not compliant because it includes a 'Ridge' regressor, which was not requested in the pipeline steps. The pipeline steps were strictly defined as imputation, normalization, and feature selection.",
+      "The pipeline is not compliant because it includes a 'Ridge' regressor, which was not requested in the pipeline steps. The pipeline steps were strictly defined as imputation, normalization, and feature selection."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "2d30411b37104d28acf1a827b9e2f5ce",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "6bcb185d336b426592604d44c12fed1f",
+    "semantic_feedback": [
+      "The code is not compliant because it uses a single-line format with semicolons which causes syntax errors in some environments, and the pipeline structure does not explicitly name the normalization step as 'normalization' as requested in the pipeline description, instead nesting it inside a 'preprocessor' step.",
+      "The code is not compliant because the pipeline step 'normalization' is defined as a ColumnTransformer containing both scaling and encoding, rather than just the requested 'robust_scaler'. Additionally, PCA cannot be applied directly to sparse output from OneHotEncoder without a dense transformation, which is missing.",
+      "The code uses semicolons to condense multiple statements onto single lines, which is considered poor practice and can lead to syntax errors in some Python environments. Additionally, the pipeline step 'normalization' is defined as a ColumnTransformer containing both scaling and encoding, rather than just the requested 'robust_scaler' as a standalone step.",
+      "The code is not compliant because the 'normalization' step is defined as a ColumnTransformer that includes imputation and encoding, rather than just the requested 'robust_scaler'. Additionally, the pipeline structure does not strictly isolate the 'robust_scaler' as the 'normalization' step."
+    ],
+    "status": "COMPLETED"
+  }
+]

@@ -1,0 +1,215 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/e56acc90583c5572ca551ba4c41bb7f8f25b45c42e753170780c7d616020d301/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/e56acc90583c5572ca551ba4c41bb7f8f25b45c42e753170780c7d616020d301/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/e56acc90583c5572ca551ba4c41bb7f8f25b45c42e753170780c7d616020d301/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-poor/run-5/ageml-evaluation-v3/protocol/ames_housing/e56acc90583c5572ca551ba4c41bb7f8f25b45c42e753170780c7d616020d301/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 25,
+  "best_run_id": "337353cc1c6a49c480dc02f43c9633fc",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    25713.536937973826,
+    29566.29622393897,
+    23829.479463188123,
+    39998.319548981526,
+    34827.78937044011,
+    20763.44901478036,
+    22120.30336396283,
+    25103.382312967853,
+    45841.19407935828,
+    29296.844836969984
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 1208.2159999999997,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "d840b8e4ffbe4376a6256b402bb5f6ea",
+    "1": "7c59a56454d941799357575897ad26cd",
+    "2": "18dca516f4a943c4be92f8a6fbd1190b",
+    "3": "8cbb31720374476eb57a3c81f5c059ae",
+    "4": "5d223b5e1a794d5c9cef94e6a283f5d4",
+    "5": "1da69c290a3149b6a83763d3bf206c0b",
+    "6": "f749ff3d73bd41358313fcbda2d048f2",
+    "7": "149cf3674be84fbebf3b5f705b0fbaec",
+    "8": "ae0d62c39bc14bfdba92cce8520d37b4",
+    "9": "293d49ac328a43009b5cb5ea42965c97",
+    "10": "8be00909f1b740c58c00bfabb1fd762c",
+    "11": "a3d3be65ade54b51a805ec8ee16e868c",
+    "12": "4dd60b93db88498b82c018ff68b2fe7d",
+    "13": "8eaa552fca3f43b6a7317807b0a72dee",
+    "14": "9c0ffae937dc4dfdb2e24c2b193e5a56",
+    "15": "acad042c6f2745749045c56efd99c7c4",
+    "16": "29ffd454c52e40b391012c6a808bdafd",
+    "17": "19e0fdf7dfe544c0a9a9d9c5de9826d3",
+    "18": "0ae131fc66f2453f8adc412c37194c81",
+    "19": "f40030cab7ed430e8637b85f1b186ccc",
+    "20": "49ed367d9b484d1f973ce7feb8d01676",
+    "21": "72f1901e5f9c4e83bacac106f5620315",
+    "22": "bc8855c7e84740168fe3e3852eb365be",
+    "23": "ff4ff3995bc144429d8df9182ef410e7",
+    "24": "e0ef7943061547969e2cfa558dbf4060",
+    "25": "e6e7a2f864114b97aeee0697bcb94de1",
+    "26": "42800553dfb1431c8b730fa4b1bf03be",
+    "27": "35f24d394ea743258e76d7efef277ba7",
+    "28": "c8bac9a67ba645fa890e8c7988ee9493",
+    "29": "e16614e5d4ef4fae867628e9d04879f3"
+  },
+  "pipelines_found": 3915,
+  "protocol_sha256": "45309c10b0d890df096477bce148224c86628169e67f9ce767d3dca6aada92f2",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "63a214230b5fc6cb7c5b78d6ab68023af4df078845a8e575626012c9c08c0742",
+  "runtime_human_readable": "0:15:10",
+  "runtime_seconds": 910.2381073385477,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 29706.059515256184,
+  "selected_candidate_key": "a444e755cbe880df490ead384fed5b79b32f58dbd7611ad7585d5b017d8a1ca1",
+  "selection_sha256": "95ef3408df450f1fe2de72e4740ec1c8726867bc9d5102d9ae7ec51f627a77b2",
+  "selection_validation_score": 29706.059515256184,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The pipeline is not compliant because it introduces an 'OneHotEncoder' step for categorical features, which was not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, and regression."
+    ],
+    "5": [
+      "no. The code fails because the SMOTE and KNeighborsClassifier components require a minimum number of samples to function correctly (k_neighbors + 1 and n_neighbors respectively). When the pipeline is cross-validated on small folds, the number of available samples is less than the default or provided hyperparameter values, causing the execution to crash. The pipeline logic itself is correct, but it lacks the necessary robustness to handle small sample sizes in cross-validation folds.",
+      "The code is compliant with the pipeline structure, but it fails during cross-validation because the SMOTE and KNeighborsClassifier components have static hyperparameter values that exceed the number of samples available in small cross-validation folds, leading to runtime errors. The pipeline needs to be robust to the sample size of the folds.",
+      "The code is not compliant because the custom 'SafeNeighbors' class is defined but never integrated into the pipeline steps, meaning the original issue with static hyperparameter values exceeding fold sample sizes remains unresolved.",
+      "The code is not compliant because the custom 'DynamicSMOTE' class does not inherit from the necessary base classes or implement the required interface for the imblearn pipeline to correctly call 'fit_resample' during the cross-validation process, leading to execution errors.",
+      "The code is not compliant because the custom 'SafeSMOTE' class does not implement the 'fit' method required by the imblearn pipeline, and the 'SafeKNN' class does not inherit from 'ClassifierMixin', which prevents it from being correctly identified as a classifier in the pipeline."
+    ],
+    "6": [
+      "The pipeline is not compliant because it introduced an extra 'preprocessor' step (ColumnTransformer with OneHotEncoder) that was not requested in the original pipeline definition. The original pipeline only specified imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer with OrdinalEncoder) that was not specified in the original pipeline requirements. The original pipeline only requested imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because the dataset contains categorical features (strings), which cause the IterativeImputer and other numerical transformers to fail. While the pipeline steps match the request, the code is not executable on the provided dataset without an encoding step.",
+      "The pipeline is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it includes an extra 'preprocessor' step (ColumnTransformer) that was not requested in the original pipeline. The pipeline must only contain the six specified steps: imputation, discretization, normalization, features, rebalancing, and classification."
+    ],
+    "9": [
+      "The pipeline is not compliant because the Binarizer step is applied after the OneHotEncoder, which creates sparse/binary data that Binarizer may not handle as intended for discretization, and the pipeline structure deviates from the specific sequence requested by applying a preprocessor before the binarizer.",
+      "The code is not compliant because the pipeline steps must strictly follow the order: discretization, normalization, features, rebalancing, and classification. The inclusion of a ColumnTransformer as a preprocessor before the binarizer violates the specified sequence and the requirement to only implement the requested steps.",
+      "The code is not compliant because it introduces an extra 'preprocessor' step (ColumnTransformer) which was not requested in the pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because the input dataset contains categorical features (strings) that the Binarizer and StandardScaler cannot process directly, leading to runtime errors. While the pipeline steps match the requested sequence, the implementation fails to handle the data types present in the provided dataset.",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer) which was not requested in the pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested five-step pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested five-step pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested five-step pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested five-step pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification.",
+      "The pipeline is not compliant because it includes a 'preprocessor' step (ColumnTransformer) which was not part of the requested five-step pipeline. The pipeline must strictly contain only the five specified steps: discretization, normalization, features, rebalancing, and classification."
+    ],
+    "15": [
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. normalization, 2. features, 3. regression. The generated code introduces a 'preprocessor' step using ColumnTransformer and OneHotEncoder, which was not part of the requested pipeline steps. Additionally, PCA cannot be applied directly to sparse output from OneHotEncoder without a dense transformation, which is not included.",
+      "The pipeline steps requested were 'normalization', 'features', and 'regression'. The generated code includes a 'preprocessor' (ColumnTransformer) as the first step, which performs both encoding and scaling, rather than just the requested 'normalization' step. Furthermore, the pipeline structure does not strictly map to the three requested steps."
+    ],
+    "16": [
+      "The code is not compliant because it adds a 'preprocessor' step (ColumnTransformer with OneHotEncoder) which was not part of the requested pipeline steps. The pipeline explicitly requested only imputation, normalization, feature selection, rebalancing, and classification.",
+      "The code is not compliant because it introduces a 'preprocessor' step (ColumnTransformer with OrdinalEncoder) that was not included in the original 5-step pipeline specification. The pipeline must strictly contain only the 5 requested steps.",
+      "The code is not compliant because it fails to handle non-numeric data present in the dataset. The pipeline steps (IterativeImputer, StandardScaler, etc.) require numeric input, but the provided dataset contains categorical columns. The code attempts to pass the raw DataFrame directly to the pipeline without encoding, which will cause a runtime error.",
+      "The code is not compliant because it adds a 'preprocessor' step (ColumnTransformer) which was not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 steps specified: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it adds an 'encoder' step (ColumnTransformer) which was not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 steps specified: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces nested pipelines and a ColumnTransformer to handle categorical data, which were not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it adds a 'preprocessor' step (ColumnTransformer) which was not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 steps specified: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it introduces nested pipelines and a ColumnTransformer to handle categorical data, which were not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 specified steps: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it adds an 'encoder' step (ColumnTransformer) which was not part of the requested 5-step pipeline. The pipeline must strictly contain only the 5 steps specified: imputation, normalization, features, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical data. The pipeline steps (IterativeImputer, StandardScaler, etc.) require numeric input, but the provided dataset contains categorical columns. The code attempts to pass the raw DataFrame directly to the pipeline without encoding, which will cause a runtime error."
+    ],
+    "17": [
+      "The pipeline is not compliant because the Binarizer step is applied after OneHotEncoding, which creates sparse binary features. Applying a Binarizer to one-hot encoded data is mathematically inappropriate and likely to cause errors or loss of information. Furthermore, the Binarizer is applied to the entire feature set including the newly created categorical columns, which violates the logical flow of the requested pipeline steps.",
+      "The code is not compliant because the Binarizer is applied to the output of the ColumnTransformer (which includes one-hot encoded categorical features). Binarizing one-hot encoded data is logically incorrect and will likely lead to data corruption or runtime errors. Additionally, the pipeline includes a StandardScaler which was not requested in the original pipeline steps.",
+      "The code is not compliant because applying a Binarizer to one-hot encoded categorical features is logically incorrect and will corrupt the data representation. Furthermore, the pipeline includes a preprocessor step (ColumnTransformer) that was not requested in the original pipeline definition.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. Additionally, applying a Binarizer to ordinal-encoded categorical data is logically incorrect as it treats category indices as continuous values to be thresholded, which corrupts the categorical information.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. Additionally, applying a Binarizer to ordinal-encoded categorical data is logically incorrect as it treats category indices as continuous values to be thresholded, which corrupts the categorical information.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. Additionally, applying a Binarizer to ordinal-encoded categorical data is logically incorrect as it treats category indices as continuous values to be thresholded, which corrupts the categorical information.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. Additionally, applying a Binarizer to ordinal-encoded categorical data is logically incorrect as it treats category indices as continuous values to be thresholded, which corrupts the categorical information.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. Additionally, applying a Binarizer to ordinal-encoded categorical data is logically incorrect as it treats category indices as continuous values to be thresholded, which corrupts the categorical information.",
+      "The code is not compliant because the dataset contains categorical features (strings), which cause the Binarizer and PCA steps to fail. The pipeline must include a mechanism to handle categorical data (e.g., encoding) before applying numerical transformations, even if not explicitly listed as a separate step, to ensure the pipeline is executable.",
+      "The code is not compliant because it includes a ColumnTransformer for encoding categorical features, which was not requested in the pipeline steps. Furthermore, applying a Binarizer to the output of a OneHotEncoder is mathematically inappropriate as it treats binary indicator columns as continuous values to be thresholded, which corrupts the data.",
+      "The code is not compliant because it includes a TargetEncoder step which was not requested in the pipeline. The pipeline must only contain the four specified steps: discretization, features, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical features present in the dataset. Applying Binarizer and PCA directly to a dataset containing string columns will raise a TypeError during execution. While the pipeline steps are correct in name, the implementation is not robust enough to handle the provided dataset.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. The pipeline must only contain the four specified steps: discretization, features, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical features present in the dataset. Applying Binarizer and PCA directly to a dataset containing string columns will raise a TypeError during execution. While the pipeline steps are correct in name, the implementation is not robust enough to handle the provided dataset.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. The pipeline must only contain the four specified steps: discretization, features, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical features present in the dataset. Applying Binarizer and PCA directly to a dataset containing string columns will raise a TypeError during execution. While the pipeline steps are correct in name, the implementation is not robust enough to handle the provided dataset.",
+      "The code is not compliant because it includes an OrdinalEncoder step which was not requested in the pipeline. The pipeline must only contain the four specified steps: discretization, features, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical features present in the dataset. Applying Binarizer and PCA directly to a dataset containing string columns will raise a TypeError during execution. While the pipeline steps are correct in name, the implementation is not robust enough to handle the provided dataset."
+    ],
+    "20": [
+      "The code is not compliant because it adds extra steps (ColumnTransformer for categorical encoding and SimpleImputer) that were not requested in the original pipeline definition. The pipeline must strictly follow the 5 steps provided: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because it introduces an extra 'preprocessor' step (OrdinalEncoder) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because the dataset contains categorical features (strings) that IterativeImputer cannot process directly, leading to runtime errors. While the pipeline steps match the request, the implementation fails to handle the data types present in the provided dataset.",
+      "The pipeline is not compliant because it introduces an extra 'preprocessor' step (ColumnTransformer with OrdinalEncoder) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because it fails to handle categorical data types present in the dataset. While the pipeline steps match the request, the IterativeImputer will raise a ValueError when encountering string columns, and the code does not include the necessary preprocessing to convert these strings to numeric format before the imputation step.",
+      "The pipeline is not compliant because it introduces an extra 'preprocessor' step (ColumnTransformer with OrdinalEncoder) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The pipeline is not compliant because it introduces an extra 'preprocessor' step (ColumnTransformer with OrdinalEncoder) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because it introduces an extra 'imputation' step (ColumnTransformer) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because it introduces an extra 'imputation' step (ColumnTransformer) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification.",
+      "The code is not compliant because it introduces an extra 'imputation' step (ColumnTransformer) that was not part of the original 5-step pipeline definition. The pipeline must strictly consist of the requested steps: imputation, discretization, normalization, rebalancing, and classification."
+    ],
+    "21": [
+      "The generated code is not fully compliant because it introduces an extra step (OneHotEncoder) for categorical features that was not specified in the pipeline. Additionally, the IterativeImputer cannot be applied directly to categorical data without prior encoding, which would require a different pipeline structure than the one requested."
+    ],
+    "23": [
+      "The pipeline definition in the prompt explicitly lists three steps: normalization, features, and classification. The generated code introduces a 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure, violating the requirement to implement only the specified steps.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code includes an additional 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code wraps these steps inside an additional outer pipeline with a preprocessor, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code includes an additional 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure.",
+      "The code fails because the dataset contains categorical features (strings), which RobustScaler cannot process. While the pipeline steps match the request, the code is not executable on the provided dataset without an encoding step.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code includes an additional 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code includes an additional 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code includes an additional 'preprocessor' step (ColumnTransformer) which was not part of the requested pipeline structure.",
+      "The pipeline definition explicitly requires three steps: normalization, features, and classification. The generated code nests a preprocessor inside the normalization step, which violates the requirement to implement only the three specified steps in the pipeline sequence."
+    ],
+    "27": [
+      "The code is not compliant because it fails to handle the SMOTE n_neighbors constraint dynamically. When cross-validation folds result in a small number of samples, SMOTE's default or provided k_neighbors will exceed the available samples, causing a runtime error. The pipeline must handle this constraint internally.",
+      "The code is not compliant because the SMOTE n_neighbors parameter is set during the construction of the pipeline using the shape of the training data. Since the pipeline must be unfitted and reusable, hardcoding the number of neighbors based on the initial training set size will cause errors during cross-validation when the number of samples in a fold is smaller than the calculated k_neighbors."
+    ],
+    "29": [
+      "The code fails because the custom SafeKNN class does not correctly handle the case where the number of samples is less than the requested n_neighbors during the fit method, as the error persists. Additionally, the logic for setting n_neighbors needs to be more robust within the sklearn framework."
+    ]
+  },
+  "semantic_validation_failures": 93,
+  "split_identity": "d03c98baee5d69cdc7179c219fda83cf4efb5899fc0f9681166105c8fe600af0",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.21065310499999992,
+    "input_tokens": 1205356,
+    "output_cost": 0.17641150000000003,
+    "output_tokens": 18719,
+    "total_cost": 0.38706460500000006,
+    "total_tokens": 1224075
+  },
+  "training_time": 2168.139999999999,
+  "validation_metric": "rmse"
+}

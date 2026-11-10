@@ -1,0 +1,2 @@
+Attempt 1:
+The code fails because it uses a lambda function inside FunctionTransformer, which cannot be pickled by the environment's serialization process. To fix this, a standalone class inheriting from BaseEstimator and TransformerMixin must be defined outside the function scope to ensure it is picklable.

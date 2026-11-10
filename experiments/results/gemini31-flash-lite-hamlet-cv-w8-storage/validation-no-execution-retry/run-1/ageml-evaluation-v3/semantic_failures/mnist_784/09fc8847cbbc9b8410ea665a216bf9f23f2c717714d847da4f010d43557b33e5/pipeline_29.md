@@ -1,0 +1,2 @@
+Attempt 1:
+The generated code uses a standard sklearn Pipeline, which does not support resampling steps like NearMiss. To be compliant with the requested pipeline, an imblearn Pipeline must be used instead.

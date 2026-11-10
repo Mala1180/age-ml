@@ -1,0 +1,83 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/madelon/b9641974282aaa7c1ed115453336930ac68f13e1a899322816d16f2a97e5314b/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/madelon/b9641974282aaa7c1ed115453336930ac68f13e1a899322816d16f2a97e5314b/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/madelon/b9641974282aaa7c1ed115453336930ac68f13e1a899322816d16f2a97e5314b/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/specification-specific/run-1/ageml-evaluation-v3/protocol/madelon/b9641974282aaa7c1ed115453336930ac68f13e1a899322816d16f2a97e5314b/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 12,
+  "best_run_id": "2f2a70dab9af49a3bf3a51e5a6c719d6",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.8192307692307692,
+    0.7923076923076923,
+    0.8153846153846154,
+    0.7961538461538462,
+    0.8,
+    0.7961538461538462,
+    0.8192307692307692,
+    0.8038461538461539,
+    0.8346153846153846,
+    0.8269230769230769
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 162.63800000000003,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "9e13e827f96f4b35a5f2e77c0ac09005",
+    "1": "fa2a253e9e8642c28dc68a3899204e51",
+    "2": "418f8942db43446491897cf3c244f1d3",
+    "3": "6c47bc64209c494a806bcf826ea3527f",
+    "4": "3786f879ae6743d5a87218207c6607f5",
+    "5": "c8f2090fbcd9401fa9d0234d95479cb8",
+    "6": "c8b89fb2267b46a697e99360839ceea3",
+    "7": "371aedf13a0047529167ef7dab742aa6",
+    "8": "7d14df9a6307426f8b034266fd40d084",
+    "9": "2d5e5c53663942c7b754e32d83850f48",
+    "10": "65cd9d6f123c4cedb90f9995b1cef686",
+    "11": "330a32331c8b4835b9bcc34c9246b141",
+    "12": "7de8b8ba1bcf41dd8f4f2411c63d6002",
+    "13": "774867c921e241a9a68aab0736dc59e5",
+    "14": "387a7956e16f42b682169ecbb478de8e",
+    "15": "602604c2b7c14eda9912ef67756307b6"
+  },
+  "pipelines_found": 16,
+  "protocol_sha256": "6cb94cc818e5ef7bf48ead1fec6a9af8be4edfa671d313579bda9323f854d19b",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "e1d6a5ff417a45606917cfa508d0020e48ff3b307fa8dccd0dd41029a03c0761",
+  "runtime_human_readable": "0:03:39",
+  "runtime_seconds": 218.64543122425675,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.8103846153846155,
+  "selected_candidate_key": "fb04252207ee023d1a77630e88a3abeee3ca64bcd043248a193d0d44801be060",
+  "selection_sha256": "f1245b577e86fac3046e5132b2cc96e8bb53ab3a945b3efc48b4d9fb2db5f8e3",
+  "selection_validation_score": 0.8103846153846155,
+  "semantic_validation_failure_reasons": {},
+  "semantic_validation_failures": 0,
+  "split_identity": "1e1191e0721ed166ea549e5e00d9c2b7241315519a3f4439424a4c4ce9b1e340",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.019649999999999997,
+    "input_tokens": 1017915,
+    "output_cost": 0.041482500000000005,
+    "output_tokens": 3609,
+    "total_cost": 0.0611325,
+    "total_tokens": 1021524
+  },
+  "training_time": 933.216,
+  "validation_metric": "balanced_accuracy"
+}

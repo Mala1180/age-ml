@@ -1,0 +1,75 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "06cfbe2b576f208273e8add9a002453718e0dcab55fbef0b037ddb8f0eca46a5",
+  "code_sha256": "b6e3f3aa1b383337410a1ec354dba42c81c3adc6869fa0741bc77d55398ec52b",
+  "completed_at": 1794182871.6894433,
+  "cv_fold_scores": [
+    72344.5678468816,
+    86622.23997666732,
+    87668.3336003387,
+    87051.72902380656,
+    101169.93314241685,
+    83005.36314068169,
+    75434.97555996738,
+    85512.54622680687,
+    95654.71268345744,
+    77350.57287122603
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 6,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "feature_range": [
+      0,
+      1
+    ],
+    "imputation_strategy": "mean",
+    "k": 10,
+    "n_bins": 10,
+    "var_smoothing": "1e-9"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "c4a382a9bb352ab6f0297e47fa5c4b7d53e1bcb4acf333639330901959046120",
+  "pipeline_id": 8,
+  "pipeline_run_id": "a00b8c3c46b041f9b54c6e36f192f62c",
+  "run_id": "00b58db29ee04ded925b2d2cca2e694c",
+  "run_identity": "15f527812ab46474d7d768580773f904e656c136e4521d1ed4d947ee1ee39653",
+  "validation_score": 85181.49740722505,
+  "validation_split_hash": "ebb2a7fe43977bc0d010fd608bccf46a2fb3cd9583c9fbe5fb5dd4c69bc267f3"
+}

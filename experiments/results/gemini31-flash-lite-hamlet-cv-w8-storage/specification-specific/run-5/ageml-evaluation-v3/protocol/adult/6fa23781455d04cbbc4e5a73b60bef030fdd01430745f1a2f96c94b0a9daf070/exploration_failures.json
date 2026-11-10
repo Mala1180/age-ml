@@ -1,0 +1,231 @@
+[
+  {
+    "execution_feedback": null,
+    "pipeline_id": 0,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 1,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 2,
+    "pipeline_run_id": "6cc878d6ade641f795d0cc8ac052632d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "4b2efc3fe40943e3b095d1c665a0ccf3",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 4,
+    "pipeline_run_id": "517f945c0b754d708305517f2b609de7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "fafd7fb4a067487fa5f3692095dd28d7",
+    "semantic_feedback": [
+      "The provided code is not fully compliant because the pipeline requires an iterative imputer on the entire dataset, but the implementation splits the data into numeric and categorical features. IterativeImputer in scikit-learn does not natively support categorical string data, which would cause a runtime error if applied directly to the whole dataframe without prior encoding. Furthermore, the pipeline steps specified were imputation, normalization, and classification, but the implementation introduces an additional OneHotEncoder step which was not requested."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "81c6da6d214044be8e1bbbdede030ccf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 7,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "66b8856db7dd4361bcddacca3c0e0d9f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "9b4199e4ada340a184f03fbf3aa091a7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 10,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 11,
+    "pipeline_run_id": "7f6a226c50d84faabccdf2f1db208790",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "abfb8cddf7c04f2ab0e7b7fb8cf530c7",
+    "semantic_feedback": [
+      "The provided code uses IterativeImputer on categorical features, which is not supported by scikit-learn's IterativeImputer as it only works on numerical data. Additionally, the categorical pipeline uses IterativeImputer with a 'strategy' parameter, which is not a valid argument for IterativeImputer (it belongs to SimpleImputer)."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "ba6f5fb48345416c9105891df8990bc9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "106b6fd750a0411489c685a6ae68ce2f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 15,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "f79e0ee77d44494789b49f43fb92751e",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "85e0cf5c86294631b8b1d57f5a45dc60",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 18,
+    "pipeline_run_id": "9902e975e1af48ad90bef8314e0916a6",
+    "semantic_feedback": [
+      "The code is not compliant because the pipeline order is incorrect. The IterativeImputer requires numerical input, but it is placed before the ColumnTransformer (which handles categorical encoding). Additionally, the IterativeImputer cannot handle categorical strings directly, so the encoding must occur before imputation."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "f030b60c68a84bda8d8932f3fa77095d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 20,
+    "pipeline_run_id": "01ef90caab1d4cffb0cf357fb2dbd4fa",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it introduced a 'preprocessor' step (ColumnTransformer with OneHotEncoder) which was not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it introduced an 'encoding' step (ColumnTransformer with OrdinalEncoder) which was not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it includes an 'encoding' step using ColumnTransformer and OrdinalEncoder, which was not specified in the original pipeline requirements. The original pipeline only requested 'normalization', 'rebalancing', and 'classification'.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a nested 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a nested 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a nested 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The code is not compliant because the dataset contains categorical features (strings like 'Private'), which cause the RobustScaler to fail. While the pipeline steps match the request, the code will crash during execution because it lacks the necessary encoding step to handle non-numeric data.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'.",
+      "The pipeline is not compliant because it introduces an 'OrdinalEncoder' and a 'ColumnTransformer' step, which were not requested in the original pipeline definition. The original pipeline only specified 'normalization' with 'robust_scaler', 'rebalancing' with 'near_miss', and 'classification' with 'nn'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 21,
+    "pipeline_run_id": "b906310721fd4a278dadf4fe631a400d",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 22,
+    "pipeline_run_id": "91c3ac3a394049a0a4ba0d3fb9c3dcba",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 23,
+    "pipeline_run_id": "5987bf0bd2614362bc57c1d1612f4153",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "4732311f7f6644c5a44e81f61e6b61dd",
+    "semantic_feedback": [
+      "The code is not compliant because the IterativeImputer cannot handle categorical string data directly, and placing the ColumnTransformer after the imputer causes a mismatch in data types. The imputation must be applied to numeric data, and categorical data must be encoded before or during the imputation process, or the imputer must be configured to handle mixed types."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 25,
+    "pipeline_run_id": "54e1f2076e824c2a8f842cd979ef5124",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 26,
+    "pipeline_run_id": "00cc0a0aca064b599299e2945e35ed0a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 27,
+    "pipeline_run_id": "2bcf3dfc511c412e9a178daad8abfcab",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 28,
+    "pipeline_run_id": "038f02c68c1143af9752a67f9d34d232",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": null,
+    "pipeline_id": 29,
+    "pipeline_run_id": null,
+    "semantic_feedback": [],
+    "status": "TIMED_OUT"
+  }
+]

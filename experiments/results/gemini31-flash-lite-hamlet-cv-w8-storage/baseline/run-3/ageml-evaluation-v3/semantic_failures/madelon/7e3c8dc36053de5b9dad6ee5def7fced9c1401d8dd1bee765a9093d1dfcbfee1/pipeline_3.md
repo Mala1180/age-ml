@@ -1,0 +1,2 @@
+Attempt 1:
+The code uses semicolons to put multiple statements on a single line, which is considered poor practice in Python and often causes issues in certain execution environments. Additionally, the previous execution errors suggest that the environment may be sensitive to this formatting or the way imports are handled.

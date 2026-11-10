@@ -1,0 +1,71 @@
+{
+  "artifact_status": "logged",
+  "candidate_key": "4274744c908f85d6f265583e9f46911778903886a212629ea881519a7155e476",
+  "code_sha256": "75d6302bca4c4b882bf0ee29e2b10d6e3ff114f1a480fabf00f8b9dab8787e90",
+  "completed_at": 1794279211.2074182,
+  "cv_fold_scores": [
+    92322.57482934024,
+    57025.540879843706,
+    77247.34622110586,
+    71763.27222686747,
+    79097.16752548543,
+    79567.90427987052,
+    55408.94496661453,
+    92860.04117809837,
+    92694.09539761009,
+    58517.522216162804
+  ],
+  "effective_random_states": [
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    },
+    {
+      "preprocessor__num__discretizer__random_state": 42
+    }
+  ],
+  "fit_attempt": 2,
+  "fit_seed": 42,
+  "fit_succeeded": true,
+  "grid_position": 1,
+  "hyperparameters": {
+    "discretization_strategy": "quantile",
+    "encode": "ordinal",
+    "imputation_strategy": "mean",
+    "n_bins": 10,
+    "n_neighbors": 11,
+    "weights": "distance"
+  },
+  "maximize": false,
+  "metric": "rmse",
+  "model_sha256": "8ca99bc8d1274c81ecec2740c1190f8d7f4afcaf093a17f670687358b2c18cb3",
+  "pipeline_id": 22,
+  "pipeline_run_id": "a98a6cc1ab604b08875664e6b07ee83c",
+  "run_id": "49c33080d2cd47eda8e41f34341da8d6",
+  "run_identity": "4c708b8b731af38bb02d9df50501536b3593510754e452e1ab021aa80c842519",
+  "validation_score": 75650.4409720999,
+  "validation_split_hash": "d3be51c254a53a35397edbd07be64c79e786db81ddde1884bd516827c5ff9a09"
+}

@@ -1,0 +1,413 @@
+[
+  {
+    "execution_feedback": true,
+    "pipeline_id": 0,
+    "pipeline_run_id": "3c1e19aa3e584c0dacc1eacf3dc82b15",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 1,
+    "pipeline_run_id": "62f4714821754b518d855d2576a373fb",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 2,
+    "pipeline_run_id": "0ecfdb94ebe24591ac5fbe380a07f14a",
+    "semantic_feedback": [
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it performs data cleaning (dropping rows) inside the build_model function. The instructions state that the function must return an unfitted pipeline and that all preprocessing must be INSIDE the pipeline. Dropping rows is a data transformation that should be handled by an imputer or similar transformer within the pipeline, not by modifying the input data directly.",
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the LinearRegression model to raise an error during execution. While the pipeline steps match the request, the implementation is not robust enough to handle the provided dataset.",
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the LinearRegression model to raise an error during execution. While the pipeline steps match the request, the implementation is not robust enough to handle the provided dataset.",
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the LinearRegression model to raise an error during execution. While the pipeline steps match the request, the implementation is not robust enough to handle the provided dataset.",
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. The generated code includes an additional 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the LinearRegression model to raise an error during execution. While the pipeline steps match the request, the implementation is not robust enough to handle the provided dataset."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 3,
+    "pipeline_run_id": "d6086d4cf7e24182b525d050b8a4a214",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 4,
+    "pipeline_run_id": "4716094b76e44d18a15828a0333f8f43",
+    "semantic_feedback": [
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. discretization, 2. normalization, 3. regression. The generated code added an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because the dataset contains missing values (NaNs) in the 'horsepower' column, which causes the KBinsDiscretizer to fail. While the pipeline steps were followed, the implementation is not robust to the provided dataset's characteristics.",
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. discretization, 2. normalization, 3. regression. The generated code added an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the 'horsepower' column of the provided dataset, which causes the KBinsDiscretizer to raise an error during execution.",
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. discretization, 2. normalization, 3. regression. The generated code added an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the 'horsepower' column of the provided dataset, which causes the KBinsDiscretizer to raise an error during execution.",
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. discretization, 2. normalization, 3. regression. The generated code introduced a ColumnTransformer and an Imputer, which were not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the 'horsepower' column of the provided dataset, which causes the KBinsDiscretizer to raise an error during execution.",
+      "The pipeline definition provided in the prompt explicitly lists three steps: 1. discretization, 2. normalization, 3. regression. The generated code added an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the 'horsepower' column of the provided dataset, which causes the KBinsDiscretizer to raise an error during execution."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 5,
+    "pipeline_run_id": "d18030521ee74a92a42bfc80ea099d7f",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 6,
+    "pipeline_run_id": "f0e05774471e4cf5a540ef3ee44c97bf",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 7,
+    "pipeline_run_id": "6f38beb1287a429080182a6e90770600",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 8,
+    "pipeline_run_id": "7af0eccfd8404fc189e63c2df1b9872b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 9,
+    "pipeline_run_id": "99a44b67860748e7a79303f121288ad9",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 10,
+    "pipeline_run_id": "9ed7a77b4dc64441abcec41dee204cdd",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 11,
+    "pipeline_run_id": "63007f34b2e24dff88211fd8ce3277d2",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization and 2. regression. Adding an imputer step violates the requirement to implement only the steps of the pipeline provided.",
+      "The code is compliant with the pipeline steps, but the dataset contains missing values (NaNs) which cause the Ridge regressor to fail. While the pipeline steps are strictly followed, the model is not executable on the provided dataset without handling missing values.",
+      "The code is not compliant because it attempts to perform data cleaning (dropping rows) inside the build_model function. The function must return an unfitted pipeline that handles the data as provided, and data cleaning/imputation should be part of the pipeline steps if necessary, or the pipeline must be constructed to handle the input directly.",
+      "The pipeline definition provided in the prompt explicitly lists only two steps: 1. normalization and 2. regression. Adding an imputer step violates the requirement to implement only the steps of the pipeline provided.",
+      "The pipeline definition explicitly lists only two steps: normalization and regression. Adding an imputer step violates the requirement to implement only the steps of the pipeline provided.",
+      "The code is compliant with the pipeline steps, but it fails during execution because the input dataset contains missing values (NaNs) which the Ridge regressor cannot handle. While the pipeline steps are strictly followed, the model is not robust to the provided data.",
+      "The pipeline definition explicitly lists only two steps: normalization and regression. Adding an imputer step violates the requirement to implement only the steps of the pipeline provided.",
+      "The pipeline definition explicitly lists only two steps: normalization and regression. Adding an imputer step violates the requirement to implement only the steps of the pipeline provided."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 12,
+    "pipeline_run_id": "3246d9bc53374cc99715626377d2d7a7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 13,
+    "pipeline_run_id": "8069f3f52e794bf4b162ffb8505d36c7",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 14,
+    "pipeline_run_id": "b1eb8a5afc0445b38491e324c04612c2",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 15,
+    "pipeline_run_id": "3041d90b716f49d0866f3f7521bca7bb",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with elastic_net. The generated code adds an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is compliant with the pipeline steps, but the previous execution failed due to NaN values in the dataset. Since the pipeline definition strictly limits the steps to normalization and regression, I cannot add an imputer. Therefore, the code is logically correct based on the instructions, but the dataset requires handling missing values which the current pipeline does not allow.",
+      "The pipeline definition explicitly lists only two steps: normalization and regression. The generated code includes an imputer step, which violates the requirement to implement only the steps specified in the pipeline.",
+      "The pipeline definition explicitly lists only two steps: normalization and regression. The generated code includes an imputer step, which violates the requirement to implement only the steps specified in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 16,
+    "pipeline_run_id": "f26bb3f08bc44f328955f56a46fd89db",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 17,
+    "pipeline_run_id": "7166e8ffce464911b2ee26706e23ca31",
+    "semantic_feedback": [
+      "The pipeline is not compliant because the Binarizer transformer in scikit-learn is designed for feature transformation (typically applied to specific columns or the whole feature set), but the pipeline logic implies it should be part of the feature engineering process. More importantly, applying Binarizer to the entire feature set (including columns like 'model' or 'displacement') is mathematically questionable for a regression task, and the implementation lacks a ColumnTransformer to handle the specific application of the Binarizer if intended for specific features. Additionally, the Binarizer is typically used for classification preprocessing, not regression."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 18,
+    "pipeline_run_id": "234f1db3154c4d208204e941fb98e219",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'. However, the dataset contains NaN values, which causes the pipeline to fail without imputation. To resolve this while strictly adhering to the pipeline, one would need to drop the rows with missing values before passing the data to the pipeline or within a custom transformer, but the current implementation adds an extra step not requested.",
+      "The generated code is not compliant because it introduces a custom 'drop_nan' step that was not specified in the original pipeline requirements of only 'normalization' and 'regression'.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'.",
+      "The generated code is not compliant because it includes an 'imputer' step, which was not specified in the original pipeline requirements of only 'normalization' and 'regression'."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 19,
+    "pipeline_run_id": "b5baf8fae427440188099b31659a761a",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 20,
+    "pipeline_run_id": "4b33599da55249c981d00a03e1cd659b",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 21,
+    "pipeline_run_id": "2d5b305bf97a44009379bf31059c64fe",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not specified in the original pipeline requirements (only 'normalization' and 'regression' were requested).",
+      "The code is not compliant because it attempts to perform data cleaning (dropping rows) inside the build_model function. The function must return an unfitted pipeline object that handles the data transformation internally, rather than modifying the training data during the construction of the pipeline.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the NaN values present in the dataset, which causes the Lasso regression to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided data.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 22,
+    "pipeline_run_id": "a40088a8f01e421689d119408a98bf36",
+    "semantic_feedback": [
+      "The generated code is not compliant because it added an 'imputer' step which was not specified in the original pipeline requirements (only 'normalization' and 'regression' were requested).",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not requested in the original pipeline definition. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash. While the pipeline steps match the request, the implementation is not robust enough for the provided dataset.",
+      "The generated code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline requirements. The pipeline must only contain 'normalization' and 'regression' steps."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 23,
+    "pipeline_run_id": "b3905b68119c4e15a721de136ca3fd16",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it added an 'imputer' step which was not requested in the original pipeline definition. The original pipeline only specified 'normalization' and 'regression'.",
+      "The code is not compliant because it fails to handle the missing values present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. While necessary for execution, the instructions strictly require implementing only the steps provided in the pipeline.",
+      "The code is not compliant because it attempts to perform data cleaning (dropping rows) inside the 'build_model' function. The function must return an unfitted sklearn-compatible estimator or pipeline, and data cleaning should be handled by including an appropriate transformer (like SimpleImputer) within the pipeline steps, rather than modifying the training data directly.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression).",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Lasso regressor to raise an error. While the pipeline steps match the request, the implementation is not robust enough to execute on the provided dataset.",
+      "The pipeline is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition. The instructions strictly require implementing only the steps provided in the pipeline (normalization and regression)."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": true,
+    "pipeline_id": 24,
+    "pipeline_run_id": "38d8cd34ea264f7c83583e0e0e8d2be1",
+    "semantic_feedback": [],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 25,
+    "pipeline_run_id": "f825f8f20a5147f9bb453edb6af8d6f3",
+    "semantic_feedback": [
+      "The pipeline is not compliant because it added an 'imputer' step which was not requested in the original pipeline definition. The original pipeline only specified 'normalization' and 'regression'.",
+      "The code is not compliant because the dataset contains missing values (NaNs) in the 'horsepower' column, which causes the SVR model to fail during execution. While the pipeline strictly follows the requested steps, it fails to handle the data quality issues present in the provided dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it performs data cleaning (dropping NaNs) outside of the pipeline structure. The instructions require all preprocessing to be INSIDE the pipeline, and the pipeline must only contain the steps specified (normalization and regression). Additionally, the function must return an unfitted estimator, but the current code performs data manipulation on the input arguments before returning the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset.",
+      "The code is not compliant because it includes an 'imputer' step which was not specified in the original pipeline definition of 'normalization' and 'regression'. While necessary for the dataset, it violates the instruction to implement only the steps of the pipeline.",
+      "The code is not compliant because it fails to handle the missing values (NaNs) present in the dataset, which causes the SVR model to crash during execution. While the pipeline strictly follows the requested steps, it does not include the necessary imputation step required to make the pipeline functional for this specific dataset."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 26,
+    "pipeline_run_id": "e2fdcba44fcb416a95e15d2b19cbe390",
+    "semantic_feedback": [
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The code is compliant with the requested pipeline steps, but the dataset contains missing values (NaNs) which cause the KNeighborsRegressor to fail. While the pipeline structure is correct, it is not functional for the provided dataset without an imputation step, which was excluded to strictly follow the pipeline definition.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions, even though it is necessary for the dataset.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions, even though it is necessary for the dataset.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions.",
+      "The pipeline definition explicitly requested only two steps: normalization and regression. Adding an imputer step violates the pipeline structure defined in the instructions."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 27,
+    "pipeline_run_id": "2da82d53afc1466b89b0326cc53e980a",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it performs data cleaning (dropping NaNs) inside the build_model function. The function must return an unfitted pipeline that handles the data as provided, and any necessary data cleaning must be part of the pipeline steps, not performed on the training data before pipeline construction.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the SVR to fail. While the pipeline steps are strictly followed, the model cannot be fitted without handling the missing data, which must be done within the pipeline as per the instructions.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the SVR model to raise an error during fitting. While the pipeline steps strictly follow the prompt, the implementation is not robust enough to handle the provided data.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the SVR model to raise an error during fitting. While the pipeline steps strictly follow the prompt, the implementation is not robust enough to handle the provided data.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the SVR model to raise an error during fitting. While the pipeline steps strictly follow the prompt, the implementation is not robust enough to handle the provided data.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the SVR model to raise an error during fitting. While the pipeline steps strictly follow the prompt, the implementation is not robust enough to handle the provided data.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the SVR model to raise an error during fitting. While the pipeline steps strictly follow the prompt, the implementation is not robust enough to handle the provided data.",
+      "The pipeline definition in the prompt explicitly lists only two steps: 1. normalization with minmax, 2. regression with svr. Adding an imputer step violates the requirement to implement only the steps provided in the pipeline."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 28,
+    "pipeline_run_id": "675bb9ee039a416db2606d533726d66c",
+    "semantic_feedback": [
+      "The pipeline definition in the prompt explicitly lists two steps: 1. normalization, 2. regression. The generated code adds an 'imputer' step which was not requested in the pipeline specification.",
+      "The code is compliant with the pipeline steps, but the dataset contains missing values (NaNs) in the 'horsepower' column. Since the pipeline does not include an imputation step, it will fail during execution. However, adding an imputation step would violate the strict pipeline definition provided.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The code is not compliant because it performs data cleaning (dropping NaNs) inside the build_model function. The instructions state that the function must return an unfitted pipeline and that all preprocessing must be INSIDE the pipeline. Modifying the input data outside the pipeline structure is not allowed.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The code is compliant with the pipeline steps, but it fails during execution because the dataset contains missing values (NaNs) which ElasticNet cannot handle. While adding an imputer would fix this, it would violate the strict two-step pipeline requirement.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure.",
+      "The pipeline definition explicitly requires only two steps: normalization and regression. The generated code includes an additional 'imputer' step, which violates the specified pipeline structure."
+    ],
+    "status": "COMPLETED"
+  },
+  {
+    "execution_feedback": false,
+    "pipeline_id": 29,
+    "pipeline_run_id": "e1cae9c994c4499f81663a15335af621",
+    "semantic_feedback": [
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline.",
+      "The code is not compliant because it performs data manipulation (fillna) outside of the pipeline structure. Preprocessing steps must be encapsulated within the sklearn Pipeline object to ensure they are applied correctly during cross-validation and inference.",
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline.",
+      "The code is not compliant because the dataset contains missing values (NaNs) which cause the Binarizer to fail during execution. While the pipeline steps match the request, the implementation is not robust to the provided dataset's characteristics, and the previous feedback indicated that preprocessing (like imputation) is necessary to make the pipeline executable.",
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline.",
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Binarizer to raise an error during execution. While the pipeline steps match the request, the implementation is not robust to the provided dataset's characteristics.",
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline.",
+      "The code is not compliant because it fails to handle missing values (NaNs) present in the dataset, which causes the Binarizer to raise an error during execution. While the pipeline steps match the request, the implementation is not robust to the provided dataset's characteristics.",
+      "The pipeline definition explicitly requested three steps: discretization, normalization, and regression. The generated code added an 'imputer' step which was not part of the specified pipeline."
+    ],
+    "status": "COMPLETED"
+  }
+]

@@ -1,0 +1,2 @@
+Attempt 1:
+The pipeline order is incorrect. The provided pipeline requires imputation to occur before normalization, but the code places the imputer after the ColumnTransformer (which includes normalization). Additionally, IterativeImputer does not support sparse matrices produced by OneHotEncoder, and the pipeline structure does not correctly handle categorical data before imputation.

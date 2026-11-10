@@ -1,0 +1,105 @@
+{
+  "artifact_references": {
+    "exploration_failures.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/wilt/f96d9bb3845a12fd2320b54962cf106b38e8fb4da12c92ddcffaebb9c96c5b49/exploration_failures.json",
+    "protocol.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/wilt/f96d9bb3845a12fd2320b54962cf106b38e8fb4da12c92ddcffaebb9c96c5b49/protocol.json",
+    "selection.json": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/wilt/f96d9bb3845a12fd2320b54962cf106b38e8fb4da12c92ddcffaebb9c96c5b49/selection.json",
+    "validation_candidates.csv": "/root/age-ml/experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage/validation-no-semantic-retry/run-4/ageml-evaluation-v3/protocol/wilt/f96d9bb3845a12fd2320b54962cf106b38e8fb4da12c92ddcffaebb9c96c5b49/validation_candidates.csv"
+  },
+  "artifacts": {
+    "best_pipeline": [
+      "/root/age-ml/out/best_pipeline/code.py",
+      "/root/age-ml/out/best_pipeline/pipeline.md"
+    ],
+    "best_run": [
+      "/root/age-ml/out/best_run/cv_evaluation.json",
+      "/root/age-ml/out/best_run/code.py",
+      "/root/age-ml/out/best_run/cv_predictions.csv"
+    ]
+  },
+  "best_pipeline_id": 17,
+  "best_run_id": "3b61d1dd3c344aaa935d63128cac0f56",
+  "best_run_name": null,
+  "best_test_score": null,
+  "cv_fold_scores": [
+    0.9596806872518032,
+    0.9796775277124623,
+    0.9764024185421565,
+    0.960446758481693,
+    0.9774941215989251,
+    0.9764024185421565,
+    0.9978165938864629,
+    0.9989082969432315,
+    0.9720356063150823,
+    0.9321663019693655
+  ],
+  "evaluation_protocol": "hamlet_cv",
+  "exploration_budget_seconds": 3600,
+  "inference_time": 137.14100000000008,
+  "model_role": "representative_last_cv_fold_model_not_full_data_refit",
+  "pipeline_run_ids": {
+    "0": "551f85d006de44fc88ad3d0fbc0dea33",
+    "1": "fe22241e37dd45249200c75597256fd1",
+    "2": "3f54bd537373403f800b690cb1a2e8d3",
+    "3": "9d7ce31ceb814e1b96b355e4563ab4a8",
+    "4": "9b557861dee64d7f9e8dc99c287d359c",
+    "5": "79656db406424cf3832c584cee64ae20",
+    "6": "a255899e06a947bf81f3fb3759b90318",
+    "7": "9550bbe8558c45bbbe21fa0c479c9618",
+    "8": "68b34840519f4673a0405fa8c2d16be6",
+    "9": "27997a5d913d4d129649ee6e852564d5",
+    "10": "ece07b0e6b7242a49c09af2489d3e2d3",
+    "11": "1f78372a7f874b3b8173906512e8ccba",
+    "12": "59c542ae1da44ca7a33763854b49682d",
+    "13": "0cd7edd287294cb089438e4f202e63dd",
+    "14": "2ab40c7864854800995d8063f04e1172",
+    "15": "055b27c1f0764d998053322061abca35",
+    "16": "7ac74a9dcef6452a9fff298397d033ac",
+    "17": "6dcac5565fff42c381b832a55cc2786b",
+    "18": "26e97d6ba51d4bb29e22165f7444207a",
+    "19": "e8109b52c86640e8be3fafa4828ed360",
+    "20": "8f1cb46738364b539069b2567850d2cc",
+    "21": "5ff5ba27481b4252b873b739883668cd",
+    "22": "21628ff792d548cab5f822cedb5db7f7",
+    "23": "c06058213c8b415c923cce5ae41cec27",
+    "24": "1ca6861d886b4ff5ae6557acca172dbd",
+    "25": "ec0e7dc365c244b799ca279d43a4ac4a",
+    "26": "8ecefe3bbd01442e90d0c39fc95cd739",
+    "27": "0f0e7af51d2a4705bba20c717a480be7",
+    "28": "d000d258663a41e49a72e0d13f47b7ba",
+    "29": "245b2a7de5094f60b492c7c86e9e2a1d"
+  },
+  "pipelines_found": 299,
+  "protocol_sha256": "cff4e4668b2a9ea4a733a7935e100d675519a331b614a84ff8bdb2f564355432",
+  "protocol_version": "ageml-evaluation-v3",
+  "run_identity": "2b695d64599201067e9adfd8fc219608c4fe79217f344bff68f0b06383dfbabf",
+  "runtime_human_readable": "0:06:20",
+  "runtime_seconds": 379.56112100183964,
+  "score_role": "selection_cv_not_independent_test",
+  "search_cv_score": 0.9731030731243339,
+  "selected_candidate_key": "256a44ad74e069a7d9b8b314166a3db72b14c49ed20d7a968029bf4fc5992046",
+  "selection_sha256": "c6ce1cbcba5c26606ca1e73b4bb0decfd34fbd16196e5d7d240354b667e9d6d8",
+  "selection_validation_score": 0.9731030731243339,
+  "semantic_validation_failure_reasons": {
+    "0": [
+      "The code is not compliant because the 'method' argument provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' parameter in the function signature is intended to be used for the imputation_order of the IterativeImputer, but it is currently ignored in favor of a hardcoded 'ascending' value, which causes a mismatch between the provided hyperparameters and the pipeline configuration.",
+      "The code is not compliant because the 'method' parameter provided in the function signature is ignored in the IterativeImputer configuration, and the 'imputation_order' is hardcoded to 'ascending' instead of utilizing the 'method' parameter as intended by the pipeline design.",
+      "The code is not compliant because the 'method' parameter in the function signature is ignored in the IterativeImputer configuration, and the 'version' parameter is not correctly mapped to the PowerTransformer, leading to runtime errors.",
+      "The code is not compliant because the 'method' parameter in the function signature is intended to control the imputation_order of the IterativeImputer, but it is currently ignored in favor of a hardcoded 'ascending' value, which causes a mismatch between the provided hyperparameters and the pipeline configuration."
+    ]
+  },
+  "semantic_validation_failures": 5,
+  "split_identity": "097cf5ef1ecee7d098102dac1f8eaaa71cf28a9c38e8d43502b49b98bab351d7",
+  "status": "completed",
+  "test_score": null,
+  "token_usage": {
+    "input_cost": 0.030464299999999986,
+    "input_tokens": 118392,
+    "output_cost": 0.06146249999999999,
+    "output_tokens": 3907,
+    "total_cost": 0.0919268,
+    "total_tokens": 122299
+  },
+  "training_time": 1059.0970000000002,
+  "validation_metric": "balanced_accuracy"
+}
