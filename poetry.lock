@@ -2692,18 +2692,18 @@ files = [
 
 [[package]]
 name = "langchain"
-version = "1.4.8"
+version = "1.4.10"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0.0,>=3.10.0"
 groups = ["main"]
 files = [
-    {file = "langchain-1.4.8-py3-none-any.whl", hash = "sha256:31ddb8688db67f9eb1fd4e77594573ef863b2e3c086397273d4a7a3ff4245b45"},
-    {file = "langchain-1.4.8.tar.gz", hash = "sha256:66649bcf64650235032ca8e25586a263b68b77a0232bb51e87c129e6a5d8e1b2"},
+    {file = "langchain-1.4.10-py3-none-any.whl", hash = "sha256:e398fc0488b592a37cbe4fcdbcec2a97211f4f5179fdeba70f94b0c5bee20da7"},
+    {file = "langchain-1.4.10.tar.gz", hash = "sha256:959182134779e7d585b509f74253e96bb8bcf7a816ba16206597493df2e4ce47"},
 ]
 
 [package.dependencies]
-langchain-core = ">=1.7.4,<2.0.0"
+langchain-core = ">=1.7.7,<2.0.0"
 langchain-google-genai = {version = "*", optional = true, markers = "extra == \"google-genai\""}
 langchain-ollama = {version = "*", optional = true, markers = "extra == \"ollama\""}
 langchain-openai = {version = "*", optional = true, markers = "extra == \"openai\""}
@@ -2733,14 +2733,14 @@ xai = ["langchain-xai"]
 
 [[package]]
 name = "langchain-core"
-version = "1.7.4"
+version = "1.7.7"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0.0,>=3.10.0"
 groups = ["main"]
 files = [
-    {file = "langchain_core-1.7.4-py3-none-any.whl", hash = "sha256:20963807aa074366a3820a5d980399009ac05e17b77105c1e847db3ea3b4829f"},
-    {file = "langchain_core-1.7.4.tar.gz", hash = "sha256:a9b286e12d782dfc1eb17bdbf4228e0f71e7caa6e5d26375eb9ab6723baaf613"},
+    {file = "langchain_core-1.7.7-py3-none-any.whl", hash = "sha256:d69535f817e9ea949dabc85079dccc28b0cde04a579ec5c2273be2f7b09b859c"},
+    {file = "langchain_core-1.7.7.tar.gz", hash = "sha256:acc4205b5617f36cc0495ee77af7b3eedf8714941c7c14a40220be52770d4536"},
 ]
 
 [package.dependencies]
