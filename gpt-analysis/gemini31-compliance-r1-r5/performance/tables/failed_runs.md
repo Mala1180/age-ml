@@ -1,0 +1,13 @@
+| condition | repetition | dataset | status |
+| --- | --- | --- | --- |
+| specification-poor | 5 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 1 | madelon | no_valid_candidate |
+| validation-no-execution-retry | 1 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 2 | madelon | no_valid_candidate |
+| validation-no-execution-retry | 2 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 3 | madelon | no_valid_candidate |
+| validation-no-execution-retry | 3 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 4 | madelon | no_valid_candidate |
+| validation-no-execution-retry | 4 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 5 | madelon | no_valid_candidate |
+| validation-no-execution-retry | 5 | mnist_784 | no_valid_candidate |

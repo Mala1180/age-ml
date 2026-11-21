@@ -343,3 +343,17 @@ il punteggio CV di selezione separatamente dal test indipendente.
 Per esportare una singola ripetizione, committare uno snapshot leggero e generare
 tabelle e figure dalla struttura corrente dei risultati, vedere
 [docs/campaign-analysis.md](docs/campaign-analysis.md).
+
+### Confronto AGE-ML e MLZero
+
+Per confrontare le distribuzioni dei punteggi e gli esiti pubblicati nei branch
+dei risultati dei due repository:
+
+```bash
+poetry run python scripts/competitor_analysis.py
+```
+
+Il report HTML, le figure PNG/PDF/SVG e le tabelle CSV/Markdown/LaTeX sono generati
+in `reports/competitor-comparison/`. Il comando legge i dati committati senza
+cambiare branch o eseguire modelli. Vedere [la guida](docs/competitor-analysis.md)
+per sorgenti, riproduzione offline e interpretazione degli intervalli.

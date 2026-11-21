@@ -1,0 +1,11 @@
+| problem | dataset | baseline | specification-poor | specification-specific | validation-no-semantic-retry | validation-no-execution-retry | no-csp |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| classification | adult | 0.821761 | 0.814481 | 0.823079 | 0.822424 | 0.745435 | 0.825495 |
+| classification | har | 0.95667 | 0.932699 | 0.951624 | 0.95667 | 0.933894 | 0.934259 |
+| classification | madelon | 0.875 | 0.866538 | 0.810385 | 0.875 | — | 0.62 |
+| classification | mnist_784 | 0.97244 | 0.70036 | 0.970074 | 0.96988 | — | 0.950564 |
+| classification | texture | 0.997455 | 0.988182 | 0.997455 | 0.997455 | 0.997455 | 0.945273 |
+| classification | wilt | 0.973103 | 0.950643 | 0.974589 | 0.973103 | 0.970202 | 0.802097 |
+| regression | ames_housing | 33819.7 | 29706.1 | 31200.2 | 33819.7 | 36356 | 31998.7 |
+| regression | auto_mpg | 2.61475 | 2.63505 | 2.71141 | 2.61475 | 3.36375 | 2.77534 |
+| regression | california_housing | 70224 | 69834.5 | 68235.7 | 70224 | 80684.6 | 68282.3 |

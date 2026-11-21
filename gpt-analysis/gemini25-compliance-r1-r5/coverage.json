@@ -1,0 +1,58 @@
+{
+  "audit_script_sha256": {
+    "compliance_audit.py": "734f11a35deba056b4795ac08d72ce9d956908723af3fcf9b8f1dd448d405f7d",
+    "_compliance_checks.py": "77ec8197f1a6382963e7ec4cdb93616e3ae27ec91c8c395af6ca4b7b71f2c348",
+    "_compliance_static.py": "82a5ab444492058e7e580013bde153fa45576e6ce6e526f973ed46a51469fb5a"
+  },
+  "campaign_identity": "b7a06bfbfba2352b5852542c5adb0eea642504354fa421ded8db728f24eff9ad",
+  "source_zip_sha256": "e8f80863d9cf3d944a6bf58a19bc4b1bf6247bf2c2ae3fe1550a473c917fbabd",
+  "dataset_runs": 270,
+  "candidate_records": 26303,
+  "hash_verified_recipes": 26303,
+  "candidate_records_with_verified_code": 26303,
+  "candidate_instance_statuses": {
+    "resolved": 26190,
+    "invalid_source": 78,
+    "unresolved_factory": 21,
+    "invalid_factory": 14
+  },
+  "registered_code_versions": 10646,
+  "all_exported_source_hashes": 4161,
+  "additional_version_audit_statuses": {
+    "unresolved": 573,
+    "resolved_structure_only": 182,
+    "invalid_source": 15
+  },
+  "winner_outcomes": {
+    "baseline": {
+      "no_detected_violation": 31,
+      "confirmed_violation": 14
+    },
+    "no-csp": {
+      "no_detected_violation": 30,
+      "confirmed_violation": 9,
+      "not_applicable": 6
+    },
+    "specification-poor": {
+      "no_detected_violation": 34,
+      "confirmed_violation": 10,
+      "not_applicable": 1
+    },
+    "specification-specific": {
+      "no_detected_violation": 32,
+      "confirmed_violation": 13
+    },
+    "validation-no-execution-retry": {
+      "no_detected_violation": 29,
+      "confirmed_violation": 10,
+      "not_applicable": 6
+    },
+    "validation-no-semantic-retry": {
+      "no_detected_violation": 28,
+      "confirmed_violation": 17
+    }
+  },
+  "parameters_unresolved_instances": 0,
+  "direct_judge_observations": 20,
+  "scope": "All recoverable registered instances and additional attributable code versions. Additional versions have structural-only audits, not observed parameter-instance scores."
+}

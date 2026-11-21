@@ -1,0 +1,56 @@
+{
+  "campaign_identity": "9ff59d982f308352c03d5f9b32547035c124caed2172f7ad4bae093025b27cc5",
+  "source_zip_sha256": "af9cb89e55156cde2181986a53171e20f907aaffb7f4eb414925d54882204bc0",
+  "dataset_runs": 270,
+  "candidate_records": 31440,
+  "hash_verified_recipes": 31440,
+  "candidate_records_with_verified_code": 31440,
+  "candidate_instance_statuses": {
+    "resolved": 19378,
+    "invalid_source": 11947,
+    "unresolved_factory": 115
+  },
+  "registered_code_versions": 17409,
+  "all_exported_source_hashes": 2382,
+  "additional_version_audit_statuses": {
+    "unresolved": 884,
+    "invalid_source": 521,
+    "resolved_structure_only": 190
+  },
+  "winner_outcomes": {
+    "baseline": {
+      "no_detected_violation": 25,
+      "confirmed_violation": 20
+    },
+    "no-csp": {
+      "no_detected_violation": 30,
+      "confirmed_violation": 15
+    },
+    "specification-poor": {
+      "no_detected_violation": 29,
+      "confirmed_violation": 15,
+      "not_applicable": 1
+    },
+    "specification-specific": {
+      "no_detected_violation": 30,
+      "confirmed_violation": 15
+    },
+    "validation-no-execution-retry": {
+      "confirmed_violation": 25,
+      "not_applicable": 10,
+      "no_detected_violation": 10
+    },
+    "validation-no-semantic-retry": {
+      "no_detected_violation": 25,
+      "confirmed_violation": 20
+    }
+  },
+  "parameters_unresolved_instances": 0,
+  "direct_judge_observations": 430,
+  "scope": "All recoverable registered instances and additional attributable code versions. Additional versions have structural-only audits, not observed parameter-instance scores.",
+  "audit_script_sha256": {
+    "compliance_audit.py": "b138e54fc898d3a1612d9fcf904df8f11ca736240deddeb030a95d5baabbb9c8",
+    "_compliance_checks.py": "77ec8197f1a6382963e7ec4cdb93616e3ae27ec91c8c395af6ca4b7b71f2c348",
+    "_compliance_static.py": "82a5ab444492058e7e580013bde153fa45576e6ce6e526f973ed46a51469fb5a"
+  }
+}

@@ -698,7 +698,18 @@ def latex_table(frame):
     return "\n".join(lines + [r"\hline", r"\end{tabular}"]) + "\n"
 
 
-def _figures(frame, info, summary, scores, deltas, directory, formats, counts, details):
+def _figures(
+    frame,
+    info,
+    summary,
+    scores,
+    deltas,
+    directory,
+    formats,
+    counts,
+    details,
+    performance_only=False,
+):
     import matplotlib
 
     matplotlib.use("Agg")
@@ -730,18 +741,21 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
         }
     )
     long_labels = {
-        "baseline": "Baseline",
-        "specification-poor": "Poor\nspecification",
-        "specification-specific": "Specific\nspecification",
+        "baseline": "Original",
+        "specification-poor": "Broad",
+        "specification-specific": "Tight",
         "validation-no-semantic-retry": "No semantic\nretry",
         "validation-no-execution-retry": "No execution\nretry",
         "no-csp": "No CSP",
     }
     conditions = info["conditions"]
     labels = [long_labels.get(c, c) for c in conditions]
-    pretty = lambda n: {"har": "HAR", "mnist_784": "MNIST", "auto_mpg": "Auto MPG"}.get(
-        n, n.replace("_", " ").capitalize()
-    )
+
+    def pretty(n):
+        return {"har": "HAR", "mnist_784": "MNIST", "auto_mpg": "Auto MPG"}.get(
+            n, n.replace("_", " ").capitalize()
+        )
+
     palette = dict(
         zip(
             conditions,
@@ -757,44 +771,98 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
             fig.savefig(directory / f"{name}.{extension}", dpi=200, bbox_inches="tight")
         plt.close(fig)
 
-    # 01: explicit numeric row positions, aligned summary, external legend.
+    def age_bracket(ax):
+        ids = [
+            conditions.index(c)
+            for c in ("baseline", "specification-poor", "specification-specific")
+            if c in conditions
+        ]
+        if len(ids) != 3 or ids != list(range(min(ids), max(ids) + 1)):
+            return
+        y0, y1 = min(ids) - 0.35, max(ids) + 0.35
+        x = -0.27
+        ax.plot(
+            [x + 0.018, x, x, x + 0.018],
+            [y0, y0, y1, y1],
+            transform=ax.get_yaxis_transform(),
+            color="#333333",
+            lw=1,
+            clip_on=False,
+        )
+        ax.text(
+            x - 0.025,
+            (y0 + y1) / 2,
+            "AGE-ML",
+            rotation=90,
+            transform=ax.get_yaxis_transform(),
+            ha="right",
+            va="center",
+            fontsize=9,
+        )
+
     part = summary.set_index("condition").reindex(conditions)
-    fig, ax = plt.subplots(figsize=(11.5, 5.4))
-    positions = np.arange(len(conditions))
-    left = np.zeros(len(conditions))
-    for field, color, label in [
-        ("completed", "#479f76", "Valid result"),
-        ("failed", "#c65f53", "Recorded unsuccessful outcome"),
-        ("missing", "#cccccc", "Missing outcome"),
-    ]:
-        values = part[field].to_numpy()
-        ax.barh(positions, values, left=left, label=label, color=color, height=0.64)
-        for i, value in enumerate(values):
-            if value:
-                ax.text(
-                    left[i] + value / 2,
-                    i,
-                    str(int(value)),
-                    ha="center",
-                    va="center",
-                    color="white" if field != "missing" else "#222222",
-                    fontsize=10,
+    if not performance_only:
+        # 01: explicit numeric row positions, aligned summary, external legend.
+        part = summary.set_index("condition").reindex(conditions)
+        fig, ax = plt.subplots(figsize=(11.5, 5.4))
+        positions = np.arange(len(conditions))
+        left = np.zeros(len(conditions))
+        outcome_columns = [
+            ("no_detected_violation", "#479f76", "No detected violation"),
+            ("confirmed_violation", "#e6b83f", "Specification violation"),
+            ("undetermined", "#8293a3", "Audit undetermined"),
+            ("failed", "#c65f53", "Unsuccessful outcome"),
+            ("missing", "#dddddd", "Missing outcome"),
+        ]
+        for outcome, _, _ in outcome_columns[:3]:
+            part[outcome] = [
+                int(
+                    (
+                        frame.condition.eq(c)
+                        & frame.status.eq("completed")
+                        & frame.audit_outcome.eq(outcome)
+                    ).sum()
                 )
-        left += values
-    ax.set_yticks(positions, labels)
-    ax.set_ylim(len(conditions) - 0.4, -0.6)
-    ax.set_xlim(0, max(1, float(part.expected.max())) * 1.015)
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.set_xlabel("Dataset executions")
-    ax.set_title("Execution outcomes", pad=48)
-    ax.legend(
-        loc="lower left", bbox_to_anchor=(0, 1.015), ncol=3, frameon=False, fontsize=9
-    )
-    save(
-        fig,
-        "01_outcomes",
-        "All selected repetitions. Unsuccessful outcomes include no valid candidate; missing outcomes remain separate.",
-    )
+                if "audit_outcome" in frame
+                else (int(part.loc[c, "completed"]) if outcome == "undetermined" else 0)
+                for c in conditions
+            ]
+        for field, color, label in outcome_columns:
+            values = part[field].to_numpy()
+            ax.barh(positions, values, left=left, label=label, color=color, height=0.64)
+            for i, value in enumerate(values):
+                if value:
+                    ax.text(
+                        left[i] + value / 2,
+                        i,
+                        str(int(value)),
+                        ha="center",
+                        va="center",
+                        color="#222222"
+                        if field in ("confirmed_violation", "missing")
+                        else "white",
+                        fontsize=10,
+                    )
+            left += values
+        ax.set_yticks(positions, labels)
+        age_bracket(ax)
+        ax.set_ylim(len(conditions) - 0.4, -0.6)
+        ax.set_xlim(0, max(1, float(part.expected.max())) * 1.015)
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.set_xlabel("Dataset executions")
+        ax.set_title("Execution outcomes", pad=64)
+        ax.legend(
+            loc="lower left",
+            bbox_to_anchor=(0, 1.015),
+            ncol=2,
+            frameon=False,
+            fontsize=9,
+        )
+        save(
+            fig,
+            "01_outcomes",
+            "Winner-level audit only. Confirmed violations take precedence over undetermined checks. Green means no violation detected under the audited contract, not proof of full conformity.",
+        )
 
     # 02: annotations keep the actual values, even below the color scale floor.
     names = [
@@ -850,7 +918,24 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
                     fontsize=8.5,
                     color="white" if luminance < 0.48 else "#222222",
                 )
-        ax.set_title("Classification | mean balanced accuracy ± 95% margin", pad=16)
+        ax.plot(
+            [-0.4, -0.4, 2.4, 2.4],
+            [1.025, 1.055, 1.055, 1.025],
+            transform=ax.get_xaxis_transform(),
+            clip_on=False,
+            color="#333333",
+            lw=1,
+        )
+        ax.text(
+            1,
+            1.065,
+            "AGE-ML",
+            transform=ax.get_xaxis_transform(),
+            ha="center",
+            va="bottom",
+            fontsize=10,
+        )
+        ax.set_title("Classification | mean balanced accuracy ± 95% margin", pad=48)
         extend = (
             "min"
             if np.isfinite(matrix).any() and np.nanmin(matrix) < 0.8
@@ -869,17 +954,16 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
             "Cells: mean ± 95% Student-t margin; valid/expected repetitions. ± 0 = no observed variation; ± <0.001 = a positive margin hidden by rounding.\nSelection CV; intervals describe technical repetition variability under an independence assumption, not generalization uncertainty.",
         )
 
-    # 03: absolute RMSE on a separate target scale for each dataset.
-    regression = [
-        n
-        for n in info["dataset_order"]
-        if info["datasets"][n]["problem"] == "regression"
-    ]
-    if regression:
+    def absolute_panels(dataset_names, filename, classification):
+        if not dataset_names:
+            return
         fig, axes = plt.subplots(
-            len(regression), 1, figsize=(12, 3.1 * len(regression) + 0.8), squeeze=False
+            len(dataset_names),
+            1,
+            figsize=(12, 3.1 * len(dataset_names) + 0.8),
+            squeeze=False,
         )
-        for ax, name in zip(axes.flat, regression):
+        for ax, name in zip(axes.flat, dataset_names):
             positive = []
             for j, condition in enumerate(conditions):
                 values = (
@@ -911,9 +995,17 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
                         linewidths=0.7,
                         zorder=4,
                     )
-                    text = f"{values.mean():,.3f}  (n={len(values)}/{len(info['repetitions'])})"
+                    ci = mean_interval(values)
+                    text = (
+                        format_mean_interval(
+                            values.mean(),
+                            ci["ci95_low_unbounded"],
+                            ci["ci95_high_unbounded"],
+                        )
+                        + f"  (n={len(values)}/{len(info['repetitions'])})"
+                    )
                 else:
-                    text = "No valid score"
+                    text = "No included score"
                 ax.text(
                     1.015,
                     j,
@@ -922,7 +1014,7 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
                     va="center",
                     fontsize=9,
                 )
-            if positive and min(positive) > 0:
+            if not classification and positive and min(positive) > 0:
                 ax.set_xscale("log")
                 low, high = min(positive), max(positive)
                 if math.isclose(low, high):
@@ -932,169 +1024,79 @@ def _figures(frame, info, summary, scores, deltas, directory, formats, counts, d
                     StrMethodFormatter("{x:,.0f}" if high >= 1000 else "{x:.2f}")
                 )
                 ax.xaxis.set_minor_locator(NullLocator())
+            else:
+                ax.xaxis.set_major_locator(MaxNLocator(5))
+                ax.xaxis.set_major_formatter(StrMethodFormatter("{x:.3f}"))
             ax.set_yticks(
                 range(len(conditions)),
                 [x.replace("\n", " ") for x in labels],
                 fontsize=9,
             )
             ax.set_ylim(len(conditions) - 0.5, -0.5)
+            age_bracket(ax)
             ax.set_title(pretty(name), loc="left")
             ax.set_xlabel(
-                "Absolute RMSE (lower is better; logarithmic axis when all values are positive)"
+                "Absolute balanced accuracy (higher is better)"
+                if classification
+                else "Absolute RMSE (lower is better; logarithmic axis when positive)"
             )
             ax.text(
                 1.015,
                 1.04,
-                "Mean RMSE and valid/expected",
+                "Mean ± 95% margin; included/expected",
                 transform=ax.transAxes,
                 fontsize=9,
             )
+            if not positive:
+                ax.set_xticks([])
+                ax.spines["bottom"].set_visible(False)
+                ax.set_xlabel("No scores included in this view")
             ax.grid(axis="x", which="major", alpha=0.2)
             ax.margins(x=0.12)
         save(
             fig,
-            "03_regression_rmse",
-            "Dots: successful repetitions; diamonds: arithmetic means of absolute RMSE. Separate target scales for each dataset.\nSelection CV only; unsuccessful outcomes are not zero scores. No ratios to the AGE-ML baseline.",
+            filename,
+            "Dots: included successful repetitions; diamonds: arithmetic means. Original, Broad and Tight are AGE-ML specification variants.\nSelection CV; 95% Student-t margins describe technical repetition variability, not generalization uncertainty. Axes vary by dataset.",
         )
 
-    # 04: unchanged resource totals, including recorded unsuccessful outcomes.
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5.2))
-    for ax, field, title in zip(
-        axes,
-        ("actual_time_hours", "estimated_cost_usd"),
-        ("Recorded wall time (hours)", "Estimated LLM cost (USD)"),
-    ):
-        ax.barh(
-            range(len(conditions)), part[field], color=[palette[c] for c in conditions]
-        )
-        ax.set_yticks(range(len(conditions)), labels)
-        ax.invert_yaxis()
-        ax.set_title(title)
-        ax.grid(axis="x", alpha=0.15)
-        ax.set_axisbelow(True)
-    save(
-        fig,
-        "04_resources",
-        "Totals across recorded outcomes, including failures. Cost is estimated; wall time includes overhead.",
-    )
+    regression = [
+        n
+        for n in info["dataset_order"]
+        if info["datasets"][n]["problem"] == "regression"
+    ]
+    absolute_panels(regression, "03_regression_rmse", False)
 
-    # 05: separate absolute baseline strip, retaining genuinely paired deltas.
-    if names and not deltas.empty:
-        rows = math.ceil(len(names) / 2)
-        fig = plt.figure(figsize=(17, rows * 3.6 + 0.6))
-        grid = fig.add_gridspec(rows, 2, wspace=0.35, hspace=0.5)
-        ablations = [c for c in conditions if c != "baseline"]
-        for index, name in enumerate(names):
-            inner = grid[index // 2, index % 2].subgridspec(
-                1, 2, width_ratios=[1, 3.1], wspace=1.25
+    if not performance_only:
+        # 04: unchanged resource totals, including recorded unsuccessful outcomes.
+        fig, axes = plt.subplots(1, 2, figsize=(12, 5.2))
+        for ax, field, title in zip(
+            axes,
+            ("actual_time_hours", "estimated_cost_usd"),
+            ("Recorded wall time (hours)", "Estimated LLM cost (USD)"),
+        ):
+            ax.barh(
+                range(len(conditions)),
+                part[field],
+                color=[palette[c] for c in conditions],
             )
-            base_ax = fig.add_subplot(inner[0])
-            ax = fig.add_subplot(inner[1])
-            values = (
-                frame.loc[
-                    frame.dataset.eq(name)
-                    & frame.condition.eq("baseline")
-                    & frame.status.eq("completed"),
-                    "score",
-                ]
-                .dropna()
-                .to_numpy()
-            )
-            if len(values):
-                base_ax.scatter(
-                    values,
-                    np.linspace(-0.14, 0.14, len(values)),
-                    color=palette["baseline"],
-                    s=30,
-                    alpha=0.7,
-                )
-                base_ax.scatter(
-                    [values.mean()],
-                    [0],
-                    marker="D",
-                    color=palette["baseline"],
-                    s=65,
-                    edgecolors="white",
-                    zorder=4,
-                )
-                base_ax.set_title(
-                    f"Baseline\nmean {values.mean():.3f}\nn={len(values)}/{len(info['repetitions'])}",
-                    fontsize=10,
-                )
-                padding = max(float(np.ptp(values)) * 0.2, 0.0005)
-                base_ax.set_xlim(
-                    max(0, values.min() - padding), min(1, values.max() + padding)
-                )
-            else:
-                base_ax.text(
-                    0.5,
-                    0.5,
-                    "No valid baseline",
-                    transform=base_ax.transAxes,
-                    ha="center",
-                )
-                base_ax.set_title("Baseline", fontsize=10)
-            base_ax.set_ylim(-0.6, 0.6)
-            base_ax.set_yticks([])
-            base_ax.xaxis.set_major_locator(MaxNLocator(2))
-            base_ax.xaxis.set_major_formatter(StrMethodFormatter("{x:.4f}"))
-            base_ax.tick_params(axis="x", labelrotation=35, labelsize=8)
-            base_ax.set_xlabel("Absolute BA", fontsize=9)
-            base_ax.grid(axis="x", alpha=0.15)
-            for j, condition in enumerate(ablations):
-                paired = (
-                    deltas.loc[
-                        deltas.dataset.eq(name) & deltas.condition.eq(condition),
-                        "improvement",
-                    ]
-                    .dropna()
-                    .to_numpy()
-                )
-                if len(paired):
-                    ax.scatter(
-                        paired,
-                        j + np.linspace(-0.12, 0.12, len(paired)),
-                        s=25,
-                        alpha=0.65,
-                        color=palette[condition],
-                    )
-                    ax.scatter(
-                        [paired.mean()],
-                        [j],
-                        s=65,
-                        marker="D",
-                        color=palette[condition],
-                        edgecolors="white",
-                        linewidths=0.7,
-                        zorder=4,
-                    )
-                else:
-                    ax.text(
-                        0.98,
-                        j,
-                        "No valid pair",
-                        transform=ax.get_yaxis_transform(),
-                        ha="right",
-                        va="center",
-                        fontsize=8,
-                    )
-            ax.axvline(0, color="#777777", linewidth=0.8)
-            ax.set_yticks(
-                range(len(ablations)),
-                [long_labels.get(c, c).replace("\n", " ") for c in ablations],
-                fontsize=8,
-            )
-            ax.set_ylim(len(ablations) - 0.5, -0.5)
-            ax.set_title(pretty(name), fontsize=12)
-            ax.set_xlabel("Paired change in BA (pp)", fontsize=9)
+            ax.set_yticks(range(len(conditions)), labels)
+            ax.invert_yaxis()
+            age_bracket(ax)
+            ax.set_title(title)
             ax.grid(axis="x", alpha=0.15)
-        fig.subplots_adjust(left=0.055, right=0.99, bottom=0.11, top=0.94)
+            ax.set_axisbelow(True)
         save(
             fig,
-            "05_classification_paired_changes",
-            "Left strips: actual baseline balanced accuracy in each successful repetition. Right panels: ablation minus baseline in the SAME repetition.\nDots: individual repetitions; diamonds: means. Positive paired changes are better. Technical repetitions share recorded seeds; axes vary by dataset.",
-            layout=False,
+            "04_resources",
+            "Totals across recorded outcomes, including failures. Cost is estimated; wall time includes overhead.",
         )
+
+    # 05 uses the same absolute-score panels as 03, including Original.
+    absolute_panels(names, "05_classification_absolute_scores", True)
+    for extension in formats:
+        retired = directory / f"05_classification_paired_changes.{extension}"
+        if retired.exists():
+            retired.unlink()
 
 
 def _paper_tables(frame, info, scores, directory):
@@ -1108,11 +1110,13 @@ def _paper_tables(frame, info, scores, directory):
     )
     reference = json.loads(reference_path.read_text(encoding="utf-8"))
     names = info["dataset_order"]
-    pretty = lambda n: {
-        "har": "HAR",
-        "mnist_784": "MNIST_784",
-        "auto_mpg": "Auto MPG",
-    }.get(n, n.replace("_", " ").title())
+
+    def pretty(n):
+        return {
+            "har": "HAR",
+            "mnist_784": "MNIST_784",
+            "auto_mpg": "Auto MPG",
+        }.get(n, n.replace("_", " ").title())
 
     def export(name, table):
         table.to_csv(directory / f"{name}.csv", index=False)
@@ -1262,8 +1266,54 @@ def _paper_tables(frame, info, scores, directory):
     }
 
 
+def attach_audit(frame, info, audit):
+    table = pd.read_csv(audit, keep_default_na=False)
+    keys = ["condition", "repetition", "dataset", "run_identity"]
+    required = set(keys + ["campaign_identity", "audit_outcome", "score"])
+    if not required <= set(table):
+        raise ValueError("Incomplete audit CSV")
+    if set(table.campaign_identity) != {info["frozen"]["campaign_identity"]}:
+        raise ValueError("Audit belongs to another campaign")
+    if table.duplicated(keys).any():
+        raise ValueError("Duplicate audit outcome")
+    if not set(table.audit_outcome) <= {
+        "no_detected_violation",
+        "confirmed_violation",
+        "undetermined",
+        "not_applicable",
+    }:
+        raise ValueError("Unknown audit outcome")
+    result = frame.merge(
+        table[keys + ["audit_outcome", "score"]].rename(
+            columns={"score": "audited_score"}
+        ),
+        on=keys,
+        how="left",
+        validate="one_to_one",
+    )
+    completed = result.status.eq("completed")
+    audited = pd.to_numeric(result.audited_score, errors="coerce")
+    if not np.allclose(
+        result.loc[completed, "score"],
+        audited[completed],
+        rtol=1e-12,
+        atol=1e-12,
+        equal_nan=False,
+    ):
+        raise ValueError("Audit scores do not match selected winners")
+    if result.loc[completed, "audit_outcome"].isna().any():
+        raise ValueError("Missing winner audit")
+    result["audit_outcome"] = result.audit_outcome.fillna("undetermined")
+    return result
+
+
 def make_report(
-    root, outdir, repetitions="1", allow_incomplete=False, formats=("png", "pdf")
+    root,
+    outdir,
+    repetitions="1",
+    allow_incomplete=False,
+    formats=("png", "pdf"),
+    audit=None,
 ):
     frame, info, inputs = load_campaign(root, repetitions, allow_incomplete)
     outdir = Path(outdir).resolve()
@@ -1272,6 +1322,8 @@ def make_report(
     if any(extension not in ("png", "pdf", "svg") for extension in formats):
         raise ValueError("Formats must be png, pdf or svg")
     outdir.mkdir(parents=True, exist_ok=True)
+    if audit is not None:
+        frame = attach_audit(frame, info, audit)
     summary, scores, deltas = summarize(frame, info)
     counts, details = exploration_counts(frame, info)
     tables = outdir / "tables"
@@ -1315,6 +1367,33 @@ def make_report(
         counts,
         details,
     )
+    if audit is not None:
+        filtered = frame.copy()
+        excluded = filtered.status.eq("completed") & ~filtered.audit_outcome.eq(
+            "no_detected_violation"
+        )
+        filtered["original_status"] = filtered.status
+        filtered.loc[excluded, "status"] = "excluded_by_audit"
+        filtered.loc[excluded, "score"] = np.nan
+        fs, sc, ds = summarize(filtered, info)
+        filtered.to_csv(tables / "audit_filtered_run_metrics.csv", index=False)
+        sc.to_csv(tables / "audit_filtered_dataset_scores.csv", index=False)
+        ds.to_csv(tables / "audit_filtered_paired_deltas.csv", index=False)
+        frame.loc[excluded].to_csv(tables / "audit_excluded_winners.csv", index=False)
+        _figures(
+            filtered,
+            info,
+            fs,
+            sc,
+            ds,
+            outdir / "figures" / "without_detected_violations",
+            formats,
+            counts,
+            details,
+            performance_only=True,
+        )
+        (tables / "without_detected_violations").mkdir(exist_ok=True)
+        _paper_tables(filtered, info, sc, tables / "without_detected_violations")
     recorded = int(frame.status.ne("missing").sum())
     completed = int(frame.status.eq("completed").sum())
     workers = sorted(frame.workers.dropna().unique().tolist())
@@ -1327,6 +1406,8 @@ def make_report(
         f"Recorded worker settings: {workers}."
         + (" Resource settings differ across rows." if len(workers) > 1 else ""),
         "Failure status alone does not establish whether the cause was generated code, timeout or infrastructure. Detailed evidence must be inspected before attributing causes.",
+        "## Compliance policy",
+        "When --audit is provided, figures/ contains all selected winners; figures/without_detected_violations/ contains only winners with resolved applicable checks and no detected violations. Undetermined winners are excluded too. No replacement winner is selected. This conditional subset can introduce selection bias; excluded rows and denominators are exported. Resources always retain all recorded outcomes. Strict recipe/task/parameter checks include undeclared categorical adapters; the audit separately reports an adapters-allowed sensitivity. Without an audit all successful winners have undetermined audit status.",
         "## Paper tables",
         "paper_table_1_datasets uses current recorded metadata. paper_dataset_differences.csv lists discrepancies from the supplied paper; historical values are never substituted for observed values. paper_results_<condition> mirrors Tables 2/3 and adds intervals and valid/expected counts. For the full AGE-ML baseline condition, paper_table_2_results or paper_table_3_results is also generated according to the model. Score means use successful runs; resource means include all recorded outcomes, including unsuccessful ones. Numeric statistics retain resource-specific denominators. Actual P. counts returned completed execution-agent states, not every attempted pipeline or successful fit.",
         "Historical Reference is transcribed from Tables 2/3: HAMLET for classification and Kaggle notebooks for regression. It is separate from the AGE-ML baseline condition. Protocol and dataset comparability must be checked before making claims. Table 4 is a static transcription of the paper's qualitative comparison, not a recomputed experiment or an independently verified current assessment. Reference provenance is saved in tables/paper_reference_used.json.",
@@ -1358,6 +1439,9 @@ def make_report(
         "failed": len(failures),
         "missing": len(info["missing"]),
         "score_role": info["score_role"],
+        "audit_csv_sha256": sha256(Path(audit).read_bytes())
+        if audit is not None
+        else None,
     }
     (outdir / "analysis_manifest.json").write_text(
         json.dumps(provenance, indent=2) + "\n", encoding="utf-8"
@@ -1378,6 +1462,9 @@ def main(argv=None):
         subparser.add_argument("--allow-incomplete", action="store_true")
         if command == "report":
             subparser.add_argument("--formats", nargs="+", default=["png", "pdf"])
+            subparser.add_argument(
+                "--audit", type=Path, help="run_audit.csv from compliance_audit.py"
+            )
     args = parser.parse_args(argv)
     try:
         if args.command == "snapshot":
@@ -1396,6 +1483,7 @@ def main(argv=None):
                 args.repetitions,
                 args.allow_incomplete,
                 args.formats,
+                args.audit,
             )
             print(
                 f"Report: {args.outdir}; {result['recorded']} outcomes, {result['failed']} failures, {result['missing']} missing"

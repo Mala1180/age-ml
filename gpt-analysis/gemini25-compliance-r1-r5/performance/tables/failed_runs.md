@@ -1,0 +1,15 @@
+| condition | repetition | dataset | status |
+| --- | --- | --- | --- |
+| specification-poor | 5 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 1 | california_housing | no_valid_candidate |
+| validation-no-execution-retry | 2 | california_housing | no_valid_candidate |
+| validation-no-execution-retry | 4 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 4 | california_housing | no_valid_candidate |
+| validation-no-execution-retry | 5 | mnist_784 | no_valid_candidate |
+| validation-no-execution-retry | 5 | california_housing | no_valid_candidate |
+| no-csp | 1 | adult | no_valid_candidate |
+| no-csp | 1 | ames_housing | no_valid_candidate |
+| no-csp | 4 | mnist_784 | no_valid_candidate |
+| no-csp | 4 | california_housing | no_valid_candidate |
+| no-csp | 4 | ames_housing | no_valid_candidate |
+| no-csp | 5 | california_housing | no_valid_candidate |

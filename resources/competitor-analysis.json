@@ -1,0 +1,24 @@
+{
+  "age_repository": "https://github.com/Mala1180/age-ml.git",
+  "age_ref": "results/gemini-run1",
+  "mlzero_repository": "https://github.com/gciatto/experiments-ageml-mlzero-benchmark.git",
+  "mlzero_ref": "results/mlzero-gemini",
+  "backends": {
+    "gemini25": {
+      "label": "Gemini 2.5 Flash",
+      "model": "gemini-2.5-flash",
+      "age_campaign": "experiments/results/gemini25-flash-hamlet-cv-w8-storage",
+      "mlzero_campaign": "artifacts/campaigns/mlzero-gemini-25-flash-hamlet-cv-s42-1h-local-factory-v5",
+      "mlzero_config": "configs/gemini25-hamlet-cv-local-factory-v5.yml",
+      "mlzero_audit": "mlzero-gemini25-full-audit"
+    },
+    "gemini31": {
+      "label": "Gemini 3.1 Flash Lite",
+      "model": "gemini-3.1-flash-lite",
+      "age_campaign": "experiments/results/gemini31-flash-lite-hamlet-cv-w8-storage",
+      "mlzero_campaign": "artifacts/campaigns/mlzero-gemini-31-flash-lite-hamlet-cv-s42-1h-local-factory-v5",
+      "mlzero_config": "configs/gemini31-hamlet-cv-local-factory-v5.yml",
+      "mlzero_audit": "mlzero-gemini31-full-audit"
+    }
+  }
+}

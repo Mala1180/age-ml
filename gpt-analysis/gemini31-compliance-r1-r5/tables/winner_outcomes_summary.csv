@@ -1,0 +1,7 @@
+condition,label,expected_outcomes,selected_winners,strict_winner_violations,adapters_allowed_winner_violations,unsuccessful_outcomes
+baseline,Original,45,45,20,15,0
+specification-poor,Broad,45,44,15,5,1
+specification-specific,Tight,45,45,15,0,0
+validation-no-semantic-retry,No semantic retry,45,45,20,15,0
+validation-no-execution-retry,No execution retry,45,35,25,10,10
+no-csp,No CSP,45,45,15,5,0
